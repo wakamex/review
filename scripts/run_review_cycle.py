@@ -68,13 +68,18 @@ def parse_args() -> argparse.Namespace:
         help="Plan/run final board synthesis after review cycles.",
     )
     parser.add_argument(
+        "--overwrite-board",
+        action="store_true",
+        help="Overwrite only the board synthesis output; reviewer outputs are reused unless --overwrite is also set.",
+    )
+    parser.add_argument(
         "--score-source",
         choices=["mechanical", "board"],
         default="mechanical",
         help=(
             "Selected final score source. 'mechanical' uses the final-cycle "
-            "reviewer average; 'board' uses the board synthesis score. "
-            "Default: mechanical."
+            "reviewer average; 'board' uses board_score_10 only for legacy "
+            "scoring board artifacts. Default: mechanical."
         ),
     )
     parser.add_argument("--claude-model", default="sonnet", help="Claude model alias/id.")
@@ -415,12 +420,19 @@ def collect_review_artifacts(paper_dir: Path, cycles: int, providers: list[str])
     return artifacts
 
 
-def render_board_prompt(paper_id: str, bundle: str, schema: str, artifacts: list[dict[str, Any]]) -> str:
+def render_board_prompt(
+    paper_id: str,
+    bundle: str,
+    schema: str,
+    artifacts: list[dict[str, Any]],
+    mechanical_context: dict[str, Any],
+) -> str:
     template = load_template(ROOT / "prompts" / "board_synthesis.md")
     return template.substitute(
         paper_id=paper_id,
         schema=schema,
         bundle=bundle,
+        mechanical_context=json.dumps(mechanical_context, indent=2, sort_keys=True),
         review_artifacts=json.dumps(artifacts, indent=2, sort_keys=True),
     )
 
@@ -438,6 +450,13 @@ def compact_board_score(board: dict[str, Any]) -> dict[str, Any]:
         "confidence": board.get("confidence"),
         "board_score_10": board.get("board_score_10"),
         "dimension_scores": board.get("dimension_scores"),
+    }
+
+
+def compact_summarizer_result(board: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "general_reader_takeaway": board.get("general_reader_takeaway"),
+        "technical_takeaway": board.get("technical_takeaway"),
     }
 
 
@@ -540,15 +559,24 @@ def collect_score_summary(
     if board_provider:
         board_path = paper_dir / "board" / f"{board_provider}.json"
         if board_path.exists():
-            board = {"reviewer": board_provider, **compact_board_score(read_json(board_path))}
-            score_summary["board"] = board
-            if review_cycles:
+            board_result = read_json(board_path)
+            if "board_score_10" in board_result:
+                board = {"reviewer": board_provider, **compact_board_score(board_result)}
+                score_summary["board"] = board
+            else:
+                board = None
+                score_summary["summarizer"] = {"reviewer": board_provider, **compact_summarizer_result(board_result)}
+            if board and review_cycles:
                 final_average = review_cycles[-1].get("mechanical_average")
                 if final_average:
                     score_summary["final_cycle_mechanical_average"] = final_average
                     delta = board_delta(board, final_average)
                     if delta:
                         score_summary["board_delta_vs_final_cycle_mechanical_average"] = delta
+    if review_cycles and "final_cycle_mechanical_average" not in score_summary:
+        final_average = review_cycles[-1].get("mechanical_average")
+        if final_average:
+            score_summary["final_cycle_mechanical_average"] = final_average
     score_summary["selected_score_source"] = score_source
     if score_source == "mechanical":
         selected = selected_mechanical_score(review_cycles)
@@ -594,6 +622,7 @@ def main() -> int:
         "cycles": args.cycles,
         "execute": args.execute,
         "score_source": args.score_source,
+        "board_role": "summarizer" if args.board else None,
         "calls": [],
     }
 
@@ -630,12 +659,13 @@ def main() -> int:
         board_dir = paper_dir / "board"
         board_dir.mkdir(parents=True, exist_ok=True)
         artifacts = collect_review_artifacts(paper_dir, args.cycles, providers)
-        board_prompt = render_board_prompt(args.paper_id, bundle, board_schema, artifacts)
+        mechanical_context = collect_score_summary(paper_dir, args.cycles, providers, None, "mechanical")
+        board_prompt = render_board_prompt(args.paper_id, bundle, board_schema, artifacts, mechanical_context)
         provider = providers[0]
         write_plan_artifacts(board_dir, provider, board_prompt, board_schema_path, args, "board")
         board_result_path = board_dir / f"{provider}.json"
         if args.execute:
-            if board_result_path.exists() and not args.overwrite:
+            if board_result_path.exists() and not (args.overwrite or args.overwrite_board):
                 summary["board"] = {"status": "exists", "provider": provider, "path": str(board_result_path)}
             else:
                 execute_provider(provider, board_prompt, board_schema_path, board_dir, args)

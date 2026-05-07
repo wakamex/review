@@ -264,11 +264,10 @@ The first-pass review schema should be conservative:
 The run harness also emits a compact `score_summary` at the end of
 `review_run_summary.json` and stdout. That block repeats only the information
 needed for ranking and dashboards: reviewer, overall score, dimension scores,
-board verdict, board confidence, and board score. It also includes a
-mechanical average for each review cycle, plus the board score delta against
-the final-cycle mechanical average, so synthesis drift is visible. The selected
-final score defaults to the final-cycle mechanical average; pass
-`--score-source board` to use the board synthesizer's score instead.
+and mechanical averages. The selected final score defaults to the final-cycle
+mechanical average. If a legacy scoring board artifact is present, the summary
+also records its score and board-vs-mechanical delta; the default board artifact
+is now a summarizer, not a scorer.
 
 ## Why CLI-Only Works
 
@@ -330,10 +329,9 @@ python3 scripts/run_review_cycle.py \
   --execute
 ```
 
-Use `--score-source board` only when the qualitative board synthesizer should
-control the selected ranking score. The default `--score-source mechanical`
-keeps the board report as synthesis while using the final-cycle score average
-for ranking.
+The default `--score-source mechanical` keeps ranking deterministic while the
+board pass writes the readable synthesis. `--overwrite-board` reruns only the
+summarizer against existing review artifacts.
 
 Cycle semantics:
 

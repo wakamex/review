@@ -1,27 +1,22 @@
-You are the board synthesizer for an LLM review board.
+You are the public summarizer for an LLM review board.
 
-Use the paper bundle and all review-cycle artifacts to produce a public-facing
-board report. Your task is not to average votes. Your task is to identify which
-claims and objections survived adversarial cross-review.
+Use the paper bundle, mechanical score context, and all review-cycle artifacts
+to produce a public-facing synthesis report. Your task is text synthesis, not
+scoring. Identify which claims and objections survived adversarial cross-review.
 
 Rules:
 - Do not claim the paper is formally verified.
+- For the main result, prefer phrases like "the paper claims", "the paper
+  argues", or "the paper aims to show" unless you are describing what would
+  follow conditionally from accepted lemmas.
 - Include only objections that are supported by paper text or clear reasoning.
 - Mark uncertain specialist questions as human spot-checks.
-- Include a board score out of 10 and dimension sub-scores at the end for
-  information/ranking. Do not simply average reviewer scores; score what
-  survived cross-review.
+- Do not assign scores, verdicts, rankings, or confidence values. The score is
+  computed mechanically outside this summarizer.
+- Include a short general-reader takeaway: 2-4 plain-language sentences that
+  say what the paper tries to do, whether the review board found it promising,
+  and what caveat matters most.
 - Return only JSON matching the provided schema.
-
-Score calibration:
-- 9-10: exceptional, likely field-shaping, technically very strong.
-- 7-8: strong or clearly promising, worth surfacing, with manageable caveats.
-- 5-6: competent or interesting but routine, unclear, or meaningfully caveated.
-- 3-4: weakly supported, low novelty, or significant unresolved issues.
-- 0-2: likely wrong, misleading, or not review-ready.
-- Technical soundness should reflect surviving unresolved proof gaps.
-- Reviewer confidence is a 0-10 version of how much the board trusts its
-  assessment, not how good the paper is.
 
 Paper id: 2604.19237
 
@@ -32,32 +27,19 @@ Schema:
   "additionalProperties": false,
   "required": [
     "paper_id",
-    "final_verdict",
-    "confidence",
+    "general_reader_takeaway",
+    "technical_takeaway",
     "public_summary",
     "strongest_supported_claims",
     "strongest_objections",
     "reviewer_disagreements",
     "human_spotchecks",
-    "audit_trail",
-    "board_score_10",
-    "dimension_scores",
-    "score_rationale"
+    "audit_trail"
   ],
   "properties": {
     "paper_id": { "type": "string" },
-    "final_verdict": {
-      "type": "string",
-      "enum": [
-        "strong_select",
-        "promising",
-        "routine",
-        "weak_evidence",
-        "major_flaw",
-        "contested"
-      ]
-    },
-    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "general_reader_takeaway": { "type": "string" },
+    "technical_takeaway": { "type": "string" },
     "public_summary": { "type": "string" },
     "strongest_supported_claims": {
       "type": "array",
@@ -103,28 +85,6 @@ Schema:
         },
         "notes": { "type": "string" }
       }
-    },
-    "board_score_10": { "type": "number", "minimum": 0, "maximum": 10 },
-    "dimension_scores": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "technical_soundness",
-        "novelty",
-        "significance",
-        "clarity",
-        "reviewer_confidence"
-      ],
-      "properties": {
-        "technical_soundness": { "type": "number", "minimum": 0, "maximum": 10 },
-        "novelty": { "type": "number", "minimum": 0, "maximum": 10 },
-        "significance": { "type": "number", "minimum": 0, "maximum": 10 },
-        "clarity": { "type": "number", "minimum": 0, "maximum": 10 },
-        "reviewer_confidence": { "type": "number", "minimum": 0, "maximum": 10 }
-      }
-    },
-    "score_rationale": {
-      "type": "string"
     }
   }
 }
@@ -1104,6 +1064,133 @@ Have a free development cycle? Help support accessibility at arXiv! Our collabor
 
 BETA
 
+```
+
+Mechanical score context:
+```json
+{
+  "final_cycle_mechanical_average": {
+    "dimension_scores": {
+      "clarity": 6.367,
+      "novelty": 7.5,
+      "reviewer_confidence": 6.367,
+      "significance": 7.433,
+      "technical_soundness": 6.533
+    },
+    "overall_score_10": 6.9
+  },
+  "review_cycles": [
+    {
+      "cycle": 1,
+      "mechanical_average": {
+        "dimension_scores": {
+          "clarity": 7.067,
+          "novelty": 7.533,
+          "reviewer_confidence": 6.567,
+          "significance": 7.467,
+          "technical_soundness": 7.267
+        },
+        "overall_score_10": 7.167
+      },
+      "reviews": [
+        {
+          "dimension_scores": {
+            "clarity": 6,
+            "novelty": 7,
+            "reviewer_confidence": 6,
+            "significance": 7,
+            "technical_soundness": 6.5
+          },
+          "overall_score_10": 6.5,
+          "reviewer": "claude"
+        },
+        {
+          "dimension_scores": {
+            "clarity": 6.2,
+            "novelty": 7.6,
+            "reviewer_confidence": 5.7,
+            "significance": 7.4,
+            "technical_soundness": 6.3
+          },
+          "overall_score_10": 7.0,
+          "reviewer": "codex"
+        },
+        {
+          "dimension_scores": {
+            "clarity": 9,
+            "novelty": 8,
+            "reviewer_confidence": 8,
+            "significance": 8,
+            "technical_soundness": 9
+          },
+          "overall_score_10": 8,
+          "reviewer": "gemini"
+        }
+      ]
+    },
+    {
+      "cycle": 2,
+      "mechanical_average": {
+        "dimension_scores": {
+          "clarity": 6.367,
+          "novelty": 7.5,
+          "reviewer_confidence": 6.367,
+          "significance": 7.433,
+          "technical_soundness": 6.533
+        },
+        "overall_score_10": 6.9
+      },
+      "reviews": [
+        {
+          "dimension_scores": {
+            "clarity": 6,
+            "novelty": 7,
+            "reviewer_confidence": 6,
+            "significance": 7,
+            "technical_soundness": 6.5
+          },
+          "overall_score_10": 7,
+          "reviewer": "claude"
+        },
+        {
+          "dimension_scores": {
+            "clarity": 6.1,
+            "novelty": 7.5,
+            "reviewer_confidence": 6.1,
+            "significance": 7.3,
+            "technical_soundness": 6.1
+          },
+          "overall_score_10": 6.7,
+          "reviewer": "codex"
+        },
+        {
+          "dimension_scores": {
+            "clarity": 7,
+            "novelty": 8,
+            "reviewer_confidence": 7,
+            "significance": 8,
+            "technical_soundness": 7
+          },
+          "overall_score_10": 7,
+          "reviewer": "gemini"
+        }
+      ]
+    }
+  ],
+  "selected_final_score": {
+    "cycle": 2,
+    "dimension_scores": {
+      "clarity": 6.367,
+      "novelty": 7.5,
+      "reviewer_confidence": 6.367,
+      "significance": 7.433,
+      "technical_soundness": 6.533
+    },
+    "overall_score_10": 6.9,
+    "source": "mechanical"
+  },
+  "selected_score_source": "mechanical"
+}
 ```
 
 Review artifacts:
