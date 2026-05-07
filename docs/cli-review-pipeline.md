@@ -266,7 +266,9 @@ The run harness also emits a compact `score_summary` at the end of
 needed for ranking and dashboards: reviewer, overall score, dimension scores,
 board verdict, board confidence, and board score. It also includes a
 mechanical average for each review cycle, plus the board score delta against
-the final-cycle mechanical average, so synthesis drift is visible.
+the final-cycle mechanical average, so synthesis drift is visible. The selected
+final score defaults to the final-cycle mechanical average; pass
+`--score-source board` to use the board synthesizer's score instead.
 
 ## Why CLI-Only Works
 
@@ -327,6 +329,11 @@ python3 scripts/run_review_cycle.py \
   --providers claude,codex,gemini \
   --execute
 ```
+
+Use `--score-source board` only when the qualitative board synthesizer should
+control the selected ranking score. The default `--score-source mechanical`
+keeps the board report as synthesis while using the final-cycle score average
+for ranking.
 
 Cycle semantics:
 

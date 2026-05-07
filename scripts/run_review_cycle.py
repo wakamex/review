@@ -67,6 +67,16 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Plan/run final board synthesis after review cycles.",
     )
+    parser.add_argument(
+        "--score-source",
+        choices=["mechanical", "board"],
+        default="mechanical",
+        help=(
+            "Selected final score source. 'mechanical' uses the final-cycle "
+            "reviewer average; 'board' uses the board synthesis score. "
+            "Default: mechanical."
+        ),
+    )
     parser.add_argument("--claude-model", default="sonnet", help="Claude model alias/id.")
     parser.add_argument("--codex-model", default=None, help="Optional Codex model id.")
     parser.add_argument("--gemini-model", default=None, help="Optional Gemini model id.")
@@ -457,7 +467,10 @@ def average_review_scores(reviews: list[dict[str, Any]]) -> dict[str, Any]:
 
 def board_delta(board: dict[str, Any], average: dict[str, Any]) -> dict[str, Any]:
     delta: dict[str, Any] = {}
-    if isinstance(board.get("board_score_10"), (int, float)) and isinstance(average.get("overall_score_10"), (int, float)):
+    if isinstance(board.get("board_score_10"), (int, float)) and isinstance(
+        average.get("overall_score_10"),
+        (int, float),
+    ):
         delta["score_10"] = round(board["board_score_10"] - average["overall_score_10"], 3)
 
     board_dimensions = board.get("dimension_scores") or {}
@@ -473,11 +486,40 @@ def board_delta(board: dict[str, Any], average: dict[str, Any]) -> dict[str, Any
     return delta
 
 
+def selected_mechanical_score(review_cycles: list[dict[str, Any]]) -> dict[str, Any] | None:
+    if not review_cycles:
+        return None
+    final_cycle = review_cycles[-1]
+    average = final_cycle.get("mechanical_average")
+    if not average:
+        return None
+    return {
+        "source": "mechanical",
+        "cycle": final_cycle.get("cycle"),
+        "overall_score_10": average.get("overall_score_10"),
+        "dimension_scores": average.get("dimension_scores"),
+    }
+
+
+def selected_board_score(board: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not board or not isinstance(board.get("board_score_10"), (int, float)):
+        return None
+    return {
+        "source": "board",
+        "reviewer": board.get("reviewer"),
+        "overall_score_10": board.get("board_score_10"),
+        "dimension_scores": board.get("dimension_scores"),
+        "final_verdict": board.get("final_verdict"),
+        "confidence": board.get("confidence"),
+    }
+
+
 def collect_score_summary(
     paper_dir: Path,
     cycles: int,
     providers: list[str],
     board_provider: str | None,
+    score_source: str,
 ) -> dict[str, Any]:
     review_cycles = []
     for cycle in range(1, cycles + 1):
@@ -507,6 +549,15 @@ def collect_score_summary(
                     delta = board_delta(board, final_average)
                     if delta:
                         score_summary["board_delta_vs_final_cycle_mechanical_average"] = delta
+    score_summary["selected_score_source"] = score_source
+    if score_source == "mechanical":
+        selected = selected_mechanical_score(review_cycles)
+    else:
+        selected = selected_board_score(score_summary.get("board"))
+    if selected:
+        score_summary["selected_final_score"] = selected
+    else:
+        score_summary["selected_final_score_error"] = f"{score_source} score unavailable"
     return score_summary
 
 
@@ -518,6 +569,8 @@ def main() -> int:
     unknown = [provider for provider in providers if provider not in {"claude", "codex", "gemini"}]
     if unknown:
         raise SystemExit(f"unknown provider(s): {', '.join(unknown)}")
+    if args.score_source == "board" and not args.board:
+        raise SystemExit("--score-source board requires --board")
 
     source_manifest = Path(args.source_manifest)
     papers_dir = Path(args.papers_dir) if args.papers_dir else default_papers_dir(source_manifest)
@@ -540,6 +593,7 @@ def main() -> int:
         "providers": providers,
         "cycles": args.cycles,
         "execute": args.execute,
+        "score_source": args.score_source,
         "calls": [],
     }
 
@@ -594,7 +648,7 @@ def main() -> int:
             }
 
     board_provider = summary.get("board", {}).get("provider") if isinstance(summary.get("board"), dict) else None
-    score_summary = collect_score_summary(paper_dir, args.cycles, providers, board_provider)
+    score_summary = collect_score_summary(paper_dir, args.cycles, providers, board_provider, args.score_source)
     if score_summary["review_cycles"] or score_summary.get("board"):
         summary["score_summary"] = score_summary
 
