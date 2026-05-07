@@ -408,6 +408,47 @@ def render_board_prompt(paper_id: str, bundle: str, schema: str, artifacts: list
     )
 
 
+def compact_review_score(review: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "overall_score_10": review.get("overall_score_10"),
+        "dimension_scores": review.get("dimension_scores"),
+    }
+
+
+def compact_board_score(board: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "final_verdict": board.get("final_verdict"),
+        "confidence": board.get("confidence"),
+        "board_score_10": board.get("board_score_10"),
+        "dimension_scores": board.get("dimension_scores"),
+    }
+
+
+def collect_score_summary(
+    paper_dir: Path,
+    cycles: int,
+    providers: list[str],
+    board_provider: str | None,
+) -> dict[str, Any]:
+    review_cycles = []
+    for cycle in range(1, cycles + 1):
+        reviews = []
+        for provider in providers:
+            path = provider_review_path(paper_dir, cycle, provider)
+            if not path.exists():
+                continue
+            reviews.append({"reviewer": provider, **compact_review_score(read_json(path))})
+        if reviews:
+            review_cycles.append({"cycle": cycle, "reviews": reviews})
+
+    score_summary: dict[str, Any] = {"review_cycles": review_cycles}
+    if board_provider:
+        board_path = paper_dir / "board" / f"{board_provider}.json"
+        if board_path.exists():
+            score_summary["board"] = {"reviewer": board_provider, **compact_board_score(read_json(board_path))}
+    return score_summary
+
+
 def main() -> int:
     args = parse_args()
     if args.cycles < 1:
@@ -491,8 +532,13 @@ def main() -> int:
                 "prompt_path": str(board_dir / f"{provider}.prompt.md"),
             }
 
+    board_provider = summary.get("board", {}).get("provider") if isinstance(summary.get("board"), dict) else None
+    score_summary = collect_score_summary(paper_dir, args.cycles, providers, board_provider)
+    if score_summary["review_cycles"] or score_summary.get("board"):
+        summary["score_summary"] = score_summary
+
     write_json(paper_dir / "review_run_summary.json", summary)
-    print(json.dumps(summary, indent=2, sort_keys=True))
+    print(json.dumps(summary, indent=2))
     return 0
 
 

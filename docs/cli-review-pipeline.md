@@ -248,9 +248,23 @@ The first-pass review schema should be conservative:
   "missing_assumptions": [],
   "novelty_assessment": "...",
   "recommended_verdict": "strong_select|promising|routine|weak_evidence|major_flaw|contested",
-  "confidence": 0.0
+  "confidence": 0.0,
+  "overall_score_10": 7.2,
+  "dimension_scores": {
+    "technical_soundness": 7,
+    "novelty": 8,
+    "significance": 8,
+    "clarity": 6,
+    "reviewer_confidence": 6
+  },
+  "score_rationale": "..."
 }
 ```
+
+The run harness also emits a compact `score_summary` at the end of
+`review_run_summary.json` and stdout. That block repeats only the information
+needed for ranking and dashboards: reviewer, overall score, dimension scores,
+board verdict, board confidence, and board score.
 
 ## Why CLI-Only Works
 
