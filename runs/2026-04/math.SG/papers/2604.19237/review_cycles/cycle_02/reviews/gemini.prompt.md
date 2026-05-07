@@ -1125,22 +1125,290 @@ BETA
 Your prior review:
 ```json
 {
-  "missing": "runs/2026-04/math.SG/papers/2604.19237/review_cycles/cycle_01/reviews/gemini.json",
-  "dry_run_note": "prior review not available yet"
+  "confidence": 0.85,
+  "cycle": 1,
+  "followup_notes": {
+    "changed_mind": false,
+    "changes_from_prior_cycle": "",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "There is no universal upper bound for the systolic ratio of Bott-integrable contact forms on closed 3-manifolds.",
+      "notes": "The claim is supported by an explicit construction that combines linearised Lutz pieces with ABHS plugs to arbitrarily decrease the contact volume while keeping the minimal period bounded from below.",
+      "paper_location": "Theorem 1, page 2",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The ABHS plug admits a Bott integral whose level sets near the boundary of the solid torus are regular tori.",
+      "notes": "The paper explicitly constructs the required invariant Morse function on the mapping torus by analyzing the Morse foliation of the specific Hamiltonian diffeomorphisms making up the ABHS map.",
+      "paper_location": "Addendum 4, page 7",
+      "support_level": "well_supported"
+    }
+  ],
+  "missing_assumptions": [],
+  "needs_human_spotcheck": [],
+  "novelty_assessment": "The result is a natural and interesting application of the ABHS plug to the restricted class of Bott-integrable contact forms. Showing that the ABHS plug itself can be made Bott-integrable by a careful choice of invariant Morse function is a nice technical addition that complements recent findings on the flexibility of integrable Reeb flows.",
+  "paper_id": "2604.19237",
+  "recommended_verdict": "promising",
+  "reviewer": "gemini",
+  "summary": "The authors show that the systolic ratio of Bott-integrable contact forms on closed 3-manifolds has no universal upper bound, proving that integrable contact forms can exhibit large systolic ratios just like general contact forms. The proof relies on piecewise linear approximations of Lutz forms combined with the insertion of a 'plug' constructed by Abbondandolo, Bramham, Hryniewicz, and Salom\u00e3o (ABHS). A key technical contribution is showing that the ABHS plug is Bott-integrable, which is achieved by constructing a Morse function invariant under the specific area-preserving diffeomorphism defining the plug.",
+  "technical_objections": []
 }
+
 ```
 
 Other reviewers' latest reviews:
 ```json
 [
   {
-    "dry_run_note": "prior review not available yet",
-    "missing": "runs/2026-04/math.SG/papers/2604.19237/review_cycles/cycle_01/reviews/claude.json",
+    "review": {
+      "confidence": 0.62,
+      "cycle": 1,
+      "followup_notes": {
+        "changed_mind": false,
+        "changes_from_prior_cycle": "First cycle; no prior review.",
+        "invalid_points_from_other_reviewers": [],
+        "valid_points_from_other_reviewers": []
+      },
+      "main_claims": [
+        {
+          "claim": "There is no universal upper bound on the systolic ratio of Bott-integrable contact forms on any closed 3-manifold (Theorem 1).",
+          "notes": "The overall proof structure is sound: drive volume to zero while keeping T_min bounded below. However, several intermediate steps (PL-approximation homotopy through contact forms, global Morse\u2013Bott extension after plug insertion) are only sketched and depend on details in [3]. Given the authors' track record and the plausibility of each step, I lean toward this being correct, but full verification requires checking [3, pp. 734-736].",
+          "paper_location": "Abstract; Section 1 (Theorem 1); Section 5 (proof)",
+          "support_level": "partially_supported"
+        },
+        {
+          "claim": "A Bott-integrable contact form can be approximated (with controlled T_min and volume) by a form that is a union of linear Lutz pieces away from a set of arbitrarily small volume (Proposition 2).",
+          "notes": "The main concern is the claim that the convex linear interpolation between the original Lutz plane curve and its piecewise-linear approximation defines a homotopy *through contact forms*. The contact condition for a Lutz form is a sign condition on a determinant involving f, g and their derivatives; it is not obvious that convex combinations of two valid Lutz curves remain valid Lutz curves unless the original curve is convex in the right sense (not stated). The homotopy claim is asserted without this check.",
+          "paper_location": "Section 3 (Proposition 2 and proof)",
+          "support_level": "partially_supported"
+        },
+        {
+          "claim": "The ABHS plug admits a Bott integral whose level sets are regular tori near the boundary of the solid torus (Addendum 4).",
+          "notes": "The construction of a \u03c6-invariant Morse function on D\u00b2 is described via its Morse foliation (Figure 2, necklace of level sets) and a branched-covering argument. The invariance under \u03c6 = \u03c6\u2081 \u2218 \u03c6\u2082 is geometrically plausible given the described rotational symmetry of the D_k arrangement. However, explicit verification of invariance (especially under \u03c6\u2082 acting on the connecting pieces of the necklace) is deferred to [3, pp. 734-736], and the indices of critical points of the resulting Morse function are not stated in the text.",
+          "paper_location": "Section 4 (Addendum 4 and proof)",
+          "support_level": "partially_supported"
+        },
+        {
+          "claim": "After inserting plugs into all linear Lutz pieces, the resulting contact form on M is Bott-integrable.",
+          "notes": "The paper appeals to Figure 3 (Morse foliation on the complement annulus) and says 'the Morse function can be chosen so that the new Morse\u2013Bott function coincides with the original near [the boundary].' The smooth global extension of the Morse\u2013Bott function across the plug boundaries, and the verification that the extended function is invariant under the modified Reeb flow, is not carried out explicitly.",
+          "paper_location": "Section 5 (proof of Theorem 1)",
+          "support_level": "partially_supported"
+        },
+        {
+          "claim": "The systolic ratio of the resulting contact form can be made arbitrarily large.",
+          "notes": "The volume estimate has two summands: the plug images (made small via Proposition 3(iv)) and the complement (made small by filling most of each linear Lutz piece with plugs). The lower bound on T_min involves both the plug period (\u2265 bN) and the period of \u03b1' in the complement of the plug images. The paper identifies T_min \u2265 (1-\u03b5)T(\u03b1) > 0, and vol \u2192 0 gives \u03c3 \u2192 \u221e. This is conceptually correct, but the formula for vol (involving a sum whose number of terms grows with N) needs careful checking to ensure the total can still be made small.",
+          "paper_location": "Section 5 (volume and period estimates)",
+          "support_level": "partially_supported"
+        }
+      ],
+      "missing_assumptions": [
+        {
+          "assumption": "The original Lutz plane curve (f(r), g(r)) satisfies a convexity or star-shapedness condition that ensures convex combinations with its PL approximation remain valid Lutz curves.",
+          "paper_location": "Section 3, proof of Proposition 2",
+          "why_it_matters": "Without this, the claimed homotopy through Bott-integrable contact forms may pass through forms that are not contact, invalidating condition (i) of Proposition 2 and breaking the Bott-integrable path."
+        },
+        {
+          "assumption": "The Morse function described on D\u00b2 (via Figure 2's necklace foliation) is genuinely invariant under the full diffeomorphism \u03c6 = \u03c6\u2081 \u2218 \u03c6\u2082, not just under the rotational component \u03c6\u2081.",
+          "paper_location": "Section 4, proof of Addendum 4",
+          "why_it_matters": "This invariance is required for the Morse function to descend to the mapping torus and give a well-defined Bott integral. If \u03c6\u2082 does not preserve the necklace level sets, the function on the mapping torus may not even be well-defined."
+        },
+        {
+          "assumption": "The number of ABHS plugs needed to fill a given fraction of the linear Lutz pieces is bounded (as a function of N) in a way that permits the total plug volume to be made small.",
+          "paper_location": "Section 5, volume estimate",
+          "why_it_matters": "If the number of plugs grows with N without a corresponding decrease in individual plug volume, the total volume estimate may not converge to zero as required for the systolic ratio to diverge."
+        }
+      ],
+      "needs_human_spotcheck": [
+        {
+          "question": "Does the convex linear interpolation between a valid Lutz plane curve and its PL approximation (with vertices on the original curve) necessarily produce a one-parameter family of curves all satisfying the Lutz contact condition f'g \u2212 fg' > 0?",
+          "why_model_cannot_resolve": "This requires a pointwise sign computation on bilinear combinations of (f,g) and (f_PL, g_PL) and their derivatives. Without seeing the actual formulas for the contact condition and the class of curves used, a definitive answer is not possible. The HTML source loses mathematical formulas."
+        },
+        {
+          "question": "Does [3, pp. 734-736] (Abbondandolo\u2013Bramham\u2013Hryniewicz\u2013Salom\u00e3o, Invent. Math. 211 (2018)) actually construct a Morse function on D\u00b2 invariant under the diffeomorphism \u03c6, or only the diffeomorphism \u03c6 itself?",
+          "why_model_cannot_resolve": "The review relies on what [3] contains, which is an external reference not in the paper bundle. Addendum 4 is the key new claim, and whether its proof is self-contained or dependent on uncited material in [3] can only be determined by reading [3]."
+        },
+        {
+          "question": "In Section 5, is the global Morse\u2013Bott function on M (after plug insertion) explicitly constructed to be smooth and Reeb-invariant, or is this left implicit via Figure 3?",
+          "why_model_cannot_resolve": "Figure 3 is referenced but not viewable in the HTML source. The text is informal at this point, and verifying that the described extension is Reeb-invariant (not just topologically a Morse\u2013Bott foliation) requires seeing the figure and the supporting argument."
+        },
+        {
+          "question": "What are the Morse indices of the critical points of the Morse function on D\u00b2 described in Section 4, and do they match the requirements for a Bott integral on the 3-dimensional mapping torus?",
+          "why_model_cannot_resolve": "The index values were not rendered in the HTML conversion (they appear to be missing or garbled). Checking consistency with Bott-integrability on the 3-manifold requires the actual index values."
+        }
+      ],
+      "novelty_assessment": "The central novelty is Addendum 4: establishing that the ABHS plug (previously known to have large systolic ratio and small volume) is also Bott-integrable. This is a non-trivial addendum because the ABHS construction was not designed with integrability in mind. The PL approximation technique in Proposition 2 is also new but is a natural and relatively straightforward tool. The conclusion \u2014 that no universal systolic bound holds for Bott-integrable forms \u2014 was open and is a meaningful contribution to the interplay between integrability and systolic geometry, complementing the positive bounds of Abbondandolo\u2013Benedetti\u2013Edtmair and Vialaret for more symmetric classes. The result is expected to be of genuine interest to the symplectic/contact topology community.",
+      "paper_id": "2604.19237",
+      "recommended_verdict": "promising",
+      "reviewer": "claude",
+      "summary": "The paper proves that there is no universal upper bound on the systolic ratio within the class of Bott-integrable contact forms on any closed 3-manifold (Theorem 1). The strategy has three steps: (1) approximate a given Bott-integrable contact form by a piecewise-linear Lutz form away from a small-volume set (Proposition 2), (2) insert ABHS plugs (solid tori with small volume and large minimal Reeb period) into the linear Lutz pieces, and (3) show the resulting contact form remains Bott-integrable by constructing a Morse\u2013Bott integral on each plug (Addendum 4). The systolic ratio then diverges because the total volume can be driven to zero while the minimal period stays bounded away from zero. The authors are established experts on Bott-integrable Reeb flows; the overall argument is coherent. The key novel contribution is Addendum 4 (Bott-integrability of the ABHS plug). Several sub-arguments are sketched at the level expected for a 10-page paper and rely heavily on [3, pp. 734-736] for details. Mathematical formulas are partially lost in the HTML rendering of the source, so formula-level verification was not possible.",
+      "technical_objections": [
+        {
+          "confidence": 0.65,
+          "evidence": "The contact condition for a Lutz form \u03b1 = f(r)d\u03b8 + g(r)d\u03c6 on S\u00b9 \u00d7 T\u00b2 is f'g \u2212 fg' > 0 (or analogously depending on orientation convention). If \u03b3(t) = (1\u2212t)(f,g) + t(f_PL, g_PL) is the convex interpolation, then (\u03b3')_f(\u03b3)_g \u2212 (\u03b3')_g(\u03b3)_f is a bilinear expression in the original and PL components that need not remain positive. No convexity assumption on the original curve is stated.",
+          "objection": "The convex linear interpolation between a Lutz plane curve and its piecewise-linear approximation is claimed to give a homotopy through contact forms (Section 3), but the contact condition for Lutz forms \u2014 a positivity condition on f'g \u2212 g'f \u2014 is not obviously preserved under pointwise convex combination of two curves.",
+          "paper_location": "Section 3, proof of Proposition 2, paragraph beginning 'Next we modify the contact form...'",
+          "severity": "moderate",
+          "would_change_verdict_if_true": false
+        },
+        {
+          "confidence": 0.55,
+          "evidence": "The paper says 'details of the construction are given in [3, pp. 734-736]' and describes only the Morse foliation geometry (Figure 2, necklace structure). The invariance under \u03c6\u2082 (which acts on individual discs D_k by Hamiltonian diffeomorphisms) for the connecting pieces of the necklace is not argued. The cited pages in [3] describe the construction of \u03c6 for the purpose of Proposition 3, not for a Morse function.",
+          "objection": "The invariance of the described Morse function on D\u00b2 under the ABHS diffeomorphism \u03c6 = \u03c6\u2081 \u2218 \u03c6\u2082 (Section 4) is asserted via geometric description but not proved in the paper; the details are deferred to [3, pp. 734-736]. It is unclear whether [3] actually constructs the Morse function or only the diffeomorphism \u03c6.",
+          "paper_location": "Section 4, proof of Addendum 4",
+          "severity": "moderate",
+          "would_change_verdict_if_true": true
+        },
+        {
+          "confidence": 0.5,
+          "evidence": "The paper says the Morse foliation shown in Figure 3, 'with one additional critical point of index [0]', defines an extension to a Morse\u2013Bott foliation on the complement in the linear Lutz piece. The Reeb-invariance of this extension (which must hold for the function to qualify as a Bott integral) is not checked.",
+          "objection": "The global Morse\u2013Bott function on the manifold M after plug insertion (Section 5) is constructed only at the level of 'the Morse function can be chosen so that it coincides with the original near the boundary.' The smoothness and Reeb-invariance of the global extension across the plug boundary circles is not verified.",
+          "paper_location": "Section 5, paragraph beginning 'The image under \u03a8 of the Morse\u2013Bott foliation...'",
+          "severity": "minor",
+          "would_change_verdict_if_true": false
+        },
+        {
+          "confidence": 0.4,
+          "evidence": "The paper says 'the number of summands (i.e., the range of j) and the \u03b5_j depend on the chosen N. By then choosing N sufficiently small, we can ensure [the volume estimate].' This presupposes that the number of plugs does not grow faster than \u03b5_j can be shrunk, but no quantitative bound on the number of plugs as a function of N is given.",
+          "objection": "The volume estimate in Section 5 involves a sum over plugs whose number of terms depends on N (the period lower bound). The claim that \u03a3\u03b5_k can be made arbitrarily small independently of N is stated but not argued in detail.",
+          "paper_location": "Section 5, volume estimate equations",
+          "severity": "minor",
+          "would_change_verdict_if_true": false
+        },
+        {
+          "confidence": 0.45,
+          "evidence": "The proof says 'the last comment about convex linear interpolation still applies' for the smoothing, so condition (i) is satisfied. But the Bott integral F is defined on all of M; modifying the contact form changes the Reeb vector field, and F must remain invariant under the new Reeb flow. This is not explicitly checked for the smoothing homotopy.",
+          "objection": "The paper does not verify that the Bott-integrable homotopy in Proposition 2(i) (passing through forms all sharing the same Bott integral F) is actually achievable for the smoothing of vertices in the PL curve. The smoothing regions introduce a curve that interpolates between two linear segments; whether the resulting contact form admits F as a Bott integral during the interpolation is not addressed.",
+          "paper_location": "Section 3, Proposition 2(i) and its proof, final paragraphs",
+          "severity": "minor",
+          "would_change_verdict_if_true": false
+        }
+      ]
+    },
     "reviewer": "claude"
   },
   {
-    "dry_run_note": "prior review not available yet",
-    "missing": "runs/2026-04/math.SG/papers/2604.19237/review_cycles/cycle_01/reviews/codex.json",
+    "review": {
+      "confidence": 0.63,
+      "cycle": 1,
+      "followup_notes": {
+        "changed_mind": false,
+        "changes_from_prior_cycle": "N/A for cycle 1.",
+        "invalid_points_from_other_reviewers": [],
+        "valid_points_from_other_reviewers": []
+      },
+      "main_claims": [
+        {
+          "claim": "For every Bott-integrable contact structure on a closed 3-manifold, Bott-integrable defining contact forms can have arbitrarily large systolic ratio.",
+          "notes": "The strategy is coherent, but the final plug insertion has a boundary-scaling mismatch and relies on a sketched integrability addendum.",
+          "paper_location": "Theorem 1, p.2 lines 63-66; proof in Section 5, p.7-p.8 lines 591-667",
+          "support_level": "partially_supported"
+        },
+        {
+          "claim": "A Bott-integrable contact form can be homotoped, preserving the Bott integral, so that outside arbitrarily small volume it is a finite union of linear Lutz pieces while Tmin is nearly preserved.",
+          "notes": "The local Lutz computations support this, but the global chart patching and the uniform Tmin control through smoothing regions are compressed.",
+          "paper_location": "Proposition 2 and proof, p.3-p.5 lines 300-504",
+          "support_level": "partially_supported"
+        },
+        {
+          "claim": "The ABHS plug admits a Bott integral with regular torus levels near the boundary.",
+          "notes": "The proof describes a candidate Morse foliation, but does not explicitly verify invariance under the actual ABHS return map phi = phi_+ composed with phi_-.",
+          "paper_location": "Addendum 4 and proof sketch, p.5-p.7 lines 528-590",
+          "support_level": "unclear"
+        },
+        {
+          "claim": "Replacing most of each linear Lutz piece by the plug keeps Tmin bounded below and makes total volume arbitrarily small.",
+          "notes": "The volume strategy is plausible, but the cited plug model does not directly match the pulled-back boundary form a_l ds + lambda_l as written.",
+          "paper_location": "Section 5, p.7-p.8 lines 608-667",
+          "support_level": "partially_supported"
+        }
+      ],
+      "missing_assumptions": [
+        {
+          "assumption": "A scaled ABHS plug exists for the boundary contact form lambda + a ds, with minimal period at least a and arbitrarily small prescribed volume.",
+          "paper_location": "Section 5, p.7 lines 616-630",
+          "why_it_matters": "This is needed for smooth gluing into a linear Lutz piece and for the claimed lower bound Tmin >= a_l. It is probably obtainable by applying Proposition 3 to lambda/a and multiplying the resulting form, but the paper should state and track the volume scaling."
+        },
+        {
+          "assumption": "The necklace foliation constructed in Section 4 is invariant under the exact ABHS disk diffeomorphism phi, not only under an idealized rotation model.",
+          "paper_location": "Section 4, p.6-p.7 lines 553-590",
+          "why_it_matters": "Without h composed with phi equal to h, the function h does not descend to a Bott integral on the mapping torus."
+        },
+        {
+          "assumption": "The finite Lutz charts used in Proposition 2 can be selected so that all chart overlaps lie in regions left unchanged by the later local modifications.",
+          "paper_location": "Proposition 2 proof, p.3-p.4 lines 329-368",
+          "why_it_matters": "This ensures the locally modified Lutz forms patch to a single smooth global contact form."
+        },
+        {
+          "assumption": "The C1 approximation and smoothing in Proposition 2 can be chosen uniformly enough that every new periodic beta-orbit has period greater than Tmin(M,alpha)-epsilon.",
+          "paper_location": "Proposition 2 proof, p.4-p.5 lines 385-503",
+          "why_it_matters": "The final large-systolic-ratio estimate depends on a global lower bound for Tmin after linearisation."
+        }
+      ],
+      "needs_human_spotcheck": [
+        {
+          "question": "Does the ABHS plug proposition, as used by the authors, already include or immediately imply the scaled boundary model lambda + a ds with the advertised period and volume estimates?",
+          "why_model_cannot_resolve": "The paper cites external propositions and the provided text does not include their exact normalization conventions."
+        },
+        {
+          "question": "Is the Morse foliation in Section 4 actually invariant under the precise ABHS diffeomorphism phi_+ composed with phi_-?",
+          "why_model_cannot_resolve": "The proof relies on details of the ABHS construction and a figure-based foliation description; a human should check the original construction or draw the dynamics on the quotient."
+        },
+        {
+          "question": "Can the Proposition 2 Lutz-chart cover be chosen with overlaps only in unchanged collars in full generality?",
+          "why_model_cannot_resolve": "This is a standard-looking foliation-cover issue, but the paper suppresses the construction and the HTML/PDF text does not provide enough detail to rule out edge cases."
+        }
+      ],
+      "novelty_assessment": "The claimed novelty is plausible: the paper appears to combine the ABHS large-systolic-ratio plug with Bott-integrability by adding an invariant Morse-Bott function on the plug and fitting it into linearized Lutz regions. I did not independently audit the full prior literature. The genuinely new point seems to be Addendum 4, and that is also one of the least detailed parts of the proof as written.",
+      "paper_id": "2604.19237",
+      "recommended_verdict": "contested",
+      "reviewer": "codex",
+      "summary": "The paper proposes to make the systolic ratio arbitrarily large within any Bott-integrable contact structure on a closed 3-manifold by linearising Lutz-form regions and inserting an ABHS small-volume plug equipped with a Bott integral. I did not attempt to certify the whole proof. The main local concern is that the plug is inserted into a region whose boundary model is a_l ds + lambda_l, while the quoted ABHS proposition is stated for lambda + ds; as written the gluing and period/volume estimates do not quite match without an explicit scaling lemma. The addendum constructing an invariant Morse function for the ABHS plug is also sketched rather than verified in the places where invariance under the actual diffeomorphism is needed.",
+      "technical_objections": [
+        {
+          "confidence": 0.86,
+          "evidence": "The pullback of the linear Lutz form is a_l ds + lambda_l, but Proposition 3 gives a plug equal to lambda + ds near the boundary. The text then sets beta_l = beta_{r_l,lambda_l,delta} and replaces the form on the image of Psi_l, which would glue to lambda_l + ds, not to lambda_l + a_l ds, unless a_l=1. The subsequent claim that the factor a_l makes the minimal period at least a_l requires an unstated scaled version of the plug, e.g. applying ABHS to lambda_l/a_l and then multiplying the contact form with adjusted volume control.",
+          "objection": "The plug boundary model used in the insertion does not match the boundary model supplied by Proposition 3 as stated.",
+          "paper_location": "Section 5, p.7 lines 616-630; Proposition 3, p.5 lines 518-526",
+          "severity": "major",
+          "would_change_verdict_if_true": true
+        },
+        {
+          "confidence": 0.67,
+          "evidence": "The proof says it suffices to exhibit h with h composed with phi equal to h, then describes a necklace Morse foliation on D/Z_n and says it lifts to the desired h. It does not check, leaf by leaf, that the actual composition phi_+ composed with phi_- preserves this foliation, especially in transition regions where phi_+ has radius-dependent rotation and where the phi_j are compactly supported in the beads.",
+          "objection": "The claimed invariant Morse function for the ABHS plug is not fully verified.",
+          "paper_location": "Section 4, p.5-p.7 lines 547-590",
+          "severity": "major",
+          "would_change_verdict_if_true": true
+        },
+        {
+          "confidence": 0.55,
+          "evidence": "The proof compares beta-periodic tori to alpha-tori with the same rational slope and states that the Reeb fields differ by a factor close to 1. For a global lower bound this needs uniform handling of vertical slopes, points where one derivative is small, and rational slopes appearing during smoothing. The text indicates substitutions for zero derivatives but does not spell out a projective-slope or compactness argument ensuring the period comparison is uniform over all smoothing regions.",
+          "objection": "The Tmin preservation argument in Proposition 2 needs a more uniform treatment of slopes and smoothing regions.",
+          "paper_location": "Proposition 2 proof, p.4-p.5 lines 385-503",
+          "severity": "moderate",
+          "would_change_verdict_if_true": false
+        },
+        {
+          "confidence": 0.45,
+          "evidence": "The proof chooses finitely many Lutz neighborhoods with no triple intersections and small pairwise-intersection volume, then modifies each chart while leaving boundary collars unchanged. It should justify that the overlaps can indeed be confined to such collars in the relevant r-coordinates and that the independently chosen piecewise-linear replacements agree smoothly on the resulting global complement.",
+          "objection": "The construction of a global modified form from overlapping Lutz charts is underexplained.",
+          "paper_location": "Proposition 2 proof, p.3-p.4 lines 329-368",
+          "severity": "moderate",
+          "would_change_verdict_if_true": false
+        },
+        {
+          "confidence": 0.9,
+          "evidence": "The text writes alpha_epsilon := beta_{epsilon,beta}; from context this should presumably be beta_{epsilon,delta}.",
+          "objection": "There is a likely typo in the final definition of the modified contact form.",
+          "paper_location": "Section 5, p.8 line 658",
+          "severity": "minor",
+          "would_change_verdict_if_true": false
+        }
+      ]
+    },
     "reviewer": "codex"
   }
 ]

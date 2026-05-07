@@ -95,7 +95,6 @@ paper has already been reviewed.
 
    ```bash
    env -u CLAUDECODE claude -p \
-     --bare \
      --tools "" \
      --no-session-persistence \
      --output-format json \
@@ -137,6 +136,9 @@ paper has already been reviewed.
    Parse each CLI's native output:
 
    - Claude returns one JSON object with `result`, `session_id`, usage, and cost.
+     When `--json-schema` is used, the schema-conforming payload may appear in
+     `structured_output` while `result` contains prose or is empty; adapters
+     should prefer `structured_output`.
    - Codex returns JSONL events; extract the final `agent_message`, thread id,
      and `turn.completed.usage`.
    - Gemini can emit JSON/text depending on flags; wrap and validate exactly as

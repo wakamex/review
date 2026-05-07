@@ -119,7 +119,6 @@ def command_preview(provider: str, schema_path: Path, args: argparse.Namespace) 
             "CLAUDECODE",
             "claude",
             "-p",
-            "--bare",
             "--tools",
             "",
             "--no-session-persistence",
@@ -198,7 +197,6 @@ def execute_provider(provider: str, prompt: str, schema_path: Path, out_dir: Pat
         command = [
             "claude",
             "-p",
-            "--bare",
             "--tools",
             "",
             "--no-session-persistence",
@@ -216,8 +214,13 @@ def execute_provider(provider: str, prompt: str, schema_path: Path, out_dir: Pat
         if completed.returncode != 0:
             raise RuntimeError(f"claude exited {completed.returncode}: {completed.stderr.strip()}")
         wrapper = json.loads(completed.stdout)
-        payload = wrapper.get("result", wrapper)
-        parsed = payload if isinstance(payload, dict) else parse_jsonish(str(payload))
+        if wrapper.get("is_error"):
+            raise RuntimeError(str(wrapper.get("result") or "claude returned is_error=true"))
+        if "structured_output" in wrapper and wrapper["structured_output"] is not None:
+            parsed = wrapper["structured_output"]
+        else:
+            payload = wrapper.get("result", wrapper)
+            parsed = payload if isinstance(payload, dict) else parse_jsonish(str(payload))
         write_json(result_file, parsed)
         write_json(out_dir / f"{provider}.usage.json", wrapper)
         return parsed
