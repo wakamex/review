@@ -1124,7 +1124,6 @@ Review artifacts:
         "technical_soundness": 6.5
       },
       "followup_notes": {
-        "changed_mind": false,
         "changes_from_prior_cycle": "First cycle; no prior review to compare.",
         "invalid_points_from_other_reviewers": [],
         "valid_points_from_other_reviewers": []
@@ -1259,7 +1258,6 @@ Review artifacts:
         "technical_soundness": 6.3
       },
       "followup_notes": {
-        "changed_mind": false,
         "changes_from_prior_cycle": "N/A for cycle 1.",
         "invalid_points_from_other_reviewers": [],
         "valid_points_from_other_reviewers": []
@@ -1393,7 +1391,6 @@ Review artifacts:
         "technical_soundness": 9
       },
       "followup_notes": {
-        "changed_mind": false,
         "changes_from_prior_cycle": "",
         "invalid_points_from_other_reviewers": [],
         "valid_points_from_other_reviewers": []
@@ -1446,7 +1443,6 @@ Review artifacts:
         "technical_soundness": 6.5
       },
       "followup_notes": {
-        "changed_mind": true,
         "changes_from_prior_cycle": "I slightly increased the overall score from 6.5 to 7.0 after reading codex's review, which independently corroborated my concern about Addendum 4 and added the Gray-stability gap I had missed. I also upgraded the severity of the Addendum 4 objection to 'would_change_verdict_if_true: true' in line with codex's assessment. I did not move toward gemini's much higher scores because gemini's review does not engage with the specific invariance gap in Addendum 4.",
         "invalid_points_from_other_reviewers": [
           "Gemini's claim that Addendum 4 is 'well_supported' and that all claims are essentially proved is not credible. The paper's own text says 'we simply need to exhibit a Morse function invariant under \u03c6' without proving invariance\u2014gemini appears to credit the description of the foliation as a proof of invariance, which it is not.",
@@ -1598,7 +1594,6 @@ Review artifacts:
         "technical_soundness": 6.1
       },
       "followup_notes": {
-        "changed_mind": true,
         "changes_from_prior_cycle": "I slightly lowered my score after accepting Claude's more precise objection that convex interpolation of Lutz curves needs an explicit contact-condition argument. I did not adopt Gemini's stronger confidence, because that review did not address the exact invariance gap in Addendum 4 with location-grounded evidence.",
         "invalid_points_from_other_reviewers": [
           "Gemini's 'well_supported' ratings for Proposition 2 and Addendum 4 are too strong from the provided text; they assume the missing verifications rather than auditing them.",
@@ -1754,7 +1749,6 @@ Review artifacts:
         "technical_soundness": 7
       },
       "followup_notes": {
-        "changed_mind": false,
         "changes_from_prior_cycle": "I have retained my 'promising' verdict but lowered the technical soundness and clarity scores. I incorporated the excellent observations from Claude and Codex regarding unverified assertions in Addendum 4 (\u03c6-invariance), Proposition 2 (convex interpolation), and the omitted Gray-stability step in the final proof.",
         "invalid_points_from_other_reviewers": [],
         "valid_points_from_other_reviewers": [

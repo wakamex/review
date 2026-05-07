@@ -128,13 +128,11 @@ Schema:
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "changed_mind",
         "changes_from_prior_cycle",
         "valid_points_from_other_reviewers",
         "invalid_points_from_other_reviewers"
       ],
       "properties": {
-        "changed_mind": { "type": "boolean" },
         "changes_from_prior_cycle": { "type": "string" },
         "valid_points_from_other_reviewers": {
           "type": "array",
@@ -1173,7 +1171,6 @@ Your prior review:
     "technical_soundness": 6.5
   },
   "followup_notes": {
-    "changed_mind": false,
     "changes_from_prior_cycle": "First cycle; no prior review to compare.",
     "invalid_points_from_other_reviewers": [],
     "valid_points_from_other_reviewers": []
@@ -1309,7 +1306,6 @@ Other reviewers' latest reviews:
         "technical_soundness": 6.3
       },
       "followup_notes": {
-        "changed_mind": false,
         "changes_from_prior_cycle": "N/A for cycle 1.",
         "invalid_points_from_other_reviewers": [],
         "valid_points_from_other_reviewers": []
@@ -1440,7 +1436,6 @@ Other reviewers' latest reviews:
         "technical_soundness": 9
       },
       "followup_notes": {
-        "changed_mind": false,
         "changes_from_prior_cycle": "",
         "invalid_points_from_other_reviewers": [],
         "valid_points_from_other_reviewers": []

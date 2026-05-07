@@ -126,13 +126,11 @@ Schema:
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "changed_mind",
         "changes_from_prior_cycle",
         "valid_points_from_other_reviewers",
         "invalid_points_from_other_reviewers"
       ],
       "properties": {
-        "changed_mind": { "type": "boolean" },
         "changes_from_prior_cycle": { "type": "string" },
         "valid_points_from_other_reviewers": {
           "type": "array",
