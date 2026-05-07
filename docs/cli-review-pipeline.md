@@ -264,7 +264,9 @@ The first-pass review schema should be conservative:
 The run harness also emits a compact `score_summary` at the end of
 `review_run_summary.json` and stdout. That block repeats only the information
 needed for ranking and dashboards: reviewer, overall score, dimension scores,
-board verdict, board confidence, and board score.
+board verdict, board confidence, and board score. It also includes a
+mechanical average for each review cycle, plus the board score delta against
+the final-cycle mechanical average, so synthesis drift is visible.
 
 ## Why CLI-Only Works
 

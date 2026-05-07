@@ -22,6 +22,13 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PROVIDERS = "claude,codex,gemini"
+SCORE_DIMENSIONS = [
+    "technical_soundness",
+    "novelty",
+    "significance",
+    "clarity",
+    "reviewer_confidence",
+]
 
 
 def parse_args() -> argparse.Namespace:
@@ -424,6 +431,48 @@ def compact_board_score(board: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def average_review_scores(reviews: list[dict[str, Any]]) -> dict[str, Any]:
+    overall_values = [
+        review["overall_score_10"]
+        for review in reviews
+        if isinstance(review.get("overall_score_10"), (int, float))
+    ]
+    dimension_scores = {}
+    for dimension in SCORE_DIMENSIONS:
+        values = []
+        for review in reviews:
+            value = (review.get("dimension_scores") or {}).get(dimension)
+            if isinstance(value, (int, float)):
+                values.append(value)
+        if values:
+            dimension_scores[dimension] = round(sum(values) / len(values), 3)
+
+    average: dict[str, Any] = {}
+    if overall_values:
+        average["overall_score_10"] = round(sum(overall_values) / len(overall_values), 3)
+    if dimension_scores:
+        average["dimension_scores"] = dimension_scores
+    return average
+
+
+def board_delta(board: dict[str, Any], average: dict[str, Any]) -> dict[str, Any]:
+    delta: dict[str, Any] = {}
+    if isinstance(board.get("board_score_10"), (int, float)) and isinstance(average.get("overall_score_10"), (int, float)):
+        delta["score_10"] = round(board["board_score_10"] - average["overall_score_10"], 3)
+
+    board_dimensions = board.get("dimension_scores") or {}
+    average_dimensions = average.get("dimension_scores") or {}
+    dimension_delta = {}
+    for dimension in SCORE_DIMENSIONS:
+        board_value = board_dimensions.get(dimension)
+        average_value = average_dimensions.get(dimension)
+        if isinstance(board_value, (int, float)) and isinstance(average_value, (int, float)):
+            dimension_delta[dimension] = round(board_value - average_value, 3)
+    if dimension_delta:
+        delta["dimension_scores"] = dimension_delta
+    return delta
+
+
 def collect_score_summary(
     paper_dir: Path,
     cycles: int,
@@ -439,13 +488,25 @@ def collect_score_summary(
                 continue
             reviews.append({"reviewer": provider, **compact_review_score(read_json(path))})
         if reviews:
-            review_cycles.append({"cycle": cycle, "reviews": reviews})
+            cycle_summary = {"cycle": cycle, "reviews": reviews}
+            average = average_review_scores(reviews)
+            if average:
+                cycle_summary["mechanical_average"] = average
+            review_cycles.append(cycle_summary)
 
     score_summary: dict[str, Any] = {"review_cycles": review_cycles}
     if board_provider:
         board_path = paper_dir / "board" / f"{board_provider}.json"
         if board_path.exists():
-            score_summary["board"] = {"reviewer": board_provider, **compact_board_score(read_json(board_path))}
+            board = {"reviewer": board_provider, **compact_board_score(read_json(board_path))}
+            score_summary["board"] = board
+            if review_cycles:
+                final_average = review_cycles[-1].get("mechanical_average")
+                if final_average:
+                    score_summary["final_cycle_mechanical_average"] = final_average
+                    delta = board_delta(board, final_average)
+                    if delta:
+                        score_summary["board_delta_vs_final_cycle_mechanical_average"] = delta
     return score_summary
 
 
