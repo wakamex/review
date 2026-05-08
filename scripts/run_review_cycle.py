@@ -15,6 +15,7 @@ import os
 import subprocess
 import sys
 import tempfile
+from datetime import UTC, datetime
 from pathlib import Path
 from string import Template
 from typing import Any
@@ -86,6 +87,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--codex-model", default=None, help="Optional Codex model id.")
     parser.add_argument("--gemini-model", default=None, help="Optional Gemini model id.")
     parser.add_argument("--timeout", type=int, default=900, help="Per-call timeout seconds.")
+    parser.add_argument(
+        "--stop-on-error",
+        action="store_true",
+        help="Stop on the first provider or board error. Default: record the error and continue.",
+    )
     parser.add_argument("--overwrite", action="store_true", help="Overwrite existing outputs.")
     return parser.parse_args()
 
@@ -101,6 +107,10 @@ def read_json(path: Path) -> Any:
 def write_json(path: Path, value: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
+def utc_now() -> str:
+    return datetime.now(UTC).isoformat(timespec="seconds")
 
 
 def load_template(path: Path) -> Template:
@@ -403,11 +413,37 @@ def write_plan_artifacts(
     )
 
 
+def write_error_artifact(
+    out_dir: Path,
+    provider: str,
+    phase: str,
+    prompt_path: Path,
+    schema_path: Path,
+    exc: Exception,
+) -> Path:
+    error_path = out_dir / f"{provider}.error.json"
+    write_json(
+        error_path,
+        {
+            "provider": provider,
+            "phase": phase,
+            "status": "error",
+            "error_type": type(exc).__name__,
+            "error": str(exc),
+            "prompt_path": str(prompt_path),
+            "schema_path": str(schema_path),
+            "created_at": utc_now(),
+        },
+    )
+    return error_path
+
+
 def collect_review_artifacts(paper_dir: Path, cycles: int, providers: list[str]) -> list[dict[str, Any]]:
     artifacts = []
     for cycle in range(1, cycles + 1):
         for provider in providers:
             path = provider_review_path(paper_dir, cycle, provider)
+            error_path = path.with_suffix(".error.json")
             artifacts.append(
                 {
                     "cycle": cycle,
@@ -415,6 +451,8 @@ def collect_review_artifacts(paper_dir: Path, cycles: int, providers: list[str])
                     "path": str(path),
                     "review": read_json(path) if path.exists() else None,
                     "missing": not path.exists(),
+                    "error_path": str(error_path) if error_path.exists() else None,
+                    "error": read_json(error_path) if error_path.exists() else None,
                 }
             )
     return artifacts
@@ -648,9 +686,21 @@ def main() -> int:
                     except Exception as exc:  # noqa: BLE001 - preserve partial run.
                         call_summary["status"] = "error"
                         call_summary["error"] = str(exc)
+                        call_summary["error_path"] = str(
+                            write_error_artifact(
+                                out_dir,
+                                provider,
+                                f"cycle_{cycle:02d}",
+                                out_dir / f"{provider}.prompt.md",
+                                review_schema_path,
+                                exc,
+                            )
+                        )
                         summary["calls"].append(call_summary)
-                        write_json(paper_dir / "review_run_summary.json", summary)
-                        return 1
+                        if args.stop_on_error:
+                            write_json(paper_dir / "review_run_summary.json", summary)
+                            return 1
+                        continue
             else:
                 call_summary["status"] = "planned"
             summary["calls"].append(call_summary)
@@ -668,8 +718,28 @@ def main() -> int:
             if board_result_path.exists() and not (args.overwrite or args.overwrite_board):
                 summary["board"] = {"status": "exists", "provider": provider, "path": str(board_result_path)}
             else:
-                execute_provider(provider, board_prompt, board_schema_path, board_dir, args)
-                summary["board"] = {"status": "ok", "provider": provider, "path": str(board_result_path)}
+                try:
+                    execute_provider(provider, board_prompt, board_schema_path, board_dir, args)
+                    summary["board"] = {"status": "ok", "provider": provider, "path": str(board_result_path)}
+                except Exception as exc:  # noqa: BLE001 - preserve partial run.
+                    error_path = write_error_artifact(
+                        board_dir,
+                        provider,
+                        "board",
+                        board_dir / f"{provider}.prompt.md",
+                        board_schema_path,
+                        exc,
+                    )
+                    summary["board"] = {
+                        "status": "error",
+                        "provider": provider,
+                        "path": str(board_result_path),
+                        "error": str(exc),
+                        "error_path": str(error_path),
+                    }
+                    if args.stop_on_error:
+                        write_json(paper_dir / "review_run_summary.json", summary)
+                        return 1
         else:
             summary["board"] = {
                 "status": "planned",

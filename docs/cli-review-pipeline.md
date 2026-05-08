@@ -338,6 +338,35 @@ Cycle semantics:
 - Cycle 1: each reviewer receives only the paper bundle and review schema.
 - Cycle 2+: each reviewer receives the paper bundle, its own previous JSON
   review, and the other reviewers' previous JSON reviews.
+- Provider failures are recorded as `*.error.json` artifacts and do not stop
+  the run unless `--stop-on-error` is set. A later rerun fills missing
+  `*.json` reviews without overwriting completed outputs.
+
+Run or resume a filtered tranche overnight:
+
+```bash
+nohup python3 scripts/run_review_batch.py \
+  --manifest runs/2026-04/gr-qc/manifest.jsonl \
+  --source-manifest runs/2026-04/gr-qc/source_manifest.jsonl \
+  --papers-dir runs/2026-04/gr-qc/papers \
+  --log-dir runs/2026-04/gr-qc/batch_logs/overnight-$(date +%Y%m%d-%H%M%S) \
+  --providers claude,codex,gemini \
+  --cycles 2 \
+  --timeout 1200 \
+  --execute \
+  --board \
+  > runs/2026-04/gr-qc/overnight.out 2>&1 &
+```
+
+After a batch has produced board summaries, export teaser-ready rows:
+
+```bash
+python3 scripts/summarize_review_results.py \
+  --manifest runs/2026-04/gr-qc/manifest.jsonl \
+  --papers-dir runs/2026-04/gr-qc/papers \
+  --json-output runs/2026-04/gr-qc/teasers.json \
+  --markdown-output runs/2026-04/gr-qc/teasers.md
+```
 - Board synthesis receives the paper bundle and all review-cycle artifacts.
 
 Artifacts for the first test paper live under:

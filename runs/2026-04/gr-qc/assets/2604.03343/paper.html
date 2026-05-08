@@ -1,0 +1,663 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Friedmann cosmology with fluids and hyperfluids</title>
+<!--Generated on Fri Apr  3 09:14:46 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="/static/browse/0.3.4/css/arxiv-html-papers-20260131.css" type="text/css">
+<script src="/static/browse/0.3.4/js/arxiv-html-papers-20260131.js"></script>
+<script>
+  // Restore the saved color scheme preference, or
+  // enact the browser preference if "automatic", 
+  // without expecting DOM load to have completed.
+  //
+  // Also restore any saved readingmode and ToC display preferences.
+  function initializeReadingPreferences() {
+    let saved_theme = localStorage.getItem("ar5iv_theme") || "automatic";
+    if (saved_theme === "automatic") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        saved_theme = "dark";
+      }
+    }
+    if (saved_theme == "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+
+    const tocDisplay = localStorage.getItem('arxiv_html_paper_toc_display');
+    if (tocDisplay) {
+      document.documentElement.setAttribute("data-toc-display", tocDisplay);
+    }
+    const readingMode = localStorage.getItem('arxiv_html_paper_reading_mode');
+    if (readingMode) {
+      document.documentElement.setAttribute("data-reading-mode", readingMode);
+    }
+  }
+  // Run as soon as JS starts, to minimize repainting
+  initializeReadingPreferences();
+</script>
+<link rel="apple-touch-icon" sizes="180x180"
+  href="/static/browse/0.3.4/images/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32"
+  href="/static/browse/0.3.4/images/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+  href="/static/browse/0.3.4/images/icons/favicon-16x16.png">
+<link rel="manifest" href="/static/browse/0.3.4/images/icons/site.webmanifest">
+<link rel="mask-icon" href="/static/browse/0.3.4/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="stylesheet" type="text/css" media="screen" href="https://use.typekit.net/utz6mli.css">
+</head>
+<body>
+<dialog id="modal-form" aria-labelledby="modal-title" closedby="any">
+  <form id="modal-form-content" method="dialog" enctype="multipart/form-data">
+    <header class="modal-header">
+      <h5 id="modal-title" class="modal-title">Report GitHub Issue</h5>
+      <button type="submit" formnovalidate class="modal-close" aria-label="Close">×</button>
+    </header>
+
+    <div class="modal-body">
+      <label for="form_title">Title:</label>
+      <input class="form-control" id="form_title" name="form_title" required placeholder="Enter title">
+
+      <p id="selectedTextModalDescription" hidden>Content selection saved. Describe the issue below:</p>
+
+      <label for="description">Description:</label>
+      <textarea class="form-control" id="description" name="description" required maxlength="500"
+        placeholder="500 characters maximum"></textarea>
+    </div>
+
+    <footer class="modal-footer">
+      <button type="submit" value="internal-report" class="sr-only modal-submit">Submit without GitHub</button>
+      <button type="submit" value="github-report" class="modal-submit">Submit in GitHub</button>
+    </footer>
+  </form>
+</dialog>
+
+<header class="arxiv-html-header">
+  <div class="html-header-logo">
+    <a href="/">
+      <img alt="arXiv logo" class="logo desktop-only" width="100"
+        src="/static/browse/0.3.4/images/arxiv-logo-one-color-white.svg">
+      <span class="sr-only">Back to arXiv</span>
+    </a>
+  </div>
+  <!--TOC, dark mode, links-->
+  <nav class="html-header-nav">
+    <a class="header-button hover-effect desktop-only" href="https://info.arxiv.org/about/accessible_HTML.html"
+      target="_blank">Why HTML?</a>
+    <a class="header-button" title="Report an Issue" href="#" title="Report an issue"
+      onclick="event.preventDefault(); showModalForm();">
+      <svg role="presentation" class="mobile-only toggle-icon" aria-hidden="true" height="1.25rem"
+        viewBox="0 0 640 640">
+        <path
+          d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+      </svg>
+      <span class="desktop-only">Report Issue</span></a>
+    <!--back to abstract-->
+    <a class="header-button" title="Back to abstract page" aria-label="Back to abstract page"
+      href="/abs/2604.03343v1">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 512 512" fill="#ffffff"
+        aria-hidden="true">
+        <path
+          d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z">
+        </path>
+      </svg>
+      <span class="desktop-only">Back to Abstract</span>
+    </a>
+    <!-- PDF download link -->
+    <a class="header-button" title="Download PDF" href="/pdf/2604.03343v1"
+      target="_blank">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 576 542">
+        <path
+          d="M208 48L96 48c-8.8 0-16 7.2-16 16l0 384c0 8.8 7.2 16 16 16l80 0 0 48-80 0c-35.3 0-64-28.7-64-64L32 64C32 28.7 60.7 0 96 0L229.5 0c17 0 33.3 6.7 45.3 18.7L397.3 141.3c12 12 18.7 28.3 18.7 45.3l0 149.5-48 0 0-128-88 0c-39.8 0-72-32.2-72-72l0-88zM348.1 160L256 67.9 256 136c0 13.3 10.7 24 24 24l68.1 0zM240 380l32 0c33.1 0 60 26.9 60 60s-26.9 60-60 60l-12 0 0 28c0 11-9 20-20 20s-20-9-20-20l0-128c0-11 9-20 20-20zm32 80c11 0 20-9 20-20s-9-20-20-20l-12 0 0 40 12 0zm96-80l32 0c28.7 0 52 23.3 52 52l0 64c0 28.7-23.3 52-52 52l-32 0c-11 0-20-9-20-20l0-128c0-11 9-20 20-20zm32 128c6.6 0 12-5.4 12-12l0-64c0-6.6-5.4-12-12-12l-12 0 0 88 12 0zm76-108c0-11 9-20 20-20l48 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 24 28 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 44c0 11-9 20-20 20s-20-9-20-20l0-128z" />
+      </svg>
+      <span class="desktop-only">Download PDF</span></a>
+    <!-- navigational table of contents toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleNavTOC();" title="Toggle navigation"
+      aria-label="Toggle navigation">
+      <svg height="1.25rem" role="presentation" viewBox="0 0 512 512">
+        <path
+          d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z">
+        </path>
+      </svg>
+    </a>
+    <!--- collapsable header / reading mode toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleReadingMode();"
+      title="Disable reading mode, show header and footer">
+      <svg role="presentation" height="1.25rem"
+        viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+        <path
+          d="M32 32C14.3 32 0 46.3 0 64l0 96c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 32zM64 352c0-17.7-14.3-32-32-32S0 334.3 0 352l0 96c0 17.7 14.3 32 32 32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0 0-64zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0 0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-96c0-17.7-14.3-32-32-32l-96 0zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l96 0c17.7 0 32-14.3 32-32l0-96z" />
+      </svg>
+    </a>
+    <!--- colored theme toggle -->
+    <button type="button" class="header-button color-tog" onclick="toggleColorScheme();" title="Toggle dark/light mode" aria-label="Toggle color scheme">
+      <span class="toggle-icon automatic-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon light-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon dark-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+    </button>
+  </nav>
+</header><nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_abstract"><a href="#abstract1" title="In Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_title">Abstract</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S1" title="In Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Metric-affine geometry and gravity</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S2" title="In Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Homogeneous and isotropic, spatially flat cosmology</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S3" title="In Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Constructing dark scenarios for the Universe history</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_bibliography"><a href="#bib" title="In Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_title">References</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div id="infobox" class="infobox">
+  <a id="license-tr" href="https://info.arxiv.org/help/license/index.html#licenses-available">
+    License: CC BY 4.0
+  </a>
+  <div id="watermark-tr">
+arXiv:2604.03343v1 [gr-qc] 03 Apr 2026</div>
+</div><div class="ltx_page_content">
+<article class="ltx_document" lang="en">
+<h1 class="ltx_title ltx_title_document">Friedmann cosmology with fluids and hyperfluids</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Ilaria Andrei<sup id="id8.2.id1" class="ltx_sup"><span id="id8.2.id1.1" class="ltx_text ltx_font_italic">a</span></sup>
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname"> Damianos Iosifidis<sup id="id9.2.id1" class="ltx_sup"><span id="id9.2.id1.1" class="ltx_text ltx_font_italic">b,c</span></sup>
+</span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname"> Laur Järv<sup id="id10.6.id1" class="ltx_sup"><span id="id10.6.id1.1" class="ltx_text ltx_font_italic">a</span></sup><span id="footnote1" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_tag ltx_tag_note">1</span>corresponding author</span></span></span> and Margus Saal<sup id="id11.7.id2" class="ltx_sup"><span id="id11.7.id2.1" class="ltx_text ltx_font_italic">a</span></sup>
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation"><sup id="id12.8.id1" class="ltx_sup"><span id="id12.8.id1.1" class="ltx_text ltx_font_italic">a</span></sup>Institute of Physics, University of Tartu, W. Ostwaldi 1, 50411 Tartu, Estonia 
+<br class="ltx_break"><sup id="id13.9.id2" class="ltx_sup"><span id="id13.9.id2.1" class="ltx_text ltx_font_italic">b</span></sup>Scuola Superiore Meridionale, Largo San Marcellino 10, 80138 Napoli, Italy 
+<br class="ltx_break"><sup id="id14.10.id3" class="ltx_sup"><span id="id14.10.id3.1" class="ltx_text ltx_font_italic">c</span></sup> INFN Sezione di Napoli, Via Cintia, 80126 Napoli, Italy
+</span>
+<span class="ltx_contact ltx_role_email"><a href="2604.03343v1/mailto:laur.jarv@ut.ee">laur.jarv@ut.ee</a>
+</span></span></span>
+</div>
+
+<div id="abstract1" class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p"><span class="ltx_text">We discuss flat Friedmann-Lemaître-Robertson-Walker (FLRW) metric-affine cosmology where the metric and connection as well as the matter energy-momentum and hypermomentum all obey the symmetry of spatial homogeneity and isotropy. In particular, we outline a scenario where a dark dust fluid carries spin hypermomentum which makes its effective equation of state dynamical and might relate to the DESI DR2 data.</span></p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Metric-affine geometry and gravity</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p id="S1.p1.3" class="ltx_p">In differential geometry the distance between points on a manifold is measured by a metric <math id="S1.p1.1.m1" class="ltx_Math" alttext="g_{\mu\nu}" display="inline" intent=":literal"><semantics><msub><mi>g</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msub><annotation encoding="application/x-tex">g_{\mu\nu}</annotation></semantics></math> while a connection <math id="S1.p1.2.m2" class="ltx_math_unparsed" alttext="\Gamma^{\lambda}{}_{\mu\nu}" display="inline" intent=":literal"><semantics><mrow><msup><mi mathvariant="normal">Γ</mi><mi>λ</mi></msup><msub><mi></mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\Gamma^{\lambda}{}_{\mu\nu}</annotation></semantics></math> defines the parallel transport of geometric objects like vectors or tensors. Although general relativity relies on the Levi-Civita connection <math id="S1.p1.3.m3" class="ltx_Math" alttext="\tilde{\Gamma}^{\lambda}_{\phantom{\lambda}\mu\nu}" display="inline" intent=":literal"><semantics><msubsup><mover accent="true"><mi mathvariant="normal">Γ</mi><mo>~</mo></mover><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow><mi>λ</mi></msubsup><annotation encoding="application/x-tex">\tilde{\Gamma}^{\lambda}_{\phantom{\lambda}\mu\nu}</annotation></semantics></math> derived from the metric, in principle the notions of distance (related to the metric) and direction (related to the connection) are independent of each other. Generic affine connection coefficients can be decomposed into <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib67" title="Metric affine gauge theory of gravity: Field equations, Noether identities, world spinors, and breaking of dilation invariance" class="ltx_ref">7</a>]</cite></p>
+<table id="S1.E1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S1.E1.m1" class="ltx_math_unparsed" alttext="\Gamma^{\lambda}{}_{\mu\nu}=\tilde{\Gamma}^{\lambda}{}_{\mu\nu}+{\frac{1}{2}g^{\lambda\rho}\left(Q_{\mu\nu\rho}+Q_{\nu\rho\mu}-Q_{\rho\mu\nu}\right)}-{g^{\lambda\rho}\left(S_{\rho\mu\nu}+S_{\rho\nu\mu}-S_{\mu\nu\rho}\right)}\,," display="block" intent=":literal"><semantics><mrow><msup><mi mathvariant="normal">Γ</mi><mi>λ</mi></msup><mmultiscripts><mo>=</mo><mprescripts></mprescripts><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow><mrow></mrow></mmultiscripts><msup><mover accent="true"><mi mathvariant="normal">Γ</mi><mo>~</mo></mover><mi>λ</mi></msup><mmultiscripts><mo>+</mo><mprescripts></mprescripts><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow><mrow></mrow></mmultiscripts><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mi>g</mi><mrow><mi>λ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ρ</mi></mrow></msup><mrow><mo>(</mo><msub><mi>Q</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi><mo lspace="0em" rspace="0em">​</mo><mi>ρ</mi></mrow></msub><mo>+</mo><msub><mi>Q</mi><mrow><mi>ν</mi><mo lspace="0em" rspace="0em">​</mo><mi>ρ</mi><mo lspace="0em" rspace="0em">​</mo><mi>μ</mi></mrow></msub><mo>−</mo><msub><mi>Q</mi><mrow><mi>ρ</mi><mo lspace="0em" rspace="0em">​</mo><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msub><mo>)</mo></mrow><mo>−</mo><msup><mi>g</mi><mrow><mi>λ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ρ</mi></mrow></msup><mrow><mo>(</mo><msub><mi>S</mi><mrow><mi>ρ</mi><mo lspace="0em" rspace="0em">​</mo><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msub><mo>+</mo><msub><mi>S</mi><mrow><mi>ρ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi><mo lspace="0em" rspace="0em">​</mo><mi>μ</mi></mrow></msub><mo>−</mo><msub><mi>S</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi><mo lspace="0em" rspace="0em">​</mo><mi>ρ</mi></mrow></msub><mo rspace="0.170em">)</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\Gamma^{\lambda}{}_{\mu\nu}=\tilde{\Gamma}^{\lambda}{}_{\mu\nu}+{\frac{1}{2}g^{\lambda\rho}\left(Q_{\mu\nu\rho}+Q_{\nu\rho\mu}-Q_{\rho\mu\nu}\right)}-{g^{\lambda\rho}\left(S_{\rho\mu\nu}+S_{\rho\nu\mu}-S_{\mu\nu\rho}\right)}\,,</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+<p id="S1.p1.11" class="ltx_p">where the departure from Riemannian geometry is given in terms of nonmetricity and torsion tensors,</p>
+<table id="Sx1.EGx1" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.E2"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.E2.m1" class="ltx_Math" alttext="\displaystyle Q_{\alpha\mu\nu}" display="inline" intent=":literal"><semantics><msub><mi>Q</mi><mrow><mi>α</mi><mo lspace="0em" rspace="0em">​</mo><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msub><annotation encoding="application/x-tex">\displaystyle Q_{\alpha\mu\nu}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.E2.m2" class="ltx_Math" alttext="\displaystyle=-\nabla_{\alpha}g_{\mu\nu}=\partial_{\alpha}g_{\mu\nu}+\Gamma^{\lambda}_{\phantom{\lambda}\mu\alpha}g_{\lambda\nu}+\Gamma^{\lambda}_{\phantom{\lambda}\nu\alpha}g_{\lambda\mu}\,," display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>=</mo><mrow><mo rspace="0.167em">−</mo><mrow><msub><mo rspace="0.167em">∇</mo><mi>α</mi></msub><msub><mi>g</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msub></mrow></mrow><mo rspace="0.1389em">=</mo><mrow><mrow><msub><mo lspace="0.1389em" rspace="0em">∂</mo><mi>α</mi></msub><msub><mi>g</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msub></mrow><mo>+</mo><mrow><msubsup><mi mathvariant="normal">Γ</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>α</mi></mrow><mi>λ</mi></msubsup><mo lspace="0em" rspace="0em">​</mo><msub><mi>g</mi><mrow><mi>λ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msub></mrow><mo>+</mo><mrow><msubsup><mi mathvariant="normal">Γ</mi><mrow><mi>ν</mi><mo lspace="0em" rspace="0em">​</mo><mi>α</mi></mrow><mi>λ</mi></msubsup><mo lspace="0em" rspace="0em">​</mo><msub><mi>g</mi><mrow><mi>λ</mi><mo lspace="0em" rspace="0em">​</mo><mi>μ</mi></mrow></msub></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\displaystyle=-\nabla_{\alpha}g_{\mu\nu}=\partial_{\alpha}g_{\mu\nu}+\Gamma^{\lambda}_{\phantom{\lambda}\mu\alpha}g_{\lambda\nu}+\Gamma^{\lambda}_{\phantom{\lambda}\nu\alpha}g_{\lambda\mu}\,,</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+<tbody id="S1.E3"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.E3.m1" class="ltx_Math" alttext="\displaystyle S_{\mu\nu}^{\phantom{\mu\nu}\lambda}" display="inline" intent=":literal"><semantics><msubsup><mi>S</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow><mi>λ</mi></msubsup><annotation encoding="application/x-tex">\displaystyle S_{\mu\nu}^{\phantom{\mu\nu}\lambda}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.E3.m2" class="ltx_Math" alttext="\displaystyle=\Gamma^{\lambda}_{\phantom{\lambda}[\mu\nu]}=\Gamma^{\lambda}_{\phantom{\lambda}\mu\nu}-\Gamma^{\lambda}_{\phantom{\lambda}\nu\mu}\,," display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>=</mo><msubsup><mi mathvariant="normal">Γ</mi><mrow><mo stretchy="false">[</mo><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow><mo stretchy="false">]</mo></mrow><mi>λ</mi></msubsup><mo>=</mo><mrow><msubsup><mi mathvariant="normal">Γ</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow><mi>λ</mi></msubsup><mo>−</mo><msubsup><mi mathvariant="normal">Γ</mi><mrow><mi>ν</mi><mo lspace="0em" rspace="0em">​</mo><mi>μ</mi></mrow><mi>λ</mi></msubsup></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\displaystyle=\Gamma^{\lambda}_{\phantom{\lambda}[\mu\nu]}=\Gamma^{\lambda}_{\phantom{\lambda}\mu\nu}-\Gamma^{\lambda}_{\phantom{\lambda}\nu\mu}\,,</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(3)</span></td>
+</tr></tbody>
+</table>
+<p id="S1.p1.9" class="ltx_p">with nontrivial contraction possibilities <math id="S1.p1.4.m1" class="ltx_Math" alttext="Q_{\mu}=Q_{\mu\alpha\beta}g^{\alpha\beta}" display="inline" intent=":literal"><semantics><mrow><msub><mi>Q</mi><mi>μ</mi></msub><mo>=</mo><mrow><msub><mi>Q</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>α</mi><mo lspace="0em" rspace="0em">​</mo><mi>β</mi></mrow></msub><mo lspace="0em" rspace="0em">​</mo><msup><mi>g</mi><mrow><mi>α</mi><mo lspace="0em" rspace="0em">​</mo><mi>β</mi></mrow></msup></mrow></mrow><annotation encoding="application/x-tex">Q_{\mu}=Q_{\mu\alpha\beta}g^{\alpha\beta}</annotation></semantics></math>, <math id="S1.p1.5.m2" class="ltx_Math" alttext="\bar{Q}_{\mu}=Q_{\alpha\nu\mu}g^{\alpha\nu}" display="inline" intent=":literal"><semantics><mrow><msub><mover accent="true"><mi>Q</mi><mo>¯</mo></mover><mi>μ</mi></msub><mo>=</mo><mrow><msub><mi>Q</mi><mrow><mi>α</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi><mo lspace="0em" rspace="0em">​</mo><mi>μ</mi></mrow></msub><mo lspace="0em" rspace="0em">​</mo><msup><mi>g</mi><mrow><mi>α</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msup></mrow></mrow><annotation encoding="application/x-tex">\bar{Q}_{\mu}=Q_{\alpha\nu\mu}g^{\alpha\nu}</annotation></semantics></math>, <math id="S1.p1.6.m3" class="ltx_Math" alttext="S_{\mu}=S_{\mu\alpha}^{\phantom{\mu\alpha}\alpha}" display="inline" intent=":literal"><semantics><mrow><msub><mi>S</mi><mi>μ</mi></msub><mo>=</mo><msubsup><mi>S</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>α</mi></mrow><mi>α</mi></msubsup></mrow><annotation encoding="application/x-tex">S_{\mu}=S_{\mu\alpha}^{\phantom{\mu\alpha}\alpha}</annotation></semantics></math>, and <math id="S1.p1.7.m4" class="ltx_Math" alttext="t_{\mu}=\epsilon_{\mu\nu\alpha\beta}S^{\nu\alpha\beta}" display="inline" intent=":literal"><semantics><mrow><msub><mi>t</mi><mi>μ</mi></msub><mo>=</mo><mrow><msub><mi>ϵ</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi><mo lspace="0em" rspace="0em">​</mo><mi>α</mi><mo lspace="0em" rspace="0em">​</mo><mi>β</mi></mrow></msub><mo lspace="0em" rspace="0em">​</mo><msup><mi>S</mi><mrow><mi>ν</mi><mo lspace="0em" rspace="0em">​</mo><mi>α</mi><mo lspace="0em" rspace="0em">​</mo><mi>β</mi></mrow></msup></mrow></mrow><annotation encoding="application/x-tex">t_{\mu}=\epsilon_{\mu\nu\alpha\beta}S^{\nu\alpha\beta}</annotation></semantics></math>.
+In this setting it is natural to assume that matter fields can also couple to the non-Riemannian connection, thus besides the energy-momentum <math id="S1.p1.8.m5" class="ltx_Math" alttext="T^{\alpha\beta}" display="inline" intent=":literal"><semantics><msup><mi>T</mi><mrow><mi>α</mi><mo lspace="0em" rspace="0em">​</mo><mi>β</mi></mrow></msup><annotation encoding="application/x-tex">T^{\alpha\beta}</annotation></semantics></math> they are also characterised by hypermomentum <math id="S1.p1.9.m6" class="ltx_Math" alttext="\Delta_{\lambda}^{\phantom{\lambda}\mu\nu}" display="inline" intent=":literal"><semantics><msubsup><mi mathvariant="normal">Δ</mi><mi>λ</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msubsup><annotation encoding="application/x-tex">\Delta_{\lambda}^{\phantom{\lambda}\mu\nu}</annotation></semantics></math> <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib55" title="On Hypermomentum in General Relativity. 1. The Notion of Hypermomentum" class="ltx_ref">6</a>, <a href="#bib.bib67" title="Metric affine gauge theory of gravity: Field equations, Noether identities, world spinors, and breaking of dilation invariance" class="ltx_ref">7</a>]</cite>,</p>
+<table id="Sx1.EGx2" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.E4"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.E4.m1" class="ltx_Math" alttext="\displaystyle T^{\alpha\beta}=+\frac{2}{\sqrt{-g}}\frac{\delta(\sqrt{-g}\mathcal{L}_{M})}{\delta g_{\alpha\beta}}\,,\qquad\Delta_{\lambda}^{\phantom{\lambda}\mu\nu}=-\frac{2}{\sqrt{-g}}\frac{\delta(\sqrt{-g}\mathcal{L}_{M})}{\delta\Gamma^{\lambda}_{\phantom{\lambda}\mu\nu}}\,." display="inline" intent=":literal"><semantics><mrow><mrow><mrow><msup><mi>T</mi><mrow><mi>α</mi><mo lspace="0em" rspace="0em">​</mo><mi>β</mi></mrow></msup><mo>=</mo><mrow><mo>+</mo><mrow><mstyle displaystyle="true"><mfrac><mn>2</mn><msqrt><mrow><mo>−</mo><mi>g</mi></mrow></msqrt></mfrac></mstyle><mo lspace="0em" rspace="0em">​</mo><mstyle displaystyle="true"><mfrac><mrow><mi>δ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><msqrt><mrow><mo>−</mo><mi>g</mi></mrow></msqrt><mo lspace="0em" rspace="0em">​</mo><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>M</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>δ</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>g</mi><mrow><mi>α</mi><mo lspace="0em" rspace="0em">​</mo><mi>β</mi></mrow></msub></mrow></mfrac></mstyle></mrow></mrow></mrow><mo lspace="0.170em" rspace="2.167em">,</mo><mrow><msubsup><mi mathvariant="normal">Δ</mi><mi>λ</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msubsup><mo>=</mo><mrow><mo>−</mo><mrow><mstyle displaystyle="true"><mfrac><mn>2</mn><msqrt><mrow><mo>−</mo><mi>g</mi></mrow></msqrt></mfrac></mstyle><mo lspace="0em" rspace="0em">​</mo><mstyle displaystyle="true"><mfrac><mrow><mi>δ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><msqrt><mrow><mo>−</mo><mi>g</mi></mrow></msqrt><mo lspace="0em" rspace="0em">​</mo><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>M</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mrow><mi>δ</mi><mo lspace="0em" rspace="0em">​</mo><msubsup><mi mathvariant="normal">Γ</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow><mi>λ</mi></msubsup></mrow></mfrac></mstyle></mrow></mrow></mrow></mrow><mo lspace="0.170em">.</mo></mrow><annotation encoding="application/x-tex">\displaystyle T^{\alpha\beta}=+\frac{2}{\sqrt{-g}}\frac{\delta(\sqrt{-g}\mathcal{L}_{M})}{\delta g_{\alpha\beta}}\,,\qquad\Delta_{\lambda}^{\phantom{\lambda}\mu\nu}=-\frac{2}{\sqrt{-g}}\frac{\delta(\sqrt{-g}\mathcal{L}_{M})}{\delta\Gamma^{\lambda}_{\phantom{\lambda}\mu\nu}}\,.</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(4)</span></td>
+</tr></tbody>
+</table>
+<p id="S1.p1.10" class="ltx_p">which can be decomposed further into spin (antisymmetric), dilation (trace), and shear (symmetric traceless) parts, <math id="S1.p1.10.m1" class="ltx_Math" alttext="\Delta_{\mu\nu\alpha}=\tau_{\mu\nu\alpha}+\frac{1}{4}g_{\mu\nu}\Delta_{\alpha}+\hat{\Delta}_{\mu\nu\alpha}" display="inline" intent=":literal"><semantics><mrow><msub><mi mathvariant="normal">Δ</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi><mo lspace="0em" rspace="0em">​</mo><mi>α</mi></mrow></msub><mo>=</mo><mrow><msub><mi>τ</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi><mo lspace="0em" rspace="0em">​</mo><mi>α</mi></mrow></msub><mo>+</mo><mrow><mfrac><mn>1</mn><mn>4</mn></mfrac><mo lspace="0em" rspace="0em">​</mo><msub><mi>g</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msub><mo lspace="0em" rspace="0em">​</mo><msub><mi mathvariant="normal">Δ</mi><mi>α</mi></msub></mrow><mo>+</mo><msub><mover accent="true"><mi mathvariant="normal">Δ</mi><mo>^</mo></mover><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi><mo lspace="0em" rspace="0em">​</mo><mi>α</mi></mrow></msub></mrow></mrow><annotation encoding="application/x-tex">\Delta_{\mu\nu\alpha}=\tau_{\mu\nu\alpha}+\frac{1}{4}g_{\mu\nu}\Delta_{\alpha}+\hat{\Delta}_{\mu\nu\alpha}</annotation></semantics></math>.</p>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p id="S1.p2.4" class="ltx_p">Perhaps the most straightforward metric-affine extension of general relativity would be given by the action</p>
+<table id="Sx1.EGx3" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.E5"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.E5.m1" class="ltx_math_unparsed" alttext="\displaystyle S=\frac{1}{2\kappa}\int\mathrm{d}^{4}x\sqrt{-g}\left[R(g_{\mu\nu},\,{{\Gamma^{\lambda}{}_{\mu\nu}}})+\mathcal{L}_{M}\,(g_{\mu\nu},\,{\Gamma^{\lambda}{}_{\mu\nu}},\,\chi_{M})\right]\,," display="inline" intent=":literal"><semantics><mrow><mi>S</mi><mo>=</mo><mstyle displaystyle="true"><mfrac><mn>1</mn><mrow><mn>2</mn><mo lspace="0em" rspace="0em">​</mo><mi>κ</mi></mrow></mfrac></mstyle><mstyle displaystyle="true"><mo>∫</mo></mstyle><msup><mi mathvariant="normal">d</mi><mn>4</mn></msup><mi>x</mi><msqrt><mrow><mo>−</mo><mi>g</mi></mrow></msqrt><mrow><mo>[</mo><mi>R</mi><mrow><mo stretchy="false">(</mo><msub><mi>g</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msub><mo rspace="0.337em">,</mo><msup><mi mathvariant="normal">Γ</mi><mi>λ</mi></msup><mmultiscripts><mo stretchy="false">)</mo><mprescripts></mprescripts><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow><mrow></mrow></mmultiscripts></mrow><mo>+</mo><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>M</mi></msub><mrow><mo stretchy="false">(</mo><msub><mi>g</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msub><mo rspace="0.337em">,</mo><msup><mi mathvariant="normal">Γ</mi><mi>λ</mi></msup><mmultiscripts><mo rspace="0.337em">,</mo><mprescripts></mprescripts><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow><mrow></mrow></mmultiscripts><msub><mi>χ</mi><mi>M</mi></msub><mo stretchy="false">)</mo></mrow><mo rspace="0.170em">]</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\displaystyle S=\frac{1}{2\kappa}\int\mathrm{d}^{4}x\sqrt{-g}\left[R(g_{\mu\nu},\,{{\Gamma^{\lambda}{}_{\mu\nu}}})+\mathcal{L}_{M}\,(g_{\mu\nu},\,{\Gamma^{\lambda}{}_{\mu\nu}},\,\chi_{M})\right]\,,</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(5)</span></td>
+</tr></tbody>
+</table>
+<p id="S1.p2.3" class="ltx_p">where the Ricci scalar <math id="S1.p2.1.m1" class="ltx_Math" alttext="R" display="inline" intent=":literal"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math> and the Lagrangian of the matter fields <math id="S1.p2.2.m2" class="ltx_Math" alttext="\chi_{M}" display="inline" intent=":literal"><semantics><msub><mi>χ</mi><mi>M</mi></msub><annotation encoding="application/x-tex">\chi_{M}</annotation></semantics></math> depend on the general connection (<a href="#S1.E1" title="In 1 Metric-affine geometry and gravity ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>). Here we assume <math id="S1.p2.3.m3" class="ltx_Math" alttext="\mathcal{L}_{M}" display="inline" intent=":literal"><semantics><msub><mi class="ltx_font_mathcaligraphic">ℒ</mi><mi>M</mi></msub><annotation encoding="application/x-tex">\mathcal{L}_{M}</annotation></semantics></math> is ghost free and well behaved, but leave its particular field content unspecified, as only the matter energy-momentum and hypermomentum properties exert gravitational influence. Varying the action (<a href="#S1.E5" title="In 1 Metric-affine geometry and gravity ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a>) with respect to the metric and the connection gives generalised Einstein field equations and Palatini constraints,</p>
+<table id="Sx1.EGx4" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S1.E6"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.E6.m1" class="ltx_Math" alttext="\displaystyle R_{(\mu\nu)}-\frac{1}{2}g_{\mu\nu}R" display="inline" intent=":literal"><semantics><mrow><msub><mi>R</mi><mrow><mo stretchy="false">(</mo><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow><mo stretchy="false">)</mo></mrow></msub><mo>−</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mn>2</mn></mfrac></mstyle><mo lspace="0em" rspace="0em">​</mo><msub><mi>g</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msub><mo lspace="0em" rspace="0em">​</mo><mi>R</mi></mrow></mrow><annotation encoding="application/x-tex">\displaystyle R_{(\mu\nu)}-\frac{1}{2}g_{\mu\nu}R</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.E6.m2" class="ltx_Math" alttext="\displaystyle=\kappa T_{\mu\nu}\,," display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>=</mo><mrow><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>T</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msub></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\displaystyle=\kappa T_{\mu\nu}\,,</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(6)</span></td>
+</tr></tbody>
+<tbody id="S1.E7"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S1.E7.m1" class="ltx_math_unparsed" alttext="\displaystyle\left(\frac{Q_{\lambda}}{2}+2S_{\lambda}\right)g^{\mu\nu}-(Q_{\lambda}{}^{\mu\nu}+2S_{\lambda}{}^{\mu\nu})+\left(\bar{Q}^{\mu}-\frac{Q^{\mu}}{2}-2S^{\mu}\right)\delta^{\nu}_{\lambda}" display="inline" intent=":literal"><semantics><mrow><mrow><mo>(</mo><mstyle displaystyle="true"><mfrac><msub><mi>Q</mi><mi>λ</mi></msub><mn>2</mn></mfrac></mstyle><mo>+</mo><mn>2</mn><msub><mi>S</mi><mi>λ</mi></msub><mo>)</mo></mrow><msup><mi>g</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msup><mo>−</mo><mrow><mo stretchy="false">(</mo><msub><mi>Q</mi><mi>λ</mi></msub><mmultiscripts><mo>+</mo><mprescripts></mprescripts><mrow></mrow><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></mmultiscripts><mn>2</mn><msub><mi>S</mi><mi>λ</mi></msub><mmultiscripts><mo stretchy="false">)</mo><mprescripts></mprescripts><mrow></mrow><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></mmultiscripts></mrow><mo>+</mo><mrow><mo>(</mo><msup><mover accent="true"><mi>Q</mi><mo>¯</mo></mover><mi>μ</mi></msup><mo>−</mo><mstyle displaystyle="true"><mfrac><msup><mi>Q</mi><mi>μ</mi></msup><mn>2</mn></mfrac></mstyle><mo>−</mo><mn>2</mn><msup><mi>S</mi><mi>μ</mi></msup><mo>)</mo></mrow><msubsup><mi>δ</mi><mi>λ</mi><mi>ν</mi></msubsup></mrow><annotation encoding="application/x-tex">\displaystyle\left(\frac{Q_{\lambda}}{2}+2S_{\lambda}\right)g^{\mu\nu}-(Q_{\lambda}{}^{\mu\nu}+2S_{\lambda}{}^{\mu\nu})+\left(\bar{Q}^{\mu}-\frac{Q^{\mu}}{2}-2S^{\mu}\right)\delta^{\nu}_{\lambda}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S1.E7.m2" class="ltx_Math" alttext="\displaystyle=\kappa\Delta_{\lambda}^{\phantom{\lambda}\mu\nu}\,." display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>=</mo><mrow><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><msubsup><mi mathvariant="normal">Δ</mi><mi>λ</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msubsup></mrow></mrow><mo lspace="0em">.</mo></mrow><annotation encoding="application/x-tex">\displaystyle=\kappa\Delta_{\lambda}^{\phantom{\lambda}\mu\nu}\,.</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(7)</span></td>
+</tr></tbody>
+</table>
+<p id="S1.p2.5" class="ltx_p">If the hypermomentum is zero then all non-Riemannian quantities vanish (in a certain gauge) and (<a href="#S1.E6" title="In 1 Metric-affine geometry and gravity ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">6</span></a>) reduces to the form as in general relativity, as happens in the Palatini formulation.</p>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Homogeneous and isotropic, spatially flat cosmology</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p id="S2.p1.10" class="ltx_p">A consistent approach to cosmology would be to assume that the metric and connection, as well as the matter energy-momentum and hypermomentum all obey cosmological symmetries, i.e. are homogeneous and isotropic in space. Focusing upon the spatially flat case we have <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib231" title="Cosmological Hyperfluids, Torsion and Non-metricity" class="ltx_ref">9</a>]</cite></p>
+<table id="Sx1.EGx5" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.E8"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E8.m1" class="ltx_Math" alttext="\displaystyle\mathrm{d}s^{2}" display="inline" intent=":literal"><semantics><mrow><mi mathvariant="normal">d</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>s</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\displaystyle\mathrm{d}s^{2}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.E8.m2" class="ltx_Math" alttext="\displaystyle=-\mathrm{d}t^{2}+a^{2}(t)\delta_{ij}\mathrm{d}x^{i}\mathrm{d}x^{j}\,," display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>=</mo><mrow><mrow><mo>−</mo><mrow><mi mathvariant="normal">d</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>t</mi><mn>2</mn></msup></mrow></mrow><mo>+</mo><mrow><msup><mi>a</mi><mn>2</mn></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><msub><mi>δ</mi><mrow><mi>i</mi><mo lspace="0em" rspace="0em">​</mo><mi>j</mi></mrow></msub><mo lspace="0em" rspace="0em">​</mo><mi mathvariant="normal">d</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>x</mi><mi>i</mi></msup><mo lspace="0em" rspace="0em">​</mo><mi mathvariant="normal">d</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>x</mi><mi>j</mi></msup></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\displaystyle=-\mathrm{d}t^{2}+a^{2}(t)\delta_{ij}\mathrm{d}x^{i}\mathrm{d}x^{j}\,,</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(8)</span></td>
+</tr></tbody>
+<tbody id="S2.E9"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E9.m1" class="ltx_Math" alttext="\displaystyle Q_{\alpha\mu\nu}" display="inline" intent=":literal"><semantics><msub><mi>Q</mi><mrow><mi>α</mi><mo lspace="0em" rspace="0em">​</mo><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msub><annotation encoding="application/x-tex">\displaystyle Q_{\alpha\mu\nu}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.E9.m2" class="ltx_math_unparsed" alttext="\displaystyle=A(t)u_{\alpha}h_{\mu\nu}+B(t)h_{\alpha(\mu}u_{\nu)}+C(t)u_{\alpha}u_{\mu}u_{\nu}\,,\quad S_{\mu\nu\alpha}=2u_{[\mu}h_{\nu]\alpha}\Phi(t)+\epsilon_{\mu\nu\alpha\rho}u^{\rho}P(t)\,," display="inline" intent=":literal"><semantics><mrow><mrow><mrow><mi></mi><mo>=</mo><mrow><mrow><mi>A</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><msub><mi>u</mi><mi>α</mi></msub><mo lspace="0em" rspace="0em">​</mo><msub><mi>h</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msub></mrow><mo>+</mo><mrow><mi>B</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><msub><mi>h</mi><mrow><mi>α</mi><mrow><mo stretchy="false">(</mo><mi>μ</mi></mrow></mrow></msub><mo lspace="0em" rspace="0em">​</mo><msub><mi>u</mi><mrow><mi>ν</mi><mo stretchy="false">)</mo></mrow></msub></mrow><mo>+</mo><mrow><mi>C</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><msub><mi>u</mi><mi>α</mi></msub><mo lspace="0em" rspace="0em">​</mo><msub><mi>u</mi><mi>μ</mi></msub><mo lspace="0em" rspace="0em">​</mo><msub><mi>u</mi><mi>ν</mi></msub></mrow></mrow></mrow><mo rspace="1.167em">,</mo><mrow><msub><mi>S</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi><mo lspace="0em" rspace="0em">​</mo><mi>α</mi></mrow></msub><mo>=</mo><mrow><mrow><mn>2</mn><mo lspace="0em" rspace="0em">​</mo><msub><mi>u</mi><mrow><mo stretchy="false">[</mo><mi>μ</mi></mrow></msub><mo lspace="0em" rspace="0em">​</mo><msub><mi>h</mi><mrow><mi>ν</mi><mo stretchy="false">]</mo><mi>α</mi></mrow></msub><mo lspace="0em" rspace="0em">​</mo><mi mathvariant="normal">Φ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><msub><mi>ϵ</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi><mo lspace="0em" rspace="0em">​</mo><mi>α</mi><mo lspace="0em" rspace="0em">​</mo><mi>ρ</mi></mrow></msub><mo lspace="0em" rspace="0em">​</mo><msup><mi>u</mi><mi>ρ</mi></msup><mo lspace="0em" rspace="0em">​</mo><mi>P</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo rspace="0.170em" stretchy="false">)</mo></mrow></mrow></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\displaystyle=A(t)u_{\alpha}h_{\mu\nu}+B(t)h_{\alpha(\mu}u_{\nu)}+C(t)u_{\alpha}u_{\mu}u_{\nu}\,,\quad S_{\mu\nu\alpha}=2u_{[\mu}h_{\nu]\alpha}\Phi(t)+\epsilon_{\mu\nu\alpha\rho}u^{\rho}P(t)\,,</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(9)</span></td>
+</tr></tbody>
+<tbody id="S2.E10"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E10.m1" class="ltx_Math" alttext="\displaystyle T_{\mu\nu}" display="inline" intent=":literal"><semantics><msub><mi>T</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msub><annotation encoding="application/x-tex">\displaystyle T_{\mu\nu}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.E10.m2" class="ltx_Math" alttext="\displaystyle=\rho(t)\,u_{\mu}u_{\nu}+p(t)\,h_{\mu\nu}\,," display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>=</mo><mrow><mrow><mi>ρ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.170em" rspace="0em">​</mo><msub><mi>u</mi><mi>μ</mi></msub><mo lspace="0em" rspace="0em">​</mo><msub><mi>u</mi><mi>ν</mi></msub></mrow><mo>+</mo><mrow><mi>p</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.170em" rspace="0em">​</mo><msub><mi>h</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msub></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\displaystyle=\rho(t)\,u_{\mu}u_{\nu}+p(t)\,h_{\mu\nu}\,,</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(10)</span></td>
+</tr></tbody>
+<tbody id="S2.E11"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E11.m1" class="ltx_Math" alttext="\displaystyle\Delta_{\alpha\mu\nu}" display="inline" intent=":literal"><semantics><msub><mi mathvariant="normal">Δ</mi><mrow><mi>α</mi><mo lspace="0em" rspace="0em">​</mo><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msub><annotation encoding="application/x-tex">\displaystyle\Delta_{\alpha\mu\nu}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.E11.m2" class="ltx_Math" alttext="\displaystyle=\phi(t)\,h_{\mu\alpha}u_{\nu}+\chi(t)\,h_{\nu\alpha}u_{\mu}+\psi(t)\,u_{\alpha}h_{\mu\nu}+\omega(t)\,u_{\alpha}u_{\mu}u_{\nu}+\epsilon_{\alpha\mu\nu\kappa}\,u^{\kappa}\zeta(t)\,," display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>=</mo><mrow><mrow><mi>ϕ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.170em" rspace="0em">​</mo><msub><mi>h</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>α</mi></mrow></msub><mo lspace="0em" rspace="0em">​</mo><msub><mi>u</mi><mi>ν</mi></msub></mrow><mo>+</mo><mrow><mi>χ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.170em" rspace="0em">​</mo><msub><mi>h</mi><mrow><mi>ν</mi><mo lspace="0em" rspace="0em">​</mo><mi>α</mi></mrow></msub><mo lspace="0em" rspace="0em">​</mo><msub><mi>u</mi><mi>μ</mi></msub></mrow><mo>+</mo><mrow><mi>ψ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.170em" rspace="0em">​</mo><msub><mi>u</mi><mi>α</mi></msub><mo lspace="0em" rspace="0em">​</mo><msub><mi>h</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msub></mrow><mo>+</mo><mrow><mi>ω</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0.170em" rspace="0em">​</mo><msub><mi>u</mi><mi>α</mi></msub><mo lspace="0em" rspace="0em">​</mo><msub><mi>u</mi><mi>μ</mi></msub><mo lspace="0em" rspace="0em">​</mo><msub><mi>u</mi><mi>ν</mi></msub></mrow><mo>+</mo><mrow><msub><mi>ϵ</mi><mrow><mi>α</mi><mo lspace="0em" rspace="0em">​</mo><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi><mo lspace="0em" rspace="0em">​</mo><mi>κ</mi></mrow></msub><mo lspace="0em" rspace="0em">​</mo><msup><mi>u</mi><mi>κ</mi></msup><mo lspace="0em" rspace="0em">​</mo><mi>ζ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo rspace="0.170em" stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\displaystyle=\phi(t)\,h_{\mu\alpha}u_{\nu}+\chi(t)\,h_{\nu\alpha}u_{\mu}+\psi(t)\,u_{\alpha}h_{\mu\nu}+\omega(t)\,u_{\alpha}u_{\mu}u_{\nu}+\epsilon_{\alpha\mu\nu\kappa}\,u^{\kappa}\zeta(t)\,,</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(11)</span></td>
+</tr></tbody>
+</table>
+<p id="S2.p1.8" class="ltx_p">where <math id="S2.p1.1.m1" class="ltx_Math" alttext="h_{\mu\nu}=g_{\mu\nu}+u_{\mu}u_{\nu}" display="inline" intent=":literal"><semantics><mrow><msub><mi>h</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msub><mo>=</mo><mrow><msub><mi>g</mi><mrow><mi>μ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ν</mi></mrow></msub><mo>+</mo><mrow><msub><mi>u</mi><mi>μ</mi></msub><mo lspace="0em" rspace="0em">​</mo><msub><mi>u</mi><mi>ν</mi></msub></mrow></mrow></mrow><annotation encoding="application/x-tex">h_{\mu\nu}=g_{\mu\nu}+u_{\mu}u_{\nu}</annotation></semantics></math> is the usual projection tensor and <math id="S2.p1.2.m2" class="ltx_Math" alttext="u^{\mu}" display="inline" intent=":literal"><semantics><msup><mi>u</mi><mi>μ</mi></msup><annotation encoding="application/x-tex">u^{\mu}</annotation></semantics></math> the 4-velocity of a comoving observer. The symmetry leaves 13 free functions, but some of those get related to each other by the Palatini constraint (<a href="#S1.E7" title="In 1 Metric-affine geometry and gravity ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">7</span></a>) leaving only the scale factor <math id="S2.p1.3.m3" class="ltx_Math" alttext="a" display="inline" intent=":literal"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>, matter density <math id="S2.p1.4.m4" class="ltx_Math" alttext="\rho" display="inline" intent=":literal"><semantics><mi>ρ</mi><annotation encoding="application/x-tex">\rho</annotation></semantics></math> and pressure <math id="S2.p1.5.m5" class="ltx_Math" alttext="p" display="inline" intent=":literal"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math>, plus one spin component <math id="S2.p1.6.m6" class="ltx_Math" alttext="\sigma=(\psi-\chi)/2" display="inline" intent=":literal"><semantics><mrow><mi>σ</mi><mo>=</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>ψ</mi><mo>−</mo><mi>χ</mi></mrow><mo stretchy="false">)</mo></mrow><mo>/</mo><mn>2</mn></mrow></mrow><annotation encoding="application/x-tex">\sigma=(\psi-\chi)/2</annotation></semantics></math>, and two shear components <math id="S2.p1.7.m7" class="ltx_Math" alttext="\Sigma_{1}=(\psi+\chi)/2" display="inline" intent=":literal"><semantics><mrow><msub><mi mathvariant="normal">Σ</mi><mn>1</mn></msub><mo>=</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>ψ</mi><mo>+</mo><mi>χ</mi></mrow><mo stretchy="false">)</mo></mrow><mo>/</mo><mn>2</mn></mrow></mrow><annotation encoding="application/x-tex">\Sigma_{1}=(\psi+\chi)/2</annotation></semantics></math>, <math id="S2.p1.8.m8" class="ltx_Math" alttext="\Sigma_{2}=(\phi+\omega)/4" display="inline" intent=":literal"><semantics><mrow><msub><mi mathvariant="normal">Σ</mi><mn>2</mn></msub><mo>=</mo><mrow><mrow><mo stretchy="false">(</mo><mrow><mi>ϕ</mi><mo>+</mo><mi>ω</mi></mrow><mo stretchy="false">)</mo></mrow><mo>/</mo><mn>4</mn></mrow></mrow><annotation encoding="application/x-tex">\Sigma_{2}=(\phi+\omega)/4</annotation></semantics></math> as independent quantities with nontrivial dynamics. Thus the system of cosmological equations is <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib297" title="Friedmann cosmology with hyperfluids" class="ltx_ref">3</a>]</cite></p>
+<table id="S2.E12" class="ltx_equationgroup ltx_eqn_table">
+<tbody>
+<tr id="Sx1.EGx6" class="ltx_eqn_row"><td class="ltx_eqn_cell" colspan="5"></td></tr>
+<tr id="S2.E12.1" class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E12.1.m1" class="ltx_Math" alttext="\displaystyle 3H^{2}" display="inline" intent=":literal"><semantics><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><msup><mi>H</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\displaystyle 3H^{2}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.E12.1.m2" class="ltx_Math" alttext="\displaystyle=\kappa\rho+\kappa\rho_{h}\,," display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>=</mo><mrow><mrow><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ρ</mi></mrow><mo>+</mo><mrow><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>ρ</mi><mi>h</mi></msub></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\displaystyle=\kappa\rho+\kappa\rho_{h}\,,</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(12a)</span></td>
+</tr>
+<tr id="S2.E12.2" class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E12.2.m1" class="ltx_Math" alttext="\displaystyle 2\dot{H}+3H^{2}" display="inline" intent=":literal"><semantics><mrow><mrow><mn>2</mn><mo lspace="0em" rspace="0em">​</mo><mover accent="true"><mi>H</mi><mo>˙</mo></mover></mrow><mo>+</mo><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><msup><mi>H</mi><mn>2</mn></msup></mrow></mrow><annotation encoding="application/x-tex">\displaystyle 2\dot{H}+3H^{2}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.E12.2.m2" class="ltx_Math" alttext="\displaystyle=-\kappa p-\kappa p_{h}\,," display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>=</mo><mrow><mrow><mo>−</mo><mrow><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><mi>p</mi></mrow></mrow><mo>−</mo><mrow><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>p</mi><mi>h</mi></msub></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\displaystyle=-\kappa p-\kappa p_{h}\,,</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(12b)</span></td>
+</tr>
+<tr id="S2.E12.3" class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E12.3.m1" class="ltx_Math" alttext="\displaystyle\dot{\rho}+3H(\rho+p)" display="inline" intent=":literal"><semantics><mrow><mover accent="true"><mi>ρ</mi><mo>˙</mo></mover><mo>+</mo><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><mi>H</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>ρ</mi><mo>+</mo><mi>p</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">\displaystyle\dot{\rho}+3H(\rho+p)</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.E12.3.m2" class="ltx_Math" alttext="\displaystyle=-\dot{\rho}_{h}-3H(\rho_{h}+p_{h})\,," display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>=</mo><mrow><mrow><mo>−</mo><msub><mover accent="true"><mi>ρ</mi><mo>˙</mo></mover><mi>h</mi></msub></mrow><mo>−</mo><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><mi>H</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>ρ</mi><mi>h</mi></msub><mo>+</mo><msub><mi>p</mi><mi>h</mi></msub></mrow><mo rspace="0.170em" stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\displaystyle=-\dot{\rho}_{h}-3H(\rho_{h}+p_{h})\,,</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(12c)</span></td>
+</tr>
+</tbody>
+</table>
+<p id="S2.p1.9" class="ltx_p">where <math id="S2.p1.9.m1" class="ltx_Math" alttext="H=\dot{a}/a" display="inline" intent=":literal"><semantics><mrow><mi>H</mi><mo>=</mo><mrow><mover accent="true"><mi>a</mi><mo>˙</mo></mover><mo>/</mo><mi>a</mi></mrow></mrow><annotation encoding="application/x-tex">H=\dot{a}/a</annotation></semantics></math> and the effective density and pressure related to the hypermomentum are</p>
+<table id="S2.E13" class="ltx_equationgroup ltx_eqn_table">
+<tbody>
+<tr id="Sx1.EGx7" class="ltx_eqn_row"><td class="ltx_eqn_cell" colspan="5"></td></tr>
+<tr id="S2.E13.1" class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E13.1.m1" class="ltx_Math" alttext="\displaystyle\rho_{h}" display="inline" intent=":literal"><semantics><msub><mi>ρ</mi><mi>h</mi></msub><annotation encoding="application/x-tex">\displaystyle\rho_{h}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.E13.1.m2" class="ltx_Math" alttext="\displaystyle=\frac{3\dot{\Sigma}_{2}}{2}+\kappa\left(-\frac{3\Sigma_{1}\sigma}{2}+\frac{3\Sigma_{2}^{2}}{4}-\frac{3\Sigma_{2}\sigma}{2}-\frac{3\sigma^{2}}{4}\right)+H\left(3\Sigma_{1}+\frac{9\Sigma_{2}}{2}+3\sigma\right)\,," display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><mfrac><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><msub><mover accent="true"><mi mathvariant="normal">Σ</mi><mo>˙</mo></mover><mn>2</mn></msub></mrow><mn>2</mn></mfrac></mstyle><mo>+</mo><mrow><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mrow><mrow><mrow><mo>−</mo><mstyle displaystyle="true"><mfrac><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><msub><mi mathvariant="normal">Σ</mi><mn>1</mn></msub><mo lspace="0em" rspace="0em">​</mo><mi>σ</mi></mrow><mn>2</mn></mfrac></mstyle></mrow><mo>+</mo><mstyle displaystyle="true"><mfrac><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><msubsup><mi mathvariant="normal">Σ</mi><mn>2</mn><mn>2</mn></msubsup></mrow><mn>4</mn></mfrac></mstyle></mrow><mo>−</mo><mstyle displaystyle="true"><mfrac><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><msub><mi mathvariant="normal">Σ</mi><mn>2</mn></msub><mo lspace="0em" rspace="0em">​</mo><mi>σ</mi></mrow><mn>2</mn></mfrac></mstyle><mo>−</mo><mstyle displaystyle="true"><mfrac><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><msup><mi>σ</mi><mn>2</mn></msup></mrow><mn>4</mn></mfrac></mstyle></mrow><mo>)</mo></mrow></mrow><mo>+</mo><mrow><mi>H</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mrow><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><msub><mi mathvariant="normal">Σ</mi><mn>1</mn></msub></mrow><mo>+</mo><mstyle displaystyle="true"><mfrac><mrow><mn>9</mn><mo lspace="0em" rspace="0em">​</mo><msub><mi mathvariant="normal">Σ</mi><mn>2</mn></msub></mrow><mn>2</mn></mfrac></mstyle><mo>+</mo><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><mi>σ</mi></mrow></mrow><mo rspace="0.170em">)</mo></mrow></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\displaystyle=\frac{3\dot{\Sigma}_{2}}{2}+\kappa\left(-\frac{3\Sigma_{1}\sigma}{2}+\frac{3\Sigma_{2}^{2}}{4}-\frac{3\Sigma_{2}\sigma}{2}-\frac{3\sigma^{2}}{4}\right)+H\left(3\Sigma_{1}+\frac{9\Sigma_{2}}{2}+3\sigma\right)\,,</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(13a)</span></td>
+</tr>
+<tr id="S2.E13.2" class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E13.2.m1" class="ltx_Math" alttext="\displaystyle p_{h}" display="inline" intent=":literal"><semantics><msub><mi>p</mi><mi>h</mi></msub><annotation encoding="application/x-tex">\displaystyle p_{h}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.E13.2.m2" class="ltx_Math" alttext="\displaystyle=\frac{\dot{\Sigma}_{2}}{2}-\dot{\sigma}+\kappa\left(\Sigma_{1}\Sigma_{2}-\frac{\Sigma_{1}\sigma}{2}+\frac{3\Sigma_{2}^{2}}{4}-\frac{\Sigma_{2}\sigma}{2}+\frac{\sigma^{2}}{4}\right)+H\left(\Sigma_{1}+\frac{3\Sigma_{2}}{2}-2\sigma\right)\,." display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>=</mo><mrow><mrow><mstyle displaystyle="true"><mfrac><msub><mover accent="true"><mi mathvariant="normal">Σ</mi><mo>˙</mo></mover><mn>2</mn></msub><mn>2</mn></mfrac></mstyle><mo>−</mo><mover accent="true"><mi>σ</mi><mo>˙</mo></mover></mrow><mo>+</mo><mrow><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mrow><mrow><mrow><mrow><mrow><msub><mi mathvariant="normal">Σ</mi><mn>1</mn></msub><mo lspace="0em" rspace="0em">​</mo><msub><mi mathvariant="normal">Σ</mi><mn>2</mn></msub></mrow><mo>−</mo><mstyle displaystyle="true"><mfrac><mrow><msub><mi mathvariant="normal">Σ</mi><mn>1</mn></msub><mo lspace="0em" rspace="0em">​</mo><mi>σ</mi></mrow><mn>2</mn></mfrac></mstyle></mrow><mo>+</mo><mstyle displaystyle="true"><mfrac><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><msubsup><mi mathvariant="normal">Σ</mi><mn>2</mn><mn>2</mn></msubsup></mrow><mn>4</mn></mfrac></mstyle></mrow><mo>−</mo><mstyle displaystyle="true"><mfrac><mrow><msub><mi mathvariant="normal">Σ</mi><mn>2</mn></msub><mo lspace="0em" rspace="0em">​</mo><mi>σ</mi></mrow><mn>2</mn></mfrac></mstyle></mrow><mo>+</mo><mstyle displaystyle="true"><mfrac><msup><mi>σ</mi><mn>2</mn></msup><mn>4</mn></mfrac></mstyle></mrow><mo>)</mo></mrow></mrow><mo>+</mo><mrow><mi>H</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mrow><mrow><msub><mi mathvariant="normal">Σ</mi><mn>1</mn></msub><mo>+</mo><mstyle displaystyle="true"><mfrac><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><msub><mi mathvariant="normal">Σ</mi><mn>2</mn></msub></mrow><mn>2</mn></mfrac></mstyle></mrow><mo>−</mo><mrow><mn>2</mn><mo lspace="0em" rspace="0em">​</mo><mi>σ</mi></mrow></mrow><mo>)</mo></mrow></mrow></mrow></mrow><mo lspace="0.170em">.</mo></mrow><annotation encoding="application/x-tex">\displaystyle=\frac{\dot{\Sigma}_{2}}{2}-\dot{\sigma}+\kappa\left(\Sigma_{1}\Sigma_{2}-\frac{\Sigma_{1}\sigma}{2}+\frac{3\Sigma_{2}^{2}}{4}-\frac{\Sigma_{2}\sigma}{2}+\frac{\sigma^{2}}{4}\right)+H\left(\Sigma_{1}+\frac{3\Sigma_{2}}{2}-2\sigma\right)\,.</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(13b)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="S2.p2" class="ltx_para">
+<p id="S2.p2.1" class="ltx_p">It is important to realize that this level of description is agnostic of the precise microstructure of the matter. The expressions of density, pressure, spin, and shear in terms of the fundamental fields will depend on the fundamental Lagrangian which we do not specify here. Let us only note that a generic Lagrangian formulation of hyperfluids in terms of thermodynamic quantities was developed recently in Ref. <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="Hyperhydrodynamics: relativistic viscous fluids from hypermomentum" class="ltx_ref">8</a>]</cite>. The system (<a href="#S2.E12" title="In 2 Homogeneous and isotropic, spatially flat cosmology ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">12</span></a>) contains only two independent equations to determine the six dynamical variables. Hence we must impose constraints (equations of state) among the variables to solve.</p>
+</div>
+<div id="S2.p3" class="ltx_para">
+<p id="S2.p3.2" class="ltx_p">For a single fluid without hypermomentum, i.e. in general relativity, we need one constraint, e.g. the constant equation of state <math id="S2.p3.1.m1" class="ltx_Math" alttext="p=\mathrm{w}\rho" display="inline" intent=":literal"><semantics><mrow><mi>p</mi><mo>=</mo><mrow><mi mathvariant="normal">w</mi><mo lspace="0em" rspace="0em">​</mo><mi>ρ</mi></mrow></mrow><annotation encoding="application/x-tex">p=\mathrm{w}\rho</annotation></semantics></math>, to obtain for <math id="S2.p3.2.m2" class="ltx_Math" alttext="H=\pm\sqrt{\kappa\rho/3}" display="inline" intent=":literal"><semantics><mrow><mi>H</mi><mo>=</mo><mrow><mo>±</mo><msqrt><mrow><mrow><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ρ</mi></mrow><mo>/</mo><mn>3</mn></mrow></msqrt></mrow></mrow><annotation encoding="application/x-tex">H=\pm\sqrt{\kappa\rho/3}</annotation></semantics></math> the solutions</p>
+<table id="Sx1.EGx8" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.E14"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E14.m1" class="ltx_Math" alttext="\displaystyle\rho(t)" display="inline" intent=":literal"><semantics><mrow><mi>ρ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">\displaystyle\rho(t)</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.E14.m2" class="ltx_Math" alttext="\displaystyle=\frac{\rho_{0}}{\left(1\pm\frac{\sqrt{3\kappa\rho_{0}}}{2}(1+{\mathrm{w}_{\rho}})(t-t_{0})\right)^{2}}\,,\qquad H(t)=\frac{H_{0}}{1+\frac{3H_{0}}{2}(1+{\mathrm{w}_{\mathrm{eff}}})(t-t_{0})}\,." display="inline" intent=":literal"><semantics><mrow><mrow><mrow><mi></mi><mo>=</mo><mstyle displaystyle="true"><mfrac><msub><mi>ρ</mi><mn>0</mn></msub><msup><mrow><mo>(</mo><mrow><mn>1</mn><mo>±</mo><mrow><mfrac><msqrt><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>ρ</mi><mn>0</mn></msub></mrow></msqrt><mn>2</mn></mfrac><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>+</mo><msub><mi mathvariant="normal">w</mi><mi>ρ</mi></msub></mrow><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>t</mi><mo>−</mo><msub><mi>t</mi><mn>0</mn></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>)</mo></mrow><mn>2</mn></msup></mfrac></mstyle></mrow><mo lspace="0.170em" rspace="2.167em">,</mo><mrow><mrow><mi>H</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mstyle displaystyle="true"><mfrac><msub><mi>H</mi><mn>0</mn></msub><mrow><mn>1</mn><mo>+</mo><mrow><mfrac><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><msub><mi>H</mi><mn>0</mn></msub></mrow><mn>2</mn></mfrac><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mn>1</mn><mo>+</mo><msub><mi mathvariant="normal">w</mi><mi>eff</mi></msub></mrow><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>t</mi><mo>−</mo><msub><mi>t</mi><mn>0</mn></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mfrac></mstyle></mrow></mrow><mo lspace="0.170em">.</mo></mrow><annotation encoding="application/x-tex">\displaystyle=\frac{\rho_{0}}{\left(1\pm\frac{\sqrt{3\kappa\rho_{0}}}{2}(1+{\mathrm{w}_{\rho}})(t-t_{0})\right)^{2}}\,,\qquad H(t)=\frac{H_{0}}{1+\frac{3H_{0}}{2}(1+{\mathrm{w}_{\mathrm{eff}}})(t-t_{0})}\,.</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(14)</span></td>
+</tr></tbody>
+</table>
+<p id="S2.p3.8" class="ltx_p">Here the indexes <math id="S2.p3.3.m1" class="ltx_Math" alttext="\mathrm{w}_{\rho}=\mathrm{w}_{\mathrm{eff}}=\mathrm{w}" display="inline" intent=":literal"><semantics><mrow><msub><mi mathvariant="normal">w</mi><mi>ρ</mi></msub><mo>=</mo><msub><mi mathvariant="normal">w</mi><mi>eff</mi></msub><mo>=</mo><mi mathvariant="normal">w</mi></mrow><annotation encoding="application/x-tex">\mathrm{w}_{\rho}=\mathrm{w}_{\mathrm{eff}}=\mathrm{w}</annotation></semantics></math> were introduced to stress the respective roles of determining how fast the energy density evolves and how fast the space expands/contracts. It turns out that a typical effect of adding hypermomentum is to make these indices to differ from each other. For instance taking a single fluid with spin hypermomentum and assuming constant equations of state <math id="S2.p3.4.m2" class="ltx_Math" alttext="p=\mathrm{w}\rho" display="inline" intent=":literal"><semantics><mrow><mi>p</mi><mo>=</mo><mrow><mi mathvariant="normal">w</mi><mo lspace="0em" rspace="0em">​</mo><mi>ρ</mi></mrow></mrow><annotation encoding="application/x-tex">p=\mathrm{w}\rho</annotation></semantics></math>, <math id="S2.p3.5.m3" class="ltx_Math" alttext="\sigma=b\sqrt{3\rho/\kappa}" display="inline" intent=":literal"><semantics><mrow><mi>σ</mi><mo>=</mo><mrow><mi>b</mi><mo lspace="0em" rspace="0em">​</mo><msqrt><mrow><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><mi>ρ</mi></mrow><mo>/</mo><mi>κ</mi></mrow></msqrt></mrow></mrow><annotation encoding="application/x-tex">\sigma=b\sqrt{3\rho/\kappa}</annotation></semantics></math> results in the solutions like (<a href="#S2.E14" title="In 2 Homogeneous and isotropic, spatially flat cosmology ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">14</span></a>), but with <math id="S2.p3.6.m4" class="ltx_Math" alttext="\mathrm{w}_{\rho}=\mathrm{w}\pm b" display="inline" intent=":literal"><semantics><mrow><msub><mi mathvariant="normal">w</mi><mi>ρ</mi></msub><mo>=</mo><mrow><mi mathvariant="normal">w</mi><mo>±</mo><mi>b</mi></mrow></mrow><annotation encoding="application/x-tex">\mathrm{w}_{\rho}=\mathrm{w}\pm b</annotation></semantics></math>, <math id="S2.p3.7.m5" class="ltx_Math" alttext="\mathrm{w}_{\mathrm{eff}}=\frac{2\mathrm{w}\mp b}{2\pm 3b}" display="inline" intent=":literal"><semantics><mrow><msub><mi mathvariant="normal">w</mi><mi>eff</mi></msub><mo>=</mo><mfrac><mrow><mrow><mn>2</mn><mo lspace="0em" rspace="0em">​</mo><mi mathvariant="normal">w</mi></mrow><mo>∓</mo><mi>b</mi></mrow><mrow><mn>2</mn><mo>±</mo><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><mi>b</mi></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">\mathrm{w}_{\mathrm{eff}}=\frac{2\mathrm{w}\mp b}{2\pm 3b}</annotation></semantics></math>, while (<a href="#S2.E12.1" title="In 12 ‣ 2 Homogeneous and isotropic, spatially flat cosmology ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">12a</span></a>) implies <math id="S2.p3.8.m6" class="ltx_Math" alttext="H=\kappa\sigma/2\pm\sqrt{\kappa\rho/3}" display="inline" intent=":literal"><semantics><mrow><mi>H</mi><mo>=</mo><mrow><mrow><mrow><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><mi>σ</mi></mrow><mo>/</mo><mn>2</mn></mrow><mo>±</mo><msqrt><mrow><mrow><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ρ</mi></mrow><mo>/</mo><mn>3</mn></mrow></msqrt></mrow></mrow><annotation encoding="application/x-tex">H=\kappa\sigma/2\pm\sqrt{\kappa\rho/3}</annotation></semantics></math> <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib297" title="Friedmann cosmology with hyperfluids" class="ltx_ref">3</a>]</cite>.</p>
+</div>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Constructing dark scenarios for the Universe history</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p id="S3.p1.5" class="ltx_p">As a complete description of cosmology needs several types of fluids, we can include in (<a href="#S2.E12" title="In 2 Homogeneous and isotropic, spatially flat cosmology ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">12</span></a>) the densities <math id="S3.p1.1.m1" class="ltx_Math" alttext="\rho_{i}" display="inline" intent=":literal"><semantics><msub><mi>ρ</mi><mi>i</mi></msub><annotation encoding="application/x-tex">\rho_{i}</annotation></semantics></math> and pressures <math id="S3.p1.2.m2" class="ltx_Math" alttext="p_{i}" display="inline" intent=":literal"><semantics><msub><mi>p</mi><mi>i</mi></msub><annotation encoding="application/x-tex">p_{i}</annotation></semantics></math> of normal matter with <math id="S3.p1.3.m3" class="ltx_Math" alttext="i=r,m,\Lambda" display="inline" intent=":literal"><semantics><mrow><mi>i</mi><mo>=</mo><mrow><mi>r</mi><mo>,</mo><mi>m</mi><mo>,</mo><mi mathvariant="normal">Λ</mi></mrow></mrow><annotation encoding="application/x-tex">i=r,m,\Lambda</annotation></semantics></math> (radiation, dust, cosmological constant), in addition to the density <math id="S3.p1.4.m4" class="ltx_Math" alttext="\rho_{\upsilon}" display="inline" intent=":literal"><semantics><msub><mi>ρ</mi><mi>υ</mi></msub><annotation encoding="application/x-tex">\rho_{\upsilon}</annotation></semantics></math> and pressure <math id="S3.p1.5.m5" class="ltx_Math" alttext="p_{\upsilon}" display="inline" intent=":literal"><semantics><msub><mi>p</mi><mi>υ</mi></msub><annotation encoding="application/x-tex">p_{\upsilon}</annotation></semantics></math> of another matter component that also carries hypermomentum,</p>
+<table id="S3.E15" class="ltx_equationgroup ltx_eqn_table">
+<tbody>
+<tr id="Sx1.EGx9" class="ltx_eqn_row"><td class="ltx_eqn_cell" colspan="5"></td></tr>
+<tr id="S3.E15.1" class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S3.E15.1.m1" class="ltx_Math" alttext="\displaystyle 3H^{2}" display="inline" intent=":literal"><semantics><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><msup><mi>H</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\displaystyle 3H^{2}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S3.E15.1.m2" class="ltx_Math" alttext="\displaystyle=\kappa(\rho_{r}+\rho_{m}+\rho_{\Lambda}+\rho_{\upsilon})+\kappa\rho_{h}\,," display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>=</mo><mrow><mrow><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>ρ</mi><mi>r</mi></msub><mo>+</mo><msub><mi>ρ</mi><mi>m</mi></msub><mo>+</mo><msub><mi>ρ</mi><mi mathvariant="normal">Λ</mi></msub><mo>+</mo><msub><mi>ρ</mi><mi>υ</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>ρ</mi><mi>h</mi></msub></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\displaystyle=\kappa(\rho_{r}+\rho_{m}+\rho_{\Lambda}+\rho_{\upsilon})+\kappa\rho_{h}\,,</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(15a)</span></td>
+</tr>
+<tr id="S3.E15.2" class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S3.E15.2.m1" class="ltx_Math" alttext="\displaystyle 2\dot{H}+3H^{2}" display="inline" intent=":literal"><semantics><mrow><mrow><mn>2</mn><mo lspace="0em" rspace="0em">​</mo><mover accent="true"><mi>H</mi><mo>˙</mo></mover></mrow><mo>+</mo><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><msup><mi>H</mi><mn>2</mn></msup></mrow></mrow><annotation encoding="application/x-tex">\displaystyle 2\dot{H}+3H^{2}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S3.E15.2.m2" class="ltx_Math" alttext="\displaystyle=-\kappa(p_{r}+p_{m}+p_{\Lambda}+p_{\upsilon})-\kappa p_{h}\,," display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>=</mo><mrow><mrow><mo>−</mo><mrow><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>p</mi><mi>r</mi></msub><mo>+</mo><msub><mi>p</mi><mi>m</mi></msub><mo>+</mo><msub><mi>p</mi><mi mathvariant="normal">Λ</mi></msub><mo>+</mo><msub><mi>p</mi><mi>υ</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><mo>−</mo><mrow><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>p</mi><mi>h</mi></msub></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\displaystyle=-\kappa(p_{r}+p_{m}+p_{\Lambda}+p_{\upsilon})-\kappa p_{h}\,,</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(15b)</span></td>
+</tr>
+<tr id="S3.E15.3" class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S3.E15.3.m1" class="ltx_Math" alttext="\displaystyle\dot{\rho}_{i}+3H(\rho_{i}+p_{i})" display="inline" intent=":literal"><semantics><mrow><msub><mover accent="true"><mi>ρ</mi><mo>˙</mo></mover><mi>i</mi></msub><mo>+</mo><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><mi>H</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>ρ</mi><mi>i</mi></msub><mo>+</mo><msub><mi>p</mi><mi>i</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">\displaystyle\dot{\rho}_{i}+3H(\rho_{i}+p_{i})</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S3.E15.3.m2" class="ltx_Math" alttext="\displaystyle=0\,," display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>=</mo><mn>0</mn></mrow><mo lspace="0.170em">,</mo></mrow><annotation encoding="application/x-tex">\displaystyle=0\,,</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(15c)</span></td>
+</tr>
+<tr id="S3.E15.4" class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S3.E15.4.m1" class="ltx_Math" alttext="\displaystyle\dot{\rho}_{\upsilon}+3H(\rho_{\upsilon}+p_{\upsilon})" display="inline" intent=":literal"><semantics><mrow><msub><mover accent="true"><mi>ρ</mi><mo>˙</mo></mover><mi>υ</mi></msub><mo>+</mo><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><mi>H</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>ρ</mi><mi>υ</mi></msub><mo>+</mo><msub><mi>p</mi><mi>υ</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">\displaystyle\dot{\rho}_{\upsilon}+3H(\rho_{\upsilon}+p_{\upsilon})</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S3.E15.4.m2" class="ltx_Math" alttext="\displaystyle=-\dot{\rho}_{h}-3H(\rho_{h}+p_{h})\,." display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>=</mo><mrow><mrow><mo>−</mo><msub><mover accent="true"><mi>ρ</mi><mo>˙</mo></mover><mi>h</mi></msub></mrow><mo>−</mo><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><mi>H</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>ρ</mi><mi>h</mi></msub><mo>+</mo><msub><mi>p</mi><mi>h</mi></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo lspace="0.170em">.</mo></mrow><annotation encoding="application/x-tex">\displaystyle=-\dot{\rho}_{h}-3H(\rho_{h}+p_{h})\,.</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(15d)</span></td>
+</tr>
+</tbody>
+</table>
+<p id="S3.p1.10" class="ltx_p">The effective hypermomentum density (<a href="#S2.E13.1" title="In 13 ‣ 2 Homogeneous and isotropic, spatially flat cosmology ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">13a</span></a>) and pressure (<a href="#S2.E13.2" title="In 13 ‣ 2 Homogeneous and isotropic, spatially flat cosmology ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">13b</span></a>) define <math id="S3.p1.6.m1" class="ltx_Math" alttext="\mathrm{w}_{h}=p_{h}/\rho_{h}" display="inline" intent=":literal"><semantics><mrow><msub><mi mathvariant="normal">w</mi><mi>h</mi></msub><mo>=</mo><mrow><msub><mi>p</mi><mi>h</mi></msub><mo>/</mo><msub><mi>ρ</mi><mi>h</mi></msub></mrow></mrow><annotation encoding="application/x-tex">\mathrm{w}_{h}=p_{h}/\rho_{h}</annotation></semantics></math>, while the other equations of state are with constant barotropic indexes: <math id="S3.p1.7.m2" class="ltx_Math" alttext="p_{r}=\rho_{r}/3" display="inline" intent=":literal"><semantics><mrow><msub><mi>p</mi><mi>r</mi></msub><mo>=</mo><mrow><msub><mi>ρ</mi><mi>r</mi></msub><mo>/</mo><mn>3</mn></mrow></mrow><annotation encoding="application/x-tex">p_{r}=\rho_{r}/3</annotation></semantics></math>, <math id="S3.p1.8.m3" class="ltx_Math" alttext="p_{m}=0" display="inline" intent=":literal"><semantics><mrow><msub><mi>p</mi><mi>m</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">p_{m}=0</annotation></semantics></math>, <math id="S3.p1.9.m4" class="ltx_Math" alttext="p_{\Lambda}=-\rho_{\Lambda}" display="inline" intent=":literal"><semantics><mrow><msub><mi>p</mi><mi mathvariant="normal">Λ</mi></msub><mo>=</mo><mrow><mo>−</mo><msub><mi>ρ</mi><mi mathvariant="normal">Λ</mi></msub></mrow></mrow><annotation encoding="application/x-tex">p_{\Lambda}=-\rho_{\Lambda}</annotation></semantics></math>, <math id="S3.p1.10.m5" class="ltx_Math" alttext="p_{\upsilon}=\mathrm{w}_{\upsilon}\rho_{\upsilon}" display="inline" intent=":literal"><semantics><mrow><msub><mi>p</mi><mi>υ</mi></msub><mo>=</mo><mrow><msub><mi mathvariant="normal">w</mi><mi>υ</mi></msub><mo lspace="0em" rspace="0em">​</mo><msub><mi>ρ</mi><mi>υ</mi></msub></mrow></mrow><annotation encoding="application/x-tex">p_{\upsilon}=\mathrm{w}_{\upsilon}\rho_{\upsilon}</annotation></semantics></math>.</p>
+</div>
+<figure id="S3.F1" class="ltx_figure"><img src="2604.03343v1/x1.png" id="S3.F1.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="760" height="550" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1: </span>Cosmological evolution of the model with hypermomentum spin (<math id="S3.F1.3.m1" class="ltx_Math" alttext="b=1/3" display="inline" intent=":literal"><semantics><mrow><mi>b</mi><mo>=</mo><mrow><mn>1</mn><mo>/</mo><mn>3</mn></mrow></mrow><annotation encoding="application/x-tex">b=1/3</annotation></semantics></math>, <math id="S3.F1.4.m2" class="ltx_Math" alttext="\mathrm{w}_{\upsilon}=0" display="inline" intent=":literal"><semantics><mrow><msub><mi mathvariant="normal">w</mi><mi>υ</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\mathrm{w}_{\upsilon}=0</annotation></semantics></math>).</figcaption>
+</figure>
+<div id="S3.p2" class="ltx_para">
+<p id="S3.p2.6" class="ltx_p">As a mathematically simple example, let us consider a model where the extra component is pressureless matter (dust), <math id="S3.p2.1.m1" class="ltx_Math" alttext="\mathrm{w}_{\upsilon}=0" display="inline" intent=":literal"><semantics><mrow><msub><mi mathvariant="normal">w</mi><mi>υ</mi></msub><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\mathrm{w}_{\upsilon}=0</annotation></semantics></math>, but which also carries spin in proportion to its density, <math id="S3.p2.2.m2" class="ltx_Math" alttext="\sigma=b\sqrt{3\rho_{\upsilon}/\kappa}" display="inline" intent=":literal"><semantics><mrow><mi>σ</mi><mo>=</mo><mrow><mi>b</mi><mo lspace="0em" rspace="0em">​</mo><msqrt><mrow><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><msub><mi>ρ</mi><mi>υ</mi></msub></mrow><mo>/</mo><mi>κ</mi></mrow></msqrt></mrow></mrow><annotation encoding="application/x-tex">\sigma=b\sqrt{3\rho_{\upsilon}/\kappa}</annotation></semantics></math>. For realistic behaviors and regular <math id="S3.p2.3.m3" class="ltx_Math" alttext="p_{h}/\rho_{h}" display="inline" intent=":literal"><semantics><mrow><msub><mi>p</mi><mi>h</mi></msub><mo>/</mo><msub><mi>ρ</mi><mi>h</mi></msub></mrow><annotation encoding="application/x-tex">p_{h}/\rho_{h}</annotation></semantics></math> the dimensionless constant must better be <math id="S3.p2.4.m4" class="ltx_Math" alttext="|b|&lt;1" display="inline" intent=":literal"><semantics><mrow><mrow><mo stretchy="false">|</mo><mi>b</mi><mo stretchy="false">|</mo></mrow><mo>&lt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">|b|&lt;1</annotation></semantics></math> (see <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib298" title="Friedmann cosmology with hyperfluids of constant equation of state" class="ltx_ref">2</a>]</cite>), we take <math id="S3.p2.5.m5" class="ltx_Math" alttext="b=1/3" display="inline" intent=":literal"><semantics><mrow><mi>b</mi><mo>=</mo><mrow><mn>1</mn><mo>/</mo><mn>3</mn></mrow></mrow><annotation encoding="application/x-tex">b=1/3</annotation></semantics></math>. Without specifying the respective fundamental Lagrangian here we just assume that dark matter particles have such extra property, and study the effects. We can integrate the equations numerically resulting in the plot on Fig. <a href="#S3.F1" title="Figure 1 ‣ 3 Constructing dark scenarios for the Universe history ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a> that shows the evolution of the cosmic fluids as measured in redshift <math id="S3.p2.6.m6" class="ltx_Math" alttext="z" display="inline" intent=":literal"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>, depicting</p>
+<table id="Sx1.EGx10" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S3.E16"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S3.E16.m1" class="ltx_Math" alttext="\displaystyle\Omega_{i}" display="inline" intent=":literal"><semantics><msub><mi mathvariant="normal">Ω</mi><mi>i</mi></msub><annotation encoding="application/x-tex">\displaystyle\Omega_{i}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S3.E16.m2" class="ltx_Math" alttext="\displaystyle=\frac{\kappa\rho_{i}}{3H^{2}}\,,\qquad\Omega_{\upsilon}=\frac{\kappa\rho_{\upsilon}}{3H^{2}}\,,\qquad\Omega_{h}=\frac{\kappa\rho_{h}}{3H^{2}}\,,\qquad\mathrm{w}_{\mathrm{eff}}=-1-\frac{2\dot{H}}{3H^{2}}\,." display="inline" intent=":literal"><semantics><mrow><mrow><mrow><mi></mi><mo>=</mo><mstyle displaystyle="true"><mfrac><mrow><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>ρ</mi><mi>i</mi></msub></mrow><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><msup><mi>H</mi><mn>2</mn></msup></mrow></mfrac></mstyle></mrow><mo lspace="0.170em" rspace="2.167em">,</mo><mrow><mrow><msub><mi mathvariant="normal">Ω</mi><mi>υ</mi></msub><mo>=</mo><mstyle displaystyle="true"><mfrac><mrow><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>ρ</mi><mi>υ</mi></msub></mrow><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><msup><mi>H</mi><mn>2</mn></msup></mrow></mfrac></mstyle></mrow><mo lspace="0.170em" rspace="2.167em">,</mo><mrow><mrow><msub><mi mathvariant="normal">Ω</mi><mi>h</mi></msub><mo>=</mo><mstyle displaystyle="true"><mfrac><mrow><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>ρ</mi><mi>h</mi></msub></mrow><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><msup><mi>H</mi><mn>2</mn></msup></mrow></mfrac></mstyle></mrow><mo lspace="0.170em" rspace="2.167em">,</mo><mrow><msub><mi mathvariant="normal">w</mi><mi>eff</mi></msub><mo>=</mo><mrow><mrow><mo>−</mo><mn>1</mn></mrow><mo>−</mo><mstyle displaystyle="true"><mfrac><mrow><mn>2</mn><mo lspace="0em" rspace="0em">​</mo><mover accent="true"><mi>H</mi><mo>˙</mo></mover></mrow><mrow><mn>3</mn><mo lspace="0em" rspace="0em">​</mo><msup><mi>H</mi><mn>2</mn></msup></mrow></mfrac></mstyle></mrow></mrow></mrow></mrow></mrow><mo lspace="0.170em">.</mo></mrow><annotation encoding="application/x-tex">\displaystyle=\frac{\kappa\rho_{i}}{3H^{2}}\,,\qquad\Omega_{\upsilon}=\frac{\kappa\rho_{\upsilon}}{3H^{2}}\,,\qquad\Omega_{h}=\frac{\kappa\rho_{h}}{3H^{2}}\,,\qquad\mathrm{w}_{\mathrm{eff}}=-1-\frac{2\dot{H}}{3H^{2}}\,.</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(16)</span></td>
+</tr></tbody>
+</table>
+<p id="S3.p2.20" class="ltx_p">The dashed lines represent the <math id="S3.p2.7.m1" class="ltx_Math" alttext="\Lambda" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Λ</mi><annotation encoding="application/x-tex">\Lambda</annotation></semantics></math>CDM base scenario with the current relative energy densities <math id="S3.p2.8.m2" class="ltx_Math" alttext="\Omega_{r,0}\approx 10^{-4}" display="inline" intent=":literal"><semantics><mrow><msub><mi mathvariant="normal">Ω</mi><mrow><mi>r</mi><mo>,</mo><mn>0</mn></mrow></msub><mo>≈</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>4</mn></mrow></msup></mrow><annotation encoding="application/x-tex">\Omega_{r,0}\approx 10^{-4}</annotation></semantics></math>, <math id="S3.p2.9.m3" class="ltx_Math" alttext="\Omega_{\Lambda,0}=0.7" display="inline" intent=":literal"><semantics><mrow><msub><mi mathvariant="normal">Ω</mi><mrow><mi mathvariant="normal">Λ</mi><mo>,</mo><mn>0</mn></mrow></msub><mo>=</mo><mn>0.7</mn></mrow><annotation encoding="application/x-tex">\Omega_{\Lambda,0}=0.7</annotation></semantics></math>, <math id="S3.p2.10.m4" class="ltx_Math" alttext="\Omega_{m,0}=1-\Omega_{r}-\Omega_{\Lambda}" display="inline" intent=":literal"><semantics><mrow><msub><mi mathvariant="normal">Ω</mi><mrow><mi>m</mi><mo>,</mo><mn>0</mn></mrow></msub><mo>=</mo><mrow><mn>1</mn><mo>−</mo><msub><mi mathvariant="normal">Ω</mi><mi>r</mi></msub><mo>−</mo><msub><mi mathvariant="normal">Ω</mi><mi mathvariant="normal">Λ</mi></msub></mrow></mrow><annotation encoding="application/x-tex">\Omega_{m,0}=1-\Omega_{r}-\Omega_{\Lambda}</annotation></semantics></math>, but <math id="S3.p2.11.m5" class="ltx_Math" alttext="\Omega_{h}=\Omega_{\upsilon}\equiv 0" display="inline" intent=":literal"><semantics><mrow><msub><mi mathvariant="normal">Ω</mi><mi>h</mi></msub><mo>=</mo><msub><mi mathvariant="normal">Ω</mi><mi>υ</mi></msub><mo>≡</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\Omega_{h}=\Omega_{\upsilon}\equiv 0</annotation></semantics></math>. The solid lines represent a scenario where <math id="S3.p2.12.m6" class="ltx_Math" alttext="\Omega_{r,0}\approx 10^{-4}" display="inline" intent=":literal"><semantics><mrow><msub><mi mathvariant="normal">Ω</mi><mrow><mi>r</mi><mo>,</mo><mn>0</mn></mrow></msub><mo>≈</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>4</mn></mrow></msup></mrow><annotation encoding="application/x-tex">\Omega_{r,0}\approx 10^{-4}</annotation></semantics></math>, <math id="S3.p2.13.m7" class="ltx_Math" alttext="\Omega_{\Lambda,0}=0.7" display="inline" intent=":literal"><semantics><mrow><msub><mi mathvariant="normal">Ω</mi><mrow><mi mathvariant="normal">Λ</mi><mo>,</mo><mn>0</mn></mrow></msub><mo>=</mo><mn>0.7</mn></mrow><annotation encoding="application/x-tex">\Omega_{\Lambda,0}=0.7</annotation></semantics></math>, <math id="S3.p2.14.m8" class="ltx_Math" alttext="\Omega_{m,0}=0.05" display="inline" intent=":literal"><semantics><mrow><msub><mi mathvariant="normal">Ω</mi><mrow><mi>m</mi><mo>,</mo><mn>0</mn></mrow></msub><mo>=</mo><mn>0.05</mn></mrow><annotation encoding="application/x-tex">\Omega_{m,0}=0.05</annotation></semantics></math>, while the total relative energy density is still one. It means the current visible dust matter takes 5% of the energy budget, while the remaining 25% is accounted by the dark dust matter with spin. For the given <math id="S3.p2.15.m9" class="ltx_Math" alttext="b" display="inline" intent=":literal"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math> the Friedmann equation (<a href="#S3.E15.1" title="In 15 ‣ 3 Constructing dark scenarios for the Universe history ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">15a</span></a>) implies that the relative energy density of this hyperdust contributes <math id="S3.p2.16.m10" class="ltx_Math" alttext="\Omega_{\upsilon,0}\approx 0.05" display="inline" intent=":literal"><semantics><mrow><msub><mi mathvariant="normal">Ω</mi><mrow><mi>υ</mi><mo>,</mo><mn>0</mn></mrow></msub><mo>≈</mo><mn>0.05</mn></mrow><annotation encoding="application/x-tex">\Omega_{\upsilon,0}\approx 0.05</annotation></semantics></math> while the effective contribution arising from its spin is <math id="S3.p2.17.m11" class="ltx_Math" alttext="\Omega_{h,0}\approx 0.2" display="inline" intent=":literal"><semantics><mrow><msub><mi mathvariant="normal">Ω</mi><mrow><mi>h</mi><mo>,</mo><mn>0</mn></mrow></msub><mo>≈</mo><mn>0.2</mn></mrow><annotation encoding="application/x-tex">\Omega_{h,0}\approx 0.2</annotation></semantics></math> (changing <math id="S3.p2.18.m12" class="ltx_Math" alttext="b" display="inline" intent=":literal"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math> would change these proportions). The main effect is that during the matter domination era the effective barotropic index <math id="S3.p2.19.m13" class="ltx_Math" alttext="\mathrm{w}_{\mathrm{eff}}" display="inline" intent=":literal"><semantics><msub><mi mathvariant="normal">w</mi><mi>eff</mi></msub><annotation encoding="application/x-tex">\mathrm{w}_{\mathrm{eff}}</annotation></semantics></math> is not strictly zero as in <math id="S3.p2.20.m14" class="ltx_Math" alttext="\Lambda" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Λ</mi><annotation encoding="application/x-tex">\Lambda</annotation></semantics></math>CDM but rather it varies in redshift due to the interplay between the dark matter density and the contribution arising from spin. In terms of the cosmic evolution the dark matter behaves as if it had a dynamical equation of state, although the variability only comes from the spin effects. Curiously, such phenomenology may be supported by the recent DESI DR2 data <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib303" title="DESI DR2 Results II: Measurements of Baryon Acoustic Oscillations and Cosmological Constraints" class="ltx_ref">1</a>]</cite>, as several authors have recently pointed out that making the dark energy dynamical with a phantom past may be supplanted by assuming constant dark energy while making the equation of state of dark matter dynamical instead <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib299" title="Evidence for Dynamical Dark Matter" class="ltx_ref">12</a>, <a href="#bib.bib295" title="The matter with(in) CPL" class="ltx_ref">5</a>, <a href="#bib.bib300" title="Evolving dark energy or dark matter with an evolving equation-of-state?" class="ltx_ref">4</a>, <a href="#bib.bib301" title="Is non-zero equation of state of dark matter favored by DESI DR2?" class="ltx_ref">11</a>, <a href="#bib.bib302" title="Exploring non-cold dark matter in a scenario of dynamical dark energy with DESI DR2 data" class="ltx_ref">10</a>]</cite>. A more quantitative comparison of this model with cosmological data is the subject of our further investigation.</p>
+</div>
+</section>
+<section id="Sx1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">Acknowledgments</h2>
+
+<div id="Sx1.p1" class="ltx_para">
+<p id="Sx1.p1.1" class="ltx_p">IA, LJ, MS were supported by the Estonian Research Council via the Center of Excellence “Foundations of the Universe” TK202U4 and the grant PRG2608. DI acknowledges the support of Istituto Nazionale di Fisica Nucleare (INFN), Sezioni di Napoli e di Torino, <span id="Sx1.p1.1.1" class="ltx_text ltx_font_italic">Iniziative Specifiche</span> QGSKY.</p>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul id="bib.L1" class="ltx_biblist">
+<li id="bib.bib303" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">M. Abdul Karim <span class="ltx_text ltx_bib_etal">et al.</span></span><span class="ltx_text ltx_bib_year"> (2025-03)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">DESI DR2 Results II: Measurements of Baryon Acoustic Oscillations and Cosmological Constraints</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2503.14738</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p2.20" title="3 Constructing dark scenarios for the Universe history ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>.
+</span>
+</li>
+<li id="bib.bib298" class="ltx_bibitem ltx_bib_inproceedings">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">I. Andrei, D. Iosifidis, L. Järv, and M. Saal</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Friedmann cosmology with hyperfluids of constant equation of state</span>.
+</span>
+<span class="ltx_bibblock">In <span class="ltx_text ltx_bib_inbook">Conference Proceedings for BCVSPIN 2024: Particle Physics and Cosmology in the Himalayas</span>,
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_place">Kathmandu, Nepal, 9-13 December 2024</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2508.18479</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p2.6" title="3 Constructing dark scenarios for the Universe history ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>.
+</span>
+</li>
+<li id="bib.bib297" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">I. Andrei, D. Iosifidis, L. Järv, and M. Saal</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Friedmann cosmology with hyperfluids</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Phys. Rev. D</span> <span class="ltx_text ltx_bib_volume">111</span> (<span class="ltx_text ltx_bib_number">6</span>), <span class="ltx_text ltx_bib_pages"> pp. 064063</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2411.19127</span>,
+<a href="https://dx.doi.org/10.1103/PhysRevD.111.064063" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.8" title="2 Homogeneous and isotropic, spatially flat cosmology ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#S2.p3.8" title="2 Homogeneous and isotropic, spatially flat cosmology ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib300" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">X. Chen and A. Loeb</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Evolving dark energy or dark matter with an evolving equation-of-state?</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">JCAP</span> <span class="ltx_text ltx_bib_volume">07</span>, <span class="ltx_text ltx_bib_pages"> pp. 059</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2505.02645</span>,
+<a href="https://dx.doi.org/10.1088/1475-7516/2025/07/059" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p2.20" title="3 Constructing dark scenarios for the Universe history ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>.
+</span>
+</li>
+<li id="bib.bib295" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">L. Giani, R. Von Marttens, and O. F. Piattella</span><span class="ltx_text ltx_bib_year"> (2025-05)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The matter with(in) CPL</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2505.08467</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p2.20" title="3 Constructing dark scenarios for the Universe history ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>.
+</span>
+</li>
+<li id="bib.bib55" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">F. W. Hehl, G. D. Kerlick, and P. Von Der Heyde</span><span class="ltx_text ltx_bib_year"> (1976)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">On Hypermomentum in General Relativity. 1. The Notion of Hypermomentum</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Z. Naturforsch. A</span> <span class="ltx_text ltx_bib_volume">31</span>, <span class="ltx_text ltx_bib_pages"> pp. 111–114</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.9" title="1 Metric-affine geometry and gravity ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib67" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">F. W. Hehl, J. D. McCrea, E. W. Mielke, and Y. Ne’eman</span><span class="ltx_text ltx_bib_year"> (1995)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Metric affine gauge theory of gravity: Field equations, Noether identities, world spinors, and breaking of dilation invariance</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Phys. Rept.</span> <span class="ltx_text ltx_bib_volume">258</span>, <span class="ltx_text ltx_bib_pages"> pp. 1–171</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">gr-qc/9402012</span>,
+<a href="https://dx.doi.org/10.1016/0370-1573%2894%2900111-F" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.3" title="1 Metric-affine geometry and gravity ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S1.p1.9" title="1 Metric-affine geometry and gravity ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">D. Iosifidis and T. S. Koivisto</span><span class="ltx_text ltx_bib_year"> (2024)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Hyperhydrodynamics: relativistic viscous fluids from hypermomentum</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">JCAP</span> <span class="ltx_text ltx_bib_volume">05</span>, <span class="ltx_text ltx_bib_pages"> pp. 001</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2312.06780</span>,
+<a href="https://dx.doi.org/10.1088/1475-7516/2024/05/001" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p2.1" title="2 Homogeneous and isotropic, spatially flat cosmology ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib231" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">D. Iosifidis</span><span class="ltx_text ltx_bib_year"> (2020)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Cosmological Hyperfluids, Torsion and Non-metricity</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Eur. Phys. J. C</span> <span class="ltx_text ltx_bib_volume">80</span> (<span class="ltx_text ltx_bib_number">11</span>), <span class="ltx_text ltx_bib_pages"> pp. 1042</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2003.07384</span>,
+<a href="https://dx.doi.org/10.1140/epjc/s10052-020-08634-z" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p1.10" title="2 Homogeneous and isotropic, spatially flat cosmology ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib302" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">T. Li, P. Wu, G. Du, Y. Yao, J. Zhang, and X. Zhang</span><span class="ltx_text ltx_bib_year"> (2025-07)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Exploring non-cold dark matter in a scenario of dynamical dark energy with DESI DR2 data</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2507.07798</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p2.20" title="3 Constructing dark scenarios for the Universe history ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>.
+</span>
+</li>
+<li id="bib.bib301" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">T. Li, Y. Zhang, Y. Yao, P. Wu, J. Zhang, and X. Zhang</span><span class="ltx_text ltx_bib_year"> (2025-06)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Is non-zero equation of state of dark matter favored by DESI DR2?</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2506.09819</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p2.20" title="3 Constructing dark scenarios for the Universe history ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>.
+</span>
+</li>
+<li id="bib.bib299" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">D. Wang</span><span class="ltx_text ltx_bib_year"> (2025-04)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Evidence for Dynamical Dark Matter</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2504.21481</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p2.20" title="3 Constructing dark scenarios for the Universe history ‣ Friedmann cosmology with fluids and hyperfluids" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>.
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+</div>
+<footer class="arxiv-html-footer">
+  <div class="ltx_page_logo">
+    Experimental support, please
+    <a href="./2604.03343v1/__stdout.txt" class="ltx_ref"
+    target="_blank" rel="nofollow">view the build logs</a>
+    for errors. Generated by
+    <a href="https://math.nist.gov/~BMiller/LaTeXML/" target="_blank" class="ltx_ref ltx_LaTeXML_logo">
+      <span style="letter-spacing: -0.2em; margin-right: 0.1em;">
+        L
+        <span style="font-size: 70%; position: relative; bottom: 2.2pt;">A</span>
+        T
+        <span style="position: relative; bottom: -0.4ex;">E</span>
+      </span>
+      <span class="ltx_font_smallcaps">xml</span>
+      <img alt="[LOGO]"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==">
+    </a>.
+  </div>
+  <div class="keyboard-glossary">
+    <h2>Instructions for reporting errors</h2>
+    <p>We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+      support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+      methods listed below:</p>
+    <ul>
+      <li>Click the "Report Issue" <span class="mobile-only">(<svg role="presentation"
+            style="display: inline-block; vertical-align: middle; fill: var(--text-color);" aria-hidden="true"
+            height="1em" viewBox="0 0 640 640">
+            <path
+              d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+          </svg>)</span> button, located in the page header.</li>
+    </ul>
+    <p><strong>Tip:</strong> You can select the relevant text first, to include it in your report.</p>
+    <p>Our team has already identified <a class="ltx_ref" href="https://github.com/arXiv/html_feedback/issues"
+        target="_blank">the following issues</a>. We appreciate your time reviewing and reporting rendering errors we
+      may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+      should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+      all.</p>
+    <p>Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a <a
+        class="ltx_ref" href="https://github.com/brucemiller/LaTeXML/wiki/Porting-LaTeX-packages-for-LaTeXML"
+        target="_blank">list of packages that need conversion</a>, and welcome <a class="ltx_ref"
+        href="https://github.com/brucemiller/LaTeXML/issues" target="_blank">developer contributions</a>.</p>
+  </div>
+</footer>
+<div id="fixed-buttons-container">
+  <div id="beta-badge" aria-hidden="true">BETA</div>
+  <a id="disable-reading-mode-btn" class="header-button" href="javascript:toggleReadingMode();"
+    title="Disable reading mode, show header and footer">
+    <svg role="presentation" height="1.25rem"
+      viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </a>
+</div></body>
+</html>

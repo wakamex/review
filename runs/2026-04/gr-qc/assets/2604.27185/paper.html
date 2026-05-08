@@ -1,0 +1,589 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Agnostically decoding gravitational wave model deficiencies in GWTC-3</title>
+<!--Generated on Wed Apr 29 20:28:03 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="/static/browse/0.3.4/css/arxiv-html-papers-20260131.css" type="text/css">
+<script src="/static/browse/0.3.4/js/arxiv-html-papers-20260131.js"></script>
+<script>
+  // Restore the saved color scheme preference, or
+  // enact the browser preference if "automatic", 
+  // without expecting DOM load to have completed.
+  //
+  // Also restore any saved readingmode and ToC display preferences.
+  function initializeReadingPreferences() {
+    let saved_theme = localStorage.getItem("ar5iv_theme") || "automatic";
+    if (saved_theme === "automatic") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        saved_theme = "dark";
+      }
+    }
+    if (saved_theme == "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+
+    const tocDisplay = localStorage.getItem('arxiv_html_paper_toc_display');
+    if (tocDisplay) {
+      document.documentElement.setAttribute("data-toc-display", tocDisplay);
+    }
+    const readingMode = localStorage.getItem('arxiv_html_paper_reading_mode');
+    if (readingMode) {
+      document.documentElement.setAttribute("data-reading-mode", readingMode);
+    }
+  }
+  // Run as soon as JS starts, to minimize repainting
+  initializeReadingPreferences();
+</script>
+<link rel="apple-touch-icon" sizes="180x180"
+  href="/static/browse/0.3.4/images/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32"
+  href="/static/browse/0.3.4/images/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+  href="/static/browse/0.3.4/images/icons/favicon-16x16.png">
+<link rel="manifest" href="/static/browse/0.3.4/images/icons/site.webmanifest">
+<link rel="mask-icon" href="/static/browse/0.3.4/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="stylesheet" type="text/css" media="screen" href="https://use.typekit.net/utz6mli.css">
+</head>
+<body>
+<dialog id="modal-form" aria-labelledby="modal-title" closedby="any">
+  <form id="modal-form-content" method="dialog" enctype="multipart/form-data">
+    <header class="modal-header">
+      <h5 id="modal-title" class="modal-title">Report GitHub Issue</h5>
+      <button type="submit" formnovalidate class="modal-close" aria-label="Close">×</button>
+    </header>
+
+    <div class="modal-body">
+      <label for="form_title">Title:</label>
+      <input class="form-control" id="form_title" name="form_title" required placeholder="Enter title">
+
+      <p id="selectedTextModalDescription" hidden>Content selection saved. Describe the issue below:</p>
+
+      <label for="description">Description:</label>
+      <textarea class="form-control" id="description" name="description" required maxlength="500"
+        placeholder="500 characters maximum"></textarea>
+    </div>
+
+    <footer class="modal-footer">
+      <button type="submit" value="internal-report" class="sr-only modal-submit">Submit without GitHub</button>
+      <button type="submit" value="github-report" class="modal-submit">Submit in GitHub</button>
+    </footer>
+  </form>
+</dialog>
+
+<header class="arxiv-html-header">
+  <div class="html-header-logo">
+    <a href="/">
+      <img alt="arXiv logo" class="logo desktop-only" width="100"
+        src="/static/browse/0.3.4/images/arxiv-logo-one-color-white.svg">
+      <span class="sr-only">Back to arXiv</span>
+    </a>
+  </div>
+  <!--TOC, dark mode, links-->
+  <nav class="html-header-nav">
+    <a class="header-button hover-effect desktop-only" href="https://info.arxiv.org/about/accessible_HTML.html"
+      target="_blank">Why HTML?</a>
+    <a class="header-button" title="Report an Issue" href="#" title="Report an issue"
+      onclick="event.preventDefault(); showModalForm();">
+      <svg role="presentation" class="mobile-only toggle-icon" aria-hidden="true" height="1.25rem"
+        viewBox="0 0 640 640">
+        <path
+          d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+      </svg>
+      <span class="desktop-only">Report Issue</span></a>
+    <!--back to abstract-->
+    <a class="header-button" title="Back to abstract page" aria-label="Back to abstract page"
+      href="/abs/2604.27185v1">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 512 512" fill="#ffffff"
+        aria-hidden="true">
+        <path
+          d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z">
+        </path>
+      </svg>
+      <span class="desktop-only">Back to Abstract</span>
+    </a>
+    <!-- PDF download link -->
+    <a class="header-button" title="Download PDF" href="/pdf/2604.27185v1"
+      target="_blank">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 576 542">
+        <path
+          d="M208 48L96 48c-8.8 0-16 7.2-16 16l0 384c0 8.8 7.2 16 16 16l80 0 0 48-80 0c-35.3 0-64-28.7-64-64L32 64C32 28.7 60.7 0 96 0L229.5 0c17 0 33.3 6.7 45.3 18.7L397.3 141.3c12 12 18.7 28.3 18.7 45.3l0 149.5-48 0 0-128-88 0c-39.8 0-72-32.2-72-72l0-88zM348.1 160L256 67.9 256 136c0 13.3 10.7 24 24 24l68.1 0zM240 380l32 0c33.1 0 60 26.9 60 60s-26.9 60-60 60l-12 0 0 28c0 11-9 20-20 20s-20-9-20-20l0-128c0-11 9-20 20-20zm32 80c11 0 20-9 20-20s-9-20-20-20l-12 0 0 40 12 0zm96-80l32 0c28.7 0 52 23.3 52 52l0 64c0 28.7-23.3 52-52 52l-32 0c-11 0-20-9-20-20l0-128c0-11 9-20 20-20zm32 128c6.6 0 12-5.4 12-12l0-64c0-6.6-5.4-12-12-12l-12 0 0 88 12 0zm76-108c0-11 9-20 20-20l48 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 24 28 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 44c0 11-9 20-20 20s-20-9-20-20l0-128z" />
+      </svg>
+      <span class="desktop-only">Download PDF</span></a>
+    <!-- navigational table of contents toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleNavTOC();" title="Toggle navigation"
+      aria-label="Toggle navigation">
+      <svg height="1.25rem" role="presentation" viewBox="0 0 512 512">
+        <path
+          d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z">
+        </path>
+      </svg>
+    </a>
+    <!--- collapsable header / reading mode toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleReadingMode();"
+      title="Disable reading mode, show header and footer">
+      <svg role="presentation" height="1.25rem"
+        viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+        <path
+          d="M32 32C14.3 32 0 46.3 0 64l0 96c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 32zM64 352c0-17.7-14.3-32-32-32S0 334.3 0 352l0 96c0 17.7 14.3 32 32 32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0 0-64zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0 0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-96c0-17.7-14.3-32-32-32l-96 0zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l96 0c17.7 0 32-14.3 32-32l0-96z" />
+      </svg>
+    </a>
+    <!--- colored theme toggle -->
+    <button type="button" class="header-button color-tog" onclick="toggleColorScheme();" title="Toggle dark/light mode" aria-label="Toggle color scheme">
+      <span class="toggle-icon automatic-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon light-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon dark-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+    </button>
+  </nav>
+</header><nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_abstract"><a href="#abstract1" title="In Agnostically decoding gravitational wave model deficiencies in GWTC-3" class="ltx_ref"><span class="ltx_text ltx_ref_title">Abstract</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S1" title="In Agnostically decoding gravitational wave model deficiencies in GWTC-3" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">I </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S2" title="In Agnostically decoding gravitational wave model deficiencies in GWTC-3" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II </span>The <span class="ltx_text ltx_font_typewriter">SCoRe</span> formalism</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S2.SS1" title="In II The SCoRe formalism ‣ Agnostically decoding gravitational wave model deficiencies in GWTC-3" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II.1 </span>Cross-correlated Residual Power</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S2.SS2" title="In II The SCoRe formalism ‣ Agnostically decoding gravitational wave model deficiencies in GWTC-3" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II.2 </span>Bayesian Framework</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S2.SS3" title="In II The SCoRe formalism ‣ Agnostically decoding gravitational wave model deficiencies in GWTC-3" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II.3 </span>Unmodeled inference</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S3" title="In Agnostically decoding gravitational wave model deficiencies in GWTC-3" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III </span>Application of <span class="ltx_text ltx_font_typewriter">SCoRe</span> on <span title="" class="ltx_glossaryref">GWTC-3</span></span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div id="infobox" class="infobox">
+  <a id="license-tr" href="https://info.arxiv.org/help/license/index.html#licenses-available">
+    License: arXiv.org perpetual non-exclusive license
+  </a>
+  <div id="watermark-tr">
+arXiv:2604.27185v1 [gr-qc] 29 Apr 2026</div>
+</div><div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_title_document">Agnostically decoding gravitational wave model deficiencies in GWTC-3</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Guillaume Dideron <a href="https://orcid.org/0000-0002-5222-7974" title="ORCID 0000-0002-5222-7974" class="ltx_ref ltx_orcid"><svg class="ltx_orcidlogo" height="1.7em" overflow="visible" version="1.1" viewBox="0 0 72 72" width="1.7em"><g transform="translate(0,20)"><path style="--ltx-fill-color:#A6CE39;" d="M72,36 C72,55.884375 55.884375,72 36,72 C16.115625,72 0,55.884375 0,36 C0,16.115625 16.115625,0 36,0 C55.884375,0 72,16.115625 72,36 Z" fill="#A6CE39"></path><g style="--ltx-fill-color:#FFFFFF;" fill="#FFFFFF" transform="translate(18.868966, 12.910345)"><polygon points="5.03734929 39.1250878 0.695429861 39.1250878 0.695429861 9.14431787 5.03734929 9.14431787 5.03734929 22.6930505 5.03734929 39.1250878"></polygon><path d="M11.409257,9.14431787 L23.1380784,9.14431787 C34.303014,9.14431787 39.2088191,17.0664074 39.2088191,24.1486995 C39.2088191,31.846843 33.1470485,39.1530811 23.1944669,39.1530811 L11.409257,39.1530811 L11.409257,9.14431787 Z M15.7511765,35.2620194 L22.6587756,35.2620194 C32.49858,35.2620194 34.7541226,27.8438084 34.7541226,24.1486995 C34.7541226,18.1301509 30.8915059,13.0353795 22.4332213,13.0353795 L15.7511765,13.0353795 L15.7511765,35.2620194 Z"></path><path d="M5.71401206,2.90182329 C5.71401206,4.441452 4.44526937,5.72914146 2.86638958,5.72914146 C1.28750978,5.72914146 0.0187670918,4.441452 0.0187670918,2.90182329 C0.0187670918,1.33420133 1.28750978,0.0745051096 2.86638958,0.0745051096 C4.44526937,0.0745051096 5.71401206,1.36219458 5.71401206,2.90182329 Z"></path></g></g></svg></a>
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_email"><a href="2604.27185v1/mailto:gdideron@perimeterinstitute.ca">gdideron@perimeterinstitute.ca</a>
+</span>
+<span class="ltx_contact ltx_role_affiliation">Perimeter Institute for Theoretical Physics, 31 Caroline Street North, Waterloo, ON N2L 2Y5, Canada
+</span></span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Suvodip Mukherjee <a href="https://orcid.org/0000-0002-3373-5236" title="ORCID 0000-0002-3373-5236" class="ltx_ref ltx_orcid"><svg class="ltx_orcidlogo" height="1.7em" overflow="visible" version="1.1" viewBox="0 0 72 72" width="1.7em"><g transform="translate(0,20)"><path style="--ltx-fill-color:#A6CE39;" d="M72,36 C72,55.884375 55.884375,72 36,72 C16.115625,72 0,55.884375 0,36 C0,16.115625 16.115625,0 36,0 C55.884375,0 72,16.115625 72,36 Z" fill="#A6CE39"></path><g style="--ltx-fill-color:#FFFFFF;" fill="#FFFFFF" transform="translate(18.868966, 12.910345)"><polygon points="5.03734929 39.1250878 0.695429861 39.1250878 0.695429861 9.14431787 5.03734929 9.14431787 5.03734929 22.6930505 5.03734929 39.1250878"></polygon><path d="M11.409257,9.14431787 L23.1380784,9.14431787 C34.303014,9.14431787 39.2088191,17.0664074 39.2088191,24.1486995 C39.2088191,31.846843 33.1470485,39.1530811 23.1944669,39.1530811 L11.409257,39.1530811 L11.409257,9.14431787 Z M15.7511765,35.2620194 L22.6587756,35.2620194 C32.49858,35.2620194 34.7541226,27.8438084 34.7541226,24.1486995 C34.7541226,18.1301509 30.8915059,13.0353795 22.4332213,13.0353795 L15.7511765,13.0353795 L15.7511765,35.2620194 Z"></path><path d="M5.71401206,2.90182329 C5.71401206,4.441452 4.44526937,5.72914146 2.86638958,5.72914146 C1.28750978,5.72914146 0.0187670918,4.441452 0.0187670918,2.90182329 C0.0187670918,1.33420133 1.28750978,0.0745051096 2.86638958,0.0745051096 C4.44526937,0.0745051096 5.71401206,1.36219458 5.71401206,2.90182329 Z"></path></g></g></svg></a>
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_email"><a href="2604.27185v1/mailto:suvodip@tifr.res.in">suvodip@tifr.res.in</a>
+</span>
+<span class="ltx_contact ltx_role_affiliation">Department of Astronomy &amp; Astrophysics, Tata Institute of Fundamental Research, 1, Homi Bhabha Road, Colaba, Mumbai 400005, India
+</span></span></span>
+<span class="ltx_author_before">  </span><span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Luis Lehner <a href="https://orcid.org/0000-0001-9682-3383" title="ORCID 0000-0001-9682-3383" class="ltx_ref ltx_orcid"><svg class="ltx_orcidlogo" height="1.7em" overflow="visible" version="1.1" viewBox="0 0 72 72" width="1.7em"><g transform="translate(0,20)"><path style="--ltx-fill-color:#A6CE39;" d="M72,36 C72,55.884375 55.884375,72 36,72 C16.115625,72 0,55.884375 0,36 C0,16.115625 16.115625,0 36,0 C55.884375,0 72,16.115625 72,36 Z" fill="#A6CE39"></path><g style="--ltx-fill-color:#FFFFFF;" fill="#FFFFFF" transform="translate(18.868966, 12.910345)"><polygon points="5.03734929 39.1250878 0.695429861 39.1250878 0.695429861 9.14431787 5.03734929 9.14431787 5.03734929 22.6930505 5.03734929 39.1250878"></polygon><path d="M11.409257,9.14431787 L23.1380784,9.14431787 C34.303014,9.14431787 39.2088191,17.0664074 39.2088191,24.1486995 C39.2088191,31.846843 33.1470485,39.1530811 23.1944669,39.1530811 L11.409257,39.1530811 L11.409257,9.14431787 Z M15.7511765,35.2620194 L22.6587756,35.2620194 C32.49858,35.2620194 34.7541226,27.8438084 34.7541226,24.1486995 C34.7541226,18.1301509 30.8915059,13.0353795 22.4332213,13.0353795 L15.7511765,13.0353795 L15.7511765,35.2620194 Z"></path><path d="M5.71401206,2.90182329 C5.71401206,4.441452 4.44526937,5.72914146 2.86638958,5.72914146 C1.28750978,5.72914146 0.0187670918,4.441452 0.0187670918,2.90182329 C0.0187670918,1.33420133 1.28750978,0.0745051096 2.86638958,0.0745051096 C4.44526937,0.0745051096 5.71401206,1.36219458 5.71401206,2.90182329 Z"></path></g></g></svg></a>
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_email"><a href="2604.27185v1/mailto:llehner@perimeterinstitute.ca">llehner@perimeterinstitute.ca</a>
+</span>
+<span class="ltx_contact ltx_role_affiliation">Perimeter Institute for Theoretical Physics, 31 Caroline Street North, Waterloo, ON N2L 2Y5, Canada
+</span></span></span>
+</div>
+
+<div id="abstract1" class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p"><span title="" class="ltx_glossaryref">Gravitational Waves (GW)</span> data bring an exceptional avenue to test the underlying models of coalescing compact objects. In the regime of strong gravity and high curvature, they allow the exploration of minute deviations from the best-fit models, which are difficult to uncover with other observational modalities.
+These deviations can stem from departures from <span title="" class="ltx_glossaryref">General Relativity (GR)</span> or unaccounted astrophysical effects. They may not be explainable within the current
+description of <span title="" class="ltx_glossaryref">GW</span> strain data, or may simply be difficult to model.
+However, they are expected to be correlated between detectors and across the
+population of observed events.
+The recently developed analysis pipeline <span class="ltx_text ltx_font_typewriter">SCoRe</span> leverages these properties
+by focusing on the correlated power between detectors and combining results from
+multiple events.
+In this paper, we apply the framework on <span title="" class="ltx_glossaryref">the Third Gravitational-Wave Transient Catalog (GWTC-3)</span> to search
+for source-dependent deviations.
+In particular, we explore whether there is evidence for a mass-scale in the observed events, which can act like a line of demarcation in their physical properties by exhibiting a deviation that is different
+above and below this mass-scale. This mass scale dependency naturally arises in gravitational theories described through effective field theories, due to environmental effects or in scenarios involving exotic compact objects, where the <span title="" class="ltx_glossaryref">GW</span> signature can differ from the standard binary black holes in <span title="" class="ltx_glossaryref">GR</span>. Using the 30 highest Signal-to-Noise Ratio events in the catalog, we find Bayes factors ranging from 0.16–0.5 (depending on where the threshold mass is set), thus disfavoring the hypothesis of existence of any mass-scale between <math class="ltx_Math" alttext="\sim 2.5" display="inline" intent=":literal"><semantics><mrow><mi></mi><mo>∼</mo><mn>2.5</mn></mrow><annotation encoding="application/x-tex">\sim 2.5</annotation></semantics></math> M<sub class="ltx_sub">⊙</sub> and <math class="ltx_Math" alttext="60" display="inline" intent=":literal"><semantics><mn>60</mn><annotation encoding="application/x-tex">60</annotation></semantics></math> M<sub class="ltx_sub">⊙</sub>. We also compute the distribution of excess cross-correlated power across events and find a Bayes factor of <math class="ltx_Math" alttext="0.07" display="inline" intent=":literal"><semantics><mn>0.07</mn><annotation encoding="application/x-tex">0.07</annotation></semantics></math>, which agrees with expected noise statistics.</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">I </span>Introduction</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p id="S1.p1.1" class="ltx_p"><span title="" class="ltx_glossaryref">Gravitational Waves (GW)</span> astronomy furnishes outstanding opportunities to learn about
+our universe <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">2021NatRP...3..344B</span>]</cite>. The depth to which we can answer fundamental questions is tied to our abilities to scrutinize observations
+and infer relevant lessons. To date, impressive insights have been obtained (by research from within and outside the <span title="" class="ltx_glossaryref">LIGO-Virgo-KAGRA (LVK)</span> collaboration), for instance on rates and distribution of compact
+binaries (e.g. <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">theligoscientificcollaborationGWTC40UpdatingGravitationalWave2025</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">callister2024observedgravitationalwavepopulations</span>]</cite>), the consistency of General Relativity to
+describe the inspiral, merger and ringdown (e.g. <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">LIGOScientific:2021sio</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">Yunes:2013dva</span>]</cite>) and
+the connection with short gamma ray bursts (e.g. <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">LIGOScientific:2017zic</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">Sarin_2022</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">desantis2026constrainingbinaryneutronstar</span>]</cite>), to
+name just a few.<span id="footnote1" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_tag ltx_tag_note">1</span>The flip side of the excitement this era has brought is that it has become impossible to cite all
+exciting developments and results in a broad context.</span></span></span> As the field transitions to
+increasingly higher precision and with it a plethora of
+events <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">abacGWTC40IntroductionVersion2025</span>]</cite>, exciting opportunities become possible to explore from astrophysics to fundamental physics. On the other hand, the challenge of dealing with unmodelled contributions present in the <span title="" class="ltx_glossaryref">GW</span> signal also becomes more pressing. The search for unmodelled signals (or features in the signals) can unearth several astrophysical and fundamental physics aspects, ranging from the nature of compact object sources and their environment to testing GR. Moreover, even when incorporating all the relevant physics governing the waveforms, deviations of the <span title="" class="ltx_glossaryref">GW</span> data with respect to the best-fit model can still arise due to waveform systematics
+(see, e.g. <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">LIGOScientific:2016ebw</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">Moore:2021eok</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">Yelikar:2024wzm</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">Gupta:2024gun</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">Bini:2026kwz</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">Mezzasoma:2026wme</span>]</cite>).</p>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p id="S1.p2.1" class="ltx_p">Standard <span title="" class="ltx_glossaryref">GW</span> studies that
+focus on deviations from <span title="" class="ltx_glossaryref">General Relativity (GR)</span> (e.g. <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">theligoscientificcollaborationGWTC40TestsGeneral2026a</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">theligoscientificcollaborationGWTC40TestsGeneral2026</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">theligoscientificcollaborationGWTC40TestsGeneral2026b</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">LIGOScientific:2021sio</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">chiaPursuitLoveNumbers2024</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">Yunes:2013dva</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">universe7120497</span>]</cite>) include: constraining specific
+parametrised strain deviations (e.g. Post-Newtonian
+coefficients <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">LIGOScientific:2021sio</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">agathosTIGERDataAnalysis2014a</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">Yunes:2009ke</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">nairFundamentalPhysicsImplications2019</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">yunesTheoreticalPhysicsImplications2016</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">mehtaTestsGeneralRelativity2023</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">royImprovedParametrizedTest2026</span>]</cite>); looking for
+specific physical signatures, such as modified dispersion
+relations <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">kosteleckyTestingLocalLorentz2016</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">Mastrogiovanni:2020gua</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">okounkovaConstrainingGravitationalWave2022</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">shaoCombinedSearchAnisotropic2020</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">mirshekariConstrainingLorentzviolatingModified2012a</span>]</cite>,
+spin-induced quadrupole
+moments <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">ryanGravitationalWavesInspiral1995</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">poissonGravitationalWavesInspiraling1998</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">laarakkersQuadrupoleMomentsRotating1999</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">krishnenduTestingBinaryBlack2017</span>]</cite>,
+or non-tensorial polarizations <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">wongNullstreambasedBayesianUnmodeled2021</span>]</cite>; and
+statistically significant coherent residual signal after subtracting the
+best-fit waveforms, among others.
+When possible, hierarchical
+schemes <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">isiHierarchicalTestGeneral2019</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">zhongMultidimensionalHierarchicalTests2024</span>]</cite> are used to combine results from multiple
+events.
+Indeed, just as combining events enables
+constraining frontier astrophysics, such as the mass gaps and formation channels,
+is also a powerful method to explore unmodelled physical effects that are either too
+minute in individual events or only manifest as a population effect.</p>
+</div>
+<div id="S1.p3" class="ltx_para">
+<p id="S1.p3.1" class="ltx_p">Motivated by population level inference of physical unmodelled effects from noisy <span title="" class="ltx_glossaryref">GW</span> data, we developed a new optimal framework <span id="S1.p3.1.1" class="ltx_text ltx_font_typewriter">SCoRe</span> in previous works <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">dideronNewFrameworkStudy2023</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">dideronDetectingUnmodeledSourcedependent2025</span>]</cite> and demonstrated its capability in measuring minute signal from the data accessible from the <span title="" class="ltx_glossaryref">LVK</span> <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">KAGRA:2013rdx</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">LIGOScientific:2014pky</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">VIRGO:2014yos</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">KAGRA:2020tym</span>]</cite> and third generation detectors, such as Cosmic Explorer<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">Reitze:2019iox</span>]</cite> and Einstein Telescope<cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">2010CQGra..27h4007P</span>]</cite>, using simulated <span title="" class="ltx_glossaryref">GW</span> data.
+The <span id="S1.p3.1.2" class="ltx_text ltx_font_typewriter">SCoRe</span> framework aims to constrain deviations from the waveform and noise models
+used in <span title="" class="ltx_glossaryref">GW</span> parameter inference, assuming only that any residual power due to
+the deviation is coherent between detectors. This allows making minimal assumptions on
+the strain model, a particularly important feature to enable combining a population of events
+without relying on a precise model for the underlying strain deviation. In
+turn, by focusing the search on population effects, we can leverage them to
+differentiate between sources of deviations that may be degenerate at the
+strain level. The details of this framework have
+been presented in <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">dideronNewFrameworkStudy2023</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">dideronDetectingUnmodeledSourcedependent2025</span>]</cite>.
+In this work, we employ <span id="S1.p3.1.3" class="ltx_text ltx_font_typewriter">SCoRe</span> for the first-time on <span title="" class="ltx_glossaryref">GW</span> data from
+<span title="" class="ltx_glossaryref">the Third Gravitational-Wave Transient Catalog (GWTC-3)</span> <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">ligoscientificcollaborationGWTC3CompactBinary2023</span>]</cite> events and, to illustrate its application, we explore whether there is any signature of mass-scale in the <span title="" class="ltx_glossaryref">GW</span> data that sets a line of demarcation between the properties of compact objects at the near field strong gravity regime. Such a mass-scale can be related to potential beyond <span title="" class="ltx_glossaryref">GR</span> effects or the type of objects involved in the binary (such as exotic compact objects). We search for this mass-scale using both a modelled and an unmodelled approach.</p>
+</div>
+<div id="S1.p4" class="ltx_para">
+<p id="S1.p4.1" class="ltx_p">We first provide a description of our formalism in Sec <a href="#S2" title="II The SCoRe formalism ‣ Agnostically decoding gravitational wave model deficiencies in GWTC-3" class="ltx_ref"><span class="ltx_text ltx_ref_tag">II</span></a>. We then report our choice of events, and describe two population models that each resulted in their own analysis.
+In the first model, we separate the events in two populations, delimited by a mass-scale, and look for differences in how excess cross-correlated power is distributed in both populations. We find that, regardless of the mass-scale value, the two populations exhibit deviations consistent with noise. Moreover, we find that the largest support is for the two populations being identical.
+In the second model, we reproduce the analysis
+in <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">dideronDetectingUnmodeledSourcedependent2025</span>]</cite>, and look for a
+<span title="" class="ltx_glossaryref">Effective field theory (EFT)</span>-motivated deviation that scales as a power law in the total mass of the
+binary. We find that the cross-correlated power is not able to place
+strong enough bounds on strain-level parameters to allow inference of the power law index.</p>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">II </span>The <span id="S2.1.1" class="ltx_text ltx_font_typewriter">SCoRe</span> formalism</h2>
+
+<section id="S2.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">II.1 </span>Cross-correlated Residual Power</h3>
+
+<div id="S2.SS1.p1" class="ltx_para">
+<p id="S2.SS1.p1.1" class="ltx_p">The <span id="S2.SS1.p1.1.1" class="ltx_text ltx_font_typewriter">SCoRe</span> framework <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">dideronDetectingUnmodeledSourcedependent2025</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">dideronNewFrameworkStudy2023</span>]</cite> enables the search for signatures of unmodelled physical effects in <span title="" class="ltx_glossaryref">GW</span> data arising from beyond<span title="" class="ltx_glossaryref">GR</span> effects, unmodeled astrophysics, or waveform systematics by analyzing the cross-correlated residuals between different detectors after subtracting best-fit signals. It identifies coherent, structured features in these residuals that could indicate unmodeled physics, as opposed to random detector noise. In essence, it provides a systematic, Bayesian way to search for new physics hidden in the small, correlated discrepancies left behind after standard <span title="" class="ltx_glossaryref">GW</span> analyses. We briefly review it in this section.</p>
+</div>
+<div id="S2.SS1.p2" class="ltx_para">
+<p id="S2.SS1.p2.4" class="ltx_p">Consider strain data <math id="S2.SS1.p2.1.m1" class="ltx_Math" alttext="d(t)" display="inline" intent=":literal"><semantics><mrow><mi>d</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">d(t)</annotation></semantics></math>, consisting of a modelled signal <math id="S2.SS1.p2.2.m2" class="ltx_Math" alttext="h(t;\theta)" display="inline" intent=":literal"><semantics><mrow><mi>h</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo>;</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">h(t;\theta)</annotation></semantics></math>,
+noise <math id="S2.SS1.p2.3.m3" class="ltx_Math" alttext="n(t)" display="inline" intent=":literal"><semantics><mrow><mi>n</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">n(t)</annotation></semantics></math>, and a deviation from the model <math id="S2.SS1.p2.4.m4" class="ltx_Math" alttext="\delta(t;\theta_{\text{True}},\beta)" display="inline" intent=":literal"><semantics><mrow><mi>δ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo>;</mo><msub><mi>θ</mi><mtext>True</mtext></msub><mo>,</mo><mi>β</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">\delta(t;\theta_{\text{True}},\beta)</annotation></semantics></math></p>
+<table id="A0.EGx1" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.E1"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E1.m1" class="ltx_Math" alttext="\displaystyle d(t)" display="inline" intent=":literal"><semantics><mrow><mi>d</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">\displaystyle d(t)</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.E1.m2" class="ltx_Math" alttext="\displaystyle=h(t;\theta)+n(t)+\delta(t;\theta_{\text{True}},\beta)," display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>=</mo><mrow><mrow><mi>h</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo>;</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>n</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo>+</mo><mrow><mi>δ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo>;</mo><msub><mi>θ</mi><mtext>True</mtext></msub><mo>,</mo><mi>β</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\displaystyle=h(t;\theta)+n(t)+\delta(t;\theta_{\text{True}},\beta),</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+<p id="S2.SS1.p2.11" class="ltx_p">where the source parameters <math id="S2.SS1.p2.5.m1" class="ltx_Math" alttext="\theta" display="inline" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math> used to generate the model may be
+different from the true source parameters <math id="S2.SS1.p2.6.m2" class="ltx_Math" alttext="\theta_{\text{True}}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mtext>True</mtext></msub><annotation encoding="application/x-tex">\theta_{\text{True}}</annotation></semantics></math>.
+We allow <math id="S2.SS1.p2.7.m3" class="ltx_Math" alttext="\delta" display="inline" intent=":literal"><semantics><mi>δ</mi><annotation encoding="application/x-tex">\delta</annotation></semantics></math> to depend on both the source parameters <math id="S2.SS1.p2.8.m4" class="ltx_Math" alttext="\theta_{\text{True}}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mtext>True</mtext></msub><annotation encoding="application/x-tex">\theta_{\text{True}}</annotation></semantics></math>, as well as a new parameter <math id="S2.SS1.p2.9.m5" class="ltx_Math" alttext="\beta" display="inline" intent=":literal"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>. The latter is zero when there is no
+deviation.
+Crucially, <math id="S2.SS1.p2.10.m6" class="ltx_Math" alttext="\beta" display="inline" intent=":literal"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math> may depend on <math id="S2.SS1.p2.11.m7" class="ltx_Math" alttext="\theta_{\text{True}}" display="inline" intent=":literal"><semantics><msub><mi>θ</mi><mtext>True</mtext></msub><annotation encoding="application/x-tex">\theta_{\text{True}}</annotation></semantics></math>. This is the case, for example, in
+<span title="" class="ltx_glossaryref">EFTs</span> of gravity, where deviations are introduced by high-order operators
+that will scale as the inverse of the black hole mass (e.g. <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">maselliBlackHoleSpectroscopy2024</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">Bernard:2025dyh</span>]</cite>), or when investigating
+Lorentz violations that cause dispersion, where the deviation will change
+according to redshift (e.g. <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">Yagi:2013ava</span>]</cite>).</p>
+</div>
+<div id="S2.SS1.p3" class="ltx_para">
+<p id="S2.SS1.p3.2" class="ltx_p">Given the residual <math id="S2.SS1.p3.1.m1" class="ltx_Math" alttext="r^{X}(t):=d(t)-h(t;\theta)" display="inline" intent=":literal"><semantics><mrow><mrow><msup><mi>r</mi><mi>X</mi></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo>:=</mo><mrow><mrow><mi>d</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo>−</mo><mrow><mi>h</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo>;</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><annotation encoding="application/x-tex">r^{X}(t):=d(t)-h(t;\theta)</annotation></semantics></math> in detectors <math id="S2.SS1.p3.2.m2" class="ltx_Math" alttext="X=I,J" display="inline" intent=":literal"><semantics><mrow><mi>X</mi><mo>=</mo><mrow><mi>I</mi><mo>,</mo><mi>J</mi></mrow></mrow><annotation encoding="application/x-tex">X=I,J</annotation></semantics></math>, the <span title="" class="ltx_glossaryref">Cross-correlated Residual Power (CRISP)</span> is given by</p>
+<table id="A0.EGx2" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.E2"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E2.m1" class="ltx_Math" alttext="\displaystyle D^{IJ}(t)" display="inline" intent=":literal"><semantics><mrow><msup><mi>D</mi><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>J</mi></mrow></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">\displaystyle D^{IJ}(t)</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.E2.m2" class="ltx_Math" alttext="\displaystyle=\int^{t+\frac{\tau(t)}{2}}_{t-\frac{\tau(t)}{2}}r^{I}(t)r^{J}(t)dt." display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><msubsup><mo>∫</mo><mrow><mi>t</mi><mo>−</mo><mfrac><mrow><mi>τ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mn>2</mn></mfrac></mrow><mrow><mi>t</mi><mo>+</mo><mfrac><mrow><mi>τ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mn>2</mn></mfrac></mrow></msubsup></mstyle><mrow><msup><mi>r</mi><mi>I</mi></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><msup><mi>r</mi><mi>J</mi></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo rspace="0em">𝑑</mo><mi>t</mi></mrow></mrow></mrow></mrow><mo lspace="0em">.</mo></mrow><annotation encoding="application/x-tex">\displaystyle=\int^{t+\frac{\tau(t)}{2}}_{t-\frac{\tau(t)}{2}}r^{I}(t)r^{J}(t)dt.</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+</table>
+<p id="S2.SS1.p3.4" class="ltx_p">The binning width <math id="S2.SS1.p3.3.m1" class="ltx_Math" alttext="\tau(t)" display="inline" intent=":literal"><semantics><mrow><mi>τ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">\tau(t)</annotation></semantics></math> is a new parameter of the analysis.
+It can be tuned to balance variance reduction from
+averaging over uncorrelated noise, and bias from washing out timescales smaller
+than <math id="S2.SS1.p3.4.m2" class="ltx_Math" alttext="\tau" display="inline" intent=":literal"><semantics><mi>τ</mi><annotation encoding="application/x-tex">\tau</annotation></semantics></math>, as explained in <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">dideronNewFrameworkStudy2023</span>]</cite>.</p>
+</div>
+<div id="S2.SS1.p4" class="ltx_para">
+<p id="S2.SS1.p4.2" class="ltx_p">An important quantity to characterise is the variance <math id="S2.SS1.p4.1.m1" class="ltx_Math" alttext="K_{D}" display="inline" intent=":literal"><semantics><msub><mi>K</mi><mi>D</mi></msub><annotation encoding="application/x-tex">K_{D}</annotation></semantics></math> of <math id="S2.SS1.p4.2.m2" class="ltx_Math" alttext="D^{IJ}(t)" display="inline" intent=":literal"><semantics><mrow><msup><mi>D</mi><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>J</mi></mrow></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">D^{IJ}(t)</annotation></semantics></math>,
+which can be computed from the zero-lag auto-correlation function of the noise
+in each detector:</p>
+<table id="A0.EGx3" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.E3"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E3.m1" class="ltx_Math" alttext="\displaystyle K_{D}(t):=\langle D(t)D(t)\rangle" display="inline" intent=":literal"><semantics><mrow><mrow><msub><mi>K</mi><mi>D</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo>:=</mo><mrow><mo stretchy="false">⟨</mo><mrow><mi>D</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mi>D</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">⟩</mo></mrow></mrow><annotation encoding="application/x-tex">\displaystyle K_{D}(t):=\langle D(t)D(t)\rangle</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.E3.m2" class="ltx_Math" alttext="\displaystyle=\frac{1}{n_{\text{eff}}}\left&lt;n^{I}(t)^{2}\right&gt;\left&lt;n^{I}(t)^{2}\right&gt;," display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>=</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><msub><mi>n</mi><mtext>eff</mtext></msub></mfrac></mstyle><mo lspace="0em" rspace="0em">​</mo><mrow><mo>⟨</mo><mrow><msup><mi>n</mi><mi>I</mi></msup><mo lspace="0em" rspace="0em">​</mo><msup><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mn>2</mn></msup></mrow><mo>⟩</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo>⟨</mo><mrow><msup><mi>n</mi><mi>I</mi></msup><mo lspace="0em" rspace="0em">​</mo><msup><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mn>2</mn></msup></mrow><mo>⟩</mo></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\displaystyle=\frac{1}{n_{\text{eff}}}\left&lt;n^{I}(t)^{2}\right&gt;\left&lt;n^{I}(t)^{2}\right&gt;,</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(3)</span></td>
+</tr></tbody>
+</table>
+<p id="S2.SS1.p4.6" class="ltx_p">where <math id="S2.SS1.p4.3.m1" class="ltx_Math" alttext="n_{\text{eff}}" display="inline" intent=":literal"><semantics><msub><mi>n</mi><mtext>eff</mtext></msub><annotation encoding="application/x-tex">n_{\text{eff}}</annotation></semantics></math> is the effective number of samples in a bin of size
+<math id="S2.SS1.p4.4.m2" class="ltx_Math" alttext="\tau" display="inline" intent=":literal"><semantics><mi>τ</mi><annotation encoding="application/x-tex">\tau</annotation></semantics></math>, and accounts for the auto-correlation of the noise within this bin,
+see <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">brockwellTimeSeriesTheory2013</span>]</cite>. The angle brackets denote the expectation value over noise realizations.
+In order to recover the parameter <math id="S2.SS1.p4.5.m3" class="ltx_Math" alttext="\beta" display="inline" intent=":literal"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>, we can use power templates
+<math id="S2.SS1.p4.6.m4" class="ltx_Math" alttext="Z(t;\beta)" display="inline" intent=":literal"><semantics><mrow><mi>Z</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo>;</mo><mi>β</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">Z(t;\beta)</annotation></semantics></math> that model the <span title="" class="ltx_glossaryref">CRISP</span> to construct a likelihood:</p>
+<table id="A0.EGx4" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.E4"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E4.m1" class="ltx_Math" alttext="\displaystyle\ln\mathcal{L}\left(D^{IJ}|\theta,\beta\right)" display="inline" intent=":literal"><semantics><mrow><mrow><mi>ln</mi><mo lspace="0.167em">⁡</mo><mi class="ltx_font_mathcaligraphic">ℒ</mi></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mrow><msup><mi>D</mi><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>J</mi></mrow></msup><mo fence="false">|</mo><mrow><mi>θ</mi><mo>,</mo><mi>β</mi></mrow></mrow><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">\displaystyle\ln\mathcal{L}\left(D^{IJ}|\theta,\beta\right)</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.E4.m2" class="ltx_Math" alttext="\displaystyle\ni-\frac{1}{2}\int dt\frac{D^{IJ}(t)Z(t;\beta)}{\langle K_{D}(t)K_{D}(t)\rangle}," display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>∋</mo><mrow><mo>−</mo><mrow><mstyle displaystyle="true"><mfrac><mn>1</mn><mn>2</mn></mfrac></mstyle><mo lspace="0em" rspace="0em">​</mo><mstyle displaystyle="true"><mrow><mo>∫</mo><mrow><mrow><mo lspace="0em" rspace="0em">𝑑</mo><mi>t</mi></mrow><mo lspace="0em" rspace="0em">​</mo><mfrac><mrow><msup><mi>D</mi><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>J</mi></mrow></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mi>Z</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo>;</mo><mi>β</mi><mo stretchy="false">)</mo></mrow></mrow><mrow><mo stretchy="false">⟨</mo><mrow><msub><mi>K</mi><mi>D</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><msub><mi>K</mi><mi>D</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">⟩</mo></mrow></mfrac></mrow></mrow></mstyle></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\displaystyle\ni-\frac{1}{2}\int dt\frac{D^{IJ}(t)Z(t;\beta)}{\langle K_{D}(t)K_{D}(t)\rangle},</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(4)</span></td>
+</tr></tbody>
+</table>
+<p id="S2.SS1.p4.9" class="ltx_p">where the form of the likelihood follows from assuming that, in the absence of
+a signal, the correlation between <math id="S2.SS1.p4.7.m1" class="ltx_Math" alttext="D^{IJ}(t_{1})" display="inline" intent=":literal"><semantics><mrow><msup><mi>D</mi><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>J</mi></mrow></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mn>1</mn></msub><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">D^{IJ}(t_{1})</annotation></semantics></math> and <math id="S2.SS1.p4.8.m2" class="ltx_Math" alttext="D^{IJ}(t_{2})" display="inline" intent=":literal"><semantics><mrow><msup><mi>D</mi><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>J</mi></mrow></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><msub><mi>t</mi><mn>2</mn></msub><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">D^{IJ}(t_{2})</annotation></semantics></math> is negligible for
+<math id="S2.SS1.p4.9.m3" class="ltx_Math" alttext="t_{1}\neq t_{2}" display="inline" intent=":literal"><semantics><mrow><msub><mi>t</mi><mn>1</mn></msub><mo>≠</mo><msub><mi>t</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">t_{1}\neq t_{2}</annotation></semantics></math>. The optimal estimator for the assumed noise statistics (Wiener filter)
+is also used, as discussed in Sec. <a href="#S2.SS3" title="II.3 Unmodeled inference ‣ II The SCoRe formalism ‣ Agnostically decoding gravitational wave model deficiencies in GWTC-3" class="ltx_ref"><span class="ltx_text ltx_ref_tag">II.3</span></a>.</p>
+</div>
+<div id="S2.SS1.p5" class="ltx_para">
+<p id="S2.SS1.p5.1" class="ltx_p">The <span title="" class="ltx_glossaryref">CRISP</span> is essentially a compressed signal, and
+different strain signals may lead to the same <span title="" class="ltx_glossaryref">CRISP</span>.
+Similarly, each power template <math id="S2.SS1.p5.1.m1" class="ltx_Math" alttext="Z(t;\beta)" display="inline" intent=":literal"><semantics><mrow><mi>Z</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo>;</mo><mi>β</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">Z(t;\beta)</annotation></semantics></math> corresponds to multiple possible
+strain deviations, and represent general features expected from a family of
+physically motivated deviations.</p>
+</div>
+<div id="S2.SS1.p6" class="ltx_para">
+<p id="S2.SS1.p6.1" class="ltx_p">Power templates are less informative than strain models (i.e.
+<math id="S2.SS1.p6.1.m1" class="ltx_Math" alttext="\delta" display="inline" intent=":literal"><semantics><mi>δ</mi><annotation encoding="application/x-tex">\delta</annotation></semantics></math>).
+At best, the likelihood on the <span title="" class="ltx_glossaryref">CRISP</span> given a power template
+will be as informative as that of strain data given a precise model of
+the strain deviation. <span id="footnote2" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_tag ltx_tag_note">2</span>This is just an example of the data processing
+inequality <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">shannonMathematicalTheoryCommunication1948</span>]</cite>.
+Intuitively, the averaging operation means that each bin is less
+sensitive to <math id="footnote2.m1" class="ltx_Math" alttext="\beta" display="inline" intent=":literal"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>, and thus reduces the Fisher information and the
+KL divergence between values of <math id="footnote2.m2" class="ltx_Math" alttext="\beta" display="inline" intent=":literal"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>.</span></span></span>
+The advantage of power templates and the <span title="" class="ltx_glossaryref">CRISP</span> is that they do not
+require modelling of the strain deviation<span id="footnote3" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">3</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">3</sup><span class="ltx_tag ltx_tag_note">3</span>An interesting possiblity for future work is to explore
+the possibility of phase retrieval as discussed
+for intensity data in the electromagnetic
+sector, e.g. <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">Fienup:82</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">Dong_2023</span>, <span class="ltx_ref ltx_missing_citation ltx_ref_self">Dalal:2024aaj</span>]</cite>.</span></span></span>.
+This is particularly useful when we are interested in types of deviations that
+vary across a population of events, as it allows us to constrain population
+effects without relying on a precise strain model.
+We describe how such effects can be measured in the next section.</p>
+</div>
+</section>
+<section id="S2.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">II.2 </span>Bayesian Framework</h3>
+
+<div id="S2.SS2.p1" class="ltx_para">
+<p id="S2.SS2.p1.5" class="ltx_p">We denote the parameters describing the variation of the deviation across the
+population as <math id="S2.SS2.p1.1.m1" class="ltx_Math" alttext="\Delta_{m}" display="inline" intent=":literal"><semantics><msub><mi mathvariant="normal">Δ</mi><mi>m</mi></msub><annotation encoding="application/x-tex">\Delta_{m}</annotation></semantics></math>, such that there exists a distribution
+<math id="S2.SS2.p1.2.m2" class="ltx_Math" alttext="P\left(\beta|\Delta_{m},\theta\right)" display="inline" intent=":literal"><semantics><mrow><mi>P</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mrow><mi>β</mi><mo fence="false">|</mo><mrow><msub><mi mathvariant="normal">Δ</mi><mi>m</mi></msub><mo>,</mo><mi>θ</mi></mrow></mrow><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">P\left(\beta|\Delta_{m},\theta\right)</annotation></semantics></math>. Given a set of data <math id="S2.SS2.p1.3.m3" class="ltx_Math" alttext="\{d\}_{i}" display="inline" intent=":literal"><semantics><msub><mrow><mo stretchy="false">{</mo><mi>d</mi><mo stretchy="false">}</mo></mrow><mi>i</mi></msub><annotation encoding="application/x-tex">\{d\}_{i}</annotation></semantics></math> corresponding to <math id="S2.SS2.p1.4.m4" class="ltx_Math" alttext="N_{\text{event}}" display="inline" intent=":literal"><semantics><msub><mi>N</mi><mtext>event</mtext></msub><annotation encoding="application/x-tex">N_{\text{event}}</annotation></semantics></math> events, the
+posterior on the parameters <math id="S2.SS2.p1.5.m5" class="ltx_Math" alttext="\Delta_{m}" display="inline" intent=":literal"><semantics><msub><mi mathvariant="normal">Δ</mi><mi>m</mi></msub><annotation encoding="application/x-tex">\Delta_{m}</annotation></semantics></math> is <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">dideronNewFrameworkStudy2023</span>]</cite></p>
+<table id="A0.EGx5" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.E5"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_eqn_cell"></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.E5.m1" class="ltx_Math" alttext="\displaystyle\mathcal{P}\left(\Delta_{m}|\{d\}_{i}\right)" display="inline" intent=":literal"><semantics><mrow><mi class="ltx_font_mathcaligraphic">𝒫</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mrow><msub><mi mathvariant="normal">Δ</mi><mi>m</mi></msub><mo fence="false">|</mo><msub><mrow><mo stretchy="false">{</mo><mi>d</mi><mo stretchy="false">}</mo></mrow><mi>i</mi></msub></mrow><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">\displaystyle\mathcal{P}\left(\Delta_{m}|\{d\}_{i}\right)</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(5)</span></td>
+</tr></tbody>
+<tbody id="S2.E6"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E6.m1" class="ltx_Math" alttext="\displaystyle\propto" display="inline" intent=":literal"><semantics><mo>∝</mo><annotation encoding="application/x-tex">\displaystyle\propto</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.E6.m2" class="ltx_Math" alttext="\displaystyle\pi\left(\Delta_{m}\right)\prod^{N_{\text{event}}}_{i=1}\prod^{N_{\text{det}}}_{I\neq J}\frac{\mathcal{L}\left(D^{IJ}_{i}|\Delta_{m}\right)}{\xi\left(\Delta_{m}\right)}" display="inline" intent=":literal"><semantics><mrow><mi>π</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><msub><mi mathvariant="normal">Δ</mi><mi>m</mi></msub><mo>)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∏</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><msub><mi>N</mi><mtext>event</mtext></msub></munderover></mstyle><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∏</mo><mrow><mi>I</mi><mo>≠</mo><mi>J</mi></mrow><msub><mi>N</mi><mtext>det</mtext></msub></munderover></mstyle><mstyle displaystyle="true"><mfrac><mrow><mi class="ltx_font_mathcaligraphic">ℒ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mrow><msubsup><mi>D</mi><mi>i</mi><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>J</mi></mrow></msubsup><mo fence="false">|</mo><msub><mi mathvariant="normal">Δ</mi><mi>m</mi></msub></mrow><mo>)</mo></mrow></mrow><mrow><mi>ξ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><msub><mi mathvariant="normal">Δ</mi><mi>m</mi></msub><mo>)</mo></mrow></mrow></mfrac></mstyle></mrow></mrow></mrow><annotation encoding="application/x-tex">\displaystyle\pi\left(\Delta_{m}\right)\prod^{N_{\text{event}}}_{i=1}\prod^{N_{\text{det}}}_{I\neq J}\frac{\mathcal{L}\left(D^{IJ}_{i}|\Delta_{m}\right)}{\xi\left(\Delta_{m}\right)}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(6)</span></td>
+</tr></tbody>
+<tbody id="S2.E7"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E7.m1" class="ltx_Math" alttext="\displaystyle\propto" display="inline" intent=":literal"><semantics><mo>∝</mo><annotation encoding="application/x-tex">\displaystyle\propto</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.E7.m2" class="ltx_Math" alttext="\displaystyle\pi\left(\Delta_{m}\right)\prod^{N_{\text{event}}}_{i=1}\prod^{N_{\text{det}}}_{I\neq J}\frac{\int d\theta\mathcal{L}\left(D^{IJ}_{i}|\theta,\Delta_{m}\right)\pi\left(\theta\right)}{\xi\left(\Delta_{m}\right)}" display="inline" intent=":literal"><semantics><mrow><mi>π</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><msub><mi mathvariant="normal">Δ</mi><mi>m</mi></msub><mo>)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∏</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><msub><mi>N</mi><mtext>event</mtext></msub></munderover></mstyle><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∏</mo><mrow><mi>I</mi><mo>≠</mo><mi>J</mi></mrow><msub><mi>N</mi><mtext>det</mtext></msub></munderover></mstyle><mstyle displaystyle="true"><mfrac><mrow><mo>∫</mo><mrow><mrow><mo lspace="0em" rspace="0em">𝑑</mo><mi>θ</mi></mrow><mo lspace="0em" rspace="0em">​</mo><mi class="ltx_font_mathcaligraphic">ℒ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mrow><msubsup><mi>D</mi><mi>i</mi><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>J</mi></mrow></msubsup><mo fence="false">|</mo><mrow><mi>θ</mi><mo>,</mo><msub><mi mathvariant="normal">Δ</mi><mi>m</mi></msub></mrow></mrow><mo>)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mi>π</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mi>θ</mi><mo>)</mo></mrow></mrow></mrow><mrow><mi>ξ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><msub><mi mathvariant="normal">Δ</mi><mi>m</mi></msub><mo>)</mo></mrow></mrow></mfrac></mstyle></mrow></mrow></mrow><annotation encoding="application/x-tex">\displaystyle\pi\left(\Delta_{m}\right)\prod^{N_{\text{event}}}_{i=1}\prod^{N_{\text{det}}}_{I\neq J}\frac{\int d\theta\mathcal{L}\left(D^{IJ}_{i}|\theta,\Delta_{m}\right)\pi\left(\theta\right)}{\xi\left(\Delta_{m}\right)}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(7)</span></td>
+</tr></tbody>
+<tbody id="S2.E8"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E8.m1" class="ltx_Math" alttext="\displaystyle\propto" display="inline" intent=":literal"><semantics><mo>∝</mo><annotation encoding="application/x-tex">\displaystyle\propto</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.E8.m2" class="ltx_Math" alttext="\displaystyle\pi\left(\Delta_{m}\right)\prod^{N_{\text{event}}}_{i=1}\prod^{N_{\text{det}}}_{I\neq J}\frac{\int d\theta d\beta\mathcal{L}\left(D^{IJ}_{i}|\theta,\beta\right)\pi\left(\beta|\theta,\Delta_{m}\right)\pi\left(\theta\right)}{\xi\left(\Delta_{m}\right)}," display="inline" intent=":literal"><semantics><mrow><mrow><mi>π</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><msub><mi mathvariant="normal">Δ</mi><mi>m</mi></msub><mo>)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∏</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><msub><mi>N</mi><mtext>event</mtext></msub></munderover></mstyle><mrow><mstyle displaystyle="true"><munderover><mo movablelimits="false">∏</mo><mrow><mi>I</mi><mo>≠</mo><mi>J</mi></mrow><msub><mi>N</mi><mtext>det</mtext></msub></munderover></mstyle><mstyle displaystyle="true"><mfrac><mrow><mo>∫</mo><mrow><mrow><mo lspace="0em" rspace="0em">𝑑</mo><mi>θ</mi></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo rspace="0em">𝑑</mo><mi>β</mi></mrow><mo lspace="0em" rspace="0em">​</mo><mi class="ltx_font_mathcaligraphic">ℒ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mrow><msubsup><mi>D</mi><mi>i</mi><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>J</mi></mrow></msubsup><mo fence="false">|</mo><mrow><mi>θ</mi><mo>,</mo><mi>β</mi></mrow></mrow><mo>)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mi>π</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mrow><mi>β</mi><mo fence="false">|</mo><mrow><mi>θ</mi><mo>,</mo><msub><mi mathvariant="normal">Δ</mi><mi>m</mi></msub></mrow></mrow><mo>)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mi>π</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mi>θ</mi><mo>)</mo></mrow></mrow></mrow><mrow><mi>ξ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><msub><mi mathvariant="normal">Δ</mi><mi>m</mi></msub><mo>)</mo></mrow></mrow></mfrac></mstyle></mrow></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\displaystyle\pi\left(\Delta_{m}\right)\prod^{N_{\text{event}}}_{i=1}\prod^{N_{\text{det}}}_{I\neq J}\frac{\int d\theta d\beta\mathcal{L}\left(D^{IJ}_{i}|\theta,\beta\right)\pi\left(\beta|\theta,\Delta_{m}\right)\pi\left(\theta\right)}{\xi\left(\Delta_{m}\right)},</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(8)</span></td>
+</tr></tbody>
+</table>
+<p id="S2.SS2.p1.13" class="ltx_p">where the <span title="" class="ltx_glossaryref">CRISP</span> <math id="S2.SS2.p1.6.m1" class="ltx_Math" alttext="D^{IJ}_{i}" display="inline" intent=":literal"><semantics><msubsup><mi>D</mi><mi>i</mi><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>J</mi></mrow></msubsup><annotation encoding="application/x-tex">D^{IJ}_{i}</annotation></semantics></math> is computed for each possible pair <math id="S2.SS2.p1.7.m2" class="ltx_Math" alttext="I" display="inline" intent=":literal"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>
+and <math id="S2.SS2.p1.8.m3" class="ltx_Math" alttext="J" display="inline" intent=":literal"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math> among the <math id="S2.SS2.p1.9.m4" class="ltx_Math" alttext="N_{\text{det}}" display="inline" intent=":literal"><semantics><msub><mi>N</mi><mtext>det</mtext></msub><annotation encoding="application/x-tex">N_{\text{det}}</annotation></semantics></math> detectors, for each event <math id="S2.SS2.p1.10.m5" class="ltx_Math" alttext="i" display="inline" intent=":literal"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>.
+The prior on the source parameters <math id="S2.SS2.p1.11.m6" class="ltx_Math" alttext="\pi\left(\theta\right)" display="inline" intent=":literal"><semantics><mrow><mi>π</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mi>θ</mi><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">\pi\left(\theta\right)</annotation></semantics></math> is obtained
+from previous parameter estimation.
+Finally, <math id="S2.SS2.p1.12.m7" class="ltx_Math" alttext="\xi" display="inline" intent=":literal"><semantics><mi>ξ</mi><annotation encoding="application/x-tex">\xi</annotation></semantics></math> is the proportion of events that are detected given the parameters
+<math id="S2.SS2.p1.13.m8" class="ltx_Math" alttext="\Delta_{m}" display="inline" intent=":literal"><semantics><msub><mi mathvariant="normal">Δ</mi><mi>m</mi></msub><annotation encoding="application/x-tex">\Delta_{m}</annotation></semantics></math>, and accounts for selection effects:</p>
+<table id="A0.EGx6" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.E9"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E9.m1" class="ltx_Math" alttext="\displaystyle\xi\left(\Delta_{M}\right)" display="inline" intent=":literal"><semantics><mrow><mi>ξ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><msub><mi mathvariant="normal">Δ</mi><mi>M</mi></msub><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">\displaystyle\xi\left(\Delta_{M}\right)</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.E9.m2" class="ltx_Math" alttext="\displaystyle=\int d\theta d\beta p\left(\text{detected}|\theta,\beta\right)\pi\left(\beta|\theta,\Delta_{M}\right)\pi\left(\theta\right)." display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>=</mo><mstyle displaystyle="true"><mrow><mo>∫</mo><mrow><mrow><mo lspace="0em" rspace="0em">𝑑</mo><mi>θ</mi></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo rspace="0em">𝑑</mo><mi>β</mi></mrow><mo lspace="0em" rspace="0em">​</mo><mi>p</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mrow><mtext>detected</mtext><mo fence="false">|</mo><mrow><mi>θ</mi><mo>,</mo><mi>β</mi></mrow></mrow><mo>)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mi>π</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mrow><mi>β</mi><mo fence="false">|</mo><mrow><mi>θ</mi><mo>,</mo><msub><mi mathvariant="normal">Δ</mi><mi>M</mi></msub></mrow></mrow><mo>)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mi>π</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mi>θ</mi><mo>)</mo></mrow></mrow></mrow></mstyle></mrow><mo lspace="0em">.</mo></mrow><annotation encoding="application/x-tex">\displaystyle=\int d\theta d\beta p\left(\text{detected}|\theta,\beta\right)\pi\left(\beta|\theta,\Delta_{M}\right)\pi\left(\theta\right).</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(9)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S2.SS2.p2" class="ltx_para">
+<p id="S2.SS2.p2.2" class="ltx_p">The <span title="" class="ltx_glossaryref">CRISP</span> likelihood <math id="S2.SS2.p2.1.m1" class="ltx_Math" alttext="\mathcal{L}\left(\{d^{I},d^{J}\}_{i}|\theta,\Delta_{m}\right)" display="inline" intent=":literal"><semantics><mrow><mi class="ltx_font_mathcaligraphic">ℒ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mrow><msub><mrow><mo stretchy="false">{</mo><msup><mi>d</mi><mi>I</mi></msup><mo>,</mo><msup><mi>d</mi><mi>J</mi></msup><mo stretchy="false">}</mo></mrow><mi>i</mi></msub><mo fence="false">|</mo><mrow><mi>θ</mi><mo>,</mo><msub><mi mathvariant="normal">Δ</mi><mi>m</mi></msub></mrow></mrow><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathcal{L}\left(\{d^{I},d^{J}\}_{i}|\theta,\Delta_{m}\right)</annotation></semantics></math> is more agnostic than a strain likelihood.
+The inference can further be freed of assumptions
+by using the Wiener filter of the deviation in place of the deviation parameter <math id="S2.SS2.p2.2.m2" class="ltx_Math" alttext="\beta" display="inline" intent=":literal"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>.
+We call such a search an <em id="S2.SS2.p2.2.1" class="ltx_emph ltx_font_italic">unmodeled search</em>, and describe it in the next
+section.</p>
+</div>
+</section>
+<section id="S2.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">II.3 </span>Unmodeled inference</h3>
+
+<div id="S2.SS3.p1" class="ltx_para">
+<p id="S2.SS3.p1.5" class="ltx_p">When evaluating the likelihood (<a href="#S2.E4" title="In II.1 Cross-correlated Residual Power ‣ II The SCoRe formalism ‣ Agnostically decoding gravitational wave model deficiencies in GWTC-3" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>) it is not necessary to assume a
+parametrised form for the deviation at the strain level, which provides the
+parameter <math id="S2.SS3.p1.1.m1" class="ltx_Math" alttext="\beta" display="inline" intent=":literal"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math> that measures the strength of the deviation from the model.
+Instead, we can measure the mean power spectrum over bins.
+For example, in <cite class="ltx_cite ltx_citemacro_cite">[<span class="ltx_ref ltx_missing_citation ltx_ref_self">dideronNewFrameworkStudy2023</span>]</cite>, we assume that the <span title="" class="ltx_glossaryref">CRISP</span> is “chirp-like” and increases close to merger.
+In such cases, <math id="S2.SS3.p1.2.m2" class="ltx_Math" alttext="Z(t)" display="inline" intent=":literal"><semantics><mrow><mi>Z</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">Z(t)</annotation></semantics></math> depends on the same parameters <math id="S2.SS3.p1.3.m3" class="ltx_Math" alttext="\theta" display="inline" intent=":literal"><semantics><mi>θ</mi><annotation encoding="application/x-tex">\theta</annotation></semantics></math> as the model.
+To measure the strength of the deviation, we cannot use <math id="S2.SS3.p1.4.m4" class="ltx_Math" alttext="\beta" display="inline" intent=":literal"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>,
+and instead measure the Wiener filter statistic <math id="S2.SS3.p1.5.m5" class="ltx_Math" alttext="\alpha" display="inline" intent=":literal"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>:</p>
+<table id="A0.EGx7" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.E10"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E10.m1" class="ltx_Math" alttext="\displaystyle\alpha" display="inline" intent=":literal"><semantics><mi>α</mi><annotation encoding="application/x-tex">\displaystyle\alpha</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.E10.m2" class="ltx_Math" alttext="\displaystyle:=\frac{\int dtD(t)Z(t;\theta)}{\sqrt{\int dt\mathrm{Var}D(t)Z(t;\theta)^{2}}}," display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>:=</mo><mstyle displaystyle="true"><mfrac><mrow><mo>∫</mo><mrow><mrow><mo lspace="0em" rspace="0em">𝑑</mo><mi>t</mi></mrow><mo lspace="0em" rspace="0em">​</mo><mi>D</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mi>Z</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo>;</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><msqrt><mrow><mo>∫</mo><mrow><mrow><mo lspace="0em" rspace="0em">𝑑</mo><mi>t</mi></mrow><mo lspace="0em" rspace="0em">​</mo><mi>Var</mi><mo lspace="0em" rspace="0em">​</mo><mi>D</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mi>Z</mi><mo lspace="0em" rspace="0em">​</mo><msup><mrow><mo stretchy="false">(</mo><mi>t</mi><mo>;</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow><mn>2</mn></msup></mrow></mrow></msqrt></mfrac></mstyle></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\displaystyle:=\frac{\int dtD(t)Z(t;\theta)}{\sqrt{\int dt\mathrm{Var}D(t)Z(t;\theta)^{2}}},</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(10)</span></td>
+</tr></tbody>
+</table>
+<p id="S2.SS3.p1.6" class="ltx_p">which is a measure of the <span title="" class="ltx_glossaryref">signal-to-noise ratio (SNR)</span>.</p>
+</div>
+<div id="S2.SS3.p2" class="ltx_para">
+<p id="S2.SS3.p2.5" class="ltx_p">The likelihood <math id="S2.SS3.p2.1.m1" class="ltx_Math" alttext="\mathcal{L}\left(\{d^{I},d^{J}\}_{i}|\theta,\Delta_{m}\right)" display="inline" intent=":literal"><semantics><mrow><mi class="ltx_font_mathcaligraphic">ℒ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mrow><msub><mrow><mo stretchy="false">{</mo><msup><mi>d</mi><mi>I</mi></msup><mo>,</mo><msup><mi>d</mi><mi>J</mi></msup><mo stretchy="false">}</mo></mrow><mi>i</mi></msub><mo fence="false">|</mo><mrow><mi>θ</mi><mo>,</mo><msub><mi mathvariant="normal">Δ</mi><mi>m</mi></msub></mrow></mrow><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathcal{L}\left(\{d^{I},d^{J}\}_{i}|\theta,\Delta_{m}\right)</annotation></semantics></math> is
+then marginalized over <math id="S2.SS3.p2.2.m2" class="ltx_Math" alttext="\alpha" display="inline" intent=":literal"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> rather than <math id="S2.SS3.p2.3.m3" class="ltx_Math" alttext="\beta" display="inline" intent=":literal"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>. The integration is
+trivial as <math id="S2.SS3.p2.4.m4" class="ltx_Math" alttext="\mathcal{L}\left(\{d^{I},d^{J}\}_{i}|\theta,\Delta_{m}\right)" display="inline" intent=":literal"><semantics><mrow><mi class="ltx_font_mathcaligraphic">ℒ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mrow><msub><mrow><mo stretchy="false">{</mo><msup><mi>d</mi><mi>I</mi></msup><mo>,</mo><msup><mi>d</mi><mi>J</mi></msup><mo stretchy="false">}</mo></mrow><mi>i</mi></msub><mo fence="false">|</mo><mrow><mi>θ</mi><mo>,</mo><msub><mi mathvariant="normal">Δ</mi><mi>m</mi></msub></mrow></mrow><mo>)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathcal{L}\left(\{d^{I},d^{J}\}_{i}|\theta,\Delta_{m}\right)</annotation></semantics></math> is a
+normalized Gaussian with mean <math id="S2.SS3.p2.5.m5" class="ltx_Math" alttext="\alpha" display="inline" intent=":literal"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> by definition of the <span title="" class="ltx_glossaryref">SNR</span>.</p>
+</div>
+<div id="S2.SS3.p3" class="ltx_para">
+<p id="S2.SS3.p3.5" class="ltx_p">An important point is that the <span title="" class="ltx_glossaryref">SNR</span> of an agnostic template will not
+necessarily scale with the power of the deviation. That is, <math id="S2.SS3.p3.1.m1" class="ltx_Math" alttext="\alpha" display="inline" intent=":literal"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> may not be
+proportional to <math id="S2.SS3.p3.2.m2" class="ltx_Math" alttext="\beta" display="inline" intent=":literal"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>.
+This is most easily seen in the extremum case: if <math id="S2.SS3.p3.3.m3" class="ltx_Math" alttext="Z(t)" display="inline" intent=":literal"><semantics><mrow><mi>Z</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">Z(t)</annotation></semantics></math> and the true deviation
+do not overlap in time, then <math id="S2.SS3.p3.4.m4" class="ltx_Math" alttext="\alpha" display="inline" intent=":literal"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> will always be zero regardless of the
+value of <math id="S2.SS3.p3.5.m5" class="ltx_Math" alttext="\beta" display="inline" intent=":literal"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>.</p>
+</div>
+<div id="S2.SS3.p4" class="ltx_para">
+<p id="S2.SS3.p4.4" class="ltx_p">An agnostic template <math id="S2.SS3.p4.1.m1" class="ltx_Math" alttext="Z(t)" display="inline" intent=":literal"><semantics><mrow><mi>Z</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">Z(t)</annotation></semantics></math> will only be sensitive to deviations with which it
+overlaps, and in the limit of a small deviation.
+To explain the last point, assume that we can decompose the cross-correlated residuals as a product of
+a time and a model-parameters dependent function <math id="S2.SS3.p4.2.m2" class="ltx_Math" alttext="F(t)" display="inline" intent=":literal"><semantics><mrow><mi>F</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">F(t)</annotation></semantics></math>, and a parameter <math id="S2.SS3.p4.3.m3" class="ltx_Math" alttext="\beta" display="inline" intent=":literal"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
+that measures the strength of the deviation from the model: <math id="S2.SS3.p4.4.m4" class="ltx_Math" alttext="D(t)=\beta^{2}(\theta)F(t)" display="inline" intent=":literal"><semantics><mrow><mrow><mi>D</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msup><mi>β</mi><mn>2</mn></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mi>F</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">D(t)=\beta^{2}(\theta)F(t)</annotation></semantics></math>.
+Then,</p>
+<table id="A0.EGx8" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S2.E11"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S2.E11.m1" class="ltx_Math" alttext="\displaystyle\alpha" display="inline" intent=":literal"><semantics><mi>α</mi><annotation encoding="application/x-tex">\displaystyle\alpha</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S2.E11.m2" class="ltx_Math" alttext="\displaystyle=\beta^{2}(\theta)\frac{\int dtF(t)Z(t;\theta)}{\sqrt{\int dt\mathrm{Var}D(t)Z(t;\theta)^{2}}}," display="inline" intent=":literal"><semantics><mrow><mrow><mi></mi><mo>=</mo><mrow><msup><mi>β</mi><mn>2</mn></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mstyle displaystyle="true"><mfrac><mrow><mo>∫</mo><mrow><mrow><mo lspace="0em" rspace="0em">𝑑</mo><mi>t</mi></mrow><mo lspace="0em" rspace="0em">​</mo><mi>F</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mi>Z</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo>;</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><msqrt><mrow><mo>∫</mo><mrow><mrow><mo lspace="0em" rspace="0em">𝑑</mo><mi>t</mi></mrow><mo lspace="0em" rspace="0em">​</mo><mi>Var</mi><mo lspace="0em" rspace="0em">​</mo><mi>D</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mi>Z</mi><mo lspace="0em" rspace="0em">​</mo><msup><mrow><mo stretchy="false">(</mo><mi>t</mi><mo>;</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow><mn>2</mn></msup></mrow></mrow></msqrt></mfrac></mstyle></mrow></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">\displaystyle=\beta^{2}(\theta)\frac{\int dtF(t)Z(t;\theta)}{\sqrt{\int dt\mathrm{Var}D(t)Z(t;\theta)^{2}}},</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(11)</span></td>
+</tr></tbody>
+</table>
+<p id="S2.SS3.p4.8" class="ltx_p">and we see that whether <math id="S2.SS3.p4.5.m1" class="ltx_Math" alttext="\alpha" display="inline" intent=":literal"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> scales with <math id="S2.SS3.p4.6.m2" class="ltx_Math" alttext="\beta" display="inline" intent=":literal"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math> depends on the
+noise-weighted overlap of the template <math id="S2.SS3.p4.7.m3" class="ltx_Math" alttext="Z(t;\theta)" display="inline" intent=":literal"><semantics><mrow><mi>Z</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo>;</mo><mi>θ</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">Z(t;\theta)</annotation></semantics></math> with the function <math id="S2.SS3.p4.8.m4" class="ltx_Math" alttext="F(t)" display="inline" intent=":literal"><semantics><mrow><mi>F</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">F(t)</annotation></semantics></math>.</p>
+</div>
+</section>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">III </span>Application of <span id="S3.2.1" class="ltx_text ltx_font_typewriter">SCoRe</span> on <span title="" class="ltx_glossaryref">GWTC-3</span>
+</h2>
+
+<figure id="S3.1" class="ltx_table">
+<p id="S3.1.1" class="ltx_p"><span id="S3.1.1.1" class="ltx_ERROR undefined">\__nicematrix_patch_booktabs:</span><span id="S3.1.1.2" class="ltx_ERROR undefined">\__nicematrix_revert_colortbl:</span></p>
+</figure>
+</section>
+</article>
+</div>
+</div>
+<footer class="arxiv-html-footer">
+  <div class="ltx_page_logo">
+    Experimental support, please
+    <a href="./2604.27185v1/__stdout.txt" class="ltx_ref"
+    target="_blank" rel="nofollow">view the build logs</a>
+    for errors. Generated by
+    <a href="https://math.nist.gov/~BMiller/LaTeXML/" target="_blank" class="ltx_ref ltx_LaTeXML_logo">
+      <span style="letter-spacing: -0.2em; margin-right: 0.1em;">
+        L
+        <span style="font-size: 70%; position: relative; bottom: 2.2pt;">A</span>
+        T
+        <span style="position: relative; bottom: -0.4ex;">E</span>
+      </span>
+      <span class="ltx_font_smallcaps">xml</span>
+      <img alt="[LOGO]"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==">
+    </a>.
+  </div>
+  <div class="keyboard-glossary">
+    <h2>Instructions for reporting errors</h2>
+    <p>We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+      support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+      methods listed below:</p>
+    <ul>
+      <li>Click the "Report Issue" <span class="mobile-only">(<svg role="presentation"
+            style="display: inline-block; vertical-align: middle; fill: var(--text-color);" aria-hidden="true"
+            height="1em" viewBox="0 0 640 640">
+            <path
+              d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+          </svg>)</span> button, located in the page header.</li>
+    </ul>
+    <p><strong>Tip:</strong> You can select the relevant text first, to include it in your report.</p>
+    <p>Our team has already identified <a class="ltx_ref" href="https://github.com/arXiv/html_feedback/issues"
+        target="_blank">the following issues</a>. We appreciate your time reviewing and reporting rendering errors we
+      may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+      should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+      all.</p>
+    <p>Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a <a
+        class="ltx_ref" href="https://github.com/brucemiller/LaTeXML/wiki/Porting-LaTeX-packages-for-LaTeXML"
+        target="_blank">list of packages that need conversion</a>, and welcome <a class="ltx_ref"
+        href="https://github.com/brucemiller/LaTeXML/issues" target="_blank">developer contributions</a>.</p>
+  </div>
+</footer>
+<div id="fixed-buttons-container">
+  <div id="beta-badge" aria-hidden="true">BETA</div>
+  <a id="disable-reading-mode-btn" class="header-button" href="javascript:toggleReadingMode();"
+    title="Disable reading mode, show header and footer">
+    <svg role="presentation" height="1.25rem"
+      viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </a>
+</div></body>
+</html>

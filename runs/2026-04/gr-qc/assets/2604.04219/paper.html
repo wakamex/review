@@ -1,0 +1,533 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>A Conformal Boundary Ansatz for Warm Inflation Initialization: A Toy Model</title>
+<!--Generated on Sun Apr  5 18:32:21 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="/static/browse/0.3.4/css/arxiv-html-papers-20260131.css" type="text/css">
+<script src="/static/browse/0.3.4/js/arxiv-html-papers-20260131.js"></script>
+<script>
+  // Restore the saved color scheme preference, or
+  // enact the browser preference if "automatic", 
+  // without expecting DOM load to have completed.
+  //
+  // Also restore any saved readingmode and ToC display preferences.
+  function initializeReadingPreferences() {
+    let saved_theme = localStorage.getItem("ar5iv_theme") || "automatic";
+    if (saved_theme === "automatic") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        saved_theme = "dark";
+      }
+    }
+    if (saved_theme == "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+
+    const tocDisplay = localStorage.getItem('arxiv_html_paper_toc_display');
+    if (tocDisplay) {
+      document.documentElement.setAttribute("data-toc-display", tocDisplay);
+    }
+    const readingMode = localStorage.getItem('arxiv_html_paper_reading_mode');
+    if (readingMode) {
+      document.documentElement.setAttribute("data-reading-mode", readingMode);
+    }
+  }
+  // Run as soon as JS starts, to minimize repainting
+  initializeReadingPreferences();
+</script>
+<link rel="apple-touch-icon" sizes="180x180"
+  href="/static/browse/0.3.4/images/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32"
+  href="/static/browse/0.3.4/images/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+  href="/static/browse/0.3.4/images/icons/favicon-16x16.png">
+<link rel="manifest" href="/static/browse/0.3.4/images/icons/site.webmanifest">
+<link rel="mask-icon" href="/static/browse/0.3.4/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="stylesheet" type="text/css" media="screen" href="https://use.typekit.net/utz6mli.css">
+</head>
+<body>
+<dialog id="modal-form" aria-labelledby="modal-title" closedby="any">
+  <form id="modal-form-content" method="dialog" enctype="multipart/form-data">
+    <header class="modal-header">
+      <h5 id="modal-title" class="modal-title">Report GitHub Issue</h5>
+      <button type="submit" formnovalidate class="modal-close" aria-label="Close">×</button>
+    </header>
+
+    <div class="modal-body">
+      <label for="form_title">Title:</label>
+      <input class="form-control" id="form_title" name="form_title" required placeholder="Enter title">
+
+      <p id="selectedTextModalDescription" hidden>Content selection saved. Describe the issue below:</p>
+
+      <label for="description">Description:</label>
+      <textarea class="form-control" id="description" name="description" required maxlength="500"
+        placeholder="500 characters maximum"></textarea>
+    </div>
+
+    <footer class="modal-footer">
+      <button type="submit" value="internal-report" class="sr-only modal-submit">Submit without GitHub</button>
+      <button type="submit" value="github-report" class="modal-submit">Submit in GitHub</button>
+    </footer>
+  </form>
+</dialog>
+
+<header class="arxiv-html-header">
+  <div class="html-header-logo">
+    <a href="/">
+      <img alt="arXiv logo" class="logo desktop-only" width="100"
+        src="/static/browse/0.3.4/images/arxiv-logo-one-color-white.svg">
+      <span class="sr-only">Back to arXiv</span>
+    </a>
+  </div>
+  <!--TOC, dark mode, links-->
+  <nav class="html-header-nav">
+    <a class="header-button hover-effect desktop-only" href="https://info.arxiv.org/about/accessible_HTML.html"
+      target="_blank">Why HTML?</a>
+    <a class="header-button" title="Report an Issue" href="#" title="Report an issue"
+      onclick="event.preventDefault(); showModalForm();">
+      <svg role="presentation" class="mobile-only toggle-icon" aria-hidden="true" height="1.25rem"
+        viewBox="0 0 640 640">
+        <path
+          d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+      </svg>
+      <span class="desktop-only">Report Issue</span></a>
+    <!--back to abstract-->
+    <a class="header-button" title="Back to abstract page" aria-label="Back to abstract page"
+      href="/abs/2604.04219v1">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 512 512" fill="#ffffff"
+        aria-hidden="true">
+        <path
+          d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z">
+        </path>
+      </svg>
+      <span class="desktop-only">Back to Abstract</span>
+    </a>
+    <!-- PDF download link -->
+    <a class="header-button" title="Download PDF" href="/pdf/2604.04219v1"
+      target="_blank">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 576 542">
+        <path
+          d="M208 48L96 48c-8.8 0-16 7.2-16 16l0 384c0 8.8 7.2 16 16 16l80 0 0 48-80 0c-35.3 0-64-28.7-64-64L32 64C32 28.7 60.7 0 96 0L229.5 0c17 0 33.3 6.7 45.3 18.7L397.3 141.3c12 12 18.7 28.3 18.7 45.3l0 149.5-48 0 0-128-88 0c-39.8 0-72-32.2-72-72l0-88zM348.1 160L256 67.9 256 136c0 13.3 10.7 24 24 24l68.1 0zM240 380l32 0c33.1 0 60 26.9 60 60s-26.9 60-60 60l-12 0 0 28c0 11-9 20-20 20s-20-9-20-20l0-128c0-11 9-20 20-20zm32 80c11 0 20-9 20-20s-9-20-20-20l-12 0 0 40 12 0zm96-80l32 0c28.7 0 52 23.3 52 52l0 64c0 28.7-23.3 52-52 52l-32 0c-11 0-20-9-20-20l0-128c0-11 9-20 20-20zm32 128c6.6 0 12-5.4 12-12l0-64c0-6.6-5.4-12-12-12l-12 0 0 88 12 0zm76-108c0-11 9-20 20-20l48 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 24 28 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 44c0 11-9 20-20 20s-20-9-20-20l0-128z" />
+      </svg>
+      <span class="desktop-only">Download PDF</span></a>
+    <!-- navigational table of contents toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleNavTOC();" title="Toggle navigation"
+      aria-label="Toggle navigation">
+      <svg height="1.25rem" role="presentation" viewBox="0 0 512 512">
+        <path
+          d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z">
+        </path>
+      </svg>
+    </a>
+    <!--- collapsable header / reading mode toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleReadingMode();"
+      title="Disable reading mode, show header and footer">
+      <svg role="presentation" height="1.25rem"
+        viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+        <path
+          d="M32 32C14.3 32 0 46.3 0 64l0 96c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 32zM64 352c0-17.7-14.3-32-32-32S0 334.3 0 352l0 96c0 17.7 14.3 32 32 32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0 0-64zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0 0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-96c0-17.7-14.3-32-32-32l-96 0zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l96 0c17.7 0 32-14.3 32-32l0-96z" />
+      </svg>
+    </a>
+    <!--- colored theme toggle -->
+    <button type="button" class="header-button color-tog" onclick="toggleColorScheme();" title="Toggle dark/light mode" aria-label="Toggle color scheme">
+      <span class="toggle-icon automatic-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon light-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon dark-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+    </button>
+  </nav>
+</header><nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_abstract"><a href="#abstract1" title="In A Conformal Boundary Ansatz for Warm Inflation Initialization: A Toy Model" class="ltx_ref"><span class="ltx_text ltx_ref_title">Abstract</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S1" title="In A Conformal Boundary Ansatz for Warm Inflation Initialization: A Toy Model" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S2" title="In A Conformal Boundary Ansatz for Warm Inflation Initialization: A Toy Model" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>The Conformal Boundary and Thermal Handoff</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S3" title="In A Conformal Boundary Ansatz for Warm Inflation Initialization: A Toy Model" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Symmetry Breaking and the Emergent Inflaton</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S4" title="In A Conformal Boundary Ansatz for Warm Inflation Initialization: A Toy Model" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>The Kinematic Handoff and Weak Dissipative Onset</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S5" title="In A Conformal Boundary Ansatz for Warm Inflation Initialization: A Toy Model" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Conclusion</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_bibliography"><a href="#bib" title="In A Conformal Boundary Ansatz for Warm Inflation Initialization: A Toy Model" class="ltx_ref"><span class="ltx_text ltx_ref_title">References</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div id="infobox" class="infobox">
+  <a id="license-tr" href="https://info.arxiv.org/help/license/index.html#licenses-available">
+    License: arXiv.org perpetual non-exclusive license
+  </a>
+  <div id="watermark-tr">
+arXiv:2604.04219v1 [gr-qc] 05 Apr 2026</div>
+</div><div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line">
+<h1 class="ltx_title ltx_font_bold ltx_title_document" style="font-size:90%;">A Conformal Boundary Ansatz for Warm Inflation Initialization: A Toy Model</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname"><span id="id1.1.id1" class="ltx_text" style="font-size:90%;">Somnath Das</span>
+</span><span class="ltx_author_notes"><span id="id2.2.id1" class="ltx_text" style="font-size:90%;">20phph12@uohyd.ac.in</span>
+<span class="ltx_contact ltx_role_affiliation"><span id="id3.3.id1" class="ltx_text" style="font-size:90%;">Department of Physics, University of Hyderabad, Hyderabad, India</span>
+</span></span></span>
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname"><span id="id4.1.id1" class="ltx_text" style="font-size:90%;">Rizwan ul Haq Ansari</span>
+</span><span class="ltx_author_notes"><span id="id5.2.id1" class="ltx_text" style="font-size:90%;">rizwanans@manuu.edu.in</span>
+<span class="ltx_contact ltx_role_affiliation"><span id="id6.3.id1" class="ltx_text" style="font-size:90%;">Physics Section, MANUU, Hyderabad, India</span>
+</span></span></span>
+</div>
+
+<div id="abstract1" class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p"><span class="ltx_text" style="font-size:90%;">We present a theoretical framework demonstrating a deterministic initialization mechanism for Warm Inflation via classical conformal boundary conditions. A persistent challenge in dissipative inflationary models is the ”cold start” paradox: initializing the requisite thermal bath to generate the dissipative friction that subsequently sustains radiation production. Postulating an idealized, asymptotically scale-invariant pre-inflationary phase, we mathematically prove that a conformal Weyl mapping to the emergent metric furnishes a finite, analytically derived initial radiation density. Implementing a spontaneous conformal symmetry-breaking ansatz, an emergent inflaton field is subjected to this inherited thermal bath. We analytically derive the initial kinematics of this framework, demonstrating that for strict sub-Planckian temperatures, the universe naturally initializes in the weak dissipative regime (</span><math class="ltx_Math" alttext="Q\ll 1" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em">Q</mi><mo mathsize="0.900em">≪</mo><mn mathsize="0.900em">1</mn></mrow><annotation encoding="application/x-tex">Q\ll 1</annotation></semantics></math><span class="ltx_text" style="font-size:90%;">). The initial Hubble friction provided by the boundary radiation enables a smooth, deterministic kinematic handoff to the warm slow-roll steady-state attractor. As a mathematical proof-of-concept, this mechanism provides a fully realized framework to bypass the bootstrap problem of warm inflation.</span></p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section" style="font-size:90%;">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p id="S1.p1.3" class="ltx_p"><span id="S1.p1.3.1" class="ltx_text" style="font-size:90%;">Inflationary cosmology resolves the shortcomings of the standard Big Bang model by positing an epoch of accelerated expansion </span><cite class="ltx_cite ltx_citemacro_cite"><span id="S1.p1.3.2.1" class="ltx_text" style="font-size:90%;">[</span><a href="#bib.bib1" title="" class="ltx_ref">1</a>, <a href="#bib.bib2" title="" class="ltx_ref">2</a><span id="S1.p1.3.3.2" class="ltx_text" style="font-size:90%;">]</span></cite><span id="S1.p1.3.4" class="ltx_text" style="font-size:90%;">. Warm inflation </span><cite class="ltx_cite ltx_citemacro_cite"><span id="S1.p1.3.5.1" class="ltx_text" style="font-size:90%;">[</span><a href="#bib.bib3" title="" class="ltx_ref">3</a>, <a href="#bib.bib4" title="" class="ltx_ref">4</a><span id="S1.p1.3.6.2" class="ltx_text" style="font-size:90%;">]</span></cite><span id="S1.p1.3.7" class="ltx_text" style="font-size:90%;"> extends this paradigm by incorporating a macroscopic dissipative friction term </span><math id="S1.p1.1.m1" class="ltx_Math" alttext="\Gamma(T,\phi)" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em" mathvariant="normal">Γ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">T</mi><mo mathsize="0.900em">,</mo><mi mathsize="0.900em">ϕ</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><annotation encoding="application/x-tex">\Gamma(T,\phi)</annotation></semantics></math><span id="S1.p1.3.8" class="ltx_text" style="font-size:90%;"> into the inflaton’s equation of motion. A well-known vulnerability of this framework is the dynamical initialization of the thermal bath. The continuous production of radiation relies on the inflaton rolling against thermal friction (</span><math id="S1.p1.2.m2" class="ltx_Math" alttext="\Gamma&gt;0" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em" mathvariant="normal">Γ</mi><mo mathsize="0.900em">&gt;</mo><mn mathsize="0.900em">0</mn></mrow><annotation encoding="application/x-tex">\Gamma&gt;0</annotation></semantics></math><span id="S1.p1.3.9" class="ltx_text" style="font-size:90%;">); however, this friction fundamentally requires an existing thermal bath (</span><math id="S1.p1.3.m3" class="ltx_Math" alttext="T&gt;0" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em">T</mi><mo mathsize="0.900em">&gt;</mo><mn mathsize="0.900em">0</mn></mrow><annotation encoding="application/x-tex">T&gt;0</annotation></semantics></math><span id="S1.p1.3.10" class="ltx_text" style="font-size:90%;">). To bootstrap this process, models often require assumed pre-thermalization epochs or specific initial quantum fluctuations.</span></p>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p id="S1.p2.1" class="ltx_p"><span id="S1.p2.1.1" class="ltx_text" style="font-size:90%;">In this work, we isolate and resolve this initialization paradox by constructing a phenomenological toy model. Motivated by theories of an asymptotically scale-invariant early universe, we treat the onset of inflation as a mathematical conformal boundary. While we remain agnostic to the underlying UV-complete quantum gravity mechanism, boundary conditions of this nature routinely emerge in frameworks such as holographic bulk-to-boundary mappings </span><cite class="ltx_cite ltx_citemacro_cite"><span id="S1.p2.1.2.1" class="ltx_text" style="font-size:90%;">[</span><a href="#bib.bib5" title="" class="ltx_ref">5</a><span id="S1.p2.1.3.2" class="ltx_text" style="font-size:90%;">]</span></cite><span id="S1.p2.1.4" class="ltx_text" style="font-size:90%;"> and Conformal Cyclic Cosmology </span><cite class="ltx_cite ltx_citemacro_cite"><span id="S1.p2.1.5.1" class="ltx_text" style="font-size:90%;">[</span><a href="#bib.bib6" title="" class="ltx_ref">6</a><span id="S1.p2.1.6.2" class="ltx_text" style="font-size:90%;">]</span></cite><span id="S1.p2.1.7" class="ltx_text" style="font-size:90%;">. We demonstrate that a Weyl transformation, mapping an idealized pre-state to the physical metric strictly guarantees a finite initial thermal bath. Furthermore, we evaluate the early-time kinematics, proving that this framework naturally yields a weak-dissipative kinematic handoff to the steady-state attractor, entirely independent of the specific effective potential </span><math id="S1.p2.1.m1" class="ltx_Math" alttext="V(\phi)" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em">V</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">ϕ</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><annotation encoding="application/x-tex">V(\phi)</annotation></semantics></math><span id="S1.p2.1.8" class="ltx_text" style="font-size:90%;">. We emphasize that this is a mathematical toy model designed to isolate the kinematic boundary conditions, offering a streamlined initialization framework for arbitrary warm inflationary potentials.</span></p>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section" style="font-size:90%;">
+<span class="ltx_tag ltx_tag_section">2 </span>The Conformal Boundary and Thermal Handoff</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p id="S2.p1.2" class="ltx_p"><span id="S2.p1.2.1" class="ltx_text" style="font-size:90%;">We define an idealized asymptotic pre-inflationary phase characterized entirely by conformally invariant fields, phenomenologically modeled as a pure radiation fluid. The metric of this pre-state is defined in conformal time </span><math id="S2.p1.1.m1" class="ltx_Math" alttext="\eta" display="inline" intent=":literal"><semantics><mi mathsize="0.900em">η</mi><annotation encoding="application/x-tex">\eta</annotation></semantics></math><span id="S2.p1.2.2" class="ltx_text" style="font-size:90%;"> as </span><math id="S2.p1.2.m2" class="ltx_Math" alttext="d\tilde{s}^{2}=\tilde{a}^{2}(\eta)(-d\eta^{2}+d\vec{x}^{2})" display="inline" intent=":literal"><semantics><mrow><mrow><mi mathsize="0.900em">d</mi><mo lspace="0em" rspace="0em">​</mo><msup><mover accent="true"><mi mathsize="0.900em">s</mi><mo mathsize="0.900em">~</mo></mover><mn mathsize="0.900em">2</mn></msup></mrow><mo mathsize="0.900em">=</mo><mrow><msup><mover accent="true"><mi mathsize="0.900em">a</mi><mo mathsize="0.900em">~</mo></mover><mn mathsize="0.900em">2</mn></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">η</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mrow><mrow><mo mathsize="0.900em">−</mo><mrow><mi mathsize="0.900em">d</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi mathsize="0.900em">η</mi><mn mathsize="0.900em">2</mn></msup></mrow></mrow><mo mathsize="0.900em">+</mo><mrow><mi mathsize="0.900em">d</mi><mo lspace="0em" rspace="0em">​</mo><msup><mover accent="true"><mi mathsize="0.900em">x</mi><mo mathsize="0.900em" stretchy="false">→</mo></mover><mn mathsize="0.900em">2</mn></msup></mrow></mrow><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">d\tilde{s}^{2}=\tilde{a}^{2}(\eta)(-d\eta^{2}+d\vec{x}^{2})</annotation></semantics></math><span id="S2.p1.2.3" class="ltx_text" style="font-size:90%;">.</span></p>
+</div>
+<div id="S2.p2" class="ltx_para">
+<p id="S2.p2.4" class="ltx_p"><span id="S2.p2.4.1" class="ltx_text ltx_font_bold" style="font-size:90%;">Assumption (Asymptotic Dilution):</span><span id="S2.p2.4.2" class="ltx_text" style="font-size:90%;"> The pre-state undergoes an unbounded expansion. The continuity equation for a conformal fluid dictates that the pre-state radiation density scales strictly as </span><math id="S2.p2.1.m1" class="ltx_Math" alttext="\tilde{\rho}_{r}=C/\tilde{a}^{4}" display="inline" intent=":literal"><semantics><mrow><msub><mover accent="true"><mi mathsize="0.900em">ρ</mi><mo mathsize="0.900em">~</mo></mover><mi mathsize="0.900em">r</mi></msub><mo mathsize="0.900em">=</mo><mrow><mi mathsize="0.900em">C</mi><mo maxsize="0.900em" minsize="0.900em" stretchy="true" symmetric="true">/</mo><msup><mover accent="true"><mi mathsize="0.900em">a</mi><mo mathsize="0.900em">~</mo></mover><mn mathsize="0.900em">4</mn></msup></mrow></mrow><annotation encoding="application/x-tex">\tilde{\rho}_{r}=C/\tilde{a}^{4}</annotation></semantics></math><span id="S2.p2.4.3" class="ltx_text" style="font-size:90%;">, where </span><math id="S2.p2.2.m2" class="ltx_Math" alttext="C" display="inline" intent=":literal"><semantics><mi mathsize="0.900em">C</mi><annotation encoding="application/x-tex">C</annotation></semantics></math><span id="S2.p2.4.4" class="ltx_text" style="font-size:90%;"> is a constant. In the asymptotic limit </span><math id="S2.p2.3.m3" class="ltx_Math" alttext="\tilde{a}(\eta)\to\infty" display="inline" intent=":literal"><semantics><mrow><mrow><mover accent="true"><mi mathsize="0.900em">a</mi><mo mathsize="0.900em">~</mo></mover><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">η</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em" stretchy="false">→</mo><mi mathsize="0.900em" mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">\tilde{a}(\eta)\to\infty</annotation></semantics></math><span id="S2.p2.4.5" class="ltx_text" style="font-size:90%;">, the physical energy density </span><math id="S2.p2.4.m4" class="ltx_Math" alttext="\tilde{\rho}_{r}\to 0" display="inline" intent=":literal"><semantics><mrow><msub><mover accent="true"><mi mathsize="0.900em">ρ</mi><mo mathsize="0.900em">~</mo></mover><mi mathsize="0.900em">r</mi></msub><mo mathsize="0.900em" stretchy="false">→</mo><mn mathsize="0.900em">0</mn></mrow><annotation encoding="application/x-tex">\tilde{\rho}_{r}\to 0</annotation></semantics></math><span id="S2.p2.4.6" class="ltx_text" style="font-size:90%;">.</span></p>
+</div>
+<div id="S2.p3" class="ltx_para">
+<p id="S2.p3.10" class="ltx_p"><span id="S2.p3.10.1" class="ltx_text ltx_font_bold" style="font-size:90%;">Ansatz 1 (The Weyl Boundary):</span><span id="S2.p3.10.2" class="ltx_text" style="font-size:90%;"> We define the onset of the universe via a conformal Weyl boundary condition at conformal time </span><math id="S2.p3.1.m1" class="ltx_Math" alttext="\eta_{W}" display="inline" intent=":literal"><semantics><msub><mi mathsize="0.900em">η</mi><mi mathsize="0.900em">W</mi></msub><annotation encoding="application/x-tex">\eta_{W}</annotation></semantics></math><span id="S2.p3.10.3" class="ltx_text" style="font-size:90%;">. To ensure a non-singular, non-trivial origin, we demand that the emergent physical energy density </span><math id="S2.p3.2.m2" class="ltx_Math" alttext="\rho_{r}" display="inline" intent=":literal"><semantics><msub><mi mathsize="0.900em">ρ</mi><mi mathsize="0.900em">r</mi></msub><annotation encoding="application/x-tex">\rho_{r}</annotation></semantics></math><span id="S2.p3.10.4" class="ltx_text" style="font-size:90%;"> approaches a finite, non-zero constant as the pre-state asymptotically expands (</span><math id="S2.p3.3.m3" class="ltx_Math" alttext="\tilde{a}\to\infty" display="inline" intent=":literal"><semantics><mrow><mover accent="true"><mi mathsize="0.900em">a</mi><mo mathsize="0.900em">~</mo></mover><mo mathsize="0.900em" stretchy="false">→</mo><mi mathsize="0.900em" mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">\tilde{a}\to\infty</annotation></semantics></math><span id="S2.p3.10.5" class="ltx_text" style="font-size:90%;">). Because the physical density transforms as </span><math id="S2.p3.4.m4" class="ltx_Math" alttext="\rho_{r}=\Omega^{-4}\tilde{\rho}_{r}" display="inline" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">ρ</mi><mi mathsize="0.900em">r</mi></msub><mo mathsize="0.900em">=</mo><mrow><msup><mi mathsize="0.900em" mathvariant="normal">Ω</mi><mrow><mo mathsize="0.900em">−</mo><mn mathsize="0.900em">4</mn></mrow></msup><mo lspace="0em" rspace="0em">​</mo><msub><mover accent="true"><mi mathsize="0.900em">ρ</mi><mo mathsize="0.900em">~</mo></mover><mi mathsize="0.900em">r</mi></msub></mrow></mrow><annotation encoding="application/x-tex">\rho_{r}=\Omega^{-4}\tilde{\rho}_{r}</annotation></semantics></math><span id="S2.p3.10.6" class="ltx_text" style="font-size:90%;">, and the pre-state density scales as </span><math id="S2.p3.5.m5" class="ltx_Math" alttext="\tilde{\rho}_{r}=C/\tilde{a}^{4}" display="inline" intent=":literal"><semantics><mrow><msub><mover accent="true"><mi mathsize="0.900em">ρ</mi><mo mathsize="0.900em">~</mo></mover><mi mathsize="0.900em">r</mi></msub><mo mathsize="0.900em">=</mo><mrow><mi mathsize="0.900em">C</mi><mo maxsize="0.900em" minsize="0.900em" stretchy="true" symmetric="true">/</mo><msup><mover accent="true"><mi mathsize="0.900em">a</mi><mo mathsize="0.900em">~</mo></mover><mn mathsize="0.900em">4</mn></msup></mrow></mrow><annotation encoding="application/x-tex">\tilde{\rho}_{r}=C/\tilde{a}^{4}</annotation></semantics></math><span id="S2.p3.10.7" class="ltx_text" style="font-size:90%;">, any conformal mapping scaling as </span><math id="S2.p3.6.m6" class="ltx_Math" alttext="\Omega\propto\tilde{a}^{-n}" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em" mathvariant="normal">Ω</mi><mo mathsize="0.900em">∝</mo><msup><mover accent="true"><mi mathsize="0.900em">a</mi><mo mathsize="0.900em">~</mo></mover><mrow><mo mathsize="0.900em">−</mo><mi mathsize="0.900em">n</mi></mrow></msup></mrow><annotation encoding="application/x-tex">\Omega\propto\tilde{a}^{-n}</annotation></semantics></math><span id="S2.p3.10.8" class="ltx_text" style="font-size:90%;"> where </span><math id="S2.p3.7.m7" class="ltx_Math" alttext="n&lt;1" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em">n</mi><mo mathsize="0.900em">&lt;</mo><mn mathsize="0.900em">1</mn></mrow><annotation encoding="application/x-tex">n&lt;1</annotation></semantics></math><span id="S2.p3.10.9" class="ltx_text" style="font-size:90%;"> yields an empty vacuum (</span><math id="S2.p3.8.m8" class="ltx_Math" alttext="\rho_{r}\to 0" display="inline" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">ρ</mi><mi mathsize="0.900em">r</mi></msub><mo mathsize="0.900em" stretchy="false">→</mo><mn mathsize="0.900em">0</mn></mrow><annotation encoding="application/x-tex">\rho_{r}\to 0</annotation></semantics></math><span id="S2.p3.10.10" class="ltx_text" style="font-size:90%;">), while </span><math id="S2.p3.9.m9" class="ltx_Math" alttext="n&gt;1" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em">n</mi><mo mathsize="0.900em">&gt;</mo><mn mathsize="0.900em">1</mn></mrow><annotation encoding="application/x-tex">n&gt;1</annotation></semantics></math><span id="S2.p3.10.11" class="ltx_text" style="font-size:90%;"> generates a physical singularity (</span><math id="S2.p3.10.m10" class="ltx_Math" alttext="\rho_{r}\to\infty" display="inline" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">ρ</mi><mi mathsize="0.900em">r</mi></msub><mo mathsize="0.900em" stretchy="false">→</mo><mi mathsize="0.900em" mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">\rho_{r}\to\infty</annotation></semantics></math><span id="S2.p3.10.12" class="ltx_text" style="font-size:90%;">). Therefore, satisfying this finiteness condition mathematically restricts the conformal factor to a unique scaling within the class of power-law mappings:</span></p>
+<table id="S2.E1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.E1.m1" class="ltx_Math" alttext="g_{\mu\nu}(x)=\Omega^{2}(\eta)\tilde{g}_{\mu\nu}(x)" display="block" intent=":literal"><semantics><mrow><mrow><msub><mi mathsize="0.900em">g</mi><mrow><mi mathsize="0.900em">μ</mi><mo lspace="0em" rspace="0em">​</mo><mi mathsize="0.900em">ν</mi></mrow></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">x</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">=</mo><mrow><msup><mi mathsize="0.900em" mathvariant="normal">Ω</mi><mn mathsize="0.900em">2</mn></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">η</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><msub><mover accent="true"><mi mathsize="0.900em">g</mi><mo mathsize="0.900em">~</mo></mover><mrow><mi mathsize="0.900em">μ</mi><mo lspace="0em" rspace="0em">​</mo><mi mathsize="0.900em">ν</mi></mrow></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">x</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">g_{\mu\nu}(x)=\Omega^{2}(\eta)\tilde{g}_{\mu\nu}(x)</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+<p id="S2.p3.14" class="ltx_p"><span id="S2.p3.14.1" class="ltx_text" style="font-size:90%;">where </span><math id="S2.p3.11.m1" class="ltx_Math" alttext="\Omega(\eta)\propto\tilde{a}^{-1}(\eta)" display="inline" intent=":literal"><semantics><mrow><mrow><mi mathsize="0.900em" mathvariant="normal">Ω</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">η</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">∝</mo><mrow><msup><mover accent="true"><mi mathsize="0.900em">a</mi><mo mathsize="0.900em">~</mo></mover><mrow><mo mathsize="0.900em">−</mo><mn mathsize="0.900em">1</mn></mrow></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">η</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">\Omega(\eta)\propto\tilde{a}^{-1}(\eta)</annotation></semantics></math><span id="S2.p3.14.2" class="ltx_text" style="font-size:90%;">. We set the proportionality constant to unity for simplicity. Consequently, as </span><math id="S2.p3.12.m2" class="ltx_Math" alttext="\eta\to\eta_{W}" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em">η</mi><mo mathsize="0.900em" stretchy="false">→</mo><msub><mi mathsize="0.900em">η</mi><mi mathsize="0.900em">W</mi></msub></mrow><annotation encoding="application/x-tex">\eta\to\eta_{W}</annotation></semantics></math><span id="S2.p3.14.3" class="ltx_text" style="font-size:90%;"> and </span><math id="S2.p3.13.m3" class="ltx_Math" alttext="\tilde{a}(\eta)\to\infty" display="inline" intent=":literal"><semantics><mrow><mrow><mover accent="true"><mi mathsize="0.900em">a</mi><mo mathsize="0.900em">~</mo></mover><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">η</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em" stretchy="false">→</mo><mi mathsize="0.900em" mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">\tilde{a}(\eta)\to\infty</annotation></semantics></math><span id="S2.p3.14.4" class="ltx_text" style="font-size:90%;">, the conformal factor </span><math id="S2.p3.14.m4" class="ltx_Math" alttext="\Omega(\eta)\to 0" display="inline" intent=":literal"><semantics><mrow><mrow><mi mathsize="0.900em" mathvariant="normal">Ω</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">η</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em" stretchy="false">→</mo><mn mathsize="0.900em">0</mn></mrow><annotation encoding="application/x-tex">\Omega(\eta)\to 0</annotation></semantics></math><span id="S2.p3.14.5" class="ltx_text" style="font-size:90%;">.</span></p>
+</div>
+<div id="S2.p4" class="ltx_para">
+<p id="S2.p4.1" class="ltx_p"><span id="S2.p4.1.1" class="ltx_text ltx_font_bold" style="font-size:90%;">Theorem (Finiteness of Initial Radiation):</span><span id="S2.p4.1.2" class="ltx_text" style="font-size:90%;"> </span><span id="S2.p4.1.3" class="ltx_text ltx_font_italic" style="font-size:90%;">A traceless conformal fluid subject to the boundary condition defined in Eq. (<a href="#S2.E1" title="In 2 The Conformal Boundary and Thermal Handoff ‣ A Conformal Boundary Ansatz for Warm Inflation Initialization: A Toy Model" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>) yields a strictly finite, non-zero physical energy density in the emergent metric.</span><span id="S2.p4.1.4" class="ltx_text" style="font-size:90%;"></span></p>
+</div>
+<div id="S2.p5" class="ltx_para">
+<p id="S2.p5.6" class="ltx_p"><span id="S2.p5.6.1" class="ltx_text ltx_font_italic" style="font-size:90%;">Proof.</span><span id="S2.p5.6.2" class="ltx_text" style="font-size:90%;"> The stress-energy tensor for a perfect fluid is </span><math id="S2.p5.1.m1" class="ltx_Math" alttext="T_{\mu\nu}=(\rho+p)u_{\mu}u_{\nu}+pg_{\mu\nu}" display="inline" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">T</mi><mrow><mi mathsize="0.900em">μ</mi><mo lspace="0em" rspace="0em">​</mo><mi mathsize="0.900em">ν</mi></mrow></msub><mo mathsize="0.900em">=</mo><mrow><mrow><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mrow><mi mathsize="0.900em">ρ</mi><mo mathsize="0.900em">+</mo><mi mathsize="0.900em">p</mi></mrow><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><msub><mi mathsize="0.900em">u</mi><mi mathsize="0.900em">μ</mi></msub><mo lspace="0em" rspace="0em">​</mo><msub><mi mathsize="0.900em">u</mi><mi mathsize="0.900em">ν</mi></msub></mrow><mo mathsize="0.900em">+</mo><mrow><mi mathsize="0.900em">p</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi mathsize="0.900em">g</mi><mrow><mi mathsize="0.900em">μ</mi><mo lspace="0em" rspace="0em">​</mo><mi mathsize="0.900em">ν</mi></mrow></msub></mrow></mrow></mrow><annotation encoding="application/x-tex">T_{\mu\nu}=(\rho+p)u_{\mu}u_{\nu}+pg_{\mu\nu}</annotation></semantics></math><span id="S2.p5.6.3" class="ltx_text" style="font-size:90%;">. For pure radiation (equation of state </span><math id="S2.p5.2.m2" class="ltx_Math" alttext="p=\rho/3" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em">p</mi><mo mathsize="0.900em">=</mo><mrow><mi mathsize="0.900em">ρ</mi><mo maxsize="0.900em" minsize="0.900em" stretchy="true" symmetric="true">/</mo><mn mathsize="0.900em">3</mn></mrow></mrow><annotation encoding="application/x-tex">p=\rho/3</annotation></semantics></math><span id="S2.p5.6.4" class="ltx_text" style="font-size:90%;">), the trace vanishes, </span><math id="S2.p5.3.m3" class="ltx_Math" alttext="T^{\mu}_{\mu}=0" display="inline" intent=":literal"><semantics><mrow><msubsup><mi mathsize="0.900em">T</mi><mi mathsize="0.900em">μ</mi><mi mathsize="0.900em">μ</mi></msubsup><mo mathsize="0.900em">=</mo><mn mathsize="0.900em">0</mn></mrow><annotation encoding="application/x-tex">T^{\mu}_{\mu}=0</annotation></semantics></math><span id="S2.p5.6.5" class="ltx_text" style="font-size:90%;">, reflecting its strict conformal invariance </span><cite class="ltx_cite ltx_citemacro_cite"><span id="S2.p5.6.6.1" class="ltx_text" style="font-size:90%;">[</span><a href="#bib.bib7" title="" class="ltx_ref">7</a><span id="S2.p5.6.7.2" class="ltx_text" style="font-size:90%;">]</span></cite><span id="S2.p5.6.8" class="ltx_text" style="font-size:90%;">. Under the Weyl transformation </span><math id="S2.p5.4.m4" class="ltx_Math" alttext="g_{\mu\nu}=\Omega^{2}\tilde{g}_{\mu\nu}" display="inline" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">g</mi><mrow><mi mathsize="0.900em">μ</mi><mo lspace="0em" rspace="0em">​</mo><mi mathsize="0.900em">ν</mi></mrow></msub><mo mathsize="0.900em">=</mo><mrow><msup><mi mathsize="0.900em" mathvariant="normal">Ω</mi><mn mathsize="0.900em">2</mn></msup><mo lspace="0em" rspace="0em">​</mo><msub><mover accent="true"><mi mathsize="0.900em">g</mi><mo mathsize="0.900em">~</mo></mover><mrow><mi mathsize="0.900em">μ</mi><mo lspace="0em" rspace="0em">​</mo><mi mathsize="0.900em">ν</mi></mrow></msub></mrow></mrow><annotation encoding="application/x-tex">g_{\mu\nu}=\Omega^{2}\tilde{g}_{\mu\nu}</annotation></semantics></math><span id="S2.p5.6.9" class="ltx_text" style="font-size:90%;">, a mixed, trace-free stress-energy tensor transforms as </span><math id="S2.p5.5.m5" class="ltx_Math" alttext="T^{\mu}_{\nu}=\Omega^{-4}\tilde{T}^{\mu}_{\nu}" display="inline" intent=":literal"><semantics><mrow><msubsup><mi mathsize="0.900em">T</mi><mi mathsize="0.900em">ν</mi><mi mathsize="0.900em">μ</mi></msubsup><mo mathsize="0.900em">=</mo><mrow><msup><mi mathsize="0.900em" mathvariant="normal">Ω</mi><mrow><mo mathsize="0.900em">−</mo><mn mathsize="0.900em">4</mn></mrow></msup><mo lspace="0em" rspace="0em">​</mo><msubsup><mover accent="true"><mi mathsize="0.900em">T</mi><mo mathsize="0.900em">~</mo></mover><mi mathsize="0.900em">ν</mi><mi mathsize="0.900em">μ</mi></msubsup></mrow></mrow><annotation encoding="application/x-tex">T^{\mu}_{\nu}=\Omega^{-4}\tilde{T}^{\mu}_{\nu}</annotation></semantics></math><span id="S2.p5.6.10" class="ltx_text" style="font-size:90%;"> </span><cite class="ltx_cite ltx_citemacro_cite"><span id="S2.p5.6.11.1" class="ltx_text" style="font-size:90%;">[</span><a href="#bib.bib8" title="" class="ltx_ref">8</a><span id="S2.p5.6.12.2" class="ltx_text" style="font-size:90%;">]</span></cite><span id="S2.p5.6.13" class="ltx_text" style="font-size:90%;">. The physical energy density in the emergent metric, measured by a comoving observer with 4-velocity </span><math id="S2.p5.6.m6" class="ltx_Math" alttext="u^{\mu}=\Omega^{-1}\tilde{u}^{\mu}" display="inline" intent=":literal"><semantics><mrow><msup><mi mathsize="0.900em">u</mi><mi mathsize="0.900em">μ</mi></msup><mo mathsize="0.900em">=</mo><mrow><msup><mi mathsize="0.900em" mathvariant="normal">Ω</mi><mrow><mo mathsize="0.900em">−</mo><mn mathsize="0.900em">1</mn></mrow></msup><mo lspace="0em" rspace="0em">​</mo><msup><mover accent="true"><mi mathsize="0.900em">u</mi><mo mathsize="0.900em">~</mo></mover><mi mathsize="0.900em">μ</mi></msup></mrow></mrow><annotation encoding="application/x-tex">u^{\mu}=\Omega^{-1}\tilde{u}^{\mu}</annotation></semantics></math><span id="S2.p5.6.14" class="ltx_text" style="font-size:90%;">, evaluates explicitly to:</span></p>
+<table id="S2.E2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.E2.m1" class="ltx_Math" alttext="\rho_{r}=-T^{0}_{0}=-\Omega^{-4}\tilde{T}^{0}_{0}=\Omega^{-4}\tilde{\rho}_{r}" display="block" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">ρ</mi><mi mathsize="0.900em">r</mi></msub><mo mathsize="0.900em">=</mo><mrow><mo mathsize="0.900em">−</mo><msubsup><mi mathsize="0.900em">T</mi><mn mathsize="0.900em">0</mn><mn mathsize="0.900em">0</mn></msubsup></mrow><mo mathsize="0.900em">=</mo><mrow><mo mathsize="0.900em">−</mo><mrow><msup><mi mathsize="0.900em" mathvariant="normal">Ω</mi><mrow><mo mathsize="0.900em">−</mo><mn mathsize="0.900em">4</mn></mrow></msup><mo lspace="0em" rspace="0em">​</mo><msubsup><mover accent="true"><mi mathsize="0.900em">T</mi><mo mathsize="0.900em">~</mo></mover><mn mathsize="0.900em">0</mn><mn mathsize="0.900em">0</mn></msubsup></mrow></mrow><mo mathsize="0.900em">=</mo><mrow><msup><mi mathsize="0.900em" mathvariant="normal">Ω</mi><mrow><mo mathsize="0.900em">−</mo><mn mathsize="0.900em">4</mn></mrow></msup><mo lspace="0em" rspace="0em">​</mo><msub><mover accent="true"><mi mathsize="0.900em">ρ</mi><mo mathsize="0.900em">~</mo></mover><mi mathsize="0.900em">r</mi></msub></mrow></mrow><annotation encoding="application/x-tex">\rho_{r}=-T^{0}_{0}=-\Omega^{-4}\tilde{T}^{0}_{0}=\Omega^{-4}\tilde{\rho}_{r}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+</table>
+<p id="S2.p5.8" class="ltx_p"><span id="S2.p5.8.1" class="ltx_text" style="font-size:90%;">Substituting the dilution scaling </span><math id="S2.p5.7.m1" class="ltx_Math" alttext="\tilde{\rho}_{r}=C/\tilde{a}^{4}(\eta)" display="inline" intent=":literal"><semantics><mrow><msub><mover accent="true"><mi mathsize="0.900em">ρ</mi><mo mathsize="0.900em">~</mo></mover><mi mathsize="0.900em">r</mi></msub><mo mathsize="0.900em">=</mo><mrow><mrow><mi mathsize="0.900em">C</mi><mo maxsize="0.900em" minsize="0.900em" stretchy="true" symmetric="true">/</mo><msup><mover accent="true"><mi mathsize="0.900em">a</mi><mo mathsize="0.900em">~</mo></mover><mn mathsize="0.900em">4</mn></msup></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">η</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">\tilde{\rho}_{r}=C/\tilde{a}^{4}(\eta)</annotation></semantics></math><span id="S2.p5.8.2" class="ltx_text" style="font-size:90%;"> and the defined conformal factor </span><math id="S2.p5.8.m2" class="ltx_Math" alttext="\Omega(\eta)=\tilde{a}^{-1}(\eta)" display="inline" intent=":literal"><semantics><mrow><mrow><mi mathsize="0.900em" mathvariant="normal">Ω</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">η</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">=</mo><mrow><msup><mover accent="true"><mi mathsize="0.900em">a</mi><mo mathsize="0.900em">~</mo></mover><mrow><mo mathsize="0.900em">−</mo><mn mathsize="0.900em">1</mn></mrow></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">η</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">\Omega(\eta)=\tilde{a}^{-1}(\eta)</annotation></semantics></math><span id="S2.p5.8.3" class="ltx_text" style="font-size:90%;">:</span></p>
+<table id="S2.E3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.E3.m1" class="ltx_Math" alttext="\rho_{r}(\eta)=\left[\tilde{a}(\eta)\right]^{4}\left[\frac{C}{\tilde{a}^{4}(\eta)}\right]=C\equiv\rho_{r,0}" display="block" intent=":literal"><semantics><mrow><mrow><msub><mi mathsize="0.900em">ρ</mi><mi mathsize="0.900em">r</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">η</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">=</mo><mrow><msup><mrow><mo>[</mo><mrow><mover accent="true"><mi mathsize="0.900em">a</mi><mo mathsize="0.900em">~</mo></mover><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">η</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo>]</mo></mrow><mn mathsize="0.900em">4</mn></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo>[</mo><mfrac><mi mathsize="0.900em">C</mi><mrow><msup><mover accent="true"><mi mathsize="0.900em">a</mi><mo mathsize="0.900em">~</mo></mover><mn mathsize="0.900em">4</mn></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">η</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mfrac><mo>]</mo></mrow></mrow><mo mathsize="0.900em">=</mo><mi mathsize="0.900em">C</mi><mo mathsize="0.900em">≡</mo><msub><mi mathsize="0.900em">ρ</mi><mrow><mi mathsize="0.900em">r</mi><mo mathsize="0.900em">,</mo><mn mathsize="0.900em">0</mn></mrow></msub></mrow><annotation encoding="application/x-tex">\rho_{r}(\eta)=\left[\tilde{a}(\eta)\right]^{4}\left[\frac{C}{\tilde{a}^{4}(\eta)}\right]=C\equiv\rho_{r,0}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(3)</span></td>
+</tr></tbody>
+</table>
+<p id="S2.p5.10" class="ltx_p"><span id="S2.p5.10.1" class="ltx_text" style="font-size:90%;">The infinite geometric dilution of the pre-state is algebraically cancelled by the conformal mapping weight. Taking the limit </span><math id="S2.p5.9.m1" class="ltx_Math" alttext="\eta\to\eta_{W}" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em">η</mi><mo mathsize="0.900em" stretchy="false">→</mo><msub><mi mathsize="0.900em">η</mi><mi mathsize="0.900em">W</mi></msub></mrow><annotation encoding="application/x-tex">\eta\to\eta_{W}</annotation></semantics></math><span id="S2.p5.10.2" class="ltx_text" style="font-size:90%;">, the physical metric strictly inherits a finite, constant radiation density </span><math id="S2.p5.10.m2" class="ltx_Math" alttext="\rho_{r,0}" display="inline" intent=":literal"><semantics><msub><mi mathsize="0.900em">ρ</mi><mrow><mi mathsize="0.900em">r</mi><mo mathsize="0.900em">,</mo><mn mathsize="0.900em">0</mn></mrow></msub><annotation encoding="application/x-tex">\rho_{r,0}</annotation></semantics></math><span id="S2.p5.10.3" class="ltx_text" style="font-size:90%;">.</span></p>
+</div>
+<div id="S2.p6" class="ltx_para">
+<p id="S2.p6.3" class="ltx_p"><span id="S2.p6.3.1" class="ltx_text" style="font-size:90%;">While a formal derivation of thermal equilibrium requires explicit microphysical scattering amplitudes (which fall outside the scope of this kinematic framework), we assume instantaneous local thermalization—a standard approximation at high-energy, sub-Planckian scales where gauge interaction rates typically vastly exceed the Hubble rate (</span><math id="S2.p6.1.m1" class="ltx_Math" alttext="\Gamma_{\text{scatter}}\gg H" display="inline" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em" mathvariant="normal">Γ</mi><mtext mathsize="0.900em">scatter</mtext></msub><mo mathsize="0.900em">≫</mo><mi mathsize="0.900em">H</mi></mrow><annotation encoding="application/x-tex">\Gamma_{\text{scatter}}\gg H</annotation></semantics></math><span id="S2.p6.3.2" class="ltx_text" style="font-size:90%;">). Therefore, this inherited constant energy density </span><math id="S2.p6.2.m2" class="ltx_Math" alttext="\rho_{r,0}" display="inline" intent=":literal"><semantics><msub><mi mathsize="0.900em">ρ</mi><mrow><mi mathsize="0.900em">r</mi><mo mathsize="0.900em">,</mo><mn mathsize="0.900em">0</mn></mrow></msub><annotation encoding="application/x-tex">\rho_{r,0}</annotation></semantics></math><span id="S2.p6.3.3" class="ltx_text" style="font-size:90%;"> directly defines an initial temperature via the standard relativistic thermodynamic relation </span><math id="S2.p6.3.m3" class="ltx_Math" alttext="\rho_{r,0}=\frac{\pi^{2}}{30}g_{*}T_{\text{init}}^{4}" display="inline" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">ρ</mi><mrow><mi mathsize="0.900em">r</mi><mo mathsize="0.900em">,</mo><mn mathsize="0.900em">0</mn></mrow></msub><mo mathsize="0.900em">=</mo><mrow><mfrac><msup><mi mathsize="0.900em">π</mi><mn mathsize="0.900em">2</mn></msup><mn mathsize="0.900em">30</mn></mfrac><mo lspace="0em" rspace="0em">​</mo><msub><mi mathsize="0.900em">g</mi><mo mathsize="0.900em">∗</mo></msub><mo lspace="0em" rspace="0em">​</mo><msubsup><mi mathsize="0.900em">T</mi><mtext mathsize="0.900em">init</mtext><mn mathsize="0.900em">4</mn></msubsup></mrow></mrow><annotation encoding="application/x-tex">\rho_{r,0}=\frac{\pi^{2}}{30}g_{*}T_{\text{init}}^{4}</annotation></semantics></math><span id="S2.p6.3.4" class="ltx_text" style="font-size:90%;">. Consequently, the conformal boundary naturally furnishes the initial temperature:</span></p>
+<table id="S2.E4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.E4.m1" class="ltx_Math" alttext="T_{\text{init}}=\left(\frac{30\rho_{r,0}}{\pi^{2}g_{*}}\right)^{1/4}" display="block" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">T</mi><mtext mathsize="0.900em">init</mtext></msub><mo mathsize="0.900em">=</mo><msup><mrow><mo>(</mo><mfrac><mrow><mn mathsize="0.900em">30</mn><mo lspace="0em" rspace="0em">​</mo><msub><mi mathsize="0.900em">ρ</mi><mrow><mi mathsize="0.900em">r</mi><mo mathsize="0.900em">,</mo><mn mathsize="0.900em">0</mn></mrow></msub></mrow><mrow><msup><mi mathsize="0.900em">π</mi><mn mathsize="0.900em">2</mn></msup><mo lspace="0em" rspace="0em">​</mo><msub><mi mathsize="0.900em">g</mi><mo mathsize="0.900em">∗</mo></msub></mrow></mfrac><mo>)</mo></mrow><mrow><mn mathsize="0.900em">1</mn><mo maxsize="0.900em" minsize="0.900em" stretchy="true" symmetric="true">/</mo><mn mathsize="0.900em">4</mn></mrow></msup></mrow><annotation encoding="application/x-tex">T_{\text{init}}=\left(\frac{30\rho_{r,0}}{\pi^{2}g_{*}}\right)^{1/4}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(4)</span></td>
+</tr></tbody>
+</table>
+<p id="S2.p6.4" class="ltx_p"><span id="S2.p6.4.1" class="ltx_text" style="font-size:90%;">This analytically derived temperature serves as the kinematic engine for the model, completely bypassing the physical necessity of a pre-thermalization epoch.</span></p>
+</div>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section" style="font-size:90%;">
+<span class="ltx_tag ltx_tag_section">3 </span>Symmetry Breaking and the Emergent Inflaton</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p id="S3.p1.2" class="ltx_p"><span id="S3.p1.2.1" class="ltx_text" style="font-size:90%;">Having established the geometric origin of the initial thermal bath, we now address the scalar field required to drive the accelerated expansion. For the warm inflationary mechanism to successfully initiate, an inflaton field must smoothly cross the conformal boundary alongside the radiation fluid and emerge dynamically active in the physical metric. To ensure this, we model the inflaton in the asymptotic pre-phase as a scalar field </span><math id="S3.p1.1.m1" class="ltx_Math" alttext="\tilde{\phi}" display="inline" intent=":literal"><semantics><mover accent="true"><mi mathsize="0.900em">ϕ</mi><mo mathsize="0.900em">~</mo></mover><annotation encoding="application/x-tex">\tilde{\phi}</annotation></semantics></math><span id="S3.p1.2.2" class="ltx_text" style="font-size:90%;"> featuring a conformal coupling to gravity (</span><math id="S3.p1.2.m2" class="ltx_Math" alttext="\xi=1/6" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em">ξ</mi><mo mathsize="0.900em">=</mo><mrow><mn mathsize="0.900em">1</mn><mo maxsize="0.900em" minsize="0.900em" stretchy="true" symmetric="true">/</mo><mn mathsize="0.900em">6</mn></mrow></mrow><annotation encoding="application/x-tex">\xi=1/6</annotation></semantics></math><span id="S3.p1.2.3" class="ltx_text" style="font-size:90%;">) </span><cite class="ltx_cite ltx_citemacro_cite"><span id="S3.p1.2.4.1" class="ltx_text" style="font-size:90%;">[</span><a href="#bib.bib8" title="" class="ltx_ref">8</a><span id="S3.p1.2.5.2" class="ltx_text" style="font-size:90%;">]</span></cite><span id="S3.p1.2.6" class="ltx_text" style="font-size:90%;">:</span></p>
+<table id="S3.E5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.E5.m1" class="ltx_Math" alttext="\mathcal{S}_{\text{pre}}=\int d^{4}x\sqrt{-\tilde{g}}\left[\frac{1}{2}\tilde{g}^{\mu\nu}\partial_{\mu}\tilde{\phi}\partial_{\nu}\tilde{\phi}-\frac{1}{12}\tilde{R}\tilde{\phi}^{2}-\lambda\tilde{\phi}^{4}\right]" display="block" intent=":literal"><semantics><mrow><msub><mi class="ltx_font_mathcaligraphic" mathsize="0.900em">𝒮</mi><mtext mathsize="0.900em">pre</mtext></msub><mo mathsize="0.900em" rspace="0.111em">=</mo><mrow><mo maxsize="0.900em" minsize="0.900em" stretchy="true">∫</mo><mrow><msup><mi mathsize="0.900em">d</mi><mn mathsize="0.900em">4</mn></msup><mo lspace="0em" rspace="0em">​</mo><mi mathsize="0.900em">x</mi><mo lspace="0em" rspace="0em">​</mo><msqrt><mrow><mo mathsize="0.900em">−</mo><mover accent="true"><mi mathsize="0.900em">g</mi><mo mathsize="0.900em">~</mo></mover></mrow></msqrt><mo lspace="0em" rspace="0em">​</mo><mrow><mo>[</mo><mrow><mrow><mfrac><mn mathsize="0.900em">1</mn><mn mathsize="0.900em">2</mn></mfrac><mo lspace="0em" rspace="0em">​</mo><msup><mover accent="true"><mi mathsize="0.900em">g</mi><mo mathsize="0.900em">~</mo></mover><mrow><mi mathsize="0.900em">μ</mi><mo lspace="0em" rspace="0em">​</mo><mi mathsize="0.900em">ν</mi></mrow></msup><mo lspace="0em" rspace="0em">​</mo><mrow><msub><mo mathsize="0.900em" rspace="0em">∂</mo><mi mathsize="0.900em">μ</mi></msub><mrow><mover accent="true"><mi mathsize="0.900em">ϕ</mi><mo mathsize="0.900em">~</mo></mover><mo lspace="0em" rspace="0em">​</mo><mrow><msub><mo mathsize="0.900em" rspace="0em">∂</mo><mi mathsize="0.900em">ν</mi></msub><mover accent="true"><mi mathsize="0.900em">ϕ</mi><mo mathsize="0.900em">~</mo></mover></mrow></mrow></mrow></mrow><mo mathsize="0.900em">−</mo><mrow><mfrac><mn mathsize="0.900em">1</mn><mn mathsize="0.900em">12</mn></mfrac><mo lspace="0em" rspace="0em">​</mo><mover accent="true"><mi mathsize="0.900em">R</mi><mo mathsize="0.900em">~</mo></mover><mo lspace="0em" rspace="0em">​</mo><msup><mover accent="true"><mi mathsize="0.900em">ϕ</mi><mo mathsize="0.900em">~</mo></mover><mn mathsize="0.900em">2</mn></msup></mrow><mo mathsize="0.900em">−</mo><mrow><mi mathsize="0.900em">λ</mi><mo lspace="0em" rspace="0em">​</mo><msup><mover accent="true"><mi mathsize="0.900em">ϕ</mi><mo mathsize="0.900em">~</mo></mover><mn mathsize="0.900em">4</mn></msup></mrow></mrow><mo>]</mo></mrow></mrow></mrow></mrow><annotation encoding="application/x-tex">\mathcal{S}_{\text{pre}}=\int d^{4}x\sqrt{-\tilde{g}}\left[\frac{1}{2}\tilde{g}^{\mu\nu}\partial_{\mu}\tilde{\phi}\partial_{\nu}\tilde{\phi}-\frac{1}{12}\tilde{R}\tilde{\phi}^{2}-\lambda\tilde{\phi}^{4}\right]</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(5)</span></td>
+</tr></tbody>
+</table>
+<p id="S3.p1.5" class="ltx_p"><span id="S3.p1.5.1" class="ltx_text" style="font-size:90%;">Because the pre-state is purely radiation-dominated, the Ricci scalar vanishes (</span><math id="S3.p1.3.m1" class="ltx_Math" alttext="\tilde{R}=0" display="inline" intent=":literal"><semantics><mrow><mover accent="true"><mi mathsize="0.900em">R</mi><mo mathsize="0.900em">~</mo></mover><mo mathsize="0.900em">=</mo><mn mathsize="0.900em">0</mn></mrow><annotation encoding="application/x-tex">\tilde{R}=0</annotation></semantics></math><span id="S3.p1.5.2" class="ltx_text" style="font-size:90%;">), ensuring the field is kinematically massless and trace-free. The fundamental premise of strict classical conformal invariance dictates that all parameters must be dimensionless; therefore, the field’s self-interaction is uniquely restricted to the quartic coupling </span><math id="S3.p1.4.m2" class="ltx_Math" alttext="\lambda\tilde{\phi}^{4}" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em">λ</mi><mo lspace="0em" rspace="0em">​</mo><msup><mover accent="true"><mi mathsize="0.900em">ϕ</mi><mo mathsize="0.900em">~</mo></mover><mn mathsize="0.900em">4</mn></msup></mrow><annotation encoding="application/x-tex">\lambda\tilde{\phi}^{4}</annotation></semantics></math><span id="S3.p1.5.3" class="ltx_text" style="font-size:90%;">. The field identically survives the conformal boundary mapping via the standard scalar transformation </span><math id="S3.p1.5.m3" class="ltx_Math" alttext="\phi=\Omega^{-1}\tilde{\phi}" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em">ϕ</mi><mo mathsize="0.900em">=</mo><mrow><msup><mi mathsize="0.900em" mathvariant="normal">Ω</mi><mrow><mo mathsize="0.900em">−</mo><mn mathsize="0.900em">1</mn></mrow></msup><mo lspace="0em" rspace="0em">​</mo><mover accent="true"><mi mathsize="0.900em">ϕ</mi><mo mathsize="0.900em">~</mo></mover></mrow></mrow><annotation encoding="application/x-tex">\phi=\Omega^{-1}\tilde{\phi}</annotation></semantics></math><span id="S3.p1.5.4" class="ltx_text" style="font-size:90%;">.</span></p>
+</div>
+<div id="S3.p2" class="ltx_para">
+<p id="S3.p2.3" class="ltx_p"><span id="S3.p2.3.1" class="ltx_text ltx_font_bold" style="font-size:90%;">Ansatz 2 (Conformal Symmetry Breaking):</span><span id="S3.p2.3.2" class="ltx_text" style="font-size:90%;"> At the boundary </span><math id="S3.p2.1.m1" class="ltx_Math" alttext="\eta_{W}" display="inline" intent=":literal"><semantics><msub><mi mathsize="0.900em">η</mi><mi mathsize="0.900em">W</mi></msub><annotation encoding="application/x-tex">\eta_{W}</annotation></semantics></math><span id="S3.p2.3.3" class="ltx_text" style="font-size:90%;">, conformal symmetry is spontaneously broken. In quantum field theory, exact classical conformal invariance is typically broken by quantum loop corrections, such as the trace anomaly </span><cite class="ltx_cite ltx_citemacro_cite"><span id="S3.p2.3.4.1" class="ltx_text" style="font-size:90%;">[</span><a href="#bib.bib9" title="" class="ltx_ref">9</a><span id="S3.p2.3.5.2" class="ltx_text" style="font-size:90%;">]</span></cite><span id="S3.p2.3.6" class="ltx_text" style="font-size:90%;">, or via dynamical mass generation </span><cite class="ltx_cite ltx_citemacro_cite"><span id="S3.p2.3.7.1" class="ltx_text" style="font-size:90%;">[</span><a href="#bib.bib10" title="" class="ltx_ref">10</a><span id="S3.p2.3.8.2" class="ltx_text" style="font-size:90%;">]</span></cite><span id="S3.p2.3.9" class="ltx_text" style="font-size:90%;">. Furthermore, the presence of explicit mass scales in the emergent physical universe, most notably the Planck mass </span><math id="S3.p2.2.m2" class="ltx_Math" alttext="M_{p}" display="inline" intent=":literal"><semantics><msub><mi mathsize="0.900em">M</mi><mi mathsize="0.900em">p</mi></msub><annotation encoding="application/x-tex">M_{p}</annotation></semantics></math><span id="S3.p2.3.10" class="ltx_text" style="font-size:90%;"> in general relativity, prevents the maintenance of perfect scale invariance. Therefore, we postulate that the transition to the physical metric at </span><math id="S3.p2.3.m3" class="ltx_Math" alttext="\eta_{W}" display="inline" intent=":literal"><semantics><msub><mi mathsize="0.900em">η</mi><mi mathsize="0.900em">W</mi></msub><annotation encoding="application/x-tex">\eta_{W}</annotation></semantics></math><span id="S3.p2.3.11" class="ltx_text" style="font-size:90%;"> is dynamically characterized by the breaking of this conformal symmetry. In this context, the Weyl mapping mathematically parameterizes our ignorance of the exact UV-complete quantum gravity mechanism driving the transition.</span></p>
+</div>
+<div id="S3.p3" class="ltx_para">
+<p id="S3.p3.3" class="ltx_p"><span id="S3.p3.3.1" class="ltx_text" style="font-size:90%;">Consequently, the dimensionless parameters of the pre-state transition to generate an effective potential </span><math id="S3.p3.1.m1" class="ltx_Math" alttext="V(\phi)" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em">V</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">ϕ</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><annotation encoding="application/x-tex">V(\phi)</annotation></semantics></math><span id="S3.p3.3.2" class="ltx_text" style="font-size:90%;"> characterized by a physical mass scale. For the purposes of this framework, we require only that the emergent field is displaced from its new potential minimum (</span><math id="S3.p3.2.m2" class="ltx_Math" alttext="\phi_{0}\neq 0" display="inline" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">ϕ</mi><mn mathsize="0.900em">0</mn></msub><mo mathsize="0.900em">≠</mo><mn mathsize="0.900em">0</mn></mrow><annotation encoding="application/x-tex">\phi_{0}\neq 0</annotation></semantics></math><span id="S3.p3.3.3" class="ltx_text" style="font-size:90%;">). This displacement provides the necessary potential energy density to eventually dominate the universe’s expansion, leaving the precise functional form of </span><math id="S3.p3.3.m3" class="ltx_Math" alttext="V(\phi)" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em">V</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">ϕ</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><annotation encoding="application/x-tex">V(\phi)</annotation></semantics></math><span id="S3.p3.3.4" class="ltx_text" style="font-size:90%;"> unspecified for general model-building applications.</span></p>
+</div>
+</section>
+<section id="S4" class="ltx_section">
+<h2 class="ltx_title ltx_title_section" style="font-size:90%;">
+<span class="ltx_tag ltx_tag_section">4 </span>The Kinematic Handoff and Weak Dissipative Onset</h2>
+
+<div id="S4.p1" class="ltx_para">
+<p id="S4.p1.1" class="ltx_p"><span id="S4.p1.1.1" class="ltx_text" style="font-size:90%;">We now derive the early-time kinematics of the physical universe at </span><math id="S4.p1.1.m1" class="ltx_Math" alttext="t=0^{+}" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em">t</mi><mo mathsize="0.900em">=</mo><msup><mn mathsize="0.900em">0</mn><mo mathsize="0.900em">+</mo></msup></mrow><annotation encoding="application/x-tex">t=0^{+}</annotation></semantics></math><span id="S4.p1.1.2" class="ltx_text" style="font-size:90%;">. The dynamics are governed by the coupled Friedmann and Klein-Gordon equations:</span></p>
+<table id="S5.EGx1" class="ltx_equationgroup ltx_eqn_align ltx_eqn_table">
+
+<tbody id="S4.E6"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S4.E6.m1" class="ltx_Math" alttext="\displaystyle 3M_{p}^{2}H^{2}" display="inline" intent=":literal"><semantics><mrow><mn mathsize="0.900em">3</mn><mo lspace="0em" rspace="0em">​</mo><msubsup><mi mathsize="0.900em">M</mi><mi mathsize="0.900em">p</mi><mn mathsize="0.900em">2</mn></msubsup><mo lspace="0em" rspace="0em">​</mo><msup><mi mathsize="0.900em">H</mi><mn mathsize="0.900em">2</mn></msup></mrow><annotation encoding="application/x-tex">\displaystyle 3M_{p}^{2}H^{2}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S4.E6.m2" class="ltx_Math" alttext="\displaystyle=\frac{1}{2}\dot{\phi}^{2}+V(\phi)+\rho_{r}" display="inline" intent=":literal"><semantics><mrow><mi></mi><mo mathsize="0.900em">=</mo><mrow><mrow><mstyle displaystyle="true"><mfrac><mn mathsize="0.900em">1</mn><mn mathsize="0.900em">2</mn></mfrac></mstyle><mo lspace="0em" rspace="0em">​</mo><msup><mover accent="true"><mi mathsize="0.900em">ϕ</mi><mo mathsize="0.900em">˙</mo></mover><mn mathsize="0.900em">2</mn></msup></mrow><mo mathsize="0.900em">+</mo><mrow><mi mathsize="0.900em">V</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">ϕ</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">+</mo><msub><mi mathsize="0.900em">ρ</mi><mi mathsize="0.900em">r</mi></msub></mrow></mrow><annotation encoding="application/x-tex">\displaystyle=\frac{1}{2}\dot{\phi}^{2}+V(\phi)+\rho_{r}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(6)</span></td>
+</tr></tbody>
+<tbody id="S4.E7"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S4.E7.m1" class="ltx_Math" alttext="\displaystyle\ddot{\phi}" display="inline" intent=":literal"><semantics><mover accent="true"><mi mathsize="0.900em">ϕ</mi><mo mathsize="0.900em">¨</mo></mover><annotation encoding="application/x-tex">\displaystyle\ddot{\phi}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S4.E7.m2" class="ltx_Math" alttext="\displaystyle+(3H+\Gamma)\dot{\phi}+V^{\prime}(\phi)=0" display="inline" intent=":literal"><semantics><mrow><mrow><mrow><mo mathsize="0.900em">+</mo><mrow><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mrow><mrow><mn mathsize="0.900em">3</mn><mo lspace="0em" rspace="0em">​</mo><mi mathsize="0.900em">H</mi></mrow><mo mathsize="0.900em">+</mo><mi mathsize="0.900em" mathvariant="normal">Γ</mi></mrow><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mover accent="true"><mi mathsize="0.900em">ϕ</mi><mo mathsize="0.900em">˙</mo></mover></mrow></mrow><mo mathsize="0.900em">+</mo><mrow><msup><mi mathsize="0.900em">V</mi><mo mathsize="0.900em">′</mo></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">ϕ</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow><mo mathsize="0.900em">=</mo><mn mathsize="0.900em">0</mn></mrow><annotation encoding="application/x-tex">\displaystyle+(3H+\Gamma)\dot{\phi}+V^{\prime}(\phi)=0</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(7)</span></td>
+</tr></tbody>
+<tbody id="S4.E8"><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_td ltx_align_right ltx_eqn_cell"><math id="S4.E8.m1" class="ltx_Math" alttext="\displaystyle\dot{\rho}_{r}" display="inline" intent=":literal"><semantics><msub><mover accent="true"><mi mathsize="0.900em">ρ</mi><mo mathsize="0.900em">˙</mo></mover><mi mathsize="0.900em">r</mi></msub><annotation encoding="application/x-tex">\displaystyle\dot{\rho}_{r}</annotation></semantics></math></td>
+<td class="ltx_td ltx_align_left ltx_eqn_cell"><math id="S4.E8.m2" class="ltx_Math" alttext="\displaystyle+4H\rho_{r}=\Gamma\dot{\phi}^{2}" display="inline" intent=":literal"><semantics><mrow><mrow><mo mathsize="0.900em">+</mo><mrow><mn mathsize="0.900em">4</mn><mo lspace="0em" rspace="0em">​</mo><mi mathsize="0.900em">H</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi mathsize="0.900em">ρ</mi><mi mathsize="0.900em">r</mi></msub></mrow></mrow><mo mathsize="0.900em">=</mo><mrow><mi mathsize="0.900em" mathvariant="normal">Γ</mi><mo lspace="0em" rspace="0em">​</mo><msup><mover accent="true"><mi mathsize="0.900em">ϕ</mi><mo mathsize="0.900em">˙</mo></mover><mn mathsize="0.900em">2</mn></msup></mrow></mrow><annotation encoding="application/x-tex">\displaystyle+4H\rho_{r}=\Gamma\dot{\phi}^{2}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(8)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S4.p2" class="ltx_para">
+<p id="S4.p2.2" class="ltx_p"><span id="S4.p2.2.1" class="ltx_text" style="font-size:90%;">By the Theorem in Section 2, at </span><math id="S4.p2.1.m1" class="ltx_Math" alttext="t=0^{+}" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em">t</mi><mo mathsize="0.900em">=</mo><msup><mn mathsize="0.900em">0</mn><mo mathsize="0.900em">+</mo></msup></mrow><annotation encoding="application/x-tex">t=0^{+}</annotation></semantics></math><span id="S4.p2.2.2" class="ltx_text" style="font-size:90%;">, the universe is momentarily dominated by the inherited boundary radiation (</span><math id="S4.p2.2.m2" class="ltx_Math" alttext="\rho_{r,0}\gg V(\phi)" display="inline" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">ρ</mi><mrow><mi mathsize="0.900em">r</mi><mo mathsize="0.900em">,</mo><mn mathsize="0.900em">0</mn></mrow></msub><mo mathsize="0.900em">≫</mo><mrow><mi mathsize="0.900em">V</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">ϕ</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">\rho_{r,0}\gg V(\phi)</annotation></semantics></math><span id="S4.p2.2.3" class="ltx_text" style="font-size:90%;">). Therefore, the initial Hubble parameter is determined analytically by the thermal bath:</span></p>
+<table id="S4.E9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S4.E9.m1" class="ltx_Math" alttext="H_{0}\simeq\sqrt{\frac{\rho_{r,0}}{3M_{p}^{2}}}=\sqrt{\frac{\pi^{2}g_{*}}{90}}\frac{T_{\text{init}}^{2}}{M_{p}}" display="block" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">H</mi><mn mathsize="0.900em">0</mn></msub><mo mathsize="0.900em">≃</mo><msqrt><mfrac><msub><mi mathsize="0.900em">ρ</mi><mrow><mi mathsize="0.900em">r</mi><mo mathsize="0.900em">,</mo><mn mathsize="0.900em">0</mn></mrow></msub><mrow><mn mathsize="0.900em">3</mn><mo lspace="0em" rspace="0em">​</mo><msubsup><mi mathsize="0.900em">M</mi><mi mathsize="0.900em">p</mi><mn mathsize="0.900em">2</mn></msubsup></mrow></mfrac></msqrt><mo mathsize="0.900em">=</mo><mrow><msqrt><mfrac><mrow><msup><mi mathsize="0.900em">π</mi><mn mathsize="0.900em">2</mn></msup><mo lspace="0em" rspace="0em">​</mo><msub><mi mathsize="0.900em">g</mi><mo mathsize="0.900em">∗</mo></msub></mrow><mn mathsize="0.900em">90</mn></mfrac></msqrt><mo lspace="0em" rspace="0em">​</mo><mfrac><msubsup><mi mathsize="0.900em">T</mi><mtext mathsize="0.900em">init</mtext><mn mathsize="0.900em">2</mn></msubsup><msub><mi mathsize="0.900em">M</mi><mi mathsize="0.900em">p</mi></msub></mfrac></mrow></mrow><annotation encoding="application/x-tex">H_{0}\simeq\sqrt{\frac{\rho_{r,0}}{3M_{p}^{2}}}=\sqrt{\frac{\pi^{2}g_{*}}{90}}\frac{T_{\text{init}}^{2}}{M_{p}}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(9)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S4.p3" class="ltx_para">
+<p id="S4.p3.3" class="ltx_p"><span id="S4.p3.3.1" class="ltx_text" style="font-size:90%;">To couple the field to the plasma, we assume a standard high-temperature gauge-kinetic dissipation rate </span><cite class="ltx_cite ltx_citemacro_cite"><span id="S4.p3.3.2.1" class="ltx_text" style="font-size:90%;">[</span><a href="#bib.bib11" title="" class="ltx_ref">11</a><span id="S4.p3.3.3.2" class="ltx_text" style="font-size:90%;">]</span></cite><span id="S4.p3.3.4" class="ltx_text" style="font-size:90%;">, parameterized as </span><math id="S4.p3.1.m1" class="ltx_Math" alttext="\Gamma(T)\simeq C_{\alpha}\frac{T^{3}}{M_{p}^{2}}" display="inline" intent=":literal"><semantics><mrow><mrow><mi mathsize="0.900em" mathvariant="normal">Γ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">T</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo mathsize="0.900em">≃</mo><mrow><msub><mi mathsize="0.900em">C</mi><mi mathsize="0.900em">α</mi></msub><mo lspace="0em" rspace="0em">​</mo><mfrac><msup><mi mathsize="0.900em">T</mi><mn mathsize="0.900em">3</mn></msup><msubsup><mi mathsize="0.900em">M</mi><mi mathsize="0.900em">p</mi><mn mathsize="0.900em">2</mn></msubsup></mfrac></mrow></mrow><annotation encoding="application/x-tex">\Gamma(T)\simeq C_{\alpha}\frac{T^{3}}{M_{p}^{2}}</annotation></semantics></math><span id="S4.p3.3.5" class="ltx_text" style="font-size:90%;">, where </span><math id="S4.p3.2.m2" class="ltx_Math" alttext="C_{\alpha}" display="inline" intent=":literal"><semantics><msub><mi mathsize="0.900em">C</mi><mi mathsize="0.900em">α</mi></msub><annotation encoding="application/x-tex">C_{\alpha}</annotation></semantics></math><span id="S4.p3.3.6" class="ltx_text" style="font-size:90%;"> encompasses model-specific coupling constants. The initial dissipation ratio </span><math id="S4.p3.3.m3" class="ltx_Math" alttext="Q_{0}=\Gamma(T_{\text{init}})/3H_{0}" display="inline" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">Q</mi><mn mathsize="0.900em">0</mn></msub><mo mathsize="0.900em">=</mo><mrow><mrow><mrow><mi mathsize="0.900em" mathvariant="normal">Γ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><msub><mi mathsize="0.900em">T</mi><mtext mathsize="0.900em">init</mtext></msub><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><mo maxsize="0.900em" minsize="0.900em" stretchy="true" symmetric="true">/</mo><mn mathsize="0.900em">3</mn></mrow><mo lspace="0em" rspace="0em">​</mo><msub><mi mathsize="0.900em">H</mi><mn mathsize="0.900em">0</mn></msub></mrow></mrow><annotation encoding="application/x-tex">Q_{0}=\Gamma(T_{\text{init}})/3H_{0}</annotation></semantics></math><span id="S4.p3.3.7" class="ltx_text" style="font-size:90%;"> evaluates to:</span></p>
+<table id="S4.E10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S4.E10.m1" class="ltx_Math" alttext="Q_{0}\simeq\frac{C_{\alpha}T_{\text{init}}^{3}/M_{p}^{2}}{3\sqrt{\frac{\pi^{2}g_{*}}{90}}T_{\text{init}}^{2}/M_{p}}\simeq\mathcal{O}(1)\cdot C_{\alpha}\left(\frac{T_{\text{init}}}{M_{p}}\right)" display="block" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">Q</mi><mn mathsize="0.900em">0</mn></msub><mo mathsize="0.900em">≃</mo><mfrac><mrow><mrow><msub><mi mathsize="0.900em">C</mi><mi mathsize="0.900em">α</mi></msub><mo lspace="0em" rspace="0em">​</mo><msubsup><mi mathsize="0.900em">T</mi><mtext mathsize="0.900em">init</mtext><mn mathsize="0.900em">3</mn></msubsup></mrow><mo maxsize="0.900em" minsize="0.900em" stretchy="true" symmetric="true">/</mo><msubsup><mi mathsize="0.900em">M</mi><mi mathsize="0.900em">p</mi><mn mathsize="0.900em">2</mn></msubsup></mrow><mrow><mrow><mn mathsize="0.900em">3</mn><mo lspace="0em" rspace="0em">​</mo><msqrt><mfrac><mrow><msup><mi mathsize="0.900em">π</mi><mn mathsize="0.900em">2</mn></msup><mo lspace="0em" rspace="0em">​</mo><msub><mi mathsize="0.900em">g</mi><mo mathsize="0.900em">∗</mo></msub></mrow><mn mathsize="0.900em">90</mn></mfrac></msqrt><mo lspace="0em" rspace="0em">​</mo><msubsup><mi mathsize="0.900em">T</mi><mtext mathsize="0.900em">init</mtext><mn mathsize="0.900em">2</mn></msubsup></mrow><mo maxsize="0.900em" minsize="0.900em" stretchy="true" symmetric="true">/</mo><msub><mi mathsize="0.900em">M</mi><mi mathsize="0.900em">p</mi></msub></mrow></mfrac><mo mathsize="0.900em">≃</mo><mrow><mrow><mrow><mi class="ltx_font_mathcaligraphic" mathsize="0.900em">𝒪</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mn mathsize="0.900em">1</mn><mo maxsize="0.900em" minsize="0.900em" rspace="0.055em">)</mo></mrow></mrow><mo mathsize="0.900em" rspace="0.222em">⋅</mo><msub><mi mathsize="0.900em">C</mi><mi mathsize="0.900em">α</mi></msub></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo>(</mo><mfrac><msub><mi mathsize="0.900em">T</mi><mtext mathsize="0.900em">init</mtext></msub><msub><mi mathsize="0.900em">M</mi><mi mathsize="0.900em">p</mi></msub></mfrac><mo>)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">Q_{0}\simeq\frac{C_{\alpha}T_{\text{init}}^{3}/M_{p}^{2}}{3\sqrt{\frac{\pi^{2}g_{*}}{90}}T_{\text{init}}^{2}/M_{p}}\simeq\mathcal{O}(1)\cdot C_{\alpha}\left(\frac{T_{\text{init}}}{M_{p}}\right)</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(10)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S4.p4" class="ltx_para">
+<p id="S4.p4.3" class="ltx_p"><span id="S4.p4.3.1" class="ltx_text" style="font-size:90%;">Equation (</span><a href="#S4.E10" title="In 4 The Kinematic Handoff and Weak Dissipative Onset ‣ A Conformal Boundary Ansatz for Warm Inflation Initialization: A Toy Model" class="ltx_ref" style="font-size:90%;"><span class="ltx_text ltx_ref_tag">10</span></a><span id="S4.p4.3.2" class="ltx_text" style="font-size:90%;">) highlights the phenomenological viability of this mechanism. To avoid the regime of quantum gravity and string-scale corrections, the inherited boundary temperature must be strictly sub-Planckian (</span><math id="S4.p4.1.m1" class="ltx_Math" alttext="T_{\text{init}}\ll M_{p}" display="inline" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">T</mi><mtext mathsize="0.900em">init</mtext></msub><mo mathsize="0.900em">≪</mo><msub><mi mathsize="0.900em">M</mi><mi mathsize="0.900em">p</mi></msub></mrow><annotation encoding="application/x-tex">T_{\text{init}}\ll M_{p}</annotation></semantics></math><span id="S4.p4.3.3" class="ltx_text" style="font-size:90%;">). Assuming natural coupling constants (</span><math id="S4.p4.2.m2" class="ltx_Math" alttext="C_{\alpha}\sim 1" display="inline" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">C</mi><mi mathsize="0.900em">α</mi></msub><mo mathsize="0.900em">∼</mo><mn mathsize="0.900em">1</mn></mrow><annotation encoding="application/x-tex">C_{\alpha}\sim 1</annotation></semantics></math><span id="S4.p4.3.4" class="ltx_text" style="font-size:90%;">), the mathematics dictate that </span><math id="S4.p4.3.m3" class="ltx_Math" alttext="Q_{0}\ll 1" display="inline" intent=":literal"><semantics><mrow><msub><mi mathsize="0.900em">Q</mi><mn mathsize="0.900em">0</mn></msub><mo mathsize="0.900em">≪</mo><mn mathsize="0.900em">1</mn></mrow><annotation encoding="application/x-tex">Q_{0}\ll 1</annotation></semantics></math><span id="S4.p4.3.5" class="ltx_text" style="font-size:90%;">. The conformal boundary condition naturally forces the universe to initialize in the weak dissipative regime.</span></p>
+</div>
+<div id="S4.p5" class="ltx_para">
+<p id="S4.p5.12" class="ltx_p"><span id="S4.p5.12.1" class="ltx_text" style="font-size:90%;">The kinematic handoff proceeds deterministically. Assuming continuous matching conditions across the boundary, the initial physical field velocity </span><math id="S4.p5.1.m1" class="ltx_Math" alttext="\dot{\phi}" display="inline" intent=":literal"><semantics><mover accent="true"><mi mathsize="0.900em">ϕ</mi><mo mathsize="0.900em">˙</mo></mover><annotation encoding="application/x-tex">\dot{\phi}</annotation></semantics></math><span id="S4.p5.12.2" class="ltx_text" style="font-size:90%;"> remains finite and well-defined, as the field’s canonical normalization is inherently preserved via the standard conformal weight transformation </span><math id="S4.p5.2.m2" class="ltx_Math" alttext="\phi=\Omega^{-1}\tilde{\phi}" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em">ϕ</mi><mo mathsize="0.900em">=</mo><mrow><msup><mi mathsize="0.900em" mathvariant="normal">Ω</mi><mrow><mo mathsize="0.900em">−</mo><mn mathsize="0.900em">1</mn></mrow></msup><mo lspace="0em" rspace="0em">​</mo><mover accent="true"><mi mathsize="0.900em">ϕ</mi><mo mathsize="0.900em">~</mo></mover></mrow></mrow><annotation encoding="application/x-tex">\phi=\Omega^{-1}\tilde{\phi}</annotation></semantics></math><span id="S4.p5.12.3" class="ltx_text" style="font-size:90%;"> </span><cite class="ltx_cite ltx_citemacro_cite"><span id="S4.p5.12.4.1" class="ltx_text" style="font-size:90%;">[</span><a href="#bib.bib8" title="" class="ltx_ref">8</a><span id="S4.p5.12.5.2" class="ltx_text" style="font-size:90%;">]</span></cite><span id="S4.p5.12.6" class="ltx_text" style="font-size:90%;">. At </span><math id="S4.p5.3.m3" class="ltx_Math" alttext="t=0^{+}" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em">t</mi><mo mathsize="0.900em">=</mo><msup><mn mathsize="0.900em">0</mn><mo mathsize="0.900em">+</mo></msup></mrow><annotation encoding="application/x-tex">t=0^{+}</annotation></semantics></math><span id="S4.p5.12.7" class="ltx_text" style="font-size:90%;">, the large initial Hubble friction </span><math id="S4.p5.4.m4" class="ltx_Math" alttext="3H_{0}" display="inline" intent=":literal"><semantics><mrow><mn mathsize="0.900em">3</mn><mo lspace="0em" rspace="0em">​</mo><msub><mi mathsize="0.900em">H</mi><mn mathsize="0.900em">0</mn></msub></mrow><annotation encoding="application/x-tex">3H_{0}</annotation></semantics></math><span id="S4.p5.12.8" class="ltx_text" style="font-size:90%;"> (sourced by the inherited boundary radiation) heavily damps the field, preventing a fast-roll phase. Because the initial field velocity </span><math id="S4.p5.5.m5" class="ltx_Math" alttext="\dot{\phi}" display="inline" intent=":literal"><semantics><mover accent="true"><mi mathsize="0.900em">ϕ</mi><mo mathsize="0.900em">˙</mo></mover><annotation encoding="application/x-tex">\dot{\phi}</annotation></semantics></math><span id="S4.p5.12.9" class="ltx_text" style="font-size:90%;"> is small, the source term in Eq. (</span><a href="#S4.E8" title="In 4 The Kinematic Handoff and Weak Dissipative Onset ‣ A Conformal Boundary Ansatz for Warm Inflation Initialization: A Toy Model" class="ltx_ref" style="font-size:90%;"><span class="ltx_text ltx_ref_tag">8</span></a><span id="S4.p5.12.10" class="ltx_text" style="font-size:90%;">) is subdominant to the expansion term (</span><math id="S4.p5.6.m6" class="ltx_Math" alttext="\Gamma\dot{\phi}^{2}\ll 4H\rho_{r}" display="inline" intent=":literal"><semantics><mrow><mrow><mi mathsize="0.900em" mathvariant="normal">Γ</mi><mo lspace="0em" rspace="0em">​</mo><msup><mover accent="true"><mi mathsize="0.900em">ϕ</mi><mo mathsize="0.900em">˙</mo></mover><mn mathsize="0.900em">2</mn></msup></mrow><mo mathsize="0.900em">≪</mo><mrow><mn mathsize="0.900em">4</mn><mo lspace="0em" rspace="0em">​</mo><mi mathsize="0.900em">H</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi mathsize="0.900em">ρ</mi><mi mathsize="0.900em">r</mi></msub></mrow></mrow><annotation encoding="application/x-tex">\Gamma\dot{\phi}^{2}\ll 4H\rho_{r}</annotation></semantics></math><span id="S4.p5.12.11" class="ltx_text" style="font-size:90%;">), causing the inherited boundary radiation </span><math id="S4.p5.7.m7" class="ltx_Math" alttext="\rho_{r,0}" display="inline" intent=":literal"><semantics><msub><mi mathsize="0.900em">ρ</mi><mrow><mi mathsize="0.900em">r</mi><mo mathsize="0.900em">,</mo><mn mathsize="0.900em">0</mn></mrow></msub><annotation encoding="application/x-tex">\rho_{r,0}</annotation></semantics></math><span id="S4.p5.12.12" class="ltx_text" style="font-size:90%;"> to rapidly redshift. However, because the boundary condition guaranteed a finite initial temperature, the dissipation coefficient is non-zero (</span><math id="S4.p5.8.m8" class="ltx_Math" alttext="\Gamma&gt;0" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em" mathvariant="normal">Γ</mi><mo mathsize="0.900em">&gt;</mo><mn mathsize="0.900em">0</mn></mrow><annotation encoding="application/x-tex">\Gamma&gt;0</annotation></semantics></math><span id="S4.p5.12.13" class="ltx_text" style="font-size:90%;">) from inception. As the inherited </span><math id="S4.p5.9.m9" class="ltx_Math" alttext="\rho_{r}" display="inline" intent=":literal"><semantics><msub><mi mathsize="0.900em">ρ</mi><mi mathsize="0.900em">r</mi></msub><annotation encoding="application/x-tex">\rho_{r}</annotation></semantics></math><span id="S4.p5.12.14" class="ltx_text" style="font-size:90%;"> drops, </span><math id="S4.p5.10.m10" class="ltx_Math" alttext="H" display="inline" intent=":literal"><semantics><mi mathsize="0.900em">H</mi><annotation encoding="application/x-tex">H</annotation></semantics></math><span id="S4.p5.12.15" class="ltx_text" style="font-size:90%;"> decreases, allowing the field velocity </span><math id="S4.p5.11.m11" class="ltx_Math" alttext="\dot{\phi}" display="inline" intent=":literal"><semantics><mover accent="true"><mi mathsize="0.900em">ϕ</mi><mo mathsize="0.900em">˙</mo></mover><annotation encoding="application/x-tex">\dot{\phi}</annotation></semantics></math><span id="S4.p5.12.16" class="ltx_text" style="font-size:90%;"> to gently increase. This naturally amplifies the source term until the system smoothly intersects the dynamical steady-state attractor (</span><math id="S4.p5.12.m12" class="ltx_Math" alttext="\dot{\rho}_{r}\approx 0\implies 4H\rho_{r}\simeq\Gamma\dot{\phi}^{2}" display="inline" intent=":literal"><semantics><mrow><msub><mover accent="true"><mi mathsize="0.900em">ρ</mi><mo mathsize="0.900em">˙</mo></mover><mi mathsize="0.900em">r</mi></msub><mo mathsize="0.900em">≈</mo><mn mathsize="0.900em">0</mn><mo mathsize="0.900em" stretchy="false">⟹</mo><mrow><mn mathsize="0.900em">4</mn><mo lspace="0em" rspace="0em">​</mo><mi mathsize="0.900em">H</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi mathsize="0.900em">ρ</mi><mi mathsize="0.900em">r</mi></msub></mrow><mo mathsize="0.900em">≃</mo><mrow><mi mathsize="0.900em" mathvariant="normal">Γ</mi><mo lspace="0em" rspace="0em">​</mo><msup><mover accent="true"><mi mathsize="0.900em">ϕ</mi><mo mathsize="0.900em">˙</mo></mover><mn mathsize="0.900em">2</mn></msup></mrow></mrow><annotation encoding="application/x-tex">\dot{\rho}_{r}\approx 0\implies 4H\rho_{r}\simeq\Gamma\dot{\phi}^{2}</annotation></semantics></math><span id="S4.p5.12.17" class="ltx_text" style="font-size:90%;">).</span></p>
+</div>
+</section>
+<section id="S5" class="ltx_section">
+<h2 class="ltx_title ltx_title_section" style="font-size:90%;">
+<span class="ltx_tag ltx_tag_section">5 </span>Conclusion</h2>
+
+<div id="S5.p1" class="ltx_para">
+<p id="S5.p1.1" class="ltx_p"><span id="S5.p1.1.1" class="ltx_text" style="font-size:90%;">We have constructed a theoretical framework presenting a mathematical proof that mapping an asymptotically scale-invariant pre-state to a physical metric via a conformal Weyl transformation guarantees a finite, non-zero initial thermal bath. The explicit transformation of the trace-free stress-energy tensor perfectly cancels geometric dilution, providing an analytical solution to the warm inflation initialization problem.</span></p>
+</div>
+<div id="S5.p2" class="ltx_para">
+<p id="S5.p2.2" class="ltx_p"><span id="S5.p2.2.1" class="ltx_text" style="font-size:90%;">Combined with a spontaneous conformal symmetry-breaking ansatz, the emergent inflaton field enters the physical metric alongside this inherited thermal bath. Because the boundary mapping guarantees a finite initial temperature, the field immediately experiences non-zero dissipative friction (</span><math id="S5.p2.1.m1" class="ltx_Math" alttext="\Gamma&gt;0" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em" mathvariant="normal">Γ</mi><mo mathsize="0.900em">&gt;</mo><mn mathsize="0.900em">0</mn></mrow><annotation encoding="application/x-tex">\Gamma&gt;0</annotation></semantics></math><span id="S5.p2.2.2" class="ltx_text" style="font-size:90%;">). We demonstrated that restricting this boundary temperature to sub-Planckian scales naturally places the onset of inflation into the weak dissipative regime (</span><math id="S5.p2.2.m2" class="ltx_Math" alttext="Q\ll 1" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em">Q</mi><mo mathsize="0.900em">≪</mo><mn mathsize="0.900em">1</mn></mrow><annotation encoding="application/x-tex">Q\ll 1</annotation></semantics></math><span id="S5.p2.2.3" class="ltx_text" style="font-size:90%;">). Consequently, the large initial Hubble friction allows for a smooth, deterministic kinematic handoff from the inherited boundary radiation to the standard warm slow-roll attractor.</span></p>
+</div>
+<div id="S5.p3" class="ltx_para">
+<p id="S5.p3.3" class="ltx_p"><span id="S5.p3.3.1" class="ltx_text" style="font-size:90%;">Crucially, because this boundary mechanism purely dictates the initial kinematic state independently of the specific effective potential </span><math id="S5.p3.1.m1" class="ltx_Math" alttext="V(\phi)" display="inline" intent=":literal"><semantics><mrow><mi mathsize="0.900em">V</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo maxsize="0.900em" minsize="0.900em">(</mo><mi mathsize="0.900em">ϕ</mi><mo maxsize="0.900em" minsize="0.900em">)</mo></mrow></mrow><annotation encoding="application/x-tex">V(\phi)</annotation></semantics></math><span id="S5.p3.3.2" class="ltx_text" style="font-size:90%;">, it protects the standard observational predictions of warm inflation. By bypassing chaotic, model-dependent pre-thermalization dynamics, this framework ensures that the extraction of standard observables—such as the scalar spectral index (</span><math id="S5.p3.2.m2" class="ltx_Math" alttext="n_{s}" display="inline" intent=":literal"><semantics><msub><mi mathsize="0.900em">n</mi><mi mathsize="0.900em">s</mi></msub><annotation encoding="application/x-tex">n_{s}</annotation></semantics></math><span id="S5.p3.3.3" class="ltx_text" style="font-size:90%;">) and the tensor-to-scalar ratio (</span><math id="S5.p3.3.m3" class="ltx_Math" alttext="r" display="inline" intent=":literal"><semantics><mi mathsize="0.900em">r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math><span id="S5.p3.3.4" class="ltx_text" style="font-size:90%;">)—remains robust and entirely determined by the chosen potential during the slow-roll attractor phase. As a theoretical proof-of-concept, this mechanism offers a streamlined, model-independent framework for initializing dissipative inflationary cosmology.</span></p>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography" style="font-size:90%;">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock"><span id="bib.bib1.1.1" class="ltx_text" style="font-size:90%;">
+A. H. Guth,
+“The Inflationary Universe: A Possible Solution to the Horizon and Flatness Problems,”
+Phys. Rev. D </span><span id="bib.bib1.2.2" class="ltx_text ltx_font_bold" style="font-size:90%;">23</span><span id="bib.bib1.3.3" class="ltx_text" style="font-size:90%;">, 347-356 (1981).
+</span>
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock"><span id="bib.bib2.1.1" class="ltx_text" style="font-size:90%;">
+A. D. Linde,
+“A New Inflationary Universe Scenario: A Possible Solution of the Horizon, Flatness, Homogeneity, Isotropy and Primordial Monopole Problems,”
+Phys. Lett. B </span><span id="bib.bib2.2.2" class="ltx_text ltx_font_bold" style="font-size:90%;">108</span><span id="bib.bib2.3.3" class="ltx_text" style="font-size:90%;">, 389-393 (1982).
+</span>
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock"><span id="bib.bib3.1.1" class="ltx_text" style="font-size:90%;">
+A. Berera,
+“Warm inflation,”
+Phys. Rev. Lett. </span><span id="bib.bib3.2.2" class="ltx_text ltx_font_bold" style="font-size:90%;">75</span><span id="bib.bib3.3.3" class="ltx_text" style="font-size:90%;">, 3218-3221 (1995).
+</span>
+</span>
+</li>
+<li id="bib.bib4" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock"><span id="bib.bib4.1.1" class="ltx_text" style="font-size:90%;">
+A. Berera, I. G. Moss and R. O. Ramos,
+“Warm Inflation and its Microphysical Basis,”
+Rep. Prog. Phys. </span><span id="bib.bib4.2.2" class="ltx_text ltx_font_bold" style="font-size:90%;">72</span><span id="bib.bib4.3.3" class="ltx_text" style="font-size:90%;">, 026901 (2009).
+</span>
+</span>
+</li>
+<li id="bib.bib5" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock"><span id="bib.bib5.1.1" class="ltx_text" style="font-size:90%;">
+J. M. Maldacena,
+“The Large N Limit of Superconformal Field Theories and Supergravity,”
+Adv. Theor. Math. Phys. </span><span id="bib.bib5.2.2" class="ltx_text ltx_font_bold" style="font-size:90%;">2</span><span id="bib.bib5.3.3" class="ltx_text" style="font-size:90%;">, 231-252 (1998).
+</span>
+</span>
+</li>
+<li id="bib.bib6" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock"><span id="bib.bib6.1.1" class="ltx_text" style="font-size:90%;">
+R. Penrose,
+</span><span id="bib.bib6.2.2" class="ltx_text ltx_font_italic" style="font-size:90%;">Cycles of Time: An Extraordinary New View of the Universe</span><span id="bib.bib6.3.3" class="ltx_text" style="font-size:90%;">,
+Bodley Head, London (2010).
+</span>
+</span>
+</li>
+<li id="bib.bib7" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock"><span id="bib.bib7.1.1" class="ltx_text" style="font-size:90%;">
+R. M. Wald,
+</span><span id="bib.bib7.2.2" class="ltx_text ltx_font_italic" style="font-size:90%;">General Relativity</span><span id="bib.bib7.3.3" class="ltx_text" style="font-size:90%;">,
+University of Chicago Press, Chicago (1984).
+</span>
+</span>
+</li>
+<li id="bib.bib8" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock"><span id="bib.bib8.1.1" class="ltx_text" style="font-size:90%;">
+N. D. Birrell and P. C. W. Davies,
+</span><span id="bib.bib8.2.2" class="ltx_text ltx_font_italic" style="font-size:90%;">Quantum Fields in Curved Space</span><span id="bib.bib8.3.3" class="ltx_text" style="font-size:90%;">,
+Cambridge University Press, Cambridge (1982).
+</span>
+</span>
+</li>
+<li id="bib.bib9" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock"><span id="bib.bib9.1.1" class="ltx_text" style="font-size:90%;">
+M. J. Duff,
+“Twenty years of the Weyl anomaly,”
+Class. Quant. Grav. </span><span id="bib.bib9.2.2" class="ltx_text ltx_font_bold" style="font-size:90%;">11</span><span id="bib.bib9.3.3" class="ltx_text" style="font-size:90%;">, 1387-1404 (1994).
+</span>
+</span>
+</li>
+<li id="bib.bib10" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock"><span id="bib.bib10.1.1" class="ltx_text" style="font-size:90%;">
+S. R. Coleman and E. J. Weinberg,
+“Radiative Corrections as the Origin of Spontaneous Symmetry Breaking,”
+Phys. Rev. D </span><span id="bib.bib10.2.2" class="ltx_text ltx_font_bold" style="font-size:90%;">7</span><span id="bib.bib10.3.3" class="ltx_text" style="font-size:90%;">, 1888-1910 (1973).
+</span>
+</span>
+</li>
+<li id="bib.bib11" class="ltx_bibitem">
+<span class="ltx_tag ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock"><span id="bib.bib11.1.1" class="ltx_text" style="font-size:90%;">
+M. Bastero-Gil, A. Berera, R. O. Ramos and J. G. Rosa,
+“General dissipation coefficient in low-temperature warm inflation,”
+JCAP </span><span id="bib.bib11.2.2" class="ltx_text ltx_font_bold" style="font-size:90%;">01</span><span id="bib.bib11.3.3" class="ltx_text" style="font-size:90%;">, 016 (2013).
+</span>
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+</div>
+<footer class="arxiv-html-footer">
+  <div class="ltx_page_logo">
+    Experimental support, please
+    <a href="./2604.04219v1/__stdout.txt" class="ltx_ref"
+    target="_blank" rel="nofollow">view the build logs</a>
+    for errors. Generated by
+    <a href="https://math.nist.gov/~BMiller/LaTeXML/" target="_blank" class="ltx_ref ltx_LaTeXML_logo">
+      <span style="letter-spacing: -0.2em; margin-right: 0.1em;">
+        L
+        <span style="font-size: 70%; position: relative; bottom: 2.2pt;">A</span>
+        T
+        <span style="position: relative; bottom: -0.4ex;">E</span>
+      </span>
+      <span class="ltx_font_smallcaps">xml</span>
+      <img alt="[LOGO]"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==">
+    </a>.
+  </div>
+  <div class="keyboard-glossary">
+    <h2>Instructions for reporting errors</h2>
+    <p>We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+      support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+      methods listed below:</p>
+    <ul>
+      <li>Click the "Report Issue" <span class="mobile-only">(<svg role="presentation"
+            style="display: inline-block; vertical-align: middle; fill: var(--text-color);" aria-hidden="true"
+            height="1em" viewBox="0 0 640 640">
+            <path
+              d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+          </svg>)</span> button, located in the page header.</li>
+    </ul>
+    <p><strong>Tip:</strong> You can select the relevant text first, to include it in your report.</p>
+    <p>Our team has already identified <a class="ltx_ref" href="https://github.com/arXiv/html_feedback/issues"
+        target="_blank">the following issues</a>. We appreciate your time reviewing and reporting rendering errors we
+      may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+      should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+      all.</p>
+    <p>Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a <a
+        class="ltx_ref" href="https://github.com/brucemiller/LaTeXML/wiki/Porting-LaTeX-packages-for-LaTeXML"
+        target="_blank">list of packages that need conversion</a>, and welcome <a class="ltx_ref"
+        href="https://github.com/brucemiller/LaTeXML/issues" target="_blank">developer contributions</a>.</p>
+  </div>
+</footer>
+<div id="fixed-buttons-container">
+  <div id="beta-badge" aria-hidden="true">BETA</div>
+  <a id="disable-reading-mode-btn" class="header-button" href="javascript:toggleReadingMode();"
+    title="Disable reading mode, show header and footer">
+    <svg role="presentation" height="1.25rem"
+      viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </a>
+</div></body>
+</html>

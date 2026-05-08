@@ -1,0 +1,956 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Generalized relative locality and causal sets</title>
+<!--Generated on Sun Apr 19 05:53:42 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="/static/browse/0.3.4/css/arxiv-html-papers-20260131.css" type="text/css">
+<script src="/static/browse/0.3.4/js/arxiv-html-papers-20260131.js"></script>
+<script>
+  // Restore the saved color scheme preference, or
+  // enact the browser preference if "automatic", 
+  // without expecting DOM load to have completed.
+  //
+  // Also restore any saved readingmode and ToC display preferences.
+  function initializeReadingPreferences() {
+    let saved_theme = localStorage.getItem("ar5iv_theme") || "automatic";
+    if (saved_theme === "automatic") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        saved_theme = "dark";
+      }
+    }
+    if (saved_theme == "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+
+    const tocDisplay = localStorage.getItem('arxiv_html_paper_toc_display');
+    if (tocDisplay) {
+      document.documentElement.setAttribute("data-toc-display", tocDisplay);
+    }
+    const readingMode = localStorage.getItem('arxiv_html_paper_reading_mode');
+    if (readingMode) {
+      document.documentElement.setAttribute("data-reading-mode", readingMode);
+    }
+  }
+  // Run as soon as JS starts, to minimize repainting
+  initializeReadingPreferences();
+</script>
+<link rel="apple-touch-icon" sizes="180x180"
+  href="/static/browse/0.3.4/images/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32"
+  href="/static/browse/0.3.4/images/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+  href="/static/browse/0.3.4/images/icons/favicon-16x16.png">
+<link rel="manifest" href="/static/browse/0.3.4/images/icons/site.webmanifest">
+<link rel="mask-icon" href="/static/browse/0.3.4/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="stylesheet" type="text/css" media="screen" href="https://use.typekit.net/utz6mli.css">
+</head>
+<body>
+<dialog id="modal-form" aria-labelledby="modal-title" closedby="any">
+  <form id="modal-form-content" method="dialog" enctype="multipart/form-data">
+    <header class="modal-header">
+      <h5 id="modal-title" class="modal-title">Report GitHub Issue</h5>
+      <button type="submit" formnovalidate class="modal-close" aria-label="Close">×</button>
+    </header>
+
+    <div class="modal-body">
+      <label for="form_title">Title:</label>
+      <input class="form-control" id="form_title" name="form_title" required placeholder="Enter title">
+
+      <p id="selectedTextModalDescription" hidden>Content selection saved. Describe the issue below:</p>
+
+      <label for="description">Description:</label>
+      <textarea class="form-control" id="description" name="description" required maxlength="500"
+        placeholder="500 characters maximum"></textarea>
+    </div>
+
+    <footer class="modal-footer">
+      <button type="submit" value="internal-report" class="sr-only modal-submit">Submit without GitHub</button>
+      <button type="submit" value="github-report" class="modal-submit">Submit in GitHub</button>
+    </footer>
+  </form>
+</dialog>
+
+<header class="arxiv-html-header">
+  <div class="html-header-logo">
+    <a href="/">
+      <img alt="arXiv logo" class="logo desktop-only" width="100"
+        src="/static/browse/0.3.4/images/arxiv-logo-one-color-white.svg">
+      <span class="sr-only">Back to arXiv</span>
+    </a>
+  </div>
+  <!--TOC, dark mode, links-->
+  <nav class="html-header-nav">
+    <a class="header-button hover-effect desktop-only" href="https://info.arxiv.org/about/accessible_HTML.html"
+      target="_blank">Why HTML?</a>
+    <a class="header-button" title="Report an Issue" href="#" title="Report an issue"
+      onclick="event.preventDefault(); showModalForm();">
+      <svg role="presentation" class="mobile-only toggle-icon" aria-hidden="true" height="1.25rem"
+        viewBox="0 0 640 640">
+        <path
+          d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+      </svg>
+      <span class="desktop-only">Report Issue</span></a>
+    <!--back to abstract-->
+    <a class="header-button" title="Back to abstract page" aria-label="Back to abstract page"
+      href="/abs/2604.17272v1">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 512 512" fill="#ffffff"
+        aria-hidden="true">
+        <path
+          d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z">
+        </path>
+      </svg>
+      <span class="desktop-only">Back to Abstract</span>
+    </a>
+    <!-- PDF download link -->
+    <a class="header-button" title="Download PDF" href="/pdf/2604.17272v1"
+      target="_blank">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 576 542">
+        <path
+          d="M208 48L96 48c-8.8 0-16 7.2-16 16l0 384c0 8.8 7.2 16 16 16l80 0 0 48-80 0c-35.3 0-64-28.7-64-64L32 64C32 28.7 60.7 0 96 0L229.5 0c17 0 33.3 6.7 45.3 18.7L397.3 141.3c12 12 18.7 28.3 18.7 45.3l0 149.5-48 0 0-128-88 0c-39.8 0-72-32.2-72-72l0-88zM348.1 160L256 67.9 256 136c0 13.3 10.7 24 24 24l68.1 0zM240 380l32 0c33.1 0 60 26.9 60 60s-26.9 60-60 60l-12 0 0 28c0 11-9 20-20 20s-20-9-20-20l0-128c0-11 9-20 20-20zm32 80c11 0 20-9 20-20s-9-20-20-20l-12 0 0 40 12 0zm96-80l32 0c28.7 0 52 23.3 52 52l0 64c0 28.7-23.3 52-52 52l-32 0c-11 0-20-9-20-20l0-128c0-11 9-20 20-20zm32 128c6.6 0 12-5.4 12-12l0-64c0-6.6-5.4-12-12-12l-12 0 0 88 12 0zm76-108c0-11 9-20 20-20l48 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 24 28 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 44c0 11-9 20-20 20s-20-9-20-20l0-128z" />
+      </svg>
+      <span class="desktop-only">Download PDF</span></a>
+    <!-- navigational table of contents toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleNavTOC();" title="Toggle navigation"
+      aria-label="Toggle navigation">
+      <svg height="1.25rem" role="presentation" viewBox="0 0 512 512">
+        <path
+          d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z">
+        </path>
+      </svg>
+    </a>
+    <!--- collapsable header / reading mode toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleReadingMode();"
+      title="Disable reading mode, show header and footer">
+      <svg role="presentation" height="1.25rem"
+        viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+        <path
+          d="M32 32C14.3 32 0 46.3 0 64l0 96c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 32zM64 352c0-17.7-14.3-32-32-32S0 334.3 0 352l0 96c0 17.7 14.3 32 32 32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0 0-64zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0 0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-96c0-17.7-14.3-32-32-32l-96 0zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l96 0c17.7 0 32-14.3 32-32l0-96z" />
+      </svg>
+    </a>
+    <!--- colored theme toggle -->
+    <button type="button" class="header-button color-tog" onclick="toggleColorScheme();" title="Toggle dark/light mode" aria-label="Toggle color scheme">
+      <span class="toggle-icon automatic-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon light-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon dark-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+    </button>
+  </nav>
+</header><nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_abstract"><a href="#abstract1" title="In Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_title">Abstract</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S1" title="In Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">1 </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S2" title="In Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">2 </span>Observer-independent and observer-dependent spacetimes</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S3" title="In Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">3 </span>Ehresmann connections and the causal set structure of <math class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math></span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S4" title="In Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">4 </span>Generalized relative locality</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S5" title="In Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">5 </span>Relative locality and momentum-space curvature</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S6" title="In Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">6 </span>Spacetime symmetries</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S7" title="In Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">7 </span>Conclusion and outlook</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_bibliography"><a href="#bib" title="In Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_title">References</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div id="infobox" class="infobox">
+  <a id="license-tr" href="https://info.arxiv.org/help/license/index.html#licenses-available">
+    License: CC BY 4.0
+  </a>
+  <div id="watermark-tr">
+arXiv:2604.17272v1 [gr-qc] 19 Apr 2026</div>
+</div><div class="ltx_page_content">
+<article class="ltx_document ltx_fleqn" lang="en">
+<h1 class="ltx_title ltx_title_document">Generalized relative locality and causal sets</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Andrea Bevilacqua
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_email"><a href="2604.17272v1/mailto:andrea.bevilacqua@ncbj.gov.pl">andrea.bevilacqua@ncbj.gov.pl</a>
+</span></span></span>
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Alice Boldrin
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_email"><a href="2604.17272v1/mailto:alice.boldrin@ncbj.gov.pl">alice.boldrin@ncbj.gov.pl</a>
+</span></span></span>
+</div>
+
+<div id="abstract1" class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p"><span class="ltx_text">In this paper we introduce a new general framework for the study of phenomenological quantum gravity theories (PQG). The key idea is the introduction of two different types of spacetime, an observer-independent spacetime (modeled by a smooth orientable manifold) and an observer-dependent one (which has an inherently discrete causal set structure). The interaction between the two allows us to prove the main result of the paper: relative locality can be obtained in general PQG models, regardless of momentum-space curvature. We also discuss the treatment of spacetime symmetries in our model, and introduce a direct link between spacetime symmetries and relative locality effects. Our construction is presented in a coordinate-independent way and is based on fibre bundles where spacetime, rather than momentum-space, is the base manifold. This makes causality manifest even in general models with relative locality. Furthermore, it allows for the application of this formalism to cosmology on general backgrounds, something which is not clearly possible in the canonical approach to relative locality, where momentum-space serves as the base manifold.</span></p>
+</div>
+<div class="ltx_classification">
+<h6 class="ltx_title ltx_title_classification">keywords: </h6>
+<span id="id1.id1" class="ltx_text">
+Quantum Gravity , Relative Locality , Fibre Bundles , Causal Sets
+</span>
+</div>
+<span id="id1" class="ltx_note ltx_note_frontmatter ltx_role_journal"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">journal: </span><span id="id1.1" class="ltx_text">Physics Letters B</span></span></span></span>
+<div id="p1" class="ltx_para">
+<span id="p1.1" class="ltx_ERROR undefined">\affiliation</span>
+<p id="p1.2" class="ltx_p">[first]organization=National Centre for Nuclear Research,addressline=ul. Pasteura 7,
+city=Warsaw,
+postcode=02-093,
+country=Poland</p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">1 </span>Introduction</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p id="S1.p1.1" class="ltx_p">In his Tractatus Logico-Philosophicus, Wittgenstein famously argued that tautologies have nothing to say about the world <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib1" title="Wittgenstein’s tractatus logico-philosophicus: a critical guide" class="ltx_ref">35</a>]</cite>. However, while a tautology indeed relates two statements with the same logical content, the history of physics and mathematics is filled with examples of <span id="S1.p1.1.1" class="ltx_text ltx_font_italic">tautological</span> reformulations of known concepts in a new language which opens the way to further discoveries. The most famous example in physics is the reformulation of Newtonian mechanics in terms of Lagrangian or Hamiltonian.
+This type of approach acquires an even greater importance in the context of quantum gravity (QG), where experimental guidance is at best sparse and theoretical or mathematical arguments are the main tools available to physicists.</p>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p id="S1.p2.1" class="ltx_p">In this work, we consider the currently most promising approaches to QG research, particularly in terms of contact with experiments. We refer to these as phenomenological QG (PQG) models, in which additional parameters are introduced to describe potential QG signatures <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="Quantum gravity phenomenology at the dawn of the multi-messenger era—A review" class="ltx_ref">1</a>]</cite>.
+One of the most striking consequences of PQG models with a curved momentum-space is relative locality <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="The principle of relative locality" class="ltx_ref">5</a>, <a href="#bib.bib4" title="Gamma ray burst delay times probe the geometry of momentum space" class="ltx_ref">21</a>, <a href="#bib.bib37" title="Relative locality: A deepening of the relativity principle" class="ltx_ref">4</a>]</cite>. The most natural way to model this class of theories is to assume that spacetime loses its fundamental role in the description of events, being replaced by momentum-space. Although conceptually appealing, this approach makes it challenging to describe relative-locality effects in general spacetimes, with existing discussions limited to highly symmetric or otherwise constrained cases <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib5" title="Phenomenology of DSR-relativistic in-vacuo dispersion in FLRW spacetime" class="ltx_ref">3</a>, <a href="#bib.bib6" title="Transverse relative locality effects in de Sitter spacetime" class="ltx_ref">20</a>]</cite>. Furthermore, causality is not manifestly well defined <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib7" title="Causal loop in the theory of Relative Locality" class="ltx_ref">17</a>, <a href="#bib.bib8" title="Twisting loops and global momentum non-conservation in Relative Locality" class="ltx_ref">10</a>, <a href="#bib.bib9" title="Causality and momentum conservation from relative locality" class="ltx_ref">2</a>]</cite>. Finally, while curvature of momentum-space is a sufficient condition for relative locality, it remains unclear whether it is also necessary.</p>
+</div>
+<div id="S1.p3" class="ltx_para">
+<p id="S1.p3.1" class="ltx_p">In what follows we will propose an approach to relative locality which is based on the fibre bundle paradigm while still retaining the fundamental role of spacetime. One of the key concepts will be the separation between an underlying <span id="S1.p3.1.1" class="ltx_text ltx_font_italic">observer-independent</span> spacetime, and an <span id="S1.p3.1.2" class="ltx_text ltx_font_italic">observer-dependent</span> spacetime. In doing so we will provide a solution to all the problems delineated above, while at the same time introducing potentially new types of relative locality, for example related to the topology of momentum-space and/or spacetime. We will begin by introducing observer-(in)dependent spacetimes (sec. <a href="#S2" title="2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>), further characterized in sec. <a href="#S3" title="3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a> where dynamics will also be discussed. In sec. <a href="#S4" title="4 Generalized relative locality ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a> we will show how the assumptions described in sec. <a href="#S2" title="2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>, <a href="#S3" title="3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>, applied in the most simple context, reproduce literature results about relative locality. Before concluding in sec. <a href="#S7" title="7 Conclusion and outlook ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">7</span></a>, we will discuss the curvature of momentum-space in sec. <a href="#S5" title="5 Relative locality and momentum-space curvature ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a> , and introduce the treatment of symmetries in our formalism in sec. <a href="#S6" title="6 Spacetime symmetries ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">6</span></a>.</p>
+</div>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">2 </span>Observer-independent and observer-dependent spacetimes</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p id="S2.p1.6" class="ltx_p">We consider a fibre bundle <math id="S2.p1.1.m1" class="ltx_Math" alttext="(E,\pi,M)" display="inline" intent=":literal"><semantics><mrow><mo stretchy="false">(</mo><mi>E</mi><mo>,</mo><mi>π</mi><mo>,</mo><mi>M</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(E,\pi,M)</annotation></semantics></math> with fibres <math id="S2.p1.2.m2" class="ltx_Math" alttext="F_{p}=\text{preim}_{\pi}(p)" display="inline" intent=":literal"><semantics><mrow><msub><mi>F</mi><mi>p</mi></msub><mo>=</mo><mrow><msub><mtext>preim</mtext><mi>π</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">F_{p}=\text{preim}_{\pi}(p)</annotation></semantics></math>, <math id="S2.p1.3.m3" class="ltx_Math" alttext="p\in M" display="inline" intent=":literal"><semantics><mrow><mi>p</mi><mo>∈</mo><mi>M</mi></mrow><annotation encoding="application/x-tex">p\in M</annotation></semantics></math>. We define the smooth orientable manifold <math id="S2.p1.4.m4" class="ltx_Math" alttext="M" display="inline" intent=":literal"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> to be the <span id="S2.p1.6.1" class="ltx_text ltx_font_italic">observer-independent</span> spacetime, with the fibres <math id="S2.p1.5.m5" class="ltx_Math" alttext="F" display="inline" intent=":literal"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math> identified with momentum-space. Notice that the observer-independent spacetime lacks any properties that could lead to relative locality or causal sets. At the same time, we are not assuming anything about <math id="S2.p1.6.m6" class="ltx_Math" alttext="F" display="inline" intent=":literal"><semantics><mi>F</mi><annotation encoding="application/x-tex">F</annotation></semantics></math> at this point, except that it is a smooth manifold. We now turn to the definition of observer-dependent spacetime.</p>
+</div>
+<div id="S2.p2" class="ltx_para">
+<p id="S2.p2.12" class="ltx_p">An observer moving along the timelike curve <math id="S2.p2.1.m1" class="ltx_Math" alttext="x:[0,1]\to U\subset M" display="inline" intent=":literal"><semantics><mrow><mi>x</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mrow><mo stretchy="false">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false">]</mo></mrow><mo stretchy="false">→</mo><mi>U</mi><mo>⊂</mo><mi>M</mi></mrow></mrow><annotation encoding="application/x-tex">x:[0,1]\to U\subset M</annotation></semantics></math>, <math id="S2.p2.2.m2" class="ltx_Math" alttext="t\mapsto x(t)" display="inline" intent=":literal"><semantics><mrow><mi>t</mi><mo stretchy="false">↦</mo><mrow><mi>x</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">t\mapsto x(t)</annotation></semantics></math>,
+experiences spacetime locally through local sections <math id="S2.p2.3.m3" class="ltx_Math" alttext="\sigma_{\theta(t)}:U_{t}\subset M\to E" display="inline" intent=":literal"><semantics><mrow><msub><mi>σ</mi><mrow><mi>θ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msub><mi>U</mi><mi>t</mi></msub><mo>⊂</mo><mi>M</mi><mo stretchy="false">→</mo><mi>E</mi></mrow></mrow><annotation encoding="application/x-tex">\sigma_{\theta(t)}:U_{t}\subset M\to E</annotation></semantics></math>.
+Here <math id="S2.p2.4.m4" class="ltx_Math" alttext="U_{t}=B_{\epsilon}(x(t))" display="inline" intent=":literal"><semantics><mrow><msub><mi>U</mi><mi>t</mi></msub><mo>=</mo><mrow><msub><mi>B</mi><mi>ϵ</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">U_{t}=B_{\epsilon}(x(t))</annotation></semantics></math> denotes an open ball of radius <math id="S2.p2.5.m5" class="ltx_Math" alttext="\epsilon" display="inline" intent=":literal"><semantics><mi>ϵ</mi><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math> centered at <math id="S2.p2.6.m6" class="ltx_Math" alttext="x(t)" display="inline" intent=":literal"><semantics><mrow><mi>x</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">x(t)</annotation></semantics></math>,
+and <math id="S2.p2.7.m7" class="ltx_Math" alttext="\theta(t)" display="inline" intent=":literal"><semantics><mrow><mi>θ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">\theta(t)</annotation></semantics></math> is an index<span id="footnote1" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_tag ltx_tag_note">1</span>The value of <math id="footnote1.m1" class="ltx_Math" alttext="\theta(t)" display="inline" intent=":literal"><semantics><mrow><mi>θ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">\theta(t)</annotation></semantics></math> may vary with the parameter <math id="footnote1.m2" class="ltx_Math" alttext="t" display="inline" intent=":literal"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math> along the curve <math id="footnote1.m3" class="ltx_Math" alttext="x(t)" display="inline" intent=":literal"><semantics><mrow><mi>x</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">x(t)</annotation></semantics></math>.</span></span></span>
+labeling the particles visible to the observer along their trajectory.
+This reflects the idea that, in special and general relativity as well as in quantum field theory, an observer can only measure the four-momentum<span id="footnote2" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_tag ltx_tag_note">2</span>In this paper we only focus on kinematical effects <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="The principle of relative locality" class="ltx_ref">5</a>, <a href="#bib.bib4" title="Gamma ray burst delay times probe the geometry of momentum space" class="ltx_ref">21</a>]</cite>. We postpone the study of the measurement of the spin to future papers.</span></span></span> <math id="S2.p2.8.m8" class="ltx_Math" alttext="p_{\mu}" display="inline" intent=":literal"><semantics><msub><mi>p</mi><mi>μ</mi></msub><annotation encoding="application/x-tex">p_{\mu}</annotation></semantics></math> of particles within an arbitrarily small neighborhood of their worldline, while still being able to distinguish separate particle arrivals, a fact the observer interprets as the passage of time. Observers then reconstruct spacetime based on these measurements. Analogously, one can obtain the same result by identifying each spacetime point with an event. In the simplest case of a single freely propagating particle, this corresponds to a 1-1 interaction: one particle arrives at the point with momentum <math id="S2.p2.9.m9" class="ltx_Math" alttext="p" display="inline" intent=":literal"><semantics><mi>p</mi><annotation encoding="application/x-tex">p</annotation></semantics></math> and one particle leaves with momentum <math id="S2.p2.10.m10" class="ltx_Math" alttext="q" display="inline" intent=":literal"><semantics><mi>q</mi><annotation encoding="application/x-tex">q</annotation></semantics></math> <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib4" title="Gamma ray burst delay times probe the geometry of momentum space" class="ltx_ref">21</a>]</cite>. By conservation of momentum we have <math id="S2.p2.11.m11" class="ltx_Math" alttext="p=q" display="inline" intent=":literal"><semantics><mrow><mi>p</mi><mo>=</mo><mi>q</mi></mrow><annotation encoding="application/x-tex">p=q</annotation></semantics></math>, so each spacetime point can be associated with a unique momentum. In more complex cases, where more general <math id="S2.p2.12.m12" class="ltx_Math" alttext="n-m" display="inline" intent=":literal"><semantics><mrow><mi>n</mi><mo>−</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">n-m</annotation></semantics></math> interactions are present, the observer assigns to the interaction point the set of all involved particles’ momenta, reducing to the previous 1-1 case away from the interaction. In all cases, with or without interacting particles, an observer may label nearby spacetime points by assigning a momentum to each visible particle, i.e. by choosing a corresponding set of local section s of the bundle. The situation is depicted in Fig. <a href="#S2.F1" title="Figure 1 ‣ 2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>, <a href="#S2.F2" title="Figure 2 ‣ 2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>.</p>
+</div>
+<figure id="S2.F1" class="ltx_figure"><img src="2604.17272v1/x1.png" id="S2.F1.g1" class="ltx_graphics ltx_centering ltx_img_portrait" width="264" height="369" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span id="S2.F1.4.2.1" class="ltx_text" style="font-size:90%;">Figure 1</span>: </span><span id="S2.F1.2.1" class="ltx_text" style="font-size:90%;">An observer moving along their worldline (solid red line). At each point of the trajectory, the observer can measure the momentum of particles that may enter or leave their observational scope (i.e. the balls <math id="S2.F1.2.1.m1" class="ltx_Math" alttext="B_{\epsilon}" display="inline" intent=":literal"><semantics><msub><mi>B</mi><mi>ϵ</mi></msub><annotation encoding="application/x-tex">B_{\epsilon}</annotation></semantics></math>, represented in perspective as ellipses). The yellow dots represent interaction vertices between the orange, dashed green, and dotted purple particles.</span></figcaption>
+</figure>
+<figure id="S2.F2" class="ltx_figure"><img src="2604.17272v1/x2.png" id="S2.F2.g1" class="ltx_graphics ltx_centering ltx_img_square" width="264" height="237" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span id="S2.F2.6.3.1" class="ltx_text" style="font-size:90%;">Figure 2</span>: </span><span id="S2.F2.4.2" class="ltx_text" style="font-size:90%;"> A representation of the same situation depicted in Fig. <a href="#S2.F1" title="Figure 1 ‣ 2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a> but from the point of view of fibre bundles. Notice that <math id="S2.F2.3.1.m1" class="ltx_Math" alttext="p_{2}" display="inline" intent=":literal"><semantics><msub><mi>p</mi><mn>2</mn></msub><annotation encoding="application/x-tex">p_{2}</annotation></semantics></math> and <math id="S2.F2.4.2.m2" class="ltx_Math" alttext="p_{5}" display="inline" intent=":literal"><semantics><msub><mi>p</mi><mn>5</mn></msub><annotation encoding="application/x-tex">p_{5}</annotation></semantics></math>, which are represented as dots here, are respectively the ending and starting point of the sections related to the incoming and outgoing orange particle.</span></figcaption>
+</figure>
+<div id="S2.p3" class="ltx_para">
+<p id="S2.p3.15" class="ltx_p">The full description of spacetime is, however, not only given by the observation of particles’ momenta at any given time, but also by the time evolution of the particle content, i.e., the temporal changes in particle number and types. We therefore define the following binary relation:</p>
+<table id="S2.E1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_left_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_left"><math id="S2.E1.m1" class="ltx_Math" alttext="\sigma_{\theta(t)}\sim\sigma_{\theta(t^{\prime})}\quad\text{iff}\quad\theta(s)=\theta(t)=\theta(t^{\prime})\quad\forall s\in[t,t^{\prime}]_{\pm}" display="block" intent=":literal"><semantics><mrow><mrow><mrow><msub><mi>σ</mi><mrow><mi>θ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo>∼</mo><mrow><msub><mi>σ</mi><mrow><mi>θ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><msup><mi>t</mi><mo>′</mo></msup><mo stretchy="false">)</mo></mrow></mrow></msub><mspace style="width:1em;" width="1em"></mspace><mtext>iff</mtext></mrow></mrow><mspace style="width:1em;" width="1em"></mspace><mrow><mrow><mi>θ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>θ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>θ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><msup><mi>t</mi><mo>′</mo></msup><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><mspace style="width:1.167em;" width="1.167em"></mspace><mrow><mrow><mo rspace="0.167em">∀</mo><mi>s</mi></mrow><mo>∈</mo><msub><mrow><mo stretchy="false">[</mo><mi>t</mi><mo>,</mo><msup><mi>t</mi><mo>′</mo></msup><mo stretchy="false">]</mo></mrow><mo>±</mo></msub></mrow></mrow><annotation encoding="application/x-tex">\sigma_{\theta(t)}\sim\sigma_{\theta(t^{\prime})}\quad\text{iff}\quad\theta(s)=\theta(t)=\theta(t^{\prime})\quad\forall s\in[t,t^{\prime}]_{\pm}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_left_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+<p id="S2.p3.11" class="ltx_p">where <math id="S2.p3.1.m1" class="ltx_Math" alttext="[t,t^{\prime}]_{\pm}=[t,t^{\prime}]" display="inline" intent=":literal"><semantics><mrow><msub><mrow><mo stretchy="false">[</mo><mi>t</mi><mo>,</mo><msup><mi>t</mi><mo>′</mo></msup><mo stretchy="false">]</mo></mrow><mo>±</mo></msub><mo>=</mo><mrow><mo stretchy="false">[</mo><mi>t</mi><mo>,</mo><msup><mi>t</mi><mo>′</mo></msup><mo stretchy="false">]</mo></mrow></mrow><annotation encoding="application/x-tex">[t,t^{\prime}]_{\pm}=[t,t^{\prime}]</annotation></semantics></math> if <math id="S2.p3.2.m2" class="ltx_Math" alttext="t\leq t^{\prime}" display="inline" intent=":literal"><semantics><mrow><mi>t</mi><mo>≤</mo><msup><mi>t</mi><mo>′</mo></msup></mrow><annotation encoding="application/x-tex">t\leq t^{\prime}</annotation></semantics></math>, and <math id="S2.p3.3.m3" class="ltx_Math" alttext="[t^{\prime},t]" display="inline" intent=":literal"><semantics><mrow><mo stretchy="false">[</mo><msup><mi>t</mi><mo>′</mo></msup><mo>,</mo><mi>t</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[t^{\prime},t]</annotation></semantics></math> otherwise.
+Relation (<a href="#S2.E1" title="In 2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>) is reflexive (since <math id="S2.p3.4.m4" class="ltx_Math" alttext="[t,t]=\{t\}" display="inline" intent=":literal"><semantics><mrow><mrow><mo stretchy="false">[</mo><mi>t</mi><mo>,</mo><mi>t</mi><mo stretchy="false">]</mo></mrow><mo>=</mo><mrow><mo stretchy="false">{</mo><mi>t</mi><mo stretchy="false">}</mo></mrow></mrow><annotation encoding="application/x-tex">[t,t]=\{t\}</annotation></semantics></math>), symmetric (if <math id="S2.p3.5.m5" class="ltx_Math" alttext="\forall s\in[t,t^{\prime}]_{\pm}" display="inline" intent=":literal"><semantics><mrow><mrow><mo rspace="0.167em">∀</mo><mi>s</mi></mrow><mo>∈</mo><msub><mrow><mo stretchy="false">[</mo><mi>t</mi><mo>,</mo><msup><mi>t</mi><mo>′</mo></msup><mo stretchy="false">]</mo></mrow><mo>±</mo></msub></mrow><annotation encoding="application/x-tex">\forall s\in[t,t^{\prime}]_{\pm}</annotation></semantics></math>, then <math id="S2.p3.6.m6" class="ltx_Math" alttext="\forall s\in[t^{\prime},t]_{\pm}" display="inline" intent=":literal"><semantics><mrow><mrow><mo rspace="0.167em">∀</mo><mi>s</mi></mrow><mo>∈</mo><msub><mrow><mo stretchy="false">[</mo><msup><mi>t</mi><mo>′</mo></msup><mo>,</mo><mi>t</mi><mo stretchy="false">]</mo></mrow><mo>±</mo></msub></mrow><annotation encoding="application/x-tex">\forall s\in[t^{\prime},t]_{\pm}</annotation></semantics></math>), and transitive (if <math id="S2.p3.7.m7" class="ltx_Math" alttext="\forall s\in[t,t^{\prime}]_{\pm}" display="inline" intent=":literal"><semantics><mrow><mrow><mo rspace="0.167em">∀</mo><mi>s</mi></mrow><mo>∈</mo><msub><mrow><mo stretchy="false">[</mo><mi>t</mi><mo>,</mo><msup><mi>t</mi><mo>′</mo></msup><mo stretchy="false">]</mo></mrow><mo>±</mo></msub></mrow><annotation encoding="application/x-tex">\forall s\in[t,t^{\prime}]_{\pm}</annotation></semantics></math> and <math id="S2.p3.8.m8" class="ltx_Math" alttext="\forall s\in[t^{\prime},t^{\prime\prime}]_{\pm}" display="inline" intent=":literal"><semantics><mrow><mrow><mo rspace="0.167em">∀</mo><mi>s</mi></mrow><mo>∈</mo><msub><mrow><mo stretchy="false">[</mo><msup><mi>t</mi><mo>′</mo></msup><mo>,</mo><msup><mi>t</mi><mo>′′</mo></msup><mo stretchy="false">]</mo></mrow><mo>±</mo></msub></mrow><annotation encoding="application/x-tex">\forall s\in[t^{\prime},t^{\prime\prime}]_{\pm}</annotation></semantics></math>, then <math id="S2.p3.9.m9" class="ltx_Math" alttext="\forall s\in[t,t^{\prime\prime}]_{\pm}" display="inline" intent=":literal"><semantics><mrow><mrow><mo rspace="0.167em">∀</mo><mi>s</mi></mrow><mo>∈</mo><msub><mrow><mo stretchy="false">[</mo><mi>t</mi><mo>,</mo><msup><mi>t</mi><mo>′′</mo></msup><mo stretchy="false">]</mo></mrow><mo>±</mo></msub></mrow><annotation encoding="application/x-tex">\forall s\in[t,t^{\prime\prime}]_{\pm}</annotation></semantics></math>), and the equality <math id="S2.p3.10.m10" class="ltx_Math" alttext="=" display="inline" intent=":literal"><semantics><mo>=</mo><annotation encoding="application/x-tex">=</annotation></semantics></math> is an equivalence relation. Hence, <math id="S2.p3.11.m11" class="ltx_Math" alttext="\sim" display="inline" intent=":literal"><semantics><mo>∼</mo><annotation encoding="application/x-tex">\sim</annotation></semantics></math> is an equivalence relation. We can now define the <span id="S2.p3.11.1" class="ltx_text ltx_font_italic">observer-dependent</span> spacetime as the set<span id="footnote3" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">3</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">3</sup><span class="ltx_tag ltx_tag_note">3</span>One may wish to exclude elements in <math id="footnote3.m1" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math> which describe zero particles seen by the observer. This amounts to a trivial modification of Eq. (<a href="#S2.E2" title="In 2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>).</span></span></span> (see also Fig. <a href="#S3.F4" title="Figure 4 ‣ 3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>)</p>
+<table id="S2.E2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_left_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_left"><math id="S2.E2.m1" class="ltx_Math" alttext="S=\frac{\{\sigma^{i}_{\theta(t)}\}_{i,\theta(t)}}{\sim}." display="block" intent=":literal"><semantics><mrow><mrow><mi>S</mi><mo>=</mo><mfrac><msub><mrow><mo stretchy="false">{</mo><msubsup><mi>σ</mi><mrow><mi>θ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mi>i</mi></msubsup><mo stretchy="false">}</mo></mrow><mrow><mi>i</mi><mo>,</mo><mrow><mi>θ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></msub><mo>∼</mo></mfrac></mrow><mo lspace="0em">.</mo></mrow><annotation encoding="application/x-tex">S=\frac{\{\sigma^{i}_{\theta(t)}\}_{i,\theta(t)}}{\sim}.</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_left_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+</table>
+<p id="S2.p3.14" class="ltx_p">where <math id="S2.p3.12.m1" class="ltx_Math" alttext="i" display="inline" intent=":literal"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math> runs over all observers.
+Eq. (<a href="#S2.E2" title="In 2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>) expresses the idea that the observer-dependent spacetime is what all observers measure it to be. Because of this definition, when two observers interact at the same spacetime point <math id="S2.p3.13.m2" class="ltx_Math" alttext="x\in M" display="inline" intent=":literal"><semantics><mrow><mi>x</mi><mo>∈</mo><mi>M</mi></mrow><annotation encoding="application/x-tex">x\in M</annotation></semantics></math>, this event may still correspond to two distinct points in <math id="S2.p3.14.m3" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>. This reflects the fact that different observers perceive spacetime differently, even when meeting at the same event, a feature historically highlighted by the Rietdijk–Putnam argument <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib34" title="A rigorous proof of determinism derived from the special theory of relativity" class="ltx_ref">30</a>, <a href="#bib.bib33" title="Time and physical geometry" class="ltx_ref">29</a>]</cite>.</p>
+</div>
+<div id="S2.p4" class="ltx_para">
+<p id="S2.p4.6" class="ltx_p">Following a similar line of reasoning, in <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="The principle of relative locality" class="ltx_ref">5</a>]</cite> observers are defined as ‘calorimeters with clocks’. However, that construction does not distinguish between an underlying observer-independent and an observer-dependent spacetime. Notice that here the observer-dependent spacetime <math id="S2.p4.1.m1" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math> has a purely phenomenological definition as we make no assumptions about the motion of particles in the vicinity of the observer. We only assume that the observer can measure the momentum of particles while moving along a trajectory <math id="S2.p4.2.m2" class="ltx_Math" alttext="x(t)" display="inline" intent=":literal"><semantics><mrow><mi>x</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">x(t)</annotation></semantics></math> in <math id="S2.p4.3.m3" class="ltx_Math" alttext="M" display="inline" intent=":literal"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>, and thus reconstruct the sections <math id="S2.p4.4.m4" class="ltx_Math" alttext="\sigma_{\theta(t)}" display="inline" intent=":literal"><semantics><msub><mi>σ</mi><mrow><mi>θ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow></msub><annotation encoding="application/x-tex">\sigma_{\theta(t)}</annotation></semantics></math>. Note also that, in this model, an observer moves in the observer-independent spacetime <math id="S2.p4.5.m5" class="ltx_Math" alttext="M" display="inline" intent=":literal"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>, which is, in general, different from the observer-dependent spacetime <math id="S2.p4.6.m6" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math> reconstructed from observations.
+This seemingly troubling discrepancy is, in fact, already present in canonical special relativity, as exemplified by the Penrose–Terrell effect <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib12" title="Invisibility of the Lorentz Contraction" class="ltx_ref">33</a>, <a href="#bib.bib25" title="The apparent shape of a relativistically moving sphere" class="ltx_ref">27</a>, <a href="#bib.bib13" title="A snapshot of relativistic motion: visualizing the Terrell-Penrose effect" class="ltx_ref">22</a>]</cite>.
+Moreover, in general relativity, different observers may adopt coordinate systems that do not cover the full spacetime, so that their observer-dependent description differs from the underlying observer-independent one. A well-known example is provided by the Schwarzschild spacetime, where standard Schwarzschild coordinates break down at the horizon <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib14" title="General Relativity" class="ltx_ref">34</a>]</cite>.
+This situation presents itself in quantum mechanics too, where the measurement postulate introduces a clear distinction between the observer-independent unitary evolution of a system, governed by the Schrödinger equation, and the observer-dependent measurement process (collapse of the wave function).</p>
+</div>
+<div id="Thmassumption1" class="ltx_theorem ltx_theorem_assumption">
+<h6 class="ltx_title ltx_runin ltx_title_theorem"><span class="ltx_tag ltx_tag_theorem"><span id="Thmassumption1.1.1.1" class="ltx_text ltx_font_bold">Assumption 1</span></span></h6>
+<div id="Thmassumption1.p1" class="ltx_para">
+<p id="Thmassumption1.p1.2" class="ltx_p"><span id="Thmassumption1.p1.2.2" class="ltx_text ltx_font_italic">We assume that the definition (<a href="#S2.E2" title="In 2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>) of observer-dependent spacetime <math id="Thmassumption1.p1.1.1.m1" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math> holds in general PQGs. All physically observable quantities are to be described in terms of <math id="Thmassumption1.p1.2.2.m2" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>.</span></p>
+</div>
+</div>
+<div id="S2.p5" class="ltx_para">
+<p id="S2.p5.3" class="ltx_p">We also note that the observer-dependent spacetime <math id="S2.p5.1.m1" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math> has a discrete structure. The equivalence relation <math id="S2.p5.2.m2" class="ltx_Math" alttext="\sim" display="inline" intent=":literal"><semantics><mo>∼</mo><annotation encoding="application/x-tex">\sim</annotation></semantics></math> in Eq. (<a href="#S2.E1" title="In 2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>) identifies all the points in the trajectory of an observer in which there is no change in the particle content seen by the observer. Therefore, the discreteness of <math id="S2.p5.3.m3" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math> is ensured by the fact that the number of particles that an observer can see at any time is discrete, and so is the change in the particles observed. In other words, interestingly, the observer-dependent spacetime discreteness is ensured by the discrete nature of particles.</p>
+</div>
+<div id="S2.p6" class="ltx_para">
+<p id="S2.p6.3" class="ltx_p">Note that our definition of observer-dependent spacetime <math id="S2.p6.1.m1" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math> in Eq. (<a href="#S2.E2" title="In 2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>) is a slight generalization of the canonical spacetime encountered in special and general relativity, where spacetime points are defined as events (intended as point-like interactions). The canonical specetime of special and general relativity corresponds to the limit <math id="S2.p6.2.m2" class="ltx_Math" alttext="\epsilon\rightarrow 0" display="inline" intent=":literal"><semantics><mrow><mi>ϵ</mi><mo stretchy="false">→</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\epsilon\rightarrow 0</annotation></semantics></math> of our construction (when the open balls <math id="S2.p6.3.m3" class="ltx_Math" alttext="B_{\epsilon}" display="inline" intent=":literal"><semantics><msub><mi>B</mi><mi>ϵ</mi></msub><annotation encoding="application/x-tex">B_{\epsilon}</annotation></semantics></math> become degenerate), so that observers are not able to measure the momentum of particles in a certain finite non-trivial nearby region, but only when they have an interaction vertex in common.<span id="footnote4" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">4</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">4</sup><span class="ltx_tag ltx_tag_note">4</span>Our generalization accounts for the possibility of non-zero physical dimensions of observer apparatuses aimed at measuring particles momenta.</span></span></span></p>
+</div>
+<div id="S2.p7" class="ltx_para">
+<p id="S2.p7.1" class="ltx_p">The final element needed to complete our framework is the connection on the bundle, related to the dynamics of the particles.</p>
+</div>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">3 </span>Ehresmann connections and the causal set structure of <math id="S3.1.m1" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>
+</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p id="S3.p1.8" class="ltx_p">We start by briefly reviewing the concept of Ehresmann connection. Given a total space <math id="S3.p1.1.m1" class="ltx_Math" alttext="E" display="inline" intent=":literal"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math> of a fibre bundle and its tangent space <math id="S3.p1.2.m2" class="ltx_Math" alttext="TE" display="inline" intent=":literal"><semantics><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mi>E</mi></mrow><annotation encoding="application/x-tex">TE</annotation></semantics></math>, one can split <math id="S3.p1.3.m3" class="ltx_Math" alttext="TE=VE\oplus HE" display="inline" intent=":literal"><semantics><mrow><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mi>E</mi></mrow><mo>=</mo><mrow><mrow><mi>V</mi><mo lspace="0em" rspace="0em">​</mo><mi>E</mi></mrow><mo>⊕</mo><mrow><mi>H</mi><mo lspace="0em" rspace="0em">​</mo><mi>E</mi></mrow></mrow></mrow><annotation encoding="application/x-tex">TE=VE\oplus HE</annotation></semantics></math> so that each vector in <math id="S3.p1.4.m4" class="ltx_Math" alttext="TE" display="inline" intent=":literal"><semantics><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mi>E</mi></mrow><annotation encoding="application/x-tex">TE</annotation></semantics></math> is the sum of a <span id="S3.p1.8.1" class="ltx_text ltx_font_italic">vertical</span> component tangent to the fibres, and a <span id="S3.p1.8.2" class="ltx_text ltx_font_italic">horizontal</span> one complementary to it. As a general notation, given <math id="S3.p1.5.m5" class="ltx_Math" alttext="w\in TE" display="inline" intent=":literal"><semantics><mrow><mi>w</mi><mo>∈</mo><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mi>E</mi></mrow></mrow><annotation encoding="application/x-tex">w\in TE</annotation></semantics></math>, we will denote by <math id="S3.p1.6.m6" class="ltx_Math" alttext="Vw" display="inline" intent=":literal"><semantics><mrow><mi>V</mi><mo lspace="0em" rspace="0em">​</mo><mi>w</mi></mrow><annotation encoding="application/x-tex">Vw</annotation></semantics></math> and <math id="S3.p1.7.m7" class="ltx_Math" alttext="Hw" display="inline" intent=":literal"><semantics><mrow><mi>H</mi><mo lspace="0em" rspace="0em">​</mo><mi>w</mi></mrow><annotation encoding="application/x-tex">Hw</annotation></semantics></math> its vertical and horizontal components. A choice of smooth subbundle <math id="S3.p1.8.m8" class="ltx_Math" alttext="HE" display="inline" intent=":literal"><semantics><mrow><mi>H</mi><mo lspace="0em" rspace="0em">​</mo><mi>E</mi></mrow><annotation encoding="application/x-tex">HE</annotation></semantics></math> is an Ehresmann connection.</p>
+</div>
+<div id="S3.p2" class="ltx_para">
+<p id="S3.p2.18" class="ltx_p">In general, a system’s (local) dynamics is described by some vector field in <math id="S3.p2.1.m1" class="ltx_Math" alttext="TE" display="inline" intent=":literal"><semantics><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mi>E</mi></mrow><annotation encoding="application/x-tex">TE</annotation></semantics></math> defined through an action principle. Indeed, given a fibre bundle <math id="S3.p2.2.m2" class="ltx_Math" alttext="(E,\pi,M)" display="inline" intent=":literal"><semantics><mrow><mo stretchy="false">(</mo><mi>E</mi><mo>,</mo><mi>π</mi><mo>,</mo><mi>M</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(E,\pi,M)</annotation></semantics></math> and calling <math id="S3.p2.3.m3" class="ltx_Math" alttext="\mathcal{F}_{U}:=\Gamma^{\infty}(E,U\subset M)" display="inline" intent=":literal"><semantics><mrow><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mi>U</mi></msub><mo>:=</mo><mrow><msup><mi mathvariant="normal">Γ</mi><mi mathvariant="normal">∞</mi></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mrow><mi>E</mi><mo>,</mo><mi>U</mi></mrow><mo>⊂</mo><mi>M</mi></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">\mathcal{F}_{U}:=\Gamma^{\infty}(E,U\subset M)</annotation></semantics></math> the space of smooth local sections <math id="S3.p2.4.m4" class="ltx_Math" alttext="\sigma:U\subset M\rightarrow E" display="inline" intent=":literal"><semantics><mrow><mi>σ</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>U</mi><mo>⊂</mo><mi>M</mi><mo stretchy="false">→</mo><mi>E</mi></mrow></mrow><annotation encoding="application/x-tex">\sigma:U\subset M\rightarrow E</annotation></semantics></math>, one can define the equations of motion via the function <math id="S3.p2.5.m5" class="ltx_Math" alttext="f:\mathcal{F}_{U}\rightarrow\mathcal{V}" display="inline" intent=":literal"><semantics><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mi>U</mi></msub><mo stretchy="false">→</mo><mi class="ltx_font_mathcaligraphic">𝒱</mi></mrow></mrow><annotation encoding="application/x-tex">f:\mathcal{F}_{U}\rightarrow\mathcal{V}</annotation></semantics></math>, where <math id="S3.p2.6.m6" class="ltx_Math" alttext="\mathcal{V}" display="inline" intent=":literal"><semantics><mi class="ltx_font_mathcaligraphic">𝒱</mi><annotation encoding="application/x-tex">\mathcal{V}</annotation></semantics></math> is some appropriate vector space. The field equations are then given by <math id="S3.p2.7.m7" class="ltx_Math" alttext="f(\phi)=0" display="inline" intent=":literal"><semantics><mrow><mrow><mi>f</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>ϕ</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">f(\phi)=0</annotation></semantics></math> with <math id="S3.p2.8.m8" class="ltx_Math" alttext="\phi\in\mathcal{F}_{U}" display="inline" intent=":literal"><semantics><mrow><mi>ϕ</mi><mo>∈</mo><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mi>U</mi></msub></mrow><annotation encoding="application/x-tex">\phi\in\mathcal{F}_{U}</annotation></semantics></math> <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib26" title="Lagrangian field theory" class="ltx_ref">12</a>]</cite>. The set of solutions to the field equations is therefore <math id="S3.p2.9.m9" class="ltx_Math" alttext="f^{-1}(0)\subset\mathcal{F}_{U}" display="inline" intent=":literal"><semantics><mrow><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mi>U</mi></msub></mrow><annotation encoding="application/x-tex">f^{-1}(0)\subset\mathcal{F}_{U}</annotation></semantics></math>, but instead of solving them explicitly, it is often useful to define <math id="S3.p2.10.m10" class="ltx_Math" alttext="f^{-1}(0)" display="inline" intent=":literal"><semantics><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">f^{-1}(0)</annotation></semantics></math> as the set of the critical points of an action functional<span id="footnote5" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">5</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">5</sup><span class="ltx_tag ltx_tag_note">5</span>In general, the action principle is not well defined, see <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib26" title="Lagrangian field theory" class="ltx_ref">12</a>]</cite> for an extensive treatment of this issue.</span></span></span> <math id="S3.p2.11.m11" class="ltx_Math" alttext="\mathcal{S}:\mathcal{F}_{U}\rightarrow\mathbb{R}" display="inline" intent=":literal"><semantics><mrow><mi class="ltx_font_mathcaligraphic">𝒮</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mi>U</mi></msub><mo stretchy="false">→</mo><mi>ℝ</mi></mrow></mrow><annotation encoding="application/x-tex">\mathcal{S}:\mathcal{F}_{U}\rightarrow\mathbb{R}</annotation></semantics></math> <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib26" title="Lagrangian field theory" class="ltx_ref">12</a>]</cite>. The critical points of <math id="S3.p2.12.m12" class="ltx_Math" alttext="\mathcal{S}" display="inline" intent=":literal"><semantics><mi class="ltx_font_mathcaligraphic">𝒮</mi><annotation encoding="application/x-tex">\mathcal{S}</annotation></semantics></math> can equivalently be defined as integral curves of the vector field <math id="S3.p2.13.m13" class="ltx_Math" alttext="w\in TE" display="inline" intent=":literal"><semantics><mrow><mi>w</mi><mo>∈</mo><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mi>E</mi></mrow></mrow><annotation encoding="application/x-tex">w\in TE</annotation></semantics></math> tangent to them. Note that in general <math id="S3.p2.14.m14" class="ltx_Math" alttext="w" display="inline" intent=":literal"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math> is not horizontal. A clear intuition for this is given by considering point-like particles, whose momentum can change along their trajectories implying a certain degree of motion along the fibres. Hence, a section describing the motion of a point-like particle is not in general horizontal. An alternative point of view is given by the determination of the dynamics through a Hamiltonian vector field <math id="S3.p2.15.m15" class="ltx_Math" alttext="\xi_{H}" display="inline" intent=":literal"><semantics><msub><mi>ξ</mi><mi>H</mi></msub><annotation encoding="application/x-tex">\xi_{H}</annotation></semantics></math>, defined in terms of the symplectic form <math id="S3.p2.16.m16" class="ltx_Math" alttext="\omega" display="inline" intent=":literal"><semantics><mi>ω</mi><annotation encoding="application/x-tex">\omega</annotation></semantics></math> by <math id="S3.p2.17.m17" class="ltx_Math" alttext="i_{\xi_{H}}\omega=-dH" display="inline" intent=":literal"><semantics><mrow><mrow><msub><mi>i</mi><msub><mi>ξ</mi><mi>H</mi></msub></msub><mo lspace="0em" rspace="0em">​</mo><mi>ω</mi></mrow><mo>=</mo><mrow><mo>−</mo><mrow><mi>d</mi><mo lspace="0em" rspace="0em">​</mo><mi>H</mi></mrow></mrow></mrow><annotation encoding="application/x-tex">i_{\xi_{H}}\omega=-dH</annotation></semantics></math>. In all cases, a choice of dynamics is equivalent to a choice of vector field in <math id="S3.p2.18.m18" class="ltx_Math" alttext="TE" display="inline" intent=":literal"><semantics><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mi>E</mi></mrow><annotation encoding="application/x-tex">TE</annotation></semantics></math>.</p>
+</div>
+<div id="S3.p3" class="ltx_para">
+<p id="S3.p3.1" class="ltx_p">In general, PQGs include dimensional quantities <math id="S3.p3.1.m1" class="ltx_Math" alttext="\lambda" display="inline" intent=":literal"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>, which, depending on the model, may parametrize either symmetry deformation or breaking <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="Quantum gravity phenomenology at the dawn of the multi-messenger era—A review" class="ltx_ref">1</a>]</cite>. For definiteness, in both cases we refer to such parameters as <span id="S3.p3.1.1" class="ltx_text ltx_font_italic">deformation parameters</span>. These considerations are included into our next assumption.</p>
+</div>
+<div id="Thmassumption2" class="ltx_theorem ltx_theorem_assumption">
+<h6 class="ltx_title ltx_runin ltx_title_theorem"><span class="ltx_tag ltx_tag_theorem"><span id="Thmassumption2.1.1.1" class="ltx_text ltx_font_bold">Assumption 2</span></span></h6>
+<div id="Thmassumption2.p1" class="ltx_para">
+<p id="Thmassumption2.p1.5" class="ltx_p"><span id="Thmassumption2.p1.5.5" class="ltx_text ltx_font_italic">We assume that the local choice of dynamics amounts to a local choice of <math id="Thmassumption2.p1.1.1.m1" class="ltx_Math" alttext="w\in TE" display="inline" intent=":literal"><semantics><mrow><mi>w</mi><mo>∈</mo><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mi>E</mi></mrow></mrow><annotation encoding="application/x-tex">w\in TE</annotation></semantics></math> such that <math id="Thmassumption2.p1.2.2.m2" class="ltx_Math" alttext="w=v+\Lambda" display="inline" intent=":literal"><semantics><mrow><mi>w</mi><mo>=</mo><mrow><mi>v</mi><mo>+</mo><mi mathvariant="normal">Λ</mi></mrow></mrow><annotation encoding="application/x-tex">w=v+\Lambda</annotation></semantics></math>, where <math id="Thmassumption2.p1.3.3.m3" class="ltx_Math" alttext="v\in TE" display="inline" intent=":literal"><semantics><mrow><mi>v</mi><mo>∈</mo><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mi>E</mi></mrow></mrow><annotation encoding="application/x-tex">v\in TE</annotation></semantics></math> describes the dynamics in absence of deformation, and <math id="Thmassumption2.p1.4.4.m4" class="ltx_Math" alttext="\Lambda" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Λ</mi><annotation encoding="application/x-tex">\Lambda</annotation></semantics></math> is an Ehresmann connection which becomes degenerate as <math id="Thmassumption2.p1.5.5.m5" class="ltx_Math" alttext="\lambda\rightarrow 0" display="inline" intent=":literal"><semantics><mrow><mi>λ</mi><mo stretchy="false">→</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\lambda\rightarrow 0</annotation></semantics></math>.</span></p>
+</div>
+</div>
+<figure id="S3.F3" class="ltx_figure"><img src="2604.17272v1/x3.png" id="S3.F3.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="330" height="260" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span id="S3.F3.8.4.1" class="ltx_text" style="font-size:90%;">Figure 3</span>: </span><span id="S3.F3.6.3" class="ltx_text" style="font-size:90%;">The generalized future light cone (outer one) of a ball <math id="S3.F3.4.1.m1" class="ltx_Math" alttext="B_{\epsilon}(x(t))" display="inline" intent=":literal"><semantics><mrow><msub><mi>B</mi><mi>ϵ</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">B_{\epsilon}(x(t))</annotation></semantics></math> is the projection of integral curves of <math id="S3.F3.5.2.m2" class="ltx_Math" alttext="w" display="inline" intent=":literal"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>, three of which are shown. The intrinsic light cone of <math id="S3.F3.6.3.m3" class="ltx_Math" alttext="M" display="inline" intent=":literal"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> (inner one), due to its Lorentzian structure, may not coincide with the generalized one.</span></figcaption>
+</figure>
+<div id="S3.p4" class="ltx_para">
+<p id="S3.p4.2" class="ltx_p">The choice of <math id="S3.p4.1.m1" class="ltx_Math" alttext="v" display="inline" intent=":literal"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> depends on the reference frame: different observers describe a system in different ways. Similarly, also the choice of <math id="S3.p4.2.m2" class="ltx_Math" alttext="\Lambda" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Λ</mi><annotation encoding="application/x-tex">\Lambda</annotation></semantics></math> is observer-dependent. This is in accordance, for instance, with <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="The principle of relative locality" class="ltx_ref">5</a>, <a href="#bib.bib4" title="Gamma ray burst delay times probe the geometry of momentum space" class="ltx_ref">21</a>, <a href="#bib.bib22" title="Curved Momentum Space, Locality, and Generalized Space-Time" class="ltx_ref">16</a>]</cite>, where it was found that different observers observe locality differently.</p>
+</div>
+<div id="S3.p5" class="ltx_para">
+<p id="S3.p5.1" class="ltx_p">Notice also that the identification of <math id="S3.p5.1.m1" class="ltx_Math" alttext="f^{-1}(0)\subset\mathcal{F}_{U}" display="inline" intent=":literal"><semantics><mrow><mrow><msup><mi>f</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><mo>⊂</mo><msub><mi class="ltx_font_mathcaligraphic">ℱ</mi><mi>U</mi></msub></mrow><annotation encoding="application/x-tex">f^{-1}(0)\subset\mathcal{F}_{U}</annotation></semantics></math> through the action principle, common in special and general relativity, and quantum field theory, is not mandatory for (P)QG theories, or in general models which go beyond special/general relativity and quantum field theory. An example is given by the amplituhedron program <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib20" title="The Amplituhedron" class="ltx_ref">7</a>]</cite>, where locality and unitarity (often explicitly introduced at the action level) are treated as emergent properties, and particles’ behaviour is obtained in terms of a purely geometrical construct. The absence of any reference to an action principle in Assumption <a href="#Thmassumption2" title="Assumption 2 ‣ 3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a> is intended to allow the inclusion of these types of models in our framework.</p>
+</div>
+<div id="S3.p6" class="ltx_para">
+<p id="S3.p6.2" class="ltx_p">Assumption <a href="#Thmassumption2" title="Assumption 2 ‣ 3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a> naturally leads to assigning a causal set structure to the observer-dependent spacetime <math id="S3.p6.1.m1" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>, and to relative locality. In both cases, we require the base manifold to be additionally endowed with a Lorentzian metric. In this section we focus on the observer-dependent spacetime <math id="S3.p6.2.m2" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>, in sec. <a href="#S4" title="4 Generalized relative locality ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a> we will discuss relative locality.</p>
+</div>
+<div id="S3.p7" class="ltx_para">
+<p id="S3.p7.14" class="ltx_p">We can call <math id="S3.p7.1.m1" class="ltx_Math" alttext="\mathbf{c}_{\pm}(\sigma_{\theta(t)})" display="inline" intent=":literal"><semantics><mrow><msub><mi>𝐜</mi><mo>±</mo></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><msub><mi>σ</mi><mrow><mi>θ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow></msub><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">\mathbf{c}_{\pm}(\sigma_{\theta(t)})</annotation></semantics></math> the future (<math id="S3.p7.2.m2" class="ltx_Math" alttext="+" display="inline" intent=":literal"><semantics><mo>+</mo><annotation encoding="application/x-tex">+</annotation></semantics></math>) or past (<math id="S3.p7.3.m3" class="ltx_Math" alttext="-" display="inline" intent=":literal"><semantics><mo>−</mo><annotation encoding="application/x-tex">-</annotation></semantics></math>) generalized light cone of the set <math id="S3.p7.4.m4" class="ltx_Math" alttext="B_{\epsilon}(x(t))" display="inline" intent=":literal"><semantics><mrow><msub><mi>B</mi><mi>ϵ</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">B_{\epsilon}(x(t))</annotation></semantics></math> as the projection through <math id="S3.p7.5.m5" class="ltx_Math" alttext="\pi" display="inline" intent=":literal"><semantics><mi>π</mi><annotation encoding="application/x-tex">\pi</annotation></semantics></math> of the integral curves of <math id="S3.p7.6.m6" class="ltx_Math" alttext="w\in TE" display="inline" intent=":literal"><semantics><mrow><mi>w</mi><mo>∈</mo><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mi>E</mi></mrow></mrow><annotation encoding="application/x-tex">w\in TE</annotation></semantics></math> starting from (<math id="S3.p7.7.m7" class="ltx_Math" alttext="+" display="inline" intent=":literal"><semantics><mo>+</mo><annotation encoding="application/x-tex">+</annotation></semantics></math>) or ending in (<math id="S3.p7.8.m8" class="ltx_Math" alttext="-" display="inline" intent=":literal"><semantics><mo>−</mo><annotation encoding="application/x-tex">-</annotation></semantics></math>) the set <math id="S3.p7.9.m9" class="ltx_Math" alttext="\pi^{-1}(B_{\epsilon}(x(t)))" display="inline" intent=":literal"><semantics><mrow><msup><mi>π</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><msub><mi>B</mi><mi>ϵ</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>x</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">\pi^{-1}(B_{\epsilon}(x(t)))</annotation></semantics></math>, see Fig. <a href="#S3.F3" title="Figure 3 ‣ 3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>. We use the word <span id="S3.p7.14.1" class="ltx_text ltx_font_italic">generalized</span> because, according to Assumption <a href="#Thmassumption2" title="Assumption 2 ‣ 3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>, particles may appear to move faster than light in <math id="S3.p7.10.m10" class="ltx_Math" alttext="M" display="inline" intent=":literal"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>. This peculiar fact, crucial for obtaining relative locality, will be discussed in sec. <a href="#S4" title="4 Generalized relative locality ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>. One can then use this structure to introduce a partial order relation <math id="S3.p7.11.m11" class="ltx_Math" alttext="\preceq" display="inline" intent=":literal"><semantics><mo>⪯</mo><annotation encoding="application/x-tex">\preceq</annotation></semantics></math> on the elements of <math id="S3.p7.12.m12" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math> depending on whether one of them is in the future or past generalized light cone of the other or not, see e.g. <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib32" title="Space-Time as a Causal Set" class="ltx_ref">15</a>, <a href="#bib.bib27" title="The causal set approach to quantum gravity" class="ltx_ref">32</a>]</cite>. An example is shown in Fig. <a href="#S3.F4" title="Figure 4 ‣ 3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">4</span></a>. Note that the causal structure identifies points in <math id="S3.p7.13.m13" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math> which may otherwise differ due to the Rietdijk–Putnam argument discussed in sec. <a href="#S2" title="2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>. In our model, <math id="S3.p7.14.m14" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math> naturally assumes the structure of a causal set where each element, in addition to causal relations, also possesses intrinsic information (in our case, the sections measured by the observer). Related, though distinct, ideas were introduced in <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib35" title="The Universe as a Process of Unique Events" class="ltx_ref">19</a>, <a href="#bib.bib36" title="Quantum energetic causal sets" class="ltx_ref">18</a>]</cite>, where causal sets are also enhanced by including intrinsic properties. However, unlike in our model, in <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib35" title="The Universe as a Process of Unique Events" class="ltx_ref">19</a>, <a href="#bib.bib36" title="Quantum energetic causal sets" class="ltx_ref">18</a>]</cite> these enhanced causal sets replace spacetime, following a line of reasoning similar to that in <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib32" title="Space-Time as a Causal Set" class="ltx_ref">15</a>]</cite>.</p>
+</div>
+<figure id="S3.F4" class="ltx_figure"><img src="2604.17272v1/x4.png" id="S3.F4.g1" class="ltx_graphics ltx_centering ltx_img_square" width="264" height="242" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span id="S3.F4.22.11.1" class="ltx_text" style="font-size:90%;">Figure 4</span>: </span><span id="S3.F4.20.10" class="ltx_text" style="font-size:90%;">Left: An observer can see different particles along their motion. Here, <math id="S3.F4.11.1.m1" class="ltx_Math" alttext="C_{1}\rightarrow\theta=4" display="inline" intent=":literal"><semantics><mrow><msub><mi>C</mi><mn>1</mn></msub><mo stretchy="false">→</mo><mi>θ</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">C_{1}\rightarrow\theta=4</annotation></semantics></math>, <math id="S3.F4.12.2.m2" class="ltx_Math" alttext="C_{2}\rightarrow\theta=3" display="inline" intent=":literal"><semantics><mrow><msub><mi>C</mi><mn>2</mn></msub><mo stretchy="false">→</mo><mi>θ</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">C_{2}\rightarrow\theta=3</annotation></semantics></math>, <math id="S3.F4.13.3.m3" class="ltx_Math" alttext="C_{3}\rightarrow\theta=1" display="inline" intent=":literal"><semantics><mrow><msub><mi>C</mi><mn>3</mn></msub><mo stretchy="false">→</mo><mi>θ</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">C_{3}\rightarrow\theta=1</annotation></semantics></math>, <math id="S3.F4.14.4.m4" class="ltx_Math" alttext="C_{4}\rightarrow\theta=3" display="inline" intent=":literal"><semantics><mrow><msub><mi>C</mi><mn>4</mn></msub><mo stretchy="false">→</mo><mi>θ</mi><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">C_{4}\rightarrow\theta=3</annotation></semantics></math>, <math id="S3.F4.15.5.m5" class="ltx_Math" alttext="C_{5}\rightarrow\theta=4" display="inline" intent=":literal"><semantics><mrow><msub><mi>C</mi><mn>5</mn></msub><mo stretchy="false">→</mo><mi>θ</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">C_{5}\rightarrow\theta=4</annotation></semantics></math>. Notice that <math id="S3.F4.16.6.m6" class="ltx_Math" alttext="C_{1}" display="inline" intent=":literal"><semantics><msub><mi>C</mi><mn>1</mn></msub><annotation encoding="application/x-tex">C_{1}</annotation></semantics></math> and <math id="S3.F4.17.7.m7" class="ltx_Math" alttext="C_{5}" display="inline" intent=":literal"><semantics><msub><mi>C</mi><mn>5</mn></msub><annotation encoding="application/x-tex">C_{5}</annotation></semantics></math> include all the momenta of the particles involved in the interaction vertex. Note also that <math id="S3.F4.18.8.m8" class="ltx_Math" alttext="C_{4}" display="inline" intent=":literal"><semantics><msub><mi>C</mi><mn>4</mn></msub><annotation encoding="application/x-tex">C_{4}</annotation></semantics></math> shows an example of identification according to the rule (<a href="#S2.E1" title="In 2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>). Right: The points in <math id="S3.F4.19.9.m9" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math> corresponding to <math id="S3.F4.20.10.m10" class="ltx_Math" alttext="C_{1},C_{2},C_{3},C_{4},C_{5}" display="inline" intent=":literal"><semantics><mrow><msub><mi>C</mi><mn>1</mn></msub><mo>,</mo><msub><mi>C</mi><mn>2</mn></msub><mo>,</mo><msub><mi>C</mi><mn>3</mn></msub><mo>,</mo><msub><mi>C</mi><mn>4</mn></msub><mo>,</mo><msub><mi>C</mi><mn>5</mn></msub></mrow><annotation encoding="application/x-tex">C_{1},C_{2},C_{3},C_{4},C_{5}</annotation></semantics></math> in the left diagram, including their causal relations.</span></figcaption>
+</figure>
+</section>
+<section id="S4" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">4 </span>Generalized relative locality</h2>
+
+<div id="S4.p1" class="ltx_para">
+<p id="S4.p1.8" class="ltx_p">We start this section by presenting a simple example.
+In order to test whether locality is relative or absolute, Alice and Bob agree beforehand that Bob will send Alice three particles (identical in mass for simplicity) with momenta, e.g., <math id="S4.p1.1.m1" class="ltx_Math" alttext="p_{1}&gt;p_{2}&gt;p_{3}" display="inline" intent=":literal"><semantics><mrow><msub><mi>p</mi><mn>1</mn></msub><mo>&gt;</mo><msub><mi>p</mi><mn>2</mn></msub><mo>&gt;</mo><msub><mi>p</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">p_{1}&gt;p_{2}&gt;p_{3}</annotation></semantics></math>, launching them in the same direction at exactly the same event according to Bob. Alice and Bob also agree on a certain spatial separation <math id="S4.p1.2.m2" class="ltx_Math" alttext="D" display="inline" intent=":literal"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math> between them. At some point, Bob sends the three particles towards Alice. Once the first particle arrives, Alice (knowing <math id="S4.p1.3.m3" class="ltx_Math" alttext="D" display="inline" intent=":literal"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>, <math id="S4.p1.4.m4" class="ltx_Math" alttext="p_{1},p_{2},p_{3}" display="inline" intent=":literal"><semantics><mrow><msub><mi>p</mi><mn>1</mn></msub><mo>,</mo><msub><mi>p</mi><mn>2</mn></msub><mo>,</mo><msub><mi>p</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">p_{1},p_{2},p_{3}</annotation></semantics></math>) can determine how much time she has to wait before measuring <math id="S4.p1.5.m5" class="ltx_Math" alttext="p_{2}" display="inline" intent=":literal"><semantics><msub><mi>p</mi><mn>2</mn></msub><annotation encoding="application/x-tex">p_{2}</annotation></semantics></math> and <math id="S4.p1.6.m6" class="ltx_Math" alttext="p_{3}" display="inline" intent=":literal"><semantics><msub><mi>p</mi><mn>3</mn></msub><annotation encoding="application/x-tex">p_{3}</annotation></semantics></math>. In absence of deformation, Alice’s predictions would be confirmed by her measurements. However, if deformation is present, Alice may see particles arriving at different spacetime points then expected, for example they may arrive at the same time even if <math id="S4.p1.7.m7" class="ltx_Math" alttext="p_{1}\neq p_{2}\neq p_{3}" display="inline" intent=":literal"><semantics><mrow><msub><mi>p</mi><mn>1</mn></msub><mo>≠</mo><msub><mi>p</mi><mn>2</mn></msub><mo>≠</mo><msub><mi>p</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">p_{1}\neq p_{2}\neq p_{3}</annotation></semantics></math>. Since Bob sent the particles at the same event, and since Alice can measure that <math id="S4.p1.8.m8" class="ltx_Math" alttext="p_{1},p_{2},p_{3}" display="inline" intent=":literal"><semantics><mrow><msub><mi>p</mi><mn>1</mn></msub><mo>,</mo><msub><mi>p</mi><mn>2</mn></msub><mo>,</mo><msub><mi>p</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">p_{1},p_{2},p_{3}</annotation></semantics></math> correspond to the agreed-upon values, the only conclusion that she can reach is that it appears as though these particles were launched at different spacetime points. In other words, a single spacetime point for the distant Bob does not correspond to a single spacetime point for Alice, i.e. there is relative locality.</p>
+</div>
+<div id="S4.p2" class="ltx_para">
+<p id="S4.p2.1" class="ltx_p">Assumptions <a href="#Thmassumption1" title="Assumption 1 ‣ 2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a> and <a href="#Thmassumption2" title="Assumption 2 ‣ 3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a> allow us to easily model this effect. For simplicity, we illustrate it by focusing on freely propagating point-like particles (the most common example in the literature, see, e.g., <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="The principle of relative locality" class="ltx_ref">5</a>, <a href="#bib.bib4" title="Gamma ray burst delay times probe the geometry of momentum space" class="ltx_ref">21</a>, <a href="#bib.bib10" title="Deformations of spacetime symmetries: gravity, group-valued momenta, and non-commutative fields" class="ltx_ref">8</a>]</cite>), and we restrict <math id="S4.p2.1.m1" class="ltx_Math" alttext="M" display="inline" intent=":literal"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> to Minkowski spacetime. Nevertheless, both Assumptions <a href="#Thmassumption1" title="Assumption 1 ‣ 2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a> and <a href="#Thmassumption2" title="Assumption 2 ‣ 3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a> hold more generally. A representation of this construction is shown in Fig. <a href="#S4.F5" title="Figure 5 ‣ 4 Generalized relative locality ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a>.</p>
+</div>
+<figure id="S4.F5" class="ltx_figure"><img src="2604.17272v1/x5.png" id="S4.F5.g1" class="ltx_graphics ltx_centering ltx_img_square" width="330" height="285" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure"><span id="S4.F5.8.4.1" class="ltx_text" style="font-size:90%;">Figure 5</span>: </span><span id="S4.F5.6.3" class="ltx_text" style="font-size:90%;">The integral curve of <math id="S4.F5.4.1.m1" class="ltx_Math" alttext="v" display="inline" intent=":literal"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> (upper black line) is displaced to the integral curve of <math id="S4.F5.5.2.m2" class="ltx_Math" alttext="w=v+\Lambda" display="inline" intent=":literal"><semantics><mrow><mi>w</mi><mo>=</mo><mrow><mi>v</mi><mo>+</mo><mi mathvariant="normal">Λ</mi></mrow></mrow><annotation encoding="application/x-tex">w=v+\Lambda</annotation></semantics></math> (upper dashed orange line). The azure dotted-dashed lines represent the curves <math id="S4.F5.6.3.m3" class="ltx_Math" alttext="c_{\sigma(t)\rightarrow f(\sigma(t))}" display="inline" intent=":literal"><semantics><msub><mi>c</mi><mrow><mrow><mi>σ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mrow><mi>f</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>σ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></msub><annotation encoding="application/x-tex">c_{\sigma(t)\rightarrow f(\sigma(t))}</annotation></semantics></math>. In the base manifold, the projections are represented in the same style as the corresponding sections.</span></figcaption>
+</figure>
+<div id="S4.p3" class="ltx_para">
+<p id="S4.p3.31" class="ltx_p">Consider a vector field <math id="S4.p3.1.m1" class="ltx_Math" alttext="v\in TE" display="inline" intent=":literal"><semantics><mrow><mi>v</mi><mo>∈</mo><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mi>E</mi></mrow></mrow><annotation encoding="application/x-tex">v\in TE</annotation></semantics></math> describing the non-deformed dynamics of a particle. Consider an integral curve <math id="S4.p3.2.m2" class="ltx_Math" alttext="\sigma" display="inline" intent=":literal"><semantics><mi>σ</mi><annotation encoding="application/x-tex">\sigma</annotation></semantics></math> of <math id="S4.p3.3.m3" class="ltx_Math" alttext="v" display="inline" intent=":literal"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> starting from some initial condition <math id="S4.p3.4.m4" class="ltx_Math" alttext="e\in E" display="inline" intent=":literal"><semantics><mrow><mi>e</mi><mo>∈</mo><mi>E</mi></mrow><annotation encoding="application/x-tex">e\in E</annotation></semantics></math>, the projection on <math id="S4.p3.5.m5" class="ltx_Math" alttext="M" display="inline" intent=":literal"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> gives the motion in spacetime of the particle. The pushforward <math id="S4.p3.6.m6" class="ltx_Math" alttext="\pi_{*}v" display="inline" intent=":literal"><semantics><mrow><msub><mi>π</mi><mo>∗</mo></msub><mo lspace="0em" rspace="0em">​</mo><mi>v</mi></mrow><annotation encoding="application/x-tex">\pi_{*}v</annotation></semantics></math> describes the velocity of the particle at a certain point. Notice that, in general, for free particles, momentum and velocity are related by<span id="footnote6" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">6</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">6</sup><span class="ltx_tag ltx_tag_note">6</span>We are using this relation because of the restriction to Minkowski spacetime in this example. The argument works in the same way in more general contexts if this relation is substituted for <math id="footnote6.m1" class="ltx_Math" alttext="g(\dot{x},p,m)=0" display="inline" intent=":literal"><semantics><mrow><mrow><mi>g</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mover accent="true"><mi>x</mi><mo>˙</mo></mover><mo>,</mo><mi>p</mi><mo>,</mo><mi>m</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">g(\dot{x},p,m)=0</annotation></semantics></math> for some fixed <math id="footnote6.m2" class="ltx_Math" alttext="g" display="inline" intent=":literal"><semantics><mi>g</mi><annotation encoding="application/x-tex">g</annotation></semantics></math>.</span></span></span> <math id="S4.p3.7.m7" class="ltx_Math" alttext="\dot{x}=p/m" display="inline" intent=":literal"><semantics><mrow><mover accent="true"><mi>x</mi><mo>˙</mo></mover><mo>=</mo><mrow><mi>p</mi><mo>/</mo><mi>m</mi></mrow></mrow><annotation encoding="application/x-tex">\dot{x}=p/m</annotation></semantics></math>. We now add the Ehresmann connection <math id="S4.p3.8.m8" class="ltx_Math" alttext="\Lambda" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Λ</mi><annotation encoding="application/x-tex">\Lambda</annotation></semantics></math>. The integral curves <math id="S4.p3.9.m9" class="ltx_Math" alttext="\Sigma" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Σ</mi><annotation encoding="application/x-tex">\Sigma</annotation></semantics></math> of the new vector field <math id="S4.p3.10.m10" class="ltx_Math" alttext="w=v+\Lambda" display="inline" intent=":literal"><semantics><mrow><mi>w</mi><mo>=</mo><mrow><mi>v</mi><mo>+</mo><mi mathvariant="normal">Λ</mi></mrow></mrow><annotation encoding="application/x-tex">w=v+\Lambda</annotation></semantics></math> are of course different than those of <math id="S4.p3.11.m11" class="ltx_Math" alttext="v" display="inline" intent=":literal"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> (initial conditions are held constant, i.e. the integral curves of <math id="S4.p3.12.m12" class="ltx_Math" alttext="v" display="inline" intent=":literal"><semantics><mi>v</mi><annotation encoding="application/x-tex">v</annotation></semantics></math> and <math id="S4.p3.13.m13" class="ltx_Math" alttext="w" display="inline" intent=":literal"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math> start at the same <math id="S4.p3.14.m14" class="ltx_Math" alttext="e\in E" display="inline" intent=":literal"><semantics><mrow><mi>e</mi><mo>∈</mo><mi>E</mi></mrow><annotation encoding="application/x-tex">e\in E</annotation></semantics></math> dictated by the description of the system by a local observer). To visualize the situation, it may be easier to consider a diffeomorphism <math id="S4.p3.15.m15" class="ltx_Math" alttext="f:E\rightarrow E" display="inline" intent=":literal"><semantics><mrow><mi>f</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi>E</mi><mo stretchy="false">→</mo><mi>E</mi></mrow></mrow><annotation encoding="application/x-tex">f:E\rightarrow E</annotation></semantics></math> mapping <math id="S4.p3.16.m16" class="ltx_Math" alttext="\sigma" display="inline" intent=":literal"><semantics><mi>σ</mi><annotation encoding="application/x-tex">\sigma</annotation></semantics></math> to <math id="S4.p3.17.m17" class="ltx_math_unparsed" alttext="f(\sigma)=:\Sigma" display="inline" intent=":literal"><semantics><mrow><mi>f</mi><mrow><mo stretchy="false">(</mo><mi>σ</mi><mo stretchy="false">)</mo></mrow><mo rspace="0em">=</mo><mo rspace="0.278em">:</mo><mi mathvariant="normal">Σ</mi></mrow><annotation encoding="application/x-tex">f(\sigma)=:\Sigma</annotation></semantics></math>. We can now consider the class of integral curves <math id="S4.p3.18.m18" class="ltx_Math" alttext="c_{\sigma(t)\rightarrow f(\sigma(t))}" display="inline" intent=":literal"><semantics><msub><mi>c</mi><mrow><mrow><mi>σ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mrow><mi>f</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>σ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></msub><annotation encoding="application/x-tex">c_{\sigma(t)\rightarrow f(\sigma(t))}</annotation></semantics></math> of <math id="S4.p3.19.m19" class="ltx_Math" alttext="\Lambda" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Λ</mi><annotation encoding="application/x-tex">\Lambda</annotation></semantics></math> alone, starting at <math id="S4.p3.20.m20" class="ltx_Math" alttext="\sigma(t)" display="inline" intent=":literal"><semantics><mrow><mi>σ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">\sigma(t)</annotation></semantics></math> and ending at <math id="S4.p3.21.m21" class="ltx_Math" alttext="f(\sigma(t))" display="inline" intent=":literal"><semantics><mrow><mi>f</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>σ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(\sigma(t))</annotation></semantics></math> (for all <math id="S4.p3.22.m22" class="ltx_Math" alttext="t" display="inline" intent=":literal"><semantics><mi>t</mi><annotation encoding="application/x-tex">t</annotation></semantics></math>). We can parallel transport each fibre through <math id="S4.p3.23.m23" class="ltx_Math" alttext="c_{\sigma(t)\rightarrow f(\sigma(t))}" display="inline" intent=":literal"><semantics><msub><mi>c</mi><mrow><mrow><mi>σ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mrow><mi>f</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>σ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></msub><annotation encoding="application/x-tex">c_{\sigma(t)\rightarrow f(\sigma(t))}</annotation></semantics></math> with the connection <math id="S4.p3.24.m24" class="ltx_Math" alttext="\Lambda" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Λ</mi><annotation encoding="application/x-tex">\Lambda</annotation></semantics></math>. In this very simplified case, for example, <math id="S4.p3.25.m25" class="ltx_Math" alttext="\Lambda" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Λ</mi><annotation encoding="application/x-tex">\Lambda</annotation></semantics></math> can be the trivial horizontal lift from a constant vector field on <math id="S4.p3.26.m26" class="ltx_Math" alttext="M" display="inline" intent=":literal"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> (e.g. with <math id="S4.p3.27.m27" class="ltx_Math" alttext="|\Lambda_{p}|=\lambda\,\,\forall p\in M" display="inline" intent=":literal"><semantics><mrow><mrow><mo stretchy="false">|</mo><msub><mi mathvariant="normal">Λ</mi><mi>p</mi></msub><mo stretchy="false">|</mo></mrow><mo>=</mo><mrow><mi>λ</mi><mo lspace="0.497em" rspace="0em">​</mo><mrow><mo rspace="0.167em">∀</mo><mi>p</mi></mrow></mrow><mo>∈</mo><mi>M</mi></mrow><annotation encoding="application/x-tex">|\Lambda_{p}|=\lambda\,\,\forall p\in M</annotation></semantics></math> in order to satisfy Assumption <a href="#Thmassumption2" title="Assumption 2 ‣ 3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>), so that the fibre coordinate along <math id="S4.p3.28.m28" class="ltx_Math" alttext="c_{\sigma(t)\rightarrow f(\sigma(t))}" display="inline" intent=":literal"><semantics><msub><mi>c</mi><mrow><mrow><mi>σ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">→</mo><mrow><mi>f</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>σ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow></msub><annotation encoding="application/x-tex">c_{\sigma(t)\rightarrow f(\sigma(t))}</annotation></semantics></math> does not change. In other words, we are modifying the spacetime trajectory of the particle but not its momentum, so that now the particle is ‘off-shell’, <math id="S4.p3.29.m29" class="ltx_Math" alttext="\dot{x}\neq p/m" display="inline" intent=":literal"><semantics><mrow><mover accent="true"><mi>x</mi><mo>˙</mo></mover><mo>≠</mo><mrow><mi>p</mi><mo>/</mo><mi>m</mi></mrow></mrow><annotation encoding="application/x-tex">\dot{x}\neq p/m</annotation></semantics></math>, and can potentially ‘move faster than light’ with respect to the inherent causal structure of the Lorentzian <math id="S4.p3.30.m30" class="ltx_Math" alttext="M" display="inline" intent=":literal"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>. Such a phenomenon has been very recently shown in <math id="S4.p3.31.m31" class="ltx_Math" alttext="\kappa" display="inline" intent=":literal"><semantics><mi>κ</mi><annotation encoding="application/x-tex">\kappa</annotation></semantics></math>-Minkowski spacetime <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib21" title="Light propagation in κ-Minkowski space-time: gauge ambiguities and invariance" class="ltx_ref">24</a>]</cite> following a different approach.</p>
+</div>
+<div id="S4.p4" class="ltx_para">
+<p id="S4.p4.5" class="ltx_p">Recall, however, that any observable consequence must be described in <math id="S4.p4.1.m1" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math> because of Assumption <a href="#Thmassumption1" title="Assumption 1 ‣ 2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>. The apparent off-shell velocity of the particle just changes the chain in the causal set describing its evolution<span id="footnote7" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">7</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">7</sup><span class="ltx_tag ltx_tag_note">7</span>See also sec. <a href="#S3" title="3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">3</span></a>: a deformation of the light cone in general changes causal relations.</span></span></span>, but observers in <math id="S4.p4.2.m2" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math> only measure momenta. In our example, Alice expects to measure the particles launched by Bob at specific nodes along her causal path. However, the deformation alters the particles chains, allowing her to detect particles with the same expected momentum but at unexpected nodes.<span id="footnote8" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">8</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">8</sup><span class="ltx_tag ltx_tag_note">8</span>It is worth noting that, for high particle densities in the universe, the sampling of events in <math id="footnote8.m1" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math> corresponds to a high density causal set, which more faithfully reproduces geometric structures in <math id="footnote8.m2" class="ltx_Math" alttext="M" display="inline" intent=":literal"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>, see e.g. <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib32" title="Space-Time as a Causal Set" class="ltx_ref">15</a>, <a href="#bib.bib27" title="The causal set approach to quantum gravity" class="ltx_ref">32</a>]</cite>.</span></span></span> Alice therefore measures relative locality.
+It is interesting to notice that, in the example provided above, the linearity of particles motion in <math id="S4.p4.3.m3" class="ltx_Math" alttext="M" display="inline" intent=":literal"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> and the choice of a constant <math id="S4.p4.4.m4" class="ltx_Math" alttext="\Lambda" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Λ</mi><annotation encoding="application/x-tex">\Lambda</annotation></semantics></math> naturally reproduce a relative locality effect proportional to the distance (in <math id="S4.p4.5.m5" class="ltx_Math" alttext="M" display="inline" intent=":literal"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>) between Alice and Bob, in agreement with important literature results (see e.g. <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib10" title="Deformations of spacetime symmetries: gravity, group-valued momenta, and non-commutative fields" class="ltx_ref">8</a>]</cite> for a review).</p>
+</div>
+<div id="S4.p5" class="ltx_para">
+<p id="S4.p5.2" class="ltx_p">We now make a few observations on the nature of relative locality as modeled in this framework.
+First, our construction does not require non-trivial interaction vertices, relative locality can arise even when particles depart from the same spacetime point without meaningful interaction. Although interacting particles provide the standard example, interaction is not essential.
+Secondly, as shown above, the simplest possible case already reproduces known results from the literature. However, Assumptions <a href="#Thmassumption1" title="Assumption 1 ‣ 2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a> and <a href="#Thmassumption2" title="Assumption 2 ‣ 3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a> are considerably more general, allowing for a definition of relative locality in more general models, including fields. Depending on the properties of the connection <math id="S4.p5.1.m1" class="ltx_Math" alttext="\Lambda" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Λ</mi><annotation encoding="application/x-tex">\Lambda</annotation></semantics></math>, this framework enables a classification of possible relative locality effects. Additionally, traditional models based on momentum-space curvature can only describe kinematical effects (momentum-space is curved for all particles), while our model allows for spin-dependent connections, describing a different type of relative locality for different types of particles. Moreover, non-trivial topology in the fibre/manifold can lead to a new type of <span id="S4.p5.2.1" class="ltx_text ltx_font_italic">topological relative locality<span id="footnote9" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">9</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">9</sup><span class="ltx_tag ltx_tag_note"><span id="footnote9.1.1.1" class="ltx_text ltx_font_upright">9</span></span><span id="footnote9.5" class="ltx_text ltx_font_upright">The intuitive idea is that, in order to observe topological effects, sections would need to be extended globally. However, such global sections often do not exist (e.g., in non-trivial principal bundles). For any </span><span id="footnote9.6" class="ltx_text">topological observer</span><span id="footnote9.7" class="ltx_text ltx_font_upright"> defined through the attempt to extend local sections to global ones, there would therefore be points in the universe to which no momentum could be assigned in the first place, and which would thus be unobservable. These effects could also manifest in the absence of deformation. Additionally, non-trivial holonomy of the connection </span><math id="footnote9.m1" class="ltx_Math" alttext="\Lambda" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Λ</mi><annotation encoding="application/x-tex">\Lambda</annotation></semantics></math><span id="footnote9.8" class="ltx_text ltx_font_upright"> may result in another type of topological relative locality effects. An investigation of these possibilities will be presented in forthcoming papers.</span></span></span></span></span>. Finally, our model does not require a curved momentum-space to exhibit relative locality. As shown in sec. <a href="#S5" title="5 Relative locality and momentum-space curvature ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">5</span></a>, curvature of momentum-space naturally induces a suitable connection <math id="S4.p5.2.m2" class="ltx_Math" alttext="\Lambda" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Λ</mi><annotation encoding="application/x-tex">\Lambda</annotation></semantics></math> and therefore implies relative locality, but it is not a necessary condition. To our knowledge, these generalizations, which are naturally included in our model, have not previously appeared in the literature.</p>
+</div>
+</section>
+<section id="S5" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">5 </span>Relative locality and momentum-space curvature</h2>
+
+<div id="S5.p1" class="ltx_para">
+<p id="S5.p1.8" class="ltx_p">We have shown that, in our model, relative locality is a consequence of a choice of connection <math id="S5.p1.1.m1" class="ltx_Math" alttext="\Lambda" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Λ</mi><annotation encoding="application/x-tex">\Lambda</annotation></semantics></math> depending on the parameters <math id="S5.p1.2.m2" class="ltx_Math" alttext="\lambda" display="inline" intent=":literal"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>.
+If momentum-space is curved, with curvature parametrized by some coefficients <math id="S5.p1.3.m3" class="ltx_Math" alttext="\lambda" display="inline" intent=":literal"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>, then, considering the fibre bundle embedded into some <math id="S5.p1.4.m4" class="ltx_Math" alttext="\mathbb{R}^{n}" display="inline" intent=":literal"><semantics><msup><mi>ℝ</mi><mi>n</mi></msup><annotation encoding="application/x-tex">\mathbb{R}^{n}</annotation></semantics></math> for a suitable <math id="S5.p1.5.m5" class="ltx_Math" alttext="n" display="inline" intent=":literal"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math> depending on the considered model, the information about the fibre curvature given by the Riemann tensor <math id="S5.p1.6.m6" class="ltx_Math" alttext="R" display="inline" intent=":literal"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math> is completely contained in its second fundamental form <math id="S5.p1.7.m7" class="ltx_Math" alttext="T(P,Q):=H\nabla_{P}Q" display="inline" intent=":literal"><semantics><mrow><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>P</mi><mo>,</mo><mi>Q</mi><mo stretchy="false">)</mo></mrow></mrow><mo>:=</mo><mrow><mi>H</mi><mo lspace="0.167em" rspace="0em">​</mo><mrow><msub><mo rspace="0.167em">∇</mo><mi>P</mi></msub><mi>Q</mi></mrow></mrow></mrow><annotation encoding="application/x-tex">T(P,Q):=H\nabla_{P}Q</annotation></semantics></math>, where <math id="S5.p1.8.m8" class="ltx_Math" alttext="P,Q\in VE" display="inline" intent=":literal"><semantics><mrow><mrow><mi>P</mi><mo>,</mo><mi>Q</mi></mrow><mo>∈</mo><mrow><mi>V</mi><mo lspace="0em" rspace="0em">​</mo><mi>E</mi></mrow></mrow><annotation encoding="application/x-tex">P,Q\in VE</annotation></semantics></math>. The relation linking the two quantities is the Gauss curvature formula</p>
+<table id="S5.E3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_left_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_left"><math id="S5.E3.m1" class="ltx_Math" alttext="\langle R(X,Y)Z,W\rangle=\langle T(Y,Z),T(X,W)\rangle-\langle T(X,Z),T(Y,W)\rangle" display="block" intent=":literal"><semantics><mrow><mrow><mo stretchy="false">⟨</mo><mrow><mi>R</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Y</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mi>Z</mi></mrow><mo>,</mo><mi>W</mi><mo stretchy="false">⟩</mo></mrow><mo>=</mo><mrow><mrow><mo stretchy="false">⟨</mo><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo>,</mo><mi>Z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>W</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">⟩</mo></mrow><mo>−</mo><mrow><mo stretchy="false">⟨</mo><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>X</mi><mo>,</mo><mi>Z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>,</mo><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>Y</mi><mo>,</mo><mi>W</mi><mo stretchy="false">)</mo></mrow></mrow><mo stretchy="false">⟩</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">\langle R(X,Y)Z,W\rangle=\langle T(Y,Z),T(X,W)\rangle-\langle T(X,Z),T(Y,W)\rangle</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_left_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(3)</span></td>
+</tr></tbody>
+</table>
+<p id="S5.p1.12" class="ltx_p">where <math id="S5.p1.9.m1" class="ltx_Math" alttext="\langle\cdot,\cdot\rangle" display="inline" intent=":literal"><semantics><mrow><mo stretchy="false">⟨</mo><mo lspace="0em" rspace="0em">⋅</mo><mo rspace="0em">,</mo><mo lspace="0em" rspace="0em">⋅</mo><mo stretchy="false">⟩</mo></mrow><annotation encoding="application/x-tex">\langle\cdot,\cdot\rangle</annotation></semantics></math> is the inner product on <math id="S5.p1.10.m2" class="ltx_Math" alttext="TE" display="inline" intent=":literal"><semantics><mrow><mi>T</mi><mo lspace="0em" rspace="0em">​</mo><mi>E</mi></mrow><annotation encoding="application/x-tex">TE</annotation></semantics></math> <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib24" title="A comprehensive introduction to differential geometry" class="ltx_ref">31</a>]</cite>.
+The second fundamental form defines a connection when evaluated for all <math id="S5.p1.11.m3" class="ltx_Math" alttext="P,Q\in VE" display="inline" intent=":literal"><semantics><mrow><mrow><mi>P</mi><mo>,</mo><mi>Q</mi></mrow><mo>∈</mo><mrow><mi>V</mi><mo lspace="0em" rspace="0em">​</mo><mi>E</mi></mrow></mrow><annotation encoding="application/x-tex">P,Q\in VE</annotation></semantics></math> which, assuming no extrinsic curvature of the fibre embedding, becomes degenerate when <math id="S5.p1.12.m4" class="ltx_Math" alttext="\lambda\rightarrow 0" display="inline" intent=":literal"><semantics><mrow><mi>λ</mi><mo stretchy="false">→</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\lambda\rightarrow 0</annotation></semantics></math>. In other words, curvature of the fibre is naturally related to a connection needed by Assumption <a href="#Thmassumption2" title="Assumption 2 ‣ 3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>, which explains the fact that, historically, relative locality has been discovered studying curved spacetimes first.</p>
+</div>
+</section>
+<section id="S6" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">6 </span>Spacetime symmetries</h2>
+
+<div id="S6.p1" class="ltx_para">
+<p id="S6.p1.22" class="ltx_p">A direct consequence of Assumption <a href="#Thmassumption2" title="Assumption 2 ‣ 3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a> is that all spacetime intervals are (locally) modified (with respect to the non-deformed ones) because of the addition of the Ehresmann connection <math id="S6.p1.1.m1" class="ltx_Math" alttext="\Lambda" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Λ</mi><annotation encoding="application/x-tex">\Lambda</annotation></semantics></math>. This can be described equivalently and intrinsically in <math id="S6.p1.2.m2" class="ltx_Math" alttext="M" display="inline" intent=":literal"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> by a map <math id="S6.p1.3.m3" class="ltx_Math" alttext="G:\mathcal{M}\rightarrow\mathcal{M}" display="inline" intent=":literal"><semantics><mrow><mi>G</mi><mo lspace="0.278em" rspace="0.278em">:</mo><mrow><mi class="ltx_font_mathcaligraphic">ℳ</mi><mo stretchy="false">→</mo><mi class="ltx_font_mathcaligraphic">ℳ</mi></mrow></mrow><annotation encoding="application/x-tex">G:\mathcal{M}\rightarrow\mathcal{M}</annotation></semantics></math> (where <math id="S6.p1.4.m4" class="ltx_Math" alttext="\mathcal{M}" display="inline" intent=":literal"><semantics><mi class="ltx_font_mathcaligraphic">ℳ</mi><annotation encoding="application/x-tex">\mathcal{M}</annotation></semantics></math> is the space of metrics on <math id="S6.p1.5.m5" class="ltx_Math" alttext="M" display="inline" intent=":literal"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>) defined by <math id="S6.p1.6.m6" class="ltx_Math" alttext="g_{x}\mapsto g_{x,\lambda}" display="inline" intent=":literal"><semantics><mrow><msub><mi>g</mi><mi>x</mi></msub><mo stretchy="false">↦</mo><msub><mi>g</mi><mrow><mi>x</mi><mo>,</mo><mi>λ</mi></mrow></msub></mrow><annotation encoding="application/x-tex">g_{x}\mapsto g_{x,\lambda}</annotation></semantics></math>, where <math id="S6.p1.7.m7" class="ltx_Math" alttext="g_{x,\lambda}" display="inline" intent=":literal"><semantics><msub><mi>g</mi><mrow><mi>x</mi><mo>,</mo><mi>λ</mi></mrow></msub><annotation encoding="application/x-tex">g_{x,\lambda}</annotation></semantics></math> is a <math id="S6.p1.8.m8" class="ltx_Math" alttext="\lambda" display="inline" intent=":literal"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>-dependent metric and <math id="S6.p1.9.m9" class="ltx_Math" alttext="x\in M" display="inline" intent=":literal"><semantics><mrow><mi>x</mi><mo>∈</mo><mi>M</mi></mrow><annotation encoding="application/x-tex">x\in M</annotation></semantics></math>. This map modifies the intrinsic light-cones (and all intervals in general) to make them coincide with those defined by Assumption <a href="#Thmassumption2" title="Assumption 2 ‣ 3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>. The spacetime symmetries, then, are those which leave <math id="S6.p1.10.m10" class="ltx_Math" alttext="g_{x,\lambda}(v,w)" display="inline" intent=":literal"><semantics><mrow><msub><mi>g</mi><mrow><mi>x</mi><mo>,</mo><mi>λ</mi></mrow></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>v</mi><mo>,</mo><mi>w</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">g_{x,\lambda}(v,w)</annotation></semantics></math> unchanged, for any <math id="S6.p1.11.m11" class="ltx_Math" alttext="v,w\in T_{x}M" display="inline" intent=":literal"><semantics><mrow><mrow><mi>v</mi><mo>,</mo><mi>w</mi></mrow><mo>∈</mo><mrow><msub><mi>T</mi><mi>x</mi></msub><mo lspace="0em" rspace="0em">​</mo><mi>M</mi></mrow></mrow><annotation encoding="application/x-tex">v,w\in T_{x}M</annotation></semantics></math> and <math id="S6.p1.12.m12" class="ltx_Math" alttext="x\in M" display="inline" intent=":literal"><semantics><mrow><mi>x</mi><mo>∈</mo><mi>M</mi></mrow><annotation encoding="application/x-tex">x\in M</annotation></semantics></math>. In the literature it is common to write <math id="S6.p1.13.m13" class="ltx_Math" alttext="g_{x,\lambda}=e_{\lambda}g_{x}e^{T}_{\lambda}" display="inline" intent=":literal"><semantics><mrow><msub><mi>g</mi><mrow><mi>x</mi><mo>,</mo><mi>λ</mi></mrow></msub><mo>=</mo><mrow><msub><mi>e</mi><mi>λ</mi></msub><mo lspace="0em" rspace="0em">​</mo><msub><mi>g</mi><mi>x</mi></msub><mo lspace="0em" rspace="0em">​</mo><msubsup><mi>e</mi><mi>λ</mi><mi>T</mi></msubsup></mrow></mrow><annotation encoding="application/x-tex">g_{x,\lambda}=e_{\lambda}g_{x}e^{T}_{\lambda}</annotation></semantics></math> for some appropriate <math id="S6.p1.14.m14" class="ltx_Math" alttext="e_{\lambda}" display="inline" intent=":literal"><semantics><msub><mi>e</mi><mi>λ</mi></msub><annotation encoding="application/x-tex">e_{\lambda}</annotation></semantics></math>, so that a symmetry transformation <math id="S6.p1.15.m15" class="ltx_Math" alttext="Rg_{x,\lambda}R^{T}=g_{x,\lambda}" display="inline" intent=":literal"><semantics><mrow><mrow><mi>R</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>g</mi><mrow><mi>x</mi><mo>,</mo><mi>λ</mi></mrow></msub><mo lspace="0em" rspace="0em">​</mo><msup><mi>R</mi><mi>T</mi></msup></mrow><mo>=</mo><msub><mi>g</mi><mrow><mi>x</mi><mo>,</mo><mi>λ</mi></mrow></msub></mrow><annotation encoding="application/x-tex">Rg_{x,\lambda}R^{T}=g_{x,\lambda}</annotation></semantics></math> takes the form <math id="S6.p1.16.m16" class="ltx_math_unparsed" alttext="(e^{-1}_{\lambda}Re_{\lambda})g_{x}(e^{-1}_{\lambda}Re_{\lambda})^{T}=:R_{\lambda}g_{x}R^{T}_{\lambda}=g_{x}" display="inline" intent=":literal"><semantics><mrow><mrow><mo stretchy="false">(</mo><msubsup><mi>e</mi><mi>λ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mi>R</mi><msub><mi>e</mi><mi>λ</mi></msub><mo stretchy="false">)</mo></mrow><msub><mi>g</mi><mi>x</mi></msub><msup><mrow><mo stretchy="false">(</mo><msubsup><mi>e</mi><mi>λ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup><mi>R</mi><msub><mi>e</mi><mi>λ</mi></msub><mo stretchy="false">)</mo></mrow><mi>T</mi></msup><mo rspace="0em">=</mo><mo rspace="0.278em">:</mo><msub><mi>R</mi><mi>λ</mi></msub><msub><mi>g</mi><mi>x</mi></msub><msubsup><mi>R</mi><mi>λ</mi><mi>T</mi></msubsup><mo>=</mo><msub><mi>g</mi><mi>x</mi></msub></mrow><annotation encoding="application/x-tex">(e^{-1}_{\lambda}Re_{\lambda})g_{x}(e^{-1}_{\lambda}Re_{\lambda})^{T}=:R_{\lambda}g_{x}R^{T}_{\lambda}=g_{x}</annotation></semantics></math>. In other words, the metric is not affected by deformation, but symmetry generators are deformed by <math id="S6.p1.17.m17" class="ltx_Math" alttext="\lambda" display="inline" intent=":literal"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math> <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib30" title="Doubly special relativity theories as different bases of kappa Poincare algebra" class="ltx_ref">23</a>, <a href="#bib.bib38" title="Relativity in space-times with short distance structure governed by an observer independent (Planckian) length scale" class="ltx_ref">6</a>, <a href="#bib.bib39" title="Finite κ-deformed two-particle boost" class="ltx_ref">11</a>, <a href="#bib.bib41" title="From Snyder space-times to doubly κ-dependent Yang quantum phase spaces and their generalizations" class="ltx_ref">25</a>]</cite>. The two approaches are equivalent in our model. Notice that, in cases where momentum space manifold is a Lie group, one often deals not only with symmetry algebras but with symmetry Hopf algebras. However, the group structure is sufficient for the determination of the Hopf algebra properties, see e.g. <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib40" title="A group theoretic description of the κ-Poincaré Hopf algebra" class="ltx_ref">9</a>]</cite>. Concluding, we note that one can use the imposition of symmetry properties as a tool to identify and study relative locality in different theories. Indeed, given a (<math id="S6.p1.18.m18" class="ltx_Math" alttext="\lambda" display="inline" intent=":literal"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>-dependent) spacetime symmetry group <math id="S6.p1.19.m19" class="ltx_Math" alttext="\mathcal{G}" display="inline" intent=":literal"><semantics><mi class="ltx_font_mathcaligraphic">𝒢</mi><annotation encoding="application/x-tex">\mathcal{G}</annotation></semantics></math>, one may reconstruct <math id="S6.p1.20.m20" class="ltx_Math" alttext="g_{x,\lambda}" display="inline" intent=":literal"><semantics><msub><mi>g</mi><mrow><mi>x</mi><mo>,</mo><mi>λ</mi></mrow></msub><annotation encoding="application/x-tex">g_{x,\lambda}</annotation></semantics></math> (using appropriately defined <math id="S6.p1.21.m21" class="ltx_Math" alttext="e_{\lambda}" display="inline" intent=":literal"><semantics><msub><mi>e</mi><mi>λ</mi></msub><annotation encoding="application/x-tex">e_{\lambda}</annotation></semantics></math>) and from it the vector field <math id="S6.p1.22.m22" class="ltx_Math" alttext="\Lambda" display="inline" intent=":literal"><semantics><mi mathvariant="normal">Λ</mi><annotation encoding="application/x-tex">\Lambda</annotation></semantics></math>, which in turn allows one to discuss relative locality. This gives a direct link between symmetries and relative locality effects, and may be a powerful tool in the classification of such effects. These interesting research lines will be investigated in forthcoming papers.</p>
+</div>
+</section>
+<section id="S7" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">7 </span>Conclusion and outlook</h2>
+
+<div id="S7.p1" class="ltx_para">
+<p id="S7.p1.2" class="ltx_p">Building on a fairly straightforward phenomenological definition of observer-dependent spacetime (Assumption <a href="#Thmassumption1" title="Assumption 1 ‣ 2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a>), and on a slight modification of a very general mathematical description of system dynamics (Assumption <a href="#Thmassumption2" title="Assumption 2 ‣ 3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a>), this model allows for the description of relative locality in very general contexts. Using a bundle with spacetime as base manifold is in line with other models <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib17" title="Deformed relativistic kinematics on curved spacetime: a geometric approach" class="ltx_ref">28</a>]</cite> which however lack the natural ability to introduce relative locality in their formalism. Causality is also manifest for general deformed theories in our model, which can therefore be applied to cosmology with <math id="S7.p1.1.m1" class="ltx_Math" alttext="M" display="inline" intent=":literal"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> playing the role of cosmological spacetime. The dependence of deformation on the observer is a known result in the literature <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="The principle of relative locality" class="ltx_ref">5</a>, <a href="#bib.bib4" title="Gamma ray burst delay times probe the geometry of momentum space" class="ltx_ref">21</a>, <a href="#bib.bib22" title="Curved Momentum Space, Locality, and Generalized Space-Time" class="ltx_ref">16</a>]</cite>. In deformed theories, the choice of observer also determines the choice of basis in momentum-space, with different bases corresponding to different physical interpretations <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib30" title="Doubly special relativity theories as different bases of kappa Poincare algebra" class="ltx_ref">23</a>, <a href="#bib.bib31" title="Different realizations of κ-momentum space" class="ltx_ref">26</a>]</cite>. In our model, the choice of observer is linked to the choice of connection. This immediately allows us to determine which observers are equivalent and which are not, by examining the equivalence classes of connections under gauge transformations. The relation between observers and gauges is also important in cosmological models, particularly in the presence of perturbations <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib29" title="Dirac procedure and the Hamiltonian formalism for cosmological perturbations in a Bianchi I universe" class="ltx_ref">14</a>, <a href="#bib.bib28" title="Time problem in primordial perturbations" class="ltx_ref">13</a>]</cite>, to which this framework could be applied. Moreover, one can also deduce the gauge-independent (i.e. observer-independent) signatures of relative locality, and how to encode them into observables defined in <math id="S7.p1.2.m2" class="ltx_Math" alttext="S" display="inline" intent=":literal"><semantics><mi>S</mi><annotation encoding="application/x-tex">S</annotation></semantics></math>, greatly enhancing our understanding of the physical basis behind PQG models. These interesting projects represent the next natural step of the above model, and will be investigated in future publications.</p>
+</div>
+</section>
+<section id="Sx1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">Acknowledgements</h2>
+
+<div id="Sx1.p1" class="ltx_para">
+<p id="Sx1.p1.1" class="ltx_p">We thank Jerzy Kowalski-Glikman for reading a preliminary draft of the paper and for providing useful guidance. This work has benefited from discussions and networking activities carried out within the framework of the COST Actions “Bridging High and Low Energies in Search of Quantum Gravity (BridgeQG)” (CA23130), and “Relativistic Quantum Information (RQI)” (CA23115), supported by COST (European Cooperation in Science and Technology). One of the authors also benefited from discussions with Christian Pfeifer at the School on Quantum Gravity Phenomenology in the Multi-Messenger Approach (COST CA18108 First Training School), Corfu, and from discussions with Anna Pachoł. We also thank the anonimous referee, whose observations greately helped clarify the paper and expand its reach. This research did not receive any specific grant from funding agencies in the public, commercial, or not-for-profit sectors.</p>
+</div>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul id="bib.L1" class="ltx_biblist">
+<li id="bib.bib2" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[1]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. Addazi <span class="ltx_text ltx_bib_etal">et al.</span></span><span class="ltx_text ltx_bib_year"> (2022)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Quantum gravity phenomenology at the dawn of the multi-messenger era—A review</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Prog. Part. Nucl. Phys.</span> <span class="ltx_text ltx_bib_volume">125</span>, <span class="ltx_text ltx_bib_pages"> pp. 103948</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2111.05659</span>,
+<a href="https://dx.doi.org/10.1016/j.ppnp.2022.103948" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p2.1" title="1 Introduction ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S3.p3.1" title="3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>.
+</span>
+</li>
+<li id="bib.bib9" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[2]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">G. Amelino-Camelia, S. Bianco, F. Brighenti, and R. J. Buonocore</span><span class="ltx_text ltx_bib_year"> (2015)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Causality and momentum conservation from relative locality</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Phys. Rev. D</span> <span class="ltx_text ltx_bib_volume">91</span> (<span class="ltx_text ltx_bib_number">8</span>), <span class="ltx_text ltx_bib_pages"> pp. 084045</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">1401.7160</span>,
+<a href="https://dx.doi.org/10.1103/PhysRevD.91.084045" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p2.1" title="1 Introduction ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib5" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[3]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">G. Amelino-Camelia, D. Frattulillo, G. Gubitosi, G. Rosati, and S. Bedić</span><span class="ltx_text ltx_bib_year"> (2024)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Phenomenology of DSR-relativistic in-vacuo dispersion in FLRW spacetime</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">JCAP</span> <span class="ltx_text ltx_bib_volume">01</span>, <span class="ltx_text ltx_bib_pages"> pp. 070</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2307.05428</span>,
+<a href="https://dx.doi.org/10.1088/1475-7516/2024/01/070" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p2.1" title="1 Introduction ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib37" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[4]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">G. Amelino-Camelia, L. Freidel, J. Kowalski-Glikman, and L. Smolin</span><span class="ltx_text ltx_bib_year"> (2011)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Relative locality: A deepening of the relativity principle</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Gen. Rel. Grav.</span> <span class="ltx_text ltx_bib_volume">43</span>, <span class="ltx_text ltx_bib_pages"> pp. 2547–2553</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">1106.0313</span>,
+<a href="https://dx.doi.org/10.1142/S0218271811020743" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p2.1" title="1 Introduction ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[5]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">G. Amelino-Camelia, L. Freidel, J. Kowalski-Glikman, and L. Smolin</span><span class="ltx_text ltx_bib_year"> (2011)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The principle of relative locality</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Phys. Rev. D</span> <span class="ltx_text ltx_bib_volume">84</span>, <span class="ltx_text ltx_bib_pages"> pp. 084010</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">1101.0931</span>,
+<a href="https://dx.doi.org/10.1103/PhysRevD.84.084010" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p2.1" title="1 Introduction ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S2.p4.6" title="2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#S3.p4.2" title="3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#S4.p2.1" title="4 Generalized relative locality ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4</span></a>,
+<a href="#S7.p1.2" title="7 Conclusion and outlook ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§7</span></a>,
+<a href="#footnote2" title="In 2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">footnote 2</span></a>.
+</span>
+</li>
+<li id="bib.bib38" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[6]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">G. Amelino-Camelia</span><span class="ltx_text ltx_bib_year"> (2002)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Relativity in space-times with short distance structure governed by an observer independent (Planckian) length scale</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Int. J. Mod. Phys. D</span> <span class="ltx_text ltx_bib_volume">11</span>, <span class="ltx_text ltx_bib_pages"> pp. 35–60</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">gr-qc/0012051</span>,
+<a href="https://dx.doi.org/10.1142/S0218271802001330" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S6.p1.22" title="6 Spacetime symmetries ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§6</span></a>.
+</span>
+</li>
+<li id="bib.bib20" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[7]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">N. Arkani-Hamed and J. Trnka</span><span class="ltx_text ltx_bib_year"> (2014)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The Amplituhedron</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">JHEP</span> <span class="ltx_text ltx_bib_volume">10</span>, <span class="ltx_text ltx_bib_pages"> pp. 030</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">1312.2007</span>,
+<a href="https://dx.doi.org/10.1007/JHEP10%282014%29030" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p5.1" title="3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>.
+</span>
+</li>
+<li id="bib.bib10" class="ltx_bibitem ltx_bib_book">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[8]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">M. Arzano and J. Kowalski-Glikman</span><span class="ltx_text ltx_bib_year"> (2021-01)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Deformations of spacetime symmetries: gravity, group-valued momenta, and non-commutative fields</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text isbn ltx_bib_external">ISBN 978-3-662-63095-2</span>,
+<a href="https://dx.doi.org/10.1007/978-3-662-63097-6" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S4.p2.1" title="4 Generalized relative locality ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4</span></a>,
+<a href="#S4.p4.5" title="4 Generalized relative locality ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4</span></a>.
+</span>
+</li>
+<li id="bib.bib40" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[9]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">M. Arzano and J. Kowalski-Glikman</span><span class="ltx_text ltx_bib_year"> (2022)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A group theoretic description of the <math id="bib.bib40.1.m1a" class="ltx_Math" alttext="\kappa" display="inline" intent=":literal"><semantics><mi>κ</mi><annotation encoding="application/x-tex">\kappa</annotation></semantics></math>-Poincaré Hopf algebra</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Phys. Lett. B</span> <span class="ltx_text ltx_bib_volume">835</span>, <span class="ltx_text ltx_bib_pages"> pp. 137535</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2204.09394</span>,
+<a href="https://dx.doi.org/10.1016/j.physletb.2022.137535" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S6.p1.22" title="6 Spacetime symmetries ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§6</span></a>.
+</span>
+</li>
+<li id="bib.bib8" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[10]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. Banburski</span><span class="ltx_text ltx_bib_year"> (2013)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Twisting loops and global momentum non-conservation in Relative Locality</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Phys. Rev. D</span> <span class="ltx_text ltx_bib_volume">88</span>, <span class="ltx_text ltx_bib_pages"> pp. 076012</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">1305.7289</span>,
+<a href="https://dx.doi.org/10.1103/PhysRevD.88.076012" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p2.1" title="1 Introduction ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib39" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[11]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. Bevilacqua, J. Kowalski-Glikman, and W. Wiślicki</span><span class="ltx_text ltx_bib_year"> (2023-05)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Finite <math id="bib.bib39.1.m1a" class="ltx_Math" alttext="\kappa" display="inline" intent=":literal"><semantics><mi>κ</mi><annotation encoding="application/x-tex">\kappa</annotation></semantics></math>-deformed two-particle boost</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2305.09180</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S6.p1.22" title="6 Spacetime symmetries ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§6</span></a>.
+</span>
+</li>
+<li id="bib.bib26" class="ltx_bibitem ltx_bib_misc">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[12]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">C. Blohmann</span><span class="ltx_text ltx_bib_year"> (2024)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Lagrangian field theory</span>.
+</span>
+<span class="ltx_bibblock"> <span class="ltx_text ltx_bib_publisher">Max Planck Institute for Mathematics</span>.
+</span>
+<span class="ltx_bibblock">Note: <span class="ltx_text ltx_bib_note"><a href="https://people.mpim-bonn.mpg.de/blohmann/assets/pdf/Lagrangian_Field_Theory_v15.pdf" title="" class="ltx_ref ltx_url ltx_font_typewriter">https://people.mpim-bonn.mpg.de/blohmann/assets/pdf/Lagrangian_Field_Theory_v15.pdf</a>Lecture notes</span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p2.18" title="3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#footnote5" title="In 3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">footnote 5</span></a>.
+</span>
+</li>
+<li id="bib.bib28" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[13]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. Boldrin, P. Małkiewicz, and P. Peter</span><span class="ltx_text ltx_bib_year"> (2024)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Time problem in primordial perturbations</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Phys. Rev. D</span> <span class="ltx_text ltx_bib_volume">109</span> (<span class="ltx_text ltx_bib_number">10</span>), <span class="ltx_text ltx_bib_pages"> pp. 106005</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2401.06887</span>,
+<a href="https://dx.doi.org/10.1103/PhysRevD.109.106005" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S7.p1.2" title="7 Conclusion and outlook ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§7</span></a>.
+</span>
+</li>
+<li id="bib.bib29" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[14]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">A. Boldrin and P. Małkiewicz</span><span class="ltx_text ltx_bib_year"> (2022)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Dirac procedure and the Hamiltonian formalism for cosmological perturbations in a Bianchi I universe</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Class. Quant. Grav.</span> <span class="ltx_text ltx_bib_volume">39</span> (<span class="ltx_text ltx_bib_number">2</span>), <span class="ltx_text ltx_bib_pages"> pp. 025005</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2105.05325</span>,
+<a href="https://dx.doi.org/10.1088/1361-6382/ac3bda" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S7.p1.2" title="7 Conclusion and outlook ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§7</span></a>.
+</span>
+</li>
+<li id="bib.bib32" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[15]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">L. Bombelli, J. Lee, D. Meyer, and R. Sorkin</span><span class="ltx_text ltx_bib_year"> (1987)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Space-Time as a Causal Set</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Phys. Rev. Lett.</span> <span class="ltx_text ltx_bib_volume">59</span>, <span class="ltx_text ltx_bib_pages"> pp. 521–524</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.1103/PhysRevLett.59.521" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p7.14" title="3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#footnote8" title="In 4 Generalized relative locality ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">footnote 8</span></a>.
+</span>
+</li>
+<li id="bib.bib22" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[16]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. M. Carmona, J. L. Cortés, and J. J. Relancio</span><span class="ltx_text ltx_bib_year"> (2021)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Curved Momentum Space, Locality, and Generalized Space-Time</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Universe</span> <span class="ltx_text ltx_bib_volume">7</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 99</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2104.07336</span>,
+<a href="https://dx.doi.org/10.3390/universe7040099" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p4.2" title="3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#S7.p1.2" title="7 Conclusion and outlook ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§7</span></a>.
+</span>
+</li>
+<li id="bib.bib7" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[17]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">L. Chen</span><span class="ltx_text ltx_bib_year"> (2013)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Causal loop in the theory of Relative Locality</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Phys. Rev. D</span> <span class="ltx_text ltx_bib_volume">88</span>, <span class="ltx_text ltx_bib_pages"> pp. 024052</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">1212.5233</span>,
+<a href="https://dx.doi.org/10.1103/PhysRevD.88.024052" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p2.1" title="1 Introduction ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib36" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[18]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">M. Cortês and L. Smolin</span><span class="ltx_text ltx_bib_year"> (2014)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Quantum energetic causal sets</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Phys. Rev. D</span> <span class="ltx_text ltx_bib_volume">90</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 044035</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">1308.2206</span>,
+<a href="https://dx.doi.org/10.1103/PhysRevD.90.044035" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p7.14" title="3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>.
+</span>
+</li>
+<li id="bib.bib35" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[19]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">M. Cortês and L. Smolin</span><span class="ltx_text ltx_bib_year"> (2014)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The Universe as a Process of Unique Events</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Phys. Rev. D</span> <span class="ltx_text ltx_bib_volume">90</span> (<span class="ltx_text ltx_bib_number">8</span>), <span class="ltx_text ltx_bib_pages"> pp. 084007</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">1307.6167</span>,
+<a href="https://dx.doi.org/10.1103/PhysRevD.90.084007" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p7.14" title="3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>.
+</span>
+</li>
+<li id="bib.bib6" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[20]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">G. Fabiano and D. Frattulillo</span><span class="ltx_text ltx_bib_year"> (2025-07)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Transverse relative locality effects in de Sitter spacetime</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2507.13192</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p2.1" title="1 Introduction ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+<li id="bib.bib4" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[21]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">L. Freidel and L. Smolin</span><span class="ltx_text ltx_bib_year"> (2011-03)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Gamma ray burst delay times probe the geometry of momentum space</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">1103.5626</span></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p2.1" title="1 Introduction ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>,
+<a href="#S2.p2.12" title="2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>,
+<a href="#S3.p4.2" title="3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#S4.p2.1" title="4 Generalized relative locality ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4</span></a>,
+<a href="#S7.p1.2" title="7 Conclusion and outlook ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§7</span></a>,
+<a href="#footnote2" title="In 2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">footnote 2</span></a>.
+</span>
+</li>
+<li id="bib.bib13" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[22]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">D. Hornof, V. Helm, E. d. D. Rodriguez, T. Juffmann, P. Haslinger, and P. Schattschneider</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A snapshot of relativistic motion: visualizing the Terrell-Penrose effect</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Commun. Phys.</span> <span class="ltx_text ltx_bib_volume">8</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 161</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2409.04296</span>,
+<a href="https://dx.doi.org/10.1038/s42005-025-02003-6" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p4.6" title="2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib30" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[23]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. Kowalski-Glikman and S. Nowak</span><span class="ltx_text ltx_bib_year"> (2002)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Doubly special relativity theories as different bases of kappa Poincare algebra</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Phys. Lett. B</span> <span class="ltx_text ltx_bib_volume">539</span>, <span class="ltx_text ltx_bib_pages"> pp. 126–132</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">hep-th/0203040</span>,
+<a href="https://dx.doi.org/10.1016/S0370-2693%2802%2902063-4" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S6.p1.22" title="6 Spacetime symmetries ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§6</span></a>,
+<a href="#S7.p1.2" title="7 Conclusion and outlook ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§7</span></a>.
+</span>
+</li>
+<li id="bib.bib21" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[24]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">M. A. Kurkov</span><span class="ltx_text ltx_bib_year"> (2025)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Light propagation in <math id="bib.bib21.1.m1a" class="ltx_Math" alttext="\kappa" display="inline" intent=":literal"><semantics><mi>κ</mi><annotation encoding="application/x-tex">\kappa</annotation></semantics></math>-Minkowski space-time: gauge ambiguities and invariance</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Eur. Phys. J. C</span> <span class="ltx_text ltx_bib_volume">85</span> (<span class="ltx_text ltx_bib_number">10</span>), <span class="ltx_text ltx_bib_pages"> pp. 1231</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2510.19847</span>,
+<a href="https://dx.doi.org/10.1140/epjc/s10052-025-14970-9" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S4.p3.31" title="4 Generalized relative locality ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§4</span></a>.
+</span>
+</li>
+<li id="bib.bib41" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[25]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. Lukierski, S. Meljanac, S. Mignemi, A. Pachoł, and M. Woronowicz</span><span class="ltx_text ltx_bib_year"> (2024)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">From Snyder space-times to doubly <math id="bib.bib41.1.m1a" class="ltx_Math" alttext="\kappa" display="inline" intent=":literal"><semantics><mi>κ</mi><annotation encoding="application/x-tex">\kappa</annotation></semantics></math>-dependent Yang quantum phase spaces and their generalizations</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Phys. Lett. B</span> <span class="ltx_text ltx_bib_volume">854</span>, <span class="ltx_text ltx_bib_pages"> pp. 138729</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2311.16994</span>,
+<a href="https://dx.doi.org/10.1016/j.physletb.2024.138729" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S6.p1.22" title="6 Spacetime symmetries ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§6</span></a>.
+</span>
+</li>
+<li id="bib.bib31" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[26]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">S. Meljanac, A. Pachol, A. Samsarov, and K. S. Gupta</span><span class="ltx_text ltx_bib_year"> (2013)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Different realizations of <math id="bib.bib31.1.m1a" class="ltx_Math" alttext="\kappa" display="inline" intent=":literal"><semantics><mi>κ</mi><annotation encoding="application/x-tex">\kappa</annotation></semantics></math>-momentum space</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Phys. Rev. D</span> <span class="ltx_text ltx_bib_volume">87</span> (<span class="ltx_text ltx_bib_number">12</span>), <span class="ltx_text ltx_bib_pages"> pp. 125009</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">1210.6814</span>,
+<a href="https://dx.doi.org/10.1103/PhysRevD.87.125009" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S7.p1.2" title="7 Conclusion and outlook ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§7</span></a>.
+</span>
+</li>
+<li id="bib.bib25" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[27]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">R. Penrose</span><span class="ltx_text ltx_bib_year"> (1959)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The apparent shape of a relativistically moving sphere</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Proc. Cambridge Phil. Soc.</span> <span class="ltx_text ltx_bib_volume">55</span>, <span class="ltx_text ltx_bib_pages"> pp. 137–139</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.1017/S0305004100033776" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p4.6" title="2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib17" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[28]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">C. Pfeifer and J. J. Relancio</span><span class="ltx_text ltx_bib_year"> (2022)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Deformed relativistic kinematics on curved spacetime: a geometric approach</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Eur. Phys. J. C</span> <span class="ltx_text ltx_bib_volume">82</span> (<span class="ltx_text ltx_bib_number">2</span>), <span class="ltx_text ltx_bib_pages"> pp. 150</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">2103.16626</span>,
+<a href="https://dx.doi.org/10.1140/epjc/s10052-022-10066-w" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S7.p1.2" title="7 Conclusion and outlook ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§7</span></a>.
+</span>
+</li>
+<li id="bib.bib33" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[29]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">H. Putnam</span><span class="ltx_text ltx_bib_year"> (1967)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Time and physical geometry</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">The Journal of Philosophy</span> <span class="ltx_text ltx_bib_volume">64</span> (<span class="ltx_text ltx_bib_number">8</span>), <span class="ltx_text ltx_bib_pages"> pp. 240–247</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text issn ltx_bib_external">ISSN 0022362X</span>,
+<a href="http://www.jstor.org/stable/2024493" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p3.14" title="2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib34" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[30]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">C. W. Rietdijk</span><span class="ltx_text ltx_bib_year"> (1966)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A rigorous proof of determinism derived from the special theory of relativity</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Philosophy of Science</span> <span class="ltx_text ltx_bib_volume">33</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 341–344</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.1086/288106" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p3.14" title="2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib24" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[31]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">M. D. Spivak</span><span class="ltx_text ltx_bib_year"> (1973)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">A comprehensive introduction to differential geometry</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">The American Mathematical Monthly</span> <span class="ltx_text ltx_bib_volume">80</span> (<span class="ltx_text ltx_bib_number">4</span>), <span class="ltx_text ltx_bib_pages"> pp. 448–449</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.2307/2319112" title="" class="ltx_ref doi ltx_bib_external">Document</a>,
+<a href="https://doi.org/10.2307/2319112" title="" class="ltx_ref ltx_bib_external">Link</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S5.p1.12" title="5 Relative locality and momentum-space curvature ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§5</span></a>.
+</span>
+</li>
+<li id="bib.bib27" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[32]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">S. Surya</span><span class="ltx_text ltx_bib_year"> (2019)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">The causal set approach to quantum gravity</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Living Rev. Rel.</span> <span class="ltx_text ltx_bib_volume">22</span> (<span class="ltx_text ltx_bib_number">1</span>), <span class="ltx_text ltx_bib_pages"> pp. 5</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><span class="ltx_text ltx_bib_external">1903.11544</span>,
+<a href="https://dx.doi.org/10.1007/s41114-019-0023-1" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S3.p7.14" title="3 Ehresmann connections and the causal set structure of 𝑆 ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§3</span></a>,
+<a href="#footnote8" title="In 4 Generalized relative locality ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">footnote 8</span></a>.
+</span>
+</li>
+<li id="bib.bib12" class="ltx_bibitem ltx_bib_article">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[33]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">J. Terrell</span><span class="ltx_text ltx_bib_year"> (1959)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Invisibility of the Lorentz Contraction</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_journal">Phys. Rev.</span> <span class="ltx_text ltx_bib_volume">116</span>, <span class="ltx_text ltx_bib_pages"> pp. 1041–1045</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.1103/PhysRev.116.1041" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p4.6" title="2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib14" class="ltx_bibitem ltx_bib_book">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[34]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_author">R. M. Wald</span><span class="ltx_text ltx_bib_year"> (1984)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">General Relativity</span>.
+</span>
+<span class="ltx_bibblock"> <span class="ltx_text ltx_bib_publisher">Chicago Univ. Pr.</span>, <span class="ltx_text ltx_bib_place">Chicago, USA</span>.
+</span>
+<span class="ltx_bibblock">External Links: <span class="ltx_text ltx_bib_links"><a href="https://dx.doi.org/10.7208/chicago/9780226870373.001.0001" title="" class="ltx_ref doi ltx_bib_external">Document</a></span>
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S2.p4.6" title="2 Observer-independent and observer-dependent spacetimes ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§2</span></a>.
+</span>
+</li>
+<li id="bib.bib1" class="ltx_bibitem ltx_bib_book">
+<span class="ltx_tag ltx_bib_key ltx_role_refnum ltx_tag_bibitem">[35]</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_year"> (2024)</span>
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_title">Wittgenstein’s tractatus logico-philosophicus: a critical guide</span>.
+</span>
+<span class="ltx_bibblock"><span class="ltx_text ltx_bib_series">Cambridge Critical Guides</span>,  <span class="ltx_text ltx_bib_publisher">Cambridge University Press</span>.
+</span>
+<span class="ltx_bibblock ltx_bib_cited">Cited by: <a href="#S1.p1.1" title="1 Introduction ‣ Generalized relative locality and causal sets" class="ltx_ref"><span class="ltx_text ltx_ref_tag">§1</span></a>.
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+</div>
+<footer class="arxiv-html-footer">
+  <div class="ltx_page_logo">
+    Experimental support, please
+    <a href="./2604.17272v1/__stdout.txt" class="ltx_ref"
+    target="_blank" rel="nofollow">view the build logs</a>
+    for errors. Generated by
+    <a href="https://math.nist.gov/~BMiller/LaTeXML/" target="_blank" class="ltx_ref ltx_LaTeXML_logo">
+      <span style="letter-spacing: -0.2em; margin-right: 0.1em;">
+        L
+        <span style="font-size: 70%; position: relative; bottom: 2.2pt;">A</span>
+        T
+        <span style="position: relative; bottom: -0.4ex;">E</span>
+      </span>
+      <span class="ltx_font_smallcaps">xml</span>
+      <img alt="[LOGO]"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==">
+    </a>.
+  </div>
+  <div class="keyboard-glossary">
+    <h2>Instructions for reporting errors</h2>
+    <p>We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+      support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+      methods listed below:</p>
+    <ul>
+      <li>Click the "Report Issue" <span class="mobile-only">(<svg role="presentation"
+            style="display: inline-block; vertical-align: middle; fill: var(--text-color);" aria-hidden="true"
+            height="1em" viewBox="0 0 640 640">
+            <path
+              d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+          </svg>)</span> button, located in the page header.</li>
+    </ul>
+    <p><strong>Tip:</strong> You can select the relevant text first, to include it in your report.</p>
+    <p>Our team has already identified <a class="ltx_ref" href="https://github.com/arXiv/html_feedback/issues"
+        target="_blank">the following issues</a>. We appreciate your time reviewing and reporting rendering errors we
+      may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+      should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+      all.</p>
+    <p>Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a <a
+        class="ltx_ref" href="https://github.com/brucemiller/LaTeXML/wiki/Porting-LaTeX-packages-for-LaTeXML"
+        target="_blank">list of packages that need conversion</a>, and welcome <a class="ltx_ref"
+        href="https://github.com/brucemiller/LaTeXML/issues" target="_blank">developer contributions</a>.</p>
+  </div>
+</footer>
+<div id="fixed-buttons-container">
+  <div id="beta-badge" aria-hidden="true">BETA</div>
+  <a id="disable-reading-mode-btn" class="header-button" href="javascript:toggleReadingMode();"
+    title="Disable reading mode, show header and footer">
+    <svg role="presentation" height="1.25rem"
+      viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </a>
+</div></body>
+</html>

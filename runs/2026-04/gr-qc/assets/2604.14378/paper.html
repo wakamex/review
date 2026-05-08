@@ -1,0 +1,920 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium</title>
+<!--Generated on Sun Apr 12 22:59:46 2026 by LaTeXML (version 0.8.8) http://dlmf.nist.gov/LaTeXML/.-->
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="/static/browse/0.3.4/css/arxiv-html-papers-20260131.css" type="text/css">
+<script src="/static/browse/0.3.4/js/arxiv-html-papers-20260131.js"></script>
+<script>
+  // Restore the saved color scheme preference, or
+  // enact the browser preference if "automatic", 
+  // without expecting DOM load to have completed.
+  //
+  // Also restore any saved readingmode and ToC display preferences.
+  function initializeReadingPreferences() {
+    let saved_theme = localStorage.getItem("ar5iv_theme") || "automatic";
+    if (saved_theme === "automatic") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        saved_theme = "dark";
+      }
+    }
+    if (saved_theme == "dark") {
+      document.documentElement.setAttribute("data-theme", "dark");
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+
+    const tocDisplay = localStorage.getItem('arxiv_html_paper_toc_display');
+    if (tocDisplay) {
+      document.documentElement.setAttribute("data-toc-display", tocDisplay);
+    }
+    const readingMode = localStorage.getItem('arxiv_html_paper_reading_mode');
+    if (readingMode) {
+      document.documentElement.setAttribute("data-reading-mode", readingMode);
+    }
+  }
+  // Run as soon as JS starts, to minimize repainting
+  initializeReadingPreferences();
+</script>
+<link rel="apple-touch-icon" sizes="180x180"
+  href="/static/browse/0.3.4/images/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32"
+  href="/static/browse/0.3.4/images/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16"
+  href="/static/browse/0.3.4/images/icons/favicon-16x16.png">
+<link rel="manifest" href="/static/browse/0.3.4/images/icons/site.webmanifest">
+<link rel="mask-icon" href="/static/browse/0.3.4/images/icons/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="stylesheet" type="text/css" media="screen" href="https://use.typekit.net/utz6mli.css">
+</head>
+<body>
+<dialog id="modal-form" aria-labelledby="modal-title" closedby="any">
+  <form id="modal-form-content" method="dialog" enctype="multipart/form-data">
+    <header class="modal-header">
+      <h5 id="modal-title" class="modal-title">Report GitHub Issue</h5>
+      <button type="submit" formnovalidate class="modal-close" aria-label="Close">×</button>
+    </header>
+
+    <div class="modal-body">
+      <label for="form_title">Title:</label>
+      <input class="form-control" id="form_title" name="form_title" required placeholder="Enter title">
+
+      <p id="selectedTextModalDescription" hidden>Content selection saved. Describe the issue below:</p>
+
+      <label for="description">Description:</label>
+      <textarea class="form-control" id="description" name="description" required maxlength="500"
+        placeholder="500 characters maximum"></textarea>
+    </div>
+
+    <footer class="modal-footer">
+      <button type="submit" value="internal-report" class="sr-only modal-submit">Submit without GitHub</button>
+      <button type="submit" value="github-report" class="modal-submit">Submit in GitHub</button>
+    </footer>
+  </form>
+</dialog>
+
+<header class="arxiv-html-header">
+  <div class="html-header-logo">
+    <a href="/">
+      <img alt="arXiv logo" class="logo desktop-only" width="100"
+        src="/static/browse/0.3.4/images/arxiv-logo-one-color-white.svg">
+      <span class="sr-only">Back to arXiv</span>
+    </a>
+  </div>
+  <!--TOC, dark mode, links-->
+  <nav class="html-header-nav">
+    <a class="header-button hover-effect desktop-only" href="https://info.arxiv.org/about/accessible_HTML.html"
+      target="_blank">Why HTML?</a>
+    <a class="header-button" title="Report an Issue" href="#" title="Report an issue"
+      onclick="event.preventDefault(); showModalForm();">
+      <svg role="presentation" class="mobile-only toggle-icon" aria-hidden="true" height="1.25rem"
+        viewBox="0 0 640 640">
+        <path
+          d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+      </svg>
+      <span class="desktop-only">Report Issue</span></a>
+    <!--back to abstract-->
+    <a class="header-button" title="Back to abstract page" aria-label="Back to abstract page"
+      href="/abs/2604.14378v1">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 512 512" fill="#ffffff"
+        aria-hidden="true">
+        <path
+          d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 192 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l210.7 0-73.4 73.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128zM160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32L96 32C43 32 0 75 0 128L0 384c0 53 43 96 96 96l64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32l64 0z">
+        </path>
+      </svg>
+      <span class="desktop-only">Back to Abstract</span>
+    </a>
+    <!-- PDF download link -->
+    <a class="header-button" title="Download PDF" href="/pdf/2604.14378v1"
+      target="_blank">
+      <svg class="mobile-only toggle-icon" role="presentation" height="1.25rem" viewBox="0 0 576 542">
+        <path
+          d="M208 48L96 48c-8.8 0-16 7.2-16 16l0 384c0 8.8 7.2 16 16 16l80 0 0 48-80 0c-35.3 0-64-28.7-64-64L32 64C32 28.7 60.7 0 96 0L229.5 0c17 0 33.3 6.7 45.3 18.7L397.3 141.3c12 12 18.7 28.3 18.7 45.3l0 149.5-48 0 0-128-88 0c-39.8 0-72-32.2-72-72l0-88zM348.1 160L256 67.9 256 136c0 13.3 10.7 24 24 24l68.1 0zM240 380l32 0c33.1 0 60 26.9 60 60s-26.9 60-60 60l-12 0 0 28c0 11-9 20-20 20s-20-9-20-20l0-128c0-11 9-20 20-20zm32 80c11 0 20-9 20-20s-9-20-20-20l-12 0 0 40 12 0zm96-80l32 0c28.7 0 52 23.3 52 52l0 64c0 28.7-23.3 52-52 52l-32 0c-11 0-20-9-20-20l0-128c0-11 9-20 20-20zm32 128c6.6 0 12-5.4 12-12l0-64c0-6.6-5.4-12-12-12l-12 0 0 88 12 0zm76-108c0-11 9-20 20-20l48 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 24 28 0c11 0 20 9 20 20s-9 20-20 20l-28 0 0 44c0 11-9 20-20 20s-20-9-20-20l0-128z" />
+      </svg>
+      <span class="desktop-only">Download PDF</span></a>
+    <!-- navigational table of contents toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleNavTOC();" title="Toggle navigation"
+      aria-label="Toggle navigation">
+      <svg height="1.25rem" role="presentation" viewBox="0 0 512 512">
+        <path
+          d="M40 48C26.7 48 16 58.7 16 72v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V72c0-13.3-10.7-24-24-24H40zM192 64c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zm0 160c-17.7 0-32 14.3-32 32s14.3 32 32 32H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H192zM16 232v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V232c0-13.3-10.7-24-24-24H40c-13.3 0-24 10.7-24 24zM40 368c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24H88c13.3 0 24-10.7 24-24V392c0-13.3-10.7-24-24-24H40z">
+        </path>
+      </svg>
+    </a>
+    <!--- collapsable header / reading mode toggle -->
+    <a class="header-button toggle-icon" href="javascript:toggleReadingMode();"
+      title="Disable reading mode, show header and footer">
+      <svg role="presentation" height="1.25rem"
+        viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+        <path
+          d="M32 32C14.3 32 0 46.3 0 64l0 96c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 32zM64 352c0-17.7-14.3-32-32-32S0 334.3 0 352l0 96c0 17.7 14.3 32 32 32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0 0-64zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0 0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-96c0-17.7-14.3-32-32-32l-96 0zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l96 0c17.7 0 32-14.3 32-32l0-96z" />
+      </svg>
+    </a>
+    <!--- colored theme toggle -->
+    <button type="button" class="header-button color-tog" onclick="toggleColorScheme();" title="Toggle dark/light mode" aria-label="Toggle color scheme">
+      <span class="toggle-icon automatic-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9h-1.9M20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69m-9.15 3.96h2.3L12 9l-1.15 3.65Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon light-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+      <span class="toggle-icon dark-tog" aria-hidden="true">
+        <svg role="presentation" height="1.25rem" viewBox="0 0 24 24">
+          <path
+            d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z">
+          </path>
+        </svg>
+      </span>
+    </button>
+  </nav>
+</header><nav class="ltx_page_navbar">
+<nav class="ltx_TOC">
+<ol class="ltx_toclist">
+<li class="ltx_tocentry ltx_tocentry_abstract"><a href="#abstract1" title="In Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_title">Abstract</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S1" title="In Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">I </span>Introduction</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S2" title="In Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II </span>The Elastic Defect Ansatz</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S2.SS1" title="In II The Elastic Defect Ansatz ‣ Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II.1 </span>Dispersion and Mass</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S2.SS2" title="In II The Elastic Defect Ansatz ‣ Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">II.2 </span>Internal Structure and The Composite Spinor</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S3" title="In Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III </span>The Klein Potential as Mechanical Stress</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S3.SS1" title="In III The Klein Potential as Mechanical Stress ‣ Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III.1 </span>Region I (Incident + Reflected)</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S3.SS2" title="In III The Klein Potential as Mechanical Stress ‣ Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III.2 </span>Region II (The Supercritical Stress)</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S3.SS3" title="In III The Klein Potential as Mechanical Stress ‣ Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">III.3 </span>Structural Interpretation of Negative Modes</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S4" title="In Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV </span>Vacuum Instability and Flux Conservation</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S4.SS1" title="In IV Vacuum Instability and Flux Conservation ‣ Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">IV.1 </span>Mechanical Breakdown vs. Probability</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S5" title="In Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">V </span>Discussion: The Schwinger Limit</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_section">
+<a href="#S6" title="In Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">VI </span>Pedagogical Implementation: Bridging the Conceptual Gap</span></a>
+<ol class="ltx_toclist ltx_toclist_section">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S6.SS1" title="In VI Pedagogical Implementation: Bridging the Conceptual Gap ‣ Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">VI.1 </span>Teaching Strategy: Comparative Analysis</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#S6.SS2" title="In VI Pedagogical Implementation: Bridging the Conceptual Gap ‣ Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">VI.2 </span>Suggested Student Exercises</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_section"><a href="#S7" title="In Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">VII </span>Conclusion</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_appendix">
+<a href="#A1" title="In Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A </span>Emergence of Spinor Structure from Linearization Constraints</span></a>
+<ol class="ltx_toclist ltx_toclist_appendix">
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#A1.SS1" title="In Appendix A Emergence of Spinor Structure from Linearization Constraints ‣ Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A.1 </span>From Wave Mechanics to First-Order Dynamics</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#A1.SS2" title="In Appendix A Emergence of Spinor Structure from Linearization Constraints ‣ Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A.2 </span>The Clifford Algebra Constraint</span></a></li>
+<li class="ltx_tocentry ltx_tocentry_subsection"><a href="#A1.SS3" title="In Appendix A Emergence of Spinor Structure from Linearization Constraints ‣ Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_title"><span class="ltx_tag ltx_tag_ref">A.3 </span>Physical Identification of Components</span></a></li>
+</ol>
+</li>
+<li class="ltx_tocentry ltx_tocentry_bibliography"><a href="#bib" title="In Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_title">References</span></a></li>
+</ol></nav>
+</nav>
+<div class="ltx_page_main">
+<div id="infobox" class="infobox">
+  <a id="license-tr" href="https://info.arxiv.org/help/license/index.html#licenses-available">
+    License: arXiv.org perpetual non-exclusive license
+  </a>
+  <div id="watermark-tr">
+arXiv:2604.14378v1 [gr-qc] 15 Apr 2026</div>
+</div><div class="ltx_page_content">
+<article class="ltx_document ltx_authors_1line"><span id="id1" class="ltx_note ltx_role_thanks"><sup class="ltx_note_mark">†</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">†</sup><span class="ltx_note_type">thanks: </span><span id="id1.1" class="ltx_text ltx_font_bold">tinoco.v.alanfermin@gmail.com</span></span></span></span>
+<h1 class="ltx_title ltx_title_document">Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium</h1>
+<div class="ltx_authors">
+<span class="ltx_creator ltx_role_author">
+<span class="ltx_personname">Alan F. Tinoco Vázquez
+</span><span class="ltx_author_notes">
+<span class="ltx_contact ltx_role_affiliation">Independent Researcher, Guadalajara, Jalisco, México
+</span></span></span>
+</div>
+
+<div id="abstract1" class="ltx_abstract">
+<h6 class="ltx_title ltx_title_abstract">Abstract</h6>
+<p class="ltx_p">The Klein Paradox—the anomalous scattering of relativistic fermions off a high potential step—signals the limit of the single-particle interpretation of the Dirac equation. While Quantum Field Theory (QFT) resolves this via pair production, the microscopic mechanism is often obscured by abstract formalism. In this work, we investigate this phenomenon through the framework of Analog Gravity and Condensed Matter Physics. We utilize a hydrodynamic model wherein a relativistic particle is treated as a localized elastic excitation (defect) within a continuous linear medium. We demonstrate that when the external stress (potential) exceeds the medium’s binding energy threshold (<math class="ltx_Math" alttext="V&gt;2mc^{2}" display="inline" intent=":literal"><semantics><mrow><mi>V</mi><mo>&gt;</mo><mrow><mn>2</mn><mo lspace="0em" rspace="0em">​</mo><mi>m</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>c</mi><mn>2</mn></msup></mrow></mrow><annotation encoding="application/x-tex">V&gt;2mc^{2}</annotation></semantics></math>), the system undergoes a mechanical instability analogous to dielectric breakdown. This instability naturally generates modes with inverted topological winding, which we identify as antiparticles. By solving the boundary conditions for this elastic system, we reproduce the transmission coefficients of Hansen and Ravndal and recover the Schwinger limit for pair production rates. This approach provides a clear pedagogical model based on continuum mechanics to visualize vacuum decay processes, suggesting that the ”paradox” is simply the elastic response of a medium under supercritical stress. This mechanical analogy serves as a pedagogical bridge for graduate students in condensed matter physics and advanced materials science, offering a concrete visualization of vacuum instability that complements standard abstract QFT derivations.
+
+<br class="ltx_break"><span class="ltx_text ltx_font_bold">Eur. J. Phys. Accepted Manuscript (2026); DOI:</span> <a href="https://iopscience.iop.org/article/10.1088/1361-6404/ae5903" title="" class="ltx_ref ltx_href">10.1088/1361-6404/ae5903</a> <span class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">1</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">1</sup><span class="ltx_tag ltx_tag_note">1</span>This is the Author’s Accepted Manuscript. The final version of record has been published in European Journal of Physics and is available at DOI: <a href="https://iopscience.iop.org/article/10.1088/1361-6404/ae5903" title="" class="ltx_ref ltx_href">10.1088/1361-6404/ae5903</a>. This manuscript is available for reuse under a CC BY-NC-ND licence after the 12-month embargo period.</span></span></span></p>
+</div>
+<section id="S1" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">I </span>Introduction</h2>
+
+<div id="S1.p1" class="ltx_para">
+<p id="S1.p1.2" class="ltx_p">Since its formulation in 1929, the Klein Paradox <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib1" title="" class="ltx_ref">1</a>]</cite> has served as a critical test case for the interpretation of relativistic quantum mechanics. When a Dirac electron encounters a potential step of height <math id="S1.p1.1.m1" class="ltx_Math" alttext="V&gt;E+mc^{2}" display="inline" intent=":literal"><semantics><mrow><mi>V</mi><mo>&gt;</mo><mrow><mi>E</mi><mo>+</mo><mrow><mi>m</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>c</mi><mn>2</mn></msup></mrow></mrow></mrow><annotation encoding="application/x-tex">V&gt;E+mc^{2}</annotation></semantics></math>, the single-particle Dirac equation predicts a reflection coefficient <math id="S1.p1.2.m2" class="ltx_Math" alttext="R&gt;1" display="inline" intent=":literal"><semantics><mrow><mi>R</mi><mo>&gt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">R&gt;1</annotation></semantics></math> and a non-vanishing transmission probability into states of formally negative kinetic energy.</p>
+</div>
+<div id="S1.p2" class="ltx_para">
+<p id="S1.p2.1" class="ltx_p">As detailed in standard texts like Greiner <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="" class="ltx_ref">2</a>]</cite>, this result is paradoxical only if one insists on conserving the probability density of a single particle. Greiner explicitly calculates the currents to show that the reflected flux exceeds the incident flux, necessitating a many-body interpretation, where the potential stimulates the creation of particle-antiparticle pairs. Similarly, Itzykson and Zuber <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib3" title="" class="ltx_ref">3</a>]</cite> use this breakdown to motivate the transition to Quantum Field Theory (QFT), arguing that the Dirac equation in strong fields describes charge redistribution in the vacuum rather than single-particle trajectories.</p>
+</div>
+<div id="S1.p3" class="ltx_para">
+<p id="S1.p3.1" class="ltx_p">While the QFT resolution is mathematically robust, the physical intuition often remains opaque. Modern treatments connect the paradox to the Schwinger Effect <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib4" title="" class="ltx_ref">4</a>, <a href="#bib.bib5" title="" class="ltx_ref">5</a>]</cite>—the creation of pairs in a strong electric field—but usually treat the ”vacuum” as an abstract state subject to operator creation/annihilation rules.</p>
+</div>
+<div id="S1.p4" class="ltx_para">
+<p id="S1.p4.1" class="ltx_p">While traditionally a subject of high-energy physics, the Klein Paradox has found renewed relevance in condensed matter systems. The realization of massless Dirac fermions in graphene and topological insulators has allowed for the experimental observation of Klein tunneling <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib6" title="" class="ltx_ref">6</a>, <a href="#bib.bib7" title="" class="ltx_ref">7</a>]</cite>. Furthermore, recent experimental breakthroughs in phononic crystals <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib8" title="" class="ltx_ref">8</a>, <a href="#bib.bib9" title="" class="ltx_ref">9</a>]</cite> have demonstrated this phenomenon in macroscopic acoustic media, validating the hydrodynamic analogy utilized in this work, making the intuitive understanding of this phenomenon crucial for modern materials science.</p>
+</div>
+<div id="S1.p5" class="ltx_para">
+<p id="S1.p5.1" class="ltx_p">Recent pedagogical works have utilized multiple scattering expansions to visualize the time-dependent dynamics of the paradox for scalar particles <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib10" title="" class="ltx_ref">10</a>]</cite>. In this work, we take a complementary approach through the framework of <span id="S1.p5.1.1" class="ltx_text ltx_font_italic">Analog Gravity</span> and <span id="S1.p5.1.2" class="ltx_text ltx_font_italic">Condensed Matter Physics</span> <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib11" title="" class="ltx_ref">11</a>, <a href="#bib.bib12" title="" class="ltx_ref">12</a>]</cite>. We explore a hydrodynamic toy model wherein the relativistic fermion is treated as a localized elastic excitation (defect) within a continuous linear medium. In this analog, ”mass” corresponds to a resonant frequency gap, and the spinor structure arises from the internal vibrational degrees of freedom required for stability.</p>
+</div>
+<div id="S1.p6" class="ltx_para">
+<p id="S1.p6.1" class="ltx_p">We demonstrate that when the external stress (potential) exceeds the medium’s binding energy threshold (<math id="S1.p6.1.m1" class="ltx_Math" alttext="V&gt;2mc^{2}" display="inline" intent=":literal"><semantics><mrow><mi>V</mi><mo>&gt;</mo><mrow><mn>2</mn><mo lspace="0em" rspace="0em">​</mo><mi>m</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>c</mi><mn>2</mn></msup></mrow></mrow><annotation encoding="application/x-tex">V&gt;2mc^{2}</annotation></semantics></math>), the system undergoes a mechanical instability analogous to <span id="S1.p6.1.1" class="ltx_text ltx_font_italic">dielectric breakdown</span>. This instability naturally generates modes with inverted topological winding, which we identify as antiparticles. By solving the boundary conditions for this elastic system, we reproduce the transmission coefficients of Hansen and Ravndal <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib13" title="" class="ltx_ref">13</a>]</cite>, suggesting that the ”paradoxical” reflection can be understood as the elastic response of a medium under supercritical stress.</p>
+</div>
+<div id="S1.p7" class="ltx_para">
+<p id="S1.p7.1" class="ltx_p">The novelty of this work lies not in calculating new scattering coefficients—which necessarily match standard QFT predictions—but in providing a <span id="S1.p7.1.1" class="ltx_text ltx_font_bold">deterministic, mechanical mechanism</span> for the pair creation process. While standard theory treats the vacuum instability as a probabilistic transition governed by operator algebra, our hydrodynamic framework reveals the underlying kinematics of the ’breakdown’. It offers a concrete physical picture where the ’mysterious’ appearance of antiparticles is demystified as the natural relaxation of a medium under supercritical stress, bridging the conceptual gap between single-particle quantum mechanics and many-body field theory.</p>
+</div>
+<section id="S1.SSx1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">Pedagogical Aim:</h3>
+
+<div id="S1.SSx1.p1" class="ltx_para">
+<p id="S1.SSx1.p1.1" class="ltx_p">Standard instruction on the Klein Paradox typically aims to demonstrate the limits of single-particle quantum mechanics and motivate relativistic Quantum Field Theory (QFT) in a high-energy physics context. However, with the advent of Dirac materials such as graphene and topological insulators, the Klein Paradox has become a distinctly observable phenomenon in solid-state physics.</p>
+</div>
+<div id="S1.SSx1.p2" class="ltx_para">
+<p id="S1.SSx1.p2.1" class="ltx_p">Consequently, this article is specifically addressed to graduate students and instructors in courses dedicated to <span id="S1.SSx1.p2.1.1" class="ltx_text ltx_font_italic">Quantum Field Theory for Condensed Matter Physics</span> or <span id="S1.SSx1.p2.1.2" class="ltx_text ltx_font_italic">Advanced Solid State Physics</span>. In these contexts, concepts such as elastic defects, topological anchoring, and continuous media are standard prerequisites. By leveraging the framework of Analog Gravity, instructors can use this hydrodynamic model to:</p>
+</div>
+<div id="S1.SSx1.p3" class="ltx_para">
+<ol id="S1.I1" class="ltx_enumerate">
+<li id="S1.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span> 
+<div id="S1.I1.i1.p1" class="ltx_para">
+<p id="S1.I1.i1.p1.1" class="ltx_p">Provide a tangible, mechanical intuition for Dirac fermions emerging from lattice/medium dynamics.</p>
+</div>
+</li>
+<li id="S1.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span> 
+<div id="S1.I1.i2.p1" class="ltx_para">
+<p id="S1.I1.i2.p1.1" class="ltx_p">Visualize ”pair creation” and vacuum instability not merely as abstract operator algebra, but as a deterministic dielectric-like breakdown of a continuous medium under stress.</p>
+</div>
+</li>
+<li id="S1.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">3.</span> 
+<div id="S1.I1.i3.p1" class="ltx_para">
+<p id="S1.I1.i3.p1.1" class="ltx_p">Bridge the conceptual gap between high-energy QFT phenomena and their macroscopic analogs in condensed matter systems.</p>
+</div>
+</li>
+</ol>
+<p id="S1.SSx1.p3.1" class="ltx_p"><span id="S1.SSx1.p3.1.1" class="ltx_text ltx_font_bold">Section <a href="#S6" title="VI Pedagogical Implementation: Bridging the Conceptual Gap ‣ Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_tag">VI</span></a></span> provides specific guidelines, a comparative table, and suggested exercises for instructors to implement this hydrodynamic model. By grounding the mathematics of Dirac fermions in continuum mechanics, this approach serves as an intuitive prelude to advanced topics in topological matter and analog gravity.</p>
+</div>
+</section>
+</section>
+<section id="S2" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">II </span>The Elastic Defect Ansatz</h2>
+
+<div id="S2.p1" class="ltx_para">
+<p id="S2.p1.2" class="ltx_p">To construct a hydrodynamic analog for the Dirac field, we adopt a model inspired by the hydrodynamics of defects in condensed matter <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib11" title="" class="ltx_ref">11</a>]</cite>. We assume the background vacuum behaves as a continuous linear medium characterized by a wave propagation speed <math id="S2.p1.1.m1" class="ltx_Math" alttext="c" display="inline" intent=":literal"><semantics><mi>c</mi><annotation encoding="application/x-tex">c</annotation></semantics></math> and a restorative stiffness parameter <math id="S2.p1.2.m2" class="ltx_Math" alttext="\kappa" display="inline" intent=":literal"><semantics><mi>κ</mi><annotation encoding="application/x-tex">\kappa</annotation></semantics></math>, as illustrated in <span id="S2.p1.2.1" class="ltx_text ltx_font_bold">Fig. <a href="#S2.F1" title="Figure 1 ‣ II.2 Internal Structure and The Composite Spinor ‣ II The Elastic Defect Ansatz ‣ Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a></span>.</p>
+</div>
+<section id="S2.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">II.1 </span>Dispersion and Mass</h3>
+
+<div id="S2.SS1.p1" class="ltx_para">
+<p id="S2.SS1.p1.4" class="ltx_p">A localized defect in this medium is not a rigid body but a standing wave pattern. Its stability requires a resonance with the background, leading to the dispersion relation for a massive field:</p>
+<table id="S2.E1" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.E1.m1" class="ltx_Math" alttext="\omega^{2}=c^{2}k^{2}+\omega_{0}^{2}" display="block" intent=":literal"><semantics><mrow><msup><mi>ω</mi><mn>2</mn></msup><mo>=</mo><mrow><mrow><msup><mi>c</mi><mn>2</mn></msup><mo lspace="0em" rspace="0em">​</mo><msup><mi>k</mi><mn>2</mn></msup></mrow><mo>+</mo><msubsup><mi>ω</mi><mn>0</mn><mn>2</mn></msubsup></mrow></mrow><annotation encoding="application/x-tex">\omega^{2}=c^{2}k^{2}+\omega_{0}^{2}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(1)</span></td>
+</tr></tbody>
+</table>
+<p id="S2.SS1.p1.3" class="ltx_p">Here, <math id="S2.SS1.p1.1.m1" class="ltx_Math" alttext="\omega_{0}" display="inline" intent=":literal"><semantics><msub><mi>ω</mi><mn>0</mn></msub><annotation encoding="application/x-tex">\omega_{0}</annotation></semantics></math> is the characteristic cutoff frequency of the medium’s response to the defect. Following the de Broglie relations <math id="S2.SS1.p1.2.m2" class="ltx_Math" alttext="E=\hbar\omega" display="inline" intent=":literal"><semantics><mrow><mi>E</mi><mo>=</mo><mrow><mi mathvariant="normal">ℏ</mi><mo lspace="0em" rspace="0em">​</mo><mi>ω</mi></mrow></mrow><annotation encoding="application/x-tex">E=\hbar\omega</annotation></semantics></math> and <math id="S2.SS1.p1.3.m3" class="ltx_Math" alttext="p=\hbar k" display="inline" intent=":literal"><semantics><mrow><mi>p</mi><mo>=</mo><mrow><mi mathvariant="normal">ℏ</mi><mo lspace="0em" rspace="0em">​</mo><mi>k</mi></mrow></mrow><annotation encoding="application/x-tex">p=\hbar k</annotation></semantics></math>, we identify the rest mass energy. Similar to the energy gap in a superconductor or the effective mass of a phonon, this mass is defined as the energy cost of the confinement resonance:</p>
+<table id="S2.E2" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S2.E2.m1" class="ltx_Math" alttext="mc^{2}\equiv\hbar\omega_{0}" display="block" intent=":literal"><semantics><mrow><mrow><mi>m</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>c</mi><mn>2</mn></msup></mrow><mo>≡</mo><mrow><mi mathvariant="normal">ℏ</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>ω</mi><mn>0</mn></msub></mrow></mrow><annotation encoding="application/x-tex">mc^{2}\equiv\hbar\omega_{0}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(2)</span></td>
+</tr></tbody>
+</table>
+</div>
+</section>
+<section id="S2.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">II.2 </span>Internal Structure and The Composite Spinor</h3>
+
+<div id="S2.SS2.p1" class="ltx_para">
+<p id="S2.SS2.p1.6" class="ltx_p">As detailed in the derivation provided in <span id="S2.SS2.p1.6.1" class="ltx_text ltx_font_bold">Appendix <a href="#A1" title="Appendix A Emergence of Spinor Structure from Linearization Constraints ‣ Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_tag">A</span></a></span>, the requirement for a causal, first-order evolution of such a wave-defect in a relativistic medium necessitates a multicomponent state vector. Within this elastic framework, the state space arises as the tensor product of two independent binary physical properties:</p>
+<ol id="S2.I1" class="ltx_enumerate">
+<li id="S2.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">1.</span> 
+<div id="S2.I1.i1.p1" class="ltx_para">
+<p id="S2.I1.i1.p1.1" class="ltx_p"><span id="S2.I1.i1.p1.1.1" class="ltx_text ltx_font_bold">Vibrational Polarization (<math id="S2.I1.i1.p1.1.1.m1" class="ltx_Math" alttext="V_{\text{spin}}" display="inline" intent=":literal"><semantics><msub><mi>V</mi><mtext class="ltx_mathvariant_bold">spin</mtext></msub><annotation encoding="application/x-tex">V_{\text{spin}}</annotation></semantics></math>):</span> The two orthogonal modes of transverse vibration relative to the propagation axis.</p>
+</div>
+</li>
+<li id="S2.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">2.</span> 
+<div id="S2.I1.i2.p1" class="ltx_para">
+<p id="S2.I1.i2.p1.1" class="ltx_p"><span id="S2.I1.i2.p1.1.1" class="ltx_text ltx_font_bold">Topological Anchoring (<math id="S2.I1.i2.p1.1.1.m1" class="ltx_Math" alttext="V_{\text{anchor}}" display="inline" intent=":literal"><semantics><msub><mi>V</mi><mtext class="ltx_mathvariant_bold">anchor</mtext></msub><annotation encoding="application/x-tex">V_{\text{anchor}}</annotation></semantics></math>):</span> The orientation of the defect’s connection to the vacuum medium (analogous to charge).</p>
+</div>
+</li>
+</ol>
+<p id="S2.SS2.p1.5" class="ltx_p">The resulting state function is a 4-component spinor <math id="S2.SS2.p1.1.m1" class="ltx_Math" alttext="\Psi\in V_{\text{spin}}\otimes V_{\text{anchor}}" display="inline" intent=":literal"><semantics><mrow><mi mathvariant="normal">Ψ</mi><mo>∈</mo><mrow><msub><mi>V</mi><mtext>spin</mtext></msub><mo lspace="0.222em" rspace="0.222em">⊗</mo><msub><mi>V</mi><mtext>anchor</mtext></msub></mrow></mrow><annotation encoding="application/x-tex">\Psi\in V_{\text{spin}}\otimes V_{\text{anchor}}</annotation></semantics></math>.
+Physically, the Dirac matrices map directly to operations on these subspaces. Crucially for the Klein paradox, the operator <math id="S2.SS2.p1.2.m2" class="ltx_Math" alttext="\beta" display="inline" intent=":literal"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math> acts as the <span id="S2.SS2.p1.5.1" class="ltx_text ltx_font_italic">topological index</span> on <math id="S2.SS2.p1.3.m3" class="ltx_Math" alttext="V_{\text{anchor}}" display="inline" intent=":literal"><semantics><msub><mi>V</mi><mtext>anchor</mtext></msub><annotation encoding="application/x-tex">V_{\text{anchor}}</annotation></semantics></math>. Its eigenvalues <math id="S2.SS2.p1.4.m4" class="ltx_Math" alttext="\pm 1" display="inline" intent=":literal"><semantics><mrow><mo>±</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\pm 1</annotation></semantics></math> distinguish between the “normal” anchoring of the defect (matter) and the “inverted” anchoring (antimatter). The mass term <math id="S2.SS2.p1.5.m5" class="ltx_Math" alttext="\beta mc^{2}" display="inline" intent=":literal"><semantics><mrow><mi>β</mi><mo lspace="0em" rspace="0em">​</mo><mi>m</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\beta mc^{2}</annotation></semantics></math> implies that the confinement energy is an intrinsic property of this anchoring stability.</p>
+</div>
+<figure id="S2.F1" class="ltx_figure"><img src="2604.14378v1/Figure1_Model.png" id="S2.F1.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="381" height="156" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 1: </span><span id="S2.F1.4.1" class="ltx_text ltx_font_bold">The Hydrodynamic Analog of Mass.</span> (a) Schematic representation of the relativistic particle as a localized standing wave defect within a continuous elastic medium. (b) The dispersion relation of the medium. The rest mass corresponds to the cutoff frequency <math id="S2.F1.2.m1" class="ltx_Math" alttext="\omega_{0}" display="inline" intent=":literal"><semantics><msub><mi>ω</mi><mn>0</mn></msub><annotation encoding="application/x-tex">\omega_{0}</annotation></semantics></math>, physically interpreted as the minimum vibrational energy required to sustain the defect against the medium’s restorative stiffness. Modes below this gap are evanescent.</figcaption>
+</figure>
+</section>
+</section>
+<section id="S3" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">III </span>The Klein Potential as Mechanical Stress</h2>
+
+<div id="S3.p1" class="ltx_para">
+<p id="S3.p1.1" class="ltx_p">We now consider the defect interacting with an external step potential <math id="S3.p1.1.m1" class="ltx_Math" alttext="V(z)" display="inline" intent=":literal"><semantics><mrow><mi>V</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">V(z)</annotation></semantics></math>:</p>
+<table id="S3.E3" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.E3.m1" class="ltx_Math" alttext="V(z)=\begin{cases}0&amp;z&lt;0\quad(\text{Region I})\\
+V_{0}&amp;z&gt;0\quad(\text{Region II})\end{cases}" display="block" intent=":literal"><semantics><mrow><mrow><mi>V</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mo>{</mo><mtable columnspacing="5pt" displaystyle="true" rowspacing="0pt"><mtr><mtd class="ltx_align_left" columnalign="left"><mn>0</mn></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mi>z</mi><mo>&lt;</mo><mrow><mn>0</mn><mspace style="width:1em;" width="1em"></mspace><mrow><mo stretchy="false">(</mo><mtext>Region I</mtext><mo stretchy="false">)</mo></mrow></mrow></mrow></mtd></mtr><mtr><mtd class="ltx_align_left" columnalign="left"><msub><mi>V</mi><mn>0</mn></msub></mtd><mtd class="ltx_align_left" columnalign="left"><mrow><mi>z</mi><mo>&gt;</mo><mrow><mn>0</mn><mspace style="width:1em;" width="1em"></mspace><mrow><mo stretchy="false">(</mo><mtext>Region II</mtext><mo stretchy="false">)</mo></mrow></mrow></mrow></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">V(z)=\begin{cases}0&amp;z&lt;0\quad(\text{Region I})\\
+V_{0}&amp;z&gt;0\quad(\text{Region II})\end{cases}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(3)</span></td>
+</tr></tbody>
+</table>
+<p id="S3.p1.2" class="ltx_p">In this mechanical model, <math id="S3.p1.2.m1" class="ltx_Math" alttext="V(z)" display="inline" intent=":literal"><semantics><mrow><mi>V</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">V(z)</annotation></semantics></math> represents a shift in the local energy density of the medium (or an external tension). The total Hamiltonian is <span id="footnote2" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">2</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">2</sup><span class="ltx_tag ltx_tag_note">2</span>Note: Mathematically, <math id="footnote2.m1" class="ltx_Math" alttext="V(z)" display="inline" intent=":literal"><semantics><mrow><mi>V</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">V(z)</annotation></semantics></math> enters as the time-component of a vector potential, representing an external energy bias applied to the medium, distinct from a scalar mass perturbation</span></span></span>:</p>
+<table id="S3.E4" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.E4.m1" class="ltx_Math" alttext="H=c\alpha_{z}p_{z}+\beta mc^{2}+V(z)" display="block" intent=":literal"><semantics><mrow><mi>H</mi><mo>=</mo><mrow><mrow><mi>c</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>α</mi><mi>z</mi></msub><mo lspace="0em" rspace="0em">​</mo><msub><mi>p</mi><mi>z</mi></msub></mrow><mo>+</mo><mrow><mi>β</mi><mo lspace="0em" rspace="0em">​</mo><mi>m</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>c</mi><mn>2</mn></msup></mrow><mo>+</mo><mrow><mi>V</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow></mrow></mrow><annotation encoding="application/x-tex">H=c\alpha_{z}p_{z}+\beta mc^{2}+V(z)</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(4)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S3.p2" class="ltx_para">
+<p id="S3.p2.2" class="ltx_p">We seek stationary states of the form <math id="S3.p2.1.m1" class="ltx_Math" alttext="\Psi(z,t)=\psi(z)e^{-iEt/\hbar}" display="inline" intent=":literal"><semantics><mrow><mrow><mi mathvariant="normal">Ψ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo>,</mo><mi>t</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mi>ψ</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mrow><mi>i</mi><mo lspace="0em" rspace="0em">​</mo><mi>E</mi><mo lspace="0em" rspace="0em">​</mo><mi>t</mi></mrow><mo>/</mo><mi mathvariant="normal">ℏ</mi></mrow></mrow></msup></mrow></mrow><annotation encoding="application/x-tex">\Psi(z,t)=\psi(z)e^{-iEt/\hbar}</annotation></semantics></math> with energy <math id="S3.p2.2.m2" class="ltx_Math" alttext="E&gt;0" display="inline" intent=":literal"><semantics><mrow><mi>E</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">E&gt;0</annotation></semantics></math> incident from the left.</p>
+</div>
+<section id="S3.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">III.1 </span>Region I (Incident + Reflected)</h3>
+
+<div id="S3.SS1.p1" class="ltx_para">
+<p id="S3.SS1.p1.3" class="ltx_p">In the stress-free region (<math id="S3.SS1.p1.1.m1" class="ltx_Math" alttext="z&lt;0" display="inline" intent=":literal"><semantics><mrow><mi>z</mi><mo>&lt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">z&lt;0</annotation></semantics></math>), the dispersion relation is standard: <math id="S3.SS1.p1.2.m2" class="ltx_Math" alttext="E^{2}=c^{2}p_{1}^{2}+m^{2}c^{4}" display="inline" intent=":literal"><semantics><mrow><msup><mi>E</mi><mn>2</mn></msup><mo>=</mo><mrow><mrow><msup><mi>c</mi><mn>2</mn></msup><mo lspace="0em" rspace="0em">​</mo><msubsup><mi>p</mi><mn>1</mn><mn>2</mn></msubsup></mrow><mo>+</mo><mrow><msup><mi>m</mi><mn>2</mn></msup><mo lspace="0em" rspace="0em">​</mo><msup><mi>c</mi><mn>4</mn></msup></mrow></mrow></mrow><annotation encoding="application/x-tex">E^{2}=c^{2}p_{1}^{2}+m^{2}c^{4}</annotation></semantics></math>. The wave number is <math id="S3.SS1.p1.3.m3" class="ltx_Math" alttext="k_{1}=\sqrt{E^{2}-m^{2}c^{4}}/\hbar c" display="inline" intent=":literal"><semantics><mrow><msub><mi>k</mi><mn>1</mn></msub><mo>=</mo><mrow><mrow><msqrt><mrow><msup><mi>E</mi><mn>2</mn></msup><mo>−</mo><mrow><msup><mi>m</mi><mn>2</mn></msup><mo lspace="0em" rspace="0em">​</mo><msup><mi>c</mi><mn>4</mn></msup></mrow></mrow></msqrt><mo>/</mo><mi mathvariant="normal">ℏ</mi></mrow><mo lspace="0em" rspace="0em">​</mo><mi>c</mi></mrow></mrow><annotation encoding="application/x-tex">k_{1}=\sqrt{E^{2}-m^{2}c^{4}}/\hbar c</annotation></semantics></math>. The solution is a superposition of an incident wave traveling right and a reflected wave traveling left:</p>
+<table id="S3.E5" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.E5.m1" class="ltx_Math" alttext="\psi_{I}(z)=u(p_{1})e^{ik_{1}z}+Ru(-p_{1})e^{-ik_{1}z}" display="block" intent=":literal"><semantics><mrow><mrow><msub><mi>ψ</mi><mi>I</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mi>u</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><msub><mi>p</mi><mn>1</mn></msub><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><msup><mi>e</mi><mrow><mi>i</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>k</mi><mn>1</mn></msub><mo lspace="0em" rspace="0em">​</mo><mi>z</mi></mrow></msup></mrow><mo>+</mo><mrow><mi>R</mi><mo lspace="0em" rspace="0em">​</mo><mi>u</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><msub><mi>p</mi><mn>1</mn></msub></mrow><mo stretchy="false">)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><msup><mi>e</mi><mrow><mo>−</mo><mrow><mi>i</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>k</mi><mn>1</mn></msub><mo lspace="0em" rspace="0em">​</mo><mi>z</mi></mrow></mrow></msup></mrow></mrow></mrow><annotation encoding="application/x-tex">\psi_{I}(z)=u(p_{1})e^{ik_{1}z}+Ru(-p_{1})e^{-ik_{1}z}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(5)</span></td>
+</tr></tbody>
+</table>
+<p id="S3.SS1.p1.6" class="ltx_p">where <math id="S3.SS1.p1.4.m1" class="ltx_Math" alttext="u(p)" display="inline" intent=":literal"><semantics><mrow><mi>u</mi><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>p</mi><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">u(p)</annotation></semantics></math> are the standard free spinors, <math id="S3.SS1.p1.5.m2" class="ltx_Math" alttext="p_{1}=\hbar k_{1}" display="inline" intent=":literal"><semantics><mrow><msub><mi>p</mi><mn>1</mn></msub><mo>=</mo><mrow><mi mathvariant="normal">ℏ</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>k</mi><mn>1</mn></msub></mrow></mrow><annotation encoding="application/x-tex">p_{1}=\hbar k_{1}</annotation></semantics></math> is the incident momentum in Region I, and <math id="S3.SS1.p1.6.m3" class="ltx_Math" alttext="R" display="inline" intent=":literal"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math> is the complex reflection amplitude.</p>
+</div>
+</section>
+<section id="S3.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">III.2 </span>Region II (The Supercritical Stress)</h3>
+
+<div id="S3.SS2.p1" class="ltx_para">
+<p id="S3.SS2.p1.1" class="ltx_p">In the potential region (<math id="S3.SS2.p1.1.m1" class="ltx_Math" alttext="z&gt;0" display="inline" intent=":literal"><semantics><mrow><mi>z</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">z&gt;0</annotation></semantics></math>), the energy equation becomes:</p>
+<table id="S3.E6" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.E6.m1" class="ltx_Math" alttext="(E-V_{0})^{2}=c^{2}p_{2}^{2}+m^{2}c^{4}" display="block" intent=":literal"><semantics><mrow><msup><mrow><mo stretchy="false">(</mo><mrow><mi>E</mi><mo>−</mo><msub><mi>V</mi><mn>0</mn></msub></mrow><mo stretchy="false">)</mo></mrow><mn>2</mn></msup><mo>=</mo><mrow><mrow><msup><mi>c</mi><mn>2</mn></msup><mo lspace="0em" rspace="0em">​</mo><msubsup><mi>p</mi><mn>2</mn><mn>2</mn></msubsup></mrow><mo>+</mo><mrow><msup><mi>m</mi><mn>2</mn></msup><mo lspace="0em" rspace="0em">​</mo><msup><mi>c</mi><mn>4</mn></msup></mrow></mrow></mrow><annotation encoding="application/x-tex">(E-V_{0})^{2}=c^{2}p_{2}^{2}+m^{2}c^{4}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(6)</span></td>
+</tr></tbody>
+</table>
+<p id="S3.SS2.p1.2" class="ltx_p">where <math id="S3.SS2.p1.2.m1" class="ltx_Math" alttext="p_{2}" display="inline" intent=":literal"><semantics><msub><mi>p</mi><mn>2</mn></msub><annotation encoding="application/x-tex">p_{2}</annotation></semantics></math> is the momentum of the wave propagating in Region II.</p>
+</div>
+<div id="S3.SS2.p2" class="ltx_para">
+<p id="S3.SS2.p2.1" class="ltx_p">We are interested in the <span id="S3.SS2.p2.1.1" class="ltx_text ltx_font_bold">Klein regime</span> (or strong field limit <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib14" title="" class="ltx_ref">14</a>]</cite>), where the applied tension constitutes a <span id="S3.SS2.p2.1.2" class="ltx_text ltx_font_italic">supercritical stress</span>: a potential sufficiently strong to bridge the entire mass gap, defined mathematically as:</p>
+<table id="S3.E7" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.E7.m1" class="ltx_Math" alttext="V_{0}&gt;E+mc^{2}" display="block" intent=":literal"><semantics><mrow><msub><mi>V</mi><mn>0</mn></msub><mo>&gt;</mo><mrow><mi>E</mi><mo>+</mo><mrow><mi>m</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>c</mi><mn>2</mn></msup></mrow></mrow></mrow><annotation encoding="application/x-tex">V_{0}&gt;E+mc^{2}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(7)</span></td>
+</tr></tbody>
+</table>
+</div>
+<div id="S3.SS2.p3" class="ltx_para">
+<p id="S3.SS2.p3.3" class="ltx_p">Under this condition, <math id="S3.SS2.p3.1.m1" class="ltx_Math" alttext="(E-V_{0})^{2}" display="inline" intent=":literal"><semantics><msup><mrow><mo stretchy="false">(</mo><mrow><mi>E</mi><mo>−</mo><msub><mi>V</mi><mn>0</mn></msub></mrow><mo stretchy="false">)</mo></mrow><mn>2</mn></msup><annotation encoding="application/x-tex">(E-V_{0})^{2}</annotation></semantics></math> is large and positive, implying that the momentum <math id="S3.SS2.p3.2.m2" class="ltx_Math" alttext="p_{2}" display="inline" intent=":literal"><semantics><msub><mi>p</mi><mn>2</mn></msub><annotation encoding="application/x-tex">p_{2}</annotation></semantics></math> (and wave number <math id="S3.SS2.p3.3.m3" class="ltx_Math" alttext="k_{2}" display="inline" intent=":literal"><semantics><msub><mi>k</mi><mn>2</mn></msub><annotation encoding="application/x-tex">k_{2}</annotation></semantics></math>) is <span id="S3.SS2.p3.3.1" class="ltx_text ltx_font_italic">real</span>. The wave propagates inside the barrier.</p>
+</div>
+<div id="S3.SS2.p4" class="ltx_para">
+<p id="S3.SS2.p4.5" class="ltx_p">However, we must determine the direction of propagation. The group velocity is given by:</p>
+<table id="S3.E8" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S3.E8.m1" class="ltx_Math" alttext="v_{g}=\frac{\partial E}{\partial p_{2}}=c^{2}\frac{p_{2}}{E-V_{0}}" display="block" intent=":literal"><semantics><mrow><msub><mi>v</mi><mi>g</mi></msub><mo>=</mo><mfrac><mrow><mo rspace="0em">∂</mo><mi>E</mi></mrow><mrow><mo rspace="0em">∂</mo><msub><mi>p</mi><mn>2</mn></msub></mrow></mfrac><mo>=</mo><mrow><msup><mi>c</mi><mn>2</mn></msup><mo lspace="0em" rspace="0em">​</mo><mfrac><msub><mi>p</mi><mn>2</mn></msub><mrow><mi>E</mi><mo>−</mo><msub><mi>V</mi><mn>0</mn></msub></mrow></mfrac></mrow></mrow><annotation encoding="application/x-tex">v_{g}=\frac{\partial E}{\partial p_{2}}=c^{2}\frac{p_{2}}{E-V_{0}}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(8)</span></td>
+</tr></tbody>
+</table>
+<p id="S3.SS2.p4.4" class="ltx_p">Since <math id="S3.SS2.p4.1.m1" class="ltx_Math" alttext="p_{2}=\hbar k_{2}" display="inline" intent=":literal"><semantics><mrow><msub><mi>p</mi><mn>2</mn></msub><mo>=</mo><mrow><mi mathvariant="normal">ℏ</mi><mo lspace="0em" rspace="0em">​</mo><msub><mi>k</mi><mn>2</mn></msub></mrow></mrow><annotation encoding="application/x-tex">p_{2}=\hbar k_{2}</annotation></semantics></math> and <math id="S3.SS2.p4.2.m2" class="ltx_Math" alttext="V_{0}&gt;E" display="inline" intent=":literal"><semantics><mrow><msub><mi>V</mi><mn>0</mn></msub><mo>&gt;</mo><mi>E</mi></mrow><annotation encoding="application/x-tex">V_{0}&gt;E</annotation></semantics></math>, the denominator is negative. For the group velocity to be positive (energy flowing away from the boundary, <math id="S3.SS2.p4.3.m3" class="ltx_Math" alttext="v_{g}&gt;0" display="inline" intent=":literal"><semantics><mrow><msub><mi>v</mi><mi>g</mi></msub><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">v_{g}&gt;0</annotation></semantics></math>), we must choose the wave number <math id="S3.SS2.p4.4.m4" class="ltx_Math" alttext="k_{2}" display="inline" intent=":literal"><semantics><msub><mi>k</mi><mn>2</mn></msub><annotation encoding="application/x-tex">k_{2}</annotation></semantics></math> to be <span id="S3.SS2.p4.4.1" class="ltx_text ltx_font_bold">negative</span>.</p>
+</div>
+</section>
+<section id="S3.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">III.3 </span>Structural Interpretation of Negative Modes</h3>
+
+<div id="S3.SS3.p1" class="ltx_para">
+<p id="S3.SS3.p1.2" class="ltx_p">In standard theory, this solution corresponds to a ”negative energy electron.” In our Defect Model, the interpretation is structural.
+The condition <math id="S3.SS3.p1.1.m1" class="ltx_Math" alttext="V_{0}&gt;2mc^{2}" display="inline" intent=":literal"><semantics><mrow><msub><mi>V</mi><mn>0</mn></msub><mo>&gt;</mo><mrow><mn>2</mn><mo lspace="0em" rspace="0em">​</mo><mi>m</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>c</mi><mn>2</mn></msup></mrow></mrow><annotation encoding="application/x-tex">V_{0}&gt;2mc^{2}</annotation></semantics></math> implies that the external stress exceeds the elastic limit required to maintain the defect’s normal topology. The dispersion relation allows a new mode: a defect with <span id="S3.SS3.p1.2.1" class="ltx_text ltx_font_bold">inverted topological anchoring</span> (see <span id="S3.SS3.p1.2.2" class="ltx_text ltx_font_bold">Appendix <a href="#A1" title="Appendix A Emergence of Spinor Structure from Linearization Constraints ‣ Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_tag">A</span></a></span>).
+In this regime, the transmitted wave <math id="S3.SS3.p1.2.m2" class="ltx_Math" alttext="\psi_{II}" display="inline" intent=":literal"><semantics><msub><mi>ψ</mi><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>I</mi></mrow></msub><annotation encoding="application/x-tex">\psi_{II}</annotation></semantics></math> describes a flux of these inverted defects (antiparticles).</p>
+</div>
+</section>
+</section>
+<section id="S4" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">IV </span>Vacuum Instability and Flux Conservation</h2>
+
+<div id="S4.p1" class="ltx_para">
+<p id="S4.p1.3" class="ltx_p">We solve the continuity of the boundary condition <math id="S4.p1.1.m1" class="ltx_Math" alttext="\psi_{I}(0)=\psi_{II}(0)" display="inline" intent=":literal"><semantics><mrow><mrow><msub><mi>ψ</mi><mi>I</mi></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><msub><mi>ψ</mi><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>I</mi></mrow></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">\psi_{I}(0)=\psi_{II}(0)</annotation></semantics></math>. Following the explicit calculations found in Greiner <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="" class="ltx_ref">2</a>]</cite> and adapted to our notation, the transmission (<math id="S4.p1.2.m2" class="ltx_Math" alttext="T" display="inline" intent=":literal"><semantics><mi>T</mi><annotation encoding="application/x-tex">T</annotation></semantics></math>) and reflection (<math id="S4.p1.3.m3" class="ltx_Math" alttext="R" display="inline" intent=":literal"><semantics><mi>R</mi><annotation encoding="application/x-tex">R</annotation></semantics></math>) amplitudes yield the current conservation relation:</p>
+<table id="S4.E9" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S4.E9.m1" class="ltx_Math" alttext="J_{\text{inc}}+J_{\text{ref}}=J_{\text{trans}}" display="block" intent=":literal"><semantics><mrow><mrow><msub><mi>J</mi><mtext>inc</mtext></msub><mo>+</mo><msub><mi>J</mi><mtext>ref</mtext></msub></mrow><mo>=</mo><msub><mi>J</mi><mtext>trans</mtext></msub></mrow><annotation encoding="application/x-tex">J_{\text{inc}}+J_{\text{ref}}=J_{\text{trans}}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(9)</span></td>
+</tr></tbody>
+</table>
+<p id="S4.p1.5" class="ltx_p">However, due to the coupling to the inverted mode (negative group velocity relative to momentum), the transmitted current <math id="S4.p1.4.m1" class="ltx_Math" alttext="J_{\text{trans}}" display="inline" intent=":literal"><semantics><msub><mi>J</mi><mtext>trans</mtext></msub><annotation encoding="application/x-tex">J_{\text{trans}}</annotation></semantics></math> flows in the opposite direction to the particle current. Normalizing the incident flux to 1, the conservation of current (<math id="S4.p1.5.m2" class="ltx_Math" alttext="J=\psi^{\dagger}\alpha_{z}\psi" display="inline" intent=":literal"><semantics><mrow><mi>J</mi><mo>=</mo><mrow><msup><mi>ψ</mi><mo>†</mo></msup><mo lspace="0em" rspace="0em">​</mo><msub><mi>α</mi><mi>z</mi></msub><mo lspace="0em" rspace="0em">​</mo><mi>ψ</mi></mrow></mrow><annotation encoding="application/x-tex">J=\psi^{\dagger}\alpha_{z}\psi</annotation></semantics></math>) requires:</p>
+<table id="S4.E10" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S4.E10.m1" class="ltx_Math" alttext="1-|R|^{2}=r|T|^{2}" display="block" intent=":literal"><semantics><mrow><mrow><mn>1</mn><mo>−</mo><msup><mrow><mo stretchy="false">|</mo><mi>R</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup></mrow><mo>=</mo><mrow><mi>r</mi><mo lspace="0em" rspace="0em">​</mo><msup><mrow><mo stretchy="false">|</mo><mi>T</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup></mrow></mrow><annotation encoding="application/x-tex">1-|R|^{2}=r|T|^{2}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(10)</span></td>
+</tr></tbody>
+</table>
+<p id="S4.p1.6" class="ltx_p">where <math id="S4.p1.6.m1" class="ltx_Math" alttext="r" display="inline" intent=":literal"><semantics><mi>r</mi><annotation encoding="application/x-tex">r</annotation></semantics></math> is the kinematic ratio of the transmitted to incident group velocities:</p>
+<table id="S4.E11" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S4.E11.m1" class="ltx_Math" alttext="r=\frac{v_{g,II}}{v_{g,I}}=\frac{k_{2}(E)}{k_{1}(E-V_{0})}" display="block" intent=":literal"><semantics><mrow><mi>r</mi><mo>=</mo><mfrac><msub><mi>v</mi><mrow><mi>g</mi><mo>,</mo><mrow><mi>I</mi><mo lspace="0em" rspace="0em">​</mo><mi>I</mi></mrow></mrow></msub><msub><mi>v</mi><mrow><mi>g</mi><mo>,</mo><mi>I</mi></mrow></msub></mfrac><mo>=</mo><mfrac><mrow><msub><mi>k</mi><mn>2</mn></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi>E</mi><mo stretchy="false">)</mo></mrow></mrow><mrow><msub><mi>k</mi><mn>1</mn></msub><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mrow><mi>E</mi><mo>−</mo><msub><mi>V</mi><mn>0</mn></msub></mrow><mo stretchy="false">)</mo></mrow></mrow></mfrac></mrow><annotation encoding="application/x-tex">r=\frac{v_{g,II}}{v_{g,I}}=\frac{k_{2}(E)}{k_{1}(E-V_{0})}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(11)</span></td>
+</tr></tbody>
+</table>
+<p id="S4.p1.11" class="ltx_p">In the Klein regime (<math id="S4.p1.7.m1" class="ltx_Math" alttext="V_{0}&gt;E+mc^{2}" display="inline" intent=":literal"><semantics><mrow><msub><mi>V</mi><mn>0</mn></msub><mo>&gt;</mo><mrow><mi>E</mi><mo>+</mo><mrow><mi>m</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>c</mi><mn>2</mn></msup></mrow></mrow></mrow><annotation encoding="application/x-tex">V_{0}&gt;E+mc^{2}</annotation></semantics></math>), causality requires the transmitted wave packet to propagate away from the boundary, implying a positive group velocity (<math id="S4.p1.8.m2" class="ltx_Math" alttext="v_{g}&gt;0" display="inline" intent=":literal"><semantics><mrow><msub><mi>v</mi><mi>g</mi></msub><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">v_{g}&gt;0</annotation></semantics></math>). However, a defining feature of the Dirac equation in the supercritical region is that the probability current <math id="S4.p1.9.m3" class="ltx_Math" alttext="J" display="inline" intent=":literal"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math> for the antiparticle branch flows <span id="S4.p1.11.1" class="ltx_text ltx_font_italic">opposite</span> to the group velocity <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib2" title="" class="ltx_ref">2</a>, <a href="#bib.bib13" title="" class="ltx_ref">13</a>]</cite>. In our defect model, this occurs because the transmitted mode possesses an inverted topological anchoring. Consequently, the kinematic ratio of the transmitted to incident currents is proportional to the transmission probability <math id="S4.p1.10.m4" class="ltx_Math" alttext="|T|^{2}" display="inline" intent=":literal"><semantics><msup><mrow><mo stretchy="false">|</mo><mi>T</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup><annotation encoding="application/x-tex">|T|^{2}</annotation></semantics></math> weighted by the negative group velocity ratio <math id="S4.p1.11.m5" class="ltx_Math" alttext="-\kappa" display="inline" intent=":literal"><semantics><mrow><mo>−</mo><mi>κ</mi></mrow><annotation encoding="application/x-tex">-\kappa</annotation></semantics></math>:</p>
+<table id="S4.E12" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S4.E12.m1" class="ltx_Math" alttext="\frac{J_{\text{trans}}}{J_{\text{inc}}}=-\kappa|T|^{2}\quad(\text{where }\kappa&gt;0)" display="block" intent=":literal"><semantics><mrow><mfrac><msub><mi>J</mi><mtext>trans</mtext></msub><msub><mi>J</mi><mtext>inc</mtext></msub></mfrac><mo>=</mo><mrow><mrow><mo>−</mo><mrow><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><msup><mrow><mo stretchy="false">|</mo><mi>T</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup></mrow></mrow><mspace style="width:1em;" width="1em"></mspace><mrow><mo stretchy="false">(</mo><mrow><mrow><mtext>where </mtext><mo lspace="0em" rspace="0em">​</mo><mi>κ</mi></mrow><mo>&gt;</mo><mn>0</mn></mrow><mo stretchy="false">)</mo></mrow></mrow></mrow><annotation encoding="application/x-tex">\frac{J_{\text{trans}}}{J_{\text{inc}}}=-\kappa|T|^{2}\quad(\text{where }\kappa&gt;0)</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(12)</span></td>
+</tr></tbody>
+</table>
+<p id="S4.p1.12" class="ltx_p">Substituting this directly into the conservation law (<math id="S4.p1.12.m1" class="ltx_Math" alttext="1-|R|^{2}=J_{\text{trans}}/J_{\text{inc}}" display="inline" intent=":literal"><semantics><mrow><mrow><mn>1</mn><mo>−</mo><msup><mrow><mo stretchy="false">|</mo><mi>R</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup></mrow><mo>=</mo><mrow><msub><mi>J</mi><mtext>trans</mtext></msub><mo>/</mo><msub><mi>J</mi><mtext>inc</mtext></msub></mrow></mrow><annotation encoding="application/x-tex">1-|R|^{2}=J_{\text{trans}}/J_{\text{inc}}</annotation></semantics></math>), we seamlessly obtain:</p>
+<table id="S4.E13" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="S4.E13.m1" class="ltx_Math" alttext="1-|R|^{2}=-\kappa|T|^{2}\implies|R|^{2}=1+\kappa|T|^{2}" display="block" intent=":literal"><semantics><mrow><mrow><mn>1</mn><mo>−</mo><msup><mrow><mo stretchy="false">|</mo><mi>R</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup></mrow><mo>=</mo><mrow><mo>−</mo><mrow><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><msup><mrow><mo stretchy="false">|</mo><mi>T</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup></mrow></mrow><mo stretchy="false">⟹</mo><msup><mrow><mo stretchy="false">|</mo><mi>R</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup><mo>=</mo><mrow><mn>1</mn><mo>+</mo><mrow><mi>κ</mi><mo lspace="0em" rspace="0em">​</mo><msup><mrow><mo stretchy="false">|</mo><mi>T</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup></mrow></mrow></mrow><annotation encoding="application/x-tex">1-|R|^{2}=-\kappa|T|^{2}\implies|R|^{2}=1+\kappa|T|^{2}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(13)</span></td>
+</tr></tbody>
+</table>
+<p id="S4.p1.13" class="ltx_p">This explicitly demonstrates that the reflection coefficient exceeds unity. Physically, the negative transmitted current signifies a flux of inverted defects (antiparticles) draining into the potential, which the conservation of topological charge registers as an enhancement of the reflected particle flux.</p>
+</div>
+<section id="S4.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">IV.1 </span>Mechanical Breakdown vs. Probability</h3>
+
+<div id="S4.SS1.p1" class="ltx_para">
+<p id="S4.SS1.p1.4" class="ltx_p">Within a single-particle probabilistic framework, <math id="S4.SS1.p1.1.m1" class="ltx_Math" alttext="|R|^{2}&gt;1" display="inline" intent=":literal"><semantics><mrow><msup><mrow><mo stretchy="false">|</mo><mi>R</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup><mo>&gt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">|R|^{2}&gt;1</annotation></semantics></math> is a violation of unitarity. However, in our hydrodynamic model, the interface at <math id="S4.SS1.p1.2.m2" class="ltx_Math" alttext="z=0" display="inline" intent=":literal"><semantics><mrow><mi>z</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">z=0</annotation></semantics></math> acts as an active <span id="S4.SS1.p1.4.1" class="ltx_text ltx_font_bold">source</span> of pair production. Standard single-particle probability is not conserved; rather, it is the <span id="S4.SS1.p1.4.2" class="ltx_text ltx_font_bold">topological charge</span> (or total energy flux) that remains balanced. The result <math id="S4.SS1.p1.3.m3" class="ltx_Math" alttext="|R|^{2}&gt;1" display="inline" intent=":literal"><semantics><mrow><msup><mrow><mo stretchy="false">|</mo><mi>R</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup><mo>&gt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">|R|^{2}&gt;1</annotation></semantics></math> indicates that the medium at the boundary is undergoing mechanical breakdown. The work done by the external stress <math id="S4.SS1.p1.4.m4" class="ltx_Math" alttext="V_{0}" display="inline" intent=":literal"><semantics><msub><mi>V</mi><mn>0</mn></msub><annotation encoding="application/x-tex">V_{0}</annotation></semantics></math> on the vacuum medium generates the additional reflected flux by ripping the medium into pairs of defects (see <span id="S4.SS1.p1.4.3" class="ltx_text ltx_font_bold">Fig. <a href="#S4.F2" title="Figure 2 ‣ IV.1 Mechanical Breakdown vs. Probability ‣ IV Vacuum Instability and Flux Conservation ‣ Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_tag">2</span></a></span>).</p>
+<ul id="S4.I1" class="ltx_itemize">
+<li id="S4.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="S4.I1.i1.p1" class="ltx_para">
+<p id="S4.I1.i1.p1.1" class="ltx_p">The reflected wave consists of the original defect <span id="S4.I1.i1.p1.1.1" class="ltx_text ltx_font_italic">plus</span> the newly created defects (same topology).</p>
+</div>
+</li>
+<li id="S4.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="S4.I1.i2.p1" class="ltx_para">
+<p id="S4.I1.i2.p1.1" class="ltx_p">The transmitted wave consists of the partner defects with inverted topology (antiparticles) draining into the potential.</p>
+</div>
+</li>
+</ul>
+<p id="S4.SS1.p1.5" class="ltx_p">This exactly matches the ”many-body” interpretation of Hansen and Ravndal <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib13" title="" class="ltx_ref">13</a>]</cite>, who derived the pair production rate <math id="S4.SS1.p1.5.m1" class="ltx_Math" alttext="\bar{n}=|T|^{2}" display="inline" intent=":literal"><semantics><mrow><mover accent="true"><mi>n</mi><mo>¯</mo></mover><mo>=</mo><msup><mrow><mo stretchy="false">|</mo><mi>T</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\bar{n}=|T|^{2}</annotation></semantics></math> using Bogoliubov transformations. Here, the ”Bogoliubov transformation” is physically realized as the stress-induced mixing between the normal and inverted anchoring modes of the defect.</p>
+</div>
+<figure id="S4.F2" class="ltx_figure"><img src="2604.14378v1/Figure2_KleinMechanismm.png" id="S4.F2.g1" class="ltx_graphics ltx_centering ltx_img_landscape" width="381" height="225" alt="Refer to caption">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_figure">Figure 2: </span><span id="S4.F2.8.1" class="ltx_text ltx_font_bold">Mechanical Resolution of the Klein Paradox.</span> When the external stress <math id="S4.F2.4.m1" class="ltx_Math" alttext="V_{0}" display="inline" intent=":literal"><semantics><msub><mi>V</mi><mn>0</mn></msub><annotation encoding="application/x-tex">V_{0}</annotation></semantics></math> exceeds the vacuum stability gap <math id="S4.F2.5.m2" class="ltx_Math" alttext="2mc^{2}" display="inline" intent=":literal"><semantics><mrow><mn>2</mn><mo lspace="0em" rspace="0em">​</mo><mi>m</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">2mc^{2}</annotation></semantics></math>, the medium undergoes mechanical breakdown at the interface. The transmitted mode (red) propagates to the right but carries a negative probability current due to its inverted topological anchoring (antiparticle nature). Conservation of flux requires the reflected particle current (blue) to exceed the incident one (<math id="S4.F2.6.m3" class="ltx_Math" alttext="|R|^{2}&gt;1" display="inline" intent=":literal"><semantics><mrow><msup><mrow><mo stretchy="false">|</mo><mi>R</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup><mo>&gt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">|R|^{2}&gt;1</annotation></semantics></math>), physically representing the creation of defect pairs to relax the stress.</figcaption>
+</figure>
+</section>
+</section>
+<section id="S5" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">V </span>Discussion: The Schwinger Limit</h2>
+
+<div id="S5.p1" class="ltx_para">
+<p id="S5.p1.6" class="ltx_p">While the step potential is an idealization, the physical mechanism—instability due to supercritical stress—is robust. As discussed by Schwartz <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib4" title="" class="ltx_ref">4</a>]</cite> in the context of the Schwinger Effect, a constant electric field <math id="S5.p1.1.m1" class="ltx_Math" alttext="\mathcal{E}" display="inline" intent=":literal"><semantics><mi class="ltx_font_mathcaligraphic">ℰ</mi><annotation encoding="application/x-tex">\mathcal{E}</annotation></semantics></math> produces pairs at a rate proportional to <math id="S5.p1.2.m2" class="ltx_Math" alttext="\exp(-\pi m^{2}c^{3}/e\hbar\mathcal{E})" display="inline" intent=":literal"><semantics><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mrow><mrow><mi>π</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>m</mi><mn>2</mn></msup><mo lspace="0em" rspace="0em">​</mo><msup><mi>c</mi><mn>3</mn></msup></mrow><mo>/</mo><mi>e</mi></mrow><mo lspace="0em" rspace="0em">​</mo><mi mathvariant="normal">ℏ</mi><mo lspace="0em" rspace="0em">​</mo><mi class="ltx_font_mathcaligraphic">ℰ</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">\exp(-\pi m^{2}c^{3}/e\hbar\mathcal{E})</annotation></semantics></math>. In our hydrodynamic model, the electric field corresponds to a macroscopic mechanical strain gradient, <math id="S5.p1.3.m3" class="ltx_Math" alttext="\nabla V" display="inline" intent=":literal"><semantics><mrow><mo rspace="0.167em">∇</mo><mi>V</mi></mrow><annotation encoding="application/x-tex">\nabla V</annotation></semantics></math>. For mechanical breakdown to occur, the work done by this external stress over the characteristic size of the defect—the Compton wavelength <math id="S5.p1.4.m4" class="ltx_Math" alttext="\lambda_{c}=\hbar/mc" display="inline" intent=":literal"><semantics><mrow><msub><mi>λ</mi><mi>c</mi></msub><mo>=</mo><mrow><mrow><mi mathvariant="normal">ℏ</mi><mo>/</mo><mi>m</mi></mrow><mo lspace="0em" rspace="0em">​</mo><mi>c</mi></mrow></mrow><annotation encoding="application/x-tex">\lambda_{c}=\hbar/mc</annotation></semantics></math>—must overcome the confinement energy gap <math id="S5.p1.5.m5" class="ltx_Math" alttext="2mc^{2}" display="inline" intent=":literal"><semantics><mrow><mn>2</mn><mo lspace="0em" rspace="0em">​</mo><mi>m</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">2mc^{2}</annotation></semantics></math>. Therefore, the critical strain threshold is <math id="S5.p1.6.m6" class="ltx_Math" alttext="\nabla V_{\text{crit}}\sim 2mc^{2}/\lambda_{c}" display="inline" intent=":literal"><semantics><mrow><mrow><mo rspace="0.167em">∇</mo><msub><mi>V</mi><mtext>crit</mtext></msub></mrow><mo>∼</mo><mrow><mrow><mn>2</mn><mo lspace="0em" rspace="0em">​</mo><mi>m</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>c</mi><mn>2</mn></msup></mrow><mo>/</mo><msub><mi>λ</mi><mi>c</mi></msub></mrow></mrow><annotation encoding="application/x-tex">\nabla V_{\text{crit}}\sim 2mc^{2}/\lambda_{c}</annotation></semantics></math>.</p>
+</div>
+<div id="S5.p2" class="ltx_para">
+<p id="S5.p2.2" class="ltx_p">If the applied gradient is subcritical (adiabatic), the defect adjusts its frequency without breaking. The probability of tunneling through this stability gap is governed by the WKB approximation, yielding an exponential suppression factor <math id="S5.p2.1.m1" class="ltx_Math" alttext="\exp(-\pi m^{2}c^{3}/\hbar\nabla V)" display="inline" intent=":literal"><semantics><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mrow><mrow><mi>π</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>m</mi><mn>2</mn></msup><mo lspace="0em" rspace="0em">​</mo><msup><mi>c</mi><mn>3</mn></msup></mrow><mo>/</mo><mi mathvariant="normal">ℏ</mi></mrow><mo lspace="0.167em" rspace="0em">​</mo><mrow><mo rspace="0.167em">∇</mo><mi>V</mi></mrow></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">\exp(-\pi m^{2}c^{3}/\hbar\nabla V)</annotation></semantics></math>. Thus, the exponential suppression arises mechanically because the energy gained over a Compton wavelength is insufficient to cause instantaneous breakdown. The Klein Paradox is simply the limit of this Schwinger Effect for an infinitely sharp stress gradient (<math id="S5.p2.2.m2" class="ltx_Math" alttext="\nabla V\to\infty" display="inline" intent=":literal"><semantics><mrow><mrow><mo rspace="0.167em">∇</mo><mi>V</mi></mrow><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">\nabla V\to\infty</annotation></semantics></math>), representing the sudden, catastrophic failure of the vacuum elasticity.</p>
+</div>
+</section>
+<section id="S6" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">VI </span>Pedagogical Implementation: Bridging the Conceptual Gap</h2>
+
+<div id="S6.p1" class="ltx_para">
+<p id="S6.p1.1" class="ltx_p">The primary educational value of this hydrodynamic model lies in its ability to convert abstract algebraic paradoxes into concrete mechanical problems. We suggest incorporating this material into graduate courses such as <span id="S6.p1.1.1" class="ltx_text ltx_font_italic">Advanced Solid State Physics</span> or <span id="S6.p1.1.2" class="ltx_text ltx_font_italic">Quantum Field Theory for Condensed Matter</span>, where students already possess a foundational understanding of continuum mechanics and topological defects.</p>
+</div>
+<section id="S6.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">VI.1 </span>Teaching Strategy: Comparative Analysis</h3>
+
+<div id="S6.SS1.p1" class="ltx_para">
+<p id="S6.SS1.p1.1" class="ltx_p">Instructors can use this model to address the ”cognitive dissonance” students often face when transitioning from single-particle quantum mechanics to the many-body physics required by Dirac materials. By presenting the standard High-Energy QFT explanation alongside the Condensed Matter hydrodynamic analog, the physical intuition becomes tangible. We propose using <span id="S6.SS1.p1.1.1" class="ltx_text ltx_font_bold">Table <a href="#S6.T1" title="Table 1 ‣ VI.1 Teaching Strategy: Comparative Analysis ‣ VI Pedagogical Implementation: Bridging the Conceptual Gap ‣ Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_tag">1</span></a></span> to guide classroom discussion on how relativistic phenomena map onto lattice/medium dynamics.</p>
+</div>
+<figure id="S6.T1" class="ltx_table">
+<figcaption class="ltx_caption ltx_centering"><span class="ltx_tag ltx_tag_table">Table 1: </span>Comparison between Standard Dirac Theory and the Hydrodynamic Analog, useful for classroom discussion.</figcaption>
+<table id="S6.T1.5" class="ltx_tabular ltx_centering ltx_guessed_headers ltx_align_middle">
+<thead class="ltx_thead">
+<tr id="S6.T1.5.6.1" class="ltx_tr">
+<th id="S6.T1.5.6.1.1" class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_column ltx_border_l ltx_border_r ltx_border_t">
+<span id="S6.T1.5.6.1.1.1" class="ltx_inline-block ltx_align_top">
+<span id="S6.T1.5.6.1.1.1.1" class="ltx_p" style="width:195.1pt;"><span id="S6.T1.5.6.1.1.1.1.1" class="ltx_text ltx_font_bold">Standard Dirac Theory (Abstract)</span></span>
+</span>
+</th>
+<th id="S6.T1.5.6.1.2" class="ltx_td ltx_align_justify ltx_align_top ltx_th ltx_th_column ltx_border_r ltx_border_t">
+<span id="S6.T1.5.6.1.2.1" class="ltx_inline-block ltx_align_top">
+<span id="S6.T1.5.6.1.2.1.1" class="ltx_p" style="width:195.1pt;"><span id="S6.T1.5.6.1.2.1.1.1" class="ltx_text ltx_font_bold">Hydrodynamic Analog (Concrete)</span></span>
+</span>
+</th>
+</tr>
+</thead>
+<tbody class="ltx_tbody">
+<tr id="S6.T1.2.2" class="ltx_tr">
+<td id="S6.T1.1.1.1" class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t">
+<span id="S6.T1.1.1.1.1" class="ltx_inline-block ltx_align_top">
+<span id="S6.T1.1.1.1.1.1" class="ltx_p" style="width:195.1pt;"><span id="S6.T1.1.1.1.1.1.1" class="ltx_text ltx_font_bold">Mass (<math id="S6.T1.1.1.1.1.1.1.m1" class="ltx_Math" alttext="m" display="inline" intent=":literal"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>):</span> A fundamental intrinsic constant.</span>
+</span>
+</td>
+<td id="S6.T1.2.2.2" class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t">
+<span id="S6.T1.2.2.2.1" class="ltx_inline-block ltx_align_top">
+<span id="S6.T1.2.2.2.1.1" class="ltx_p" style="width:195.1pt;"><span id="S6.T1.2.2.2.1.1.1" class="ltx_text ltx_font_bold">Mass:</span> An emergent resonance frequency (<math id="S6.T1.2.2.2.1.1.m1" class="ltx_Math" alttext="\omega_{0}" display="inline" intent=":literal"><semantics><msub><mi>ω</mi><mn>0</mn></msub><annotation encoding="application/x-tex">\omega_{0}</annotation></semantics></math>) due to confinement.</span>
+</span>
+</td>
+</tr>
+<tr id="S6.T1.3.3" class="ltx_tr">
+<td id="S6.T1.3.3.1" class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t">
+<span id="S6.T1.3.3.1.1" class="ltx_inline-block ltx_align_top">
+<span id="S6.T1.3.3.1.1.1" class="ltx_p" style="width:195.1pt;"><span id="S6.T1.3.3.1.1.1.1" class="ltx_text ltx_font_bold">Negative Energy States:</span> Solutions with <math id="S6.T1.3.3.1.1.1.m1" class="ltx_Math" alttext="E&lt;-mc^{2}" display="inline" intent=":literal"><semantics><mrow><mi>E</mi><mo>&lt;</mo><mrow><mo>−</mo><mrow><mi>m</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>c</mi><mn>2</mn></msup></mrow></mrow></mrow><annotation encoding="application/x-tex">E&lt;-mc^{2}</annotation></semantics></math>, often requiring the ”Dirac Sea” or hole theory interpretation.</span>
+</span>
+</td>
+<td id="S6.T1.3.3.2" class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t">
+<span id="S6.T1.3.3.2.1" class="ltx_inline-block ltx_align_top">
+<span id="S6.T1.3.3.2.1.1" class="ltx_p" style="width:195.1pt;"><span id="S6.T1.3.3.2.1.1.1" class="ltx_text ltx_font_bold">Inverted Anchoring Modes:</span> Mechanical modes where the topological winding is inverted due to excessive stress.</span>
+</span>
+</td>
+</tr>
+<tr id="S6.T1.4.4" class="ltx_tr">
+<td id="S6.T1.4.4.1" class="ltx_td ltx_align_justify ltx_align_top ltx_border_l ltx_border_r ltx_border_t">
+<span id="S6.T1.4.4.1.1" class="ltx_inline-block ltx_align_top">
+<span id="S6.T1.4.4.1.1.1" class="ltx_p" style="width:195.1pt;"><span id="S6.T1.4.4.1.1.1.1" class="ltx_text ltx_font_bold">Potential (<math id="S6.T1.4.4.1.1.1.1.m1" class="ltx_Math" alttext="V" display="inline" intent=":literal"><semantics><mi>V</mi><annotation encoding="application/x-tex">V</annotation></semantics></math>):</span> An external scalar/vector field modifying energy levels.</span>
+</span>
+</td>
+<td id="S6.T1.4.4.2" class="ltx_td ltx_align_justify ltx_align_top ltx_border_r ltx_border_t">
+<span id="S6.T1.4.4.2.1" class="ltx_inline-block ltx_align_top">
+<span id="S6.T1.4.4.2.1.1" class="ltx_p" style="width:195.1pt;"><span id="S6.T1.4.4.2.1.1.1" class="ltx_text ltx_font_bold">Stress/Tension:</span> An external strain shifting the local stiffness of the medium.</span>
+</span>
+</td>
+</tr>
+<tr id="S6.T1.5.5" class="ltx_tr">
+<td id="S6.T1.5.5.1" class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_l ltx_border_r ltx_border_t">
+<span id="S6.T1.5.5.1.1" class="ltx_inline-block ltx_align_top">
+<span id="S6.T1.5.5.1.1.1" class="ltx_p" style="width:195.1pt;"><span id="S6.T1.5.5.1.1.1.1" class="ltx_text ltx_font_bold">Klein Paradox (<math id="S6.T1.5.5.1.1.1.1.m1" class="ltx_Math" alttext="R&gt;1" display="inline" intent=":literal"><semantics><mrow><mi>R</mi><mo>&gt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">R&gt;1</annotation></semantics></math>):</span> Violation of single-particle probability; implies pair creation.</span>
+</span>
+</td>
+<td id="S6.T1.5.5.2" class="ltx_td ltx_align_justify ltx_align_top ltx_border_b ltx_border_r ltx_border_t">
+<span id="S6.T1.5.5.2.1" class="ltx_inline-block ltx_align_top">
+<span id="S6.T1.5.5.2.1.1" class="ltx_p" style="width:195.1pt;"><span id="S6.T1.5.5.2.1.1.1" class="ltx_text ltx_font_bold">Dielectric Breakdown:</span> Mechanical failure of the medium; implies generation of defect pairs to relax strain.</span>
+</span>
+</td>
+</tr>
+</tbody>
+</table>
+</figure>
+</section>
+<section id="S6.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">VI.2 </span>Suggested Student Exercises</h3>
+
+<div id="S6.SS2.p1" class="ltx_para">
+<p id="S6.SS2.p1.1" class="ltx_p">To solidify understanding, instructors can assign the following problems based on the derivations in this text:</p>
+</div>
+<div id="S6.SS2.p2" class="ltx_para">
+<ul id="S6.I1" class="ltx_itemize">
+<li id="S6.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="S6.I1.i1.p1" class="ltx_para">
+<p id="S6.I1.i1.p1.3" class="ltx_p"><span id="S6.I1.i1.p1.3.1" class="ltx_text ltx_font_bold">Exercise 1 (Group Velocity vs. Current):</span> Using the dispersion relation in the supercritical region (Eq. 6), calculate the group velocity <math id="S6.I1.i1.p1.1.m1" class="ltx_Math" alttext="v_{g}" display="inline" intent=":literal"><semantics><msub><mi>v</mi><mi>g</mi></msub><annotation encoding="application/x-tex">v_{g}</annotation></semantics></math> and demonstrate that it is positive (outgoing). Then, calculate the Dirac probability current <math id="S6.I1.i1.p1.2.m2" class="ltx_Math" alttext="J" display="inline" intent=":literal"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math> for the antiparticle spinor and show it is negative. Discuss how this sign difference is crucial for obtaining <math id="S6.I1.i1.p1.3.m3" class="ltx_Math" alttext="|R|^{2}&gt;1" display="inline" intent=":literal"><semantics><mrow><msup><mrow><mo stretchy="false">|</mo><mi>R</mi><mo stretchy="false">|</mo></mrow><mn>2</mn></msup><mo>&gt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">|R|^{2}&gt;1</annotation></semantics></math>.</p>
+</div>
+</li>
+<li id="S6.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="S6.I1.i2.p1" class="ltx_para">
+<p id="S6.I1.i2.p1.1" class="ltx_p"><span id="S6.I1.i2.p1.1.1" class="ltx_text ltx_font_bold">Exercise 2 (The Infinite Well Limit):</span> Following the logic in <span id="S6.I1.i2.p1.1.2" class="ltx_text ltx_font_bold">Section <a href="#S5" title="V Discussion: The Schwinger Limit ‣ Hydrodynamic Analog of the Klein Paradox: Vacuum Instability and Pair Production in a Linear Elastic Medium" class="ltx_ref"><span class="ltx_text ltx_ref_tag">V</span></a></span>, ask students to take the limit <math id="S6.I1.i2.p1.1.m1" class="ltx_Math" alttext="V_{0}\to\infty" display="inline" intent=":literal"><semantics><mrow><msub><mi>V</mi><mn>0</mn></msub><mo stretchy="false">→</mo><mi mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">V_{0}\to\infty</annotation></semantics></math> in the transmission coefficients found in standard textbooks (e.g., Greiner) and show that Klein tunneling vanishes. Students should be asked to interpret this physically: as the potential wall approaches infinite steepness and height without propagating into the medium, the boundary becomes infinitely rigid. Show how this extreme rigidity prevents the mechanical ”breakdown” oscillation required to rip the vacuum, thereby suppressing pair production and recovering standard quantization.</p>
+</div>
+</li>
+<li id="S6.I1.i3" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="S6.I1.i3.p1" class="ltx_para">
+<p id="S6.I1.i3.p1.2" class="ltx_p"><span id="S6.I1.i3.p1.2.1" class="ltx_text ltx_font_bold">Exercise 3 (The Schwinger Connection):</span> ask students to perform a dimensional analysis comparison between the pair production rate derived here (dependent on the stress gradient) and the exponential factor in the Schwinger limit <math id="S6.I1.i3.p1.1.m1" class="ltx_Math" alttext="\exp(-\pi m^{2}/e\mathcal{E})" display="inline" intent=":literal"><semantics><mrow><mi>exp</mi><mo>⁡</mo><mrow><mo stretchy="false">(</mo><mrow><mo>−</mo><mrow><mrow><mrow><mi>π</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>m</mi><mn>2</mn></msup></mrow><mo>/</mo><mi>e</mi></mrow><mo lspace="0em" rspace="0em">​</mo><mi class="ltx_font_mathcaligraphic">ℰ</mi></mrow></mrow><mo stretchy="false">)</mo></mrow></mrow><annotation encoding="application/x-tex">\exp(-\pi m^{2}/e\mathcal{E})</annotation></semantics></math>, identifying the analog of the electric field <math id="S6.I1.i3.p1.2.m2" class="ltx_Math" alttext="\mathcal{E}" display="inline" intent=":literal"><semantics><mi class="ltx_font_mathcaligraphic">ℰ</mi><annotation encoding="application/x-tex">\mathcal{E}</annotation></semantics></math> (related to the strain gradient) in the elastic model.</p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="S7" class="ltx_section">
+<h2 class="ltx_title ltx_title_section">
+<span class="ltx_tag ltx_tag_section">VII </span>Conclusion</h2>
+
+<div id="S7.p1" class="ltx_para">
+<p id="S7.p1.1" class="ltx_p">In this work, we have investigated the Klein Paradox through the lens of a hydrodynamic analog model. By interpreting the Dirac equation as the effective field theory of a linear elastic medium, we demonstrated that the anomalous scattering coefficients arise from a mechanical instability analogous to dielectric breakdown under supercritical stress.</p>
+</div>
+<div id="S7.p2" class="ltx_para">
+<p id="S7.p2.1" class="ltx_p">Within this framework, the “negative energy” modes are physically identified as excitations with inverted topological winding, and the reflection coefficient <math id="S7.p2.1.m1" class="ltx_Math" alttext="R&gt;1" display="inline" intent=":literal"><semantics><mrow><mi>R</mi><mo>&gt;</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">R&gt;1</annotation></semantics></math> corresponds to the relaxation of vacuum strain via the generation of defect pairs. This derivation reproduces the pair production phenomenology of the Schwinger mechanism and the scattering results of Hansen and Ravndal <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib13" title="" class="ltx_ref">13</a>]</cite>. Ultimately, this study reinforces the program of Analog Gravity by showing that complex quantum field theoretical processes can be rigorously modeled as the deterministic mechanics of a constrained continuum.</p>
+</div>
+<div id="S7.p3" class="ltx_para">
+<p id="S7.p3.1" class="ltx_p">From a pedagogical perspective, this mechanical model offers a tangible alternative to the abstract algebraic derivations typically found in textbooks. By mapping the opaque concept of vacuum instability onto the intuitive physics of material breakdown, we provide students and instructors with a concrete visualization of the Dirac sea dynamics. We hope this framework serves as a valuable conceptual bridge in advanced courses —particularly those bridging relativistic equations with solid-state physics— facilitating a deeper intuition for the physical reality underlying the formalism of relativistic quantum mechanics in modern Dirac materials.</p>
+</div>
+</section>
+<section id="A1" class="ltx_appendix">
+<h2 class="ltx_title ltx_title_appendix">
+<span class="ltx_tag ltx_tag_appendix">Appendix A </span>Emergence of Spinor Structure from Linearization Constraints</h2>
+
+<div id="A1.p1" class="ltx_para">
+<p id="A1.p1.1" class="ltx_p">In this appendix, we demonstrate that the algebraic requirement of constructing a linear, first-order evolution equation from the second-order wave mechanics necessitates a multi-component state space structure isomorphic to the Dirac spinor. We show that the internal degrees of freedom required to stabilize the elastic defect map naturally onto the Clifford algebra of relativistic quantum mechanics.</p>
+</div>
+<section id="A1.SS1" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">A.1 </span>From Wave Mechanics to First-Order Dynamics</h3>
+
+<div id="A1.SS1.p1" class="ltx_para">
+<p id="A1.SS1.p1.1" class="ltx_p">The fundamental dynamics of a massive perturbation in a linear medium are governed by the second-order wave equation (Klein-Gordon form):</p>
+<table id="A1.E14" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="A1.E14.m1" class="ltx_Math" alttext="\left(\frac{1}{c^{2}}\partial_{t}^{2}-\nabla^{2}+\frac{m^{2}c^{2}}{\hbar^{2}}\right)\Psi=0" display="block" intent=":literal"><semantics><mrow><mrow><mrow><mo>(</mo><mrow><mrow><mrow><mfrac><mn>1</mn><msup><mi>c</mi><mn>2</mn></msup></mfrac><mo lspace="0em" rspace="0em">​</mo><msubsup><mo rspace="0em">∂</mo><mi>t</mi><mn>2</mn></msubsup></mrow><mo>−</mo><msup><mo>∇</mo><mn>2</mn></msup></mrow><mo lspace="0em">+</mo><mfrac><mrow><msup><mi>m</mi><mn>2</mn></msup><mo lspace="0em" rspace="0em">​</mo><msup><mi>c</mi><mn>2</mn></msup></mrow><msup><mi mathvariant="normal">ℏ</mi><mn>2</mn></msup></mfrac></mrow><mo>)</mo></mrow><mo lspace="0em" rspace="0em">​</mo><mi mathvariant="normal">Ψ</mi></mrow><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\left(\frac{1}{c^{2}}\partial_{t}^{2}-\nabla^{2}+\frac{m^{2}c^{2}}{\hbar^{2}}\right)\Psi=0</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(14)</span></td>
+</tr></tbody>
+</table>
+<p id="A1.SS1.p1.2" class="ltx_p">However, second-order equations allow for solutions with non-positive definite probability densities, describing transient excitations rather than persistent, conserved matter. To model a stable, conserved excitation (a ”particle”) with a conserved probability current, the equation of motion must be of <span id="A1.SS1.p1.2.1" class="ltx_text ltx_font_italic">first order</span> in time:</p>
+<table id="A1.E15" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="A1.E15.m1" class="ltx_Math" alttext="i\hbar\frac{\partial\Psi}{\partial t}=\hat{H}\Psi" display="block" intent=":literal"><semantics><mrow><mrow><mi>i</mi><mo lspace="0em" rspace="0em">​</mo><mi mathvariant="normal">ℏ</mi><mo lspace="0em" rspace="0em">​</mo><mfrac><mrow><mo rspace="0em">∂</mo><mi mathvariant="normal">Ψ</mi></mrow><mrow><mo rspace="0em">∂</mo><mi>t</mi></mrow></mfrac></mrow><mo>=</mo><mrow><mover accent="true"><mi>H</mi><mo>^</mo></mover><mo lspace="0em" rspace="0em">​</mo><mi mathvariant="normal">Ψ</mi></mrow></mrow><annotation encoding="application/x-tex">i\hbar\frac{\partial\Psi}{\partial t}=\hat{H}\Psi</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(15)</span></td>
+</tr></tbody>
+</table>
+</div>
+</section>
+<section id="A1.SS2" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">A.2 </span>The Clifford Algebra Constraint</h3>
+
+<div id="A1.SS2.p1" class="ltx_para">
+<p id="A1.SS2.p1.1" class="ltx_p">Relativistic covariance requires that space and time be treated on equal footing. If the time derivative is linear, the spatial derivatives (momentum <math id="A1.SS2.p1.1.m1" class="ltx_Math" alttext="\hat{\mathbf{p}}" display="inline" intent=":literal"><semantics><mover accent="true"><mi>𝐩</mi><mo>^</mo></mover><annotation encoding="application/x-tex">\hat{\mathbf{p}}</annotation></semantics></math>) must also appear linearly in the Hamiltonian:</p>
+<table id="A1.E16" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="A1.E16.m1" class="ltx_Math" alttext="\hat{H}=c\boldsymbol{\alpha}\cdot\hat{\mathbf{p}}+\beta mc^{2}" display="block" intent=":literal"><semantics><mrow><mover accent="true"><mi>H</mi><mo>^</mo></mover><mo>=</mo><mrow><mrow><mrow><mi>c</mi><mo lspace="0em" rspace="0em">​</mo><mi>𝜶</mi></mrow><mo lspace="0.222em" rspace="0.222em">⋅</mo><mover accent="true"><mi>𝐩</mi><mo>^</mo></mover></mrow><mo>+</mo><mrow><mi>β</mi><mo lspace="0em" rspace="0em">​</mo><mi>m</mi><mo lspace="0em" rspace="0em">​</mo><msup><mi>c</mi><mn>2</mn></msup></mrow></mrow></mrow><annotation encoding="application/x-tex">\hat{H}=c\boldsymbol{\alpha}\cdot\hat{\mathbf{p}}+\beta mc^{2}</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(16)</span></td>
+</tr></tbody>
+</table>
+<p id="A1.SS2.p1.2" class="ltx_p">For this linear ansatz to be consistent with the fundamental dispersion relation <math id="A1.SS2.p1.2.m1" class="ltx_Math" alttext="E^{2}=c^{2}p^{2}+m^{2}c^{4}" display="inline" intent=":literal"><semantics><mrow><msup><mi>E</mi><mn>2</mn></msup><mo>=</mo><mrow><mrow><msup><mi>c</mi><mn>2</mn></msup><mo lspace="0em" rspace="0em">​</mo><msup><mi>p</mi><mn>2</mn></msup></mrow><mo>+</mo><mrow><msup><mi>m</mi><mn>2</mn></msup><mo lspace="0em" rspace="0em">​</mo><msup><mi>c</mi><mn>4</mn></msup></mrow></mrow></mrow><annotation encoding="application/x-tex">E^{2}=c^{2}p^{2}+m^{2}c^{4}</annotation></semantics></math> (derived from the resonance of the medium), the coefficients must satisfy the condition that squaring the operator recovers the scalar wave equation. This imposes the Clifford algebra:</p>
+<table id="A1.E17" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="A1.E17.m1" class="ltx_Math" alttext="\{\alpha_{i},\alpha_{j}\}=2\delta_{ij},\quad\{\alpha_{i},\beta\}=0,\quad\beta^{2}=1" display="block" intent=":literal"><semantics><mrow><mrow><mrow><mo stretchy="false">{</mo><msub><mi>α</mi><mi>i</mi></msub><mo>,</mo><msub><mi>α</mi><mi>j</mi></msub><mo stretchy="false">}</mo></mrow><mo>=</mo><mrow><mn>2</mn><mo lspace="0em" rspace="0em">​</mo><msub><mi>δ</mi><mrow><mi>i</mi><mo lspace="0em" rspace="0em">​</mo><mi>j</mi></mrow></msub></mrow></mrow><mo rspace="1.167em">,</mo><mrow><mrow><mrow><mo stretchy="false">{</mo><msub><mi>α</mi><mi>i</mi></msub><mo>,</mo><mi>β</mi><mo stretchy="false">}</mo></mrow><mo>=</mo><mn>0</mn></mrow><mo rspace="1.167em">,</mo><mrow><msup><mi>β</mi><mn>2</mn></msup><mo>=</mo><mn>1</mn></mrow></mrow></mrow><annotation encoding="application/x-tex">\{\alpha_{i},\alpha_{j}\}=2\delta_{ij},\quad\{\alpha_{i},\beta\}=0,\quad\beta^{2}=1</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(17)</span></td>
+</tr></tbody>
+</table>
+<p id="A1.SS2.p1.3" class="ltx_p">It is a well-known algebraic theorem that the smallest faithful representation of this algebra requires matrices of dimension <math id="A1.SS2.p1.3.m1" class="ltx_Math" alttext="N=4" display="inline" intent=":literal"><semantics><mrow><mi>N</mi><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">N=4</annotation></semantics></math>.</p>
+</div>
+</section>
+<section id="A1.SS3" class="ltx_subsection">
+<h3 class="ltx_title ltx_title_subsection">
+<span class="ltx_tag ltx_tag_subsection">A.3 </span>Physical Identification of Components</h3>
+
+<div id="A1.SS3.p1" class="ltx_para">
+<p id="A1.SS3.p1.1" class="ltx_p">The mathematical requirement for a 4-component spinor maps naturally to the geometric degrees of freedom of a 1D elastic defect in 3D space. Specifically, the transverse vibrations in the 2D plane orthogonal to propagation require a 2-component complex representation (vibrational polarization or spin), while the topological boundary condition connecting the defect to the vacuum requires a binary orientation (topological anchoring or charge). Consequently, to satisfy the requirement of linear causal evolution within this elastic model, the effective field description requires a 4-component spinor representation, mirroring the Dirac field.</p>
+</div>
+<div id="A1.SS3.p2" class="ltx_para">
+<p id="A1.SS3.p2.4" class="ltx_p">In our defect model, this dimensionality corresponds to the physical degrees of freedom of the defect (anchored string)<span id="footnote3" class="ltx_note ltx_role_footnote"><sup class="ltx_note_mark">3</sup><span class="ltx_note_outer"><span class="ltx_note_content"><sup class="ltx_note_mark">3</sup><span class="ltx_tag ltx_tag_note">3</span>This decomposition into two fundamental physical dualities is mathematically supported by the formalism of polar spinor decomposition, which shows that a Dirac spinor can be rigorously rewritten in terms of a real modulus, a chiral angle, and the parameters of a Lorentz transformation <cite class="ltx_cite ltx_citemacro_cite">[<a href="#bib.bib15" title="" class="ltx_ref">15</a>]</cite>. Our work provides a straightforward mechanical interpretation for these mathematical components</span></span></span>:</p>
+<table id="A1.E18" class="ltx_equation ltx_eqn_table">
+
+<tbody><tr class="ltx_equation ltx_eqn_row ltx_align_baseline">
+<td class="ltx_eqn_cell ltx_eqn_center_padleft"></td>
+<td class="ltx_eqn_cell ltx_align_center"><math id="A1.E18.m1" class="ltx_Math" alttext="\text{dim}(\Psi)=\text{dim}(V_{\text{spin}})\times\text{dim}(V_{\text{anchor}})=2\times 2=4" display="block" intent=":literal"><semantics><mrow><mrow><mtext>dim</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><mi mathvariant="normal">Ψ</mi><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mrow><mrow><mtext>dim</mtext><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><msub><mi>V</mi><mtext>spin</mtext></msub><mo rspace="0.055em" stretchy="false">)</mo></mrow></mrow><mo rspace="0.222em">×</mo><mtext>dim</mtext></mrow><mo lspace="0em" rspace="0em">​</mo><mrow><mo stretchy="false">(</mo><msub><mi>V</mi><mtext>anchor</mtext></msub><mo stretchy="false">)</mo></mrow></mrow><mo>=</mo><mrow><mn>2</mn><mo lspace="0.222em" rspace="0.222em">×</mo><mn>2</mn></mrow><mo>=</mo><mn>4</mn></mrow><annotation encoding="application/x-tex">\text{dim}(\Psi)=\text{dim}(V_{\text{spin}})\times\text{dim}(V_{\text{anchor}})=2\times 2=4</annotation></semantics></math></td>
+<td class="ltx_eqn_cell ltx_eqn_center_padright"></td>
+<td rowspan="1" class="ltx_eqn_cell ltx_eqn_eqno ltx_align_middle ltx_align_right"><span class="ltx_tag ltx_tag_equation ltx_align_right">(18)</span></td>
+</tr></tbody>
+</table>
+<p id="A1.SS3.p2.3" class="ltx_p">The ”antiparticle” solutions involved in the Klein paradox correspond to the subspace where the operator <math id="A1.SS3.p2.1.m1" class="ltx_Math" alttext="\beta" display="inline" intent=":literal"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math> (acting on <math id="A1.SS3.p2.2.m2" class="ltx_Math" alttext="V_{\text{anchor}}" display="inline" intent=":literal"><semantics><msub><mi>V</mi><mtext>anchor</mtext></msub><annotation encoding="application/x-tex">V_{\text{anchor}}</annotation></semantics></math>) takes the eigenvalue <math id="A1.SS3.p2.3.m3" class="ltx_Math" alttext="-1" display="inline" intent=":literal"><semantics><mrow><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">-1</annotation></semantics></math>. The paradox is thus resolved as a stress-induced transition between these topological sectors.</p>
+</div>
+<div id="A1.SS3.p3" class="ltx_para">
+<p id="A1.SS3.p3.4" class="ltx_p">Physically, the topological index <math id="A1.SS3.p3.1.m1" class="ltx_Math" alttext="\beta" display="inline" intent=":literal"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math> represents the orientation of the defect’s anchoring relative to the medium’s restorative field. If the defect’s transverse displacement is aligned with the primary gradient of the vacuum’s elastic restoring force, it occupies the <math id="A1.SS3.p3.2.m2" class="ltx_Math" alttext="\beta=+1" display="inline" intent=":literal"><semantics><mrow><mi>β</mi><mo>=</mo><mrow><mo>+</mo><mn>1</mn></mrow></mrow><annotation encoding="application/x-tex">\beta=+1</annotation></semantics></math> state (matter). Conversely, an excitation with <math id="A1.SS3.p3.3.m3" class="ltx_Math" alttext="\beta=-1" display="inline" intent=":literal"><semantics><mrow><mi>β</mi><mo>=</mo><mrow><mo>−</mo><mn>1</mn></mrow></mrow><annotation encoding="application/x-tex">\beta=-1</annotation></semantics></math> (antimatter) possesses an <span id="A1.SS3.p3.4.1" class="ltx_text ltx_font_italic">inverted</span> topological winding, meaning its phase response is exactly <math id="A1.SS3.p3.4.m4" class="ltx_Math" alttext="\pi" display="inline" intent=":literal"><semantics><mi>π</mi><annotation encoding="application/x-tex">\pi</annotation></semantics></math> out of phase with the background restoring field. This physical inversion is what dictates the opposite flow of the probability current relative to the group velocity in the supercritical regime.</p>
+</div>
+<div id="A1.SS3.p4" class="ltx_para">
+<ul id="A1.I1" class="ltx_itemize">
+<li id="A1.I1.i1" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="A1.I1.i1.p1" class="ltx_para">
+<p id="A1.I1.i1.p1.1" class="ltx_p"><span id="A1.I1.i1.p1.1.1" class="ltx_text ltx_font_bold">The author declares that there are no conflict of interest.</span></p>
+</div>
+</li>
+<li id="A1.I1.i2" class="ltx_item" style="list-style-type:none;">
+<span class="ltx_tag ltx_tag_item">•</span> 
+<div id="A1.I1.i2.p1" class="ltx_para">
+<p id="A1.I1.i2.p1.1" class="ltx_p"><span id="A1.I1.i2.p1.1.1" class="ltx_text ltx_font_bold">The author declares that no funding was provided for this research.</span></p>
+</div>
+</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="bib" class="ltx_bibliography">
+<h2 class="ltx_title ltx_title_bibliography">References</h2>
+
+<ul class="ltx_biblist">
+<li id="bib.bib1" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Klein [1929]</span>
+<span class="ltx_bibblock">O. Klein, <a href="http://dx.doi.org/10.1007/BF01339716" title="" class="ltx_ref ltx_href">Zeitschrift für Physik <span id="bib.bib1.1.1.1" class="ltx_text ltx_font_bold">53</span>, 157 (1929)</a>. 
+</span>
+</li>
+<li id="bib.bib2" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Greiner [2000]</span>
+<span class="ltx_bibblock">W. Greiner, <em id="bib.bib2.1.1" class="ltx_emph ltx_font_italic">Relativistic Quantum Mechanics: Wave Equations</em>, 3rd ed. (Springer, 2000) chapter 12. 
+</span>
+</li>
+<li id="bib.bib3" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Itzykson and Zuber [1980]</span>
+<span class="ltx_bibblock">C. Itzykson and J.-B. Zuber, <em id="bib.bib3.1.1" class="ltx_emph ltx_font_italic">Quantum Field Theory</em> (McGraw-Hill, 1980) section 2-2-2. 
+</span>
+</li>
+<li id="bib.bib4" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Schwartz [2014]</span>
+<span class="ltx_bibblock">M. D. Schwartz, <em id="bib.bib4.1.1" class="ltx_emph ltx_font_italic">Quantum Field Theory and the Standard Model</em> (Cambridge University Press, 2014) chapter 34. 
+</span>
+</li>
+<li id="bib.bib5" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Xu and Li [2015]</span>
+<span class="ltx_bibblock">C. Xu and Y. J. Li, <a href="https://arxiv.org/abs/1504.00901" title="" class="ltx_ref ltx_href">“Qft treatment of the klein paradox,” </a> (2015), <a href="http://arxiv.org/abs/1504.00901" title="" class="ltx_ref ltx_href">arXiv:1504.00901 [hep-ph]</a> . 
+</span>
+</li>
+<li id="bib.bib6" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Katsnelson <em id="bib.bib6.2.2.1" class="ltx_emph ltx_font_italic">et al.</em> [2006]</span>
+<span class="ltx_bibblock">M. I. Katsnelson, K. S. Novoselov,  and A. K. Geim, <a href="http://dx.doi.org/10.1038/nphys384" title="" class="ltx_ref ltx_href">Nature Physics <span id="bib.bib6.3.1.1" class="ltx_text ltx_font_bold">2</span>, 620 (2006)</a>. 
+</span>
+</li>
+<li id="bib.bib7" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Stander <em id="bib.bib7.2.2.1" class="ltx_emph ltx_font_italic">et al.</em> [2009]</span>
+<span class="ltx_bibblock">N. Stander, B. Huard,  and D. Goldhaber-Gordon, <a href="http://dx.doi.org/10.1103/PhysRevLett.102.026807" title="" class="ltx_ref ltx_href">Phys. Rev. Lett. <span id="bib.bib7.3.1.1" class="ltx_text ltx_font_bold">102</span>, 026807 (2009)</a>. 
+</span>
+</li>
+<li id="bib.bib8" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Jiang <em id="bib.bib8.2.2.1" class="ltx_emph ltx_font_italic">et al.</em> [2020]</span>
+<span class="ltx_bibblock">X. Jiang, C. Shi, Z. Li, S. Wang, Y. Wang, S. Yang, S. G. Louie,  and X. Zhang, <a href="http://dx.doi.org/10.1126/science.abe2011" title="" class="ltx_ref ltx_href">Science <span id="bib.bib8.3.1.1" class="ltx_text ltx_font_bold">370</span>, 1447 (2020)</a>. 
+</span>
+</li>
+<li id="bib.bib9" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Wu <em id="bib.bib9.2.2.1" class="ltx_emph ltx_font_italic">et al.</em> [2024]</span>
+<span class="ltx_bibblock">H. Wu, H. He, Z. Dong, L. Ye, W. Deng, M. Ke,  and Z. Liu, <a href="http://dx.doi.org/10.1103/PhysRevApplied.21.034026" title="" class="ltx_ref ltx_href">Phys. Rev. Appl. <span id="bib.bib9.3.1.1" class="ltx_text ltx_font_bold">21</span>, 034026 (2024)</a>. 
+</span>
+</li>
+<li id="bib.bib10" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Alkhateeb and Matzkin [2022]</span>
+<span class="ltx_bibblock">M. Alkhateeb and A. Matzkin, <a href="http://dx.doi.org/10.1119/10.0009408" title="" class="ltx_ref ltx_href">American Journal of Physics <span id="bib.bib10.1.1.1" class="ltx_text ltx_font_bold">90</span>, 297 (2022)</a>. 
+</span>
+</li>
+<li id="bib.bib11" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Volovik [2003]</span>
+<span class="ltx_bibblock">G. E. Volovik, <em id="bib.bib11.1.1" class="ltx_emph ltx_font_italic">The Universe in a Helium Droplet</em> (Oxford University Press, 2003). 
+</span>
+</li>
+<li id="bib.bib12" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Unruh [1981]</span>
+<span class="ltx_bibblock">W. G. Unruh, <a href="http://dx.doi.org/10.1103/PhysRevLett.46.1351" title="" class="ltx_ref ltx_href">Physical Review Letters <span id="bib.bib12.1.1.1" class="ltx_text ltx_font_bold">46</span>, 1351 (1981)</a>. 
+</span>
+</li>
+<li id="bib.bib13" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Hansen and Ravndal [1981]</span>
+<span class="ltx_bibblock">A. Hansen and F. Ravndal, <a href="http://dx.doi.org/10.1088/0031-8949/23/6/002" title="" class="ltx_ref ltx_href">Physica Scripta <span id="bib.bib13.1.1.1" class="ltx_text ltx_font_bold">23</span>, 1036 (1981)</a>. 
+</span>
+</li>
+<li id="bib.bib14" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Holstein [1998]</span>
+<span class="ltx_bibblock">B. R. Holstein, <a href="http://dx.doi.org/10.1119/1.18910" title="" class="ltx_ref ltx_href">American Journal of Physics <span id="bib.bib14.1.1.1" class="ltx_text ltx_font_bold">66</span>, 507 (1998)</a>. 
+</span>
+</li>
+<li id="bib.bib15" class="ltx_bibitem">
+<span class="ltx_tag ltx_role_refnum ltx_tag_bibitem">Fabbri [2022]</span>
+<span class="ltx_bibblock">L. Fabbri, <a href="http://dx.doi.org/10.1007/s10701-022-00641-2" title="" class="ltx_ref ltx_href">Foundations of Physics <span id="bib.bib15.1.1.1" class="ltx_text ltx_font_bold">52</span>, 116 (2022)</a>. 
+</span>
+</li>
+</ul>
+</section>
+</article>
+</div>
+</div>
+<footer class="arxiv-html-footer">
+  <div class="ltx_page_logo">
+    Experimental support, please
+    <a href="./2604.14378v1/__stdout.txt" class="ltx_ref"
+    target="_blank" rel="nofollow">view the build logs</a>
+    for errors. Generated by
+    <a href="https://math.nist.gov/~BMiller/LaTeXML/" target="_blank" class="ltx_ref ltx_LaTeXML_logo">
+      <span style="letter-spacing: -0.2em; margin-right: 0.1em;">
+        L
+        <span style="font-size: 70%; position: relative; bottom: 2.2pt;">A</span>
+        T
+        <span style="position: relative; bottom: -0.4ex;">E</span>
+      </span>
+      <span class="ltx_font_smallcaps">xml</span>
+      <img alt="[LOGO]"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAAOCAYAAAD5YeaVAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9wKExQZLWTEaOUAAAAddEVYdENvbW1lbnQAQ3JlYXRlZCB3aXRoIFRoZSBHSU1Q72QlbgAAAdpJREFUKM9tkL+L2nAARz9fPZNCKFapUn8kyI0e4iRHSR1Kb8ng0lJw6FYHFwv2LwhOpcWxTjeUunYqOmqd6hEoRDhtDWdA8ApRYsSUCDHNt5ul13vz4w0vWCgUnnEc975arX6ORqN3VqtVZbfbTQC4uEHANM3jSqXymFI6yWazP2KxWAXAL9zCUa1Wy2tXVxheKA9YNoR8Pt+aTqe4FVVVvz05O6MBhqUIBGk8Hn8HAOVy+T+XLJfLS4ZhTiRJgqIoVBRFIoric47jPnmeB1mW/9rr9ZpSSn3Lsmir1fJZlqWlUonKsvwWwD8ymc/nXwVBeLjf7xEKhdBut9Hr9WgmkyGEkJwsy5eHG5vN5g0AKIoCAEgkEkin0wQAfN9/cXPdheu6P33fBwB4ngcAcByHJpPJl+fn54mD3Gg0NrquXxeLRQAAwzAYj8cwTZPwPH9/sVg8PXweDAauqqr2cDjEer1GJBLBZDJBs9mE4zjwfZ85lAGg2+06hmGgXq+j3+/DsixYlgVN03a9Xu8jgCNCyIegIAgx13Vfd7vdu+FweG8YRkjXdWy329+dTgeSJD3ieZ7RNO0VAXAPwDEAO5VKndi2fWrb9jWl9Esul6PZbDY9Go1OZ7PZ9z/lyuD3OozU2wAAAABJRU5ErkJggg==">
+    </a>.
+  </div>
+  <div class="keyboard-glossary">
+    <h2>Instructions for reporting errors</h2>
+    <p>We are continuing to improve HTML versions of papers, and your feedback helps enhance accessibility and mobile
+      support. To report errors in the HTML that will help us improve conversion and rendering, choose any of the
+      methods listed below:</p>
+    <ul>
+      <li>Click the "Report Issue" <span class="mobile-only">(<svg role="presentation"
+            style="display: inline-block; vertical-align: middle; fill: var(--text-color);" aria-hidden="true"
+            height="1em" viewBox="0 0 640 640">
+            <path
+              d="M224 160C224 107 267 64 320 64C373 64 416 107 416 160L416 163.6C416 179.3 403.3 192 387.6 192L252.5 192C236.8 192 224.1 179.3 224.1 163.6L224.1 160zM569.6 172.8C580.2 186.9 577.3 207 563.2 217.6L465.4 290.9C470.7 299.8 474.7 309.6 477.2 320L576 320C593.7 320 608 334.3 608 352C608 369.7 593.7 384 576 384L480 384L480 416C480 418.6 479.9 421.3 479.8 423.9L563.2 486.4C577.3 497 580.2 517.1 569.6 531.2C559 545.3 538.9 548.2 524.8 537.6L461.7 490.3C438.5 534.5 395.2 566.5 344 574.2L344 344C344 330.7 333.3 320 320 320C306.7 320 296 330.7 296 344L296 574.2C244.8 566.5 201.5 534.5 178.3 490.3L115.2 537.6C101.1 548.2 81 545.3 70.4 531.2C59.8 517.1 62.7 497 76.8 486.4L160.2 423.9C160.1 421.3 160 418.7 160 416L160 384L64 384C46.3 384 32 369.7 32 352C32 334.3 46.3 320 64 320L162.8 320C165.3 309.6 169.3 299.8 174.6 290.9L76.8 217.6C62.7 207 59.8 186.9 70.4 172.8C81 158.7 101.1 155.8 115.2 166.4L224 248C236.3 242.9 249.8 240 264 240L376 240C390.2 240 403.7 242.8 416 248L524.8 166.4C538.9 155.8 559 158.7 569.6 172.8z" />
+          </svg>)</span> button, located in the page header.</li>
+    </ul>
+    <p><strong>Tip:</strong> You can select the relevant text first, to include it in your report.</p>
+    <p>Our team has already identified <a class="ltx_ref" href="https://github.com/arXiv/html_feedback/issues"
+        target="_blank">the following issues</a>. We appreciate your time reviewing and reporting rendering errors we
+      may not have found yet. Your efforts will help us improve the HTML versions for all readers, because disability
+      should not be a barrier to accessing research. Thank you for your continued support in championing open access for
+      all.</p>
+    <p>Have a free development cycle? Help support accessibility at arXiv! Our collaborators at LaTeXML maintain a <a
+        class="ltx_ref" href="https://github.com/brucemiller/LaTeXML/wiki/Porting-LaTeX-packages-for-LaTeXML"
+        target="_blank">list of packages that need conversion</a>, and welcome <a class="ltx_ref"
+        href="https://github.com/brucemiller/LaTeXML/issues" target="_blank">developer contributions</a>.</p>
+  </div>
+</footer>
+<div id="fixed-buttons-container">
+  <div id="beta-badge" aria-hidden="true">BETA</div>
+  <a id="disable-reading-mode-btn" class="header-button" href="javascript:toggleReadingMode();"
+    title="Disable reading mode, show header and footer">
+    <svg role="presentation" height="1.25rem"
+      viewBox="0 0 448 512"><!--!Font Awesome Free v7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+      <path
+        d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z" />
+    </svg>
+  </a>
+</div></body>
+</html>
