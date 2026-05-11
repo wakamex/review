@@ -12,6 +12,13 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", required=True, help="Filtered arXiv manifest for paper order.")
     parser.add_argument("--papers-dir", required=True, help="Per-paper review output directory.")
+    parser.add_argument(
+        "--sort-by",
+        choices=("score", "manifest"),
+        default="score",
+        help="Order output rows by selected score descending or original manifest order.",
+    )
+    parser.add_argument("--quiet", action="store_true", help="Do not print the Markdown report to stdout.")
     parser.add_argument("--json-output", help="Optional JSON output path.")
     parser.add_argument("--markdown-output", help="Optional Markdown output path.")
     return parser.parse_args()
@@ -75,15 +82,35 @@ def render_markdown(rows: list[dict[str, object]]) -> str:
     return "\n".join(lines)
 
 
+def sort_rows(rows: list[dict[str, object]], sort_by: str) -> list[dict[str, object]]:
+    if sort_by == "manifest":
+        return rows
+    return sorted(
+        rows,
+        key=lambda row: (
+            row.get("selected_score") if isinstance(row.get("selected_score"), (int, float)) else -1,
+            str(row.get("arxiv_id") or ""),
+        ),
+        reverse=True,
+    )
+
+
 def main() -> int:
     args = parse_args()
-    rows = [paper_summary(entry, Path(args.papers_dir)) for entry in load_manifest(Path(args.manifest))]
+    rows = sort_rows(
+        [paper_summary(entry, Path(args.papers_dir)) for entry in load_manifest(Path(args.manifest))],
+        args.sort_by,
+    )
     if args.json_output:
         output_path = Path(args.json_output)
         output_path.parent.mkdir(parents=True, exist_ok=True)
-        output_path.write_text(json.dumps({"papers": rows}, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        output_path.write_text(
+            json.dumps({"sort_by": args.sort_by, "papers": rows}, indent=2, sort_keys=True) + "\n",
+            encoding="utf-8",
+        )
     markdown = render_markdown(rows)
-    print(markdown)
+    if not args.quiet:
+        print(markdown)
     if args.markdown_output:
         output_path = Path(args.markdown_output)
         output_path.parent.mkdir(parents=True, exist_ok=True)

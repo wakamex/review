@@ -365,8 +365,11 @@ python3 scripts/summarize_review_results.py \
   --manifest runs/2026-04/gr-qc/manifest.jsonl \
   --papers-dir runs/2026-04/gr-qc/papers \
   --json-output runs/2026-04/gr-qc/teasers.json \
-  --markdown-output runs/2026-04/gr-qc/teasers.md
+  --markdown-output runs/2026-04/gr-qc/teasers.md \
+  --quiet
 ```
+- Teaser exports are score-sorted by default; pass `--sort-by manifest` to
+  preserve the original arXiv listing order.
 - Board synthesis receives the paper bundle and all review-cycle artifacts.
 
 Artifacts for the first test paper live under:
