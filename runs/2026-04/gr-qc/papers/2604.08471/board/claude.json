@@ -1,0 +1,90 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Two review cycles were completed. In cycle 1, all three reviewers flagged the central \u03b3_I = 0 claim as unverifiable due to severe HTML rendering artifacts suppressing Eq. (13) arm vectors. Gemini raised a fatal objection based on a tensor calculation concluding the claim is false for standard small-tilt geometries. In cycle 2, Codex accessed the PDF and revised upward, arguing the leading-order detector-tensor cancellation is real for the Eq. (13) vectors; Claude independently confirmed that generic pyramid geometries do not satisfy the orthogonality condition and maintained a contested verdict; Gemini upheld the fatal objection. The central dispute about \u03b3_I = 0 remains unresolved across cycles and is flagged for human expert verification. All reviewers agreed that the tower noise analysis is insufficient.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper proposes a new gravitational wave detector design\u2014called a Pyramid interferometer\u2014that could directly detect the \"handedness\" (chirality) of cosmological gravitational waves, a signature of parity-violating physics in the early universe that no current or planned detector can cleanly access. The review board found the geometric concept genuinely novel and potentially important for next-generation detector planning. However, the board is divided on whether the central mathematical claim\u2014that the proposed geometry automatically isolates the chiral signal from the unpolarized background\u2014actually holds for the described configuration. That dispute, along with an unverified assumption that a 1-km above-ground tower would achieve underground-level noise performance, must be resolved before the paper's sensitivity forecasts can be trusted.",
+  "human_spotchecks": [
+    "Verify, using the full arm vectors from Eq. (13) of the published PDF, whether the detector tensor contraction Tr[D_ET \u00b7 D_PyET] vanishes exactly, approximately, or not at all\u2014and whether this holds for all pyramid heights h or only for specially chosen arm orientations.",
+    "Assess whether the \u03b3_I = 0 result for the ET-PyET pair survives the full finite-frequency overlap reduction function calculation (including the phase factor e^{i2\u03c0fd\u00b7\u03a9/c} and finite-arm transfer functions), or whether it holds only at leading order in the small-separation expansion.",
+    "Determine the scaling of \u03b3_V with pyramid height h for fixed arm length L and frequency f, and verify whether the published Fig. 3 sensitivity curves correctly account for this h-dependent suppression for the underground Minimal Pyramid (h ~ 100\u2013300 m, L = 10 km).",
+    "Evaluate the realistic noise level for a 1-km above-ground tower interferometer arm at 10\u2013100 Hz, accounting for structural resonances, wind-driven tilt, thermal gradients, and anthropogenic seismic, and assess whether shot-noise dominance can plausibly be achieved at these frequencies for such a structure.",
+    "Provide a quantitative comparison of the Pyramid's Stokes-V power-law sensitivity against an optimally projected ET-CE V-mode sensitivity at the same frequencies, to determine whether the Pyramid's advantage over ET-CE is one of channel purity alone or also of absolute SNR."
+  ],
+  "paper_id": "2604.08471",
+  "public_summary": "The paper introduces a class of non-coplanar, co-located laser interferometer designs, termed Pyramid interferometers, as extensions of the Einstein Telescope (ET). The paper argues that a standard triangular ET layout, when supplemented by a tilted (non-coplanar) arm\u2014called PyET\u2014forms a detector network with two qualitatively distinct correlation channels: an ET-ET channel sensitive only to unpolarized gravitational-wave intensity (Stokes-I), and an ET-PyET channel sensitive only to circular polarization (Stokes-V). This channel separation, the paper claims, geometrically evades the established no-go theorem that any co-located planar network is blind to isotropic Stokes-V. Three design variants are proposed: a Minimal Pyramid (single tilted arm), a Double Pyramid (two tilted arms, \u221a2 SNR gain), and a Tower-Extended Minimal Pyramid extending the tilted arm through a 1-km above-ground tower. Power-law sensitivity curves are presented suggesting the Pyramid configurations can approach the BBN bound for the Stokes-V component after three years of observation. The physical motivation\u2014probing parity violation and chiral symmetry breaking in early-universe physics via inflationary models, Chern-Simons gravity, chiral magnetic effects, and primordial phase transitions\u2014is well-grounded in the literature. The review board broadly agrees on the novelty and significance of the geometric concept. The central contested question is whether the claimed exact vanishing of \u03b3_I for the ET-PyET pair holds for the geometry defined in Eq. (13), a claim whose verification is complicated by severe HTML rendering failures suppressing key equations in the source used by most reviewers. Codex, after accessing the PDF, argues the leading-order cancellation is real; Gemini maintains it is not for any standard small-tilt pyramid and classifies this as a fatal flaw; Claude's independent tensor calculation suggests the cancellation is not automatic for generic pyramid geometries and rates the central claim as unverified.",
+  "reviewer_disagreements": [
+    "Whether \u03b3_I = 0 holds for the Eq. (13) Pyramid geometry: Gemini maintains it is mathematically false for any standard small-tilt pyramid (fatal flaw, confidence 0.95); Codex argues after reading the PDF that the leading-order detector-tensor contraction does cancel for those specific arm vectors (revised to promising); Claude independently calculates Tr[D_1\u00b7D_4] \u2248 3/4 \u2260 0 for a naive pyramid-over-centroid geometry, concluding the orthogonality is not automatic and the Eq. (13) geometry could not be verified from HTML.",
+    "Whether the SNR formula Eq. (20) is valid: Gemini rates it fatally wrong because it omits I-mode projection noise; Codex and Claude argue it is standard cross-correlation SNR and valid if the leading-order \u03b3_I = 0 cancellation holds, making the SNR objection conditional on the geometry dispute.",
+    "Overall severity of the paper's flaws: Gemini assigns a major_flaw / 3 verdict in both cycles; Codex revised to promising / 6.6 in cycle 2 after accessing the PDF; Claude shifted from promising / 6.5 (cycle 1) to contested / 5.0 (cycle 2) after incorporating Gemini's tensor argument.",
+    "Whether the 'co-location' terminology creates a logical contradiction: Codex (cycle 1) flagged potential inconsistency between the claim of co-location and the requirement for finite separation d = h to achieve \u03b3_V \u2260 0; Claude (cycle 2) rejected this as a misunderstanding, noting co-location means same-site (not zero separation), and that finite h is precisely what enables the nonzero parity-odd response."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The central claim that the ET-PyET correlation channel is natively blind to the unpolarized Stokes-I background (\u03b3_I = 0, Eq. 15) is disputed. Gemini's tensor calculation finds that for a small-tilt pyramid the detector tensors are heavily aligned, yielding a large, non-zero \u03b3_I. Claude's independent tensor calculation for a pyramid-over-centroid geometry also gives Tr[D_1\u00b7D_4] \u2248 3/4 \u2260 0. Codex, after reading the PDF, argues the leading-order contraction does cancel for the Eq. (13) arm vectors, but this remains unverified from the HTML source by the other reviewers. Whether orthogonality is an automatic consequence of non-coplanarity or requires a specially designed arm orientation is not established in the main text.",
+      "paper_location": "Abstract; Eq. (13)\u2013(15); Table 1",
+      "severity": "fatal",
+      "supporting_reviewers": [
+        "gemini",
+        "claude"
+      ]
+    },
+    {
+      "objection": "If \u03b3_I \u2260 0 for the ET-PyET pair, the SNR formula in Eq. (20) is invalid because it uses only instrumental noise P_1P_4 and ignores the noise penalty of projecting out a much larger Stokes-I background. In that case, the sensitivity curves in Fig. 3 overestimate the achievable Stokes-V sensitivity by an unquantified amount.",
+      "paper_location": "Eq. (20); Fig. 3",
+      "severity": "fatal",
+      "supporting_reviewers": [
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The noise analysis for the Tower-Extended Minimal Pyramid (1 km above-ground arm) is physically insufficient. The paper asserts that shot noise dominates above ~1 Hz and therefore above-ground placement is not a penalty, citing the underground ET noise budget. It does not quantify wind-driven structural sway, thermal gradients, anthropogenic seismic upconversion, or tower-specific suspension requirements for a kilometer-tall free-standing structure.",
+      "paper_location": "Fig. 2; 'Sensitivity and dominant noise sources' section",
+      "severity": "major",
+      "supporting_reviewers": [
+        "gemini",
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The Stokes-V overlap reduction function \u03b3_V vanishes as separation d \u2192 0 by parity symmetry (the parity-odd integrand averages to zero over the sphere). For the underground Minimal Pyramid with h ~ 100\u2013300 m and L = 10 km, this implies \u03b3_V is suppressed by O(h/L) ~ 1\u20133% relative to its maximum. This fundamental trade-off\u2014co-location advantage at the cost of reduced V sensitivity\u2014is not discussed in the paper, and the tower extension may be necessary primarily to overcome this suppression rather than being a purely supplementary enhancement.",
+      "paper_location": "Eqs. (10)\u2013(15); 'Sensitivity and dominant noise sources' section; Fig. 3",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude"
+      ]
+    },
+    {
+      "objection": "The paper claims the Pyramid is the 'optimal design' for isolating the circular-polarization signal, but no optimization is performed over possible 3D arm configurations, opening angles, frequency-dependent transfer functions, noise-weighted networks, or projected ET-CE configurations. The optimality claim is unsupported as a global statement.",
+      "paper_location": "Paragraph after Eq. (16); Discussion",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "claude"
+      ]
+    },
+    {
+      "objection": "No quantitative comparison of the Pyramid's Stokes-V SNR against the best achievable projected ET-CE V-mode sensitivity is provided. The paper argues qualitatively that ET-CE produces a 'mixed' I-V response (Table 1), but does not show whether an optimally projected ET-CE network could match or exceed the Pyramid's absolute V-mode sensitivity.",
+      "paper_location": "Table 1; Discussion; Fig. 3",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The no-go theorem that any co-located planar detector network is insensitive to the isotropic Stokes-V component of the SGWB is well-established in prior literature (Seto and Taruya 2007/2008, Smith and Caldwell 2017) and is correctly applied in the paper's framework.",
+    "A genuinely three-dimensional (non-coplanar, co-located) network in principle admits a non-zero parity-odd overlap reduction function \u03b3_V, which is impossible for any co-located planar configuration. This geometric principle is sound within the cited ORF formalism.",
+    "The Double Pyramid's \u221a2 improvement in circular-polarization SNR relative to the Minimal Pyramid follows correctly from adding two independent parity-sensitive channels in quadrature, under the assumption that the channels are independent and have equal noise.",
+    "The physical motivation for accessing SGWB chirality as a qualitatively distinct probe of parity-violating early-universe physics (inflationary gauge-field models, Chern-Simons gravity, chiral magnetic effect, primordial phase transitions) is well-grounded in an extensive theoretical literature.",
+    "The projected V-mode overlap function (Eq. 16) is a valid linear-algebraic construction that cancels the Stokes-I contribution in the idealized case of perfect calibration and known detector responses."
+  ],
+  "technical_takeaway": "The paper argues that adding one or two non-coplanar arms to the triangular Einstein Telescope layout creates a detector pair whose overlap reduction functions satisfy \u03b3_I = 0 and \u03b3_V \u2260 0 simultaneously\u2014yielding exact geometric separation of the Stokes-I intensity and Stokes-V circular-polarization channels. The dispute among reviewers centers on whether the specific arm geometry of Eq. (13) actually achieves this: Gemini's tensor calculation finds the detector tensors are heavily aligned for any small-tilt pyramid, giving large \u03b3_I, while Codex argues (after accessing the PDF) that the leading-order detector-tensor contraction does cancel for those specific arm vectors. If \u03b3_I \u2260 0, the SNR formula (Eq. 20) omits the noise penalty of subtracting a much larger Stokes-I background, potentially invalidating Fig. 3. An independent concern raised by Claude is that \u03b3_V is suppressed by O(h/L) for the underground Minimal Pyramid (h/L ~ 1\u20133%), a fundamental trade-off the paper does not discuss. The Tower-Extended variant's noise analysis is acknowledged by all reviewers to be insufficient, relying on the underground ET noise budget without quantifying tower-specific noise sources."
+}

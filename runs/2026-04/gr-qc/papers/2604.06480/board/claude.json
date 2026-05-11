@@ -1,0 +1,90 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Two full review cycles were completed. In cycle 1, claude and codex found the paper promising/contested with scores of 5.0 and 5.2; gemini identified a fatal coordinate flaw and scored 2.0. In cycle 2, claude updated to major_flaw (2.5) after accepting the non-injectivity argument; codex held at contested (5.1) while explicitly rejecting the folding objection; gemini maintained fatal (2.0) and expanded the Rolle's theorem argument. The central unresolved dispute \u2014 whether eq. (6) produces a non-injective coordinate \u2014 cannot be settled from the available HTML source because the equation is not rendered. All reviewers independently identified the vacuum-state and Hegerfeldt-interpretation objections as significant. The 4D extrapolation was unanimously rated unsupported.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This 5-page paper proposes that quantum field theory allows a particle to tunnel out of a non-singular black hole from deep inside \u2014 crossing both an inner and an outer horizon \u2014 with a probability that is suppressed polynomially rather than exponentially. The review board found the core physical idea interesting but identified a potentially fatal flaw in the mathematical construction underlying all numerical results: the global coordinate used to do the calculation may fold distinct parts of the spacetime onto the same coordinate values, making the apparent tunneling amplitude a mathematical artifact rather than a physical effect. A third reviewer disputed this diagnosis. Even setting that dispute aside, the connection between the computed quantity and a genuine particle escape mechanism is not firmly established, and the speculation about information loss and 4D black holes goes well beyond what the calculation supports.",
+  "human_spotchecks": [
+    "Verify the exact form of eq. (6) from the PDF or LaTeX source: does \u0169 equal zero at both the outer and inner horizons, and is \u0169 positive in both the outer and inner spacetime regions (as the surrounding text states)? Or does eq. (6) assign strictly disjoint and non-overlapping \u0169-ranges to the three regions (as codex reads it)? This single check resolves the central dispute about whether the coordinate construction is valid.",
+    "If \u0169 is confirmed non-injective, determine whether a valid global conformal coordinate covering all three regions exists for this two-horizon spacetime (analogous to Kruskal coordinates for Schwarzschild), and whether the tunneling calculation would give a parametrically similar asymptotic result in that valid chart.",
+    "Verify the sign of the logarithmic finite-time correction in eq. (22), including any distributional or i-epsilon conventions relevant to the one-particle amplitude normalization.",
+    "Identify which physical vacuum state (Unruh, Hartle\u2013Hawking, Boulware, or other) corresponds to the global \u0169-coordinate positive-frequency decomposition used in eq. (12)\u2013(13), and assess whether it is the appropriate state for a collapse-formed evaporating regular black hole.",
+    "Evaluate, from a QFT-on-curved-spacetime perspective, whether the Hegerfeldt-type one-particle localized-state transition amplitude computed here constitutes an operationally meaningful tunneling probability (e.g., via a detector model or Newton\u2013Wigner localization argument), or is purely a kinematic statement about vacuum correlations without direct physical significance for particle escape."
+  ],
+  "paper_id": "2604.06480",
+  "public_summary": "The paper studies a massless scalar quantum field on a two-dimensional non-singular black hole spacetime bounded by both an inner and an outer horizon. The author constructs a null coordinate system claimed to cover all three spacetime regions (inner, trapped, outer) simultaneously, uses 2D conformal invariance to map the problem to flat-space quantum field theory, and computes the transition amplitude between single-particle states localized inside the inner horizon and outside the outer horizon. The paper argues these causally disconnected states have a nonzero, polynomially suppressed tunneling probability whose asymptotic value depends only on the surface gravities of the two horizons, and speculates this could contribute to purifying Hawking radiation and resolving the information loss problem.\n\nThe review board identified several serious concerns. The most contested is whether the global null coordinate \u0169 is mathematically valid: the paper states \u0169 = 0 at both the outer and inner horizons and \u0169 > 0 in both the outer and inner regions, which would make the coordinate map non-injective (assigning the same coordinate label to distinct physical points). If so, the quantum field theory built on this coordinate conflates degrees of freedom from causally disconnected regions, and the large tunneling amplitude is an artifact of the coordinate fold rather than a physical effect. One reviewer rejected this diagnosis, reading the construction as assigning disjoint coordinate ranges to the three regions \u2014 a disagreement that hinges on the exact form of eq. (6), which is not fully rendered in the available HTML source. Independently of the coordinate dispute, all reviewers agreed that the physical vacuum state is not identified or justified (different choices \u2014 Unruh, Hartle\u2013Hawking, Boulware \u2014 give qualitatively different physics), that the Hegerfeldt-type amplitude computed is a kinematic property of vacuum correlations and does not by itself establish a dynamical particle escape mechanism, and that the four-dimensional rate estimate in eq. (26) rests on assumptions independent of and not derivable from the 2D conformal calculation.",
+  "reviewer_disagreements": [
+    "Whether the coordinate non-injectivity is fatal: gemini and claude (cycle 2) concluded that \u0169 = 0 at both horizons and positive in both outer and inner regions, making the coordinate map 2-to-1 and the tunneling amplitude a coordinate artifact \u2014 a fatal flaw. Codex disputed this, claiming eq. (6) assigns strictly disjoint \u0169-ranges (\u0169 < \u22121/\u03ba_o in the outer region, \u0169 > 1/\u03ba_i in the inner region) so no folding occurs. This disagreement is not resolvable from the HTML source because the relevant equations are not fully rendered.",
+    "Severity of the flaw and overall verdict: gemini and claude assigned 'major_flaw' with scores of 2.0 and 2.5 out of 10 in cycle 2. Codex maintained a 'contested' verdict with a score of approximately 5.1, viewing the core 2D calculation as plausible within its stated assumptions.",
+    "Gemini assigned confidence 1.0 to all three of its fatal objections. Claude noted this is inappropriate given that key equations are not rendered in the HTML source and the exact coordinate construction cannot be fully audited; claude assessed the same objections at 0.75\u20130.80 confidence."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The global null coordinate \u0169 appears to equal zero at both the outer and inner horizons while being positive in both the outer and inner regions. Any ingoing null ray (v = const) passes through both horizons. The coordinate map (\u0169, v) \u2192 spacetime would then be 2-to-1, making it an invalid global chart. The QFT, Fock vacuum, and propagator built on this coordinate would conflate distinct physical points, and the small \u0394\u0169 that drives the large tunneling amplitude would be a coordinate artifact rather than a physical effect.",
+      "paper_location": "Section II, paragraph beginning 'Note that \u0169>0 in the outer region\u2026'; eqs. (6)\u2013(8)",
+      "severity": "fatal",
+      "supporting_reviewers": [
+        "claude",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper conflates the Hegerfeldt-type kinematic property \u2014 that the QFT vacuum state has nonzero correlations between spacelike-separated points \u2014 with a dynamical mechanism by which a localized particle physically escapes the black hole. Nonzero spacelike propagators are compatible with microcausality and do not by themselves constitute a local detector transition, energy-carrying escape process, or invariant information-transfer channel. The language in the Discussion section about purifying Hawking radiation requires an operational observable and backreaction model that the calculation does not provide.",
+      "paper_location": "Section I and Section III discussion after eqs. (14) and (18); Section IV",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The vacuum state used is not identified or physically justified. The paper implicitly uses a global \u0169-coordinate vacuum that is not shown to correspond to the Unruh state (appropriate for an evaporating black hole formed by collapse), the Hartle\u2013Hawking state, or any other physically motivated choice. The tunneling amplitude depends sensitively on this choice, and the paper provides no argument that its implicit vacuum is the correct one.",
+      "paper_location": "Section III, below eq. (13)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The four-dimensional rate estimate (eq. 26), comparing the tunneling rate to Hawking evaporation, is not derived from the model. It requires independent assumptions about the inner horizon surface gravity (\u03ba_i ~ \u03ba_o, motivated by loop quantum gravity models), the wavepacket width, the number of constituent particles, an energy-loss rule per tunneling event, and a 4D scaling of the tunneling probability. None of these follows from the 2D conformal scalar calculation, and the 2D result itself depends on conformal invariance that does not hold in 4D.",
+      "paper_location": "Section IV, eq. (26)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "Eq. (22) appears to have the wrong sign in the logarithmic finite-time correction term. While the asymptotic formula (eq. 23) survives, the sign error affects finite-time values and the direction of approach to the asymptote.",
+      "paper_location": "Section III, eq. (22)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex"
+      ]
+    },
+    {
+      "objection": "The paper acknowledges that the global null coordinate \u0169 is only C^1 (continuous but not differentiable) at the horizons, and dismisses this with the assertion that smoothing 'will not affect the resulting physics' \u2014 without proof. In QFT on curved spacetime, the differentiability of mode functions at horizons directly affects Bogoliubov coefficients and mode matching.",
+      "paper_location": "Section II, below eq. (7)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "In two spacetime dimensions, a conformally coupled massless scalar field satisfies the same wave equation as in flat Minkowski space when the metric is conformally flat \u2014 a standard result in 2D QFT on curved spacetime.",
+    "The Minkowski-space propagator is nonzero for spacelike-separated points (the Hegerfeldt effect), including between points in causally disconnected regions of the black hole spacetime. The paper correctly notes this does not imply superluminal signaling or causality violation.",
+    "Within the Fock space defined by the paper's chosen global null coordinate and the localization basis of eqs. (15)\u2013(17), the one-particle transition amplitude between inner-region and outer-region states is mathematically nonzero \u2014 this follows from the nonvanishing flat-space propagator.",
+    "If the global null coordinate construction is valid, the asymptotic tunneling probability depends on the spacetime geometry only through the surface gravities \u03ba_i and \u03ba_o of the inner and outer horizons, which is a dimensionally natural result."
+  ],
+  "technical_takeaway": "The paper exploits 2D conformal invariance to reduce QFT on a Painlev\u00e9\u2013Gullstrand non-singular black hole (inner horizon at r_i, outer at r_o) to flat-space QFT in a globally constructed null coordinate (\u0169, v). The Hegerfeldt-type one-particle transition amplitude between localized states in causally disconnected inner and outer regions is then computed from the flat-space propagator. The paper claims an asymptotic integrated tunneling probability P_out \u2192 W/[4\u03c0\u00b2(\u03ba_i\u207b\u00b9 + \u03ba_o\u207b\u00b9)]. Two reviewers (claude, gemini) concluded that \u0169 equals zero at both horizons and is positive in both the outer and inner regions, making the coordinate map non-injective \u2014 a formally fatal defect that would cause the small \u0394\u0169 driving the large transition amplitude to be a coordinate artifact rather than physical proximity. A third reviewer (codex) disputed this, reading eq. (6) as assigning strictly disjoint \u0169-ranges to the three regions. All reviewers agreed independently that the vacuum state is not physically identified, the Hegerfeldt amplitude does not by itself establish a dynamical escape channel, and the 4D rate estimate (eq. 26) is not derived from the model."
+}

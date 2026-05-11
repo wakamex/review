@@ -1,0 +1,164 @@
+{
+  "confidence": 0.74,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 5.9,
+    "novelty": 7.3,
+    "reviewer_confidence": 7.4,
+    "significance": 7.4,
+    "technical_soundness": 6.2
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "I revise my prior judgment upward. The readable PDF equations make Eq. (13) auditable, and the leading-order gamma_I=0 cancellation for the ET-PyET detector tensor is real rather than merely asserted. I therefore reject the fatal-objection framing from another reviewer. I keep the earlier caveats about finite-frequency exactness, co-location terminology, noise modeling, optimality, and systematic leakage.",
+    "invalid_points_from_other_reviewers": [
+      "Gemini's fatal claim that gamma_I for the ET-PyET pair is large appears to use the wrong geometry. With the Eq. (13) vectors, the leading detector-tensor contraction cancels: the terms in (n.n'')^2, (n.m'')^2, (m.n'')^2, and (m.m'')^2 sum to zero.",
+      "Gemini's claim that Eq. (20) is invalid because the raw ET-PyET channel is dominated by Stokes-I is not supported once the leading-order gamma_I=0 cancellation is recognized. A leakage analysis is still needed, but that is weaker than a fatal analytic error.",
+      "The broad claim that the Pyramid channel-separation idea is unsupported is too strong; it is supported within the idealized response model, with unresolved robustness questions."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Claude's point that the core geometric derivation was not auditable from the HTML bundle was valid; the PDF partly resolves it but the paper itself still gives too little derivation in the main text.",
+      "Claude's concerns about the co-location approximation, tower-specific noise, and lack of a quantitative ET-CE projected comparison remain valid.",
+      "Gemini's skepticism about the 1 km tower noise claim is valid as an engineering and detector-noise objection, though not as proof that the central geometry is wrong.",
+      "Gemini's concern about calibration/I-leakage is valid as a systematic-error issue for any projected or nominally nulled V estimator."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "A co-located planar detector network is insensitive to the isotropic Stokes-V/circular-polarization component of an SGWB.",
+      "notes": "This is consistent with the cited overlap-reduction-function literature and with the parity/geometric argument stated in the paper. The statement should remain explicitly restricted to the isotropic background and to the relevant response approximation.",
+      "paper_location": "Abstract; framework text after Eqs. (10)-(12)",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "For the Minimal Pyramid geometry, the ET-ET channel is intensity-only, while the ET-PyET channel has gamma_I=0 and gamma_V proportional to H f.",
+      "notes": "The readable PDF resolves an important ambiguity from the HTML bundle: using the Eq. (13) arm vectors, the detector-tensor contraction for the ET-PyET pair cancels at leading order. This rejects the strongest contrary objection from another reviewer. What remains unclear is whether the claimed pure-V channel survives full finite-separation phase factors, finite-arm transfer functions, and realistic geometry/calibration errors.",
+      "paper_location": "Eq. (13)-(15); Table I",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The projected V-mode overlap function cleanly separates stochastic intensity and circular polarization.",
+      "notes": "The projection formula is standard in spirit and works algebraically under ideal calibration and known responses. The paper does not quantify noise amplification, leakage from a larger I signal, or robustness to response-function errors.",
+      "paper_location": "Eq. (16) and following paragraph",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Pyramid interferometers are an optimal design for isolating SGWB circular polarization and are superior to ET-CE for clean I/V separation.",
+      "notes": "The Pyramid construction is a clean example of channel separation in the idealized response model. The paper does not establish a global optimum over possible 3D geometries, frequency-dependent transfer functions, noise-weighted networks, or projected multi-detector ET-CE configurations.",
+      "paper_location": "Paragraph after Eq. (16); Discussion; Table I",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Minimal, Double, and Tower-Extended Pyramid designs have competitive power-law sensitivity to Stokes-V.",
+      "notes": "The SNR framework is recognizable, and the double-pyramid sqrt(2) gain is plausible if the two channels are independent and similarly noisy. The quantitative curves rely on assumptions about PyET/tower noise, full response functions, and frequency dependence that are not sufficiently explicit in the reviewed text.",
+      "paper_location": "Sensitivity section, Eqs. (19)-(21), Fig. 3",
+      "support_level": "unclear"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The gamma_I=0 and gamma_V response are being used in a regime where the small-separation expansion and long-arm transfer-function approximations are valid.",
+      "paper_location": "Eqs. (11)-(15); Eqs. (19)-(21)",
+      "why_it_matters": "If full finite-frequency ORFs or finite-arm transfer functions generate non-negligible gamma_I leakage, the clean-channel interpretation and PLS curves need revision."
+    },
+    {
+      "assumption": "The exact Eq. (13) geometry can be built and maintained, including the special non-coplanar arm orientation and equal effective arm lengths.",
+      "paper_location": "Eq. (13); Fig. 1",
+      "why_it_matters": "The leading-order intensity null is geometry-specific. Deviations from the special arm directions or unequal transfer functions could spoil the cancellation."
+    },
+    {
+      "assumption": "The added PyET/tower detector has a known noise PSD comparable to ET-HF, or a justified alternative PSD is used in the SNR curves.",
+      "paper_location": "Eq. (18)-(20); Fig. 3",
+      "why_it_matters": "The sensitivity claims scale directly with the assumed non-coplanar detector noise. A realistic tilted or tower arm could be substantially noisier than the ET curves used for comparison."
+    },
+    {
+      "assumption": "Instrumental and environmental noises between same-site ET and PyET channels are uncorrelated enough for stochastic cross-correlation searches.",
+      "paper_location": "Eq. (17)-(20); Supplemental S1-S2",
+      "why_it_matters": "A co-site 3D structure may share seismic, Newtonian, thermal, control, and optical noise paths. Correlated noise can mimic or mask a stochastic signal."
+    },
+    {
+      "assumption": "The SGWB is isotropic and the weak-signal, detector-noise-dominated SNR approximation is adequate.",
+      "paper_location": "Eq. (3); Eqs. (19)-(21)",
+      "why_it_matters": "The no-go theorem and the clean channel separation are formulated for isotropic backgrounds. Strong foregrounds, anisotropy, or non-negligible stochastic self-noise would require a more complete estimator analysis."
+    },
+    {
+      "assumption": "Calibration, alignment, and response-function uncertainties are small enough that leakage from Stokes-I into the V estimator is subdominant.",
+      "paper_location": "Eq. (16); Fig. 3",
+      "why_it_matters": "Even a small fractional leakage can matter if the unpolarized background is larger than the chiral component being sought."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Do the full finite-frequency overlap functions, including phase factors from the actual beam-splitter separations and finite-arm transfer functions, preserve a negligible gamma_I for ET-PyET over the frequency range used in Fig. 3?",
+      "why_model_cannot_resolve": "I can verify the leading detector-tensor cancellation from Eq. (13), but certifying the full ORF requires a detailed response calculation beyond the text supplied."
+    },
+    {
+      "question": "Is the normalization gamma_V = (pi/2) H f, including factors of c and the placement of frequency dependence inside the SNR integral, correct and consistent with the PLS curves?",
+      "why_model_cannot_resolve": "The printed formulas are terse and possibly typographically compressed. Reproducing Fig. 3 requires the authors' numerical implementation or an independent full calculation."
+    },
+    {
+      "question": "What level of geometric, calibration, and alignment error can be tolerated before Stokes-I leakage dominates the V estimator?",
+      "why_model_cannot_resolve": "This depends on realistic calibration models, expected I/V amplitudes, and instrument response uncertainties not provided in the paper."
+    },
+    {
+      "question": "Can a tilted or tower-extended arm achieve the assumed ET-like noise PSD, including environmental and correlated-noise controls?",
+      "why_model_cannot_resolve": "This is an experimental design question requiring a tower/tilted-arm noise budget rather than only the generic ET underground noise budget."
+    }
+  ],
+  "novelty_assessment": "The strongest novelty is the concrete detector-geometry idea: use a same-facility, genuinely three-dimensional interferometer configuration to create a parity-sensitive SGWB channel. The underlying ORF formalism and the planar no-go result are known, but the specific Pyramid/ET extension is a useful and potentially influential design proposal. The novelty is partly reduced by the fact that the main mathematical mechanism is a special response-tensor cancellation in an idealized geometry, not yet a complete finite-frequency or engineering design study.",
+  "overall_score_10": 6.6,
+  "paper_id": "2604.08471",
+  "recommended_verdict": "promising",
+  "reviewer": "codex",
+  "score_rationale": "The score increases relative to my prior review because the readable PDF supports the central leading-order gamma_I=0 cancellation and invalidates the strongest fatal objection. The proposal is novel and potentially significant as a detector-geometry concept for SGWB chirality. The score remains below the strong range because the paper does not yet establish the clean channel with full finite-frequency response, does not provide a reproducible sensitivity/noise treatment for PyET or the tower variant, and overstates optimality and feasibility relative to what is demonstrated.",
+  "summary": "The paper proposes a non-coplanar, ET-like Pyramid interferometer geometry to isolate the circular-polarization/Stokes-V component of an isotropic stochastic gravitational-wave background. After checking the readable PDF equations, I no longer regard the central gamma_I=0 claim as merely unauditable: the arm vectors in Eq. (13) do make the leading-order detector-tensor contraction for the ET-PyET pair vanish. However, the paper still overstates the exactness and feasibility of the result: the clean channel appears to be a leading-order, ideal-geometry statement, while the finite-frequency overlap functions, arm transfer functions, calibration leakage, correlated same-site noise, and tower-specific noise budget are not worked out enough to support the strongest sensitivity and 'optimal design' claims.",
+  "technical_objections": [
+    {
+      "confidence": 0.78,
+      "evidence": "Eq. (11) for gamma_I is written without the finite-separation phase factor, while Eq. (12) gives a parity-odd term linear in the separation. Eq. (15)'s gamma_I=0 is therefore well supported as a leading detector-tensor cancellation, but finite-separation and finite-arm corrections could reintroduce intensity leakage at higher order, especially across the 30 Hz-10 kHz range used in the sensitivity discussion.",
+      "objection": "The pure-V channel is presented as exact, but the calculation shown appears to use a leading-order small-baseline/long-wavelength response rather than the full finite-frequency overlap reduction function.",
+      "paper_location": "Eqs. (11)-(15); Fig. 3",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.64,
+      "evidence": "Eq. (15) reports gamma_V = (pi/2) H f, apparently without an explicit c factor despite c appearing elsewhere. Eq. (20) appears to place an H f factor outside an integral over f. This may be shorthand or a typesetting artifact, but the numerical PLS curves depend directly on the correct frequency-dependent gamma_V inside the SNR integral.",
+      "objection": "The normalization and frequency dependence of the Stokes-V sensitivity are not dimensionally or notationally transparent enough to reproduce Fig. 3.",
+      "paper_location": "Eq. (15), Eq. (20), Fig. 3",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.82,
+      "evidence": "The text argues that high-frequency sensitivity is shot-noise dominated and therefore above-ground or vertically displaced arms do not incur a significant penalty. It does not quantify tower sway, wind loading, thermal gradients, anthropogenic vibration, alignment/control noise, optical losses, or altered suspension requirements for a tilted or above-ground arm.",
+      "objection": "The PyET and tower sensitivity estimates assume an ET-like noise model for new non-coplanar infrastructure without a dedicated detector/noise budget.",
+      "paper_location": "Sensitivity and dominant noise sources section; Fig. 2; Supplemental S1-S2; Fig. 3",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.76,
+      "evidence": "The paper relies on gamma_I=0 or projected cancellation to isolate V, but does not propagate arm-vector tolerances, calibration mismatch, beam-splitter position errors, or response-function uncertainty. This is particularly important if I is much larger than V.",
+      "objection": "The ideal I-null needs a systematic-error and leakage analysis, because small geometry or calibration errors can convert a larger Stokes-I background into an apparent V signal.",
+      "paper_location": "Eq. (16); Eqs. (19)-(21); Discussion",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.74,
+      "evidence": "The text shows an ideal geometry with clean leading-order separation, but does not optimize over possible 3D arm configurations, opening angles, baseline choices, full transfer functions, correlated noise, or noise-weighted projected ET-CE networks. Table I is qualitative and does not by itself establish global optimality or quantitative superiority.",
+      "objection": "The 'optimal design' and ET-CE comparison are overclaimed relative to the demonstrated calculation.",
+      "paper_location": "Paragraph after Eq. (16); Table I; Discussion",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.68,
+      "evidence": "The Eq. (13) arm choice that cancels gamma_I is not just an arbitrary small tilt of an ET interferometer. The PyET arm pair has a special orientation, and its optical topology, arm sharing, response normalization, and possible correlated noise with existing ET arms are not discussed at the level needed for a facility-design claim.",
+      "objection": "The economy of 'adding a single tilted arm' depends on a special PyET geometry that should be stated more explicitly.",
+      "paper_location": "Eq. (13); Fig. 1; Discussion",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

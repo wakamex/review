@@ -1,0 +1,167 @@
+{
+  "confidence": 0.82,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 7,
+    "novelty": 3.5,
+    "reviewer_confidence": 7.5,
+    "significance": 7.5,
+    "technical_soundness": 6.5
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Technical soundness reduced from 7.5 to 6.5 and clarity from 8 to 7, reflecting the codex reviewer's substantiated objections: the GKZ parameter dimension error (\u03ba \u2208 C^n should be C^k) is a genuine factual mistake, the cosmological polytope formula has a clear typo (\u2208 V should be \u2208 E), and the Lee\u2013Pomeransky integration dimension uses overloaded notation (n vs m). Overall score drops from 6.5 to 6.0 accordingly.",
+    "invalid_points_from_other_reviewers": [
+      "Codex: Flagging items 1\u20134 as 'would_change_verdict_if_true' \u2014 these are fixable notation/typo errors in a survey article and do not invalidate the conceptual content; they do not warrant a change in verdict category from 'routine'.",
+      "Gemini: Technical soundness score of 9/10 \u2014 too generous given the documented GKZ dimension error and typographic errors in displayed formulas.",
+      "Gemini: 'Promising' verdict \u2014 the article is a competent survey with documented formula errors; 'routine' better captures a well-executed but non-novel AMS Notices overview with a few fixable inaccuracies."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Codex: GKZ parameter vector dimension error (\u03ba \u2208 C^n should be \u03ba \u2208 C^k for A \u2208 Z^{k\u00d7n}) \u2014 confirmed as a genuine factual error.",
+      "Codex: Cosmological polytope facet formula typo '\u2208 V' should be '\u2208 E' \u2014 confirmed as a type-inconsistent index in the displayed formula.",
+      "Codex: Schwinger parameter notation confusion in Lee\u2013Pomeransky formula (R_{>0}^n where n = external legs, not m = internal edges) \u2014 confirmed as a moderate clarity issue.",
+      "Codex: D-module/vector bundle statement requires localization away from singular locus \u2014 partially valid; the statement holds locally and in the physically relevant setting, but the global phrasing is too broad.",
+      "Codex: Scattering amplitude oversimplification (missing momentum conservation, on-shell conditions) \u2014 valid but expected in a broad survey."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "Feynman integrals in the Lee\u2013Pomeransky representation are instances of generalized Euler integrals, with the graph polynomial G_G serving as the integrand.",
+      "notes": "The correspondence is correct in substance. However, the integration is over Schwinger parameters (one per internal edge, count m), but the formula writes the integration domain as R_{>0}^n, where n is previously defined as the number of external legs. This notation overload is a moderate clarity issue, not a mathematical error, since many references reuse 'n' to mean the number of Schwinger parameters in context.",
+      "paper_location": "Section 2, formula preceding Example 1",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The dimension of master integrals equals the signed Euler characteristic of the very affine variety X, coinciding with dim H^n(X,\u03c9) for generic parameters.",
+      "notes": "Correct for generic (s,\u03bd). Genericity is stated but the consequence of non-generic values (which are physically interesting) is only mentioned qualitatively as a challenge.",
+      "paper_location": "Section 4.1, following equation (7)",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "Facets of the cosmological polytope P_G are in bijection with connected subgraphs of G.",
+      "notes": "Attributed to [4]. The facet polynomial formula contains a typographic error: the second sum is indexed 'e = ij \u2208 V' (vertex set) where 'e = ij \u2208 E' (edge set) is clearly intended. This is a notation error in the displayed formula, not a conceptual error.",
+      "paper_location": "Section 3, paragraph before Example 2",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "(Gr_{k,n}, Gr_{k,n}^{\u22650}) is a simplex-like positive geometry with faces being positroid cells.",
+      "notes": "Attributed to Lam [13] Theorem 9 with correct citation. Example 5 Pl\u00fccker coordinates are numerically correct.",
+      "paper_location": "Section 4.3, citing [13] Theorem 9",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "Amplituhedra are conjectured to be positive geometries; their canonical form conjecturally computes the scattering amplitude.",
+      "notes": "Correctly labeled as a conjecture. The required inequality n \u2265 k+m for the defining map is not stated explicitly.",
+      "paper_location": "Section 4.3, final paragraph",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "GKZ systems H_A(\u03ba) encode differential equations satisfied by generalized Euler integrals, with Feynman integrals satisfying restrictions of GKZ systems.",
+      "notes": "Conceptually correct, but the displayed parameter vector \u03ba is given as \u03ba \u2208 C^n, whereas for A \u2208 Z^{k\u00d7n} the Euler operator equations A\u00b7(\u03b8_1,...,\u03b8_n)^T - \u03ba = 0 force \u03ba \u2208 C^k. This is a factual dimension error.",
+      "paper_location": "Section 4.2, GKZ paragraph",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Likelihood equations for M_{0,n} are the scattering equations for n-point tree-level scattering.",
+      "notes": "Published result attributed to Sturmfels\u2013Telen [18] with correct journal citation.",
+      "paper_location": "Section 5, maximum likelihood paragraph",
+      "support_level": "well_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "Genericity of parameters (s_j, \u03bd_i) required for the twisted cohomology dimension formula",
+      "paper_location": "Section 4.1, following equation (7)",
+      "why_it_matters": "The finite-dimensionality and Euler characteristic dimension formula hold for generic parameters; at non-generic values (which are physically relevant, e.g., integer \u03bd_i) the dimension can jump and the intermediate vanishing theorem may fail."
+    },
+    {
+      "assumption": "The cosmological toy model underlying equation (4) is not specified beyond citations to [3,4]",
+      "paper_location": "Section 3, equation (4)",
+      "why_it_matters": "The specific assumptions (flat slicing, conformal dimensions, de Sitter background) that justify the displayed formula are not spelled out, making it hard to assess the formula's scope of validity."
+    },
+    {
+      "assumption": "Holonomicity of H_A(\u03ba) requires a condition on the columns of A (their span must equal R^k); this is not stated",
+      "paper_location": "Section 4.2, GKZ paragraph",
+      "why_it_matters": "Without the rank condition on A, H_A(\u03ba) need not be holonomic and the finite solution space claim fails."
+    },
+    {
+      "assumption": "Convergence of integrals (2) and (4) requires specification of the contour \u0393 and analytic continuation; dimensional regularization needed for divergent Feynman integrals",
+      "paper_location": "Sections 2 and 3, equations (2) and (4)",
+      "why_it_matters": "The integrals are generally divergent or multivalued; the exposition does not clarify when and how regularization is imposed."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "As of early 2025, what is the status of the conjecture that amplituhedra are positive geometries? Have partial results been established for specific (k,n,m) values beyond the tree-level m=4 case?",
+      "why_model_cannot_resolve": "This requires tracking recent preprints in amplituhedron theory near or after my knowledge boundary; the area moves quickly."
+    },
+    {
+      "question": "Does Brown\u2013Dupont arXiv:2501.03202 (cited as [7]) define logarithmic canonical forms via relative homology and mixed Hodge theory as the article states, or does it extend the definition in a different direction?",
+      "why_model_cannot_resolve": "The January 2025 preprint content cannot be verified from the survey text alone."
+    },
+    {
+      "question": "Is the equivalence of the three methods for computing \u03c8_flat^G (Feynman rules, recursion, canonical form of cosmological polytope) proven for any non-trivial class of graphs beyond examples in [4]?",
+      "why_model_cannot_resolve": "Requires knowledge of cosmological polytope literature post-2022 that may exist only in preprints."
+    },
+    {
+      "question": "In the published typeset version (as opposed to the HTML source), does the GKZ parameter vector read \u03ba \u2208 C^k (correct) or \u03ba \u2208 C^n (error as in the HTML)? Is the cosmological polytope facet formula's '\u2208 V' typeset as '\u2208 E' in the print version?",
+      "why_model_cannot_resolve": "The source is an HTML extract from the AMS website; PDF/typeset checking is needed to distinguish a transcription artifact from an error in the published article."
+    }
+  ],
+  "novelty_assessment": "This is an expository overview article for the AMS Notices, so novelty in the sense of new theorems is not expected or present. The synthetic contribution \u2014 connecting Lee\u2013Pomeransky representations, twisted cohomology, GKZ systems, D-modules, cosmological polytopes, and positive geometries in a single accessible article \u2014 has expositional value for a broad mathematical audience. The surveyed research area is genuinely active and important, supported by multiple major ERC grants and open problems of substantial interest to both mathematics and physics. Novelty score is penalized appropriately for the survey nature.",
+  "overall_score_10": 6,
+  "paper_id": "bm-178-01",
+  "recommended_verdict": "routine",
+  "reviewer": "claude",
+  "score_rationale": "Technical soundness drops from my cycle-1 assessment (7.5 \u2192 6.5) because the GKZ parameter dimension error (\u03ba \u2208 C^n vs. the correct C^k) is a genuine factual mistake in a displayed formula, the cosmological polytope formula contains a type-inconsistent index ('\u2208 V' vs '\u2208 E'), and the Lee\u2013Pomeransky integration measure notation overloads 'n' in a way that is actively misleading. For a survey article these are fixable but are more substantive than I initially recognized. Clarity drops (8 \u2192 7) because the notation issues and formula errors reduce reliability for technical readers. Novelty (3.5) and significance (7.5) are unchanged: this is a well-targeted synthesis of an important active area, appropriately calibrated as a Notices survey. The recommended verdict remains 'routine' \u2014 a competent, timely overview with exactly the right scope for its venue, but with several formula-level errors that prevent a higher assessment.",
+  "summary": "This is an expository survey by Fevola and Sattelberger in the AMS Notices covering algebraic geometry, D-modules, combinatorics, and their connections to Feynman integrals and cosmological correlators. It surveys positive geometries, GKZ systems, twisted cohomology, and the amplituhedron for a broad mathematical audience. Cycle 2 incorporates the codex reviewer's objections, several of which are substantiated: a factual error in the GKZ parameter dimension, a typographic error in the cosmological polytope facet formula, and a confusing notation overload in the Lee\u2013Pomeransky integration measure. These reduce the technical soundness assessment from my initial cycle 1 judgment. The gemini reviewer's very high technical soundness score (9/10) is not supportable given these issues. The article remains a competent and timely survey appropriate for its venue, but the overall score drops slightly.",
+  "technical_objections": [
+    {
+      "confidence": 0.95,
+      "evidence": "Standard GKZ formulation (Gel'fand\u2013Kapranov\u2013Zelevinsky [9]): A \u2208 Z^{d\u00d7n}, \u03ba \u2208 C^d. The paper's k\u00d7n matrix and C^n parameter vector are inconsistent.",
+      "objection": "GKZ parameter vector \u03ba has incorrect dimension as stated: the paper writes \u03ba \u2208 C^n but for A \u2208 Z^{k\u00d7n} the Euler operator system A\u00b7(\u03b8_1,...,\u03b8_n)^T - \u03ba generates k equations, requiring \u03ba \u2208 C^k.",
+      "paper_location": "Section 4.2, paragraph beginning 'Prominent examples of D-ideals...'",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.92,
+      "evidence": "Y_{ij} are energies associated to edges, not to elements of the vertex set V. The indexing 'e = ij \u2208 V' is type-inconsistent.",
+      "objection": "The cosmological polytope facet polynomial L_H contains a typographic error: the second summation is written 'e = ij \u2208 V' (over the vertex set) where 'e = ij \u2208 E' (over the edge set) is clearly intended.",
+      "paper_location": "Section 3, formula defining L_H",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "The paper defines: n external legs, m internal edges. Schwinger parameters are assigned to internal edges. Standard Lee\u2013Pomeransky integration is over R_{>0}^m.",
+      "objection": "The Lee\u2013Pomeransky integral domain R_{>0}^n is confusing because in Section 2 'n' denotes the number of external legs, while the integration is over Schwinger parameters (one per internal edge, count m). The product \u220f_{i=1}^n and the exponents \u03bd = (\u03bd_1,...,\u03bd_n) also index internal-edge variables.",
+      "paper_location": "Section 2, Lee\u2013Pomeransky integral formula",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "A holonomic D-module with singular support (e.g., a delta function) is not an integrable connection. The statement is correct locally away from the singular locus.",
+      "objection": "The statement that holonomic D-modules 'correspond to integrable connections on vector bundles' is only valid on the complement of the singular locus, or after localization; arbitrary holonomic D-modules on affine space can have singular support and are not globally vector bundles.",
+      "paper_location": "Section 4.2, paragraph beginning 'In applications, one works mostly over the affine space'",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "At \u2113 = 1, G_G has degree 2 in Schwinger parameters and the formula formally still applies with appropriate normalization, but this is not stated.",
+      "objection": "The Lee\u2013Pomeransky formula is given only for \u2113 > 1, leaving the one-loop (\u2113 = 1) case unaddressed. A reader may incorrectly infer the formula fails at one loop.",
+      "paper_location": "Section 2, preamble to Lee\u2013Pomeransky formula",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "The map sends a k\u00d7n matrix to its product with an n\u00d7(k+m) matrix Z, requiring n \u2265 k+m.",
+      "objection": "The amplituhedron definition does not state the required inequality n \u2265 k+m for the right-multiplication map Gr_{k,n}^{\u22650} \u2192 Gr_{k,k+m} to be well-defined.",
+      "paper_location": "Section 4.3, amplituhedron definition",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

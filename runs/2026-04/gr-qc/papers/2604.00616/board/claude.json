@@ -1,0 +1,94 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Two review cycles were completed. All three reviewers agreed on a major-flaw verdict by cycle 2. The most significant cross-cycle development was gemini withdrawing its cycle-1 'fatal acceleration inversion' objection in cycle 2 after reconsidering the metric components; claude had independently accepted this objection and maintained it in cycle 2, while codex rejected it as metric-dependent and inapplicable. Three objections achieved cross-reviewer consensus: (1) prose-formula contradiction on frequency dependence, (2) near-horizon approximation applied outside its valid domain, and (3) CHSH Tsirelson bound violation in printed formulas. The HTML source of the paper rendered all equations as empty table cells, preventing direct equation-level verification by any reviewer; all formula-level assessments relied on PDF text extraction (codex) or independent rederivation (gemini, claude). Reviewer confidence scores ranged from 6\u20139 across cycles; gemini reported the highest confidence (0.95) throughout.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper tries to show how a proposed violation of Lorentz symmetry \u2014 a foundational symmetry of physics \u2014 would affect quantum correlations (specifically \"quantum steering\" and Bell nonlocality) near a particular type of black hole. The review board found the general setup standard and the research direction interesting, but identified multiple serious internal inconsistencies that undermine the main quantitative conclusions. Most critically, the paper's own text says the opposite of what its central equations imply about how a key parameter affects quantum steering, and the results are derived using an approximation that the paper then applies far outside its valid range. Until these issues are resolved by examining the PDF source directly, the specific quantitative claims cannot be trusted.",
+  "human_spotchecks": [
+    "PDF source check of Eq. (8): Does the printed proper acceleration formula place (1+\u2113\u03be) in the numerator as \u221a(1+\u2113\u03be) (consistent with the correct derivation for the Bumblebee metric) or in the denominator? This determines whether the algebraic inversion objection \u2014 withdrawn by gemini but accepted by claude \u2014 is real.",
+    "PDF source check of Eqs. (44)\u2013(46): Do the printed CHSH Bell-function expressions contain a branch that evaluates to 2\u221a3 at any parameter value, violating Tsirelson's bound of 2\u221a2? Alternatively, do the plotted Fig. 4 values use corrected Horodecki formulas rather than the printed expressions?",
+    "Frequency convention in Eq. (14)\u2013(15): Is \u03c9_i the local proper frequency of Rob's detector or the globally defined Killing (asymptotic) frequency? This determines whether the radial distance dependence of \u03b1 is physically meaningful or an artifact of the chosen convention.",
+    "Standard surface gravity for the specific Bumblebee metric (Eq. 1): Is the surface gravity \u03ba used in the paper consistent with Casana et al. (2018) [ref 47] and subsequent Bumblebee black hole literature, or does the paper adopt a nonstandard convention that effectively redefines the thermal parameter?",
+    "Steering witness completeness: Does the entanglement-based steering criterion of Eqs. (22)\u2013(23) (from Das et al. 2019) provide a necessary and sufficient condition for quantum steering \u2014 and a valid monotone \u2014 for all X-state parameter values appearing in Eqs. (26), (29), and (32)? The paper treats S = 0 as equivalent to no steering without establishing this equivalence."
+  ],
+  "paper_id": "2604.00616",
+  "public_summary": "The paper investigates how a theoretical violation of Lorentz symmetry \u2014 embodied by the \"Einstein-Bumblebee\" black hole model \u2014 would modify quantum steering and Bell nonlocality for fermionic fields in the Alice-Rob-Anti-Rob thought experiment. The methodological framework (near-horizon Bogoliubov transformations, two-qubit X-state density matrices, CHSH inequality) is standard and well-established in relativistic quantum information. The paper claims that steering is restricted to a narrow region near the event horizon and that the Lorentz-violating parameter further confines it, while Bell nonlocality in the physically accessible sector strengthens with distance. However, cross-cycle review identified multiple internal inconsistencies that call these specific conclusions into question. The text asserts that high mode frequency suppresses Alice-Rob steering, but the paper's own Eq. (15) implies the exact opposite. The near-horizon Rindler approximation invoked for the derivation is then used at radii two to three times the horizon radius, well outside its stated domain. Additionally, the CHSH expressions as printed appear to permit values exceeding the absolute quantum bound of 2\u221a2. A notation collision using the same symbol for two different quantities further obscures the calculation. The research direction is reasonable and incremental novelty relative to prior work on quantum correlations in Lorentz-violating spacetimes is plausible, but the paper as submitted contains uncorrected technical errors that prevent its quantitative conclusions from being accepted.",
+  "reviewer_disagreements": [
+    "The cycle-1 objection identifying an algebraic error in the proper acceleration formula (Eq. 8) \u2014 placing \u221a(1+\u2113\u03be) in the denominator rather than the numerator, thereby inverting all quantitative conclusions about how \u2113 modulates correlations \u2014 was raised at high confidence by gemini and independently accepted by claude in cycle 2, but withdrawn by gemini itself in cycle 2 after re-examining the metric components, and explicitly rejected by codex as based on a wrong metric assumption. The status of this objection is unresolved across reviewers.",
+    "Codex (cycle 2, score 3.5) assessed the paper more charitably than claude (2.5) or gemini (2.0), primarily because codex did not accept the acceleration inversion error and judged that the qualitative trends of some correlation measures may survive formula corrections.",
+    "Gemini classified the prose-vs.-formula frequency contradiction and the near-horizon approximation misapplication as 'fatal' individually; codex and claude classified each as 'major.' All three agree these are genuine errors, but disagree on severity labeling.",
+    "Codex (cycle 2) argued that the notation collision involving r is not between 'radial coordinate' and 'Bogoliubov angle' in the specific equations cited by gemini/claude, but that a real notation problem does exist in Eqs. (44)\u2013(46). The precise locus of the collision is disputed, though all reviewers agree a serious notation problem is present."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The paper's prose description of frequency dependence directly contradicts its own analytic formula. Eq. (15) gives tan(\u03b1) = exp(\u2212\u03c0\u03c9/a\u2080), so large mode frequency \u03c9 drives \u03b1\u21920, meaning negligible Bogoliubov mixing and steering approaching its maximal value. The paper instead states 'at sufficiently high \u03c9, the steerability between Alice and Rob becomes negligible' \u2014 the opposite of what the formula implies.",
+      "paper_location": "Section IV, text discussing Fig. 1; Section II, Eq. (15)",
+      "severity": "fatal",
+      "supporting_reviewers": [
+        "gemini",
+        "codex",
+        "claude"
+      ]
+    },
+    {
+      "objection": "The near-horizon Rindler approximation is used to justify the Bogoliubov quantization scheme, but the figures plot and interpret results at R\u2080 \u2208 [2, 3] \u2014 corresponding to r = 2r_s to 3r_s \u2014 which is far outside the near-horizon regime (R\u2080 = 1 at the horizon). The local proper acceleration a(r) equals the Tolman-Hawking thermal parameter only in the strict limit r \u2192 r_s; using it globally at finite radii mischaracterizes the effective thermal bath and invalidates the distance dependence of all correlation measures.",
+      "paper_location": "Section II, Eqs. (2)\u2013(9); Figures 1\u20134 captions",
+      "severity": "fatal",
+      "supporting_reviewers": [
+        "gemini",
+        "codex",
+        "claude"
+      ]
+    },
+    {
+      "objection": "The printed CHSH Bell-function expressions in Eqs. (44)\u2013(46) appear to contain algebraic branches that can evaluate to 2\u221a3 \u2248 3.46, exceeding Tsirelson's absolute upper bound of 2\u221a2 \u2248 2.83 for any two-qubit state. This is a mathematical impossibility and indicates algebraic errors in the eigenvalue formulas of Eqs. (40)\u2013(42). The paper itself states the maximum is 2\u221a2, making this internally inconsistent.",
+      "paper_location": "Section V, Eqs. (40)\u2013(46) and Fig. 4",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "A severe notation collision uses the symbol r for both the radial spacetime coordinate (Eqs. 1, 8) and the Bogoliubov transformation angle (Eqs. 12\u201314). This yields Eq. (15) in the form r = arctan(\u2026 r\u00b2 \u2026), where the left-hand side is a dimensionless angle and the right-hand side contains a spatial length, making the core equations formally ill-defined.",
+      "paper_location": "Section II, Eqs. (12)\u2013(15)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "gemini",
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The paper relies on the single-mode approximation relating each Hawking particle mode to a single Rindler mode without acknowledgment or justification. This approximation has been criticized in the literature as physically inconsistent for fermionic fields in some formulations (e.g., Bruschi et al. 2010), and its validity for the parameter regimes studied is never stated.",
+      "paper_location": "Section II, Eqs. (12)\u2013(13)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper analyzes quantum steering and Bell nonlocality for the Alice-Anti-Rob and Rob-Anti-Rob subsystems and discusses them as 'quantum resources,' but provides no operational interpretation for correlations involving Anti-Rob modes that are inaccessible behind the event horizon. Mathematical correlations involving causally disconnected regions are not directly usable quantum resources without a specified protocol.",
+      "paper_location": "Section IV, Eqs. (29)\u2013(32) and Figs. 2(a), 2(b)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The general Alice-Rob-Anti-Rob tripartite setup with Dirac-field Bogoliubov transformations and X-state density matrices is correctly structured as a framework for studying quantum correlations near a black hole horizon.",
+    "The qualitative result that Bell nonlocality in the accessible Alice-Rob sector is expected to recover at large distances \u2014 as Hawking temperature decreases away from the horizon \u2014 is physically plausible on general grounds independent of the specific formulas.",
+    "Bell nonlocality is absent for the Alice-Anti-Rob and Rob-Anti-Rob subsystems at the parameter ranges considered, consistent with the more entropically mixed character of those reduced states.",
+    "The observation that steering asymmetry between any two subsystems is generically nonzero at a fixed radial distance from the horizon is qualitatively reasonable given the directional asymmetry of the Hawking effect."
+  ],
+  "technical_takeaway": "The paper applies the standard Alice-Rob-Anti-Rob Dirac-field Bogoliubov framework to the static Einstein-Bumblebee black hole, aiming to quantify how the Lorentz-violating parameter \u2113 and radial distance modulate quantum steering and CHSH Bell nonlocality. Three cross-confirmed major defects undermine the quantitative results: (1) the prose claims that high mode frequency \u03c9 kills Alice-Rob steering, while Eq. (15) gives tan(\u03b1) = exp(\u2212\u03c0\u03c9/a\u2080), meaning large \u03c9 sends \u03b1\u21920 and steers toward maximal, not minimal, correlation \u2014 a direct internal contradiction; (2) the near-horizon Rindler approximation used to derive the Bogoliubov transformations is plotted and interpreted at R\u2080 \u2208 [2,3] (i.e., r = 2r_s to 3r_s), far outside its region of validity; (3) the printed CHSH Bell-function expressions appear to contain algebraic branches that can exceed Tsirelson's bound of 2\u221a2 \u2248 2.83. A severe notational collision (symbol r used for both radial coordinate and Bogoliubov angle) renders Eq. (15) formally ill-defined. A cycle-1 objection claiming an algebraic error in the proper acceleration (Eq. 8) was withdrawn by the raising reviewer in cycle 2 after rechecking the metric components, and remains disputed across reviewers. The qualitative trend that Alice-Rob Bell nonlocality recovers at large distances is physically plausible on general grounds."
+}

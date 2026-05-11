@@ -1,0 +1,93 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Gemini identified the fatal theoretical objection in cycle 1 (predicted device noise ~0.10% conflated with the \u03c8-epistemic bound ~14.6%). Claude independently verified and confirmed this conflation in cycle 2 by tracing the paper's explicit statement\u2014'implementing these noise models gives an approximation of the error bound [Eq. 4] for the probability of the forbidden outcomes, i.e. Eq. 6 and Eq. 8'\u2014and noting that Table 1 tolerance values of ~0.10\u20130.12% are consistent with device noise, not the classical trace distance D_c(\u03c1\u2080, \u03c1\u2081) for minimum-angle states. Codex accepted the conceptual concern in cycle 2 but was more cautious about certifying the exact numerical reversal from the HTML-rendered source alone, since the key equations are missing. All three reviewers independently flagged missing HTML-rendered equations and table values, absent statistical criteria, preparation-independence assumptions on a shared chip, and overstated foundational conclusions. The fatal objection is grounded in direct quotation from the visible paper text and does not rely solely on missing table data.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper claims to be the first test of a foundational quantum physics theorem (the Pusey-Barrett-Rudolph or PBR theorem) on a superconducting chip, running experiments on IBM's 156-qubit Heron2 processor to probe whether quantum states represent physical reality or just ignorance. The review board found a serious theoretical error: the authors appear to have compared their experimental results against the wrong benchmark, confusing the chip's expected hardware noise level with the much larger theoretical threshold required by the PBR theorem itself. This means experiments the paper labels \"failures\" would actually pass the real foundational test by a wide margin. The hardware experiment is a genuine engineering achievement, but the scientific conclusions need significant revision before they can be trusted.",
+  "human_spotchecks": [
+    "Verify the exact numeric value of the \u03c8-epistemic tolerance bound (Eqs. 3\u20134) for n=2 minimum-angle states in this paper's specific formulation: is it approximately 14.6% (as computed from 2sin\u00b2(\u03c0/8) for |\u27e8\u03c8\u2080|\u03c8\u2081\u27e9|\u00b2 = 1/2), or does the protocol's multi-outcome aggregation or maximally-\u03c8-epistemic framing introduce factors that materially change the threshold? This is the crux of the fatal objection and must be resolved against the PDF and cited references [15, 12].",
+    "Confirm that the missing equations (Eqs. 1\u20134 and 10\u201311), numerical table entries (Tables 1\u20132), preparation angles, and pass fractions are present and internally consistent in the PDF version of the paper, and are not an artifact of the arXiv HTML rendering.",
+    "Verify the n=5 preparation angle \u03b8 satisfying the PBR threshold condition (Eq. 10), and confirm that the five-qubit entangling circuit correctly implements zero-probability forbidden outcomes for all 32 input strings after Qiskit transpilation to the Heron2 native gate set.",
+    "Confirm by literature search through October 2025 that no prior superconducting-qubit PBR realization exists, validating the platform-novelty claim.",
+    "Assess whether reference [21] (Unnikrishnan, Academia Quantum 2025) is peer-reviewed and whether its argument\u2014that PBR's disjoint-support requirement conflicts with linear superposition and Born's rule, and therefore excludes only a specific ontological model\u2014is technically correct and applicable to the experimental context here."
+  ],
+  "paper_id": "bm-218-01",
+  "public_summary": "This paper runs the Pusey-Barrett-Rudolph (PBR) quantum foundations test on IBM's superconducting Heron2 processor, claiming the first such realization on this hardware type. The authors prepare qubit pairs and five-qubit groups in non-orthogonal states, apply entangling circuits designed so certain measurement outcomes are theoretically forbidden, and check whether observed forbidden-outcome rates exceed a noise-aware threshold. They derive error bounds from calibrated device parameters using depolarizing and thermodynamic noise models. However, the adversarial review board identified a critical theoretical error confirmed across two review cycles: the paper equates the expected hardware gate error (~0.10%) with the theoretical \u03c8-epistemic bound that the PBR theorem actually requires for ruling out ignorance-based models (~14.6% for the minimum two-qubit case). Because the threshold is wrong by roughly two orders of magnitude, experiments classified as \"failing\" the PBR test actually pass the foundational test by a wide margin\u2014the paper's conclusions about distant qubit pairs are therefore inverted. Ironically, the underlying experimental data\u2014forbidden outcome rates of 0.1\u20131% far below the true theoretical bound\u2014does support ruling out maximally \u03c8-epistemic models, but the paper's interpretive framework does not recognize this. Additional issues include: the sweeping conclusion \"ruling out the epistemic interpretation of quantum mechanics\" overshoots what PBR actually proves; preparation independence on a shared chip is unverified; key quantitative results are missing from the HTML rendering; the five-qubit circuit construction is under-specified; and no statistical uncertainty quantification is reported. The hardware engineering achievement\u2014scaling a foundational quantum test to a 156-qubit superconducting device\u2014is genuine and represents a legitimate milestone for platform coverage, but the scientific conclusions require substantial revision.",
+  "reviewer_disagreements": [
+    "Gemini maintained that the paper's conclusions are fully reversed\u2014all tested configurations pass the foundational PBR test, and the paper incorrectly labels distant-pair experiments as 'failures.' Claude (cycle 2) accepted the core conflation as fatal but qualified the reversal: the raw experimental data do support ruling out \u03c8-epistemic models; the error lies in the framing and pass/fail framework, not in the measurements themselves. This distinction matters for how salvageable the paper's contribution is.",
+    "Codex accepted the conceptual concern (device noise conflated with epistemic bound) as a major objection but declined to certify the specific ~14.6% numerical claim or the full reversal of distant-pair conclusions, arguing that the protocol-specific formulation of Eqs. 1\u20134 is not auditable from the HTML-rendered source and may involve aggregation or squaring factors that modify the threshold. Gemini and Claude treated the ~14.6% estimate as sufficiently established from the visible paper text and standard PBR analysis.",
+    "Claude rated the paper 5.5/10 ('routine') in cycle 1 based on the rendered text alone. After cross-reviewing Gemini's cycle-1 objection and independently verifying the conflation from visible paper statements, Claude downgraded to 3.5/10 ('major_flaw') in cycle 2. Gemini maintained 2/10 ('major_flaw') across both cycles with higher reviewer confidence (0.95). Codex remained at 3.2\u20133.6 ('weak_evidence'/'contested') throughout.",
+    "Codex rated 'missing equations and table values' as the primary independent major flaw, whereas Claude (cycle 2) considered the theoretical conflation the more fundamental issue, with missing HTML content a compounding but secondary problem."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The paper conflates the predicted device gate error probability (~0.10%, derived from calibrated depolarizing and thermodynamic noise models, Eqs. 6 and 8) with the \u03c8-epistemic tolerance bound from Eq. 4. For n=2 at the minimum preparation angle, the epistemic bound is approximately 14.6%\u2014roughly two orders of magnitude larger than the device noise floor. Setting the pass/fail threshold to ~0.10% means distant-qubit experiments are declared 'PBR failures' solely because observed noise exceeded the hardware prediction, not because they failed the foundational test. Experiments with observed rates of 0.13\u20130.95% remain far below the true epistemic bound and should be classified as passing. The paper's own text confirms the conflation: 'implementing these noise models gives an approximation of the error bound [Eq. 4] for the probability of the forbidden outcomes, i.e. Eq. 6 and Eq. 8.'",
+      "paper_location": "Section II Overlap and distance, Eqs. 4, 6, 8; Section III Table 1 and distant-qubit-pairs discussion",
+      "severity": "fatal",
+      "supporting_reviewers": [
+        "gemini",
+        "claude"
+      ]
+    },
+    {
+      "objection": "The Abstract and Conclusion claim the results 'rule out the epistemic interpretation of quantum mechanics,' while the Discussion acknowledges that 'alternative epistemic models may yet offer a consistent foundation for the wavefunction' and cites a theoretical critique arguing PBR excludes only a specific ontological model, not all \u03c8-epistemic interpretations. A noisy NISQ experiment cannot adjudicate interpretational questions that the PBR theorem itself only partially resolves under idealized assumptions. The foundational conclusion is internally contradicted and overstated.",
+      "paper_location": "Abstract and Conclusion vs. Section IV Discussion",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "Key quantitative results are missing from the paper as rendered in the provided HTML source. The fraction of adjacent n=2 pairs passing the test reads 'approximately [blank] exhibited a violation,' and most numeric entries in Table 2 (error rates, tolerance thresholds, pass fractions by configuration) are absent. The central experimental claims cannot be independently verified from the supplied text.",
+      "paper_location": "Section III adjacent-pair paragraph; Table 2",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The five-qubit PBR construction is asserted but not specified in auditable detail. The paper does not state the preparation angle \u03b8 for n=5 satisfying Eq. (10), does not provide the explicit measurement basis, and does not demonstrate that the zero-probability conditions hold for all 2^5 input strings after compilation to the native gate set.",
+      "paper_location": "Section II Ideal PBR measurement; Section III Adjacent Five-qubit groups",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "No confidence intervals, p-values, or multiple-comparison corrections are reported for 100,000-shot experiments in which forbidden-outcome probabilities near the (incorrectly set) threshold involve O(100\u20131000) events. The statistical decision rule for pass/fail classification is absent, making it impossible to assess whether results are statistically distinguishable from the threshold.",
+      "paper_location": "Section III experiment execution paragraph",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The PBR theorem's core assumption\u2014that independently prepared systems have product ontic states\u2014is not operationally checked or bounded for a shared superconducting chip. Shared control electronics, ZZ coupling, common-mode calibration drift, and correlated noise can violate preparation independence in ways not captured by the independent depolarizing or thermodynamic noise models applied.",
+      "paper_location": "Section I PBR theorem statement; Section III experimental design",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The paper claims the first experimental PBR test on a superconducting qubit platform, extending prior trapped-ion and spin-system implementations to this hardware class; this platform-novelty claim is plausible given the cited literature.",
+    "The underlying experimental data\u2014observed forbidden-outcome rates of 0.1\u20131% across tested configurations\u2014are far below the true theoretical \u03c8-epistemic bound (~14.6% for n=2), meaning the raw measurements do support ruling out maximally \u03c8-epistemic models under the preparation independence assumption, even though the paper's pass/fail framework does not reflect this correctly.",
+    "The paper argues that passing probability decreases qualitatively with qubit separation, a trend physically consistent with SWAP-gate overhead increasing circuit depth and cumulative noise\u2014the mechanism is well-motivated even though the numeric support is absent from the HTML rendering.",
+    "The paper proposes that the PBR protocol can serve as a device-level benchmark for quantumness in NISQ systems, with observed deviation from ideal predictions correlating with device coherence parameters; this benchmarking framing is assessed as potentially interesting, though underdeveloped relative to established metrics like Quantum Volume."
+  ],
+  "technical_takeaway": "The paper presents a NISQ-hardware implementation of the PBR no-go protocol with noise-aware bounds, but multiple adversarial review cycles confirmed a fatal theoretical conflation: the paper equates the predicted device error probability (~0.10%, from calibrated depolarizing and thermodynamic models, Eqs. 6 and 8) with the \u03c8-epistemic tolerance bound from Eq. 4 (which should be approximately 14.6% for the n=2 minimum-angle case with |\u27e8\u03c8\u2080|\u03c8\u2081\u27e9|\u00b2 = 1/2). This makes the pass/fail criterion incorrect by roughly two orders of magnitude, inverts the classification of distant-pair experiments, and undermines the paper's central experimental narrative. The foundational conclusion\u2014ruling out \u03c8-epistemic models\u2014is further overstated given the PBR theorem's scope (preparation independence assumed, only specific ontological models excluded) and the noisy NISQ context in which the test was run."
+}

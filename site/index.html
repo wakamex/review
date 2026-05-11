@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LLM Paper Review Board</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Agent SVG icons, from /home/mihai/defi/spillage.html -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+        <symbol id="ic-claude" viewBox="0 0 16 16">
+            <circle cx="8" cy="8" r="3.5" fill="#e67e22"/>
+            <g stroke="#e67e22" stroke-width="1.5" stroke-linecap="round">
+                <line x1="8"     y1="1"     x2="8"     y2="3.5"/>
+                <line x1="8"     y1="12.5"  x2="8"     y2="15"/>
+                <line x1="1"     y1="8"     x2="3.5"   y2="8"/>
+                <line x1="12.5"  y1="8"     x2="15"    y2="8"/>
+                <line x1="3.05"  y1="3.05"  x2="5.17"  y2="5.17"/>
+                <line x1="10.83" y1="10.83" x2="12.95" y2="12.95"/>
+                <line x1="3.05"  y1="12.95" x2="5.17"  y2="10.83"/>
+                <line x1="10.83" y1="5.17"  x2="12.95" y2="3.05"/>
+            </g>
+        </symbol>
+        <symbol id="ic-codex" viewBox="0 0 16 16">
+            <rect x="1" y="2" width="14" height="12" rx="2" fill="none" stroke="#2ecc71" stroke-width="1.3"/>
+            <polyline points="4,6 7,8 4,10" fill="none" stroke="#2ecc71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="9" y1="10" x2="12" y2="10" stroke="#2ecc71" stroke-width="1.5" stroke-linecap="round"/>
+        </symbol>
+        <symbol id="ic-gemini" viewBox="0 0 16 16">
+            <circle cx="5.5"  cy="5"  r="2.8" fill="none" stroke="#3498db" stroke-width="1.3"/>
+            <circle cx="10.5" cy="11" r="2.8" fill="none" stroke="#3498db" stroke-width="1.3"/>
+            <line x1="7.5" y1="6.5" x2="8.5" y2="9.5" stroke="#3498db" stroke-width="1.2" stroke-linecap="round"/>
+        </symbol>
+    </svg>
+
+    <h1>LLM Paper Review Board</h1>
+    <p class="tagline">
+        Three frontier coding LLMs
+        <span class="agent-tag claude"><svg class="icon"><use href="#ic-claude"/></svg>claude</span>
+        <span class="agent-tag codex"><svg class="icon"><use href="#ic-codex"/></svg>codex</span>
+        <span class="agent-tag gemini"><svg class="icon"><use href="#ic-gemini"/></svg>gemini</span>
+        independently review each paper across two cycles, then a board agent synthesizes the cross-review.
+    </p>
+    <p class="subtagline">
+        Two datasets: <b>gr-qc</b> — arXiv April 2026, gr-qc papers ≤10 pages;
+        <b>bs-meter</b> — papers Sabine Hossenfelder rated on her bullshit-meter, scored 0–10 (10 = most bullshit).
+    </p>
+
+    <div class="pillrow-label">Dataset</div>
+    <div class="pillrow" id="tabs" role="tablist"></div>
+
+    <div class="summary" id="summary">
+        <div class="item"><div class="label">Papers</div><div class="value" id="m-count">—</div></div>
+        <div class="item"><div class="label">Median board score</div><div class="value" id="m-median">—</div><div class="meta" id="m-range">—</div></div>
+        <div class="item" id="m-bs-wrap" style="display:none"><div class="label">Median Sabine BS</div><div class="value" id="m-bs">—</div></div>
+        <div class="item" id="m-agree-wrap" style="display:none"><div class="label">Sabine ↔ board agreement</div><div class="value" id="m-agree">—</div><div class="meta">|board + BS − 10| averaged</div></div>
+    </div>
+
+    <div id="banner-host"></div>
+
+    <!-- Scatter only shown for bs-meter -->
+    <div id="scatter-wrap" class="scatter-wrap" style="display:none">
+        <h3 style="margin-top:0">Sabine BS-meter vs. board score</h3>
+        <p style="margin:0 0 8px; color: var(--muted); font-size: 0.78rem;">
+            Each dot is a paper. The two scales are <b>inverted</b>: high BS-meter ↔ low quality.
+            Perfect agreement lies on the dashed line <span style="color:var(--accent)">board + BS = 10</span>.
+            Distance from that line is the disagreement. Click a dot to drill in.
+        </p>
+        <svg id="scatter" viewBox="0 0 640 380" preserveAspectRatio="xMidYMid meet"></svg>
+        <div class="scatter-legend">
+            <span><svg width="10" height="10"><circle cx="5" cy="5" r="4" fill="#6dbf6d"/></svg> aligned</span>
+            <span><svg width="10" height="10"><circle cx="5" cy="5" r="4" fill="#d0a850"/></svg> mild gap</span>
+            <span><svg width="10" height="10"><circle cx="5" cy="5" r="4" fill="#ff9800"/></svg> strong disagreement</span>
+        </div>
+    </div>
+
+    <h2 id="catalog-heading">Papers</h2>
+    <p style="color: var(--muted); font-size: 0.78rem; margin: 0 0 6px;">
+        Click a column header to sort. Click any row to open the full multi-cycle, multi-LLM review.
+    </p>
+    <div id="catalog" class="loading">Loading…</div>
+
+    <div class="footer">
+        <p>Each paper gets two review cycles × three reviewers (claude, codex, gemini) plus a board synthesis.
+        Scores are mechanical averages of reviewer dimension scores (technical soundness, novelty, significance, clarity, reviewer confidence).
+        Verdict tiers: <span class="verdict select">select</span> <span class="verdict promising">promising</span> <span class="verdict borderline">borderline</span> <span class="verdict reject">reject</span>.</p>
+        <p>Sabine's bullshit meter is rated 0–10 where <b>higher means more bullshit</b>, so it runs opposite to the board's 0–10 quality score.
+           The "agreement" metric here is <code>|board + sabine_BS − 10|</code>; small = the two agree, large = they disagree.</p>
+        <p>Data: <code>runs/2026-04/gr-qc/</code> · <code>runs/bullshit-meter/sabine-20260509-164342/</code> · <code>runs/bullshit-meter/latest-video-20260510-225418/review-scored/</code>.</p>
+    </div>
+
+<script>
+// In dev (localhost) load JSON from the sibling repo via `../`; in production
+// (mihaicosma.com/review/ where only the HTML lives) serve from jsDelivr.
+// Override either way with ?data=cdn or ?data=local.
+const DATA_BASE = (() => {
+    const force = new URLSearchParams(location.search).get('data');
+    if (force === 'cdn')   return 'https://cdn.jsdelivr.net/gh/wakamex/review@main/';
+    if (force === 'local') return '../';
+    const host = location.hostname;
+    const isLocal = host === 'localhost' || host === '127.0.0.1' || host === '';
+    return isLocal ? '../' : 'https://cdn.jsdelivr.net/gh/wakamex/review@main/';
+})();
+
+async function loadData(repoPath) {
+    const r = await fetch(`${DATA_BASE}${repoPath}`, { cache: 'no-cache' });
+    if (!r.ok) throw new Error(`${repoPath}: HTTP ${r.status}`);
+    return r.json();
+}
+
+const DATASETS = {
+    'gr-qc': {
+        label: 'gr-qc · April 2026',
+        sources: [
+            { teaser: 'runs/2026-04/gr-qc/teasers.json',
+              root:   'runs/2026-04/gr-qc' },
+        ],
+        hasSabine: false,
+    },
+    'bs-meter': {
+        label: 'bs-meter · Sabine',
+        sources: [
+            { teaser: 'runs/bullshit-meter/sabine-20260509-164342/teasers.json',
+              root:   'runs/bullshit-meter/sabine-20260509-164342' },
+            { teaser: 'runs/bullshit-meter/latest-video-20260510-225418/review-scored/teasers.json',
+              root:   'runs/bullshit-meter/latest-video-20260510-225418/review-scored' },
+        ],
+        hasSabine: true,
+    },
+};
+
+const STATE = {
+    dataset: (new URLSearchParams(location.search).get('d')) || 'gr-qc',
+    sort: { key: null, asc: false },
+    papers: [],
+};
+
+const fmtScore = n => (n == null || isNaN(n)) ? '—' : Number(n).toFixed(2);
+const fmtScore1 = n => (n == null || isNaN(n)) ? '—' : Number(n).toFixed(1);
+
+function scoreClass(n) {
+    if (n == null) return 'muted';
+    if (n >= 7) return 's-high';
+    if (n >= 5) return 's-mid';
+    return 's-low';
+}
+function bsClass(n) {
+    if (n == null) return 'muted';
+    if (n >= 7) return 'bs-high';
+    if (n >= 4) return 'bs-mid';
+    return 'bs-low';
+}
+function disagreementClass(d) {
+    if (d == null) return 'muted';
+    const a = Math.abs(d);
+    if (a >= 4) return 'd-high';
+    if (a >= 2) return 'd-mid';
+    return 'd-low';
+}
+
+function median(arr) {
+    const v = arr.filter(x => x != null && !isNaN(x)).sort((a, b) => a - b);
+    if (!v.length) return null;
+    const m = Math.floor(v.length / 2);
+    return v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2;
+}
+function mean(arr) {
+    const v = arr.filter(x => x != null && !isNaN(x));
+    return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null;
+}
+
+function buildTabs() {
+    const host = document.getElementById('tabs');
+    host.innerHTML = '';
+    for (const [key, cfg] of Object.entries(DATASETS)) {
+        const b = document.createElement('button');
+        b.className = 'pill' + (STATE.dataset === key ? ' active' : '');
+        b.textContent = cfg.label;
+        b.onclick = () => {
+            STATE.dataset = key;
+            history.replaceState(null, '', '?d=' + key);
+            load();
+        };
+        host.appendChild(b);
+    }
+}
+
+async function load() {
+    buildTabs();
+    document.getElementById('catalog').innerHTML = '<p class="loading">Loading…</p>';
+    document.getElementById('banner-host').innerHTML = '';
+    const cfg = DATASETS[STATE.dataset];
+    try {
+        const lists = await Promise.all(cfg.sources.map(async s => {
+            const j = await loadData(s.teaser);
+            return j.papers.map(p => ({ ...p, _root: s.root }));
+        }));
+        STATE.papers = lists.flat();
+        STATE.sort = { key: 'selected_score', asc: false };
+        render();
+    } catch (e) {
+        document.getElementById('catalog').innerHTML =
+            '<div class="banner error">Failed to load: ' + e.message + '</div>';
+        console.error(e);
+    }
+}
+
+function render() {
+    renderSummary();
+    renderScatter();
+    renderTable();
+}
+
+function renderSummary() {
+    const ps = STATE.papers;
+    const scores = ps.map(p => p.selected_score);
+    document.getElementById('m-count').textContent = ps.length;
+    document.getElementById('m-median').textContent = fmtScore(median(scores));
+    document.getElementById('m-range').textContent =
+        ps.length ? `${fmtScore1(Math.min(...scores.filter(x => x != null)))}–${fmtScore1(Math.max(...scores.filter(x => x != null)))}` : '—';
+    const hasSabine = DATASETS[STATE.dataset].hasSabine;
+    document.getElementById('m-bs-wrap').style.display = hasSabine ? '' : 'none';
+    document.getElementById('m-agree-wrap').style.display = hasSabine ? '' : 'none';
+    if (hasSabine) {
+        const bs = ps.map(p => p.sabine_bullshit_meter_score_10);
+        document.getElementById('m-bs').textContent = fmtScore(median(bs));
+        const disagree = ps.map(p => {
+            if (p.selected_score == null || p.sabine_bullshit_meter_score_10 == null) return null;
+            return Math.abs(p.selected_score + p.sabine_bullshit_meter_score_10 - 10);
+        });
+        document.getElementById('m-agree').textContent = fmtScore(mean(disagree));
+    }
+}
+
+function renderScatter() {
+    const wrap = document.getElementById('scatter-wrap');
+    if (!DATASETS[STATE.dataset].hasSabine) { wrap.style.display = 'none'; return; }
+    wrap.style.display = '';
+
+    const svg = document.getElementById('scatter');
+    svg.innerHTML = '';
+    const W = 640, H = 380, M = { l: 44, r: 16, t: 12, b: 38 };
+    const plotW = W - M.l - M.r, plotH = H - M.t - M.b;
+    const xScale = v => M.l + (v / 10) * plotW;
+    const yScale = v => M.t + plotH - (v / 10) * plotH;
+
+    const ns = 'http://www.w3.org/2000/svg';
+    const make = (tag, attrs, parent) => {
+        const el = document.createElementNS(ns, tag);
+        for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+        (parent || svg).appendChild(el);
+        return el;
+    };
+
+    // Grid + axes
+    const grid = make('g', { class: 'scatter-grid' });
+    for (let i = 0; i <= 10; i += 2) {
+        make('line', { x1: xScale(i), x2: xScale(i), y1: M.t, y2: M.t + plotH }, grid);
+        make('line', { x1: M.l, x2: M.l + plotW, y1: yScale(i), y2: yScale(i) }, grid);
+    }
+    const axis = make('g', { class: 'scatter-axis' });
+    make('line', { x1: M.l, y1: M.t + plotH, x2: M.l + plotW, y2: M.t + plotH }, axis);
+    make('line', { x1: M.l, y1: M.t, x2: M.l, y2: M.t + plotH }, axis);
+    for (let i = 0; i <= 10; i += 2) {
+        const tx = make('text', { x: xScale(i), y: M.t + plotH + 14, 'text-anchor': 'middle' }, axis);
+        tx.textContent = i;
+        const ty = make('text', { x: M.l - 6, y: yScale(i) + 3, 'text-anchor': 'end' }, axis);
+        ty.textContent = i;
+    }
+    const xl = make('text', { x: M.l + plotW / 2, y: H - 6, 'text-anchor': 'middle', fill: '#a69987' }, axis);
+    xl.textContent = 'board score →';
+    const yl = make('text', {
+        x: M.l + 6, y: M.t + 12, 'text-anchor': 'start', fill: '#a69987',
+    }, axis);
+    yl.textContent = '↑ Sabine BS-meter';
+
+    // Agreement line: board + BS = 10  →  BS = 10 - board
+    make('line', {
+        x1: xScale(0), y1: yScale(10), x2: xScale(10), y2: yScale(0),
+        stroke: '#ff9800', 'stroke-width': '1', 'stroke-dasharray': '4 4', opacity: '0.6'
+    });
+
+    // Dots
+    const dotGroup = make('g', {});
+    const tooltip = make('text', { class: 'scatter-tooltip', x: M.l + plotW, y: M.t + 14, 'text-anchor': 'end' });
+    for (const p of STATE.papers) {
+        if (p.selected_score == null || p.sabine_bullshit_meter_score_10 == null) continue;
+        const dis = Math.abs(p.selected_score + p.sabine_bullshit_meter_score_10 - 10);
+        const colour = dis >= 4 ? '#ff9800' : dis >= 2 ? '#d0a850' : '#6dbf6d';
+        const c = make('circle', {
+            class: 'scatter-dot',
+            cx: xScale(p.selected_score),
+            cy: yScale(p.sabine_bullshit_meter_score_10),
+            r: 5,
+            fill: colour,
+            opacity: '0.75',
+        }, dotGroup);
+        c.addEventListener('mouseenter', () => {
+            tooltip.textContent = `${p.title} — board ${fmtScore1(p.selected_score)} · BS ${fmtScore1(p.sabine_bullshit_meter_score_10)} · gap ${fmtScore1(dis)}`;
+        });
+        c.addEventListener('mouseleave', () => { tooltip.textContent = ''; });
+        c.addEventListener('click', () => openPaper(p));
+    }
+}
+
+const COLUMNS_BASE = [
+    { key: 'selected_score', label: 'Score', num: true,
+      render: p => `<span class="${scoreClass(p.selected_score)}">${fmtScore(p.selected_score)}</span>` },
+    { key: 'title', label: 'Title', num: false,
+      render: p => `${p.title} <span class="muted" style="font-size:.75rem">${p.arxiv_id}</span>` },
+    { key: 'general_reader_takeaway', label: 'General-reader takeaway', num: false,
+      render: p => p.general_reader_takeaway || '—', cls: 'takeaway' },
+];
+
+const COLUMNS_BS_EXTRA = [
+    { key: 'sabine_bullshit_meter_score_10', label: 'Sabine BS', num: true,
+      render: p => `<span class="${bsClass(p.sabine_bullshit_meter_score_10)}">${fmtScore(p.sabine_bullshit_meter_score_10)}</span>` },
+    { key: 'disagreement', label: 'Gap', num: true,
+      get: p => (p.selected_score != null && p.sabine_bullshit_meter_score_10 != null)
+                ? Math.abs(p.selected_score + p.sabine_bullshit_meter_score_10 - 10) : null,
+      render: p => {
+          if (p.selected_score == null || p.sabine_bullshit_meter_score_10 == null) return '—';
+          const d = p.selected_score + p.sabine_bullshit_meter_score_10 - 10;
+          return `<span class="${disagreementClass(d)}">${(d >= 0 ? '+' : '') + d.toFixed(2)}</span>`;
+      } },
+];
+
+function renderTable() {
+    const hasSabine = DATASETS[STATE.dataset].hasSabine;
+    const cols = hasSabine ? [COLUMNS_BASE[0], ...COLUMNS_BS_EXTRA, COLUMNS_BASE[1], COLUMNS_BASE[2]] : COLUMNS_BASE;
+
+    // Sort
+    const { key, asc } = STATE.sort;
+    let rows = [...STATE.papers];
+    if (key) {
+        const col = cols.find(c => c.key === key);
+        const getter = col && col.get ? col.get : (p => p[key]);
+        rows.sort((a, b) => {
+            const va = getter(a), vb = getter(b);
+            if (va == null && vb == null) return 0;
+            if (va == null) return 1;
+            if (vb == null) return -1;
+            if (typeof va === 'number') return asc ? va - vb : vb - va;
+            return asc ? String(va).localeCompare(String(vb)) : String(vb).localeCompare(String(va));
+        });
+    }
+
+    const colClass = c => {
+        if (c.key === 'selected_score') return 'c-score';
+        if (c.key === 'sabine_bullshit_meter_score_10') return 'c-bs';
+        if (c.key === 'disagreement') return 'c-gap';
+        if (c.key === 'title') return 'c-title';
+        if (c.key === 'general_reader_takeaway') return 'c-takeaway';
+        return '';
+    };
+    const colgroup = cols.map(c => `<col class="${colClass(c)}">`).join('');
+
+    const thead = cols.map(c => {
+        const sorted = STATE.sort.key === c.key ? ' sorted' + (STATE.sort.asc ? ' asc' : '') : '';
+        return `<th class="${c.num ? 'num' : ''}${sorted}" data-key="${c.key}">${c.label}</th>`;
+    }).join('');
+
+    const tbody = rows.map(p => {
+        const id = encodeURIComponent(p.arxiv_id);
+        const root = encodeURIComponent(p._root);
+        const tds = cols.map(c =>
+            `<td class="${c.num ? 'num' : ''} ${c.cls || (c.key === 'title' ? 'name' : '')}">${c.render(p)}</td>`
+        ).join('');
+        return `<tr class="clickable" data-id="${id}" data-root="${root}">${tds}</tr>`;
+    }).join('');
+
+    document.getElementById('catalog').innerHTML =
+        `<div class="table-scroll"><table><colgroup>${colgroup}</colgroup>` +
+        `<thead><tr>${thead}</tr></thead><tbody>${tbody}</tbody></table></div>`;
+
+    // Handlers
+    document.querySelectorAll('#catalog th[data-key]').forEach(th => {
+        th.addEventListener('click', () => {
+            const k = th.dataset.key;
+            STATE.sort = STATE.sort.key === k
+                ? { key: k, asc: !STATE.sort.asc }
+                : { key: k, asc: false };
+            renderTable();
+        });
+    });
+    document.querySelectorAll('#catalog tr.clickable').forEach(tr => {
+        tr.addEventListener('click', () => {
+            const id = decodeURIComponent(tr.dataset.id);
+            const root = decodeURIComponent(tr.dataset.root);
+            location.href = `paper.html?root=${encodeURIComponent(root)}&id=${encodeURIComponent(id)}&d=${encodeURIComponent(STATE.dataset)}`;
+        });
+    });
+}
+
+function openPaper(p) {
+    location.href = `paper.html?root=${encodeURIComponent(p._root)}&id=${encodeURIComponent(p.arxiv_id)}&d=${encodeURIComponent(STATE.dataset)}`;
+}
+
+load();
+</script>
+</body>
+</html>

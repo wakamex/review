@@ -1,0 +1,175 @@
+{
+  "confidence": 0.65,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 4.5,
+    "novelty": 7,
+    "reviewer_confidence": 5.5,
+    "significance": 6.5,
+    "technical_soundness": 6
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Raised overall score from 6.2 to 6.5 and technical soundness from 5.5 to 6.0, reflecting: (1) the group's established track record with ILLINOIS GRMHD (which Gemini's higher confidence and domain familiarity implicitly weights), and (2) accepting that some diagnostics I flagged as missing may exist in the full PDF or companion papers. Figure cross-reference error updated to the more precise diagnosis from Gemini: main text cites Fig. 11 for EM luminosity when the correct figure is Fig. 6. Added purely poloidal initial field as a formal missing assumption. Expanded the MRI turbulence diagnostics objection to include Maxwell/Reynolds stresses and alpha parameter per Codex.",
+    "invalid_points_from_other_reviewers": [
+      "No clearly invalid points were identified from either Codex or Gemini. All major objections are independently justified and consistent with my own first-cycle assessment."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Gemini precisely identifies the figure cross-reference error: main text says 'Fig. 11' for EM luminosity and ejecta inset, but Fig. 11 is GW characteristic strain; the correct figure is Fig. 6. This is a cleaner diagnosis than my prior 'numbering inconsistency' framing.",
+      "Gemini raises the purely poloidal initial field as a formal caveat for jet universality claims \u2014 this is a real and important missing assumption I had mentioned only briefly.",
+      "Codex highlights the absence of direct MRI turbulence diagnostics (Maxwell/Reynolds stress histories, alpha estimates, angular momentum flux decomposition) beyond the timescale argument \u2014 this supplements my MRI quality factor concern and strengthens the case that the causal MRI-PPI claim is underdetermined.",
+      "Codex raises the concern that the magnetized vs. hydrodynamic comparison may not cleanly isolate magnetization if initial-data transients from field seeding are not quantified \u2014 a valid point I had noted but underweighted."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "First self-consistent GRMHD treatment of tilted, massive, self-gravitating BHD systems",
+      "notes": "Literature survey credibly distinguishes this from fixed-background tilted-disk GRMHD (Liska et al. 2018, 2021; Fragile et al. 2007) and hydrodynamic self-gravitating tilted simulations (Tsokaros et al. 2022). The 'first' boundary requires human-expert verification against recent dynamical-spacetime GRMHD literature.",
+      "paper_location": "Abstract; Introduction final paragraph; Discussion",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "PPI persists in all magnetized configurations; magnetic fields damp it in aligned/small-tilt cases but enhance it in antialigned (A4)",
+      "notes": "Qualitative trend is consistent across mode amplitude plots. Table 1 growth rate values are unreadable in the HTML rendering, preventing independent quantitative verification of the factor-of-several amplification claimed for A4.",
+      "paper_location": "Results section; Table 1; Fig. 4; Discussion",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "MRI timescale is shorter than hydrodynamic PPI timescale, so MRI develops first and creates an effectively viscous background governing nonlinear PPI evolution",
+      "notes": "Timescale argument is physically reasonable for q~3/2 disks. However, no direct MRI turbulence diagnostics are shown (Maxwell/Reynolds stresses, alpha parameter, angular momentum flux decomposition), making the causal claim stronger than the presented evidence.",
+      "paper_location": "Results: MRI/PPI timescale discussion",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "All models launch BZ-consistent jets; jet formation is robust across tilt angles",
+      "notes": "Qualitatively supported by morphology and luminosity. BZ identification is incomplete without horizon magnetic flux, field-line angular velocity, and energy extraction diagnostics. The purely poloidal initial field assumption strongly biases toward BZ jet formation. Citation error present (Blandford & Payne 1982 cited instead of Blandford & Znajek 1977).",
+      "paper_location": "Results (polar funnel section); Figs. 2-3; Fig. 6; Discussion",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "GW emission is damped in aligned/moderately tilted systems but enhanced in antialigned; antialigned magnetized system exceeds hydrodynamic counterpart",
+      "notes": "Qualitatively consistent with mode amplitude evolution. The figure numbering confusion (main text refers to Fig. 11 for EM luminosity when the correct figure is Fig. 6) does not affect GW strain claims in Fig. 7, but reduces overall presentation confidence.",
+      "paper_location": "Results (Fig. 7); Discussion; Supplemental GW spectrum",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "MRI-driven turbulence enhances angular momentum transport and accelerates nonlinear PPI evolution in misaligned configurations",
+      "notes": "Presented as explanation rather than directly measured quantity. Angular momentum transport rates, Maxwell/Reynolds stress decomposition, and alpha parameter are not plotted or tabulated. Interpretation is indirect, based on faster accretion, higher mode amplitudes, and density compression.",
+      "paper_location": "Abstract; Results; Discussion",
+      "support_level": "unclear"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The initial equilibrium configurations remain physically meaningful after magnetic field seeding, without seed fields introducing artificial transients that could mimic or suppress instabilities",
+      "paper_location": "Initial data and numerical methods: 'We now seed the disk with an initially weak poloidal magnetic field'",
+      "why_it_matters": "Unlike Wessel et al. 2023 where magnetization was introduced after PPI saturation, here MRI and PPI develop simultaneously from the start. If seeding introduces significant pressure imbalance or early compression, the MRI onset time and PPI growth rates in Table 1 could be transient-influenced rather than reflecting physical MRI-PPI coupling."
+    },
+    {
+      "assumption": "Purely poloidal initial magnetic field topology is representative of astrophysical BHD initial conditions",
+      "paper_location": "Initial data and numerical methods: poloidal field seeding procedure",
+      "why_it_matters": "Purely poloidal initial fields strongly favor rapid accumulation of large-scale flux on the BH, which guarantees BZ jet formation. Toroidal or tangled initial fields would not necessarily produce such robust jet formation. This caveat weakens the generality of the claim that jet formation is a 'robust outcome' across all tilt configurations."
+    },
+    {
+      "assumption": "The Gamma=4/3 polytrope with ideal gas EOS is sufficient to capture relevant thermodynamics for all physical scenarios invoked",
+      "paper_location": "Initial data and numerical methods: 'ideal gas law equation of state (Gamma)'",
+      "why_it_matters": "The paper invokes applications spanning stellar-mass to supermassive systems. Gamma=4/3 is appropriate for radiation-dominated conditions but not generally valid for BHNS remnants at nuclear density. Neglecting radiative cooling also artificially supports disk thickness. Conclusions about kilonova ejecta or AGN flares implicitly assume the thermodynamics is representative."
+    },
+    {
+      "assumption": "Nearly constant specific angular momentum (q~0) is representative; the dominance of PPI over disk tearing at high tilts may reflect this profile rather than self-gravity alone",
+      "paper_location": "Initial data: 'polytrope with nearly constant specific angular momentum'",
+      "why_it_matters": "The paper contrasts PPI dominance (this work) with disk tearing (Liska et al. 2021) and attributes the difference to disk self-gravity. However, the nearly constant specific angular momentum profile is significantly more PPI-unstable than Keplerian profiles. The angular momentum profile's role versus self-gravity in setting the dominant instability is not disentangled."
+    },
+    {
+      "assumption": "The simulation duration is sufficient for PPI saturation and quasi-steady jet formation in all four models, including the slower-growing aligned case A1",
+      "paper_location": "Results; Supplemental GW spectrum",
+      "why_it_matters": "If A1 does not reach saturation during the simulation, its lower growth rate is a lower bound rather than a converged value, which affects the quantitative comparison between aligned and misaligned cases."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Does the paper or supplemental include MRI quality factor diagnostics (Q_z, Q_phi) showing >= 10 cells per MRI wavelength in the relevant disk regions?",
+      "why_model_cannot_resolve": "The HTML rendering omits figures and supplemental content that may contain this standard diagnostic. The full PDF is required; a domain expert familiar with this group's methodology can also judge whether prior ILLINOIS GRMHD papers provide sufficient resolution validation."
+    },
+    {
+      "question": "What are the actual numerical values in Table 1 (sigma and Omega_p for magnetized vs. hydrodynamic cases for all four models, including the A4 amplification factor)?",
+      "why_model_cannot_resolve": "The HTML rendering leaves multiple table cells blank or as special characters. The A4 magnetized growth rate amplification is the central quantitative result of the paper but cannot be verified from the provided source text."
+    },
+    {
+      "question": "Is the BZ luminosity scaling citation 'Blandford and Payne (1982)' a citation error for Blandford & Znajek (1977), or does the paper intentionally discuss a BP disk-wind component in addition to BZ jets?",
+      "why_model_cannot_resolve": "All three reviewers independently flagged this; only the authors can confirm intent. A human reading the full PDF with complete context can judge whether a BP component is being deliberately invoked."
+    },
+    {
+      "question": "Is there a convergence/resolution study at a second resolution level for any of the four models, either in the supplemental, in Ruiz et al. 2023, or in a companion paper?",
+      "why_model_cannot_resolve": "Such a test may exist in cited companion papers. A domain expert familiar with this group's methodology can determine whether prior aligned-system resolution studies transfer to the tilted configurations."
+    },
+    {
+      "question": "Does the paper show horizon magnetic flux (phi_BH) vs. time confirming SANE rather than MAD regime throughout the simulation?",
+      "why_model_cannot_resolve": "This diagnostic may exist in figures not faithfully represented by the HTML conversion, or in supplemental material not included in the bundle."
+    }
+  ],
+  "novelty_assessment": "The novelty claim is credible and appears to fill a genuine gap. Prior GRMHD studies of tilted disks (Liska et al. 2018, 2021; Fragile et al. 2007) used fixed Kerr backgrounds without self-gravity. Prior self-gravitating BHD simulations (Tsokaros et al. 2022) were purely hydrodynamic. The combination of dynamical spacetime, disk self-gravity, magnetic fields, and spin-disk misalignment in a single simulation framework does not appear to have been done before based on the literature surveyed. The finding that antialigned systems show enhanced rather than damped PPI under magnetization is physically non-obvious and is the opposite of what aligned-system behavior would predict. The MRI-PPI coupling as a function of tilt provides a potentially unifying physical picture. That said, this is an incremental extension of the same group's prior hydrodynamic work (Tsokaros et al. 2022) using identical initial data, with magnetic field seeding as the primary new ingredient. The four-model parameter coverage is narrow, and the constant-j, Gamma=4/3, purely poloidal-field setup is idealized. Novelty is real but incremental relative to the group's own prior publications.",
+  "overall_score_10": 6.5,
+  "paper_id": "2604.03368",
+  "recommended_verdict": "promising",
+  "reviewer": "claude",
+  "score_rationale": "Technical soundness raised from 5.5 to 6.0 to partially reflect this group's established ILLINOIS GRMHD track record, while maintaining a penalty for absent MRI quality factor diagnostics, missing direct turbulence characterization (Maxwell/Reynolds stresses, alpha), no convergence test for growth rates, unconfirmed SANE/MAD classification, and the BZ/BP citation error. Novelty (7.0) is the strongest dimension: the combination of self-gravity + MHD + dynamical spacetime + tilt appears genuinely new, and the antialigned PPI-enhancement finding is physically non-obvious. Significance (6.5) reflects real astrophysical relevance but narrow parameter coverage (4 models, one angular momentum profile, one EOS, one field topology). Clarity (4.5) is heavily penalized by HTML rendering failures obscuring quantitative results, the Fig. 6/11 cross-reference error, the BZ/BP citation error, and qualitative descriptions substituting for quantitative diagnostics. Reviewer confidence increased slightly (5.5) as both other reviewers' assessments are consistent with mine in direction, and no new analysis tools are available beyond the HTML source. The 'promising' verdict is confirmed by consensus across all three reviewers.",
+  "summary": "This paper presents fully relativistic GRMHD simulations of four magnetized, self-gravitating BHD systems (A1\u2013A4) with BH spins misaligned with the disk angular momentum by increasing tilt angles, magnetizing the hydrodynamic initial data of Tsokaros et al. (2022). The main findings are: (1) the PPI persists in all configurations; (2) magnetic fields damp PPI in aligned/moderately tilted systems but amplify it in the antialigned case (A4); (3) MRI develops faster than the PPI and creates an effectively viscous background that controls the nonlinear instability outcome as a function of tilt; (4) all models launch BZ-consistent jets regardless of tilt; (5) GW emission follows instability amplitude, suppressed in aligned and amplified in antialigned cases. The paper claims to be the first self-consistent GRMHD treatment of tilted, massive, self-gravitating BHDs. After reviewing the other two assessments (both scoring ~7.0, \"promising\"), I maintain a slightly more conservative position due to absent MRI resolution diagnostics, but I accept several of their clarifications and raise my score modestly.",
+  "technical_objections": [
+    {
+      "confidence": 0.8,
+      "evidence": "The paper states finest resolution and refinement level count but does not report Q_z = lambda_MRI/Delta_x. For MRI-driven turbulence to be physical rather than numerical, Q_z >= 10 is typically required. Without this diagnostic, the main physics claims about MRI-PPI coupling cannot be validated.",
+      "objection": "MRI resolution quality not reported; standard GRMHD practice requires stating the number of grid cells per MRI wavelength (Q-factor) to validate instability capture",
+      "paper_location": "Initial data and numerical methods section",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "Blandford & Payne (1982) describes magnetocentrifugal disk winds, not BH spin energy extraction via horizon-threading fields. All three reviewers independently identified this error. BZ (1977) does not appear in the reference list.",
+      "objection": "Citation error: BZ luminosity scaling attributed to Blandford and Payne (1982) instead of Blandford and Znajek (1977); the correct BZ reference is entirely absent from the reference list",
+      "paper_location": "Results, EM luminosity paragraph: 'consistent with the BZ scaling Blandford and Payne (1982)'",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "Fig. 6 caption explicitly describes EM Poynting luminosity with inset showing unbound mass fraction. Fig. 11 is labeled as characteristic GW strain in the supplemental. This is a concrete mislabeling, not merely a numbering convention difference between main text and supplemental.",
+      "objection": "Figure cross-reference error: main text directs reader to 'Fig. 11' for EM Poynting luminosity and dynamical ejecta inset, but Fig. 11 shows GW characteristic strain; the correct figure is Fig. 6",
+      "paper_location": "Results section: 'The EM luminosity is in all cases (Fig. 11)' and 'The inset of Fig. 11 shows that the dynamical ejecta masses'",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "Quantitative claims about growth rates and pattern speeds in Table 1 require at least one resolution comparison to be trusted. Absence of convergence test makes reported growth rates potentially under- or over-estimated.",
+      "objection": "No convergence study or second-resolution check is mentioned for any of the four models",
+      "paper_location": "Initial data and numerical methods; no resolution study found",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.78,
+      "evidence": "The causal argument that MRI turbulence accelerates PPI growth is supported only indirectly through accretion rates, mode amplitudes, and density compression. Standard GRMHD practice for MRI studies includes stress tensor diagnostics to validate the turbulent transport interpretation.",
+      "objection": "Causal MRI-PPI claim lacks direct turbulence diagnostics (Maxwell/Reynolds stresses, alpha parameter, angular momentum flux decomposition)",
+      "paper_location": "Results paragraphs beginning 'Magnetic turbulence triggers massive accretion' and 'The hierarchy between MRI and PPI timescales'",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "No phi_BH plot is presented. For nearly extremal spins and poloidal initial fields, transition to MAD cannot be excluded without this diagnostic. The comparison with Chatterjee et al. (2025) MAD simulations is weakened by this omission.",
+      "objection": "SANE vs. MAD regime classification is asserted without showing the normalized horizon magnetic flux phi_BH vs. time for any model",
+      "paper_location": "Results discussion: 'Our models instead remain in the standard-and-normal-evolution (SANE) regime'",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "Throughout the paper, quantities appear as blank, dashes, or unparsed special characters. This is likely a LaTeXML conversion artifact, but it blocks independent verification of the key quantitative results.",
+      "objection": "HTML rendering has numerous missing numerical values, preventing independent quantitative assessment from this source",
+      "paper_location": "Multiple locations: disk-to-BH mass ratio range, tilt angle values, Table 1 growth rate cells, spin-down values, amplification factors",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

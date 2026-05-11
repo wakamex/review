@@ -1,0 +1,82 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "All three reviewers converged to a major-flaw verdict by cycle 2. Gemini raised two independent fatal symmetry objections in cycle 1 (axisymmetry isometry argument; path-reversal/spin-reversal conflation) that were validated by Claude and Codex in cycle 2 after adversarial re-evaluation. Claude revised its verdict from 'routine' to 'major_flaw'; Codex revised from 'weak_evidence' to 'major_flaw'. The mechanical average score fell from 3.567 in cycle 1 to 2.367 in cycle 2, consistent with the convergent verdict. Key unresolved questions (b^0 value in the VEV, simulation code implementation) are flagged as human spotchecks. The optical-diode framing and conjugate-branch observation are noted as conceptually interesting despite the structural errors in the main claim.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper proposes that a black hole modified by a speculative physics effect (spontaneous Lorentz symmetry breaking) would look dramatically different depending on which side you observe it from \u2014 like an optical diode that passes light asymmetrically. The review board found serious mathematical problems: the black hole's own exact symmetry properties appear to forbid the claimed effect within a single spacetime, and the paper's simulations appear to compare two distinct theoretical black holes rather than one black hole viewed from opposite sides. Even setting aside these structural issues, the proposed observation would require placing a telescope on the far side of a supermassive black hole, which is physically impossible.",
+  "human_spotchecks": [
+    "Verify whether the Poulis et al. (2022) gradient bumblebee VEV has a vanishing temporal component (b^0=0) in the exact rotating solution (arXiv:2112.04040). If b^0=0, the (t,\u03c6)\u2192(\u2212t,\u2212\u03c6) transformation is an isometry of M_+(a), which independently establishes optical reciprocity within that spacetime and reinforces the fatal verdict.",
+    "Inspect the ray-tracing simulation code or supplemental methods to determine whether the 'backward path' configuration is implemented by (a) swapping the positions of S and O while keeping the metric fixed as M_+(a), or (b) changing the spin parameter to \u2212a or switching to the M_\u2212 branch. The difference determines whether the simulation measures genuine nonreciprocity or a branch comparison.",
+    "Confirm that all metric components in Eq. (1) are independent of \u03c6 for the exact Poulis et al. solution, and that the \u03c6\u2192\u03c6+\u03c0 isometry correctly interchanges the source and observer positions as described. The HTML rendering of the metric equation is incomplete in the bundle, preventing direct verification.",
+    "Determine the quantitative behavior of \u03b7_N as a function of \u2113 at observationally constrained values (using current Solar System or astrophysical bounds on bumblebee-sector parameters) to assess whether any detectable nonreciprocity survives within allowed parameter space."
+  ],
+  "paper_id": "2604.18101",
+  "public_summary": "This 5-page Letter works within the Einstein-bumblebee gravity model, where a dynamical vector field acquires a vacuum expectation value (VEV) that spontaneously breaks Lorentz symmetry. In the rotating (axisymmetric) black hole solution derived by Poulis et al. (2022), the VEV generates a non-diagonal metric component g_r\u03b8 that is absent in standard Kerr geometry. The paper argues that this term breaks the optical reciprocity of photon paths, transforming the black hole into a macroscopic \"optical diode\": ray-tracing simulations show the shadow morphing from a quasi-symmetric rugby-ball shape to a teardrop profile when source and observer are exchanged. Two dimensionless observables \u2014 a normalized area deviation and a nonreciprocity index \u03b7_N \u2014 are defined, and a parameter-space scan claims \u03b7_N \u2260 0 generically for nonzero spin and nonzero Lorentz-violation parameter \u2113.\n\nThe review board found this framing creative but identified two potentially fatal structural errors that all three reviewers independently validated by cycle 2. The first is a metric isometry argument: because the exact solution is strictly axisymmetric, placing source and observer at antipodal equatorial points and swapping them is equivalent to the global isometry \u03c6\u2192\u03c6+\u03c0, which maps one configuration to the other within the same spacetime. This means the intrinsic shadow shape cannot differ between the two configurations in a single spacetime. The second is a definition problem: the paper's nonreciprocity index (Eq. 3) is computed using A_Lv(a,\u2113) and A_Lv(-a,\u2113) \u2014 i.e., comparing the metric with spin parameter +a against the metric with spin parameter -a. Because the g_r\u03b8 term is proportional to a\u00b7\u2113, flipping a also flips the sign of the cross-term, effectively comparing two physically distinct metric branches (M_+ vs. M_\u2212) rather than forward vs. backward photon paths in one spacetime. Together, these objections imply that the visually striking rugby-ball/teardrop dimorphism is a real difference between the two bumblebee solution branches, but does not constitute optical nonreciprocity of a single system.\n\nAdditional unresolved issues include: the observational proposal requires antipodal imaging of M87* or Sgr A* (physically unrealizable for any Earth-based interferometer); all visualizations use Lorentz-violation parameters far larger than existing weak-field bounds without quantifying \u03b7_N at allowed values; and the simulations lack convergence tables or integration-error estimates. The paper's subsidiary claim that the g_r\u03b8 term breaks equatorial reflection symmetry and destroys manifest Carter separability is well-supported and uncontested, and the conjugate relationship between the (+) and (\u2212) solution branches is an interesting structural observation, but these do not support the central nonreciprocity interpretation.",
+  "reviewer_disagreements": [
+    "Gemini assigns confidence 1.0 to both fatal symmetry objections and describes them as 'demonstrably mathematically false'; Claude and Codex in cycle 2 rate the same objections at approximately 0.74\u20130.88, noting they cannot fully verify without access to the explicit rendered metric equations and simulation code. The underlying objections are shared across all three reviewers but the confidence calibration differs.",
+    "Gemini treats the branch-switching error as sufficient alone to be fatal and does not require further analysis of the (t,\u03c6)\u2192(\u2212t,\u2212\u03c6) isometry; Claude provides a more detailed conditional argument (the isometry holds if and only if the VEV is purely spatial, b^0=0) and flags this as requiring human verification of the Poulis et al. solution.",
+    "Claude in cycle 1 rated the paper as 'routine' (4.5/10) before the symmetry arguments were fully worked through; after engaging with the gemini objections in cycle 2, Claude revised to 'major_flaw' (2.5/10). Codex similarly revised from 'weak_evidence' (4.2/10) to 'major_flaw' (2.6/10). All three reviewers converged to a major-flaw assessment by cycle 2."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The exact axisymmetry of the bumblebee metric (\u2202_\u03c6 g_\u03bc\u03bd = 0) makes \u03c6\u2192\u03c6+\u03c0 a global isometry of the spacetime. This transformation maps the 'forward' source-at-\u03c6=0/observer-at-\u03c6=\u03c0 configuration to the 'backward' source-at-\u03c6=\u03c0/observer-at-\u03c6=0 configuration within the same spacetime M_+(a). Consequently, the intrinsic shadow shape cannot differ between the two configurations in one spacetime, and the claimed macroscopic optical nonreciprocity is forbidden by the metric's own symmetry.",
+      "paper_location": "Setup of Fig. 1(b)\u2013(d): antipodal equatorial source and observer in an axisymmetric metric; also Fig. 2 branch discussion",
+      "severity": "fatal",
+      "supporting_reviewers": [
+        "gemini",
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The nonreciprocity index in Eq. (3) is defined as A_Lv(a,\u2113)/A_Lv(\u2212a,\u2113) \u2014 a comparison of the metric with spin +a against the metric with spin \u2212a. Because g_r\u03b8 is proportional to a\u00b7\u2113, changing a\u2192\u2212a also flips the sign of the cross-term, effectively simulating a physically distinct spacetime (the M_\u2212 branch) rather than path-reversal within M_+(a). The paper's central assertion that 'exchanging source and observer is mathematically equivalent to reversing the black hole spin' is stated without derivation and appears to be false; the rugby-ball/teardrop dimorphism is a real branch difference, not optical nonreciprocity of a single system.",
+      "paper_location": "Eq. (3) and surrounding discussion; Fig. 2 caption: 'exchanging the source and the observer is mathematically equivalent to reversing the black hole spin'",
+      "severity": "fatal",
+      "supporting_reviewers": [
+        "gemini",
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The proposed observational test requires comparing black hole shadows from antipodal directions (one observer on each side of the target). For M87* and Sgr A*, this would require placing a telescope on the far side of the black hole from Earth \u2014 an observation that is physically unrealizable with any foreseeable interferometric array. No alternative single-vantage observable is proposed.",
+      "paper_location": "Conclusion: 'the directional dependence of the shadow morphology may become observable' with ngEHT",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "gemini",
+        "codex"
+      ]
+    },
+    {
+      "objection": "All visualizations and the phase diagram use Lorentz-violation parameter values \u2113 that are explicitly described as chosen to exaggerate the deformation for visual clarity. The paper acknowledges existing weak-field bounds but does not quantify \u03b7_N at observationally allowed \u2113 values, so it is unknown whether any detectable nonreciprocity remains within currently permitted parameter space.",
+      "paper_location": "Conclusion and Fig. 3 caption: 'we adopt \u2113 in our visualizations only to amplify the shadow deformation'",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The simulations provide no resolution-convergence plots, integration tolerances, observer tetrad definitions, or uncertainty bands for \u03b7_N. The paper acknowledges pixelization artifacts but does not demonstrate that \u03b7_N \u2260 0 is robust to numerical refinement, particularly in the small-\u2113 regime where the claimed effect persists.",
+      "paper_location": "Fig. 3 discussion and statement that qualitative nonreciprocity persists for any non-vanishing Lorentz violation",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The rotating bumblebee metric contains a non-diagonal g_r\u03b8 term that breaks equatorial (\u03b8\u2192\u03c0-\u03b8) reflection symmetry of photon geodesics, making the shadow asymmetric about the equatorial plane.",
+    "The non-diagonal g^{r\u03b8} p_r p_\u03b8 cross-term in the geodesic Hamiltonian destroys the manifest Carter separability present in Kerr, so numerical ray-tracing is required.",
+    "The two sign branches (+) and (\u2212) of the bumblebee solution produce qualitatively different shadow morphologies \u2014 rugby-ball vs. teardrop \u2014 and are related by a conjugate structure under spin reversal.",
+    "In the static limit (a\u21920) or in the limit \u2113\u21920, the g_r\u03b8 cross-term vanishes and standard results are recovered."
+  ],
+  "technical_takeaway": "The paper's central nonreciprocity claim is undermined by two independent symmetry arguments that survived adversarial cross-review. First, the exact axisymmetry of the bumblebee metric (\u2202_\u03c6 g_\u03bc\u03bd = 0) makes \u03c6\u2192\u03c6+\u03c0 a global isometry that maps the \"forward\" source-observer configuration to the \"backward\" one within the same spacetime M_+(a), requiring identical intrinsic shadow shapes for antipodal equatorial observers. Second, the nonreciprocity index in Eq. (3) is defined as A_Lv(a,\u2113)/A_Lv(-a,\u2113), comparing two distinct metric branches rather than forward vs. backward propagation in one spacetime; the paper's key assertion that \"exchanging source and observer is mathematically equivalent to reversing the black hole spin\" is stated without derivation and appears to be false. The genuinely supported residual results are: (i) the g_r\u03b8 cross-term breaks equatorial reflection symmetry and destroys manifest Carter separability, and (ii) the two sign branches of the bumblebee solution produce different shadow morphologies \u2014 a much weaker finding than the optical-diode claim."
+}

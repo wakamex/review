@@ -1,0 +1,99 @@
+{
+  "confidence": 0.95,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 7,
+    "novelty": 4,
+    "reviewer_confidence": 9,
+    "significance": 3,
+    "technical_soundness": 2
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Added technical objections regarding unreported post-selection rates and the missing optimization in the Holevo bound computation, based on insights from other reviewers.",
+    "invalid_points_from_other_reviewers": [
+      "Both other reviewers rated the paper 'promising', underestimating the severity of the mathematical flaw in the proposed local observable $O_W$. While they noted it was only qualitatively specified or lacked an audited proof, they failed to recognize that any completely decohered, uncorrelated state trivially yields $\\langle O_W \\rangle = 0$, rendering the primary novel theoretical claim of the paper invalid."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Reviewers 'claude' and 'codex' correctly identified that the post-selection protocol without reported rejection rates is a major methodological gap.",
+      "They correctly noted that the circuit design is tautological because the conditional gates structurally enforce the branching state by definition.",
+      "They accurately pointed out that the Holevo bound optimization over measurement bases is missing or underspecified."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "The experiment observes the highly structured branching quantum states that support classicality and the saturation of quantum mutual information.",
+      "notes": "The authors successfully simulate a toy model by applying explicit conditional gates (e.g., CZ) that structurally enforce branching. However, this is a tautological digital simulation rather than a natural emergence of classicality. Furthermore, as pointed out by other reviewers, post-selection rejection rates are unreported, which could artificially sharpen the apparent clustering.",
+      "paper_location": "Abstract, RESULTS -> Branching states and quantum Darwinism",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "A proposed local observable ($O_W$) can be used as a computationally and experimentally inexpensive quantifier to probe quantum-to-classical transitions and witness Quantum Darwinism.",
+      "notes": "The proposed observable $O_W = O_S \\otimes O_E$, where $O_S$ flips the pointer state, evaluates to zero for ANY state where the system is locally decohered in the pointer basis, regardless of whether the environment fragment $E$ actually encodes any redundant information about $S$. It completely fails to distinguish between Quantum Darwinism and simple, uncorrelated decoherence.",
+      "paper_location": "Abstract, RESULTS -> Local observables",
+      "support_level": "unsupported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "Vanishing coherences between a system and an environment fragment imply redundant encoding of information in that fragment.",
+      "paper_location": "RESULTS -> Local observables",
+      "why_it_matters": "This assumption is mathematically false. Decoherence is a necessary but not sufficient condition for Quantum Darwinism. Redundancy requires strong classical correlations, which cannot be detected merely by verifying that local coherences are zero."
+    },
+    {
+      "assumption": "The discarded fraction of shots from post-selection does not bias the reconstructed geometric state distributions.",
+      "paper_location": "Materials and Methods -> Measurement of the geometric state",
+      "why_it_matters": "If leakage is branch-dependent or significant, the discarded events could artificially inflate the appearance of clustering and branching."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Is there a hidden assumption in Supplementary Text 1D that restricts the global state space to explicitly correlated states such that $O_W$ uniquely identifies Darwinism?",
+      "why_model_cannot_resolve": "The supplement is unavailable. However, in a general experimental setting where the state is unknown, relying on $O_W$ is invalid because uncorrelated decohered states will yield false positives."
+    },
+    {
+      "question": "What are the leakage/post-selection rejection rates in the geometric state tomography experiment?",
+      "why_model_cannot_resolve": "This data is missing from the main text and is crucial to verify that the clustering is not an artifact of post-selection."
+    }
+  ],
+  "novelty_assessment": "Simulations of Quantum Darwinism toy models using quantum platforms have been demonstrated previously. The primary theoretical novelty\u2014using a local observable to avoid full state tomography\u2014is mathematically flawed. The use of geometric state visualization is a nice addition, but compromised by unreported post-selection and tautological circuit engineering.",
+  "overall_score_10": 3,
+  "paper_id": "bm-197-01",
+  "recommended_verdict": "major_flaw",
+  "reviewer": "gemini",
+  "score_rationale": "While the experiment utilizes a high-quality 12-qubit processor, the novel theoretical contribution (the local observable $O_W$) is fatally flawed because it cannot distinguish between redundant encoding and simple, uncorrelated decoherence. Furthermore, as highlighted by the review panel, the experimental observation of branching is tautological due to the use of structurally identical conditional gates, and the integrity of the state reconstruction is undermined by unreported post-selection rates. The accumulation of these theoretical and methodological flaws justifies a low score.",
+  "summary": "The authors present an experimental simulation of Quantum Darwinism using up to 12 qubits on a superconducting processor. By applying engineered conditional gates, they prepare branching states and use quantum state tomography to measure mutual information, the Holevo bound, and quantum discord. They also propose a local observable witness ($O_W$) to detect the emergence of the branching structure and the classical plateau, attempting to avoid the exponential scaling of full state tomography.",
+  "technical_objections": [
+    {
+      "confidence": 1.0,
+      "evidence": "The authors specify that $O_S$ rotates a pointer state to an orthogonal one. For any bipartite state $\\rho_{SE}$ that is block-diagonal in the system's pointer basis (meaning $S$ is decohered), the expectation value $\\langle O_W \\rangle$ evaluates exactly to zero. This holds even if $S$ is completely uncorrelated with $E$ (e.g., $\\rho_{SE} = \\rho_S \\otimes \\rho_E$). Thus, measuring $\\langle O_W \\rangle = 0$ does not guarantee a branching structure or redundant encoding.",
+      "objection": "The proposed local observable $O_W$ only witnesses decoherence, not the redundancy of information required for Quantum Darwinism.",
+      "paper_location": "RESULTS -> Local observables (Eq. 4)",
+      "severity": "fatal",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "The text states that outcomes leaking out of the logical basis are discarded via post-selection. Without reporting the rejection rates, it is impossible to know if the post-selection biases the reconstructed geometric states and artificially sharpens the clustering around pointer states.",
+      "objection": "Unreported post-selection rates could artificially enhance branching signatures.",
+      "paper_location": "Materials and Methods -> Measurement of the geometric state",
+      "severity": "major",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "The system-environment interactions are engineered by compiling explicit conditional gates (e.g., controlled unitaries) that are mathematically identical to the theoretical definition of a branching state. This demonstrates that the processor can run the circuit, but does not test the natural emergence of Quantum Darwinism from uncontrolled physical decoherence.",
+      "objection": "The experiment is a tautological digital simulation of a toy Hamiltonian, not a natural observation of emergent physical phenomena.",
+      "paper_location": "RESULTS -> Branching states and quantum Darwinism",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "The Holevo bound requires an optimization (minimization) over all possible measurement bases on the environment. The methodology describes a fixed sum over a basis without specifying if an optimization is performed. If a fixed basis is used, the calculated quantity is only an upper bound, making the discord appear closer to zero than its true value.",
+      "objection": "Missing optimization in Holevo bound and quantum discord calculations.",
+      "paper_location": "Materials and Methods -> Measurement of the quantum discord (Eqs. 9-12)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

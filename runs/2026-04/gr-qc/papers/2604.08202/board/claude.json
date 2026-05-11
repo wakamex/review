@@ -1,0 +1,94 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Two full cross-review cycles completed. All three reviewers updated their assessments in cycle 2; gemini made the largest revision (4\u21922, weak_evidence\u2192major_flaw) after accepting the codex and claude objections on the gamma-matrix convention, Hermiticity, and incomplete force commutator. The mechanical score dropped from 3.667 (cycle 1) to 2.833 (cycle 2). A persistent audit limitation is that all inline equations in the HTML source bundle are blank; every algebraic assessment is conditional on the HTML representation and definitive verification requires PDF inspection. The cycle-2 mechanical average (2.833) was selected as the final score.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper tries to describe, using quantum mechanics, how particles with spin (fermions) would move and feel gravitational forces near a black hole governed by a modified gravity theory called Einstein-Gauss-Bonnet (EGB) gravity. The review board found the overall strategy recognizable and the qualitative picture plausible \u2014 EGB gravity should introduce a small extra correction to the usual gravitational force. However, three independent reviewers converged on the finding that the central quantitative result, the quantum force operator, appears to be an incomplete derivation rather than a full calculation, and that several foundational steps contain errors or gaps. The paper needs substantial revision before its claimed results can be accepted.",
+  "human_spotchecks": [
+    "Does Eq. (18) follow from the full Heisenberg commutator [p_r, H]/i\u210f applied to the complete Hamiltonian in Eq. (12), or does it only reflect \u2202_r of the effective mass term \u221af\u00b7\u03b2m? Specifically, are the kinetic-term commutator contributions present in the PDF? This is the most consequential algebraic question and all three reviewers could not resolve it from the HTML source.",
+    "Are the gamma-matrix and metric-signature conventions in Eqs. (6)\u2013(12) internally consistent? In particular, does the sign of (\u03b3\u2070)\u00b2 match the implied Minkowski signature \u03b7\u2080\u2080 = \u22121 throughout the Hamiltonian derivation, or is there the sign contradiction identified by codex and gemini?",
+    "Do the tetrad components (Eq. 7), spin-connection coefficients (Eq. 9), and the resulting Hamiltonian (Eq. 12) reduce to the standard Schwarzschild Dirac Hamiltonian in the limit GB-coupling \u2192 0, consistent with Parker (1980) or Silva et al. (2019)?",
+    "What do Figures 1 and 2 actually display, and are the plotted GB coupling parameter values physically reasonable within the effective 4D EGB framework? The surrounding text for Figure 1 describes the metric function f(r), while both figure captions are labelled 'Radial gravitational force.'"
+  ],
+  "paper_id": "2604.08202",
+  "public_summary": "The paper investigates the quantum dynamics of a spin-1/2 fermion in a static, spherically symmetric effective four-dimensional Einstein-Gauss-Bonnet (EGB) black-hole spacetime. Using the tetrad formalism and spin-connection approach to the Dirac equation in curved spacetime, the paper aims to construct a Dirac Hamiltonian and derive explicit velocity and force operators via Heisenberg's equations. The paper argues that the force operator contains a Gauss-Bonnet correction scaling as 1/r\u2075 in the weak-field expansion, encoding higher-curvature quantum effects. The review board ran two cross-review cycles with three independent reviewers. In cycle 2, after adversarial cross-review, all three converged on serious technical concerns. Most significantly, the claimed force operator (Eq. 18) appears to be a weak-field scalar gradient expression rather than the full Heisenberg commutator [p_r, H]: it omits the commutator of radial momentum with the kinetic term (which would generate velocity-dependent and Zitterbewegung contributions) and contributions from angular-derivative terms that carry radial dependence. Two reviewers independently identified an apparent inconsistency between the stated metric signature and the Dirac matrix representation used in the Hamiltonian derivation. Hermiticity of the Dirac Hamiltonian in the curved-space inner product is never established. The paper also asserts that the velocity operator is diagonal in the Dirac basis, which is demonstrably false: the standard \u03b1^i matrices are off-diagonal block matrices. The foundational metric is drawn from the Glavan-Lin effective 4D EGB regularization, which is known to be contested as a self-consistent four-dimensional field theory, and no specific consistent completion is adopted. Phenomenological claims about constraining the GB coupling through precision atomic or Penning-trap experiments are not supported by any order-of-magnitude estimate. Novelty is incremental \u2014 the primary new content is substituting the EGB metric function for the Schwarzschild one in an established calculational framework. A significant epistemic limitation: all key equations in the paper are blank in the HTML source bundle; definitive algebraic verification requires PDF inspection.",
+  "reviewer_disagreements": [
+    "Severity of the force-operator gap: codex labelled the missing kinetic-term commutator as 'fatal' with would_change_verdict=true; claude described the same issue as 'major' while noting that if the paper implicitly intends a weak-field semiclassical approximation the result could be partially defensible, though the approximation would need to be stated explicitly.",
+    "Initial confidence in the gamma-matrix/signature inconsistency: claude could not verify the claim from the HTML bundle and flagged it as a human spotcheck; codex (confidence 0.84) and gemini (confidence 0.95) were sufficiently confident to treat it as an established objection.",
+    "Cycle-1 versus cycle-2 scoring by gemini: gemini initially scored the paper 4/10 with some claims rated 'well_supported'; after cross-review in cycle 2 the score dropped to 2/10 with 'major_flaw' verdict, representing the largest single-reviewer shift across cycles.",
+    "Support level for the velocity-operator claim: gemini cycle 1 rated it 'well_supported'; claude and codex rated it at most 'partially_supported' in both cycles, and all three downgraded it in cycle 2 once the false diagonality assertion was agreed upon."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The force operator in Eq. (18) appears to capture only the gradient of the effective mass term \u2202_r(\u221af\u00b7\u03b2m), omitting the commutator of p_r with the kinetic f\u00b7\u03b1^r\u00b7\u2202_r term (which generates velocity-dependent and Zitterbewegung contributions) and contributions from angular-derivative terms in H that contain 1/r factors and do not commute with p_r. No Foldy-Wouthuysen reduction or nonrelativistic approximation is invoked to justify dropping these terms. The result as presented is an incomplete force operator, not the full Heisenberg commutator [p_r, H]/i\u210f.",
+      "paper_location": "Section III.1, Eqs. (17)\u2013(18); Section III.2",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The stated Minkowski signature \u03b7_ab = diag(\u22121,+1,+1,+1) implies (\u03b3\u2070)\u00b2 = \u22121 in the Clifford algebra, but Eq. (12) identifies \u03b3\u2070 with \u03b2 in the standard Dirac representation where \u03b2\u00b2 = +1. This sign inconsistency propagates through the entire Hamiltonian derivation.",
+      "paper_location": "Section III, Eqs. (6), (8), and (12)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The Hermiticity (self-adjointness) of the Dirac Hamiltonian under the curved-space inner product \u222b\u03c8\u2020\u03c6\u221a(\u2212g)d\u00b3x is never established. Simply isolating \u2202_t \u03c8 from the covariant Dirac equation yields an operator that is generally not self-adjoint with respect to this measure; a symmetrisation step or hermitizing transformation is required for the Heisenberg equations to be well-defined.",
+      "paper_location": "Section III, derivation of Eq. (12)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper asserts that the velocity operator 'remains diagonal in the Dirac basis (matrix \u03b3\u2070)'. In the standard Dirac representation adopted by the paper, the \u03b1^i matrices are off-diagonal 2\u00d72 block matrices. This claim is demonstrably false and is not a convention issue.",
+      "paper_location": "Section III.1, paragraph after Eq. (16)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The foundational metric (Eq. 4) derives from the Glavan-Lin (2020) effective 4D regularisation, which multiple groups have shown to be inconsistent as a four-dimensional metric theory. The paper acknowledges the debate but does not specify which consistent reformulation (Horndeski scalar\u2013tensor, Kaluza-Klein limit, etc.) it adopts, leaving the theoretical underpinning ambiguous and potentially affecting how additional scalar degrees of freedom couple to the fermion.",
+      "paper_location": "Section II, paragraphs 2\u20133; Section IV",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The Final Remarks claim that constraints on the Gauss-Bonnet coupling could in principle be obtained from atomic spectroscopy, antihydrogen experiments, and Penning-trap measurements. No order-of-magnitude estimate is provided, and the EGB correction scales as \u03b1/r\u2075 near compact objects; at any laboratory or near-Earth scale the suppression is many orders of magnitude below current or foreseeable experimental sensitivity. The cited references (Safronova 2018; ALPHA Collaboration; Gabrielse 2006) are generic precision-measurement citations and do not establish sensitivity to the specific claimed effect.",
+      "paper_location": "Section IV (Final Remarks); Refs. 39\u201344",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The tetrad and spin-connection formalism is the correct framework for constructing a Dirac Hamiltonian in the EGB spherically symmetric background, and the general structure of the approach is consistent with established literature (Parker 1980; Obukhov et al. 2013; Silva et al. 2019).",
+    "The EGB metric function's weak-field expansion deviates from Schwarzschild at order M\u00b2/r\u2074, implying that any force correction from the GB term would enter at order 1/r\u2075; this parametric form is consistent with the GB term's structure and survives adversarial review.",
+    "The radial velocity operator plausibly acquires a prefactor proportional to the metric function f(r) from the leading-order position-commutator contribution [r, H], consistent with the gravitational-redshift interpretation of local kinematics.",
+    "The paper correctly identifies that the Gauss-Bonnet invariant is topological in strictly four dimensions and that nontrivial dynamics require either D > 4 or an effective 4D formulation; this motivational framing is well-established in the literature."
+  ],
+  "technical_takeaway": "The paper applies the Heisenberg-picture operator formalism \u2014 tetrad/spin-connection Dirac Hamiltonian followed by commutator equations \u2014 to the effective 4D EGB black-hole metric, claiming explicit radial velocity and force operators with a leading EGB correction scaling as \u03b1/r\u2075. All three reviewers in cycle 2 identify that the force operator (Eq. 18) appears to be a classical weak-field scalar gradient rather than the full commutator [p_r, H], missing kinetic-term contributions (which generate velocity-dependent and Zitterbewegung terms) and angular-derivative terms with 1/r factors whose commutator with p_r produces centrifugal contributions. Additional converged objections include: an apparent contradiction between the stated Minkowski signature \u03b7_ab = diag(\u22121,+1,+1,+1) and the use of the standard Dirac representation where \u03b2\u00b2 = +1; unestablished Hermiticity of the Dirac Hamiltonian under the curved-space weighted inner product; a demonstrably false claim that the Dirac \u03b1-matrix velocity operator is diagonal; an unspecified theoretical completion for the contested Glavan-Lin effective 4D EGB metric; and phenomenological reach claims unsupported by any order-of-magnitude estimate. Novelty is incremental \u2014 the main new content is substituting the EGB metric function for Schwarzschild in an otherwise standard framework. All key equations are blank in the HTML source, precluding external algebraic verification from that artifact alone."
+}

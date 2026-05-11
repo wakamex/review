@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Paper — LLM Review Board</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+        <symbol id="ic-claude" viewBox="0 0 16 16">
+            <circle cx="8" cy="8" r="3.5" fill="#e67e22"/>
+            <g stroke="#e67e22" stroke-width="1.5" stroke-linecap="round">
+                <line x1="8" y1="1" x2="8" y2="3.5"/>
+                <line x1="8" y1="12.5" x2="8" y2="15"/>
+                <line x1="1" y1="8" x2="3.5" y2="8"/>
+                <line x1="12.5" y1="8" x2="15" y2="8"/>
+                <line x1="3.05" y1="3.05" x2="5.17" y2="5.17"/>
+                <line x1="10.83" y1="10.83" x2="12.95" y2="12.95"/>
+                <line x1="3.05" y1="12.95" x2="5.17" y2="10.83"/>
+                <line x1="10.83" y1="5.17" x2="12.95" y2="3.05"/>
+            </g>
+        </symbol>
+        <symbol id="ic-codex" viewBox="0 0 16 16">
+            <rect x="1" y="2" width="14" height="12" rx="2" fill="none" stroke="#2ecc71" stroke-width="1.3"/>
+            <polyline points="4,6 7,8 4,10" fill="none" stroke="#2ecc71" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <line x1="9" y1="10" x2="12" y2="10" stroke="#2ecc71" stroke-width="1.5" stroke-linecap="round"/>
+        </symbol>
+        <symbol id="ic-gemini" viewBox="0 0 16 16">
+            <circle cx="5.5" cy="5" r="2.8" fill="none" stroke="#3498db" stroke-width="1.3"/>
+            <circle cx="10.5" cy="11" r="2.8" fill="none" stroke="#3498db" stroke-width="1.3"/>
+            <line x1="7.5" y1="6.5" x2="8.5" y2="9.5" stroke="#3498db" stroke-width="1.2" stroke-linecap="round"/>
+        </symbol>
+    </svg>
+
+    <p class="back"><a id="back-link" href="index.html">&larr; Back to catalog</a></p>
+
+    <div id="paper-loading" class="loading">Loading paper…</div>
+    <div id="paper-error" style="display:none"></div>
+
+    <article id="paper" style="display:none">
+        <h1 id="p-title">—</h1>
+        <p class="tagline" id="p-meta">—</p>
+
+        <div class="summary">
+            <div class="item">
+                <div class="label">Board score</div>
+                <div class="value" id="p-score">—</div>
+                <div class="meta" id="p-score-source"></div>
+            </div>
+            <div class="item" id="p-bs-wrap" style="display:none">
+                <div class="label">Sabine BS-meter</div>
+                <div class="value" id="p-bs">—</div>
+                <div class="meta" id="p-bs-note"></div>
+            </div>
+            <div class="item" id="p-gap-wrap" style="display:none">
+                <div class="label">Gap (board + BS − 10)</div>
+                <div class="value" id="p-gap">—</div>
+                <div class="meta">0 = perfect agreement</div>
+            </div>
+            <div class="item">
+                <div class="label">Cycles · Reviewers</div>
+                <div class="value" id="p-cycles">—</div>
+            </div>
+        </div>
+
+        <h2>General-reader takeaway</h2>
+        <p id="p-general"></p>
+
+        <h2>Technical takeaway</h2>
+        <p id="p-technical"></p>
+
+        <h2>Board synthesis</h2>
+        <div id="p-public-summary"></div>
+
+        <h2>Strongest supported claims</h2>
+        <ul class="tight" id="p-claims"></ul>
+
+        <h2>Strongest objections</h2>
+        <div id="p-objections"></div>
+
+        <h2>Reviewer disagreements</h2>
+        <ul class="tight" id="p-disagreements"></ul>
+
+        <h2>Suggested human spot-checks</h2>
+        <ul class="tight" id="p-spotchecks"></ul>
+
+        <h2>Score breakdown</h2>
+        <div id="p-score-table"></div>
+
+        <h2>Per-reviewer drill-down</h2>
+        <p style="color: var(--muted); font-size: 0.78rem; margin: 0 0 6px;">
+            Two review cycles per reviewer. Cycle 2 was given the other reviewers' cycle-1 reports as input.
+        </p>
+        <div id="p-reviewers"></div>
+
+        <h2>Audit trail</h2>
+        <p id="p-audit-notes" class="muted"></p>
+        <div class="footer">
+            <p id="p-paths"></p>
+        </div>
+    </article>
+
+<script>
+const PARAMS = new URLSearchParams(location.search);
+const ROOT = PARAMS.get('root');
+const ID = PARAMS.get('id');
+const DATASET = PARAMS.get('d') || 'gr-qc';
+
+const AGENTS = ['claude', 'codex', 'gemini'];
+const VERDICT_LABEL = {
+    strong_select: 'strong select',
+    select: 'select',
+    promising: 'promising',
+    borderline: 'borderline',
+    reject: 'reject',
+};
+const DIM_LABELS = {
+    technical_soundness: 'tech',
+    novelty: 'novelty',
+    significance: 'significance',
+    clarity: 'clarity',
+    reviewer_confidence: 'confidence',
+};
+
+const fmt = n => (n == null || isNaN(n)) ? '—' : Number(n).toFixed(2);
+const fmt1 = n => (n == null || isNaN(n)) ? '—' : Number(n).toFixed(1);
+const sClass = n => n == null ? 'muted' : n >= 7 ? 's-high' : n >= 5 ? 's-mid' : 's-low';
+const bsClass = n => n == null ? 'muted' : n >= 7 ? 'bs-high' : n >= 4 ? 'bs-mid' : 'bs-low';
+
+function esc(s) {
+    return String(s ?? '').replace(/[&<>"']/g, c => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[c]));
+}
+
+const DATA_BASE = (() => {
+    const force = new URLSearchParams(location.search).get('data');
+    if (force === 'cdn')   return 'https://cdn.jsdelivr.net/gh/wakamex/review@main/';
+    if (force === 'local') return '../';
+    const host = location.hostname;
+    const isLocal = host === 'localhost' || host === '127.0.0.1' || host === '';
+    return isLocal ? '../' : 'https://cdn.jsdelivr.net/gh/wakamex/review@main/';
+})();
+
+async function loadData(repoPath) {
+    const r = await fetch(`${DATA_BASE}${repoPath}`, { cache: 'no-cache' });
+    if (!r.ok) throw new Error(`${repoPath}: HTTP ${r.status}`);
+    return r.json();
+}
+async function loadDataOptional(repoPath) {
+    try { return await loadData(repoPath); }
+    catch (_) { return null; }
+}
+
+function paragraphs(text) {
+    if (!text) return '';
+    return text.split(/\n\n+/).map(p => `<p>${esc(p)}</p>`).join('');
+}
+
+async function load() {
+    if (!ROOT || !ID) {
+        return showError('Missing root or id query parameter.');
+    }
+    document.getElementById('back-link').href = `index.html?d=${encodeURIComponent(DATASET)}`;
+
+    const paperDir = `${ROOT}/papers/${ID}`;
+    try {
+        const [board, summary, teasers] = await Promise.all([
+            loadData(`${paperDir}/board/claude.json`),
+            loadData(`${paperDir}/review_run_summary.json`),
+            loadTeaser(),
+        ]);
+        const cycleNums = [...new Set(summary.calls.map(c => c.cycle))].sort();
+        const reviewers = {};
+        for (const c of cycleNums) reviewers[c] = {};
+        await Promise.all(summary.calls.map(async call => {
+            const cyc = String(call.cycle).padStart(2, '0');
+            const j = await loadDataOptional(`${paperDir}/review_cycles/cycle_${cyc}/reviews/${call.provider}.json`);
+            reviewers[call.cycle][call.provider] = { data: j, status: call.status };
+        }));
+        renderPaper(board, summary, teasers, reviewers);
+    } catch (e) {
+        showError(e.message);
+        console.error(e);
+    }
+}
+
+async function loadTeaser() {
+    // Find which teaser file holds this arxiv_id, so we can pull bs-meter Sabine fields.
+    const SOURCES = {
+        'gr-qc': ['runs/2026-04/gr-qc/teasers.json'],
+        'bs-meter': [
+            'runs/bullshit-meter/sabine-20260509-164342/teasers.json',
+            'runs/bullshit-meter/latest-video-20260510-225418/review-scored/teasers.json',
+        ],
+    };
+    for (const path of SOURCES[DATASET] || []) {
+        const j = await loadDataOptional(path);
+        if (!j) continue;
+        const hit = j.papers.find(p => p.arxiv_id === ID);
+        if (hit) return hit;
+    }
+    return null;
+}
+
+function showError(msg) {
+    document.getElementById('paper-loading').style.display = 'none';
+    const e = document.getElementById('paper-error');
+    e.style.display = '';
+    e.innerHTML = `<div class="banner error">${esc(msg)}</div>`;
+}
+
+function renderPaper(board, summary, teaser, reviewers) {
+    document.getElementById('paper-loading').style.display = 'none';
+    document.getElementById('paper').style.display = '';
+
+    const title = teaser?.title || ID;
+    const abs = teaser?.abs_url;
+    document.getElementById('p-title').textContent = title;
+
+    const meta = [];
+    if (abs) meta.push(`<a href="${esc(abs)}" target="_blank" rel="noopener">${esc(abs.replace(/^https?:\/\//, ''))}</a>`);
+    meta.push(`<span class="muted">${esc(ID)}</span>`);
+    if (teaser?.page_count) meta.push(`<span class="muted">${teaser.page_count} pages</span>`);
+    document.getElementById('p-meta').innerHTML = meta.join(' · ');
+
+    // Summary tiles
+    const finalScore = summary.score_summary?.final_cycle_mechanical_average?.overall_score_10;
+    const scoreEl = document.getElementById('p-score');
+    scoreEl.textContent = fmt(finalScore);
+    scoreEl.className = 'value ' + sClass(finalScore);
+    document.getElementById('p-score-source').textContent = `${summary.score_source || 'mechanical'} · cycle ${summary.cycles}`;
+
+    const bs = teaser?.sabine_bullshit_meter_score_10;
+    if (bs != null) {
+        document.getElementById('p-bs-wrap').style.display = '';
+        const bsEl = document.getElementById('p-bs');
+        bsEl.textContent = fmt(bs);
+        bsEl.className = 'value ' + bsClass(bs);
+        document.getElementById('p-bs-note').textContent =
+            `${teaser.sabine_bullshit_meter_score_scope || ''} · ${teaser.sabine_bullshit_meter_score_status || ''}`;
+        if (finalScore != null) {
+            document.getElementById('p-gap-wrap').style.display = '';
+            const gap = finalScore + bs - 10;
+            const gapEl = document.getElementById('p-gap');
+            gapEl.textContent = (gap >= 0 ? '+' : '') + gap.toFixed(2);
+            gapEl.className = 'value ' + (Math.abs(gap) >= 4 ? 'd-high' : Math.abs(gap) >= 2 ? 'd-mid' : 'd-low');
+        }
+    }
+
+    const cycleNums = Object.keys(reviewers).sort();
+    document.getElementById('p-cycles').textContent = `${cycleNums.length} × ${(summary.providers || AGENTS).length}`;
+
+    // Takeaways
+    document.getElementById('p-general').innerHTML = paragraphs(board.general_reader_takeaway);
+    document.getElementById('p-technical').innerHTML = paragraphs(board.technical_takeaway);
+    document.getElementById('p-public-summary').innerHTML = paragraphs(board.public_summary);
+
+    // Supported claims
+    document.getElementById('p-claims').innerHTML =
+        (board.strongest_supported_claims || []).map(c => `<li>${esc(c)}</li>`).join('') || '<li class="muted">—</li>';
+
+    // Objections
+    document.getElementById('p-objections').innerHTML =
+        (board.strongest_objections || []).map(o => `
+            <div class="card severity-${esc(o.severity || 'moderate')}">
+                <div class="card-meta">
+                    severity: <b>${esc(o.severity || '—')}</b>
+                    ${o.supporting_reviewers ? ' · supported by ' + o.supporting_reviewers.map(agentTag).join(' ') : ''}
+                </div>
+                <div class="card-body">${esc(o.objection)}</div>
+                ${o.paper_location ? `<div class="card-note">${esc(o.paper_location)}</div>` : ''}
+            </div>`).join('') || '<p class="muted">—</p>';
+
+    // Disagreements
+    document.getElementById('p-disagreements').innerHTML =
+        (board.reviewer_disagreements || []).map(d => `<li>${esc(d)}</li>`).join('') || '<li class="muted">No notable disagreements recorded.</li>';
+
+    // Spotchecks
+    document.getElementById('p-spotchecks').innerHTML =
+        (board.human_spotchecks || []).map(s => `<li>${esc(s)}</li>`).join('') || '<li class="muted">—</li>';
+
+    // Score table
+    renderScoreTable(summary);
+
+    // Per-reviewer
+    renderReviewers(reviewers, cycleNums);
+
+    // Audit
+    if (board.audit_trail?.notes) {
+        document.getElementById('p-audit-notes').textContent = board.audit_trail.notes;
+    }
+    document.getElementById('p-paths').innerHTML =
+        `Sources: ` +
+        `<code>${esc(ROOT)}/papers/${esc(ID)}/board/claude.json</code> · ` +
+        `<code>review_run_summary.json</code> · ` +
+        `<code>review_cycles/cycle_0{1,2}/reviews/{claude,codex,gemini}.json</code>`;
+}
+
+function agentTag(name) {
+    if (!AGENTS.includes(name)) return `<span class="agent-tag">${esc(name)}</span>`;
+    return `<span class="agent-tag ${name}"><svg class="icon"><use href="#ic-${name}"/></svg>${name}</span>`;
+}
+
+function renderScoreTable(summary) {
+    const cycles = summary.score_summary?.review_cycles || [];
+    if (!cycles.length) {
+        document.getElementById('p-score-table').innerHTML = '<p class="muted">No score data.</p>';
+        return;
+    }
+    const dims = Object.keys(DIM_LABELS);
+    const rows = [];
+    for (const c of cycles) {
+        rows.push(`<tr><td class="name" colspan="${dims.length + 3}" style="background: var(--bg-soft); color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; font-size: 0.75rem;">Cycle ${c.cycle}</td></tr>`);
+        for (const r of c.reviews) {
+            const ds = r.dimension_scores || {};
+            rows.push(`<tr>
+                <td class="name">${agentTag(r.reviewer)}</td>
+                <td class="num"><span class="${sClass(r.overall_score_10)}">${fmt(r.overall_score_10)}</span></td>
+                ${dims.map(d => `<td class="num"><span class="${sClass(ds[d])}">${fmt(ds[d])}</span></td>`).join('')}
+                <td class="muted">${esc(r.recommended_verdict || '')}</td>
+            </tr>`);
+        }
+        const m = c.mechanical_average;
+        if (m) {
+            rows.push(`<tr>
+                <td class="name muted" style="text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.05em;">cycle avg</td>
+                <td class="num"><span class="${sClass(m.overall_score_10)}">${fmt(m.overall_score_10)}</span></td>
+                ${dims.map(d => `<td class="num"><span class="${sClass(m.dimension_scores?.[d])}">${fmt(m.dimension_scores?.[d])}</span></td>`).join('')}
+                <td></td>
+            </tr>`);
+        }
+    }
+    const finalAvg = summary.score_summary?.final_cycle_mechanical_average;
+    if (finalAvg) {
+        const ds = finalAvg.dimension_scores || {};
+        rows.push(`<tr style="border-top: 2px solid var(--accent);">
+            <td class="name" style="color: var(--accent); font-weight: 700;">FINAL</td>
+            <td class="num"><span class="${sClass(finalAvg.overall_score_10)}">${fmt(finalAvg.overall_score_10)}</span></td>
+            ${Object.keys(DIM_LABELS).map(d => `<td class="num"><span class="${sClass(ds[d])}">${fmt(ds[d])}</span></td>`).join('')}
+            <td></td>
+        </tr>`);
+    }
+    const headers = ['Reviewer', 'Overall', ...Object.values(DIM_LABELS), 'Verdict'];
+    document.getElementById('p-score-table').innerHTML = `<div class="table-scroll"><table>
+        <thead><tr>${headers.map((h, i) => `<th class="${i > 0 && i < headers.length - 1 ? 'num' : ''} no-sort">${h}</th>`).join('')}</tr></thead>
+        <tbody>${rows.join('')}</tbody>
+    </table></div>`;
+}
+
+function renderReviewers(reviewers, cycleNums) {
+    const host = document.getElementById('p-reviewers');
+    host.innerHTML = '';
+    for (const agent of AGENTS) {
+        const wrap = document.createElement('details');
+        wrap.open = false;
+        const cycleCount = cycleNums.filter(c => reviewers[c][agent]?.data).length;
+        wrap.innerHTML = `<summary>${agentTag(agent)} <span class="muted">— ${cycleCount} of ${cycleNums.length} cycles</span></summary>`;
+        for (const cn of cycleNums) {
+            const slot = reviewers[cn][agent];
+            const block = document.createElement('div');
+            block.style.marginTop = '8px';
+            if (!slot || !slot.data) {
+                block.innerHTML = `<div class="card"><div class="card-meta">cycle ${cn}</div><div class="card-body muted">No review data available (status: ${esc(slot?.status || 'missing')}).</div></div>`;
+            } else {
+                block.appendChild(renderReviewBlock(agent, cn, slot.data));
+            }
+            wrap.appendChild(block);
+        }
+        host.appendChild(wrap);
+    }
+}
+
+function renderReviewBlock(agent, cycle, r) {
+    const root = document.createElement('div');
+    root.className = `card ${agent}`;
+    const ds = r.dimension_scores || {};
+    const dims = Object.keys(DIM_LABELS).map(k => `
+        <div class="dim"><div class="lbl">${DIM_LABELS[k]}</div><div class="val">${fmt(ds[k])}</div></div>
+    `).join('');
+
+    const claims = (r.main_claims || []).map(c => `
+        <details>
+            <summary>${esc(c.claim)} <span class="muted">[${esc(c.support_level || '')}]</span></summary>
+            ${c.notes ? `<p>${esc(c.notes)}</p>` : ''}
+            ${c.paper_location ? `<p class="muted" style="font-size:.78rem">${esc(c.paper_location)}</p>` : ''}
+        </details>`).join('');
+
+    const objs = (r.technical_objections || []).map(o => `
+        <details>
+            <summary>${esc(o.objection)} <span class="muted">[severity ${esc(o.severity || '')}, confidence ${fmt1(o.confidence)}]</span></summary>
+            ${o.evidence ? `<p>${esc(o.evidence)}</p>` : ''}
+            ${o.paper_location ? `<p class="muted" style="font-size:.78rem">${esc(o.paper_location)}</p>` : ''}
+            ${o.would_change_verdict_if_true != null ? `<p class="muted" style="font-size:.78rem">would change verdict if true: <b>${o.would_change_verdict_if_true ? 'yes' : 'no'}</b></p>` : ''}
+        </details>`).join('');
+
+    const missing = (r.missing_assumptions || []).map(a => `
+        <details>
+            <summary>${esc(a.assumption)}</summary>
+            ${a.why_it_matters ? `<p>${esc(a.why_it_matters)}</p>` : ''}
+            ${a.paper_location ? `<p class="muted" style="font-size:.78rem">${esc(a.paper_location)}</p>` : ''}
+        </details>`).join('');
+
+    const spots = (r.needs_human_spotcheck || []).map(s => `
+        <details>
+            <summary>${esc(s.question)}</summary>
+            ${s.why_model_cannot_resolve ? `<p>${esc(s.why_model_cannot_resolve)}</p>` : ''}
+        </details>`).join('');
+
+    const followup = r.followup_notes?.changes_from_prior_cycle
+        ? `<details ${cycle > 1 ? 'open' : ''}>
+              <summary>Changes from prior cycle</summary>
+              <p>${esc(r.followup_notes.changes_from_prior_cycle)}</p>
+              ${(r.followup_notes.valid_points_from_other_reviewers || []).length ? `<p><b>Valid points from others:</b></p><ul class="tight">${r.followup_notes.valid_points_from_other_reviewers.map(p => `<li>${esc(typeof p === 'string' ? p : (p.point || JSON.stringify(p)))}</li>`).join('')}</ul>` : ''}
+              ${(r.followup_notes.invalid_points_from_other_reviewers || []).length ? `<p><b>Invalid points:</b></p><ul class="tight">${r.followup_notes.invalid_points_from_other_reviewers.map(p => `<li>${esc(typeof p === 'string' ? p : (p.point || JSON.stringify(p)))}</li>`).join('')}</ul>` : ''}
+          </details>`
+        : '';
+
+    root.innerHTML = `
+        <div class="card-meta">
+            cycle ${cycle} · ${agentTag(agent)} ·
+            <span class="verdict ${esc(r.recommended_verdict || '')}">${esc(VERDICT_LABEL[r.recommended_verdict] || r.recommended_verdict || '—')}</span> ·
+            confidence ${fmt1(r.confidence)}
+        </div>
+        <div class="dim-grid">
+            <div class="dim"><div class="lbl">overall</div><div class="val">${fmt(r.overall_score_10)}</div></div>
+            ${dims}
+        </div>
+        ${r.summary ? `<p>${esc(r.summary)}</p>` : ''}
+        ${r.score_rationale ? `<details><summary>Score rationale</summary>${paragraphs(r.score_rationale)}</details>` : ''}
+        ${r.novelty_assessment ? `<details><summary>Novelty assessment</summary>${paragraphs(r.novelty_assessment)}</details>` : ''}
+        ${claims ? `<h3 style="margin-top:10px">Main claims</h3>${claims}` : ''}
+        ${objs ? `<h3 style="margin-top:10px">Technical objections</h3>${objs}` : ''}
+        ${missing ? `<h3 style="margin-top:10px">Missing assumptions</h3>${missing}` : ''}
+        ${spots ? `<h3 style="margin-top:10px">Needs human spotcheck</h3>${spots}` : ''}
+        ${followup}
+    `;
+    return root;
+}
+
+load();
+</script>
+</body>
+</html>

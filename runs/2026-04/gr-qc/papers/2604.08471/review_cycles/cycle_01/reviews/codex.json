@@ -1,0 +1,140 @@
+{
+  "confidence": 0.67,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 5.2,
+    "novelty": 7.2,
+    "reviewer_confidence": 6.7,
+    "significance": 7.0,
+    "technical_soundness": 5.0
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "No prior cycle; this is the initial review.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "Any co-located planar detector network is insensitive to isotropic circular polarization, while a genuinely three-dimensional network can evade this suppression.",
+      "notes": "The statement is consistent with standard parity/geometric arguments for isotropic SGWB response. However, the paper also says the circular response vanishes for zero separation, so the meaning of 'co-located' versus finite beam-splitter separation needs sharper treatment.",
+      "paper_location": "Abstract; Framework paragraph after Eqs. (10)-(12)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "In the Minimal Pyramid geometry, the ET-ET channel is pure intensity and the ET-PyET channel is pure circular polarization, with the non-coplanar channel blind to the unpolarized background.",
+      "notes": "This is the central technical claim. The HTML bundle suppresses many formulas, so the exact arm vectors and overlap functions cannot be checked. More importantly, exact vanishing of the intensity ORF for a finite-frequency, finite-separation baseline is a strong condition that needs a transparent derivation and robustness analysis.",
+      "paper_location": "Pyramid interferometers section, Eqs. (13)-(15), Table 1",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "The projected V-mode overlap function achieves maximal separability in the ideal Pyramid case, making PyET an optimal design for isolating circular polarization.",
+      "notes": "The projection idea is plausible, but 'optimal' is not established as a global statement over possible 3D geometries, noise budgets, arm lengths, detector transfer functions, and construction constraints. The text appears to show an example with special cancellation rather than a proof of optimality.",
+      "paper_location": "Eq. (16) and following paragraph",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Pyramid configurations yield competitive power-law sensitivity to chiral SGWB, including minimal and tower-extended variants.",
+      "notes": "The SNR/PLS framework is standard, but the result appears to assume ET-like noise for the added non-coplanar/tower arms. The engineering and environmental noise changes introduced by above-ground or vertically displaced arms are only qualitatively discussed.",
+      "paper_location": "Sensitivity section, Eqs. (19)-(21), Fig. 3",
+      "support_level": "partially_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "Whether 'co-located' means identical detector vertex, shared observatory site, or finite beam-splitter separations comparable to ET arm lengths.",
+      "paper_location": "Abstract; Eq. (13); Framework after Eq. (12)",
+      "why_it_matters": "The circular-polarization response for an isotropic background is sensitive to separation vectors. If zero separation gives no V response, the central evasion depends on finite 3D baselines, not merely non-coplanar arms."
+    },
+    {
+      "assumption": "The limit in which Eq. (15)'s pure-V response is exact: long-wavelength, finite-frequency, equal-arm, rigid geometry, or including full detector transfer functions.",
+      "paper_location": "Eqs. (13)-(15)",
+      "why_it_matters": "If the result holds only approximately or in a special frequency regime, then Table 1 and the clean-channel interpretation should be qualified."
+    },
+    {
+      "assumption": "The added PyET arm has the same strain noise PSD and duty cycle as the corresponding ET arm, or a justified modified PSD.",
+      "paper_location": "Sensitivity section; Fig. 3; Supplemental S1-S2",
+      "why_it_matters": "The PLS curves and SNR comparisons are only as reliable as the assumed noise model for the new non-coplanar infrastructure."
+    },
+    {
+      "assumption": "Instrumental noises between ET and PyET channels are uncorrelated or can be subtracted to the level needed for SGWB cross-correlation.",
+      "paper_location": "Eq. (17)-(20)",
+      "why_it_matters": "The cross-correlation method requires control of correlated environmental and instrumental noise; a same-site 3D structure could introduce correlations not present in separated observatories."
+    },
+    {
+      "assumption": "Geometric tolerances, calibration errors, and alignment errors do not reintroduce significant intensity leakage into the V estimator.",
+      "paper_location": "Eq. (16), Fig. 3",
+      "why_it_matters": "The proposed direct access to chirality relies on near-perfect nulling of I. Practical leakage bounds are needed because I may be much larger than V."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Do the full, correctly rendered Eqs. (13)-(15) prove gamma_I=0 and gamma_V nonzero exactly at finite frequency, or only in a limiting approximation?",
+      "why_model_cannot_resolve": "The provided arXiv HTML text omits many mathematical symbols and formula details, making the overlap-function derivation impossible to audit fully from the bundle."
+    },
+    {
+      "question": "Is the claimed non-coplanar response compatible with the statement that the V overlap function vanishes for zero separation?",
+      "why_model_cannot_resolve": "This requires checking the authors' precise geometry and terminology in the PDF/source, including beam-splitter positions and arm vectors."
+    },
+    {
+      "question": "Are the Fig. 3 sensitivity curves generated with a realistic PyET/tower noise PSD and full arm transfer functions?",
+      "why_model_cannot_resolve": "The bundle gives qualitative noise discussion but not enough numerical implementation detail to reproduce or audit the plotted curves."
+    }
+  ],
+  "novelty_assessment": "The geometric idea of using non-coplanar same-site interferometer baselines to obtain parity-odd response to isotropic SGWB appears novel or at least a fresh design proposal relative to standard ET/CE network discussions. The paper's novelty is strongest as a detector-geometry concept. However, the work currently reads more like an idealized response calculation plus sensitivity sketch than a complete proof of optimality or a mature feasibility study.",
+  "overall_score_10": 5.8,
+  "paper_id": "2604.08471",
+  "recommended_verdict": "contested",
+  "reviewer": "codex",
+  "score_rationale": "The proposal is interesting and potentially significant because clean access to SGWB chirality would be valuable, and the non-coplanar geometry is a promising direction. The score is limited by unresolved local issues around the exact ORF cancellations, ambiguous use of co-location, overstrong optimality language, and idealized sensitivity assumptions for the added arms. The paper is worth surfacing for expert scrutiny, but I would not treat the central pure-channel and feasibility claims as established from the reviewed text alone.",
+  "summary": "The paper proposes non-coplanar, ET-like 'Pyramid' interferometer geometries as a way to isolate the Stokes-V/circular-polarization component of an isotropic stochastic gravitational-wave background. The core idea is potentially interesting and physically motivated, but the central exact-isolation claims depend on geometric response formulae that are not sufficiently auditable from the presented text, and several sensitivity/optimality claims appear stronger than what is locally established.",
+  "technical_objections": [
+    {
+      "confidence": 0.78,
+      "evidence": "The text states that the circular response vanishes for either zero separation or coplanarity, but later describes a 'colocated non-coplanar channel' that responds only to helicity. Eq. (13) also introduces nonzero displacement vectors between beam splitters. If finite separation is essential, the design is same-site rather than co-located in the strict ORF sense.",
+      "objection": "The paper's use of 'co-located' is ambiguous and potentially conflicts with the stated condition that the circular-polarization ORF vanishes for zero detector separation.",
+      "paper_location": "Abstract; Framework paragraph after Eq. (12); Pyramid section around Eq. (13)",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.68,
+      "evidence": "For finite detector separation, the intensity ORF generally receives frequency-dependent terms determined by the baseline vector and detector tensors. The paper claims a pure V channel, but the displayed text does not show enough derivation to verify that gamma_I vanishes identically rather than only in a long-wavelength limit or for an idealized geometry.",
+      "objection": "Exact intensity cancellation in the ET-PyET channel is asserted but not locally robustly justified.",
+      "paper_location": "Eq. (15), Table 1, Discussion paragraph claiming the noncoplanar channel is blind to the unpolarized background",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.74,
+      "evidence": "The text argues that ideal gamma_I=0 and gamma_V=1 imply maximal separability, but does not show an optimization over all non-coplanar detector tensors, finite-arm transfer functions, separations, opening angles, or noise-weighted networks. A special geometry with clean channels is not by itself a proof of global optimality.",
+      "objection": "The 'optimal design' claim is stronger than the demonstrated calculation appears to support.",
+      "paper_location": "Paragraph after Eq. (16); Discussion",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.72,
+      "evidence": "The text says high-frequency sensitivity is dominated by shot noise and therefore the non-coplanar arm not being underground does not lead to significant loss. This does not address optical layout, arm length changes, suspension/thermal noise, gravity-gradient and seismic upconversion, environmental correlations, or tower-specific control noise. These assumptions directly affect Fig. 3.",
+      "objection": "Sensitivity estimates appear to assume ET-like noise for added non-coplanar or tower arms without a sufficiently explicit detector/noise model.",
+      "paper_location": "Sensitivity and dominant noise sources section; Supplemental S1-S2; Fig. 3",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "The proposed advantage relies on exact I/V separation. Even small gamma_I leakage or calibration mismatch could dominate a helicity search if the unpolarized SGWB is larger than V. The paper does not present tolerances or systematic-error propagation in the reviewed text.",
+      "objection": "The SNR formulas and PLS curves do not visibly address leakage from much larger intensity backgrounds into the V channel under geometry, calibration, or alignment errors.",
+      "paper_location": "Eqs. (19)-(21), Fig. 3, Table 1",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.66,
+      "evidence": "Statements that chirality cannot be mimicked by parity-symmetric physics or standard astrophysical sources are plausible for an ideal isotropic Stokes-V measurement, but the detector observable can be affected by anisotropy, foreground subtraction, correlated noise, and instrumental parity-odd systematics. The paper should condition these claims on those assumptions.",
+      "objection": "Some observational claims are phrased too absolutely for the assumptions used.",
+      "paper_location": "Introductory motivation and Discussion",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

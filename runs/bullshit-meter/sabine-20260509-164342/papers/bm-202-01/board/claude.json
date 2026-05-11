@@ -1,0 +1,95 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "All three reviewers converged on a 'promising' verdict across both cycles. Mechanical average fell from 6.833 (cycle 1) to 6.6 (cycle 2) as reviewers incorporated each other's objections. The main cross-cycle updates were: adoption of the 'real time' language objection (Gemini \u2192 Claude/Codex), the photometric-effects limitation (Gemini \u2192 all), the \u03b2/\u03b3 terminology imprecision (Codex \u2192 Claude), and convergence on the epistemic framing of 'analog visualization' versus 'independent test.' The one unresolved severity disagreement \u2014 codex 'major' vs. claude 'moderate' on the equivalence-derivation point \u2014 is flagged above. Final selected score is cycle 2 mechanical average (6.6/10), source: mechanical.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "The paper aims to show, for the first time in a laboratory, that fast-moving objects appear rotated rather than squished in a photograph \u2014 a counterintuitive prediction from special relativity known as the Terrell-Penrose effect. The review board found the experimental setup clever and the qualitative visual results consistent with theory, making this a genuine milestone as a physics demonstration. The key caveat is that the experiment is an analog simulation that presupposes the theory to construct its images, so it visualizes the effect rather than independently testing it. The work is considered most valuable as a pedagogical contribution rather than a fundamental physics advance.",
+  "human_spotchecks": [
+    "Literature priority: Is the claim 'this surprising effect has never been tested experimentally' accurate? A targeted search of relativistic optics, ultrafast imaging, stroboscopic demonstrations, and pedagogical physics journals is needed to establish whether prior analog or indirect demonstrations of Terrell-Penrose rotation exist.",
+    "Supplementary methods (not included in the review bundle): Do Supplementary Methods 1 and 2 provide a rigorous derivation and error budget for the snapshot condition under the actual source-camera geometry, finite gate width (300 ps), and finite slice spacing (6 cm effective)? Reviewers could not audit this from the main text alone.",
+    "Sphere artifact correction: For Fig. 5b, what does the expected image look like after accounting for the 11% elongation from tilt via simulation? Does the residual match theoretical Terrell rotation quantitatively? No simulation overlay comparable to the cube (Fig. 5c) is provided in the main text.",
+    "Frame construction boundary handling: The paper reports 32 timing slices, 32 object positions, 17 slices per frame, and 49 animation frames, but does not detail the indexing convention or how boundary frames (where fewer than 17 slices are available) are handled. The data processing code is available only on request.",
+    "Framing standard: Is the 'first experimental test/visualization' framing appropriate given that the experimental construction presupposes the theory, or does this require qualification to 'first macroscopic laboratory analog visualization' in accordance with editorial standards for physics demonstration papers?"
+  ],
+  "paper_id": "bm-202-01",
+  "public_summary": "The Terrell-Penrose effect, predicted independently by Penrose and Terrell in 1959, states that a relativistically moving object does not appear Lorentz-contracted in a snapshot photograph \u2014 instead it looks rotated. This paper claims to provide the first experimental visualization of that effect using an optical analog: physically squished models of a sphere and cube are illuminated by picosecond laser pulses, photographed with an ultrafast gated camera across 32 separate positions, and the resulting slices are recombined to simulate what a camera would capture of a relativistically moving object. The synthesized images show apparent rotation consistent with theoretical predictions. Reviewers agreed the method is ingenious and the qualitative results credible, while noting that the theory is baked into the experimental design (the displacement rule comes directly from the theory), so the paper demonstrates rather than independently tests the effect. The abstract's claim of \"real time\" visualization is a noted overstatement for a technique requiring 32 separate acquisition sessions. The paper is most accurately characterized as an important pedagogical and experimental milestone \u2014 making a 66-year-old abstract prediction visually concrete \u2014 rather than a falsifiable test of special relativity.",
+  "reviewer_disagreements": [
+    "Severity of the equivalence-derivation concern: codex rated it 'major' and stated it would change the verdict if true; claude explicitly disagreed, calling it 'moderate' and noting that encoding a theory into an analog experiment's construction is standard for this class of demonstration and does not threaten the paper's validity.",
+    "Technical soundness scores diverged: gemini assigned 9/10 in cycle 1 (later revised to 7 in cycle 2); claude and codex independently found 7/10 more defensible given the gating/slice overlap, unquantified sphere artifact, and normalization suppressing intensity information.",
+    "Novelty scores varied: claude 5/10, gemini 6/10, codex 7\u20137.5/10. The disagreement reflects different weights placed on the genuine experimental ingenuity (SEEC photography repurposed for relativistic analogs) versus the absence of new physics predictions.",
+    "Gemini's initial 'real time' objection was rated minor in all cycles, but claude and codex independently converged on it being a genuine misleading statement, suggesting it deserves more prominence than gemini's single-sentence treatment implies."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The experiment encodes the Terrell-Penrose theory directly into its construction: the displacement rule \u0394x = \u03b2\u0394z (Eq. 1) is derived from the theory being 'demonstrated.' As a result, the experiment cannot in principle falsify the effect \u2014 it visualizes a consequence that is mathematically guaranteed once the correct theoretical framework is embedded in the experimental design. This is a meaningful epistemic distinction that the paper blurs by using language like 'test' and 'experimental demonstration.'",
+      "paper_location": "Abstract, Introduction final paragraph, Methods Eq. 1 and Eq. 2, Conclusion",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The abstract states the apparatus enables 'visualization of relativistically moving objects in real time,' but the method is stroboscopic and composite: 32 discrete static positions of the object are acquired in separate sessions and combined. This is not real-time imaging of motion.",
+      "paper_location": "Abstract",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The gating time (300 ps, corresponding to ~9 cm of light travel) is larger than the effective inter-slice spacing (\u0394z = 6 cm). Each slice therefore integrates depth over roughly 1.5 slice widths, meaning consecutive slices substantially overlap. No error budget or point-spread analysis is provided for how this affects the sharpness or quantitative accuracy of the synthesized snapshots.",
+      "paper_location": "Methods: Setup, 300 ps gating time and 400 ps inter-slice delay",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "Per-slice normalization to 1 (irrespective of local reflectivity) eliminates physically meaningful intensity information. The visualization demonstrates geometric Terrell rotation but not the correct luminosity distribution of a relativistically moving object, which would include relativistic aberration and Doppler beaming. This limitation is not explicitly stated in the paper.",
+      "paper_location": "Methods: Post-processing paragraph",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The sphere result (Fig. 5b) carries an 11% horizontal elongation artifact attributed to the required tilt for illumination. No simulation overlay corrected for this artifact is provided for the sphere (unlike the cube in Fig. 5c), leaving the residual agreement with theory after artifact correction unquantified.",
+      "paper_location": "Results and Discussion, Figure 5b",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The claim that the Terrell-Penrose effect 'has never been tested experimentally' is stated without a systematic literature survey. The boundary between prior stroboscopic, ultrafast, or indirect demonstrations and this result is not made auditable in the text.",
+      "paper_location": "Abstract: 'This surprising effect has never been tested experimentally'",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The theoretical Terrell-Penrose result \u2014 that objects moving at relativistic speed appear rotated rather than Lorentz-contracted in a snapshot photograph \u2014 is correctly implemented in the experimental analog, with sphere and cube results qualitatively consistent with simulation (Figs. 5b, 5c).",
+    "The cube result (Fig. 5c) shows apparent rotation and front-face aspect ratio retention in agreement with simulation overlays; distortions from non-parallel-ray projection (duplicated faces, hyperbolic vertical edges) are correctly predicted and identified.",
+    "The arithmetic for virtual light-speed reduction (0.06 m / (1/30 s) = 1.8 m/s) is correct given the 6 cm effective inter-slice spacing and 30 fps playback, with the round-trip light-travel factor properly accounted for.",
+    "The observation that Lorentz contraction is invisible in a snapshot but remains measurable from the 3D shape of a known object \u2014 consistent with Lampa (1924) \u2014 is correctly noted for the cube's front face retaining a 0.6 aspect ratio.",
+    "Non-parallel-ray projection induces hyperbolic distortions in cube edges at close observer distances, an effect that is geometrically explained and confirmed by simulation (Fig. 6)."
+  ],
+  "technical_takeaway": "The paper constructs laboratory snapshots of the Terrell-Penrose effect using picosecond laser pulses, a 300 ps gated camera (SEEC technique), and physically pre-Lorentz-contracted macroscopic models (a sphere at simulated 0.999c, a cube at 0.8c). Objects are displaced between acquisition sessions by \u0394x = \u03b2\u0394z and slices are combined diagonally (S_n = {f_{i,i+n}}) to implement the equal-arrival-time snapshot condition. The method encodes the theoretical displacement rule directly into its construction, so the result cannot falsify the Terrell-Penrose prediction. Qualitative shape results for both objects match theory, with correctly identified artifacts: an 11% elongation in the sphere due to tilt, and hyperbolic distortions in cube edges from non-parallel-ray projection. Per-slice normalization suppresses photometric relativistic effects (aberration, Doppler beaming), limiting the demonstration to geometric rotation only."
+}

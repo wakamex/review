@@ -1,0 +1,127 @@
+{
+  "confidence": 0.69,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 3.5,
+    "novelty": 5.0,
+    "reviewer_confidence": 6.9,
+    "significance": 5.0,
+    "technical_soundness": 4.0
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Cycle 1 initial review; no prior cycle to compare.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "Massive scalar quasinormal spectra of EMD black holes are computed for several charges and dilaton couplings using WKB16/WKB14 with Pade improvement and time-domain evolution.",
+      "notes": "The methods are standard in this literature, and the paper reports many tabulated frequencies plus two time-domain comparisons. However, in the supplied text most equations and table entries are missing or unreadable, preventing an independent audit of the exact parameter values and numerical data.",
+      "paper_location": "Sections III-IV; Tables I-V; Figures 3-6",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Increasing the scalar mass suppresses damping and indicates approach to quasi-resonances for multiple dilaton couplings.",
+      "notes": "The qualitative statement is plausible and is backed by reported trends in the tables/figures. The strongest version, that modes become arbitrarily long-lived at critical mass values, relies on extrapolated zero crossings rather than a near-axis frequency-domain computation.",
+      "paper_location": "Abstract; Section IV around Figures 5-6; Conclusions",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Dilaton-induced shifts are substantially larger than numerical uncertainty and are therefore robust physical effects.",
+      "notes": "The comparison to WKB-order mismatch is not a fully reliable uncertainty estimate near quasi-resonant regimes or for low multipoles; only two time-domain benchmarks are shown, apparently away from the most delicate near-axis points.",
+      "paper_location": "Abstract; Section IV discussion after Figure 6; Conclusions",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "Known QNM-greybody correspondence can be used to estimate greybody factors from the computed spectrum.",
+      "notes": "This is presented as an ancillary observation, but it is not used or tested. The paper itself notes limitations at low multipole and complicated potentials.",
+      "paper_location": "End of Section IV, Eq. (18) discussion",
+      "support_level": "unclear"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "A precise branch convention for the massive outgoing condition at infinity, including behavior when Re(omega) is close to or below the scalar mass threshold.",
+      "paper_location": "Section III, Eq. (13)",
+      "why_it_matters": "The distinction controls whether the computed object is a QNM, a quasi-bound state, or a threshold resonance, which is central to the quasi-resonance interpretation."
+    },
+    {
+      "assumption": "A stated criterion for when the effective potential has a single dominant peak suitable for the WKB formula, and which table entries fail or nearly fail that criterion.",
+      "paper_location": "Section III WKB-method discussion; Tables I-V",
+      "why_it_matters": "The authors acknowledge extra turning points and missing maxima can occur, but the validity domain of the reported frequencies is not delineated entry by entry."
+    },
+    {
+      "assumption": "A robust uncertainty model beyond adjacent WKB-order differences, especially near zero damping and for l=0 or low-l sectors.",
+      "paper_location": "Section IV accuracy discussion",
+      "why_it_matters": "Adjacent-order agreement can miss systematic errors; the central physical conclusion depends on damping rates becoming very small."
+    },
+    {
+      "assumption": "Details of the time-domain extraction window, grid spacing, convergence test, and Prony fit stability.",
+      "paper_location": "Section III time-domain integration; Figures 3-4",
+      "why_it_matters": "Late-time massive tails and beating can contaminate ringdown fits, so reproducibility of the reported agreement requires these numerical details."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Do the PDF equations and tables specify correct massive-field boundary conditions and branch choices, despite the HTML bundle losing formulas?",
+      "why_model_cannot_resolve": "The provided text omits many formula contents, and this review is based on the supplied bundle rather than an independently typeset PDF audit."
+    },
+    {
+      "question": "Are the claimed near-resonant modes actually QNMs under outgoing massive-field boundary conditions, or quasi-bound states under decaying boundary conditions?",
+      "why_model_cannot_resolve": "Resolving this requires checking the exact numerical implementation and asymptotic convention, not just the prose summary."
+    },
+    {
+      "question": "Do independent frequency-domain methods, such as Leaver/Frobenius or direct integration with massive asymptotics, reproduce the extrapolated zero-damping critical values?",
+      "why_model_cannot_resolve": "The paper says such methods are future work; the present bundle does not include computations sufficient to verify the extrapolation."
+    }
+  ],
+  "novelty_assessment": "The application to massive scalar quasi-resonant trends for charged Einstein-Maxwell-dilaton black holes appears incremental but potentially useful: it extends a familiar QNM/WKB/time-domain program to a less systematically charted parameter family. The paper does not convincingly establish a fundamentally new mechanism, and its novelty is weakened by reliance on standard techniques and by limited validation of the most distinctive near-resonant claims.",
+  "overall_score_10": 4.2,
+  "paper_id": "2604.11845",
+  "recommended_verdict": "weak_evidence",
+  "reviewer": "codex",
+  "score_rationale": "The topic is relevant and the qualitative massive-field damping trend is plausible, but the strongest claims are not locally certified by the evidence shown: near-axis quasi-resonances are inferred from WKB trends and smooth extrapolation, with sparse time-domain checks and unclear massive-field boundary conditions. Severe formula/table loss in the supplied text further reduces auditability. I would view this as interesting but currently under-supported rather than review-ready as a strong result.",
+  "summary": "The paper numerically studies massive scalar perturbations of charged Einstein-Maxwell-dilaton black holes, using high-order WKB-Pade estimates and a small number of time-domain Prony checks to argue for quasi-resonant, weakly damped modes as the scalar mass is increased. The topic is plausible and the qualitative trend is consistent with known massive-field behavior, but several key claims are supported mainly by extrapolation and WKB convergence diagnostics rather than by a frequency-domain method adapted to near-real-axis massive modes.",
+  "technical_objections": [
+    {
+      "confidence": 0.78,
+      "evidence": "For a massive scalar, the asymptotic potential tends to the mass term, so the infinity behavior involves a wave number such as sqrt(omega^2-mu^2) and a branch choice. The paper asserts QNM boundary conditions but the supplied text does not make the massive-field branch convention auditable, while the near-resonant regime is exactly where this distinction matters.",
+      "objection": "The boundary conditions for massive-field modes near the mass threshold are not specified with enough precision to distinguish outgoing QNMs from quasi-bound states or threshold resonances.",
+      "paper_location": "Section III, Eq. (13), and quasi-resonance discussion in Section IV/Figure 6",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.82,
+      "evidence": "The text says dotted segments are smooth extrapolations toward zero damping and that WKB is not sufficiently reliable very close to the real axis, yet also calls the approach unambiguous and states modes become arbitrarily long-lived at critical values. That conclusion requires a dedicated near-axis method or more direct data near the claimed critical points.",
+      "objection": "The main quasi-resonance claim is partly extrapolated beyond the demonstrably reliable numerical regime.",
+      "paper_location": "Section IV, Figure 6 caption and surrounding paragraph; Conclusions",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.75,
+      "evidence": "The paper itself notes additional turning points and possible loss of a maximum, but then treats neighboring WKB-order differences as the expected relative error. Agreement of adjacent high-order approximants does not by itself validate the asymptotic approximation or boundary-condition treatment near quasi-resonant massive modes.",
+      "objection": "Using WKB14-WKB16 agreement as the main error estimate may understate systematic error in regimes with altered peak structure, extra turning points, or low multipoles.",
+      "paper_location": "Section III WKB-method paragraph; Section IV first paragraph",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "Only two representative Prony comparisons are described, whereas the main conclusions concern multiple dilaton couplings, charges, low multipoles, and near-resonant points. The examples support consistency in selected regimes but do not validate the extrapolated zero-damping behavior or all branches in Tables I-V.",
+      "objection": "Time-domain validation is too sparse for the strongest parameter-space claims.",
+      "paper_location": "Figures 3-4 and final paragraph of Section IV",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "Many displayed formulas and table entries appear as blank placeholders in the bundle. This may be an HTML conversion artifact rather than an author error, but it prevents checking the action normalization, metric functions, potential, WKB formula, boundary conditions, and numerical values from the provided source.",
+      "objection": "The supplied paper text has severe readability/auditability problems for equations and tables.",
+      "paper_location": "Equations (1)-(18), Tables I-V in the provided arXiv HTML bundle",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

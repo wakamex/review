@@ -1,0 +1,84 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Three reviewers each completed two full adversarial cycles. Gemini started with high technical-soundness (9/10, cycle 1) and revised down to 5/10 after accepting that HTML table rendering stripped all numerical data and that the scalar decoupling assumption is unjustified. Claude raised technical soundness from 5 to 6 after partially crediting gemini's positive assessment of numerical execution within the genre. Codex held near its cycle-1 position throughout. The main surviving disagreement is between claude's 'routine' verdict and codex/gemini's 'weak_evidence' verdict; this reflects differing weights on the WKB internal consistency check. The 'no peak found' inconsistency raised by codex as a confirmed major flaw in cycle 1 was downgraded to a human spotcheck in cycle 2 by both codex and claude after gemini's counter-reading, and remains unresolved. HTML rendering failure prevented all reviewers from accessing numerical table data, which is the primary driver of unresolved uncertainty in this bundle.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper computes the characteristic \"ringdown\" oscillation frequencies of three types of test fields (scalar, electromagnetic, and fermionic) around a hypothetical singularity-free black hole built from an exotic scalar matter field. The review board found the calculation competently executed within an active niche, but incremental: the same toolkit has been applied to many similar backgrounds. The most important caveat is that the exotic \"phantom\" matter smoothing the singularity is susceptible to ghost-type instabilities, and the paper does not check whether the background itself is stable before computing oscillation modes on top of it. A second unresolved gap is that the scalar perturbation equation used may not correctly account for the coupling between the probe field and the scalar matter that sources the black hole.",
+  "human_spotchecks": [
+    "Verify the actual numerical entries in Tables 1\u20134 from the PDF or LaTeX source: confirm claimed ~10% spectral shifts in Re(\u03c9) and |Im(\u03c9)| as \u03b2 increases, verify that Schwarzschild QNFs are reproduced at \u03b2=0, and confirm that WKB16 vs. WKB14 discrepancies are indeed at the level of 10\u207b\u2074 to 10\u207b\u00b3 for fundamental modes.",
+    "Determine which rows in Tables 1(b) and 1(c) carry 'no peak found' entries and at which \u03b2 values they appear. If such entries occur at small \u03b2 for \u2113=1 or \u2113=2 scalar modes, this would be inconsistent with the Schwarzschild limit where those potentials have a standard exterior barrier maximum.",
+    "Verify whether the massless Klein-Gordon scalar perturbation (Eq. 7) is correctly decoupled from perturbations of the background phantom DBI scalar in the full linearized Einstein + phantom-DBI perturbation equations around the Parvez-Shankaranarayanan solution. This requires working out the off-diagonal coupling terms explicitly.",
+    "Check the Parvez-Shankaranarayanan background (arXiv:2511.14047) for classical stability of the phantom-DBI sector: confirm whether the black-hole branch is free of growing perturbation modes and whether the phantom scalar is compatible with classical stability over the studied parameter range.",
+    "Determine the critical value of \u03b2 (for M=1) at which the solution transitions from the black-hole branch to an extremal remnant, and confirm that all \u03b2 values appearing in the tables are safely below this threshold."
+  ],
+  "paper_id": "2604.24349",
+  "public_summary": "The paper studies how waves of different spins \u2014 a scalar field, an electromagnetic field, and a Dirac (fermionic) field \u2014 propagate and ring down around a regular black hole whose singularity is replaced by a smooth core. The regular geometry is taken from a recently proposed exact solution (Parvez and Shankaranarayanan 2025) sourced by a phantom Dirac-Born-Infeld scalar. For each spin sector the paper derives a one-dimensional Schr\u00f6dinger-like wave equation and computes the fundamental quasinormal frequencies using the Pad\u00e9-improved WKB method at 16th and 14th order, with the scalar and electromagnetic fundamental modes independently verified by time-domain integration and Prony fitting. The paper argues that increasing the DBI regularity parameter \u03b2 lowers and broadens all three effective potential barriers, which in turn shifts the quasinormal frequencies toward the origin of the complex plane \u2014 meaning slower oscillation and slower damping \u2014 by amounts claimed to be well above the WKB truncation uncertainty. The quality factor changes only weakly with \u03b2. The review board found the setup and presentation adequate for the genre, but identified several gaps that should be addressed before the results are taken as definitive. The core unresolved issues are: whether the massless scalar perturbation correctly decouples from the background scalar hair, whether the phantom-branch geometry is classically stable, and whether the WKB self-consistency test is sufficient to certify numerical accuracy for the least favorable modes. The paper's contribution is incremental: it adds a perturbative data catalogue for a specific new background without introducing new methods or conceptual advances.",
+  "reviewer_disagreements": [
+    "Gemini rated technical soundness at 9/10 in cycle 1, while claude and codex rated it at 5 and 4.5 respectively. After cross-review in cycle 2, gemini lowered to 5, claude raised to 6, and codex held at 4.5. The residual gap reflects genuine disagreement about whether the paper's numerical execution is sound within its genre given the unverifiable HTML tables and the weak uncertainty estimate.",
+    "Codex (cycle 1, confidence 0.88) raised as a major objection that 'no peak found' entries for scalar modes appear at \u2113=1 and \u2113=2 for what Codex read as small \u03b2 values, which would contradict the Schwarzschild limit. Claude classified this as an unresolved human spotcheck item rather than a confirmed flaw. Gemini argued in cycle 2 that it is most likely a rendering artifact from HTML table corruption. The disagreement was not resolved because all reviewers lacked access to the PDF numerical data.",
+    "On overall verdict, claude maintained 'routine' (publishable as incremental data paper) across both cycles, while codex and gemini (cycle 2) converged on 'weak_evidence' (numerical case is insufficiently validated). The divergence reflects differing weights placed on the WKB internal consistency check as evidence of robustness."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The massless Klein-Gordon scalar (Eq. 7) is introduced as a test field without being distinguished from the phantom DBI scalar that sources the background. For a hairy black hole, scalar perturbations generically couple to the background hair through off-diagonal metric\u00d7scalar mixing in the linearized Einstein+DBI equations. The paper does not justify that a decoupled probe Klein-Gordon sector exists, either by identifying the test scalar as a different species or by showing the off-diagonal coupling vanishes. If the decoupling is not valid, the reported scalar effective potential and quasinormal frequencies describe a fictitious mode, not the physical scalar channel of the theory.",
+      "paper_location": "Sec. III.1, Eq. (7)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "No stability analysis is performed for the phantom-DBI background. The phantom branch (\u03b5=\u22121 in Eq. 1) carries a wrong-sign kinetic term for the scalar, which can admit ghost or tachyonic perturbations at the classical or quantum level. The paper reports only modes with Im(\u03c9)<0 (damped) but does not scan for unstable modes (Im(\u03c9)>0) or verify that the background is free from growing perturbations. If the background is unstable, the computed quasinormal frequencies do not correspond to observable astrophysical ringdown.",
+      "paper_location": "Sec. II (phantom branch, Eq. 1); Sec. VI (entire section)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The primary numerical uncertainty estimate \u2014 the difference between WKB16 and WKB14 Pad\u00e9-improved results \u2014 is a weak internal consistency check. Two closely related asymptotic approximants of different order can agree well while sharing a common systematic bias, especially for low multipoles (\u2113=0 scalar, \u2113=1/2 Dirac) and higher overtones where the WKB series is least reliable. Time-domain validation covers only two specific (\u03b2, \u2113) combinations and does not include any Dirac mode or the low-multipole scalar cases where the largest spreads are acknowledged.",
+      "paper_location": "Sec. VI, discussion below Table 4; Abstract robustness claim; Figs. 3\u20134",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex",
+        "claude",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "Table 4 includes higher-overtone electromagnetic modes at n=3, \u2113=2, which violates the paper's own stated WKB reliability condition \u2113\u2265n (cited in Sec. V). Including these entries without flagging the reliability violation weakens the self-consistency of the higher-overtone conclusions.",
+      "paper_location": "Sec. V WKB reliability discussion; Sec. VI Table 4 panel (c)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "claude"
+      ]
+    },
+    {
+      "objection": "The paper does not state the critical value of \u03b2 at which the black-hole branch transitions to an extremal remnant or horizonless configuration. Without this information, it cannot be verified that all tabulated \u03b2 values remain in the black-hole regime where the QNM boundary conditions and single-exterior tortoise coordinate are valid.",
+      "paper_location": "Sec. II Eq. (3); Sec. VI tables header",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "claude"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The perturbation equations for massless scalar, electromagnetic, and Dirac test fields in any static spherically symmetric geometry reduce to one-dimensional Schr\u00f6dinger-like master equations with spin-dependent effective potentials; the specific forms derived in Eqs. (9), (14), and (19)\u2013(20) are consistent with standard Regge-Wheeler/Zerilli and Chandrasekhar SUSY-Dirac procedures and reduce to the correct Schwarzschild limits as \u03b2\u21920.",
+    "The effective potential barriers for all three spin sectors vanish at the event horizon and at spatial infinity, guaranteeing standard quasinormal-mode boundary conditions (purely ingoing at the horizon, purely outgoing at infinity) throughout the studied parameter range.",
+    "Increasing \u03b2 qualitatively lowers and broadens the effective potential barriers in all three spin sectors, as shown in representative potential profiles (Figs. 1\u20132); this trend is physically consistent with the DBI geometry smoothing the near-center curvature.",
+    "The two Dirac supersymmetric partner potentials are isospectral under compatible boundary conditions, so analyzing one partner potential suffices for the quasinormal spectrum \u2014 a standard result that the paper correctly cites.",
+    "For the specific modes verified by time-domain integration (scalar \u2113=1 and electromagnetic \u2113=1 fundamental modes at representative \u03b2), the Prony-fit frequencies agree with the WKB values to better than 1%, providing a local consistency check on the numerical pipeline."
+  ],
+  "technical_takeaway": "The paper applies Pad\u00e9-improved WKB (16th and 14th order) with two time-domain Prony spot-checks to compute fundamental quasinormal frequencies of massless scalar, electromagnetic, and Dirac test fields on the Parvez-Shankaranarayanan phantom-DBI regular black hole. The paper claims increasing the regularity parameter \u03b2 monotonically shifts all fundamental QNFs toward the origin of the complex plane with spectral changes larger than internal WKB truncation estimates. Cross-review over two cycles identified three gaps that survived adversarial scrutiny: (1) the massless Klein-Gordon scalar is never distinguished from the background phantom DBI hair field, leaving the decoupling assumption unjustified for a hairy spacetime; (2) no stability analysis is performed for the phantom branch, so it is unclear whether damped modes correspond to physically observable ringdown; (3) the primary numerical uncertainty estimate \u2014 agreement between WKB16 and WKB14 Pad\u00e9 approximants \u2014 is a weak internal consistency check that can mask shared systematic bias, and time-domain validation covers only two of many tabulated modes. A further concrete flaw is that Table 4 includes electromagnetic overtone modes (n=3, \u2113=2) that fall outside the paper's own stated WKB reliability condition \u2113\u2265n. The \"no peak found\" entries in the scalar table remain ambiguous due to HTML rendering failure and require PDF-level spotcheck."
+}

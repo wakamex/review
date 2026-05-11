@@ -1,0 +1,82 @@
+{
+  "confidence": 0.95,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 4,
+    "novelty": 6,
+    "reviewer_confidence": 9,
+    "significance": 3,
+    "technical_soundness": 2
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "The first experimental realization of the PBR test on a superconducting qubit architecture, extending up to a 5-qubit system.",
+      "notes": "The experimental execution on the IBM hardware and the data collection are valid, but the theoretical analysis used to interpret the PBR test results is critically flawed.",
+      "paper_location": "Section I, paragraph 4",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Noise-aware error tolerances derived from device calibration allow the determination of when an experimental outcome violates the epistemic bound.",
+      "notes": "The authors calculated the expected quantum circuit noise (the device noise floor) and incorrectly substituted it as the theoretical epistemic tolerance bound, completely changing the physical meaning of the test.",
+      "paper_location": "Section I, paragraph 5; Section II (Eq. 4-8)",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "Distant qubit pairs fail the PBR test due to the increased circuit depth and corresponding decoherence.",
+      "notes": "The distant pairs 'failed' to meet the authors' calculated device noise floor, but their observed errors (e.g., 0.95%) remain overwhelmingly below the actual epistemic bound (which is ~14.6% for n=2), meaning they successfully ruled out the epistemic model despite the noise.",
+      "paper_location": "Section III, 'Distant qubit pairs' and Table 2",
+      "support_level": "unsupported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "Actual evaluation of the noisy trace distance $D_c(\\rho_0, \\rho_1)$ to establish the true epistemic threshold.",
+      "paper_location": "Section II, under 'Overlap and distance'",
+      "why_it_matters": "The authors define the modified epistemic bound in Eq. 4 using $D_c(\\rho_0, \\rho_1)$, but they never compute this value for their actual noisy state preparations to find the true allowed error limit for ruling out epistemic models."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Did the authors intend a different, non-standard formulation of the PBR protocol?",
+      "why_model_cannot_resolve": "The text directly equates the expected quantum gate error (Eq 6) with the epistemic ontological bound (Eq 4). While this is mathematically and physically invalid in standard PBR frameworks, an expert should verify if there is any unconventional benchmarking context where this equality was intended."
+    }
+  ],
+  "novelty_assessment": "The execution of a PBR test on a superconducting processor and the scaling to 5-qubit clusters across a chip is a novel and structurally impressive physical experiment. However, the theoretical interpretation contributes negative value to the field due to fundamental misconceptions about the theorem's bounds.",
+  "overall_score_10": 2,
+  "paper_id": "bm-218-01",
+  "recommended_verdict": "major_flaw",
+  "reviewer": "gemini",
+  "score_rationale": "While the experimental data collection on a 156-qubit device is a competent technical feat, the paper is fundamentally undermined by a severe theoretical misunderstanding. The authors conflated the predicted expected noise of the quantum circuit (~0.1%) with the absolute theoretical bound required to rule out the $\\psi$-epistemic model (~14.6%). Because their experimental noise occasionally exceeded their simulation, they incorrectly concluded those test cases 'failed', whereas they actually produced strong evidence validating the ontological model. This error reverses the core scientific findings of the paper.",
+  "summary": "The paper presents an experimental realization of the Pusey-Barrett-Rudolph (PBR) theorem on a 156-qubit superconducting quantum processor (IBM Heron2 Marrakesh). The authors attempt to test the $\\psi$-epistemic model by executing 2-qubit and 5-qubit circuits across adjacent and distant qubit pairs and measuring the frequency of theoretically 'forbidden' outcomes. They also introduce noise models (depolarizing and thermodynamical) to estimate the impact of gate infidelity and decoherence. However, the study suffers from a fatal theoretical flaw: the authors fundamentally conflate the expected device noise floor with the theoretical epistemic error bound required by the PBR theorem. As a result, they incorrectly classify successful violations of the epistemic model as 'failures' simply because the observed error exceeded the hardware's expected noise level.",
+  "technical_objections": [
+    {
+      "confidence": 0.98,
+      "evidence": "In a PBR test, an epistemic model is ruled out if the observed forbidden outcome rate $\\epsilon$ is less than the epistemic lower bound $(1 - D_q)/2$. For $n=2$ at the minimum angle, this theoretical bound is macroscopic ($\\sim 14.6\\%$). The authors explicitly note this in Eq 4. However, they then state that 'implementing these noise models gives an approximation of the error bound', setting the PBR threshold to their simulated hardware noise rate (e.g., $\\sim 0.10\\%$ in Table 1). When experimental runs yield $0.15\\%$ error, the authors conclude the run 'failed the PBR test'. In reality, $0.15\\%$ massively violates the true $14.6\\%$ epistemic bound. The authors are failing their own hardware noise benchmark, not the PBR test, rendering their main conclusions invalid.",
+      "objection": "Fatal conflation of expected device noise floor with the ontological epistemic bound.",
+      "paper_location": "Section II (paragraphs below Eq 4); Section III (Table 1 and Table 2 discussion)",
+      "severity": "fatal",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "The text claims that non-adjacent pairs passed the PBR test with a passing probability declining 'from 100% at minimal separation [d=2] to around 25%'. However, Table 2 indicates that for $d=2$ pairs, the best observed error rate is $0.13\\%$. According to the authors' own explicitly stated tolerance thresholds in Table 1 ($0.10\\% - 0.12\\%$), an error of $0.13\\%$ must be classified as a failure. It is impossible to achieve a 100% passing rate under the authors' own flawed criteria given the data in the table.",
+      "objection": "Contradiction in reported success rates for distant pairs versus tabular data.",
+      "paper_location": "Section III, 'Distant qubit pairs (d\\ge2)'",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "The authors refer to 'random $\\alpha, \\beta$' and state this causes failure due to transpilation depth. A PBR measurement basis must be highly specific, parameterized analytically to ensure that the forbidden outcome has exactly zero probability in ideal quantum mechanics. If the angles are truly 'random', the measurement outcomes are no longer forbidden, and the test is physically meaningless. If the authors mean 'arbitrary but analytically correct non-Clifford angles' (as hinted by Footnote 1), the terminology 'random' is highly misleading.",
+      "objection": "Ambiguous and potentially invalid use of 'random' angles.",
+      "paper_location": "Section III, Table 2 and Footnote 1",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

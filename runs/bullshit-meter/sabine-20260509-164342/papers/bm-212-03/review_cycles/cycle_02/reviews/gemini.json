@@ -1,0 +1,96 @@
+{
+  "confidence": 0.85,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 7,
+    "novelty": 6,
+    "reviewer_confidence": 8,
+    "significance": 7,
+    "technical_soundness": 6
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Lowered recommended verdict from 'promising' to 'routine' and reduced technical soundness score based on critical observations from other reviewers regarding the effective mass approximation at the zone edge and the heuristic treatment of the neutral impurity extension.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": [
+      "Codex correctly pointed out that replacing the periodic background potential with a simple effective Bloch mass may fail for large momentum transfers near the Brillouin-zone edge, which undermines the quantitative prediction of the absorption peaks.",
+      "Claude and Codex rightly noted that the extension to neutral impurities reuses the ionic absorption formula without deriving the linear response to a field gradient.",
+      "Claude observed that the required Bloch-band separation condition is not numerically verified for the chosen parameters."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "The optical absorption spectrum of an impurity in a dipolar supersolid features two Van Hove singularities corresponding to the Goldstone modes.",
+      "notes": "Derived from the density of states of the 1D effective model, but relies on a simple effective Bloch mass approximation that may not hold at the required zone-edge momenta.",
+      "paper_location": "Optical response \u2013, Figure 2",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The optical response of a neutral dipolar impurity to an oscillating magnetic/electric field gradient qualitatively matches that of an ionic impurity to an AC electric field.",
+      "notes": "Calculated by substituting the interaction potential in the ionic absorption equation, lacking a rigorous linear-response derivation for coupling to a field gradient.",
+      "paper_location": "Extension to neutral impurities \u2013, Figure 4",
+      "support_level": "unclear"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The effective Bloch mass remains a valid approximation for the impurity dispersion across the entire first Brillouin zone, particularly near the zone edge.",
+      "paper_location": "Model \u2013, paragraph after Eq. (2)",
+      "why_it_matters": "If the true Bloch dispersion is highly non-parabolic near the zone edge, the positions and shapes of the predicted absorption peaks (which correspond to zone-edge Goldstone modes) would be significantly altered."
+    },
+    {
+      "assumption": "Transverse excitations do not significantly alter the predicted absorption spectra.",
+      "paper_location": "Model \u2013",
+      "why_it_matters": "A 1D effective model might artificially enhance Van Hove singularities. In a real 3D or quasi-1D experiment, transverse modes could smear or modify these sharp features."
+    }
+  ],
+  "needs_human_spotcheck": [],
+  "novelty_assessment": "The work represents a solid, incremental theoretical advance. It combines a recently established model of a supersolid polaron with standard Kubo linear response theory to propose a concrete experimental observable. While theoretically straightforward, the connection to experimental probing of Goldstone modes is valuable, though the robustness of the predictions depends heavily on approximations that require further justification.",
+  "overall_score_10": 6,
+  "paper_id": "bm-212-03",
+  "recommended_verdict": "routine",
+  "reviewer": "gemini",
+  "score_rationale": "The paper presents a physically appealing idea\u2014using absorption spectroscopy to probe supersolid Goldstone modes\u2014but relies on several poorly controlled approximations. As highlighted by other reviewers, applying a simple effective Bloch mass out to the Brillouin-zone edge, claiming divergence for a roton peak outside the theory's validity regime, and heuristically extending the formalism to neutral impurities in a gradient field without a full Kubo derivation reduce the technical soundness. While the qualitative connection is interesting, these issues represent meaningful caveats that require substantive revision to ensure the quantitative reliability of the predictions.",
+  "summary": "The paper theoretically investigates the optical response of an ionic or dipolar impurity immersed in a 1D dipolar supersolid. Using a previously derived Bogoliubov-Fr\u00f6hlich Hamiltonian and the Kubo memory-function formalism, the authors calculate the optical absorption spectrum. They find that the spectrum exhibits Van Hove singularities corresponding to the flattening of the supersolid's two Goldstone modes at the Brillouin zone edge, while the massive Higgs mode yields a much smaller contribution. The authors propose using this absorption spectroscopy as an experimental probe for supersolid excitations.",
+  "technical_objections": [
+    {
+      "confidence": 0.85,
+      "evidence": "The background periodic potential is replaced by a single effective Bloch mass. However, the predicted absorption peaks involve momentum transfer up to the Brillouin-zone edge, where a parabolic dispersion is typically insufficient.",
+      "objection": "The simple effective Bloch mass approximation may fail near the Brillouin-zone edge, potentially shifting or modifying the predicted absorption peaks.",
+      "paper_location": "Model \u2013, paragraph after Eq. (2); Optical response \u2013, Figure 2 discussion",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "The authors reuse the ionic-impurity absorption formula (Eq. 3) with a substituted interaction potential. However, a field gradient couples differently than a uniform AC field, requiring a dedicated linear-response derivation to confirm the spectral shape and weight.",
+      "objection": "The neutral-impurity response is evaluated heuristically without a proper Kubo derivation for an oscillating field gradient.",
+      "paper_location": "Extension to neutral impurities \u2013",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "The paper requires the distance between the first and second Bloch bands to be larger than the largest energy considered. No numerical verification is provided to confirm this holds for the parameter sets used in Figures 1-4.",
+      "objection": "The requirement that the ion remains in the lowest Bloch band is stated but not verified for the chosen parameters.",
+      "paper_location": "Model \u2013, paragraph on Bloch mass",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "The authors explicitly state that the peak is situated outside of the regime of validity of their theory, though they argue transverse effects won't change it qualitatively.",
+      "objection": "The divergent peak observed in the superfluid regime near the transition lies outside the theory's regime of validity.",
+      "paper_location": "Optical response \u2013, Note [1]",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "Van Hove singularities in the 1D density of states diverge, whereas in 3D or quasi-1D experimental systems they typically manifest as kinks or steps. While authors note experimental broadening, the strict divergence shown in figures is a theoretical artifact of 1D.",
+      "objection": "The strict divergence of the absorption peaks (Van Hove singularities) is fundamentally an artifact of the 1D model.",
+      "paper_location": "Optical response \u2013",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

@@ -1,0 +1,164 @@
+{
+  "confidence": 0.72,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 8,
+    "novelty": 7,
+    "reviewer_confidence": 6,
+    "significance": 7,
+    "technical_soundness": 7
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Added a new moderate technical objection on massive scalar fields (prompted by gemini's valid observation): the stability argument for infinitely-degenerate horizons relies on Aretakis constants, which exist only for massless minimally coupled fields; massive scalars lack these constants but still exhibit instability on standard extremal horizons. Downgraded the l>0 decay claim from 'well_supported' to 'partially_supported' following codex's valid argument that the leading-order scaling argument does not exclude subleading asymptotics carrying derivative growth. Added massive scalar as a missing assumption. Slightly raised significance score (6.5 \u2192 7.0) in view of gemini's stronger emphasis on the physical impact of the graveyard proposal. Overall score unchanged at 7.0.",
+    "invalid_points_from_other_reviewers": [
+      "Codex rates the l>0 decay issue as 'major' with would_change_verdict_if_true: true. This is overstated: the core physical result of the paper concerns l=0 Aretakis softening and elimination, which is the primary contribution. If l>0 subleading growth were found, it would be a secondary correction, not a reversal of the central result.",
+      "Gemini's reviewer_confidence of 9/10 and classification of infinite-k stability as 'well_supported' are too generous. The unproved decay premise for the new geometries is a real conditional that prevents the infinite-k result from being fully established analytically. Gemini's overall score of 8 is plausibly the upper bound, not the central estimate."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Gemini: The stability argument for infinitely-degenerate horizons relies specifically on locally defined Aretakis constants for massless scalars; massive fields lack these and may still exhibit instability. This is a genuine gap in the universality claim.",
+      "Codex: The l>0 decay claim is stronger than what the near-horizon scaling argument directly proves \u2014 it kills only the leading throat mode, not subleading corrections that could potentially carry derivative growth."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "For a horizon of degeneracy rank k, the first k transverse derivatives of the s-wave scalar field approach constants at late times, while the (k+1)-th blows up linearly and higher derivatives blow up as t^{n\u2212k} for the n-th derivative.",
+      "notes": "Derivation in Appendix A is careful and systematic, using the recurrence relation from the near-horizon wave equation plus k Aretakis constants. Numerical confirmation in Figures 1 and 2 matches the predicted pattern. The induction argument is laid out explicitly. The premise that \u03c6 itself remains bounded is assumed (not proved analytically), which is a stated conditional, not a hidden gap.",
+      "paper_location": "Section 3.2, Eq. (3.4), Appendix A (Eq. A.20\u2013A.22)",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "An infinitely-degenerate horizon possesses infinitely many Aretakis conservation laws, preventing any transverse derivative of the s-wave scalar field from blowing up at late times.",
+      "notes": "The logic connecting infinitely many constants to non-blow-up is sound given the recurrence structure, but the key premise that \u03c6 itself remains bounded is only supported numerically for one specific metric (Eq. 4.21). Growth of H_j as j\u2192\u221e is not analyzed \u2014 diverging H_j could compromise r-regularity of the late-time profile even without temporal blow-up. Additionally, this argument applies only to minimally coupled massless scalars; massive fields lack locally defined Aretakis constants but still exhibit instability on standard extremal horizons.",
+      "paper_location": "Section 3.4, Eq. (3.22)\u2013(3.24)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The Aretakis instability is universal and purely local, governed by the near-horizon throat geometry (scale invariance / Lifshitz symmetry), insensitive to global spacetime structure.",
+      "notes": "Clean extension of the Gralla et al. framework to Lifshitz near-horizon throats via the scaling limit of Eq. (3.6). The off-shell argument applies to any sufficiently smooth tensor field. One of the stronger parts of the paper.",
+      "paper_location": "Sections 2.2.2, 3.3",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "For multi-degenerate horizons with k\u22652, only the l=0 s-wave mode of scalar perturbations survives in the near-horizon throat and is subject to Aretakis-type instability; higher angular modes decay.",
+      "notes": "The leading-order scaling limit argument kills higher l modes cleanly. However, as codex correctly notes, this kills only the leading term; subleading asymptotics could in principle carry derivative growth invisible in the leading throat limit. Numerics cover selected modes for specific metrics. The claim that all l>0 modes and all their transverse derivatives decay is stronger than what the scaling argument directly proves.",
+      "paper_location": "Section 3.3, Eq. (3.16)\u2013(3.18); Figures 3, 6",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The photon sphere located on a multi-degenerate horizon is stable for even k (outer horizon), unstable for even k inside an odd-degeneracy outer horizon, and meta-stable for odd k.",
+      "notes": "Effective-potential calculation is standard and correctly executed. The argument that f^{(k)}(r_H)\u22600 at the photon sphere (Eq. B.15) is assumed for all theories, not universally guaranteed. The conclusion decoupling photon-sphere stability from Aretakis instability is justified.",
+      "paper_location": "Section 3.2 discussion; Appendix B, Eq. (B.17)\u2013(B.18)",
+      "support_level": "partially_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The scalar field \u03c6 evaluated on the horizon decays (or at least remains bounded) at late advanced times v\u2192\u221e for rank-k degenerate and infinitely-degenerate horizons.",
+      "paper_location": "Sections 3.2, 3.4; Appendix A",
+      "why_it_matters": "This is the foundational premise of all blow-up and non-blow-up results. For ERN this is a theorem; for the new metrics it is only a numerical observation on specific examples. If \u03c6|_{r=0} fails to remain bounded for some initial data, the entire chain of reasoning is invalidated."
+    },
+    {
+      "assumption": "The stability argument extends to massive scalar fields and higher-spin perturbations. The paper's central claim that infinitely-degenerate horizons are Aretakis-stable relies on Aretakis constants, which do not exist for massive scalars.",
+      "paper_location": "Section 3.4; Abstract; Section 5",
+      "why_it_matters": "A genuine 'graveyard' configuration must be stable under all physically relevant perturbations. The paper shows massive fields exhibit instability on standard extremal horizons without Aretakis constants; the same mechanism could apply to infinitely-degenerate horizons."
+    },
+    {
+      "assumption": "The infinitely-degenerate metric (Eq. 3.19) is a solution to some physically reasonable set of field equations. The paper prescribes the metric ansatz without deriving it from an action.",
+      "paper_location": "Section 3.4, Eq. (3.19); Section 4.2, Eq. (4.21)",
+      "why_it_matters": "For the 'black hole graveyard' interpretation to be physically relevant, the metric must be on-shell in some consistent theory. Without this, it is a mathematical ansatz."
+    },
+    {
+      "assumption": "The Aretakis constants H_j for the infinitely-degenerate horizon form a sufficiently well-behaved sequence as j\u2192\u221e that the spatial field profile \u03c6(v,r) near the horizon is smooth in r at late times.",
+      "paper_location": "Section 3.4, Eq. (3.22)\u2013(3.24)",
+      "why_it_matters": "The stability claim requires not just that each time derivative is bounded in v, but that the full field is regular. Uncontrolled growth of H_j could signal a formal asymptotic series that does not converge, undermining regularity."
+    },
+    {
+      "assumption": "Global exterior boundary conditions and asymptotics sufficient to exclude incoming radiation or other far-region effects that could interfere with the local near-horizon decay arguments.",
+      "paper_location": "Sections 3 and 4",
+      "why_it_matters": "The analytic argument is entirely local, while decay and numerical evolution depend on global causal structure. The paper does not verify that the chosen asymptotically flat geometries have the correct global properties for the decay premise to hold."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Does Appendix A's induction argument (Eq. A.20\u2013A.22) correctly establish that the blow-up rate for the n-th derivative is exactly t^{n-k} for all n>k, or are there corrections from off-diagonal terms in the recursion (Eq. A.10) that could alter the exponent?",
+      "why_model_cannot_resolve": "Verifying the full induction step in Eq. A.10 requires carefully tracking all contributions at each order, including the triangular matrix in Eq. A.21, and confirming no overlooked subdominant terms become leading-order at higher n. This is a detailed algebraic check requiring specialist attention."
+    },
+    {
+      "question": "Is there any known decay theorem for scalar waves on smooth but non-analytic static horizons of the type Eq. (3.19) that would supply the missing boundedness premise analytically?",
+      "why_model_cannot_resolve": "This requires specialist knowledge of the recent PDE literature on extremal and non-analytic black hole horizons, and whether any existing result (e.g., for asymptotically flat spacetimes with degenerate horizons) applies to the specific non-analytic class studied here."
+    },
+    {
+      "question": "Does the massive scalar (or electromagnetic/gravitational) perturbation on an infinitely-degenerate horizon still exhibit an Aretakis-type instability, or does the infinite degeneracy suppress it through a different mechanism than Aretakis constants?",
+      "why_model_cannot_resolve": "For massive scalars on ERN, the instability is known despite the absence of local Aretakis constants [Lucietti:2012xr]. Whether the infinitely-degenerate geometry suppresses this alternative route to instability is not addressed in the paper and requires specialist analysis."
+    },
+    {
+      "question": "Is the specific infinitely-degenerate metric ansatz (Eq. 4.21, f = exp(-1/r^2)) a known solution or approximation to a solution of Einstein equations coupled to some matter, or is it purely a mathematical toy model?",
+      "why_model_cannot_resolve": "Determining whether this metric arises from a physically consistent action requires searching the literature on nonlinear electrodynamics and regular black holes beyond the paper's own references."
+    }
+  ],
+  "novelty_assessment": "The paper makes a genuine and cleanly presented contribution. The central idea \u2014 that Aretakis instability strength is tied to the degree of horizon degeneracy \u2014 is natural but had not been systematically worked out. The extension of the near-horizon scaling argument from ERN (k=1, AdS_2 throat) to arbitrary finite k (Lifshitz throat with dynamical exponent k+1) is new and elegant. The proposal of infinitely-degenerate horizons as Aretakis-stable configurations, via infinitely many conservation laws, is novel and physically motivated. The connection to \"black hole graveyards\" [DiFilippo:2024spj] \u2014 providing the missing Aretakis stability analysis for those configurations \u2014 gives the work clear contextual relevance. The photon-sphere stability analysis as a function of k is a useful byproduct. This is not a field-shaping result but is a solid incremental advance with clean analytical content and numerical support. The gap concerning massive scalar (and higher-spin) perturbations prevents the 'infinitely-degenerate = universally stable' claim from being fully established.",
+  "overall_score_10": 7,
+  "paper_id": "2604.15260",
+  "recommended_verdict": "promising",
+  "reviewer": "claude",
+  "score_rationale": "The paper is technically solid and well-organized. The analytical derivations for finite-k degeneracy (Sections 3.2 and Appendix A) are careful and the near-horizon Lifshitz scaling argument is clean and elegant. The combination of analytical and numerical methods is appropriate for the claims made. After incorporating other reviewers' perspectives: gemini's high score (8.0) and high confidence are plausible for a field specialist who credits the near-horizon locality argument heavily; codex's lower score (6.7) appropriately emphasizes the conditional nature of the main results. My 7.0 reflects a middle position: the paper's analytical content is strong for the finite-k case and genuinely novel, but the infinitely-degenerate stability claim rests on an unproved boundedness premise, the universality claim outpaces the evidence (only massless scalars are treated and the physical realizability of the metric is not established), and numerical convergence is not demonstrated. The newly incorporated concern about massive scalar fields (where locally defined Aretakis constants do not exist) is a real gap in the 'graveyard' argument that should be addressed. These are manageable limitations, not fatal flaws, and the work fills a concrete gap in the black-hole-graveyard literature. Significance raised marginally (6.5 \u2192 7.0) because the connection to graveyard stability is more direct than initially weighted.",
+  "summary": "The paper studies how the Aretakis instability \u2014 polynomial late-time blow-up of transverse derivatives of scalar fields along extremal black hole horizons \u2014 is modified when the horizon is multiply degenerate (the metric function f and its first k\u22121 derivatives vanish at the horizon). The main results are: (1) for finite degeneracy rank k, the instability persists but is softened \u2014 blow-up shifts to the (k+1)-th and higher derivatives while the first k derivatives approach constants; (2) for an infinitely-degenerate horizon (all derivatives of f vanish), infinitely many Aretakis conservation laws prevent any transverse derivative from blowing up, suggesting classical stability; (3) only the l=0 s-wave mode is affected for k\u22652; (4) photon-sphere stability on the degenerate horizon depends on parity of k and the outer horizon structure. Analytical near-horizon Aretakis-constant and Lifshitz-throat scaling arguments are supported by numerical evolution of the scalar wave equation.",
+  "technical_objections": [
+    {
+      "confidence": 0.85,
+      "evidence": "The paper states 'the field itself does not blow up on the horizon in the far future, as can be seen, for instance, by numerically integrating the equations of motion.' This rests entirely on numerical evidence for specific metric choices and initial data.",
+      "objection": "The non-blow-up of the field \u03c6 itself at late times \u2014 the foundational premise of all stability conclusions \u2014 is assumed rather than proved analytically for rank-k>1 and infinitely-degenerate horizons. For ERN, Aretakis proved this rigorously (Theorem 7.2); no analogous theorem is presented or cited for the new geometries.",
+      "paper_location": "Section 3.2 (first paragraph after Eq. 3.3); Section 3.4 (premise of argument)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "Section 2.2.2 explicitly states that massive scalars lack locally defined Aretakis constants yet still exhibit instability. The stability proof in Section 3.4 relies entirely on the infinite tower of Aretakis constants (Eq. 3.22), which does not exist for massive fields. The 'graveyard' interpretation in Section 5 does not acknowledge this gap.",
+      "objection": "The stability argument for infinitely-degenerate horizons applies only to minimally coupled massless scalar fields, which possess locally defined Aretakis constants. Massive scalar fields lack such constants but still exhibit Aretakis instability on standard extremal black holes. The paper does not analyze this case for infinitely-degenerate horizons.",
+      "paper_location": "Section 3.4; Section 2.2.2 (massive scalar discussion)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.65,
+      "evidence": "The paper asserts 'this is true for all integer n, thanks to the existence of infinitely-many Aretakis constants' without bounding the growth of H_n or checking convergence of the formal series \u2211_n H_n r^n.",
+      "objection": "For the infinitely-degenerate case, the Aretakis constants H_j (j=0,1,2,...) form an infinite sequence whose growth rate as j\u2192\u221e is not analyzed. Even if each H_j is finite and each \u2202_r^n \u03c6 approaches H_n in time, uncontrolled growth H_j ~ (j!)^\u03b1 could imply the spatial field profile near the horizon is non-smooth or divergent in r.",
+      "paper_location": "Section 3.4, Eqs. (3.22)\u2013(3.24)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.65,
+      "evidence": "Eq. (3.16) shows that in the \u03b5\u21920 scaling limit, the l>0 centrifugal term is suppressed. But the paper does not track subleading corrections or rule out derivative growth there. Numerical checks cover only l=1,2 for selected initial data.",
+      "objection": "The l>0 decay claim is stated more strongly than the near-horizon scaling argument proves. The scaling shows only that the leading smooth throat limit kills l>0 modes; subleading scalings or different weight choices could in principle carry derivative growth invisible at leading order.",
+      "paper_location": "Section 3.3, Eq. (3.16)\u2013(3.18); Section 3.4 last paragraph",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "Eq. (3.7) defines \u03bb_k from f^{(k+1)}(r_H), which vanishes identically for all k in the infinitely-degenerate geometry. The paper instead uses a direct Aretakis-constant argument for the infinite-k case, which is logically separate from the Lifshitz scaling picture.",
+      "objection": "The near-horizon scaling argument (Section 3.3) is explicitly constructed for finite k via the Lifshitz throat with length scale \u03bb_k ~ [f^{(k+1)}(r_H)]^{-1/(k+1)}. For k\u2192\u221e (infinitely-degenerate case), f^{(k+1)}(r_H)=0 for all k, making \u03bb_k ill-defined. The scaling approach to instability-absence for the infinite-k case therefore cannot be derived by taking k\u2192\u221e in the Lifshitz throat argument.",
+      "paper_location": "Section 3.3, Eq. (3.7); transition to Section 3.4",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.75,
+      "evidence": "The paper reports grid parameters and acknowledges the artifact in Figure 4, but provides no Richardson extrapolation, convergence rate estimate, or systematic resolution comparison.",
+      "objection": "No numerical convergence tests are presented. Grid parameters are stated, but no comparison at different resolutions is provided. Figure 4 explicitly acknowledges a step-like numerical artifact, raising the question of whether late-time saturation in other figures could also be resolution-dependent.",
+      "paper_location": "Section 4; Appendix D; Figure 4",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "Only f = exp(\u22121/r^2) (Eq. 4.21) is numerically tested. The universality requires the same decay premise to hold for all smooth non-analytic f with all derivatives vanishing at the horizon.",
+      "objection": "The universality claim at the end of Section 3.4 ('this absence of Aretakis instability for the l=0 mode remains valid for any infinitely-degenerate horizon') relies on the premise that \u03c6|_{r=0} doesn't blow up, which is established only numerically for one specific f(r). The claim therefore outpaces the evidence.",
+      "paper_location": "Section 3.4, last paragraph",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

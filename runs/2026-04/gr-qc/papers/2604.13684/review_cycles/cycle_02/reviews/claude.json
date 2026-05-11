@@ -1,0 +1,161 @@
+{
+  "confidence": 0.7,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 4,
+    "novelty": 3,
+    "reviewer_confidence": 6,
+    "significance": 3,
+    "technical_soundness": 3
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Score lowered from 4.5 to 3.5; verdict changed from 'routine' to 'weak_evidence'. The gemini reviewer's argument that \u03b4 scales trivially with \u03b5 (making absolute smallness near-meaningless without normalization) and the mass-shell violation concern during integration are valid and were underweighted in cycle 1. The codex reviewer's identification of Warburton\u2013Barack (2010) as a scalar (not electromagnetic) self-force paper is a genuine issue I missed. Technical soundness and significance scores lowered accordingly.",
+    "invalid_points_from_other_reviewers": [
+      "Gemini (characterizing the diagnostic as 'physically meaningless'): The orthogonality condition IS a genuine consistency requirement of relativistic dynamics. Violations of it demonstrate real internal inconsistency in the approximation. The problem is that \u03b4 \u2248 0 is overinterpreted as precision validation \u2014 the diagnostic is meaningful but weak, not meaningless.",
+      "Gemini (asserting projection would trivially eliminate \u03b4 and make the analysis 'moot'): Projecting f^\u03bc_approx onto the orthogonal subspace would force \u03b4 = 0 by construction but would not make the underlying approximation more accurate. The question of whether to project or not is a separate choice from whether the un-projected force satisfies orthogonality, and studying the un-projected deviation is a legitimate (if limited) diagnostic."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Gemini: The diagnostic \u03b4 scales with the overall force magnitude \u03b5, so extremely small \u03b4 for electron parameters reflects mostly the smallness of the force rather than the accuracy of the functional approximation. A normalized diagnostic is needed.",
+      "Gemini: Using a non-orthogonal force in the equations of motion without a projection step or normalization enforcement violates u^\u03bc u_\u03bc = -1 during integration, making the physical interpretation of the numerical trajectories ambiguous.",
+      "Codex: Warburton\u2013Barack (2010), cited as numerical validation of the electromagnetic Gal'tsov terms, is actually about scalar self-force in Kerr \u2014 not electromagnetic self-force. The validation is weaker than the paper implies.",
+      "Codex: The paper does not provide AccuracyGoal, PrecisionGoal, or residual error estimates from the Mathematica integration; WorkingPrecision -> 40 alone does not guarantee the ODE solution errors are below the reported \u03b4 values."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "The orthogonality condition \u03b4 = f^\u03bc_tail u_\u03bc = 0 is a valid covariant consistency diagnostic for approximate tail-force models.",
+      "notes": "The mathematical derivation is correct: normalization implies orthogonality; the Lorentz and local LL terms are orthogonal by construction; therefore the tail term must be orthogonal. However, \u03b4 = 0 is necessary but not sufficient for accuracy \u2014 including the trivial case f^\u03bc_tail = 0 which would yield \u03b4 = 0 exactly while being maximally wrong. The paper presents \u03b4 as a 'quantitative measure of precision' which is overclaimed.",
+      "paper_location": "Section 2.3, Eqs. (10)\u2013(15)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Adding Gal'tsov dissipative terms to Smith\u2013Will suppresses the orthogonality violation by many orders of magnitude.",
+      "notes": "Plausible and likely numerically correct. However, a significant part of the suppression for realistic parameters (electron \u03b5 ~ 10^-21) is trivially explained by the overall scale of the radiation-reaction force \u2014 \u03b4 scales with \u03b5, so extremely small \u03b4 for \u03b5 \u2248 10^-19 tells us very little about the relative accuracy of the approximation. The paper does not provide a normalized diagnostic.",
+      "paper_location": "Section 3.1, Table 1; Section 4",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The combined Smith\u2013Will and Gal'tsov approximations provide a reliable description of electromagnetic self-force in Schwarzschild backgrounds.",
+      "notes": "Reliability relative to the true (exact) tail force is never demonstrated. No comparison is made against numerical self-force calculations for the same trajectories. The orthogonality diagnostic cannot rule out a force that satisfies \u03b4 \u2248 0 while being substantially wrong in magnitude or spatial direction.",
+      "paper_location": "Abstract; Section 4 (Conclusions)",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "Gal'tsov dissipative terms derived for circular orbits in Kerr apply as estimates for general orbital configurations in the magnetized Schwarzschild case.",
+      "notes": "The paper acknowledges these are 'practical estimates' but provides no bound on the extrapolation error for non-circular trajectories. Furthermore, the cited validation (Warburton\u2013Barack 2010) is for scalar self-force, not electromagnetic self-force, so the analogy is weaker than the paper implies.",
+      "paper_location": "Section 2.2.2, Section 3.3",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "For realistic electron parameters the orthogonality condition is satisfied to extremely high precision.",
+      "notes": "Numerically likely correct but conceptually misleading. The smallness of \u03b4 for \u03b5 \u2248 10^-19 is largely an artifact of the overall force scale, not a demonstration that the functional form of the approximation is accurate.",
+      "paper_location": "Tables 1\u20133, Sections 3.1\u20133.3",
+      "support_level": "partially_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "A normalized form of the orthogonality diagnostic (e.g., |\u03b4|/|f_tail| or |\u03b4|/|f_gravity|) to separate approximation quality from force-scale suppression.",
+      "paper_location": "Section 2.3, Section 3",
+      "why_it_matters": "Without normalization, absolute values of \u03b4 decrease trivially as \u03b5 decreases, making the metric conflate genuine precision improvement with simple overall force suppression. The claimed 'many orders of magnitude improvement' may partly reflect this confound."
+    },
+    {
+      "assumption": "The Gal'tsov circular-orbit dissipative terms remain a reasonable approximation for the actual (non-circular) trajectories studied in Sections 3.3.",
+      "paper_location": "Section 2.2.2, Section 3.3",
+      "why_it_matters": "If the Gal'tsov terms are systematically wrong for non-circular orbits, the improved orthogonality in the magnetized case may be partly an artifact of their specific functional form rather than a true accuracy gain."
+    },
+    {
+      "assumption": "The reduced-order Landau\u2013Lifshitz equation is valid in the regimes studied and preserves the four-velocity normalization to the required accuracy.",
+      "paper_location": "Section 2.1",
+      "why_it_matters": "LL reduction introduces a controlled approximation to the local radiation-reaction term. If this reduction has non-trivial error near the horizon, the decomposition used in Eq. (14) to isolate the tail contribution may not hold cleanly."
+    },
+    {
+      "assumption": "The numerical integration enforces or monitors the mass-shell constraint u^\u03bc u_\u03bc = -1 despite the non-orthogonal approximate tail force.",
+      "paper_location": "Section 3",
+      "why_it_matters": "If rest-mass is not conserved during integration, the reported trajectories and hence the reported \u03b4 values may correspond to an unphysical particle."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "What are the explicit analytical forms of the Smith\u2013Will term (Eq. 7), Gal'tsov terms (Eqs. 8\u20139), and the diagnostic \u03b4 (Eq. 15)? Do they agree with the original Smith\u2013Will (1980) and Gal'tsov (1982) papers, and are the index conventions (covariant vs. contravariant) consistent when forming u_\u03bc f^\u03bc_tail?",
+      "why_model_cannot_resolve": "All these equations appear as empty cells in the HTML source. Verification requires the PDF and access to the original references."
+    },
+    {
+      "question": "Do the numerical tables contain the values claimed in the main text? In particular, does the Table 1 entry for Smith\u2013Will at r0=5M and \u03b5=10^-3 actually show a seven-orders-of-magnitude reduction compared to r0=3M?",
+      "why_model_cannot_resolve": "All table entries are blank in the HTML. A reviewer with the PDF can read and spot-check the claimed trends."
+    },
+    {
+      "question": "Does the numerical integration in Section 3 enforce the mass-shell constraint u^\u03bc u_\u03bc = -1 at each integration step, or does it allow drift? Is the norm monitored?",
+      "why_model_cannot_resolve": "The paper does not describe the ODE solver setup, stopping criteria, or any constraint-enforcement procedure. Access to the Mathematica notebook or supplementary material is required."
+    },
+    {
+      "question": "Is the application of Gal'tsov circular-orbit terms to non-circular magnetized trajectories explicitly justified in the companion paper Juraev et al. 2026 (arXiv:2603.17728)?",
+      "why_model_cannot_resolve": "The companion paper is not in the review bundle, and the degree of orbit non-circularity in Section 3.3 cannot be assessed without the full numerical setup."
+    }
+  ],
+  "novelty_assessment": "Low novelty. The orthogonality diagnostic follows directly from the elementary relativistic identity u^\u03bc(Du_\u03bc/d\u03c4) = 0, and applying it to check approximate self-force models is a natural sanity check that workers in this area would recognise immediately. The main quantitative finding \u2014 that combining conservative and dissipative tail terms passes the consistency check better than either alone \u2014 was strongly anticipated because the Gal'tsov terms provide the dissipative component that Smith\u2013Will's static derivation structurally omits. The paper makes a useful practical contribution by quantifying violation magnitudes across parameter space, but does not derive new approximations, advance the theoretical understanding of tail physics, or provide independent benchmarks against exact numerical self-force computations.",
+  "overall_score_10": 3.5,
+  "paper_id": "2604.13684",
+  "recommended_verdict": "weak_evidence",
+  "reviewer": "claude",
+  "score_rationale": "Lowered from 4.5 to 3.5 after evaluating other reviewers. The diagnostic logic is mathematically correct (orthogonality is a genuine consistency requirement) but two substantial problems reduce the work below the threshold of useful evidence. First, the 'precision' interpretation of \u03b4 is not justified: for realistic electron parameters, \u03b4 is trivially suppressed by the overall scale of the radiation-reaction force (\u03b5 ~ 10^-21), so the reported numerical smallness conflates force-scale suppression with approximation quality, and a normalized diagnostic is never provided. Second, the numerical integration uses a non-orthogonal force without documented constraint enforcement, raising the concern that rest-mass is not conserved during the simulation. These two issues, combined with the uncited approximation regime violations (Gal'tsov terms outside circular-orbit setting) and the weak validation reference (scalar self-force Warburton\u2013Barack 2010 cited for EM Gal'tsov), leave the main conclusion \u2014 that the combined approximation 'provides a reliable description' \u2014 without adequate support. Novelty and significance are both low: the diagnostic is elementary, the approximations are pre-existing, and no comparison against exact numerical self-force benchmarks is provided. The HTML rendering makes independent equation verification impossible. Reviewer confidence rises to 6/10 given alignment with other reviewers on the key concerns.",
+  "summary": "The paper introduces \u03b4 = u_\u03bc f^\u03bc_tail as a consistency diagnostic for approximate tail-force models in Schwarzschild spacetime, testing Smith\u2013Will (conservative) and Gal'tsov (dissipative) approximations across three configurations. On second review, incorporating other reviewers' arguments substantially lowers my assessment. The codex reviewer correctly identifies that Warburton\u2013Barack (2010), cited as validation of Gal'tsov electromagnetic terms, is actually about scalar self-force in Kerr \u2014 a non-trivial mismatch. The gemini reviewer's strongest arguments \u2014 that \u03b4 scales trivially with the radiation-reaction parameter \u03b5 and that using a non-orthogonal force in the equations of motion violates rest-mass conservation during integration \u2014 are valid and were underweighted in my cycle 1 review. However, I reject gemini's most extreme characterisation: the diagnostic is not \"physically meaningless,\" it is a genuine (if weak) consistency check, but the paper's conclusions overclaim its significance as a precision measure.",
+  "technical_objections": [
+    {
+      "confidence": 0.88,
+      "evidence": "The paper reports \u03b4 ~ 10^-31 for electron parameters, but \u03b5 ~ 10^-19 means even a completely wrong tail force of the same overall scale would produce |\u03b4| of similar magnitude if its projection onto u^\u03bc happened to be small. The trivial bound \u03b4 = 0 (f^\u03bc_tail = 0) passes the diagnostic perfectly.",
+      "objection": "The orthogonality diagnostic \u03b4 is trivially small for electron-scale parameters primarily because the entire tail force scales as \u03b5 ~ 10^-21, not because the approximation is accurate. No normalized residual (e.g., |\u03b4|/|f_tail|) is reported, so the 'many orders of magnitude' suppression reported for realistic \u03b5 cannot be distinguished from a scaling artifact.",
+      "paper_location": "Tables 1\u20133; Sections 3.1\u20133.3; Conclusions",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.78,
+      "evidence": "If \u03b4 \u2260 0 by construction and the EOM integrator does not re-project the four-velocity after each step, the norm u^\u03bc u_\u03bc will drift. Standard methods (e.g., constraint damping or post-step normalization) would need to be described. Their absence means the numerical setup is incomplete as reported.",
+      "objection": "Using a non-orthogonal approximate force directly in the equations of motion (without projecting onto the four-velocity-orthogonal subspace) causes the numerical integration to violate the mass-shell constraint u^\u03bc u_\u03bc = -1, so the 'particle rest mass' artificially changes during the simulation. The paper does not mention any constraint-projection step or drift monitoring.",
+      "paper_location": "Section 2.1 (Eq. 4); Section 3",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.82,
+      "evidence": "Reference title is 'Self-force on a scalar charge in Kerr spacetime: Circular equatorial orbits.' The scalar and electromagnetic self-forces differ in their retarded Green's functions and in the specific tail expressions. The analogy may be suggestive but is not a rigorous validation.",
+      "objection": "Warburton and Barack (2010), cited as numerical validation of the Gal'tsov electromagnetic tail expressions, is actually a study of scalar self-force on a scalar charge in Kerr spacetime \u2014 not electromagnetic self-force. The citation cannot support the claim that the EM Gal'tsov terms closely match numerical EM self-force.",
+      "paper_location": "Introduction; Section 2.2.2; References",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.82,
+      "evidence": "Eq. (8)\u2013(9) are labeled as valid for circular motion with angular frequency \u03a9_\u03c6. In Section 3.3 the trajectories are not constrained to be circular. The text calls them 'analytic estimates' without quantifying the additional approximation error for non-circular motion.",
+      "objection": "The Gal'tsov dissipative terms were derived strictly for circular equatorial orbits and are applied here to general (non-circular) trajectories in magnetized Schwarzschild spacetime without any bounding of the extrapolation error.",
+      "paper_location": "Section 2.2.2, Section 3.3",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "No comparison to exact or numerical self-force results is provided for any trajectory studied. The paper acknowledges the approximations are 'practical estimates' but draws strong reliability conclusions based solely on \u03b4.",
+      "objection": "\u03b4 is a necessary but not sufficient condition for accuracy of the tail approximation. A force field could satisfy \u03b4 \u2248 0 while pointing in the wrong spatial direction or having the wrong magnitude \u2014 these errors are invisible to the scalar diagnostic. The paper's claims of 'precision' and 'reliability' require a stronger argument than \u03b4 \u2248 0.",
+      "paper_location": "Section 2.3, Section 4 (Conclusions)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "Every equation cell appears as '| |' in the HTML. This is a rendering artifact but makes the bundle non-auditable. A PDF reviewer can check these.",
+      "objection": "Key equations \u2014 Smith\u2013Will (Eq. 7), Gal'tsov terms (Eqs. 8\u20139), and the explicit diagnostic formula \u03b4 (Eq. 15) \u2014 are all empty in the HTML source due to arXiv rendering failures. All numerical table entries are also blank. Independent verification of inputs and outputs is impossible from the provided source.",
+      "paper_location": "Sections 2.2.1, 2.2.2, 2.3; Tables 1\u20133",
+      "severity": "major",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "Text: 'we present the results in Table 4 for the various...' while the table header reads 'Table 3: Summary of numerical results for weakly magnetized Schwarzschild black hole.'",
+      "objection": "Section 3.3 refers to 'Table 4' but the corresponding table is captioned 'Table 3'. This cross-reference inconsistency, combined with missing equation content, reduces auditability.",
+      "paper_location": "Section 3.3, Table 3 caption",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

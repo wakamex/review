@@ -1,0 +1,97 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "The review bundle contained only the abstract, author list, and references \u2014 the full article body was absent due to a scraper/paywall limitation. In cycle 2, codex accessed the arXiv PDF (reportedly arXiv:2504.20338) and filled in quantitative results, methods, and robustness checks not present in the supplied bundle. Gemini maintained a near-zero technical score based on the missing bundle text; claude and codex treated the PRL Editors' Suggestion status as a meaningful prior and assessed the paper on available evidence. The mechanical score average across cycle 2 reviewers is 4.27/10, with a wide spread (gemini 2.0, claude 5.0, codex 5.8) primarily driven by the gemini/claude-codex disagreement over how to handle bundle incompleteness. Quantitative neutrino mass values appearing blank in the abstract HTML are a known scraping artifact. The paper's own robustness tables (Table II, End Matter Fig. 4, as reported by codex from the full text) are the primary basis for the fragility objections.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper proposes that dark energy is produced by \"cosmologically coupled\" black holes \u2014 black holes formed from dying stars that gain mass as the universe expands, converting ordinary matter into dark energy over cosmic history. Combined with the latest galaxy survey data (DESI DR2), the authors claim this model matches the universe's expansion history, partially alleviates the long-standing \"Hubble tension,\" and predicts neutrino masses that are positive \u2014 fixing an awkward problem where standard analyses push toward physically impossible negative values. The review board found the idea interesting and the paper credibly published (PRL Editors' Suggestion), but the headline neutrino mass result is fragile under several reasonable analysis variations, the mechanism requires black holes to have exotic non-standard interiors that remain theoretically contested, and the model requires converting roughly 25\u201350% of cosmic baryons to dark energy, a fraction that strains independent observational bounds.",
+  "human_spotchecks": [
+    "The actual numerical values for \u03a3m\u03bd under each SFRD (Trinca and Madau), with confidence intervals, were garbled in the review bundle HTML. Verify from the full PRL text or arXiv PDF (reportedly arXiv:2504.20338) whether the quoted 95% positive \u03a3m\u03bd posteriors are robust to the baseline choices described.",
+    "Determine whether the cosmological coupling exponent k = 3 is derived from first-principles theory, fixed from prior observational fits, or selected post-hoc after inspecting the DESI DR2 fit quality. This is critical for the parameter-count claim.",
+    "Assess whether the two SFRD templates (Trinca et al. 2024 and Madau-Fragos 2017) were pre-registered or selected after examining their effect on cosmological fit quality. Post-hoc SFRD selection would inflate stated statistical confidence.",
+    "Expert GR evaluation of whether the cosmological coupling M \u221d a^k with k \u2248 3 is physically realizable for realistic stellar-collapse remnants, specifically in light of the Faraoni & Rinaldi (PRD 110, 2024) critique and the Croker et al. responses.",
+    "Verify whether the positive neutrino mass peak survives a combined robustness analysis that simultaneously includes supernovae data, full CMB lensing, and alternative CMB likelihoods \u2014 the paper's own checks show individual sensitivities of \u22120.04 to \u22120.05 eV each.",
+    "Inspect the modified CLASS/Cobaya Boltzmann solver (Zenodo release 10.5281/zenodo.15734248) to determine whether the CCBH perturbation approximations (pinned \u03b4_CCBH = 0, excluded CMB lensing) introduce systematic biases in the inferred neutrino mass posterior at a level comparable to the claimed signal."
+  ],
+  "paper_id": "bm-125-01",
+  "public_summary": "Published as a PRL Editors' Suggestion (August 2025), this DESI Collaboration paper combines DESI Data Release 2 baryon acoustic oscillation measurements (~14 million extragalactic targets) with CMB datasets to test whether dark energy is produced by matter conversion mediated by cosmologically coupled black holes (CCBHs). In the CCBH framework, stellar-collapse remnants are modeled as exotic compact objects whose mass grows with cosmic expansion (M \u221d a^k, k = 3), thereby transferring baryonic matter into dark energy at a rate set by the observed cosmic star formation rate density (SFRD). The paper argues this model has the same number of free parameters as \u039bCDM because the SFRD is treated as a fixed external observational input rather than a fitted function. Two published SFRDs (Trinca et al. and Madau-Fragos) bracket current observations and yield somewhat different results: the Trinca SFRD fits the expansion history nearly as well as \u039bCDM (\u0394\u03c7\u00b2_MAP \u2248 0.7), while the Madau SFRD produces a larger H0 shift (Hubble tension reduced from ~4.2\u03c3 to ~2.7\u03c3) but requires consuming ~50% of cosmic baryons. Both SFRDs are claimed to yield positive summed neutrino mass posteriors at 95% confidence, in contrast to standard \u039bCDM + DESI DR2 analyses that push \u03a3m\u03bd toward or below the oscillation lower bound. However, the paper's own robustness checks show the positive neutrino mass peak disappears when supernovae data are added, the coupling exponent k is allowed to float, or alternative CMB lensing/likelihood choices are made. The perturbation treatment is acknowledged to be incomplete: CCBH density perturbations are pinned to zero and CMB lensing is excluded from the baseline pending a future full perturbation study. The theoretical basis of the mechanism \u2014 that realistic stellar-mass black holes are nonsingular energized-vacuum objects exhibiting cosmological coupling \u2014 is not derived in this paper and remains actively debated in the GR community.",
+  "reviewer_disagreements": [
+    "Gemini assigned technical_soundness = 1 and overall scores of 1\u20132 across both cycles, treating the missing bundle text (absent article body, garbled abstract numerics) as a paper-level fatal flaw. Claude and codex disagreed, arguing the missing text is a bundle/scraper quality issue \u2014 the paper is a published PRL Editors' Suggestion that passed peer review \u2014 and that conflating bundle incompleteness with paper invalidity miscalibrates the score. Codex in cycle 2 accessed the arXiv PDF and confirmed the paper body exists and contains the expected methods, tables, and robustness checks.",
+    "Codex revised upward substantially from cycle 1 (overall 3.8 \u2192 5.8) after accessing the arXiv full text, while gemini maintained a near-minimal score in cycle 2. Claude was stable across cycles (5.5 \u2192 5.0). The spread (gemini 2, claude 5, codex 5.8 in cycle 2) primarily reflects disagreement about how to weight bundle-access limitations versus the paper's published status.",
+    "On recommended verdict: claude called the paper 'promising,' codex called it 'contested,' and gemini called it 'weak_evidence' in both cycles. The disagreement is partly definitional \u2014 codex's 'contested' and claude's 'promising' both acknowledge the theoretical disputes and fragility while differing on whether the overall balance tips toward interest or skepticism."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The headline neutrino mass result is fragile under robustness variations reported by the authors themselves: adding SNe, allowing the coupling exponent k to float, adding Pantheon+, or including CMB lensing/alternative CMB likelihoods each shift the \u03a3m\u03bd posterior by roughly \u22120.04 to \u22120.05 eV and can restore a near-zero constraint, eliminating the positive peak.",
+      "paper_location": "Discussion and End Matter, Table II and Fig. 4",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex"
+      ]
+    },
+    {
+      "objection": "The perturbation treatment is acknowledged to be incomplete: CCBH fractional density perturbations are pinned to zero, CMB lensing is excluded from the baseline because nonlinear and small-scale perturbations are not accurately modeled, and a full perturbation study is deferred to future work. Neutrino mass constraints are sensitive to CMB lensing and structure growth, making the baseline posterior reliability uncertain.",
+      "paper_location": "End Matter, pp.8-10",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex"
+      ]
+    },
+    {
+      "objection": "The theoretical premise \u2014 that stellar-collapse remnants are nonsingular energized-vacuum objects with cosmological mass coupling M \u221d a^k at k \u2248 3 \u2014 is not derived in this paper and is actively contested in the GR literature (Faraoni & Rinaldi 2024; Faraoni & Jacques 2007). Standard Kerr/Schwarzschild black holes in cosmological backgrounds do not generically exhibit this coupling. If realistic astrophysical black holes do not carry this coupling, the dark energy production mechanism fails entirely.",
+      "paper_location": "Theory section; prior work Croker & Weiner 2019, Croker et al. 2022, Faraoni & Rinaldi 2024",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The required baryon consumption is large and observationally constrained: the Madau SFRD implies a baryon survival fraction of ~0.50, which the authors acknowledge is approximately 2\u03c3 from fast radio burst baryon density constraints. This makes the stronger (larger H0 shift, more positive \u03a3m\u03bd) Madau SFRD result less persuasive as evidence for the physical model.",
+      "paper_location": "Table I and Results discussion",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex"
+      ]
+    },
+    {
+      "objection": "The 'same number of free parameters as \u039bCDM' claim hides substantial fixed structure: k = 3 is fixed rather than fitted, two SFRD templates are fixed external functions with SFRD-specific \u039e prior intervals, and SFRD normalization is fixed. These fixed choices materially affect inference but are not counted as free parameters, making the model comparison to \u039bCDM difficult to interpret rigorously.",
+      "paper_location": "Abstract; Theory Eqs. (1)\u2013(3); End Matter priors",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The claim that a positive \u03a3m\u03bd peak is a 'general feature of any model that converts sufficient matter to dark energy during and after reionization' is not supported by a general theoretical argument \u2014 it is demonstrated only within the CCBH scenario. Different matter-to-DE coupling functions and perturbation structures in other interacting dark energy models may not produce this feature.",
+      "paper_location": "Abstract, final sentence; Discussion p.5",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "BBN consistency is presented as a model result but is expected by construction: CCBH dark energy production is driven by stellar collapse peaking around z ~ 2, while BBN occurs at z ~ 10^8\u201310^9. Listing BBN agreement as a validation inflates the apparent independent confirmation count.",
+      "paper_location": "Abstract",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The CCBH model can fit DESI DR2 BAO + Planck PR4 CMB with a goodness-of-fit comparable to \u039bCDM for the Trinca SFRD (\u0394\u03c7\u00b2_MAP \u2248 0.7), indicating the model is not observationally ruled out by baseline BAO+CMB data alone.",
+    "The CCBH model reduces Hubble tension from ~4.2\u03c3 to ~3.3\u03c3 (Trinca SFRD) or ~2.7\u03c3 (Madau SFRD), representing a genuine but incomplete alleviation.",
+    "The paper demonstrates a physical mechanism \u2014 late-time baryon depletion shifting the matter power spectrum normalization \u2014 that can push the summed neutrino mass posterior away from zero in the baseline analysis, producing a positive peak under specific dataset and model choices.",
+    "The model's onset of dark energy production after reionization means it does not perturb BBN-era physics, which is internally consistent (though not an independent empirical test)."
+  ],
+  "technical_takeaway": "The cosmologically coupled black hole (CCBH) model ties dark energy production to the cosmic star formation rate density (SFRD) via late-time baryon depletion, with black hole mass scaling as M \u221d a^k (k = 3 fixed). Fit to DESI DR2 BAO + Planck PR4 CMB using an augmented CLASS/Cobaya implementation: the Trinca SFRD gives \u0394\u03c7\u00b2_MAP \u2248 0.7 vs. \u039bCDM with a positive \u03a3m\u03bd posterior; the Madau SFRD reduces Hubble tension to ~2.7\u03c3 but is ~2\u03c3 from fast radio burst baryon constraints at baryon survival fraction ~0.50. The \u03a3m\u03bd result is fragile: floating k, adding Pantheon+ SNe, or including CMB lensing shifts the posterior by roughly \u22120.04 to \u22120.05 eV and can restore a near-zero \u039bCDM-like constraint. The perturbation treatment pins CCBH density perturbations to zero and excludes CMB lensing from the baseline as deferred work. The theoretical premise \u2014 k \u2248 3 cosmological coupling for realistic stellar-collapse remnants \u2014 is non-standard and contested in the GR literature (Faraoni & Rinaldi 2024 and prior critiques)."
+}

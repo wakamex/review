@@ -1,0 +1,147 @@
+{
+  "confidence": 0.72,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 8,
+    "novelty": 6,
+    "reviewer_confidence": 6,
+    "significance": 8,
+    "technical_soundness": 7
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "First cycle review; no prior cycle.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "GreyRing accurately reproduces both the amplitude and phase of the frequency-domain post-merger signal, extending prior amplitude-only greybody models.",
+      "notes": "Validated against a large SXS catalog with mismatches ~10\u207b\u2074 for (2,2). Phase model is empirically well-motivated but justified post-hoc as a Laurent expansion; the theoretical underpinning for the specific \u03c6\u2081/\u03c9 form is not derived from the Green's function analysis, only from Ref. [111] for the amplitude.",
+      "paper_location": "Abstract and Eqs. (2)-(4); Fig. 1; Appendix B",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "GreyRing typically outperforms state-of-the-art time-domain ringdown models (e.g., TEOBPM) in mismatch.",
+      "notes": "The comparison relies on mismatches from Ref. [52] for TEOBPM. The inner product is noise-unweighted (Eq. 6), which may not directly compare with the metric used in Ref. [52]. The comparison is not performed in the same paper under identical conditions, so fairness is not guaranteed.",
+      "paper_location": "Abstract; main text after Eq. (5); Fig. 2",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The greybody-factor consistency test can infer (M_f, \u03c7_f) from the post-merger signal alone, without overtones or early start-time sensitivity.",
+      "notes": "The claim is supported by Fig. 10 showing stability of (M_f, \u03c7_f) over f_low variations. However, the stability is partly due to 7-parameter flexibility (phenomenological nuisance parameters A, \u03c6\u2081 absorbing modeling uncertainty) and to fixing extrinsic parameters. This should be noted as a caveat.",
+      "paper_location": "Tests of gravity with GreyRing section; Discussion item (ii)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "GreyRing applied to GW250114 yields posteriors for (M_f, \u03c7_f) consistent with and slightly narrower than standard LVK ringdown analyses.",
+      "notes": "Fig. 3 is clear and the comparison with both fundamental-mode-only and fundamental+overtone QNM analyses is shown. The quantitative values are reported with 90% CIs. The narrowing is modest and could partly reflect the fixing of extrinsic parameters.",
+      "paper_location": "Application to GW250114; Fig. 3; Appendix D",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The greybody factor resums all overtones and captures features not in the QNM expansion, including late-time tails.",
+      "notes": "While the Green's function indeed contains all overtone contributions, the GreyRing model as deployed still uses phenomenological parameters fitted to NR data. The 'resummation' is formal, not computational; the phase term \u03c6\u2081/\u03c9 was added empirically. The claim overstates what the current model achieves from first principles.",
+      "paper_location": "Discussion, item (i)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "GreyRing achieves mismatch accuracy sufficient for SNR ~ 100\u2013200 signals, relevant for next-generation detectors.",
+      "notes": "Uses the standard criterion M < 1/(2 SNR\u00b2) from Refs. [61,83]. With M ~ 10\u207b\u2074 this gives SNR ~ 70, which is conservative for next-gen; slightly optimistic for the stated range 100\u2013200. The argument is standard and internally consistent.",
+      "paper_location": "Discussion, last paragraph before extensions",
+      "support_level": "well_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The greybody factor model is applied only in the post-merger frequency range (f > f_knee), and the prescription for identifying f_knee and the valid frequency band is heuristic (parameters vary by less than 10% across fitting range). The stability criterion is not analytically motivated.",
+      "paper_location": "Appendix B (Fits to numerical simulations section)",
+      "why_it_matters": "The choice of frequency band determines which part of the NR waveform is fitted and tested. An alternative criterion could lead to different mismatches or GR test conclusions."
+    },
+    {
+      "assumption": "Mode mixing between spheroidal and spherical harmonics is neglected (mentioned only briefly). For nonzero spin, the mixing coefficients depend on \u03c7_f and could be non-negligible at higher multipoles or higher spins.",
+      "paper_location": "Appendix B: 'we neglect such mixing, as it is expected to be subdominant in the frequency range of interest'",
+      "why_it_matters": "If mode mixing is non-negligible, the fitted (M_f, \u03c7_f) from subdominant modes could be biased. For rapidly spinning remnants like GW250114 (\u03c7_f ~ 0.7), the effect may be more than subdominant."
+    },
+    {
+      "assumption": "The phenomenological parameters (A, \u03c6\u2081) are treated as free nuisance parameters without fitting formulas as functions of progenitor parameters. The model therefore requires fitting to the post-merger data of each event independently, rather than predicting the full waveform from progenitor parameters alone.",
+      "paper_location": "Main text: 'A, \u03c6\u2081, and \u03b7 are source-dependent fitting parameters'",
+      "why_it_matters": "For a truly predictive GR test, one would want a model where only (M_f, \u03c7_f) are unknowns. As written, the test relies on (A, \u03c6\u2081) as nuisance parameters, which could absorb genuine GR deviations."
+    },
+    {
+      "assumption": "Linearity of the ringdown is assumed throughout. Nonlinear effects (quadratic QNMs) are acknowledged as a limitation for high-spin/high-SNR cases, but no quantitative assessment of their impact on the GR test is provided.",
+      "paper_location": "Discussion; Appendix B: 'potential nonlinear effects'",
+      "why_it_matters": "At GW250114-level SNR, nonlinear quadratic QNM contributions may already be detectable. Mismodeling these as part of the greybody factor signal could bias (M_f, \u03c7_f) in ways that could be falsely interpreted as GR deviations."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Is the mismatch definition in Ref. [52] (for TEOBPM) identical to or compatible with the noise-unweighted inner product of Eqs. (5)-(6) in this paper? If not, the claimed order-of-magnitude improvement over TEOBPM may be unreliable.",
+      "why_model_cannot_resolve": "Ref. [52] is a preprint (arXiv:2511.02915) not available in my training data at the needed detail level; I cannot verify the exact mismatch definition used there."
+    },
+    {
+      "question": "Does Ref. [111] (Rosato, De Amicis, Pani, arXiv:2603.20490) actually prove that the reflection amplitude R(\u03c9) appears as an explicit factor in the Green's function for the Kerr case (not just Schwarzschild), and does this result extend to the comparable-mass merger regime used here?",
+      "why_model_cannot_resolve": "The paper in question is from March 2026 and may be outside my training data. The extension from test-particle/perturbation theory to comparable-mass mergers involves phenomenological parameters that cannot be verified from the abstract alone."
+    },
+    {
+      "question": "Are all SXS simulations used in Fig. 2 and Fig. 5 distinct from those used to develop or calibrate the phenomenological parameters in Ref. [113]? Cross-contamination would inflate the apparent mismatch performance.",
+      "why_model_cannot_resolve": "The paper states simulations are from IDs above a cutoff for Appendix B but doesn't explicitly clarify whether the full catalog used overlaps with the training set of Ref. [113]'s fitting formulas."
+    }
+  ],
+  "novelty_assessment": "The novelty is incremental but meaningful within a well-defined research program. The core amplitude model was established in Ref. [113] (same group, December 2025); the key new contribution here is the phase model and the assembled GR consistency test. The theoretical justification for the full complex model comes from Ref. [111] (same group, March 2026). Several prior works (Refs. [98,99,112]) established the phenomenological greybody-factor amplitude picture. The assembled GreyRing template and its Bayesian application to GW250114 with the specific consistency test framing are genuinely new, and the mismatch improvements are substantial. However, the theoretical advance is essentially the engineering of the phase correction rather than a conceptually new idea. The GR test is novel in implementation but conceptually similar to (and weaker than) IMR consistency tests. Overall: solidly incremental novelty with practical value.",
+  "overall_score_10": 7,
+  "paper_id": "2604.11895",
+  "recommended_verdict": "promising",
+  "reviewer": "claude",
+  "score_rationale": "The paper presents a well-executed extension of a coherent research program, achieving strong numerical validation against NR simulations and a clean application to GW250114. Technical soundness is moderate-to-good (7): the amplitude model is well-grounded, but the phase term lacks first-principles derivation and the key theoretical paper is unpublished work by the same group. Novelty is incremental (6): the assembled template and GR test are new contributions, but rely heavily on immediately prior same-group preprints and the conceptual advance over [113] is the engineering of the phase correction. Significance is high (8): frequency-domain ringdown templates robust to start-time choice address a genuine bottleneck in GR testing, and the model is directly applicable to next-generation detectors. Clarity is strong (8): well-structured, clear exposition of model, validation, and results with appropriate caveats. Reviewer confidence is modest (6): I can audit the logic and structure but cannot independently verify NR comparisons or the Green's function calculations.",
+  "summary": "This paper introduces GreyRing, a frequency-domain model for the post-merger gravitational-wave signal from binary black hole coalescences, based on the complex reflection amplitude R(\u03c9) (equivalently, the greybody factor) of the Kerr remnant. The key advance over predecessor models [Refs. 98,99,112,113] is the addition of a phase model \u03b4\u03c6(\u03c9) = \u03c6\u2081/\u03c9 alongside the previously validated amplitude model, enabling a complete complex waveform template. The model achieves mismatches of order 10\u207b\u2074 for the dominant (2,2) mode across a large SXS NR catalog. The authors use GreyRing to define a novel consistency test of GR: inferring (M_f, \u03c7_f) from the post-merger signal alone with GreyRing, independent of the QNM decomposition, then comparing with standard BH spectroscopy. Applied to GW250114, the GreyRing posteriors are compatible with and slightly tighter than standard ringdown analyses, with the inferred remnant parameters claimed to be robust against variation of the analysis frequency band.",
+  "technical_objections": [
+    {
+      "confidence": 0.8,
+      "evidence": "The paper says 'The term \u03c6\u2081/\u03c9 is the simplest among a family of parametrizations discussed in the Supplemental Material' and that 'The correction can be understood as the leading-order high-frequency contribution in a Laurent expansion of the phase.' No derivation from the Green's function is given.",
+      "objection": "The phase correction \u03b4\u03c6(\u03c9) = \u03c6\u2081/\u03c9 in Eq. (4) is introduced primarily on empirical grounds. The justification as a 'Laurent expansion' is post-hoc. The paper does not show that this term is predicted or required by the Green's function formalism of Ref. [111], which motivates the amplitude model. This makes the phase model phenomenological rather than theory-derived, undermining the claim that the full model has a rigorous analytical foundation.",
+      "paper_location": "Eqs. (4), (15); Appendix B (GreyRing model section)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "Ref. [111] is cited as 'recently demonstrated' and 'based on this theoretical insight, we propose...' throughout. The paper's novelty claims partly depend on the correctness of [111].",
+      "objection": "The key theoretical foundation\u2014that R(\u03c9) is explicitly encoded in the Green's function component of the ringdown response\u2014rests entirely on Ref. [111] (Rosato, De Amicis, Pani, arXiv:2603.20490, March 2026), a preprint by largely the same author group submitted one month before this paper. This result has not yet been independently verified or peer-reviewed, creating a degree of circular dependency in the theoretical justification.",
+      "paper_location": "Introduction; Appendix B (GreyRing model section), citing Ref. [111]",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.75,
+      "evidence": "The paper states 'the extrinsic parameters...are fixed to the values reported in Table 2' and that a check with inclination and polarization sampled shows 'negligible impact,' but this is for those two angles only, not for all jointly-marginalized parameters.",
+      "objection": "For the GW250114 analysis, most extrinsic parameters (sky location, inclination, polarization, distance) are fixed to the LVK values from Ref. [3]. Fixing these parameters reduces the posterior uncertainty artificially, potentially explaining why GreyRing posteriors are slightly narrower than the LVK ringdown analysis (which may marginalize over more parameters). The comparison is therefore not strictly apples-to-apples.",
+      "paper_location": "Appendix C (Table 2); Appendix D",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.6,
+      "evidence": "The paper defines its own mismatch (Eqs. 5-6) without noise weighting, but Ref. [52] is an external comparison. The paper does not explicitly verify that the same metric was used.",
+      "objection": "The mismatch comparison with TEOBPM (claimed as 'at least one order of magnitude lower') uses an internally computed noise-unweighted inner product (Eq. 6) for GreyRing, while the TEOBPM numbers are imported from Ref. [52], which may use a different mismatch definition or frequency range. This makes the comparison potentially misleading.",
+      "paper_location": "Main text after Eq. (5); Fig. 2 caption citing Ref. [52]",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "The paper explicitly acknowledges this is 'conceptually similar to IMR consistency tests' but 'relies exclusively on the post-merger signal.' The GR-testing power relative to IMR consistency tests is not quantified.",
+      "objection": "The consistency test as designed compares two estimates of (M_f, \u03c7_f) that are both derived from the same post-merger frequency-domain data: one via GreyRing and one via QNM spectroscopy. A genuine test of GR would ideally compare these against a prediction from an independent observable (e.g., inspiral parameters). The internal consistency check demonstrated is weaker than an IMR test and is essentially testing whether two models fitted to the same ringdown data agree\u2014which they trivially should if both are reasonable models of the same Kerr spacetime.",
+      "paper_location": "Tests of gravity with GreyRing; Application to GW250114",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.65,
+      "evidence": "Fig. 11 shows significant degeneracy between A and \u03c6\u2081, consistent with these parameters absorbing model uncertainty. The tighter (M_f, \u03c7_f) posteriors are therefore not necessarily reflecting more information from the signal.",
+      "objection": "The paper claims the model has 7 free parameters per multipole (M_f, \u03c7_f, t_c, \u03c6_c, A, \u03c6_1, and possibly \u03b7 though it is fixed to 1). With the dominant mode alone and 6 effective free parameters, GreyRing has more freedom than a fundamental-QNM model (4 parameters). The tighter posteriors on (M_f, \u03c7_f) may partly reflect that A, \u03c6\u2081 absorb degeneracies that would otherwise inflate the (M_f, \u03c7_f) uncertainty, rather than a fundamental improvement in physical information content.",
+      "paper_location": "Main text: 'each multipole is modeled by 7 real parameters'; Appendix D corner plots (Fig. 11)",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

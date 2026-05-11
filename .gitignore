@@ -1,3 +1,31 @@
 .codex
 __pycache__/
 *.pyc
+
+# --- exclude pipeline byproducts that the published site doesn't need ---
+
+# Source paper bundles fed to reviewers (copyrighted arXiv content, huge).
+runs/**/assets/
+runs/**/source/
+
+# Reviewer process artefacts — keep the *.json review outputs, drop the rest.
+runs/**/*.prompt.md
+runs/**/*.stderr.txt
+runs/**/*.stdout.json
+runs/**/*.usage.json
+runs/**/*.command.json
+runs/**/*.error.json
+runs/**/*.jsonl
+runs/**/bundle.md
+
+# Run-orchestration scratch.
+runs/**/batch_logs/
+runs/**/current_batch.json
+
+# Datasets the published site does not surface.
+runs/2026-04/math.SG/
+runs/bullshit-meter/sabine-20260509-164211/
+runs/retry-gaps-*/
+
+# Local site previews.
+.DS_Store

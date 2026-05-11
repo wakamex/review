@@ -1,0 +1,127 @@
+{
+  "confidence": 0.68,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 6.0,
+    "novelty": 8.0,
+    "reviewer_confidence": 6.8,
+    "significance": 8.0,
+    "technical_soundness": 6.2
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "N/A for cycle 1.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "The Penrose-Wall singularity theorem extends to the full finite-G semiclassical regime if quantum trapped surfaces are redefined using PNC wedges and generalized max conditional entropy.",
+      "notes": "The proof gives a plausible route around the touching lemma, but it depends on conjectural GSL/SSA input and several geometric inclusions that are asserted rather than derived in detail.",
+      "paper_location": "Abstract; Introduction; Semiclassical Singularity Theorem",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Wall's proof is limited to a strict G -> 0 regime because the touching lemma fails when quantum and area terms are comparable.",
+      "notes": "The paper clearly identifies the problematic use of classical dominance and gives the QES/island setting as a concrete motivation where quantum and classical expansion terms are comparable.",
+      "paper_location": "Touching Lemma and Its Limitations",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The new definition of trapped wedges is generic enough to include the usual classical or Wall quantum trapped surfaces.",
+      "notes": "The paper asserts that generic surfaces trapped in the older senses are trapped under the new PNC definition, but the verification is not provided locally. This is important because the new definition is substantially different and even treats stationary horizon cuts as trapped.",
+      "paper_location": "Definition of trapped wedge; paragraph after definition",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "The theorem excludes controlled black-hole and certain cosmological bounces if the semiclassical regime remains valid through the bounce.",
+      "notes": "This follows only if the bounce spacetime satisfies the theorem's global hypotheses, has the required noncompact Cauchy slice and trapped wedge, and obeys the max-GSL/SSA assumptions. These applicability conditions are not checked for the stated model classes.",
+      "paper_location": "Introduction, paragraphs discussing bounces",
+      "support_level": "partially_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The theorem should explicitly assume the generalized max-GSL for the relevant causal horizons and cuts.",
+      "paper_location": "Conjecture (GSL); Lemma; Semiclassical Singularity Theorem",
+      "why_it_matters": "The proof obtains PNE for horizon exteriors from the GSL. Without this as a theorem hypothesis, the singularity theorem is not established."
+    },
+    {
+      "assumption": "The theorem should explicitly assume strong subadditivity/monotonicity properties of the renormalized generalized smooth conditional max entropy at the required semiclassical order.",
+      "paper_location": "Generalized Max Conditional Entropy Eq. (2); final proof paragraph",
+      "why_it_matters": "The contradiction with PNC depends on applying SSA to generalized max entropies. The text itself flags higher-order SSA as conjectural."
+    },
+    {
+      "assumption": "The causal horizon associated with the endpoint of the complete generator must have well-defined exteriors and cuts satisfying the wedge definitions used in the proof.",
+      "paper_location": "Causal Structure and Wedges; proof construction of the causal horizon H",
+      "why_it_matters": "The GSL lemma applies only to causal horizon exteriors. The proof needs the constructed horizon from a single endpoint at future null infinity to satisfy those structural requirements."
+    },
+    {
+      "assumption": "The null deformation under consideration must preserve the regularity needed for edge area, entropy, and generator arguments.",
+      "paper_location": "Discrete Max-Expansions; Semiclassical Singularity Theorem",
+      "why_it_matters": "PNE/PNC and the compactness/geodesic-generator argument rely on smooth enough edges and null deformations. The definitions in the provided text do not state regularity requirements."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Does the full arXiv version contain complete equations and notation omitted from the bundle extraction, especially Eqs. (1)-(4)?",
+      "why_model_cannot_resolve": "The supplied text has missing mathematical symbols, so some objections may reflect extraction loss rather than the original paper."
+    },
+    {
+      "question": "Is the final SSA-to-PNE implication a known lemma from Bousso 2024 or should it be proven explicitly here?",
+      "why_model_cannot_resolve": "The bundle references prior discrete max-focusing work but does not include its detailed definitions or lemmas."
+    },
+    {
+      "question": "Does the compactness argument adapt rigorously from Penrose/Wall to the wedge-edge and causal-horizon setting used here?",
+      "why_model_cannot_resolve": "The proof cites the standard argument only implicitly; checking the adaptation requires careful causal geometry beyond the provided derivation."
+    }
+  ],
+  "novelty_assessment": "The conceptual move from Wall's touching-lemma-dependent quantum expansion to a PNC wedge condition using max entropies appears novel and potentially important. However, the novelty is partly tied to very recent Bousso/Tabor and Shahbazi-Moghaddam machinery, and the paper should more explicitly separate what is newly proven here from what is imported as conjectural entropy technology.",
+  "overall_score_10": 7.0,
+  "paper_id": "bm-123-01",
+  "recommended_verdict": "promising",
+  "reviewer": "codex",
+  "score_rationale": "The paper presents a promising and potentially significant route around a real limitation in Wall's theorem. I do not see an obvious contradiction, but the proof is conditional on conjectural entropy principles and several key transitions are too compressed for local certification. The score reflects strong conceptual interest with meaningful unresolved proof-audit gaps.",
+  "summary": "The paper proposes a strengthened Penrose-Wall style singularity theorem for finite-G semiclassical gravity by replacing Wall's quantum trapped surface condition with a wedge-based, max-entropy, discrete past-noncontracting condition. The proof is short and conceptually interesting, but it is conditional on conjectural semiclassical entropy properties and contains several steps whose causal/topological details are not fully justified in the text provided.",
+  "technical_objections": [
+    {
+      "confidence": 0.88,
+      "evidence": "The proof uses both the GSL and strong subadditivity for generalized max conditional entropy. The text explicitly says strong subadditivity at higher orders in G should be considered a conjecture, and the GSL is separately labeled as a conjecture. The theorem itself is stated as if it is unconditional once a trapped wedge exists.",
+      "objection": "The theorem statement omits or under-specifies essential conjectural assumptions used in the proof.",
+      "paper_location": "Generalized Max Conditional Entropy; Conjecture (GSL); Semiclassical Singularity Theorem",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.73,
+      "evidence": "PNE was defined using an open set and an inequality for deformations, while the proof only states that the constructed wedges are nowhere timelike related and that one wedge is PNE. The exact substitution into the SSA inequality, including which wedges play the roles in Eq. (2), why the needed open neighborhoods match the edge portion, and why the resulting condition is PNE at every new edge point, is not shown.",
+      "objection": "The final inference that strong subadditivity makes the constructed wedge PNE on all points of the relevant edge portion is too compressed to audit.",
+      "paper_location": "Last paragraph of proof of Semiclassical Singularity Theorem",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.66,
+      "evidence": "The proof claims that if no generator remains on the null boundary for infinite affine time then a certain set would be compact, hence a Cauchy slice would be compact. This resembles the standard Penrose argument, but the paper does not spell out the needed conditions on the null generators, caustics, endpoint map, closedness, or the relevant horizon/slice sets in the wedge setting.",
+      "objection": "The compactness step inherited from Penrose/Wall is asserted without enough hypotheses in the local text.",
+      "paper_location": "Proof of Semiclassical Singularity Theorem, paragraph beginning 'At least one null geodesic generator...'",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "The new condition is past-noncontracting rather than negative expansion, and the paper says it is easy to verify that generic older trapped surfaces satisfy it. Because the theorem's physical significance rests on capturing ordinary trapped surfaces, a local proof or lemma would be expected.",
+      "objection": "Applicability of the new trapped condition to standard trapped surfaces is asserted but not demonstrated.",
+      "paper_location": "Definition paragraph after PNC/trapped definition",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "Key symbols and displayed equations are blank or mangled in the provided text. This may be an extraction issue rather than a paper issue, but it prevents independent verification of the exact entropy definitions and wedge relations from this review bundle.",
+      "objection": "The source text/equations as provided are not fully readable, making several definitions impossible to check from the bundle alone.",
+      "paper_location": "Semiclassical gravity as an asymptotic expansion; Generalized Max Conditional Entropy Eq. (1); SSA Eq. (2); proof Eqs. (3)-(4)",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

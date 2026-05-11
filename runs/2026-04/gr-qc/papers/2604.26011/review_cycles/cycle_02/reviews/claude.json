@@ -1,0 +1,144 @@
+{
+  "confidence": 0.75,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 7,
+    "novelty": 5,
+    "reviewer_confidence": 7,
+    "significance": 6,
+    "technical_soundness": 6
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Upgraded verdict from 'routine' to 'promising' and raised overall score from 5.5 to 6.0. Novelty raised from 4 to 5 after reflecting that the systematic multi-resonance comparison with orbit-dependent Teukolsky coefficients and the cross-prescription comparison have more community value than initially credited. Maintained lower scores than codex (7.0) and gemini (7.0) because the quantitative unreliability of large-mismatch cases, the unvalidated restricted Fisher space, and the unexplained 3:1 coefficient discrepancy remain substantive limitations.",
+    "invalid_points_from_other_reviewers": [
+      "Codex lists 'HTML text omits mathematical notation' as a needs-human-spotcheck item \u2014 this is a limitation of the review process, not a scientific concern about the paper.",
+      "Gemini does not flag the 3:1 Teukolsky/self-force coefficient discrepancy (orders of magnitude) as a technical objection, which is an important gap in that review. The discrepancy is mentioned in codex's review but characterized only as 'moderate' without noting that it casts doubt on whether the reported 3:1 bias values are meaningful at all.",
+      "Both reviewers at 7.0 appear to weight the acknowledged limitations too lightly. A paper where the key quantitative findings for the highest-bias cases derive from a formula the authors themselves call inapplicable in that regime should score below 7 on technical soundness."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Codex correctly identifies the restricted Fisher space as potentially 'major' \u2014 the unvalidated assumption about phase-offset degeneracy means bias ratios could materially change with a larger parameter space. I retain this as 'moderate' rather than 'major' because the approach follows field convention from [50], but the point is valid.",
+      "Codex correctly emphasizes that 'for most orbits' language is overstated given only 4 sampled configurations \u2014 I added this as a minor technical objection.",
+      "Gemini correctly highlights that Table 1 reports mismatches up to 1.030, making the presentation of precise large bias numbers (like 361-sigma) from a broken linear approximation particularly problematic, even with the Sec. V caveat.",
+      "Both reviewers confirm the sign-prescription limitation is real: only two of four possible sign combinations are explored, and Fig. 4 shows this is decisive for weaker resonances."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "For most orbits studied, neglecting resonance crossings induces SNR losses and parameter biases exceeding 1-sigma statistical uncertainty.",
+      "notes": "Supported within the ERM+NK kludge framework, but 'most orbits' refers to 4 orbital configurations only. The Cutler-Vallisneri bias formula explicitly breaks down for large-mismatch cases (e.g., mismatch up to 1.030 in Table 1), making those specific bias numbers qualitative indicators rather than quantitative estimates. The qualitative conclusion survives but the language is stronger than the evidence warrants.",
+      "paper_location": "Abstract, Sec. IV, Figs. 2-3",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Both the sign and amplitude of resonance-induced modifications to integrals of motion play a crucial role in determining the induced bias.",
+      "notes": "Fig. 4 clearly demonstrates that changing the sign of the Carter-constant flux modification moves weaker-resonance biases across the threshold. Internally consistent and the most robustly supported finding.",
+      "paper_location": "Abstract, Sec. IV, Fig. 4",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The 3:2 and 2:1 resonances produce the largest biases; 4:3 and 3:1 are subdominant but can be significant.",
+      "notes": "Physically plausible given the resonance-strength scaling in Eq. 2, but dependent on Teukolsky-based coefficients from [22]. The several-orders-of-magnitude discrepancy between Teukolsky and self-force coefficients for the 3:1 resonance (Fig. 3) means the ordering could be coefficient-prescription dependent.",
+      "paper_location": "Sec. IV, Tab. 1",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Accurate resonance modeling is necessary for EMRI detection and parameter estimation with LISA.",
+      "notes": "Qualitatively well-motivated and consistent with prior literature. Rests on kludge waveforms that the authors acknowledge may not meet LISA search requirements. Generalization beyond 4 orbits and the fixed spin/mass-ratio is not demonstrated.",
+      "paper_location": "Abstract, Sec. V",
+      "support_level": "partially_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "Extrinsic-intrinsic parameter degeneracies are negligible for bias estimation in the restricted Fisher subspace.",
+      "paper_location": "Sec. III, Fisher parameter space",
+      "why_it_matters": "Bias in intrinsic parameters can be absorbed by shifts in extrinsic parameters when their correlations are included. Excluding them could overestimate or underestimate individual parameter biases."
+    },
+    {
+      "assumption": "The ERM phenomenological impulse function shape and coefficient prescription accurately represent the resonance physics for all four resonances studied, not only the 3:2 resonance for which the ERM was originally calibrated.",
+      "paper_location": "Sec. II",
+      "why_it_matters": "The ERM was introduced in [50] primarily for the 3:2 resonance. Its accuracy for 4:3, 2:1, and 3:1 resonances is assumed rather than independently validated."
+    },
+    {
+      "assumption": "Only a single resonance crossing occurs during the observation; cumulative effects from multiple crossings are not modeled.",
+      "paper_location": "Sec. II, evolution setup",
+      "why_it_matters": "The paper initializes close to a single resonance. In a full inspiral, multiple resonances are crossed; cumulative effects (studied in [34]) could change the bias landscape significantly."
+    },
+    {
+      "assumption": "A fixed SNR=20 rescaling is a meaningful representation of the detection scenario for all orbits.",
+      "paper_location": "Sec. II",
+      "why_it_matters": "Fixing SNR by overall amplitude rescaling ignores that different orbital configurations correspond to different physical source distances. The bias-to-uncertainty comparison depends on SNR, so this choice affects which cases appear threshold-crossing."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Are the Teukolsky-based resonance coefficients from [22] (Flanagan, Hughes, Ruangsri 2014) actually computed for the specific (p_0, e_0, iota_0) orbital configurations in Table 1, or were they computed for reference orbits and applied here with some interpolation or extrapolation?",
+      "why_model_cannot_resolve": "The paper states coefficients are 'computed from Teukolsky-based calculations [22]' for the investigated orbits, but verifying whether [22] provides coefficients at these exact orbital parameters requires access to the underlying code and the supplementary data tables."
+    },
+    {
+      "question": "What is the physical reason for the several-orders-of-magnitude discrepancy between Teukolsky-based [22] and self-force-based [35] coefficients specifically for the 3:1 resonance, and which prescription is more reliable for the orbital configurations studied?",
+      "why_model_cannot_resolve": "Resolving this requires domain expertise in both Teukolsky equation calculations and self-force computations, and direct access to the coefficient tables from both references. The paper does not provide raw coefficient values for the 3:1 case."
+    },
+    {
+      "question": "Is the restricted Fisher parameter space (excluding extrinsic parameters and all initial orbital phases) known from prior validated EMRI Fisher studies to give bias estimates consistent with those from a full parameter space, or is the assumption of weak degeneracy with phase offsets specific to the post-resonance regime being studied here?",
+      "why_model_cannot_resolve": "This requires domain judgment about EMRI parameter degeneracy structures under resonance conditions, and possibly comparison with a full Fisher or MCMC run \u2014 neither of which is provided in this paper."
+    }
+  ],
+  "novelty_assessment": "Incrementally novel relative to prior work. The core advance over [50] (which studied the 3:2 resonance with fixed coefficients) is the systematic comparison of four resonances with orbit-dependent Teukolsky-based coefficients and separate flux modifications for E, L, and C. The cross-prescription comparison between Teukolsky [22] and self-force [35] coefficients for the same orbits, which reveals order-of-magnitude differences for the 3:1 resonance, is the most distinctive finding and a useful community contribution. The Fisher validation procedure (bias ranges from stable step-size windows rather than single estimates) is good methodological practice. No new theoretical framework or derivation is introduced; the contribution is applied and numerical within an established phenomenological model. I revise my cycle-1 novelty score upward from 4 to 5, acknowledging that the multi-resonance comparison with Teukolsky coefficients is more substantive than I initially credited.",
+  "overall_score_10": 6,
+  "paper_id": "2604.26011",
+  "recommended_verdict": "promising",
+  "reviewer": "claude",
+  "score_rationale": "Technical soundness 6: The Fisher validation procedure (stable step-size windows, overlap consistency check) is methodologically careful. However, several quantitative results derive from the Cutler-Vallisneri bias formula applied beyond its stated regime of validity (mismatch up to 1.030), the restricted Fisher space excludes extrinsic parameters on an unvalidated assumption, and the orders-of-magnitude 3:1 Teukolsky/self-force coefficient discrepancy is unexplained. These are collectively substantive, not cosmetic, limitations. Novelty 5: Incremental but meaningful extension of [50] to four resonances with orbit-dependent Teukolsky coefficients; the cross-prescription comparison revealing the 3:1 discrepancy is the most novel finding. Significance 6: Relevant for LISA EMRI science; qualitative conclusion that resonance modeling is necessary is well-motivated. Quantitative impact on LISA data analysis is limited by the kludge waveform caveat. Clarity 7: Writing is clear and limitations are explicitly acknowledged; the absence of condition number values and no demarcation of which table entries fall inside vs. outside the valid bias formula regime are gaps. Reviewer confidence 7: The methodological concerns are clear-cut; uncertainty remains in how much the restricted Fisher space and coefficient-prescription uncertainty affect the conclusions quantitatively. Overall 6.0 reflects a careful, community-relevant applied study that is worth surfacing but whose quantitative findings are materially caveated.",
+  "summary": "This paper studies systematic parameter-estimation bias in EMRIs caused by neglecting transient orbital resonances, using a Fisher-matrix approach with a phenomenological effective resonance model (ERM) augmenting a numerical kludge (NK) waveform. The study spans four resonances (4:3, 3:2, 2:1, 3:1) and four orbital configurations with Teukolsky-based resonance coefficients. The main finding is that, for most of the studied orbits, neglecting resonance crossings induces parameter biases exceeding 1-sigma statistical uncertainty. After reading the other reviewers' assessments, I am upgrading from 'routine' to 'promising' and raising the overall score slightly, primarily because the multi-resonance systematic comparison and the Teukolsky vs. self-force coefficient cross-check provide more community value than I initially credited. However, I maintain lower scores than codex and gemini because the quantitative reliability is substantially limited by the breakdown of the first-order bias formula for large mismatches, the unvalidated restricted Fisher space, and the unexplained orders-of-magnitude 3:1 coefficient discrepancy.",
+  "technical_objections": [
+    {
+      "confidence": 0.88,
+      "evidence": "Table 1 reports mismatches up to 1.030; the paper's own Sec. V states that for large mismatches 'the first-order Cutler-Vallisneri bias formula can no longer be regarded as an accurate estimate.' No figure marks which entries fall inside vs. outside the valid regime.",
+      "objection": "Large-mismatch cases exceed the regime of validity of the linear Cutler-Vallisneri bias formula, yet precise bias values (e.g., bias ratios of ~361) are tabulated and displayed without clear demarcation of which entries are quantitatively reliable vs. merely qualitative.",
+      "paper_location": "Sec. IV, Tab. 1, Fig. 2; Sec. V caveat paragraph",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "Fig. 3 caption states that the two prescriptions 'differ significantly in one case, namely the 3:1 resonance, where the induced bias differs by several orders of magnitude.' No physical interpretation or reconciliation is offered, leaving the reliability of the Teukolsky coefficients for this resonance uncertain.",
+      "objection": "Several-orders-of-magnitude discrepancy between Teukolsky-based and self-force-based coefficients for the 3:1 resonance is reported but not explained physically.",
+      "paper_location": "Sec. IV, Fig. 3",
+      "severity": "major",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "The paper claims secular post-resonance phase growth is 'only weakly degenerate with simple phase offsets,' but provides no numerical demonstration (e.g., no comparison with a larger Fisher space or sampling run). Correlations with sky-location and spin-orientation angles could redistribute bias projections.",
+      "objection": "Restricted Fisher parameter space (extrinsic parameters excluded) is justified by an unvalidated assumption about degeneracy with phase offsets.",
+      "paper_location": "Sec. III, Fisher parameter space definition",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "The actual sign of resonance coefficients depends on the resonant phase at crossing, which is not computed from the inspiral trajectory. The paper selects two representative combinations, meaning reported biases reflect specific phase choices rather than a physically motivated distribution. Fig. 4 shows this choice is decisive for weaker resonances.",
+      "objection": "The sign prescription is ad hoc: only two out of four possible sign combinations are studied and the resonant phase at crossing is not self-consistently tracked.",
+      "paper_location": "Sec. II, sign prescription; Sec. IV",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "Table 1 covers four cases at a fixed spin (a=0.9M) and mass ratio; 'most orbits' reduces to a small count. The language invites over-reading of the statistical representativeness.",
+      "objection": "The abstract's claim 'for most of the orbits considered' overstates the scope of the sample: only four orbital configurations are studied, and one case is excluded due to kludge-flux breakdown.",
+      "paper_location": "Abstract; Table 1",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "The paper states reparameterization 'significantly reduces kappa' but provides no numerical values before or after. Without this, the reader cannot gauge proximity to singularity.",
+      "objection": "Fisher condition number after reparameterization is not reported, preventing independent assessment of numerical stability.",
+      "paper_location": "Sec. III",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

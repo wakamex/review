@@ -1,0 +1,146 @@
+{
+  "confidence": 0.67,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 6.3,
+    "novelty": 7.0,
+    "reviewer_confidence": 6.7,
+    "significance": 7.0,
+    "technical_soundness": 6.0
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "N/A for cycle 1.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "A RatExp-based post-merger template with time-dependent complex QNM amplitudes models the dominant h_22 mode for highly eccentric non-spinning BBH mergers.",
+      "notes": "The local-fit comparisons show plausible improvement over the quasi-circular HypTan template, but the model is phenomenological and several choices affecting the fit, especially merger-time filtering and coefficient degeneracies, are not fully specified.",
+      "paper_location": "Secs. III, V.1, Figs. 1-3",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Global polynomial fits in eta and dynamics-based non-circular parameters, especially a cubic fit in eta plus two eccentric parameters, yield low mismatches across the RIT eccentric dataset.",
+      "notes": "The reported mismatch distributions support the claim on the calibration dataset, but there is no clear held-out or leave-one-out validation, so generalization accuracy is not established.",
+      "paper_location": "Secs. IV.2 and V.3, Figs. 5-9",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The dynamics-based merger parameters E_eff, j_eff, and/or b_eff provide a gauge-invariant and effective parameterization for arbitrary eccentric or dynamically bound orbits.",
+      "notes": "The construction follows prior work and is plausible, but the paper explicitly neglects BMS-frame effects and does not quantify their size for this waveform modeling task.",
+      "paper_location": "Secs. II.2 and V.2",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The model can be directly combined with EOB and phenomenological inspiral waveforms to produce accurate IMR waveforms for parameter estimation.",
+      "notes": "The paper validates only the post-merger h_22 component and does not demonstrate an actual inspiral-merger-ringdown stitching procedure, continuity conditions with an inspiral model, or PE-level validation.",
+      "paper_location": "Abstract, Sec. VI",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "The model is validated against SXS simulations.",
+      "notes": "Appendix A shows one illustrative SXS eccentric case and states future work will analyze the entire SXS catalog; this falls short of the broader validation wording in the abstract.",
+      "paper_location": "Abstract; Appendix A, 'Testing with Eccentricity', Fig. 15",
+      "support_level": "unclear"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The selected posterior branch after removing bimodal degeneracies is a harmless gauge/parameterization choice rather than a physically relevant subpopulation.",
+      "paper_location": "Sec. V.1",
+      "why_it_matters": "If branch membership correlates with eta, E_eff, j_eff, or b_eff, the global fit may silently exclude part of the claimed validity region."
+    },
+    {
+      "assumption": "The frequency-inflection merger-time prescription is unique and stable under reasonable filtering choices.",
+      "paper_location": "Sec. III",
+      "why_it_matters": "The merger amplitude, derivative, frequency, and constrained RatExp coefficients are all tied to this time choice."
+    },
+    {
+      "assumption": "Gaussian strain errors estimated from the late-time noise floor adequately represent NR waveform uncertainty.",
+      "paper_location": "Sec. IV.1",
+      "why_it_matters": "The Bayesian local fits and global coefficient uncertainties depend on this likelihood model."
+    },
+    {
+      "assumption": "BMS-frame ambiguities and waveform extraction choices are negligible for the quadrupolar post-merger model.",
+      "paper_location": "Sec. II.2",
+      "why_it_matters": "The parameterization is described as gauge-invariant modulo BMS effects, but the magnitude of those effects is not quantified."
+    },
+    {
+      "assumption": "Accuracy for the h_22 post-merger mode is sufficient evidence for eventual IMR parameter-estimation utility.",
+      "paper_location": "Abstract and Sec. VI",
+      "why_it_matters": "Astrophysical use will depend on matching to inspiral/plunge, higher modes, masses, orientations, and detector noise models."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Do the discarded bimodal-branch simulations cluster in a physically important part of the parameter space?",
+      "why_model_cannot_resolve": "The bundle does not provide the list or count of discarded simulations, nor the raw posterior samples."
+    },
+    {
+      "question": "Are the reported mismatch exponents and thresholds as strong as implied by the prose?",
+      "why_model_cannot_resolve": "Several numerical values in the HTML source are missing or rendered blank in the provided bundle."
+    },
+    {
+      "question": "Does the accompanying code/coefficients reproduce the global-fit mismatch distributions?",
+      "why_model_cannot_resolve": "The manuscript says the repository will be public at journal submission, but no auditable code or coefficients are included in the bundle."
+    }
+  ],
+  "novelty_assessment": "The work appears novel and useful as an extension of previous late-time eccentric ringdown and test-mass RatExp ideas to early post-merger comparable-mass, non-spinning eccentric NR data. The main ingredients are partly inherited from Refs. 21, 58, and 64, so the novelty is more in calibration, implementation, and validation than in a first-principles model. Stronger independent validation would substantially improve the case for significance.",
+  "overall_score_10": 6.6,
+  "paper_id": "2604.15431",
+  "recommended_verdict": "promising",
+  "reviewer": "codex",
+  "score_rationale": "The paper is technically plausible and addresses an important waveform-modeling gap, with encouraging reported improvements over quasi-circular templates. The score is held back by in-sample validation, under-specified merger-time filtering, ad hoc handling of bimodal coefficient degeneracies, and overbroad claims about SXS validation and direct IMR applicability.",
+  "summary": "The paper constructs an NR-informed closed-form model for the dominant quadrupolar post-merger waveform of non-spinning, highly eccentric binary black-hole mergers, using RIT eccentric simulations and polynomial global fits in symmetric mass ratio plus dynamics-based merger parameters. The direction is useful and the reported training-set mismatches appear encouraging, but several validation and identifiability details are not yet auditable enough to support the strongest accuracy and direct-IMR-use claims.",
+  "technical_objections": [
+    {
+      "confidence": 0.78,
+      "evidence": "The coefficients are extracted from all RIT simulations, global fits are constructed from those coefficients, and mismatches are then reported against the same NR simulations. Cubic three-parameter fits have many polynomial coefficients, making generalization error a real concern.",
+      "objection": "The global-fit validation appears to be mostly or entirely in-sample, with no explicit held-out, leave-one-out, or cross-validation study.",
+      "paper_location": "Secs. IV.2 and V.3, Figs. 5-9",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.82,
+      "evidence": "The authors report symmetric bimodal posteriors and then discard simulations falling in the minority branch to ensure monotonic global-fit behavior. They do not give the number, location, or physical character of discarded simulations, nor show that this deletion does not bias the validity region.",
+      "objection": "The handling of bimodal coefficient posteriors is not statistically satisfactory as written.",
+      "paper_location": "Sec. V.1, paragraph beginning 'Finally, a note on the results.'",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.74,
+      "evidence": "The merger time is defined as an inflection point after applying a filter to remove high-frequency noise, but the filter type, parameters, ambiguity handling, and sensitivity of coefficients/mismatches to this choice are not reported.",
+      "objection": "The merger-time definition is central but under-specified and not robustly tested.",
+      "paper_location": "Sec. III, RatExp discussion around definition of t_m as an inflection point of waveform frequency",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.69,
+      "evidence": "For RIT waveforms, which have single resolution and extraction radius, the paper assumes Gaussian strain errors set by a late-time noise floor after subtracting a constant complex offset. This does not obviously capture finite-resolution, extrapolation, time-alignment, or phase systematics.",
+      "objection": "The assumed NR error model may understate uncertainty in the fitted coefficients and mismatches.",
+      "paper_location": "Sec. IV.1",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.86,
+      "evidence": "The abstract says the post-merger non-circular waveform model is validated by comparison with SXS simulations, but the appendix presents only one illustrative SXS:2527 case and says full SXS analysis is future work.",
+      "objection": "The claim of external SXS validation is overstated relative to the evidence shown.",
+      "paper_location": "Abstract; Appendix A, Fig. 15",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.73,
+      "evidence": "Mismatches are computed for the post-merger dominant mode over a finite time window using one detector PSD and a GW150914-like total mass. The paper does not test hybridization with an inspiral-merger model, higher modes, detector-frame parameter ranges, or PE biases.",
+      "objection": "The practical IMR and parameter-estimation claims are not demonstrated by the paper's validation metric.",
+      "paper_location": "Abstract, Sec. IV.1, Sec. VI",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

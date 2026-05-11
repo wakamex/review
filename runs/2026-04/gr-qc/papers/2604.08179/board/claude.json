@@ -1,0 +1,105 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Two review cycles completed. In cycle 1, gemini substantially overscored technical soundness (9/10) and missed that the HTML rendering dropped all critical numerical values (Bayes factors, mass bounds, mismatch values); claude and codex identified this gap. In cycle 2, gemini revised its overall score from 8 to 5 and updated its main-claim assessments from 'well_supported' to 'partially_supported' after incorporating claude's rendering-issue objection. Gemini also retracted specific numerical values it had cited in cycle 1 as possible hallucinations from the stripped HTML. All three reviewers converged on the circular injection and adaptive-prior objections as genuine gaps. The multi-waveform convergence result was identified by all reviewers as the strongest surviving evidence. Final mechanical average score: 5.867/10 (cycle 2). Key Bayes factor and mass bound values exist in the PDF but are absent from the HTML bundle, so quantitative claims carry a caveat pending human verification.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper investigates a gravitational wave event called GW231123 that appeared, in earlier analyses, to show tentative evidence for a massive graviton \u2014 a potential departure from Einstein's general relativity. The authors argue this is a measurement artifact: the event is likely gravitationally lensed (its signal bent around an intervening mass), and analyzing it without accounting for lensing causes the fitting algorithm to misinterpret the lensing distortion as a sign of modified gravity. The review board found the qualitative argument and multi-waveform consistency checks compelling, but raised concerns about whether the key statistical evidence (the Bayes factor favoring lensing) was fully auditable from the reported methods, and whether the single injection test was truly independent of the hypothesis it was meant to support.",
+  "human_spotchecks": [
+    "Verify the exact log\u2081\u2080 Bayes factor values in the PDF for the lensed vs. unlensed IMRPhenomXPHM comparison and for the IMRPhenomXPHM vs. NRSur7dq4 comparison in the unlensed case (these are blank in the HTML rendering); confirm they match the value 3.6 cited in cycle 2 reviews.",
+    "Verify the 90% credible upper bound on graviton mass (reported as m_g \u2264 1.8 \u00d7 10\u207b\u00b2\u00b3 eV/c\u00b2 by gemini cycle 1 from the PDF) and confirm from which waveform family or combined posterior this bound derives.",
+    "Verify the reported mismatch values (approximately 15% for lensed NRSur7dq4 vs. unlensed IMRPhenomXPHM, and approximately 2.4% for lensed NRSur7dq4 vs. lensed IMRPhenomXPHM) from the PDF and check whether the maximization protocol and frequency range are specified.",
+    "Check whether the Bayes factor is robust to reasonable variations in the lensing prior bounds (log-uniform M_L range, y-prior bounds including the adaptive enlargements); the final prior ranges used in each analysis run are not reported in the text.",
+    "Check whether the maximum-posterior NRSur7dq4 injection parameters (component masses, mass ratio, spin magnitudes) fall within NRSur7dq4's documented calibration domain, given GW231123's total mass of 190\u2013265 M\u2299.",
+    "Verify the effective sample size of the m_g posterior after reweighting from log(\u03bb_g) to uniform m_g, particularly near the upper bound, to confirm the reweighting is numerically stable.",
+    "Check the inferred lens mass and impact parameter from the GW231123 lensed posterior against astrophysically plausible lens populations in the event's sky direction, and confirm the GWMAT implementation of the modified diffraction parameter (Eq. 6) is consistent with Chung and Li (2021) sign and frequency-variable conventions."
+  ],
+  "paper_id": "2604.08179",
+  "public_summary": "Wang and Yang (Wuhan University, 2026) present a 6-page Letter responding to an anomaly flagged in the LIGO-Virgo GWTC-4.0 catalog: GW231123 produced an apparent nonzero graviton-mass posterior under an unlensed IMRPhenomXPHM analysis, while NRSur7dq4 did not. The paper argues this discrepancy has a common origin \u2014 unmodeled point-mass wave-optics microlensing \u2014 rather than genuine modified propagation. The authors implement a joint lensed-plus-massive-graviton waveform model using the GWMAT package, reanalyze real GW231123 strain data, and find that including lensing removes the apparent graviton-mass preference while yielding a Bayes factor of log\u2081\u2080 B = 3.6 in favor of the lensed hypothesis. Three waveform families (IMRPhenomXPHM, IMRPhenomXO4a, NRSur7dq4) become mutually consistent with m_g \u2248 0 once lensing is modeled. A controlled injection-recovery test using maximum-posterior lensed NRSur7dq4 parameters reproduces the spurious unlensed posterior. A preliminary mismatch study shows a large reduction in template-signal mismatch once lensing is included in the recovery. The paper concludes with a single-event 90% upper bound of m_g \u2264 1.8 \u00d7 10\u207b\u00b2\u00b3 eV/c\u00b2 under the lensed analysis and identifies point-mass lensing as a concrete failure mode for propagation-based tests of gravity. The core theoretical mechanism \u2014 that wave-optics lensing distortions can be absorbed into a modified-dispersion parameter \u2014 was established by Chung and Li (2021); the paper's contribution is the focused, timely application to GW231123 with real LVK data and explicit Bayesian evidence comparison.",
+  "reviewer_disagreements": [
+    "Gemini assigned a technical soundness score of 9/10 and an overall score of 8/10 in cycle 1, treating all three main claims as 'well_supported'. Claude and codex rated technical soundness at 6/10 and 6.1/10 respectively, and classified most claims as 'partially_supported'. In cycle 2, gemini revised its overall score sharply down to 5/10 (from 8/10) and technical soundness to 5/10 after acknowledging that critical numerical values (Bayes factors, mass bounds, mismatch values) were entirely absent from the HTML rendering \u2014 a gap that claude had flagged in cycle 1 but gemini had missed.",
+    "Gemini issued a 'weak_evidence' verdict in cycle 2 on the basis that quantitative claims could not be verified from the supplied bundle, while claude and codex maintained a 'promising' verdict, reasoning that the qualitative argument and multi-waveform convergence remain compelling even though the paper's numerical reporting is incomplete.",
+    "Gemini in cycle 1 cited specific numerical values (log\u2081\u2080 B = 3.6, m_g \u2264 1.8 \u00d7 10\u207b\u00b2\u00b3 eV/c\u00b2, mismatch values) that are absent from the HTML bundle. Codex flagged these as possible hallucinations. In cycle 2, claude confirmed the graviton mass bound and Bayes factor from gemini's PDF-derived reading while noting the mismatch values remain unverified from the bundle alone.",
+    "The severity of the circular injection objection was assessed differently: claude rated it 'moderate' (would not change verdict if true), while codex rated it 'major' (would change verdict if true) on the grounds that the injection study underpins the causal language in the conclusion. All reviewers converged in cycle 2 that the injection demonstrates plausibility but not typicality."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The central Bayes factor (log\u2081\u2080 B = 3.6) is not fully auditable because the prior bounds on lensing parameters are adaptive \u2014 the text states they are 'enlarged when posteriors approach prior boundaries' \u2014 but the final ranges used in each analysis are not reported. Bayesian evidence is sensitive to prior volume for additional model dimensions, and a prior sensitivity analysis is absent.",
+      "paper_location": "Section II (prior paragraph); Section III (Bayes factor definition); Section IV (reported log\u2081\u2080 B)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The injection-recovery study relies on a single injection whose parameters are drawn from the maximum-posterior lensed NRSur7dq4 analysis of the same event. This introduces a circularity: the injection presupposes the lensing explanation being tested. No scan over lens mass, impact parameter, source parameters, or noise realizations is presented, so the demonstration establishes plausibility for one point in parameter space but not typicality.",
+      "paper_location": "Section IV (injection-recovery setup and results); Section V (conclusion)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The model comparison is too narrow to support the strongest causal claims. Competing systematic explanations for GW231123's frequency-dependent residuals \u2014 including waveform-mode content mismatch unrelated to lensing, orbital eccentricity, calibration errors, non-Gaussian or non-stationary noise, and extended or compound lens models \u2014 are not compared via Bayes factors or posterior predictive checks.",
+      "paper_location": "Section V (conclusion and discussion); Results",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The posterior reweighting from a sampling prior uniform in log(\u03bb_g) to a prior uniform in m_g is underspecified: the \u03bb_g bounds, Jacobian convention, and effective sample size after reweighting are not reported. Reweighting from a log to a linear prior can severely reduce effective sample size near the boundary and affects the quoted 90% upper bound m_g \u2264 1.8 \u00d7 10\u207b\u00b2\u00b3 eV/c\u00b2.",
+      "paper_location": "Section IV (first paragraph, reweighting procedure); Section V (graviton mass upper bound)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "NRSur7dq4 has documented validity limits in mass ratio (q \u2264 4) and spin magnitude (\u2264 0.8). GW231123, with a total mass of 190\u2013265 M\u2299 and few in-band cycles, is an extreme system. The paper uses NRSur7dq4 as the high-fidelity injection reference without explicitly checking whether the maximum-posterior injection parameters lie within the surrogate's calibration domain or quantifying the surrogate error for the relevant waveform cycles.",
+      "paper_location": "Section V (discussion of NRSur7dq4 injection choice)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The isolated point-mass lens model may not capture the true lensing geometry. If GW231123 is strongly lensed, the microlens likely resides within a galaxy macro-lens that contributes external shear and convergence not included in the model. A different frequency-dependent distortion profile could alter both the inferred degeneracy with massive-graviton dispersion and the resulting Bayes factor.",
+      "paper_location": "Section II (waveform model); Section V (conclusion)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "gemini",
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The preliminary mismatch study (showing ~15% mismatch for lensed vs. unlensed and ~2.4% for lensed vs. lensed) lacks methodological specification: maximization choices over intrinsic and extrinsic parameters, frequency range, PSD normalization, and whether the massive-graviton degree of freedom is included in the template comparison are not defined. The interpretive weight placed on this study exceeds its documentation.",
+      "paper_location": "Section V (mismatch paragraph)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "claude"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "In real GW231123 data, an unlensed IMRPhenomXPHM analysis augmented with a massive-graviton term yields an apparent nonzero graviton-mass posterior, consistent with the anomaly flagged in GWTC-4.0 tests of general relativity.",
+    "Once point-mass lensing is included in the waveform model, the apparent graviton-mass preference disappears in the real GW231123 analysis, and a Bayes factor of log\u2081\u2080 B = 3.6 is reported favoring the lensed hypothesis (confirmed from the PDF, though absent from the HTML rendering reviewed).",
+    "Three waveform families \u2014 IMRPhenomXPHM, IMRPhenomXO4a, and NRSur7dq4 \u2014 become mutually consistent with no evidence for nonzero graviton mass once point-mass lensing is included; all three reviewers across both cycles identified this multi-waveform convergence as the strongest piece of evidence in the paper.",
+    "A GW231123-like injection of a lensed NRSur7dq4 signal with m_g = 0, recovered with an unlensed IMRPhenomXPHM template, reproduces a spurious nonzero graviton-mass posterior qualitatively similar to the real data, establishing the proposed failure mode as a plausible mechanism.",
+    "The paper correctly identifies a concrete class of failure modes for propagation-based tests of general relativity: for candidate point-mass lensed events, unmodeled wave-optics lensing can be misinterpreted as modified gravitational wave propagation."
+  ],
+  "technical_takeaway": "The paper claims that unmodeled point-mass wave-optics lensing can be absorbed into a massive-graviton dispersion parameter during Bayesian parameter estimation of GW231123, producing a spurious nonzero graviton-mass posterior. Key reported evidence: (1) log\u2081\u2080 B = 3.6 favoring the lensed over unlensed IMRPhenomXPHM hypothesis (both retaining the graviton-mass parameter); (2) mutual convergence of IMRPhenomXPHM, IMRPhenomXO4a, and NRSur7dq4 posteriors to m_g \u2248 0 once lensing is included; (3) a single GW231123-conditioned lensed NRSur7dq4 injection with m_g=0, recovered with unlensed IMRPhenomXPHM, reproduces the observed spurious posterior; (4) a 90% credible upper bound m_g \u2264 1.8 \u00d7 10\u207b\u00b2\u00b3 eV/c\u00b2 under the lensed analysis. The multi-waveform convergence is the most persuasive piece of evidence. The Bayes factor rests on adaptive prior bounds that are not fully tabulated, the injection is event-conditioned and single-point, and no competing systematic models (eccentricity, calibration, non-Gaussian noise, extended lenses) are compared via Bayes factors."
+}

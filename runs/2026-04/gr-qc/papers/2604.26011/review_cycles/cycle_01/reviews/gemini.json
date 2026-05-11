@@ -1,0 +1,78 @@
+{
+  "confidence": 0.8,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 8,
+    "novelty": 6,
+    "reviewer_confidence": 8,
+    "significance": 7,
+    "technical_soundness": 7
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "Neglecting transient orbital resonances in EMRI parameter estimation leads to significant losses in recovered SNR.",
+      "notes": "Supported by the mismatch and SNR loss calculations presented in Table 1 for various orbits and resonance combinations.",
+      "paper_location": "Abstract, Section IV, Table 1",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "Neglecting transient orbital resonances induces a systematic error in parameter estimation that exceeds the corresponding statistical fluctuation.",
+      "notes": "The Fisher matrix analysis shows biases exceeding the 1-sigma statistical threshold. However, for large mismatches, the linear-signal approximation (Cutler-Vallisneri formula) breaks down, making the very large quantitative biases (e.g., >100 sigma) indicative rather than exact, which the authors explicitly acknowledge.",
+      "paper_location": "Abstract, Section IV, Figure 2",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The sign of the resonance-induced modifications to the integrals of motion significantly affects the induced bias, potentially shifting it across the significance threshold.",
+      "notes": "Clearly demonstrated in Figure 4 where changing the relative sign of the modification to the Carter constant flux reduces the bias to within the statistical threshold for the 4:3 resonance.",
+      "paper_location": "Section IV, Figure 4",
+      "support_level": "well_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The secular post-resonance phase growth is only weakly degenerate with simple phase offsets.",
+      "paper_location": "Section III",
+      "why_it_matters": "This assumption is used to justify restricting the Fisher space to a 5-dimensional subset to avoid ill-conditioning. If the discarded parameters are strongly correlated with the retained ones under resonance conditions, the reduced Fisher matrix will underestimate the true statistical errors and potentially misestimate the bias significance."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Are the validity bounds established for the Fisher matrix inversion (Eq. 9, 10) sufficiently strict to guarantee the reliability of the bias estimates in the presented subset of the parameter space?",
+      "why_model_cannot_resolve": "Requires expert judgment on the numerical stability of EMRI Fisher matrices and the specific tolerances acceptable for claiming bias significance."
+    },
+    {
+      "question": "Is the breakdown of the kludge fluxes for the high-eccentricity, low-inclination orbit near the 3:1 resonance a fundamental limitation of the Numerical Kludge model or an implementation artifact?",
+      "why_model_cannot_resolve": "Requires deep familiarity with the internal workings and limits of validity of the Numerical Kludge (NK) waveform framework."
+    }
+  ],
+  "novelty_assessment": "The novelty is moderate. It is a solid, incremental extension of previous work (like Speri & Gair 2021) that analyzed the 3:2 resonance. Expanding the study to 4:3, 2:1, and 3:1 resonances using orbit-dependent Teukolsky coefficients provides a more comprehensive census of the problem, but relies on established phenomenological modeling and data analysis techniques.",
+  "overall_score_10": 7,
+  "paper_id": "2604.26011",
+  "recommended_verdict": "promising",
+  "reviewer": "gemini",
+  "score_rationale": "The paper tackles an important modeling challenge for EMRIs and provides clear evidence that transient resonances must be accounted for to avoid severe parameter biases. The methodology is generally sound and standard, but the quantitative reliability of the bias results is significantly weakened in cases of large mismatch due to the reliance on the linearized Cutler-Vallisneri formula, a caveat the authors acknowledge. The manuscript is well-written and the assumptions are clearly stated.",
+  "summary": "This paper investigates the impact of transient orbital resonances on parameter estimation for extreme-mass-ratio inspirals (EMRIs) observed by LISA. Using a Fisher-matrix approach and a phenomenological effective resonance model combined with Numerical Kludge waveforms, the authors evaluate the systematic bias induced when resonances (specifically 4:3, 3:2, 2:1, and 3:1) are neglected. They find that neglecting resonance crossings leads to significant signal-to-noise ratio loss and parameter biases that exceed statistical uncertainties. They also demonstrate that both the sign and magnitude of the resonance-induced modifications to integrals of motion are crucial for accurately modeling the bias.",
+  "technical_objections": [
+    {
+      "confidence": 0.9,
+      "evidence": "Table 1 reports mismatches up to 1.030. The bias formula (Eq. 7) assumes small waveform differences. The authors acknowledge this limitation in Section V, stating that large biases should be interpreted as 'qualitative indicators', but presenting precise large numerical values (like 361 sigma) in figures/tables derived from a broken assumption is problematic.",
+      "objection": "Use of the linear-signal approximation (Cutler-Vallisneri bias formula) in regimes where the waveform mismatch is large.",
+      "paper_location": "Section IV (Table 1), Section V",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "The authors state they 'adopt a reduced phenomenological prescription in which we retain only representative relative-sign patterns' rather than modeling the full resonant-phase dependence. While useful for bounding the effect, it leaves the actual continuous distribution of biases unquantified.",
+      "objection": "Incomplete modeling of the resonance phase dependence.",
+      "paper_location": "Section II, Section IV",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

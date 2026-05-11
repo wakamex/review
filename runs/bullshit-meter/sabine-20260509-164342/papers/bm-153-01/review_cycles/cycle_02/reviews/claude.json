@@ -1,0 +1,138 @@
+{
+  "confidence": 0.55,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 7,
+    "novelty": 5,
+    "reviewer_confidence": 4,
+    "significance": 7,
+    "technical_soundness": 6.5
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Added codex's valid concern about Gallagher et al. 2019 as a moderately strong objection that the 'not established experimentally' framing may be overbroad. Slightly reduced novelty score from 5.5 to 5.0 and overall score from 6.2 to 6.0 on this basis. Maintained 'promising' verdict against gemini's 'weak_evidence'; gemini's 0.95 confidence for a 2/10 score is poorly calibrated when information access is the limiting factor\u2014the appropriate response to limited information is low confidence, not a low paper score.",
+    "invalid_points_from_other_reviewers": [
+      "Gemini: Scoring the paper 2/10 with 0.95 confidence and recommending 'weak_evidence' because the bundle is a paywall scrape mistakes a review-process access limitation for a scientific flaw. A 2/10 score implies the science is likely wrong or misleading; the correct response to limited access is low reviewer confidence (3\u20134/10), not a low paper score. The paper has passed Nature Physics peer review, the abstract is internally consistent with established theory, and the figure structure (multiple devices, extended data on systematics) is consistent with rigorous experimental practice.",
+      "Gemini: Classifying the missing full text as a 'fatal' technical objection with confidence 1.0 is a category error. 'Fatal' in the objection schema means the science has a fatal flaw, not that the review process is incomplete. This inflates the severity inappropriately."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Codex: The abstract's claim that quantized conductivity 'has not been established experimentally so far' is potentially overbroad given Gallagher et al. (Science 2019), which is cited in the same paper and has nearly identical scope. The distinction must be articulated explicitly.",
+      "Codex: 'Universality' is claimed strongly in the title and abstract but the device count and selection criteria are not specified in accessible text; whether all measured samples support the universal value matters for the claim.",
+      "Gemini: The bundle genuinely lacks the full text, methods, and supplementary; all quantitative claims are therefore unauditable from first principles. This is a real limitation that should be flagged explicitly in any review."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "DC electrical conductivity at the Dirac point converges to a quantized universal value determined by the universality class of the quantum critical point",
+      "notes": "The abstract explicitly states the value 'has not been established experimentally so far,' but ref. 15 (Gallagher et al., Science 2019) is titled 'Quantum-critical conductivity of the Dirac fluid in graphene.' The distinction between the two claims must exist (likely device quality, combined thermal measurement, or cleaner convergence), but it is not evident from the abstract alone. Full paper needed to audit the comparison and to see whether convergence is to a specific theoretically predicted value or to an empirical plateau.",
+      "paper_location": "Abstract; Fig. 3",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Electrical and thermal conductivities are inversely related, consistent with relativistic hydrodynamics",
+      "notes": "The hydrodynamic relation from Hartnoll et al. (2007) and Lucas et al. (2016) is \u03c3_Q \u00b7 \u03ba/T \u2248 s\u00b2, not a simple \u03c3 \u221d 1/\u03ba. The abstract's 'inversely related' framing is an approximation valid in a specific limit. Whether the data are fit to the exact relation or the approximation is not checkable without the full text.",
+      "paper_location": "Abstract; Fig. 2",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Lorentz number exceeds semiclassical Wiedemann-Franz value by more than 200\u00d7 near the Dirac point at low temperature",
+      "notes": "Prior record (Crossno et al. 2016) was ~20\u00d7. A 10\u00d7 larger violation is physically plausible in cleaner devices but demands careful phonon background subtraction and noise-thermometry calibration. Extended Data Figs. 3\u20135 show multiple devices and temperature dependences with error bars, which is a positive indicator of rigor, but the subtraction procedure is in the inaccessible supplementary.",
+      "paper_location": "Abstract; Fig. 2; Extended Data Fig. 3, 4, 5",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "\u03b7/s approaches the KSS quantum viscosity bound within a factor of four in the cleanest devices",
+      "notes": "Extraction of absolute \u03b7 from Poiseuille-regime resistance typically depends on assumed boundary conditions (slip vs. no-slip), which alone can shift \u03b7 by factors of 2\u20134. Extended Data Fig. 6 shows consistent non-monotonic T dependence across four additional devices, which is a positive reproducibility signal, but the factor-of-four claim cannot be audited without the viscosity extraction methodology.",
+      "paper_location": "Abstract; Fig. 4; Extended Data Fig. 6",
+      "support_level": "partially_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "Phonon thermal conductance through hBN is either negligible or has been subtracted before computing the electronic Lorentz number",
+      "paper_location": "Methods / Supplementary (inaccessible); Extended Data Fig. 2; Fig. 2",
+      "why_it_matters": "If phonon conductance is a significant fraction of total conductance and is not removed, the inferred electronic \u03ba_e is overestimated, directly inflating L and making the WF violation appear larger than it is. This is the single most consequential unverifiable assumption."
+    },
+    {
+      "assumption": "The quantized conductivity value to which \u03c3 converges corresponds to the theoretically predicted \u03c3_Q for the graphene universality class, not just a non-zero empirical plateau",
+      "paper_location": "Abstract; Fig. 3",
+      "why_it_matters": "The theoretical value of \u03c3_Q is debated in the literature (Boltzmann gives ~4e\u00b2/\u03c0h; RG calculations give differing values). If the paper only shows saturation at some plateau without matching a specific prediction, the 'quantized' and 'universal' language is unjustified."
+    },
+    {
+      "assumption": "The hydrodynamic regime (l_ee \u226a W \u226a l_imp) is robustly established across all temperatures and densities where quantum critical claims are made",
+      "paper_location": "Extended Data Fig. 1; Fig. 1",
+      "why_it_matters": "The hydrodynamic description underlying both the \u03c3\u00b7\u03ba relation and the \u03b7/s interpretation requires electron-electron mean free path to be much shorter than device width. Data in the crossover or ballistic regime would invalidate the hydrodynamic extraction."
+    },
+    {
+      "assumption": "The distinction from Gallagher et al. (Science 2019) is clearly articulated and the present paper achieves qualitatively better convergence to the theoretical \u03c3_Q value, not merely comparable results in cleaner devices",
+      "paper_location": "Abstract; reference 15",
+      "why_it_matters": "The novelty of the conductivity quantization claim depends on this. If Gallagher et al. already established the same quantized value, the present paper's main advance is the combined thermal measurement and the 200\u00d7 WF violation, not first establishment of conductivity universality."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Does Fig. 3 show \u03c3(n\u21920) converging to the specific theoretical value for the graphene universality class (e.g., ~4e\u00b2/\u03c0h from RG or ~4e\u00b2/h from Boltzmann), and how does this compare quantitatively to Gallagher et al. (Science 2019)?",
+      "why_model_cannot_resolve": "Paper is paywalled. The distinction between 'saturates at a non-zero value' and 'saturates at the theoretically predicted universal value' is the core of the quantization claim, and the comparison to ref. 15 is needed to assess novelty."
+    },
+    {
+      "question": "What fraction of the measured thermal conductance near the Dirac point is attributed to phonons vs. electrons, and how is this separation performed (supplementary sections 1\u201310)?",
+      "why_model_cannot_resolve": "Supplementary is behind the paywall. The 200\u00d7 WF violation claim critically depends on this subtraction being done correctly and independently of fitting the electrical data."
+    },
+    {
+      "question": "What boundary condition (no-slip vs. partial slip) is assumed when extracting absolute viscosity \u03b7 from resistance data, and how sensitive is the \u03b7/s ratio to this choice?",
+      "why_model_cannot_resolve": "This is in the supplementary methods. A factor-of-2\u20134 sensitivity to boundary conditions could make the KSS comparison claim trivially satisfiable or falsified under alternative assumptions."
+    },
+    {
+      "question": "Is the charge inhomogeneity n* (Table I, Supplementary) small enough relative to the density range analyzed that the 'near Dirac point' data genuinely probe the quantum critical regime rather than the disorder-limited floor?",
+      "why_model_cannot_resolve": "Table I and characterization data are in the Supplementary, which is inaccessible. The answer determines whether the universality claim is physically realized in the measured devices."
+    }
+  ],
+  "novelty_assessment": "The theoretical framework is well-established (Damle & Sachdev 1997, Son 2007, Fritz et al. 2008, Hartnoll et al. 2007). Prior experiments have reported: WF violation (Crossno et al. Science 2016, ~20\u00d7), quantum-critical conductivity signatures (Gallagher et al. Science 2019), thermal diffusivity (Block et al. 2021), and viscosity signatures (Bandurin et al. 2018). The paper's advance appears to be: (a) simultaneous electrical + thermal measurement in the same ultraclean device enabling cleaner extraction of \u03c3_Q; (b) a 10\u00d7 larger WF violation magnitude; and (c) an improved \u03b7/s bound. The legitimate novelty is experimental precision and device quality, not a conceptual breakthrough. The claim that quantized conductivity 'has not been established experimentally so far' needs qualification against Gallagher et al. 2019. The popular framing ('breaking a fundamental law') is misleading\u2014WF violation in the Dirac fluid is theoretically predicted and previously observed, not a surprising anomaly.",
+  "overall_score_10": 6,
+  "paper_id": "bm-153-01",
+  "recommended_verdict": "promising",
+  "reviewer": "claude",
+  "score_rationale": "Significance is elevated (7/10) because simultaneously establishing quantized conductivity and a 200\u00d7 WF violation in the same device, if confirmed, would be the clearest experimental demonstration yet of the quantum critical Dirac fluid\u2014a decades-old theoretical prediction. Technical soundness (6.5/10) is penalized because the major concerns\u2014phonon subtraction in thermal conductance and the absolute viscosity extraction\u2014cannot be verified from the abstract, and the factor-of-200\u00d7 jump over the prior record warrants scrutiny. Novelty (5.0/10) is slightly reduced from cycle 1 based on codex's valid observation that Gallagher et al. (Science 2019) already targeted the quantized conductivity; the present paper's incremental advance is combined thermal+electrical measurement and device quality. Reviewer confidence is low (4/10) because the full paper is paywalled. I maintain 'promising' over gemini's 'weak_evidence': a 2/10 score for a Nature Physics paper passed through peer review is calibrated to scientific error, not to access limitations, and the latter is all that is actually established here.",
+  "summary": "This Nature Physics paper (Majumdar et al., August 2025) reports combined electrical and thermal transport in ultraclean hBN-encapsulated graphene near the Dirac point, claiming: (1) DC conductivity converges to a quantized universal value; (2) electrical and thermal conductivities are inversely related per relativistic hydrodynamics; (3) Lorentz number exceeds the Wiedemann-Franz semiclassical value by >200\u00d7; and (4) \u03b7/s approaches the KSS quantum viscosity bound within a factor of four. The review bundle is restricted to abstract, figure/extended-data captions, and references. Cycle 2 incorporates audit of the other reviewers' objections. The central new concern from co-reviewers is whether Gallagher et al. (Science 2019, ref. 15) already established the quantized conductivity, making the abstract's claim that it 'has not been established experimentally so far' potentially misleading. I maintain 'promising' rather than 'weak_evidence' (gemini's verdict), as the abstract, captions, and reference structure provide sufficient context for a conditional assessment; penalizing the paper's score down to 2/10 solely because we lack paywall access mistakes a review-process limitation for a scientific flaw.",
+  "technical_objections": [
+    {
+      "confidence": 0.7,
+      "evidence": "Gallagher et al. (Science 2019) is directly cited. Its title indicates it measured quantum-critical conductivity of the Dirac fluid in graphene. If the present paper's main advance is only improved device quality or concurrent thermal measurement, the claim of first experimental establishment is misleading. However, the distinction may be that Gallagher et al. did not achieve full convergence to the theoretical \u03c3_Q or used a microwave technique with different systematic errors.",
+      "objection": "The abstract claims the quantized conductivity 'has not been established experimentally so far,' but ref. 15 (Gallagher et al., Science 2019) has nearly identical scope and title ('Quantum-critical conductivity of the Dirac fluid in graphene'). The distinction from prior work is not articulated in the accessible text.",
+      "paper_location": "Abstract; reference 15",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.55,
+      "evidence": "Noise thermometry infers \u03ba_e from Johnson noise and applied Joule heating. If hBN phonon conduction is not subtracted, \u03ba_e is overestimated and L is inflated. The supplementary (Sections 1\u201310) would clarify this but is inaccessible. The factor-of-10 improvement over the prior experimental record makes systematic error the primary concern.",
+      "objection": "The 200\u00d7 Wiedemann-Franz violation is 10\u00d7 larger than the prior experimental record (Crossno et al. 2016). Such a jump warrants scrutiny of systematic errors in the thermal conductance measurement: phonon conduction through hBN, electron-phonon coupling corrections, and noise-thermometer calibration.",
+      "paper_location": "Abstract; Extended Data Fig. 2 (noise thermometry, Eqn. 6); Extended Data Fig. 3",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.65,
+      "evidence": "Extended Data Fig. 4 explicitly references 'intrinsic charge inhomogeneity and mobility' in Table I of the Supplementary. The theoretical prediction applies strictly at n\u21920, T\u21920 in a disorder-free system. If n* is non-negligible, the conductivity plateau is a disorder-limited floor, not genuine quantization.",
+      "objection": "The 'quantized conductivity' claim may conflate an asymptotic approach with genuine quantization. Residual charge inhomogeneity (puddles) in real devices sets a finite effective density n* > 0, so the true n = 0 quantum critical point is never probed.",
+      "paper_location": "Abstract; Fig. 3; Extended Data Fig. 4 inset",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.6,
+      "evidence": "Pellegrino et al. (2016) and the Bandurin et al. debate on slip conditions in graphene hydrodynamics established that boundary conditions materially affect extracted viscosity. A factor-of-four uncertainty from this source alone would make the KSS comparison claim unfalsiflable without additional independent viscosity measurements.",
+      "objection": "Absolute viscosity extraction from Poiseuille-regime resistance depends on assumed boundary conditions (no-slip vs. partial slip), which can shift \u03b7 by factors of 2\u20134. The factor-of-four comparison to the KSS bound may be trivially satisfiable under alternative boundary assumptions.",
+      "paper_location": "Abstract; Fig. 4; Extended Data Fig. 1; Extended Data Fig. 6",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "Hartnoll et al. (2007) and Lucas et al. (2016) give the transport relations in the collision-dominated limit. The simple inverse relation holds only approximately and in specific limits. If the paper uses the more complete relation (as the Eqn. 3 reference in Extended Data Figs. 3\u20134 suggests), the abstract oversimplifies.",
+      "objection": "The abstract describes electrical and thermal conductivities as 'inversely related,' but the correct Dirac fluid hydrodynamic relation involves \u03c3_Q, entropy density, and temperature in a non-trivial combination\u2014it is not \u03c3 \u00b7 \u03ba = const.",
+      "paper_location": "Abstract",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

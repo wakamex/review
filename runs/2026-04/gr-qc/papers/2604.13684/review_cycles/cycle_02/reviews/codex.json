@@ -1,0 +1,182 @@
+{
+  "confidence": 0.82,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 4.0,
+    "novelty": 4.0,
+    "reviewer_confidence": 8.2,
+    "significance": 4.0,
+    "technical_soundness": 3.5
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "I slightly lowered the overall and technical scores after considering the other reviews' emphasis on absolute residual scaling and mass-shell drift. I still do not adopt the strongest 'fatal' verdict because the orthogonality residual is a legitimate consistency audit if framed modestly; the fatal flaw is the paper's interpretation of it as precision/reliability, not the diagnostic's existence.",
+    "invalid_points_from_other_reviewers": [
+      "I do not accept that the diagnostic is physically meaningless merely because one could orthogonally project any approximate force. Projection changes the model; the unprojected residual remains an informative consistency check.",
+      "I do not accept the unqualified claim that the paper has a fatal foundational misunderstanding. The derivation of orthogonality as a necessary condition is basically correct; the overclaim is treating the scalar residual as a full accuracy metric.",
+      "The Smith-Will off-domain objection should be major, not merely minor, because it affects the interpretation of the radial-motion results."
+    ],
+    "valid_points_from_other_reviewers": [
+      "The diagnostic is necessary but not sufficient for self-force accuracy; a force can pass it while being quantitatively wrong.",
+      "The use of Gal'tsov circular-orbit terms outside circular motion needs explicit justification or bounded error.",
+      "Tiny electron-parameter residuals mostly reflect tiny force scales unless normalized by an appropriate norm.",
+      "If non-orthogonal forces are integrated directly, the paper should monitor mass-shell drift or explain reprojection.",
+      "The arXiv HTML rendering hides key equations and table entries, requiring PDF or source spot-checking.",
+      "The Table 4/Table 3 cross-reference error is real and symptomatic of weak presentation."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "For an exact electromagnetic self-force, the tail force must be orthogonal to the four-velocity, so u_mu F_tail^mu is a valid necessary consistency diagnostic.",
+      "notes": "The kinematic implication is standard and sound, assuming constant rest mass and correctly orthogonal Lorentz/local terms. The paper does not establish that this scalar residual quantitatively measures distance to the exact self-force.",
+      "paper_location": "Introduction Eq. (2); Sec. 2.3, Eqs. (10)-(15)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Smith-Will alone yields measurable residuals, while adding Gal'tsov dissipative terms suppresses the residual by many orders of magnitude.",
+      "notes": "This is plausible from the narrative and tables, but the arXiv HTML bundle renders key formulas and many numerical entries poorly, and the numerical setup is not detailed enough for independent reproduction.",
+      "paper_location": "Abstract; Sec. 3.1; Table 1",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Weakly charged Schwarzschild runs show smaller residuals for smaller radiation-reaction parameter, larger initial radius, and larger electric interaction parameter.",
+      "notes": "The qualitative trends are plausible. However, much of the decrease can follow from smaller force scales rather than better approximation quality, so a normalized residual is needed.",
+      "paper_location": "Sec. 3.2; Table 2",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The magnetized case is more accurate because both Smith-Will and Gal'tsov components are included.",
+      "notes": "Small residuals in a scalar orthogonality test do not show accuracy of the full tail force. The use of Gal'tsov circular-orbit expressions on the studied magnetized trajectories remains insufficiently justified.",
+      "paper_location": "Sec. 3.3; Table 3; Conclusions",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "The combined Smith-Will and Gal'tsov approximations provide a reliable description of electromagnetic self-force effects in the tested Schwarzschild backgrounds.",
+      "notes": "Reliability relative to the true nonlocal tail force is not benchmarked against exact tail integrals, perturbative self-force computations, or trajectory-level error estimates.",
+      "paper_location": "Abstract; Conclusions",
+      "support_level": "unsupported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "A justified regime in which the Smith-Will static radial self-force approximates the tail force for moving particles.",
+      "paper_location": "Sec. 2.2.1 and Secs. 3.1-3.2",
+      "why_it_matters": "Otherwise the residual mainly measures use outside the derivation domain, not controlled approximation quality."
+    },
+    {
+      "assumption": "A justified regime in which Gal'tsov circular-motion dissipative components can be used instantaneously on noncircular or magnetized trajectories.",
+      "paper_location": "Sec. 2.2.2 and Sec. 3.3",
+      "why_it_matters": "Missing components may be as important as the reported residual, especially when radial motion or external-field acceleration is significant."
+    },
+    {
+      "assumption": "Complete initial data and numerical controls for all runs.",
+      "paper_location": "Tables 1-3 and Sec. 3",
+      "why_it_matters": "The scalar residual depends on the velocity components, Omega_phi, index conventions, and mass-shell treatment, so the results cannot be audited without these details."
+    },
+    {
+      "assumption": "A normalized diagnostic such as |u.F_tail| divided by a tail-force norm or total dynamical force scale.",
+      "paper_location": "Sec. 2.3 and Sec. 3",
+      "why_it_matters": "Absolute residuals shrink automatically when the force scale or radiation-reaction parameter shrinks."
+    },
+    {
+      "assumption": "Explicit projection or non-projection policy for approximate tail forces during time evolution.",
+      "paper_location": "Sec. 3",
+      "why_it_matters": "Projecting the force would make the residual vanish by construction but alter the model; not projecting can produce mass-shell drift. The paper must state which object is being physically evolved."
+    },
+    {
+      "assumption": "Quantitative weak-field bounds for Q and B ensuring Schwarzschild geometry remains self-consistent for the tabulated interaction parameters.",
+      "paper_location": "Secs. 3.2-3.3",
+      "why_it_matters": "Large interaction parameters may correspond to electromagnetic fields whose backreaction cannot be neglected unless scaled carefully by q/m and M."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Do the PDF formulas for Eqs. (7)-(9) match Smith-Will and Gal'tsov in the same electromagnetic conventions and index placement used in Eq. (15)?",
+      "why_model_cannot_resolve": "The provided HTML bundle renders the equations incompletely, and checking convention matching requires the original cited derivations or the PDF."
+    },
+    {
+      "question": "Did the numerical implementation correctly raise/lower all tail-force components before forming u_mu F_tail^mu?",
+      "why_model_cannot_resolve": "The paper reports final residuals but not explicit scalar-evaluation formulas or code."
+    },
+    {
+      "question": "Are the Sec. 3.1 and Sec. 3.3 trajectories circular, quasi-circular, radial, or generic, and is Gal'tsov's circular formula valid for them?",
+      "why_model_cannot_resolve": "The manuscript lacks complete initial conditions and trajectory characterizations, while the validity of the dissipative terms depends on them."
+    },
+    {
+      "question": "How large is the drift in u_mu u^mu + 1 during the reported integrations if no projection is applied?",
+      "why_model_cannot_resolve": "Only orthogonality residuals are reported; the normalization drift and solver convergence data are absent."
+    }
+  ],
+  "novelty_assessment": "The novelty is modest. Using u_mu F_tail^mu as an orthogonality sanity check is simple and useful, but it is a direct consequence of four-velocity normalization rather than a new accuracy theory. The work could be a useful numerical consistency note if carefully framed, normalized, and made reproducible. It is not currently a strong validation of analytical tail approximations against the true electromagnetic self-force.",
+  "overall_score_10": 3.6,
+  "paper_id": "2604.13684",
+  "recommended_verdict": "weak_evidence",
+  "reviewer": "codex",
+  "score_rationale": "The paper has a real, location-grounded consistency idea, but its main reliability conclusions are not supported by the diagnostic alone. The approximation domains are stretched, the residual is unnormalized, numerical details are insufficient, and the mass-shell/projection issue needs explicit handling. I therefore remain in the weak-evidence range, slightly below my prior score after accepting the strongest valid scaling and integration objections from the other reviewers.",
+  "summary": "The paper studies the scalar residual u_mu F_tail^mu for stitched analytical electromagnetic tail-force approximations in Schwarzschild settings. I keep my prior view: the residual is a valid necessary consistency check, but the paper over-interprets it as a precision or reliability measure. The other reviews strengthened the concern that absolute smallness, especially for tiny electron-scale parameters, is not evidence of force accuracy. I do not fully accept the strongest claim that the diagnostic is physically meaningless or fatal: an unprojected residual can still be a useful audit of an approximate force model. But the paper needs clearer domains of validity, normalization, reproducibility details, and benchmark comparisons before the reliability claims are supported.",
+  "technical_objections": [
+    {
+      "confidence": 0.95,
+      "evidence": "A force can be exactly orthogonal to u^mu and still have the wrong spatial components or magnitude; the zero-force approximation would pass this scalar test. The paper does not prove or calibrate a relation between |u_mu F_tail^mu| and the error relative to the exact tail integral.",
+      "objection": "The central diagnostic is treated as a precision/error measure, but orthogonality is only a necessary consistency condition.",
+      "paper_location": "Introduction around Eq. (2); Sec. 2.3 around Eq. (15); Conclusions",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "The paper states Smith-Will is for a static charge and Gal'tsov is for circular motion, then uses them in radial, weakly charged, and magnetized dynamical settings. Calling them practical estimates does not bound the missing velocity- or acceleration-dependent components.",
+      "objection": "Smith-Will and Gal'tsov formulas are applied beyond their stated derivation domains without adequate validity assumptions.",
+      "paper_location": "Sec. 2.2.1, Eq. (7); Sec. 2.2.2, Eqs. (8)-(9); Secs. 3.1-3.3",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.86,
+      "evidence": "The paper does not give complete initial four-velocity data, angular momentum or Omega_phi prescriptions, solver tolerances beyond WorkingPrecision, mass-shell enforcement or reprojection policy, horizon stopping criteria, or code. These directly affect u_mu F_tail^mu.",
+      "objection": "The numerical experiments are not reproducible from the paper as written.",
+      "paper_location": "Sec. 3 and Tables 1-3",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.86,
+      "evidence": "Many conclusions rely on tiny values for realistic radiation-reaction parameters. Since the tail force itself scales with that small parameter, absolute smallness can be largely dimensional. Values far below ordinary numerical scales are reported without AccuracyGoal, PrecisionGoal, convergence tests, or comparison to force norms.",
+      "objection": "Absolute residuals are used to argue improved accuracy without normalization or numerical error monitoring.",
+      "paper_location": "Tables 1-3; Secs. 3.1-3.3; Conclusions",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.78,
+      "evidence": "The scalar can be formed consistently as u_mu F^mu or u^mu F_mu, but the paper does not spell out how Smith-Will radial and Gal'tsov t/phi components are raised or lowered before evaluating the residual. Incorrect metric factors could create or cancel residuals.",
+      "objection": "The paper mixes covariant and contravariant tail-force components without enough index bookkeeping in the reviewable text.",
+      "paper_location": "Eq. (3) uses F_tail^mu; Eq. (7) gives F_tail^r; Sec. 2.2.2 describes Gal'tsov covariant components; Eq. (15) forms u_mu F_tail^mu",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.72,
+      "evidence": "The cited Warburton-Barack paper is titled as a scalar-charge self-force calculation in Kerr, while this manuscript invokes it as support for electromagnetic Gal'tsov expressions. The analogy may be useful, but convention and field-content matching are not shown.",
+      "objection": "The cited numerical validation of Gal'tsov is not clearly applicable to the electromagnetic claim made here.",
+      "paper_location": "Introduction and Sec. 2.2.2; References entry Warburton and Barack (2010)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "The reported nonzero residual means u_mu du^mu/dtau is nonzero unless some reprojection is applied. This is acceptable as a diagnostic only if the authors explicitly monitor the induced normalization drift or separate diagnostic evaluation from physical trajectory generation.",
+      "objection": "If the equations are integrated with a non-orthogonal force, the resulting trajectories do not exactly preserve the mass-shell constraint.",
+      "paper_location": "Sec. 3 numerical analysis; Sec. 2.3 derivation",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "In the provided arXiv HTML source, critical equations and many table entries appear as empty cells, and Sec. 3.3 refers to Table 4 while the magnetized table is labeled Table 3. The PDF may contain the information, so this is partly a source-rendering and presentation issue rather than a mathematical disproof.",
+      "objection": "Presentation errors and rendered missing formulas hinder auditability.",
+      "paper_location": "Eqs. (7)-(9), Eq. (15), Tables 1-3, and Sec. 3.3 reference to Table 4",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

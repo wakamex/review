@@ -1,0 +1,92 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "All three reviewers converge on a routine verdict with overall scores in the range 4.0\u20135.4 (mechanical average 4.633/10 in cycle 2). The review was complicated by systematic HTML rendering failures that stripped numerical values and equations from the supplied bundle; codex (cycle 2) partially recovered values from raw HTML math alt text. Gemini gave divergent clarity scores between cycles (8/10 cycle 1, 2/10 cycle 2) reflecting a reassessment of the HTML quality. A numerical discrepancy in the recovered mass bound (gemini: ~30.6 M\u2299, codex: ~43.6 M\u2299) was not resolved within the review cycles. The paper is EPJC-accepted. No reviewer identified a fatal methodological error; all objections are categorized as major (HTML unverifiability, resonance domain) or moderate (non-rotating approximation, no data fitting, form-factor specificity, underspecified time delay). The non-rotating assumption and absence of observational data fitting are the objections most consistently supported across all three reviewers and both cycles.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper applies standard black-hole physics tools to a specific theoretical modification of gravity called \"nonlocal gravity,\" asking how this modification would alter the quasi-periodic oscillation (QPO) signals observed in X-ray light from matter spiraling into black holes. The review board found the methodology internally consistent and the paper competently executed, but assessed it as a routine template calculation applied to one more theory variant without new physical insight or comparison to actual observational data. The most important caveat is that the analysis assumes a non-spinning black hole, while real astrophysical QPO sources host rapidly spinning black holes \u2014 a mismatch that substantially limits the physical applicability of the derived constraints.",
+  "human_spotchecks": [
+    "Verify the exact numerical values in the published PDF against codex's recovered values: nonlocal parameter constraint (\u03b1/M \u2264 0.452?), radiative efficiency maximum (~8.9%?), QPO frequency range (~673/M\u20134360/M Hz?), TOV-limited upper frequency (~1450 Hz?), and mass bound (~43.6 M\u2299 per codex vs. ~30.6 M\u2299 per gemini cycle 1 \u2014 this discrepancy requires resolution).",
+    "Check the full Table 1 frequency expressions in the PDF to verify the claimed model reductions RP0=RP1=RP2=ER1 and ER3=TD under the substitution \u03bd_\u03b8 \u2192 \u03bd_K, including signs and domain restrictions on the upper/lower frequency assignments.",
+    "For each of the 7 effective QPO models, verify numerically that the 3:2 resonance equation \u03bd_U/\u03bd_L = 3/2 has a unique, physically admissible root outside the ISCO and within the stable orbit region (where \u03bd_r\u00b2 > 0) for all values of \u03b1/M in [0, 0.452].",
+    "Verify that G_eff(r) as given in Eq. (9) is well-defined, convergent, and correctly reproduces Newton's constant G in the large-r limit, and that the effective potential correctly reduces to the Schwarzschild effective potential when \u03b1 \u2192 0.",
+    "Verify the time delay calculation underlying Fig. 14: identify the specific null-geodesic path and integration, the observer convention (coordinate time vs. observed arrival time), and assess whether the neglect of accretion disk opacity and cosmological redshift is justified for the claimed \u22641.3 ms upper bound."
+  ],
+  "paper_id": "2604.25254",
+  "public_summary": "The paper claims to show that the nonlocal parameter \u03b1 of a specific NLG black hole metric (Nicolini-type, static, spherically symmetric) systematically lowers the innermost stable circular orbit (ISCO) radius and the specific energy and angular momentum of circular orbits, while increasing radiative efficiency. For the fundamental frequencies, the paper argues that spherical symmetry forces \u03bd_K = \u03bd_\u03b8, which both decrease with \u03b1 while the radial epicyclic frequency increases. This identity collapses 11 twin-peak QPO models (RP, ER, WD, TD) to 7 effective models. By imposing the 3:2 resonance condition, the paper aims to show that the resonant radius decreases with \u03b1 and the upper QPO frequency increases, with the maximum black hole mass capable of producing high-frequency QPOs constrained to roughly 43.6 M\u2299 (combining the TOV lower mass limit with an HF QPO classification threshold). The gravitational time delay between QPO and shadow signals is argued to be negligible (\u2264~1.3 ms). All reviewers converge on a routine assessment: the calculation is methodologically standard and largely internally consistent, but contributes no new conceptual or methodological advance, lacks comparison to actual QPO source data, and the non-rotating approximation limits physical relevance for the spin-sensitive astrophysical systems motivating the analysis.",
+  "reviewer_disagreements": [
+    "Clarity scores diverged substantially between cycle 1 reviewers: gemini assigned 8/10 based on apparent access to the PDF, while claude (3/10) and codex (4/10) penalized the HTML bundle for missing numerical content. In cycle 2 gemini revised downward to 2/10 after accepting that the HTML failures were systematic, while codex revised upward to 5.8/10 after recovering values from raw HTML math alt text.",
+    "Gemini (cycle 2) concluded 'weak_evidence' largely on the basis of the HTML rendering failures, while codex (cycle 2) converged on 'routine' after recovering numerical values from the HTML alt text, reflecting different weighting of presentation artifacts versus physics content.",
+    "Codex (cycle 2) disputes gemini's cycle-1 recovered mass bound of ~30.6 M\u2299, finding ~43.6 M\u2299 in the raw HTML alt text. This numerical discrepancy was not resolved within the review cycles and requires PDF verification.",
+    "Codex marked the resonance root uniqueness concern as potentially verdict-changing (would_change_verdict_if_true: true); claude disagreed, viewing this as a minor documentation gap standard in the genre whose resolution is unlikely to overturn the monotone qualitative trends visible in the figures."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The HTML review bundle has systematic rendering failures that stripped all explicit numerical values and equations, making quantitative claims unverifiable from the supplied source. Codex (cycle 2) partially recovered values from raw HTML math alt text (\u03b1/M \u2264 0.452, ~8.9% efficiency, ~43.6 M\u2299 mass bound, \u22641.3 ms time delay), but these have not been cross-checked against the PDF and a discrepancy exists with gemini's earlier recovery of ~30.6 M\u2299.",
+      "paper_location": "Throughout; Abstract, Sections III\u2013VI, all figures",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The analysis assumes a static, non-rotating black hole, whereas real microquasar HF QPO sources (e.g., GRO J1655-40, XTE J1550-564, Sco X-1) host rapidly spinning black holes. Spin substantially alters epicyclic frequencies, the ISCO location, and QPO frequency ratios, making the derived mass bounds and parameter constraints physically inapplicable to the astrophysical targets motivating the analysis.",
+      "paper_location": "Section II Eq. (5); Section V; Conclusion",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "No comparison with actual QPO observational data from specific sources is provided. The mass bound and \u03bb constraints are derived from a rough classification threshold (\u03bd_U \u2265 100 Hz, explicitly described as 'approximate') rather than source-specific fitting, reducing them to broad phenomenological order-of-magnitude estimates.",
+      "paper_location": "Section V; paragraph around Fig. 12; Conclusion",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The paper does not establish that the 3:2 resonance equation has a unique, physically admissible root outside the ISCO for every QPO model across the full plotted parameter range. Smooth monotone curves in the figures provide indirect evidence but no root-count analysis, domain restrictions, or stability-region checks are documented.",
+      "paper_location": "Section V; Fig. 10 and surrounding text",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "claude"
+      ]
+    },
+    {
+      "objection": "The results are specific to the Gaussian nonlocal form factor A(p\u00b2) = exp(\u2212\u03b1p/2) chosen from Nicolini:2012eu, without discussion of why this choice is preferred among admissible NLG form factors or how sensitive the QPO predictions are to alternative choices. The paper sometimes presents the conclusions broadly as NLG predictions rather than predictions of this one functional choice.",
+      "paper_location": "Section II, Eqs. (8)\u2013(9); Abstract and Conclusion",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The gravitational time delay calculation between QPO and shadow signals does not specify the null geodesic path, observer location, integration limits, or the distinction between coordinate and observed arrival time, leaving the prediction unauditable. For astrophysical sources, the neglected cosmological redshift contribution may also be non-negligible.",
+      "paper_location": "Section V; Fig. 14 and surrounding paragraph",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "For a static, spherically symmetric spacetime, the Keplerian frequency equals the vertical epicyclic frequency (\u03bd_K = \u03bd_\u03b8); this is a standard, well-established result that correctly reduces the 11 candidate QPO models to 7 effective models for this geometry.",
+    "The nonlocal parameter \u03b1 qualitatively decreases the ISCO radius and the specific energy and angular momentum of circular orbits while increasing radiative efficiency, which is consistent with the modified effective potential and supported by all reviewers via the figures.",
+    "The NLG black hole metric reduces to the Schwarzschild solution in the limit \u03b1 \u2192 0, consistent with the general-relativistic baseline.",
+    "The 3:2 resonance condition predicts an upper QPO frequency that increases monotonically with \u03b1 and a rough black hole mass upper bound of order tens of solar masses, a result that is internally consistent with the frequency-mass scaling relation in Eq. (28)."
+  ],
+  "technical_takeaway": "The paper derives the geodesic and epicyclic frequency structure for the Nicolini-type static nonlocal gravity (NLG) black hole (parameter range \u03b1/M \u2264 0.452 per the raw HTML), demonstrates \u03bd_K = \u03bd_\u03b8 from spherical symmetry (reducing 11 QPO models to 7 effective models), and imposes the empirical 3:2 resonance condition to find the upper QPO frequency increasing with \u03b1, a TOV-limited upper frequency of roughly 1450 Hz, and a rough mass bound of order 43.6 M\u2299. The methodology is standard for this class of phenomenological papers; the non-rotating approximation and absence of source-specific data fitting substantially limit the physical applicability of the derived constraints. A discrepancy between reviewer-recovered numerical values (gemini: ~30.6 M\u2299 vs. codex cycle 2: ~43.6 M\u2299) requires PDF verification."
+}

@@ -1,0 +1,127 @@
+{
+  "confidence": 0.62,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 5.0,
+    "novelty": 8.2,
+    "reviewer_confidence": 6.2,
+    "significance": 8.0,
+    "technical_soundness": 6.2
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "No prior cycle available; this is the first review.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "QSO1 hosts an accreting black hole and is a prototypical Little Red Dot.",
+      "notes": "The paper cites prior NIRSpec spectroscopy, broad Balmer components, high-resolution IFU data, and variability. Within this bundle those are mostly literature-dependent claims rather than newly established results.",
+      "paper_location": "Introduction, first two paragraphs",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The narrow H-alpha velocity field plus spectroastrometry reveal rotation consistent with Keplerian motion around a compact point mass of about 50 million solar masses.",
+      "notes": "The modeling program is coherent, including 1D rotation-curve fitting and 3D MOKA3D fits. However, the observed velocity gradient is very small, many key values are missing in the converted text, and the inference relies on assumptions about rotation, inclination, pressure support, PSF/lensing corrections, and broad-line subtraction.",
+      "paper_location": "Main text around Figures 1-2; Methods: Narrow line kinematics, Spectroastrometric measurements, Rotation curve analysis, MOKA3D kinematics modeling",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Extended stellar-cluster, Plummer-sphere, and dark-matter-only explanations are disfavored because they either fit worse or collapse to unphysically small radii/densities.",
+      "notes": "The qualitative argument is plausible: extended profiles struggle to reproduce a steep inner velocity gradient unless they become nearly point-like. The strength of this conclusion is hard to audit because BIC values, radii, masses, and uncertainties are often absent from the provided text.",
+      "paper_location": "Main text around Figure 2; Methods: Rotation curve analysis; MOKA3D kinematics modeling",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Virial single-epoch Balmer black-hole mass estimates are validated for this LRD, while electron/Balmer scattering low-mass scenarios are ruled out.",
+      "notes": "Consistency between the dynamical estimate and prior virial estimates supports this object-specific comparison. General validation for LRDs is a stronger extrapolation from one object.",
+      "paper_location": "Main text around Figure 3; Methods: BH mass estimate assuming electron scattering",
+      "support_level": "partially_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The narrow H-alpha emission traces gravitationally dominated circular rotation in a disk rather than noncircular AGN-driven gas motions.",
+      "paper_location": "Main text around Figure 1; Methods: Tentative nuclear outflow; MOKA3D kinematics modeling",
+      "why_it_matters": "The black-hole mass inference converts line-of-sight velocity structure into an enclosed mass. If the gas is substantially affected by outflows, inflows, shocks, or anisotropic turbulence, a Keplerian-looking gradient may not directly measure a point-mass potential."
+    },
+    {
+      "assumption": "Broad-line and continuum subtraction leaves unbiased narrow-line centroids and dispersions at the few km/s and few-pc levels.",
+      "paper_location": "Methods: Narrow line kinematics; Spectroastrometric measurements; Tentative nuclear outflow",
+      "why_it_matters": "The observed narrow velocity gradient is small and the spectroastrometric signal is sub-PSF. Residuals from the broad Balmer profile, absorption model, or continuum asymmetry could shift centroids or line velocities enough to affect the result."
+    },
+    {
+      "assumption": "The lensing shear and magnification model is accurate enough for source-plane radii and centroid separations.",
+      "paper_location": "Methods: Conventions; Spectroastrometric measurements",
+      "why_it_matters": "Mass scales linearly with radius for fixed velocity-squared. A systematic error in source-plane distance scale directly changes the inferred enclosed mass and compactness constraints."
+    },
+    {
+      "assumption": "BIC comparisons are appropriate despite small effective sample sizes, correlated spaxels, PSF convolution, and model-dependent residual structure.",
+      "paper_location": "Methods: Conventions; Rotation curve analysis; MOKA3D kinematics modeling",
+      "why_it_matters": "The preference for a point mass over extended alternatives is presented using BIC. If the likelihood assumptions or independent-data-point counts are wrong, the numerical strength of model preference may be overstated."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Do the original PDF and data tables contain the missing numerical values and equations that are absent from the provided HTML conversion?",
+      "why_model_cannot_resolve": "The bundle explicitly reports a fatal HTML conversion error and many quantities are blank, so I cannot distinguish author omission from conversion damage without the original source/PDF."
+    },
+    {
+      "question": "Are the MOKA3D fits using the correct PSF, covariance, lensing transformation, and narrow-line flux model?",
+      "why_model_cannot_resolve": "The review text summarizes the framework but does not provide enough implementation detail, residual arrays, or posterior diagnostics to audit the modeling locally."
+    },
+    {
+      "question": "Are independent reductions or null tests sufficient to rule out wavelength-calibration/slicer artifacts at the approximately 10 km/s gradient level?",
+      "why_model_cannot_resolve": "The paper discusses one artifact geometry but does not include the full calibration validation or alternative-reduction comparisons needed to evaluate this systematic."
+    }
+  ],
+  "novelty_assessment": "If the dynamical modeling is correct, the paper is novel and potentially high-impact: a direct black-hole mass measurement in an LRD at the epoch of reionization would be important for early black-hole growth and for testing virial estimates. However, the novelty is tied to a difficult measurement at the edge of resolution and calibration limits, and the provided source text is too damaged to audit many key quantitative claims.",
+  "overall_score_10": 7.0,
+  "paper_id": "bm-149-01",
+  "recommended_verdict": "promising",
+  "reviewer": "codex",
+  "score_rationale": "The work is potentially significant and novel, with multiple modeling routes pointing toward a compact massive object. I lower the technical and clarity scores because the measurement is near instrumental and spatial-resolution limits, key numerical values are missing from the review bundle, and several modeling assumptions need expert audit before the strongest claims about direct mass, nakedness, and formation channel are accepted.",
+  "summary": "The paper reports a JWST/NIRSpec-IFS dynamical mass measurement for the lensed Little Red Dot A2744-QSO1 at the epoch of reionization, arguing that narrow-line gas kinematics and spectroastrometry require a compact point mass of order 5e7 solar masses and leave little room for a stellar host. The result is potentially important, but from the provided text several key numerical values are missing or malformed, and some reductions from marginal, low-amplitude velocity structure to a black-hole-dominated Keplerian model need closer audit.",
+  "technical_objections": [
+    {
+      "confidence": 0.95,
+      "evidence": "Examples include missing redshift, black-hole mass estimates, sphere-of-influence radius, velocity amplitudes, BIC values, fitted radii, stellar-mass limits, and many equation symbols. The text repeatedly contains blanks such as 'at .', 'a black hole mass of about was estimated', and equations rendered without variables.",
+      "objection": "Several central numerical quantities are missing or corrupted in the provided HTML text, making the argument locally unauditable from this bundle.",
+      "paper_location": "Abstract; Introduction; Figure 2 discussion; Methods equations and parameter reports throughout",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "The paper states that it corrects for velocity dispersion support by adding the observed velocity dispersion in quadrature to the observed velocity. A physical asymmetric-drift correction generally depends on radial gradients, anisotropy, geometry, and beam smearing. This matters because the observed velocity gradient is only about 10 km/s before correction.",
+      "objection": "The pressure-support correction used for the 1D rotation curve appears oversimplified and may not justify the quoted enclosed-mass points on its own.",
+      "paper_location": "Methods: Narrow line kinematics; Methods: Rotation curve analysis",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.72,
+      "evidence": "The analysis claims parsec-scale centroid precision below the PSF using peak S/N about 12 and reports a 3-5 sigma red-blue separation. The same section notes flux asymmetry, mismatch between the zero-velocity centroid and MOKA3D dynamical center, and possible weak emission in another velocity channel.",
+      "objection": "The spectroastrometric mass estimate rests on very small centroid separations and low-significance channel structure, but the systematic error budget is not fully demonstrated in the text.",
+      "paper_location": "Main text: spectroastrometry paragraph; Methods: Spectroastrometric measurements; Extended Data Fig. 1 discussion",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.65,
+      "evidence": "The paper argues that the velocity gradient is aligned with the slicers and therefore orthogonal to the expected false rotation pattern from one slice-calibration artifact. This addresses one named artifact mode, but the gradient is smaller than one spectral pixel and the bundle does not show null tests on stars, alternative reductions, individual dither subsets, or independent strong line tracers.",
+      "objection": "The instrumental-artifact dismissal for the narrow velocity gradient may be too narrow as written.",
+      "paper_location": "Methods: Narrow line kinematics",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "The data, if correct, support consistency for QSO1. But LRDs are heterogeneous, and the paper itself notes unusual spectra, X-ray weakness, and challenges with standard AGN templates.",
+      "objection": "The broad claim that virial calibrations apply to LRDs is stronger than what a single-object consistency check can establish.",
+      "paper_location": "Introduction final sentence; Main text around Figure 3",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "confidence": 0.95,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 3,
+    "novelty": 3,
+    "reviewer_confidence": 9,
+    "significance": 2,
+    "technical_soundness": 2
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Maintained the overall verdict of major_flaw. Incorporated agreement from other reviewers regarding the insufficiency of orthogonality as an accuracy metric, the unjustified extrapolation of static/circular models to general trajectories, and dimensional scaling issues. Lowered clarity score due to the HTML rendering issues raised by Claude.",
+    "invalid_points_from_other_reviewers": [
+      "Claude considers the core logic of using orthogonality as a diagnostic to be 'sound' and gives a 'routine' verdict. However, integrating a non-orthogonal force actively breaks the mass-shell constraint, which is a fundamental physical violation rendering the methodology fundamentally flawed, not just routine."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Both Claude and Codex correctly identify that orthogonality is a necessary but not sufficient condition for accuracy.",
+      "Codex correctly points out that the absolute smallness of the diagnostic simply tracks the radiation reaction parameter scaling, rather than indicating improved precision.",
+      "Both correctly object to applying static (Smith-Will) and circular (Gal'tsov) formulas to generic trajectories without bounding the error.",
+      "Claude accurately observed that key equations and numerical table entries are missing due to HTML rendering artifacts, severely hindering auditability."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "The quantity $D \\equiv u^\\mu F^{tail}_\\mu$ serves as a quantitative covariant diagnostic of the precision and internal consistency of approximate tail-term models.",
+      "notes": "The diagnostic $D$ merely measures the missing kinematic components (mechanical work) resulting from applying restricted models (static/circular) to general motion. As pointed out by multiple reviewers, orthogonality is a necessary but not sufficient condition for accuracy.",
+      "paper_location": "Abstract, Section 1 (Introduction), and Section 2.3",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "The combined Smith-Will and Gal'tsov tail-term approximations provide a reliable and accurate description of electromagnetic self-force effects in Schwarzschild spacetime.",
+      "notes": "The conclusion is based entirely on $D$ taking numerically small values (e.g., $10^{-31}$ for an electron). This smallness is a trivial consequence of the overall radiation reaction parameter $\\epsilon$ being extremely small, not an indication that the approximation's functional form is accurate.",
+      "paper_location": "Section 4 (Conclusions)",
+      "support_level": "unsupported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The paper assumes that an ad-hoc 4-force constructed from static and circular approximations can be integrated directly without orthogonal projection.",
+      "paper_location": "Throughout Section 3",
+      "why_it_matters": "If the standard orthogonal projection $f^\\mu_\\perp = (\\delta^\\mu_\\nu + u^\\mu u_\\nu) f^\\nu$ were applied to maintain a constant rest mass, $D$ would identically equal zero by construction, removing the entire basis for the paper's numerical analysis."
+    },
+    {
+      "assumption": "The paper assumes the un-normalized absolute residual of $D$ directly equates to approximation error.",
+      "paper_location": "Section 3 and 4",
+      "why_it_matters": "Without normalizing by the magnitude of the force or parameter $\\epsilon$, the shrinking of $D$ is simply a trivial consequence of the overall force scale becoming infinitesimally small."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Verify the explicit analytical forms and the numerical values in Tables 1-3.",
+      "why_model_cannot_resolve": "Equations 7-9, 15, and all numerical entries in Tables 1-3 are rendered as empty cells in the provided HTML source, requiring a human to check the original PDF."
+    },
+    {
+      "question": "Verify whether the authors apply any projection operator to the tail force in their underlying numerical code.",
+      "why_model_cannot_resolve": "The text strongly implies no projection was used (since $D \\neq 0$), but accessing the authors' exact integration scheme code would be necessary to confirm if the mass-shell constraint was violated as expected."
+    }
+  ],
+  "novelty_assessment": "The condition $u_\\mu f^\\mu = 0$ is a standard, elementary kinematic constraint in relativistic mechanics. Proposing its absolute violation as a 'diagnostic' for the precision of ad-hoc stitched force approximations represents a misunderstanding of how 4-forces work. The paper essentially conducts a numerical consistency check on known approximations applied outside their domains, offering negligible novel physical insight.",
+  "overall_score_10": 2,
+  "paper_id": "2604.13684",
+  "recommended_verdict": "major_flaw",
+  "reviewer": "gemini",
+  "score_rationale": "The paper relies on a foundational misunderstanding of relativistic kinematics. Measuring $u_\\mu f^\\mu \\neq 0$ for an unprojected 4-force assembled from restricted (static and circular) approximations merely quantifies the work components omitted by these models; it does not measure approximation accuracy compared to the exact self-force. Integrating this non-orthogonal force violates the 4-velocity normalization (mass-shell constraint). Furthermore, conclusions of 'high precision' are erroneously drawn from the trivial absolute scaling of the radiation reaction parameter. The technical objections are fatal to the paper's core premise.",
+  "summary": "The paper investigates the accuracy of analytical approximations for the electromagnetic tail term in the self-force of a charged particle in Schwarzschild spacetime. The authors introduce a \"covariant diagnostic\" defined as $D \\equiv u^\\mu F^{tail}_\\mu$, arguing that since a true 4-force must be orthogonal to the 4-velocity, any deviation of $D$ from zero measures the precision and internal consistency of the adopted approximations. They numerically integrate the equations of motion using the Smith-Will conservative term and the Gal'tsov dissipative terms in various backgrounds. Finding that $D$ is numerically small for astrophysical parameters, they conclude that combining these approximations yields a highly accurate representation of the tail force.",
+  "technical_objections": [
+    {
+      "confidence": 0.95,
+      "evidence": "Any exact self-force $f^\\mu$ strictly satisfies $u_\\mu f^\\mu = 0$. The Smith-Will force is derived for a static charge, and the Gal'tsov force for circular orbits. When applied to a generally moving particle, they lack the corresponding velocity-dependent components representing mechanical work. Consequently, $D$ simply evaluates to these missing kinematic terms. Measuring this omission does not test the physical accuracy of the tail term compared to a rigorous calculation.",
+      "objection": "Fundamental conceptual flaw in the proposed diagnostic $D$.",
+      "paper_location": "Section 2.3",
+      "severity": "fatal",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "Because the authors directly insert a non-orthogonal 4-force into the equations of motion ($D \\neq 0$), the numerical integration fails to preserve the 4-velocity normalization $u_\\mu u^\\mu = -1$. This physically implies that the rest mass of the particle is artificially changing during the simulation. Standard procedure dictates projecting approximate 3-forces onto the orthogonal subspace.",
+      "objection": "Violation of the mass-shell constraint during numerical integration.",
+      "paper_location": "Section 3 (Numerical analysis)",
+      "severity": "fatal",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "The Smith-Will expression is derived for a static charge, and the Gal'tsov expression is derived for circular equatorial orbits in Kerr spacetime. The authors apply these to radial and general non-circular trajectories in magnetized/charged Schwarzschild spacetimes without bounded error estimates or mathematical justification.",
+      "objection": "Invalid extrapolation of restricted models to general trajectories.",
+      "paper_location": "Sections 2.2.1, 2.2.2, and 3",
+      "severity": "major",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "The paper cites values of $D \\sim 10^{-31}$ for realistic electron parameters as evidence of 'extremely high accuracy.' However, the overall magnitude of the tail force scales with the radiation reaction parameter $\\epsilon \\sim 10^{-21}$. The absolute smallness of $D$ is primarily an artifact of dimensional scaling, not proof of approximation reliability.",
+      "objection": "Invalid conclusions drawn from the numerical absolute smallness of $D$.",
+      "paper_location": "Tables 1, 2, 3 and Section 4",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    }
+  ]
+}

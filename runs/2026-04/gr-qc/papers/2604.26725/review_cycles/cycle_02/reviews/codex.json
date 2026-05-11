@@ -1,0 +1,170 @@
+{
+  "confidence": 0.8,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 4.6,
+    "novelty": 3.3,
+    "reviewer_confidence": 8.0,
+    "significance": 4.3,
+    "technical_soundness": 5.0
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "I checked the arXiv PDF, so I reject the stronger claim that the paper itself lacks equation content; the equation loss is an HTML/bundle-rendering artifact. I keep the missing-supplement objection, the Fig. 2 kappa arithmetic error, and the irreproducibility of the Kerr section. The other reviewers strengthened my view that prior-art positioning and noise/SNR assumptions are missing, so I lower novelty and significance slightly while leaving technical soundness near the prior score.",
+    "invalid_points_from_other_reviewers": [
+      "The objection that Eqs. (1)-(15) are unavailable in the paper is invalid once the PDF is consulted; the formulas render in the PDF. It remains true only as an HTML extraction problem for the review bundle.",
+      "The claim that the Kerr numerical values are blank is invalid for the PDF: it reports a = 0.8810, eta = 0.049145, ratios 5.60 and 7.35, and Ramp = 7.00. The methodology is still under-specified.",
+      "Treating the two-scale hierarchy as fully well-supported because it is a Taylor expansion is too strong; the Taylor expansion is sound, but the operational diagnostic claims need residue, norm, and noise assumptions."
+    ],
+    "valid_points_from_other_reviewers": [
+      "The core observation is standard near-degenerate exponential/confluent-basis behavior and should be compared to Prony, ESPRIT/MUSIC, SVD-regularized Prony, or related signal-processing/numerical linear algebra literature.",
+      "The Kerr section remains opaque: terms such as eta-only band, surrogate layer, validation band, and failure pocket are not operationally defined, and the mode pair/protocol is absent.",
+      "Practical finite-window resolvability requires a noise/SNR or perturbation model, not only condition-number statements.",
+      "Fig. 3's zeroth-order error does not collapse cleanly on a single kappa scaling; the paper acknowledges spread but does not make the two-parameter fit reproducible.",
+      "The cited Supplemental Material is essential to several claims but is not present in the supplied paper bundle/PDF."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "A resolved two-simple-pole block can be exactly rewritten as a centered block with denominator x^2 - sigma^2 and numerator A x + B.",
+      "notes": "The PDF confirms the formulas: A = R+ + R- and B = sigma(R+ - R-). This is straightforward algebra and does not require a true pole coalescence.",
+      "paper_location": "Eqs. (1)-(4), local effective two-pole response skeleton",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "On a finite window, the resolved exponential basis becomes ill-conditioned as eta = |sigma| T_eff -> 0, while the centered first-jet basis remains O(1) conditioned.",
+      "notes": "The stated real-splitting, normalized-window calculation supports the local linear-algebra claim. The extension to complex damped splittings, noise-weighted inner products, and Kerr inference is not derived in the main text.",
+      "paper_location": "Eqs. (5)-(8), Fig. 1",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The two-pole time-domain waveform admits a carrier-plus-first-jet approximation on windows with |sigma| T_eff << 1.",
+      "notes": "This follows directly from the exact cosine/sine rewrite and Taylor expansion. It is mathematically correct but elementary.",
+      "paper_location": "Eqs. (9)-(12)",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The diagnostic kappa controls when the linear correction is needed, while eta^2 controls residual error after the first-jet correction is retained.",
+      "notes": "The leading-order idea is plausible, but it depends on residue ratios, normalization of error, absence of zeroth-order cancellation, and the window/noise norm. Fig. 3 itself shows only partial kappa collapse for E0.",
+      "paper_location": "Eqs. (13)-(14), Fig. 3",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Toy two-pole numerics verify the two-scale hierarchy.",
+      "notes": "The E1 power law in Fig. 3 is consistent with Taylor scaling, but sampling choices, error definitions, and code/data are not provided. The Fig. 2 caption also contradicts Eq. (13) numerically.",
+      "paper_location": "Fig. 2, Fig. 3, local interference diagnostics",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "Kerr QNMs provide a representative gravitational realization of the centered organization.",
+      "notes": "The PDF supplies numerical values missing from the HTML extraction, but the paper still omits the QNM pair, T_eff, inverse-problem definition, perturbation model, surrogate construction, validation criterion, and data/code.",
+      "paper_location": "Representative Kerr realization section, Fig. 4",
+      "support_level": "unclear"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "A quantitative two-pole dominance condition over other poles, prompt response, and branch-cut contributions on the chosen spectral/time window.",
+      "paper_location": "Introduction and local effective two-pole response skeleton",
+      "why_it_matters": "The algebraic two-pole block can be correct while still failing to describe the physical waveform if nearby modes or nonmodal terms are comparable."
+    },
+    {
+      "assumption": "Bounds excluding anomalous suppression of R+ + R- and controlling large residue ratios or destructive interference.",
+      "paper_location": "Eqs. (10)-(14)",
+      "why_it_matters": "The kappa/eta hierarchy uses ratios involving R+ + R-. Without explicit bounds, the diagnostics can change character in physically relevant excitation configurations."
+    },
+    {
+      "assumption": "A precise inner product, time origin, window normalization, tapering, and noise weighting for Gram matrices and inverse stability.",
+      "paper_location": "Eqs. (5)-(8), Fig. 1, Kerr section",
+      "why_it_matters": "Condition numbers and coefficient recovery are norm-dependent, and the constant 7 + 4 sqrt(3) is tied to a particular normalized idealization."
+    },
+    {
+      "assumption": "Conditions under which the real-splitting Gram-matrix result carries over to complex splittings with unequal damping rates.",
+      "paper_location": "Eq. (8) and Representative Kerr realization section",
+      "why_it_matters": "The gravitational example uses complex QNM frequencies, so the simplified real-slice calculation alone does not justify the Kerr inference claim."
+    },
+    {
+      "assumption": "An observational perturbation model, including SNR or numerical precision, for translating conditioning into practical instability.",
+      "paper_location": "Introduction, finite-window necessity section, Kerr section",
+      "why_it_matters": "A large condition number by itself does not specify when two-mode fitting fails in actual ringdown data; the threshold depends on noise and perturbation scale."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Does any separate Supplemental Material actually exist for arXiv:2604.26725, and if so does it contain valid Secs. A and C supporting the Green-function reduction, Gram-matrix constants, and coefficient-recovery tests?",
+      "why_model_cannot_resolve": "The supplied bundle and PDF do not include the supplemental sections, but a source-package or ancillary-file check by a human may be needed."
+    },
+    {
+      "question": "Is the Fig. 2 kappa inconsistency a simple caption typo, or does it reflect an error in the numerical data generation?",
+      "why_model_cannot_resolve": "The figure data and code are not provided, so the arithmetic contradiction cannot be traced to its source."
+    },
+    {
+      "question": "Can the Kerr Fig. 4 claims be reproduced for a specified QNM pair, T_eff, perturbation model, and inverse-problem protocol?",
+      "why_model_cannot_resolve": "The paper provides only aggregate numbers and qualitative band labels, not the underlying mode labels, data, or algorithm."
+    },
+    {
+      "question": "What is the exact complex-splitting/window-weighted analogue of Eq. (8), and does it preserve the claimed centered-basis advantage in the relevant Kerr regime?",
+      "why_model_cannot_resolve": "The paper gives only the real-splitting slice; resolving the general case requires a mathematical derivation or expert check not present in the text."
+    },
+    {
+      "question": "How much of the centered first-jet formulation is already standard in near-degenerate exponential fitting and ringdown inference literature?",
+      "why_model_cannot_resolve": "This requires a focused literature audit beyond the paper's reference list and the supplied reviews."
+    }
+  ],
+  "novelty_assessment": "The central mathematics is an exact two-pole reparametrization plus the standard confluent/Taylor limit of two nearly coincident exponentials. The conditioning issue is closely related to classical Prony/Vandermonde/confluent-basis and subspace-method lore. The paper's useful contribution is mainly rhetorical and domain-specific: packaging this familiar structure as a finite-window organizing principle for neighboring Kerr QNM sectors. That could be pedagogically useful for ringdown work, but the paper does not adequately compare against established near-degenerate exponential fitting methods or demonstrate improved inference performance.",
+  "overall_score_10": 4.8,
+  "paper_id": "2604.26725",
+  "recommended_verdict": "routine",
+  "reviewer": "codex",
+  "score_rationale": "The local algebra, Taylor expansion, and simplified conditioning calculation are basically correct, so this is not a likely-wrong paper. However, the main mathematical content is routine, the numerical evidence is not reproducible and includes a visible kappa inconsistency, the supplemental material cited for important derivations is absent from the supplied arXiv paper, and the Kerr application is under-specified. I therefore keep it in the borderline routine range rather than treating it as a strong or clearly promising contribution.",
+  "summary": "The paper gives a local two-pole reparametrization and finite-window Taylor/conditioning argument for replacing nearly coincident damped exponentials by a carrier-plus-first-jet basis. The core algebra and Taylor expansion are sound in the restricted two-pole setting, but the broader claims remain under-supported: the conditioning analysis is only explicit on a simplified real-splitting/window norm, the residue and noise assumptions behind the diagnostics are not quantified, the cited supplemental derivations are not present in the supplied arXiv paper, and the Kerr realization is not reproducible from the text. After reading the other reviewers and checking the PDF, I view the work as a routine reframing rather than a strong new mathematical result.",
+  "technical_objections": [
+    {
+      "confidence": 0.99,
+      "evidence": "Eq. (13) defines kappa = eta rho. Fig. 2 reports eta = 0.260, rho = 0.650, and kappa = 0.400, but eta*rho = 0.169, not 0.400.",
+      "objection": "The numerical parameters in Fig. 2 contradict the definition of kappa.",
+      "paper_location": "Eq. (13) and Fig. 2 caption",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "The PDF at https://arxiv.org/pdf/2604.26725 is a 5-page paper and cites Sec. A for the Green-function derivation and Sec. C for Gram-matrix/coefficient-recovery details, but those sections are not included in the provided text or PDF.",
+      "objection": "Key derivations and numerical stability tests are deferred to supplemental sections that are not present in the supplied arXiv paper/bundle.",
+      "paper_location": "References to Supplemental Material Secs. A and C near Eqs. (1), (8), and coefficient-recovery discussion",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.84,
+      "evidence": "The paper explicitly says Eq. (8) is along a real-splitting slice. Kerr QNM frequencies have complex splittings and inference normally uses finite start times, tapering, detector/noise weights, and complex damping differences; no analogous bound is given.",
+      "objection": "The conditioning result is proved only in a simplified real-splitting/window-norm setting but is used to motivate broader claims about damped complex poles and Kerr QNMs.",
+      "paper_location": "Eq. (8), Fig. 1, Representative Kerr realization section",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "Expanding Eq. (10), the omitted terms after the first jet contain contributions proportional to (R+ + R-) sigma^2 t^2 and (R+ - R-) sigma^3 t^3. Relative error and the importance of the linear term therefore depend on residue ratios, cancellation of R+ + R-, and the chosen norm, not only on eta and kappa.",
+      "objection": "The eta^2 residual hierarchy and kappa correction-onset criterion lack quantitative residue and normalization assumptions.",
+      "paper_location": "Eqs. (10)-(14), Fig. 3",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.92,
+      "evidence": "The text reports a = 0.8810, eta = 0.049145, q50/q90 spread ratios 5.60 and 7.35, and Ramp = 7.00, but does not identify the mode pair, QNM data source, T_eff, perturbation amplitude/noise model, inverse map, surrogate layer, validation rule, or failure-pocket criterion.",
+      "objection": "The Kerr realization is too under-specified to reproduce or independently assess.",
+      "paper_location": "Representative Kerr realization section and Fig. 4",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.78,
+      "evidence": "Condition-number blowup is a useful warning, but practical resolvability depends on perturbation size, detector/noise weighting, and finite precision. The paper gives amplification ratios only in the Kerr section without enough protocol detail to translate them into parameter-recovery limits.",
+      "objection": "The practical claim that the resolved basis is unstable is not tied to an SNR, noise, or finite-precision threshold.",
+      "paper_location": "Introduction, finite-window necessity section, Representative Kerr realization section",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    }
+  ]
+}

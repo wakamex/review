@@ -1,0 +1,165 @@
+{
+  "confidence": 0.62,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 3.5,
+    "novelty": 4,
+    "reviewer_confidence": 5,
+    "significance": 4,
+    "technical_soundness": 3
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Verdict changed from 'routine' to 'contested' and score lowered from 4.5 to 3.5. The Gemini reviewer raises specific algebraic and dimensional error claims (Eqs. 26 and 28) that, if correct, would make this 'major_flaw'. Because the HTML rendering does not display the actual equations, I cannot independently verify these claims, but they are internally coherent and dimensionally grounded. This genuine uncertainty\u2014between ~4.5 (routine, errors are rendering artifacts) and ~2.0 (major_flaw, errors are real)\u2014justifies 'contested' with lower reviewer confidence. The technical_soundness dimension is lowered to 3.5 to reflect this uncertainty. Reviewer_confidence dimension lowered from 6 to 5 for the same reason.",
+    "invalid_points_from_other_reviewers": [
+      "Gemini: significance = 1 is too harsh regardless of algebraic errors; even with quantitative flaws the phenomenological framework of anchoring predictions to R_sh has genuine utility for EHT observers.",
+      "Gemini: calling the entire paper 'not review-ready' at score 2.0 with confidence 0.95 is overconfident given that the primary evidence for fatal errors comes from equations the HTML rendering suppresses\u2014the actual PDF may show correct formulas that appear wrong only in the stripped HTML.",
+      "Codex: the concern that 'other parameters must be fixed independently before applying the inversion' is a valid qualification but not an additional flaw\u2014the paper is explicit that the inversion is at fixed spin and additional parameters, which is a sensible framing for EHT-based phenomenology."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Codex: mass-shadow inversion is not demonstrated for MOG/Horndeski metrics\u2014valid, confirms my cycle-1 concern about IFT generality.",
+      "Codex: single scalar shadow radius is inadequate for asymmetric rotating shadows without justification\u2014valid, connects to my \u00b1 branch ambiguity concern in Eq. 5.",
+      "Codex: EHT image feature should not be directly equated with the theoretical critical curve radius without accounting for plasma emission systematics\u2014valid, I missed this specificity in cycle 1.",
+      "Gemini: factor-of-2 error in T_H (Eq. 28) is a credible specific claim; T_H = 1/(8\u03c0M) for Schwarzschild is elementary, so T_H = \u221a27/(4\u03c0R_sh) would be wrong\u2014needs human verification.",
+      "Gemini: dimensional error in deflection angle Eq. 26 is a credible specific claim; the correctly substituted form must be dimensionless\u2014needs human verification.",
+      "Gemini: slow-rotation approximation vs. near-extremal analysis (Eq. 24) is internally inconsistent\u2014valid, I noted the slow-rotation issue but missed this specific internal contradiction.",
+      "Gemini: 'degeneracy breaking' is overstated as terminology\u2014valid moderate criticism, confirmed by Codex as well."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "The mass-shadow map M \u2194 R_sh is a smooth locally unique inversion guaranteed by the IFT because dR_sh/dM \u2260 0 for all physically valid configurations.",
+      "notes": "Verified only in the Schwarzschild and slow-rotation Kerr limits; no independent proof for Kerr-MOG or Horndeski metrics. IFT is local, not global. The 'stationary envelope condition' is asserted rather than derived for the rotating case. This was a concern in cycle 1 and Codex independently confirms it. Gemini also flags it but as secondary to the algebraic errors.",
+      "paper_location": "Section II.1, Eqs. 6\u201310",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The weak deflection angle can be expressed strictly as a function of R_sh, decoupling it from the bare mass.",
+      "notes": "The substitution is conceptually valid, but the Gemini reviewer specifically claims Eq. 26 has a dimensional error: the first term is allegedly proportional to 1/R_sh (units of inverse length) rather than the dimensionless R_sh/b that correct substitution of M=R_sh/\u221a27 into \u03b1\u0302=4M/b should yield. If this error is present, all astrometric predictions are invalid. I cannot verify from the HTML rendering alone, but the dimensional argument is sound in principle.",
+      "paper_location": "Eq. 15, 26, 36, 45",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "The Hawking temperature and integrated luminosity can be expressed as functions of R_sh via the thermodynamic-optical duality.",
+      "notes": "The Gemini reviewer claims Eq. 28 has a factor-of-2 error: T_H = \u221a27/(4\u03c0 R_sh) rather than the correct \u221a27/(8\u03c0 R_sh), which would cascade into a factor-of-16 error in luminosity. The argument is simple: for Schwarzschild, T_H = 1/(8\u03c0M) = \u221a27/(8\u03c0R_sh). If the paper has 1/(4\u03c0M), that is wrong. This is a consequential arithmetic claim I cannot independently verify from the rendered HTML.",
+      "paper_location": "Eqs. 28, 30, 37\u201339, 46\u201348",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "For fixed shadow radius, Kerr-MOG enhances classical deflection but suppresses Hawking luminosity, breaking mass-parameter degeneracy.",
+      "notes": "The qualitative trend is physically plausible and consistent with the MOG metric structure. However, Gemini correctly notes that a variable substitution does not reduce the number of free parameters\u2014fixing R_sh and varying \u03b1 still requires a second independent observable to constrain the system. The 'degeneracy breaking' framing is overstated but the phenomenological contrast between lensing and luminosity is a genuine prediction.",
+      "paper_location": "Section IV.2, Eqs. 35\u201339",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Horndeski scalar hair drives up to ~36% deviation in Hawking emission under EHT constraints.",
+      "notes": "Constants \u03ba and \u03b7_E are introduced in Eq. 46 but never computed from the metric components in Eqs. 40\u201343. This was a major concern in cycle 1 and remains unresolved. If the T_H formula also carries the alleged factor-of-2 error from cycle 2, the percentage deviation is doubly unreliable.",
+      "paper_location": "Abstract, Section IV.3, Eqs. 46\u201348",
+      "support_level": "unsupported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The slow-rotation approximation (a << M) is valid for M87* and for the modified-gravity metrics applied to M87* EHT constraints.",
+      "paper_location": "Sections II.1, IV.1\u2013IV.3",
+      "why_it_matters": "If a* for M87* is not small, the truncated mass-shadow inversion carries uncontrolled error in all EHT-anchored numerical predictions."
+    },
+    {
+      "assumption": "The standard Killing-horizon surface gravity formula T_H = \u210f\u03ba/(2\u03c0) applies without modification from non-minimal coupling in the Horndeski and MOG theories.",
+      "paper_location": "Section III.1, Eq. 16",
+      "why_it_matters": "In scalar-tensor and vector-tensor theories, the effective gravitational coupling at the horizon may differ from the asymptotic Newton constant, requiring corrections to the Hawking temperature formula used in Eqs. 37 and 46."
+    },
+    {
+      "assumption": "The eikonal cross-section \u03c3_abs \u2248 \u03c0 R_sh\u00b2 dominates the integrated Hawking luminosity, making the greybody error \u03b5 small and the superradiant correction negligible.",
+      "paper_location": "Section III.2, Eqs. 20\u201322",
+      "why_it_matters": "No numerical bound on \u03b5 is derived. For rotating black holes in modified gravity, greybody factors are not well-characterized analytically, so the luminosity predictions carry unquantified systematic error."
+    },
+    {
+      "assumption": "The EHT-reported angular shadow diameter can be directly equated with the theoretical critical impact parameter radius in the analytic formulas.",
+      "paper_location": "Section IV.1, M87* constraint paragraph",
+      "why_it_matters": "The observed EHT image feature depends on plasma emission models and calibration. Treating it as a direct geometric input may introduce systematics not accounted for in the derived bounds."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Does Eq. 26 (Kerr deflection angle in terms of R_sh) contain 4\u221a27/R_sh as its leading term (dimensionally wrong: units of inverse length) or 4R_sh/(\u221a27 b) (dimensionally correct: dimensionless)?",
+      "why_model_cannot_resolve": "The HTML rendering suppresses the actual formula in Eq. 26. This is the most critical binary check: if 4\u221a27/R_sh, the deflection angle predictions are fatally wrong; if 4R_sh/(\u221a27 b), they may be correct. Requires PDF inspection."
+    },
+    {
+      "question": "Does Eq. 28 write T_H = \u221a27/(4\u03c0R_sh) or T_H = \u221a27/(8\u03c0R_sh)? The former would be a factor-of-2 error in T_H and factor-of-16 error in L.",
+      "why_model_cannot_resolve": "The HTML rendering does not display Eq. 28. The factor-of-2 check is elementary given T_H = 1/(8\u03c0M) for Schwarzschild, but requires reading the actual rendered equation in the PDF."
+    },
+    {
+      "question": "Are the constants \u03ba and \u03b7_E in Eq. 46 derivable from the rotating Horndeski metric components in Eqs. 40\u201343, and do they yield the claimed ~36% luminosity deviation when the EHT scalar hair bound \u03b7 < 0.03 is applied?",
+      "why_model_cannot_resolve": "The paper provides no expressions for these constants. Verifying the headline prediction requires working through the full surface gravity calculation for the rotating Horndeski metric, which is a substantial computation not reproduced in the paper."
+    },
+    {
+      "question": "Does the stationary envelope condition \u2202R_sh/\u2202r_ps = 0 hold at the photon sphere for the \u00b1 shadow formula Eq. 5 in a generic axisymmetric metric beyond the Schwarzschild and slow-rotation Kerr limits?",
+      "why_model_cannot_resolve": "A general proof requires symbolic computation with the full rotating metric structure; a definitive answer also requires checking whether the result holds for the Kerr-MOG and Horndeski metrics used in the applications."
+    }
+  ],
+  "novelty_assessment": "The central idea\u2014re-expressing black hole observables in terms of R_sh rather than M\u2014is a pragmatic reparameterization that has repeatedly appeared in the EHT-era shadow and lensing literature (Kumar & Ghosh 2020, Pantig et al. 2022, and others). The Gauss-Bonnet methodology is entirely standard (Gibbons-Werner 2008). The multi-model application to Kerr, Kerr-MOG, and Horndeski is systematic but formulaic. The IFT framing adds formal justification that is correct in spirit but does not go beyond what was implicitly assumed in prior work. The \"thermodynamic-optical duality\" label elevates a change of variables to duality status without the non-trivial mapping between distinct physical descriptions that duality terminology normally implies. Novelty is modest, useful for EHT phenomenology but incremental.",
+  "overall_score_10": 3.5,
+  "paper_id": "2604.22181",
+  "recommended_verdict": "contested",
+  "reviewer": "claude",
+  "score_rationale": "Technical soundness lowered to 3.0: in addition to my cycle-1 concerns (undefined Horndeski constants \u03ba, \u03b7_E; IFT local-only; slow-rotation inconsistency), the Gemini reviewer raises specific dimensional and arithmetic errors in Eqs. 26 and 28 that, if real, would be fatal. I cannot verify these from the HTML-rendered source, but the dimensional argument is internally coherent and the elementary nature of the T_H = 1/(8\u03c0M) check makes the factor-of-2 claim credible. Novelty holds at 4.0: systematic multi-model application is useful but the core idea is a standard reparameterization. Significance stays at 4.0: genuine EHT phenomenology value, but quantitative predictions are unreliable pending resolution of the algebraic concerns. Clarity lowered to 3.5: beyond my cycle-1 concerns (undefined constants, \u00b1 ambiguity, no approximation domain quantification), the HTML suppression of equations makes the paper nearly unauditable in its current distributed form\u2014a problem that is partly a rendering artifact but partly reflects insufficient equation annotation in the text. Reviewer confidence at 5: the contested nature of the algebraic claims and the inaccessibility of the actual rendered equations limit my confidence. The verdict is contested rather than major_flaw because the dimensional errors, while credible, have not been independently confirmed and may be HTML rendering artifacts.",
+  "summary": "The paper reparameterizes black hole observables (weak deflection angle, Hawking temperature, luminosity) from the bare mass M to the observable shadow radius R_sh, applied to Kerr, Kerr-MOG, and rotating Horndeski spacetimes with EHT-anchored numerical predictions. In cycle 2, I must weigh the Gemini reviewer's specific algebraic and dimensional error claims against my own and Codex's more moderate assessment. The critical new issue is whether Eq. 26 (deflection angle) and Eq. 28 (Hawking temperature) contain actual dimensional/algebraic errors. Because many equations in the HTML rendering are not displayed, I cannot independently verify these claims from the available source, but the argument is internally coherent and specific enough to take seriously. If the dimensional error in the deflection angle and the factor-of-2 error in T_H are real, the paper has fatal quantitative flaws despite a conceptually valid reparameterization idea.",
+  "technical_objections": [
+    {
+      "confidence": 0.65,
+      "evidence": "Gemini reviewer with confidence 0.95 asserts this specific form. Dimensional analysis is unambiguous: \u03b1\u0302 must be dimensionless; 4M/b is dimensionless in natural units; therefore 4\u221a27/R_sh cannot be the result of the substitution M = R_sh/\u221a27. The HTML rendering does not display the actual equations, so I cannot confirm or deny. Requires PDF inspection.",
+      "objection": "Dimensional inconsistency in the weak deflection angle after mass-shadow substitution (Eq. 26 and analogues). Correct substitution of M = R_sh/\u221a27 into \u03b1\u0302 = 4M/b gives \u03b1\u0302 = 4R_sh/(\u221a27 b), which is dimensionless. Gemini claims the paper writes 4\u221a27/R_sh for the leading term, which has dimensions of inverse length.",
+      "paper_location": "Eqs. 15, 26, 36, 45",
+      "severity": "fatal",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "Elementary calculation: surface gravity \u03ba = 1/(4M) for Schwarzschild, T_H = \u03ba/(2\u03c0) = 1/(8\u03c0M). If M = R_sh/(3\u221a3), then T_H = 3\u221a3/(8\u03c0R_sh) = \u221a27/(8\u03c0R_sh). A factor-of-2 discrepancy would propagate to a factor-of-16 error in L \u221d T_H^4. Confidence 0.70 because I cannot view the rendered Eq. 28 directly.",
+      "objection": "Factor-of-2 error in the Hawking temperature formula Eq. 28. The correct leading-order Schwarzschild/slow-Kerr temperature is T_H = 1/(8\u03c0M), giving T_H = \u221a27/(8\u03c0R_sh) after substitution; Gemini claims the paper writes \u221a27/(4\u03c0R_sh), missing a factor of 2 in the denominator.",
+      "paper_location": "Eq. 28 and thermodynamic analogues Eqs. 37, 46",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "Paper states \u03ba is 'a dimensionless constant determined by the scalar gradient at the horizon' without evaluation. No expression for \u03b7_E is given. This was identified in cycle 1 and confirmed by Codex. The Gemini reviewer also flags undefined constants in the modified-gravity sections.",
+      "objection": "The Horndeski constants \u03ba and \u03b7_E (Eq. 46) are never derived from the metric components in Eqs. 40\u201343. The headline 36% luminosity deviation is therefore unverifiable from the paper.",
+      "paper_location": "Section IV.3, Eqs. 46\u201348",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "Proven only for Schwarzschild and slow-rotation Kerr limits. The \u00b1 branch ambiguity in Eq. 5 is unresolved across the three metrics. IFT local vs. global distinction is standard differential geometry.",
+      "objection": "The 'stationary envelope condition' \u2202R_sh/\u2202r_ps = 0 is asserted without a general proof for rotating spacetimes with off-diagonal g_t\u03c6. The IFT guarantees only local invertibility at a single point, not a global smooth diffeomorphism as claimed.",
+      "paper_location": "Section II.1, text between Eqs. 6 and 7; final paragraph of II.1",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "The mass-shadow inversion M(R_sh, a) is derived under a << M. Applying this to M87* predictions where a* may be large introduces unquantified truncation errors. Applying it to the near-extremal limit (Eq. 24) is internally inconsistent.",
+      "objection": "The slow-rotation approximation used throughout Sections II and IV is inconsistent with M87*'s likely dimensionless spin (a* ~ 0.5\u20130.98 in various analyses) and is also inconsistent with the paper's own near-extremal analysis in Eq. 24.",
+      "paper_location": "Sections II.1, III.2 (Eq. 24), IV.1\u2013IV.3",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "The EHT shadow integrates both prograde and retrograde null geodesics. No justification is given for selecting a single branch when constructing the duality mapping.",
+      "objection": "The \u00b1 sign in Eq. 5 (prograde vs retrograde photon orbit) is never resolved in the mass inversions Eqs. 25, 35, 44. The two branches give different M(R_sh) relations.",
+      "paper_location": "Eq. 5; Eqs. 25, 35, 44",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "Standard argument: reparameterization does not reduce degrees of freedom. Codex and Gemini both identify this. The framework is still useful for fixing R_sh and asking how lensing vs. luminosity respond to \u03b1\u2014this is a genuine phenomenological tool\u2014but it does not 'break' degeneracy in the sense of eliminating it.",
+      "objection": "'Degeneracy breaking' between mass and modified-gravity parameters is overstated. Substituting M = M(R_sh, a, \u03b1) does not reduce the number of free parameters; a second independent observable is still required to constrain M and \u03b1 jointly.",
+      "paper_location": "Abstract, Section IV.2, Conclusion",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

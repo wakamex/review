@@ -1,0 +1,111 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "The review bundle was an incomplete HTML scrape of the PRX abstract landing page, omitting the full article body, all equations, and all appendices. Gemini treated this as a paper-level fatal flaw across both cycles, producing 0 scores for technical_soundness and clarity and a 1/10 overall score; Claude and Codex correctly identified the missing text as a data-ingestion failure and assessed the paper based on abstract, popular summary, reference list, and extracted footnote fragments. In cycle 2, Codex accessed the full arXiv/PRX text (arXiv:2502.17575) and substantially revised its assessment upward, providing section-level and equation-level analysis not available from the bundle alone. Gemini's 0-scores were excluded from the consensus as methodologically unsound; Gemini's textual observations about scope restriction (Newtonian limit) and the wave-packet footnote were accepted as valid independent corroboration. The mechanical average overall score of 4.667 is depressed primarily by Gemini's persistent 1/10 scores and does not reflect the two-reviewer consensus of approximately 6/10. The paper is published in Physical Review X (2025), a rigorous peer-reviewed venue, and the authors have established prior work in quantum-gravity phenomenology.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper argues that gravity might not be a fundamental force carried by particles (gravitons), but could instead emerge from the collective quantum behavior of microscopic building blocks\u2014similar to how temperature emerges from molecules in motion. Published in the prestigious journal Physical Review X by a credible research group, the work presents explicit mathematical models and proposes laboratory experiments to test this idea. The review board found the concept genuinely novel and the approach serious, but the result is limited to reproducing ordinary Newtonian gravity (the 1/r\u00b2 force law) rather than Einstein's full general relativity, and several technical approximations require expert verification before the experimental predictions can be taken at face value.",
+  "human_spotchecks": [
+    "Verify whether the paper's qubit/oscillator entropy is well-defined and whether it successfully addresses the Carroll and Remmen (2016) critique of what 'entropy' means in entropic gravity settings\u2014this is the central conceptual vulnerability for any entropic gravity model and requires reading the full article body.",
+    "Check the Appendix C adiabatic elimination line-by-line: does the Lindblad perturbation theory correctly reduce the joint dynamics for off-diagonal mass density-matrix elements, and are the small-superposition approximations valid across the experimental parameter space shown in Figures 4-6?",
+    "Determine whether the proposed AION and MAGIS-100 atom-interferometer experimental configurations, which involve spatial superpositions at half-metre scale (Kovachy et al. 2015), fall within the certified small-wave-packet regime or whether the paper separately extends its derivation to cover that spatial-superposition regime.",
+    "Check whether including kinetic-energy terms in the adiabatic elimination recovers the fluctuation-dissipation friction with a magnitude consistent with stable planetary orbits across the model's viable parameter space (Fig. 5).",
+    "Conduct a comparative reading of this paper against Schimmoller et al. (2021) 'Decoherence-free entropic gravity: model and experimental tests' to determine whether the present construction is a genuine advance in quantum-mechanical completeness or primarily a reframing of existing approaches.",
+    "Verify that the Newtonian sign, normalization, dimensional analysis, and many-body generalization in Sections II.1-II.2 (Eqs. 9-17, 21-23, and 25-33) are correct under the stated parameter identifications, given that the ar5iv HTML text omits many displayed mathematical symbols."
+  ],
+  "paper_id": "bm-165-01",
+  "public_summary": "Carney, Karydas, Scharnhorst, Singh, and Taylor (Lawrence Berkeley National Laboratory / University of Maryland / NIST) present quantum-mechanical models in which Newton's gravitational force is claimed to arise as an emergent, thermodynamic phenomenon from a collection of microscopic qubits or harmonic oscillators, rather than from the exchange of gravitons. The paper was published in Physical Review X in August 2025. The review board assessed the work over two cycles using three independent reviewers. A significant complication for this review is that the source bundle consisted only of the abstract landing page, popular summary, and reference list\u2014the main article body was not captured by the HTML scraper. One reviewer (Gemini) treated this as a fatal paper flaw and scored accordingly; the other two reviewers (Claude and Codex) correctly identified this as a data-ingestion failure, not a scientific defect, with Codex in the second cycle accessing the full arXiv/PRX text directly. After reconciliation, the paper's core contributions\u2014explicit nonlocal and local model constructions, an open-systems Lindblad reduction, and proposed experimental signatures\u2014appear to be genuine. However, the nonlocal model substantially encodes the desired force by design, the local model's Newtonian limit rests on a chain of approximations whose joint validity range is not fully established, and the derivation is explicitly restricted to a small-wave-packet regime that may not cover all cited near-term experiments. The paper argues it is the first to provide a fully quantum microscopic realization of entropic gravity with testable predictions, but Schimmoller et al. (2021, ref 21) proposed \"decoherence-free entropic gravity: model and experimental tests\" and the distinction requires comparative reading. The Carroll-Remmen (2016) critique of what \"entropy\" means in entropic gravity is cited but its resolution cannot be confirmed from available text.",
+  "reviewer_disagreements": [
+    "Gemini (both cycles) scored technical_soundness and clarity as 0 and assigned a 'major_flaw' verdict on the grounds that the review bundle was missing the article body. Claude and Codex rejected this as a category error: the bundle incompleteness is a data-ingestion failure, not a scientific flaw, and the paper demonstrably exists as a published PRX article. Gemini's 0-scores and 1/10 overall scores were not accepted into the consensus assessment.",
+    "Codex cycle 2 revised its overall score upward to 6.9 after accessing the full arXiv/PRX text, finding that explicit constructions, derivations, and appendices exist as claimed. Claude's cycle 2 score remained at 6.1, reflecting continued inability to independently audit the appendices and a somewhat more conservative weighting of the acknowledged approximation gaps. Both converged on 'promising' as the verdict.",
+    "Gemini maintained across both cycles that no verdict above 'major_flaw' was warranted without the full text, while Claude and Codex treated the published PRX record and credible authorship as sufficient basis for a 'promising' classification with caveats. The board accepts the Claude/Codex framing as methodologically correct.",
+    "Codex cycle 2 identified the nonlocal model's design as substantially encoding the desired force (a more critical reading of the construction), while Claude gave it a somewhat more favorable framing as a 'proof-of-concept.' The Codex framing is adopted as a supported objection given it is grounded in the full paper text."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The reduced Lindblad dynamics and effective Newtonian force are derived under Born-Markov and adiabatic-elimination approximations that are explicitly limited to small wave packets and small superpositions; the paper acknowledges that higher-order extensions are interesting but leaves them to future work, potentially undermining experimental predictions that involve larger spatial superpositions.",
+      "paper_location": "Sections II.3-II.4; Appendix C (noted in Codex cycle 2 review); Footnote/remark 33",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex",
+        "claude"
+      ]
+    },
+    {
+      "objection": "The nonlocal construction substantially builds in the desired pairwise gravitational force through position-dependent mediator frequencies and a dedicated mediator system for each mass pair, limiting its explanatory gain beyond fitting an effective potential.",
+      "paper_location": "Section II.1, Eqs. 9-17 and 21-23 (Codex cycle 2 review)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex"
+      ]
+    },
+    {
+      "objection": "The local lattice model's Newtonian limit rests on a continuum approximation, small-frequency free-energy expansion, and lattice-spacing corrections whose simultaneous validity range is not fully established in the main text.",
+      "paper_location": "Section II.2, Eqs. 25-33 (Codex cycle 2 review)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex"
+      ]
+    },
+    {
+      "objection": "Fluctuation-dissipation friction is predicted by the model but not fully derived\u2014the paper states the adiabatic elimination 'should recover this friction once kinetic energy terms are included'\u2014leaving the model's thermodynamic self-consistency incompletely established.",
+      "paper_location": "Footnote/remark 41; Section III.1 footnote",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The claim of near-term experimental distinguishability from standard graviton-exchange gravity is weakened by parameter degeneracies, particularly in the nonlocal model where decoherence noise can be reduced while preserving the Newtonian force, and by the deliberate exclusion of ambient gas, blackbody, and systematic decoherence channels from the estimates.",
+      "paper_location": "Sections III.1-III.3; Section III.3 footnote on ambient gas and blackbody photons",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "claude"
+      ]
+    },
+    {
+      "objection": "Carroll and Remmen (2016, ref 20) sharply critiqued what 'entropy' means in entropic gravity settings; the paper cites this work but whether the present qubit-based entropy is immune to their critique cannot be assessed from available text.",
+      "paper_location": "Reference 20; article body not in bundle",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude"
+      ]
+    },
+    {
+      "objection": "The popular summary's claim that the emergent gravity idea was 'untestable' before this work may be overstated given that Schimmoller et al. (2021, ref 21) already proposed 'decoherence-free entropic gravity: model and experimental tests.'",
+      "paper_location": "Popular Summary vs. Reference 21",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper offers no physically motivated microscopic origin for the qubits, oscillators, spatial lattice, or heat bath; without this, the constructions function as controlled kinematic analogues of entropic gravity rather than as a genuine derivation of spacetime from microscopic physics.",
+      "paper_location": "Abstract; Introduction and Outlook sections",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The paper is published in Physical Review X (August 2025), a high-impact peer-reviewed journal, by researchers with an established prior track record in quantum-gravity phenomenology (Carney, Taylor).",
+    "The paper's scope is explicitly restricted to Newtonian 1/r\u00b2 gravity, not full general relativity\u2014confirmed by the section outline heading 'NEWTON'S LAW OF GRAVITATION' and the absence of any relativistic-extension section.",
+    "A nonlocal qubit mediator model and a local lattice model are both presented; the local model is claimed to generate an attractive Newtonian potential at distances beyond the lattice spacing via free-energy expansion, with short-distance softening.",
+    "The derivation of Newton's law is valid only in the regime where individual wave packets are small compared to inter-object distances; the paper explicitly states that validity beyond this regime is deferred to future work.",
+    "The model predicts fluctuation-dissipation friction, which is acknowledged but not fully derived\u2014the paper states that the adiabatic elimination 'should recover this friction once kinetic energy terms are included.'",
+    "Experimental signatures are referenced against concrete proposals: the AION and MAGIS-100 atom interferometers, Westphal et al. milligram-scale gravitational coupling measurements, and Bell-inequality entanglement witnesses.",
+    "The thermodynamic limit of the qubit model (polarization vanishing as N\u2192\u221e) is asserted to be well-defined but supported only by a brief remark, with key mathematical symbols missing from the scraped text.",
+    "The Lindblad open-system reduction depends critically on Born-Markov and adiabatic-elimination approximations; the nonlocal derivation is explicitly limited to small superpositions, and higher-order extensions are noted as future work."
+  ],
+  "technical_takeaway": "The paper claims to construct explicit quantum open-system models\u2014qubit and harmonic oscillator mediators thermalized to a heat bath\u2014in which Newton's inverse-square gravitational force emerges from free-energy extremization via adiabatic elimination of bath and mediator degrees of freedom, yielding an effective Lindblad equation with a coherent Newtonian Hamiltonian plus position-basis decoherence and noise terms. A nonlocal version encodes pairwise gravitational coupling directly through position-dependent mediator frequencies, limiting its explanatory gain. A local lattice version is physically more interesting but rests on continuum limits, small-frequency free-energy expansions, and lattice-scale corrections whose simultaneous validity range requires expert checking. The derivation is certified only for wave packets small compared to inter-object separations; validity beyond this regime is deferred to future work. Fluctuation-dissipation friction is predicted by the model but not fully derived\u2014the adiabatic elimination is said to \"should recover this friction once kinetic energy terms are included.\" Experimental discriminants from perturbative quantum gravity are proposed via force noise, decoherence of spatial superpositions, and entanglement-witness behavior, but quantitative reach is sensitive to parameter degeneracies and neglected ambient decoherence channels."
+}

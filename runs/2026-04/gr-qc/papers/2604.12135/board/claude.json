@@ -1,0 +1,91 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Two adversarial review cycles completed. Cycle 2 incorporated cross-reviewer feedback: claude downgraded its score from 4.0 to 3.5 and adopted 'weak_evidence' verdict, accepting the codex statistical-evidence objection and the gemini sign-error concern while explicitly rejecting gemini's Gaussian-profile fatality claim as incorrect. Gemini maintained a 'major_flaw' verdict (2/10) and upgraded the Gaussian profile objection to 'fatal'. Codex remained at 'weak_evidence' (4.6/10) and took a middle position on both contested points. The three major cross-cycle objections (statistical count vs. mean, cosmological extrapolation, p^u conservation breakdown) were accepted by all reviewers. The Gaussian profile objection and the overall severity rating remain the principal disagreements. Key equations (17)\u2013(21) and (27)\u2013(28) are not rendered in the HTML source; all mathematical claims in these sections are flagged for human verification from the PDF.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper asks whether gravitational waves might shift the color of starlight passing through them \u2014 specifically, whether photons can permanently gain energy after traversing a gravitational wave pulse, potentially adding noise to the cosmic distance measurements used to infer that the universe is accelerating. The review board found that the narrow theoretical calculation (photon propagation in a simplified \"pp-wave\" spacetime) is broadly competent, but the headline claim of cosmological relevance is not supported: the blueshift effect disappears at the extremely weak gravitational wave amplitudes relevant to real astrophysics, and the model's key symmetry properties do not carry over to realistic gravitational waves in an expanding universe. The most important caveat is that the paper's statistical evidence for a net energy gain is itself incomplete \u2014 it counts how often photons gain energy but does not report whether the average gain is positive.",
+  "human_spotchecks": [
+    "Sign check in Eqs. (27)\u2013(28): Tracing Eq. (26) d/du(H \u2212 2v\u0307) = \u2212H\u2080(dW/du) through integration by parts with localized H\u2080 appears to yield \u0394(2v\u0307) = \u2212\u222bW(dH\u2080/du)du, opposite to what the paper states. A reviewer with PDF access should verify whether this sign is correct in the published LaTeX source, since the HTML rendering omits the displayed formulas.",
+    "Observer-frame validity: The tetrad construction requires H < 2 along all sampled observer worldlines. For amplitude A = 1 and the polynomial profiles H = A(u)(x\u00b2 \u2212 y\u00b2), this condition can fail at moderate transverse positions. A human reviewer should check the PDF for the exact tetrad matrix (Eq. 18) and verify whether the photon trajectories in Figs. 4\u20136 and the ensemble in Table 1 remain within the H < 2 domain throughout the pulse.",
+    "Mean energy statistics: The paper reports only gain/loss photon counts in Table 1. A human reviewer (or access to the authors' simulation code) is needed to determine the mean \u0394E, its standard error, and whether the result holds under a correctly specified fixed-energy isotropic distribution of photon directions (which is not a rotationally symmetric Gaussian in transverse velocities under the paper's u-parametrization).",
+    "Overlap with prior work: A specialist comparison of the observer-frame energy observable defined in Eq. (19) with the frequency-shift results of Harte (2015) 'Optics in a nonlinear gravitational plane wave' and Wang & Feng (2024) 'Geometric deformation and redshift structure caused by plane gravitational waves' is needed to determine whether the tetrad-energy framing constitutes a new result or a repackaging of known plane-wave scattering outcomes.",
+    "Profile-dependence test: Whether the statistical blueshift tendency survives replacement of the Gaussian profile A(u) with a physical profile satisfying \u222bA(u)du = 0 (e.g., a derivative-of-Gaussian or Mexican-hat profile) should be checked. If the leading-order velocity shift vanishes for such profiles and the energy shift drops to O(A\u2074), the quantitative conclusions of Table 1 would need significant revision."
+  ],
+  "paper_id": "2604.12135",
+  "public_summary": "The paper studies how photons propagate through exact pp-wave gravitational wave pulses in general relativity. Using standard null geodesic equations and a tetrad-based energy definition adapted to a stationary observer, it aims to show that photons can acquire a permanent energy shift (memory effect) after the wave passes, and that this shift statistically favors blueshift for physically motivated ensembles. The paper then suggests this mechanism could contribute to scatter in cosmological redshift data from Type Ia supernovae.\n\nThe technical framework (pp-wave geometry, Brinkmann coordinates, tetrad projection) is standard and the numerical simulations appear internally consistent for the model studied. The displacement memory effect for null geodesics in pp-waves is well-established in the cited literature, and the tetrad-based energy framing provides modest additional clarity over prior work, though its novelty relative to Harte (2015) and Wang & Feng (2024) is asserted rather than demonstrated.\n\nThree objections survived the full two-cycle adversarial review. First, the statistical claim that interactions produce a net blueshift is evidentially incomplete: the paper reports only the fraction of simulated photons that gain energy (>50% in Table 1 at large amplitudes), but a majority count does not establish a positive mean energy shift \u27e8\u0394E\u27e9 \u2014 the average could be zero or negative if losses are larger in magnitude than gains. Second, the blueshift bias is argued to arise from an asymmetry (photons propagating opposite the wave cannot further decrease their longitudinal velocity), but this argument relies on exact conservation of the null momentum component p^u, which follows from the planar Killing symmetry of pp-waves and is absent in realistic localized spherical gravitational wave sources and FLRW spacetimes. Third, at small amplitudes (closer to astrophysically realistic gravitational wave strains), the paper itself shows the gain/loss split approaches 50/50 and the effect becomes \"observationally negligible,\" directly undermining the cosmological motivation. No quantitative estimate of the effect size at physical gravitational wave strains (h ~ 10\u207b\u00b2\u00b9) is provided, and no embedding in a cosmological background is attempted.",
+  "reviewer_disagreements": [
+    "Gaussian profile physicality: Gemini rates the use of a Gaussian curvature profile A(u) = A\u00b7exp(\u2212u\u00b2/w\u00b2) as fatal, arguing that \u222bA(u)du \u2260 0 implies infinite displacement memory (unbounded metric strain growth), which inflates O(A) velocity shifts by a full perturbative order relative to physical profiles where the leading shift would be O(A\u00b2). Claude explicitly disputes this, arguing that A(u) \u221d R_{uxux} (the curvature component, not the strain) and that the Gaussian is the standard choice in the pp-wave memory literature, with nonzero \u222bA(u)du being precisely what defines displacement memory (Christodoulou 1991). Codex takes a middle position \u2014 flags profile-dependence as worth testing but does not accept the objection as proven. This disagreement about whether the model's wave profile is physically pathological or standard was not resolved across cycles.",
+    "Overall severity and verdict: Gemini rates the paper 2/10 with a 'major_flaw' verdict, driven by the cumulative force of the sign error, unphysical profile, and invalid statistical argument. Claude rates it 3.5/10 and codex 4.6/10, both calling it 'weak_evidence' \u2014 reflecting a view that the toy-model calculation has legitimate pedagogical value and the individual flaws are correctable rather than fundamental. The gap between gemini and the other two reviewers reflects differing judgments about whether the Gaussian profile objection is fatal and whether the statistical flaw is severe enough to invalidate the central claim entirely.",
+    "Sign error severity: Gemini (confidence 0.95) explicitly traces the algebra and concludes the sign in Eqs. (27)\u2013(28) is inverted, rating this 'major'. Claude accepts the objection as plausible (confidence 0.75) but rates it 'moderate' and notes it would not change the verdict since the numerical results are derived independently. Codex flags it as a human spot-check item (confidence 0.55) without committing to the sign direction from the HTML source alone."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The statistical argument for a net blueshift reports only the fraction of photons that gain energy (>50% in Table 1), not the mean or variance of the energy change distribution. A majority count of energy-gainers does not establish a positive mean \u27e8\u0394E\u27e9: if photons that lose energy lose more than gainers gain, the net drift could be zero or negative. The paper presents no mean energy statistics, histograms, or confidence intervals.",
+      "paper_location": "Section III.2, Table 1",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper argues that cumulative interactions over cosmological distances produce a systematic redshift correction (Eq. 30), but this extrapolation is unsupported: no FLRW embedding is provided, no mapping from the dimensionless pp-wave amplitude A to physical gravitational wave strain h is given, the effect the paper itself shows vanishes at small amplitudes, and realistic encounter rates and wave orientations are not modeled.",
+      "paper_location": "Abstract, Section IV, Eq. (30)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The statistical blueshift bias relies structurally on exact conservation of the null momentum component p^u, which follows from the planar null Killing vector \u2202_v unique to pp-wave geometry. In realistic localized spherical gravitational waves and in FLRW spacetimes, this symmetry is absent, so the kinematical lower-bound argument that drives the blueshift bias does not carry over to astrophysical settings.",
+      "paper_location": "Section III.1, Section IV Conclusions",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The stationary-observer tetrad construction requires H < 2 along the observer worldline for the static observer to remain timelike. The paper uses large amplitudes (A = 1) with polynomial transverse profiles that are unbounded in the transverse plane, yet this domain condition is never stated, verified, or enforced. If violated, the tetrad projection and the photon energy formula become physically undefined during part of the interaction.",
+      "paper_location": "Section III, Eqs. (17)\u2013(19)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "A potential sign error in the integration-by-parts derivation of Eqs. (27)\u2013(28) would reverse the analytical prediction of which initial conditions lead to energy gain versus energy loss, invalidating the paper's analytical characterization of gain/loss regions. The numerical results from geodesic integration would remain valid independently of this sign.",
+      "paper_location": "Section III.1, Eqs. (25)\u2013(28) and following paragraph",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper's claim that 'except for co-propagating light rays, a memory effect is always present' is overstrong. A counter-propagating ray initialized exactly on the symmetry axis (x = y = 0, transverse velocity = 0) experiences \u2207H = 0 for the quadrupole modes and acquires no transverse acceleration and hence no memory, despite not being co-propagating.",
+      "paper_location": "Introduction, Section II, Conclusions",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "codex",
+        "claude"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "Null geodesics in pp-wave backgrounds that are not exactly co-propagating with the wave generically retain a kinematic memory of the interaction \u2014 a well-established result corroborated by extensive prior literature (Zhang et al. 2017, Harte 2015, Datta & Guha 2024) and consistent with the paper's numerical simulations of beam deformation and caustic formation.",
+    "The observer-measured photon energy (defined via tetrad projection onto a static-observer frame) can increase or decrease after the wave pulse, depending on initial conditions and wave profile \u2014 the paper's numerical examples in Figs. 4\u20136 demonstrate both cases for the same polarization mode.",
+    "At small wave amplitudes, the gain/loss split approaches 50/50 and the energy effect becomes negligible \u2014 the paper itself confirms this, which the board notes is the regime closest to astrophysically realistic gravitational wave strains."
+  ],
+  "technical_takeaway": "The paper numerically solves null geodesic equations in exact pp-wave spacetimes (Brinkmann coordinates) and defines an asymptotic photon energy via tetrad projection onto a static-observer frame. It argues that (i) non-co-propagating photons generically retain kinematic memory, (ii) energy can increase or decrease depending on initial conditions, and (iii) an ensemble bias toward blueshift exists for physically motivated samples. All three reviewers converged that the core geodesic setup is standard and internally consistent, but identified three cross-cycle objections that survived adversarial review: the statistical claim rests on gain/loss frequency counts rather than mean energy shift \u27e8\u0394E\u27e9, the blueshift bias structurally depends on exact conservation of p^u from the pp-wave's null Killing vector \u2202_v (absent in localized spherical GWs and FLRW backgrounds), and the effect becomes negligible at astrophysically realistic amplitudes (A \u226a 1). A potential sign error in Eqs. (27)\u2013(28) is plausible but disputed; if present it reverses the analytical prediction of gain vs. loss regions while leaving the numerics intact. The Gaussian curvature profile choice (\u222bA(u)du \u2260 0) is contested: gemini argues it implies unphysical infinite displacement memory that artificially inflates O(A) velocity shifts to an order larger than for physical profiles; claude disputes this, noting the Gaussian is standard in the displacement-memory literature where A(u) \u221d R_{uxux}, not h_+(t). Observer-frame validity (the tetrad requires H < 2 along sampled worldlines) is never stated or enforced for the large amplitudes used."
+}

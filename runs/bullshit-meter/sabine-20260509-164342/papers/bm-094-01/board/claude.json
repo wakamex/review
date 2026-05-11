@@ -1,0 +1,87 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Source bundle truncated at approximately 140,000 of 367,060 total characters (~38%), preventing review of Section VII (cosmological analysis), most appendices, and numerical table values. All three reviewers recommended selection (strong_select or promising). Gemini's cycle 1 assessment (confidence 9, no spotchecks, no missing assumptions) was deemed insufficiently cautious by co-reviewers given the truncation; Gemini revised downward in cycle 2. Codex's classification of factorization approximations as 'would_change_verdict_if_true' was rejected by claude and gemini as overstating the risk for industry-standard simulation-calibrated methods. The three surviving moderate-severity objections (post-unblinding corrections, covariance regularization, TT null-test failures) are consistent across all three reviewers in both cycles.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper presents new, highly precise measurements of the cosmic microwave background (CMB) \u2014 the faint afterglow of the Big Bang \u2014 using the South Pole Telescope. For the first time, a combination of two ground-based telescopes (SPT and ACT) matches the precision of the space-based Planck satellite on key cosmological parameters, which the review board found to be a genuine milestone. The analysis is technically serious and extensively validated, though several systematic corrections were added after the main pipeline was locked, and some internal consistency checks required manual workarounds. The most consequential open question is whether a roughly 2.8\u03c3 discrepancy found between the CMB results and galaxy-survey (DESI) measurements signals new physics beyond the standard cosmological model.",
+  "human_spotchecks": [
+    "Appendix B (truncated): Do the post-unblinding changes \u2014 quadrupolar beam leakage correction and polarized beam sidelobe model \u2014 constitute pre-registered allowed corrections or deviations from the blinding protocol? What are the quantified shifts in cosmological parameters before and after these corrections?",
+    "Section VII.3 (truncated): Is the reported ~2.8\u03c3 CMB\u2013DESI DR2 BAO tension computed with an appropriate multivariate metric in the correct parameter space, and is it robust to the post-unblinding systematic corrections and to the choice of tension metric?",
+    "Section VII and appendices (truncated): Does the covariance matrix regularization (\u03b1=0.01 \u00d7 sample variance, Eq. 38) preserve correct frequentist coverage for all extended cosmological models explored in Section VII, not only for \u039bCDM?",
+    "Appendix F (truncated): Does the SPT-lite CMB-only likelihood faithfully preserve constraining power and unbiased posteriors for extended models (Neff, \u03a9k, w0/wa), or are there compression losses that affect the tension characterizations in Section VII.4?",
+    "Full paper source: What are the exact claimed multipole ranges for 'most precise to date' EE and TE measurements? These ranges appear stripped from the supplied HTML bundle and reviewers reported inconsistent values."
+  ],
+  "paper_id": "bm-094-01",
+  "public_summary": "The SPT-3G Collaboration presents power spectrum measurements of CMB temperature and E-mode polarization (TT, TE, EE) from 2019\u20132020 observations with the South Pole Telescope's third-generation camera. The maps cover approximately 4% of the sky and are argued to be the deepest used in a CMB TT/TE/EE analysis to date.\n\nThe paper argues that SPT-3G D1 delivers the most precise measurements of the lensed EE power spectrum at high multipoles and is competitive with or superior to all previous datasets in lensed TE over a comparable range. It also claims that combining SPT-3G D1 with ACT DR6 data produces ground-based constraints matching Planck precision on some key cosmological parameters \u2014 described as a milestone for the field. The Hubble constant inferred from SPT-3G alone is approximately 68 km/s/Mpc, roughly 2.6\u03c3 below local distance-ladder measurements (SH0ES), confirming the Hubble tension from an independent dataset. The combined CMB dataset (SPT+ACT+Planck) shows a ~2.8\u03c3 discrepancy with DESI DR2 baryon acoustic oscillation results in \u039bCDM, which is reduced when extended models are considered.\n\nMethodological advances include: (1) a curved-sky HEALPix pipeline replacing a prior flat-sky approximation; (2) first application of Gaussian-constrained inpainting to primary CMB T&E analysis, demonstrably reducing estimator variance relative to point-source masking; (3) a fast Quickmock simulation framework for transfer-function and covariance calibration; (4) a JAX-based differentiable likelihood (candl) enabling gradient-based robustness testing; and (5) a semi-analytic covariance matrix. Data products and the likelihood code are publicly released.\n\nThe review board found the paper scientifically significant and technically serious, with three cross-review cycles converging on a consistent set of moderate-severity objections, none assessed as altering the overall verdict. The cosmological analysis sections and most appendices fell outside the reviewable portion of the supplied bundle, limiting independent verification of the headline parameter constraints and tension characterizations.",
+  "reviewer_disagreements": [
+    "Gemini assigned reviewer_confidence 9/10 in cycle 1 despite approximately 62% of the paper text being unavailable (including all of Section VII and most appendices); claude and codex both flagged this as unreasonable and Gemini revised downward to 8/10 in cycle 2.",
+    "Gemini listed zero human spotchecks and zero missing assumptions in cycle 1, which claude and codex assessed as reflecting under-scrutiny rather than genuine absence of concerns; Gemini added spotchecks and missing assumptions in cycle 2.",
+    "Codex rated the filtering factorization approximations and covariance regularization as 'would change verdict if true,' while claude and gemini assessed these as industry-standard simulation-validated techniques consistent with ACT/Planck methodology, not verdict-changing even if imperfect.",
+    "Overall score spread across cycle 2 was Gemini 8.0, Codex 7.7, Claude 7.5; disagreement reflects different weights placed on post-unblinding changes and on how much to penalize the truncation-limited review scope."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "Non-trivial systematic corrections \u2014 the quadrupolar beam leakage model (detected at 3.5\u20136\u03c3) and the polarized beam sidelobe model with free nuisance parameters \u2014 were both identified and implemented after unblinding. Both corrections affect the band powers used for cosmological inference. The blinding protocol's credibility depends on whether these were pre-listed as allowed post-unblinding additions, which cannot be assessed from the supplied bundle because Appendix B is truncated.",
+      "paper_location": "Sections IV.2.2, IV.2.3; Section V.2 note on post-unblinding updates; Appendix B (truncated)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The covariance matrix fails more stringent conditional consistency tests without modification. The paper resolves this by adding \u03b1=0.01 \u00d7 sample-variance to the diagonal (Eq. 38), which lowers the average \u03c7\u00b2 by ~60 points. This is a disclosed workaround pointing to unmodeled inter-frequency systematic effects or inaccuracies in the signal covariance model at the ~1% sample-variance level.",
+      "paper_location": "Section IV.6, Eq. 38; Section VI.2.2",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "Several TT null tests formally exceed the pre-defined PTE threshold: the azimuth test at 95 and 150 GHz and the year test at 95 GHz. The paper deems these acceptable because contamination amplitudes are below 5% of sample-variance error bars, but this criterion was not pre-registered and constitutes a post-hoc threshold adjustment.",
+      "paper_location": "Section III.5",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "A Polspice configuration error produced slightly incorrect TE and EE transfer functions. The originally calculated (erroneous) versions were retained for consistency after the error was discovered post-submission. The claimed parameter impact is below 0.1\u03c3 but cannot be independently verified from the supplied text.",
+      "paper_location": "Section IV.1.2",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The inpainting procedure treats frequency bands as uncorrelated, which the paper explicitly acknowledges introduces biases in cross-frequency spectra. These biases are estimated and subtracted via simulation templates (Fig. 4), but the systematic uncertainty on this calibration at the sensitivity level of the dataset is not separately quantified.",
+      "paper_location": "Section IV.3, below Eq. 21; Fig. 4",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The SPT-3G D1 maps achieve coadded white noise of approximately 2.4 \u03bcK-arcmin in temperature and 3.4 \u03bcK-arcmin in polarization, making them the deepest used in a CMB TT/TE/EE analysis to date, as supported by noise power spectra in Fig. 10 and signal-to-noise comparisons with Planck and ACT DR6 in Fig. 11.",
+    "Gaussian-constrained inpainting of point sources reduces power-spectrum estimator variance by roughly one-third relative to conventional point-source masking, as demonstrated quantitatively via 500 Fullmock simulations in Fig. 8.",
+    "Quadrupolar beam leakage from temperature to polarization is detected at 3.5\u20136\u03c3 at individual SPT-3G frequencies and must be modeled and corrected; its template is described by Eq. 14 and measured from map-level analysis at bright source positions.",
+    "The SPT-3G D1 EE signal-to-noise per multipole exceeds unity up to \u2113~3000 and surpasses Planck and ACT DR6 above \u2113~1000, as shown in Fig. 11.",
+    "The candl/SPT-lite likelihood compression reduces the data vector from 1392 to 196 elements and achieves a ~50\u00d7 speed-up while reproducing \u039bCDM posteriors to within 0.1\u03c3 of the full multi-frequency likelihood, as stated in Sections V.3 and V.4.",
+    "The SPT-3G D1 band powers are internally consistent across TT/TE/EE frequency combinations and consistent with a best-fit \u039bCDM model, as demonstrated by the extensive validation suite in Section VI."
+  ],
+  "technical_takeaway": "The paper presents SPT-3G D1 TT/TE/EE band powers from 2019\u20132020 Main-field observations (~4% sky, coadded noise ~2.4 \u03bcK-arcmin in temperature and ~3.4 \u03bcK-arcmin in polarization), claiming the most precise lensed EE measurements at \u2113~1000\u20134000 and TE at \u2113~1000\u20133000, and the first ground-based CMB combination (SPT+ACT) reaching Planck constraining power on some parameters. Methodological advances include a curved-sky HEALPix pipeline, first-use Gaussian-constrained inpainting for primary CMB T&E analysis, a JAX-based differentiable likelihood (candl), and a semi-analytic covariance framework. Cosmological constraints are reported as consistent with \u039bCDM and with Planck/ACT DR6; a ~2.8\u03c3 CMB\u2013DESI DR2 BAO tension is reported in \u039bCDM, relaxed in extended models. Key technical caveats surviving cross-review are: non-trivial post-unblinding systematic corrections (quadrupolar beam leakage detected at 3.5\u20136\u03c3, polarized beam sidelobe model), covariance matrix regularization required to pass conditional consistency tests, and formal TT null-test failures accepted with a post-hoc justification not pre-registered in the blinding protocol. None of these were assessed as fatal; all three reviewers recommended selection."
+}

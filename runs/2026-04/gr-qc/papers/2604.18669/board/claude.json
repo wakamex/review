@@ -1,0 +1,95 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Cycle 1 showed large scorer disagreement (claude 5.5, codex 5.1, gemini 8.0; mechanical avg 6.2). In cycle 2, gemini substantially downgraded after incorporating the circularity and derivation-gap objections from the other reviewers, landing at 4.0; cycle 2 mechanical average is 4.933. The final selected score uses the cycle 2 mechanical average. The large inter-reviewer spread in cycle 1 (range 2.9 points on a 10-point scale) reflects genuine technical uncertainty requiring human specialist resolution, particularly on the nonlocal Wald entropy calculation and NLQG positivity claims.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper proposes that the 2025 LIGO-Virgo-KAGRA detection of a black-hole merger (GW250114) \u2014 which confirmed that total black-hole horizon area grows during mergers \u2014 can be used to sharply restrict the design of quantum gravity theories if that growth law is treated as exact. The review board found the core idea timely and non-trivial, as constraining quantum-scale theories using macroscopic gravitational-wave data is a genuinely novel diagnostic. However, several technical steps are omitted or incomplete in the four-page format, and the most fundamental concern is that the observational input itself relies on assuming Einstein gravity to infer horizon areas, creating a circularity when those areas are used to constrain non-Einstein theories. The paper is best read as a provocative no-go argument that requires further expert verification before its conclusions can be treated as established.",
+  "human_spotchecks": [
+    "Expert verification needed: Is the Wald (Iyer-Wald) entropy formula applicable to the nonlocal/fractional action of Eq. (2), including proper treatment of d'Alembertian form-factor variations, boundary terms, and potential JKM ambiguities? Does f(\u25a1)R_{abcd}|_{bifurcation} = f(0)R_{abcd}|_{bifurcation} hold for non-entire (fractional) form factors, and does it follow from the geometric identity cited?",
+    "Expert verification needed: Does the derivation from the generalized Einstein equations (Eqs. 8\u20139) to the focusing condition (Eq. 10) correctly handle all commutator [\u25a1, R_{\u03bc\u03bd}] terms when contracted with the null bivector k^\u03b1 k^\u03b2? The 'absorption' of the curvature commutator piece into the sign-indefinite curvature remainder is asserted without calculation.",
+    "Expert verification needed: For NLQG, does entire positivity of the form factor F\u2080(\u03be) on the real axis actually imply that the inverse operator preserves positivity of T_{\u03bc\u03bd}k^\u03bck^\u03bd as a Lorentzian integral kernel acting on tensor fields in a curved black-hole background? This is a stronger functional-analytic claim than pointwise positivity.",
+    "Expert verification needed: Does the stationary Wald Noether-charge entropy for these nonlocal/fractional theories monotonically track the dynamical event-horizon area in non-stationary black-hole spacetimes? The literature on dynamical vs. Noether-charge entropy in higher-derivative gravity (Dong, Wall, etc.) should be consulted.",
+    "Observational data check: Are the GW250114 horizon areas, masses, and spins quoted in Eq. (1) consistent with the LVK paper [89] (arXiv:2509.08054), and does that paper report a verification of Hawking's area law at the stated credibility level? The paper post-dates the reviewers' knowledge cutoffs."
+  ],
+  "paper_id": "2604.18669",
+  "public_summary": "The paper aims to show that taking Hawking's black-hole area law as an exact principle \u2014 motivated by the 2025 LVK observation of event GW250114 \u2014 places strong constraints on a broad class of quantum gravity theories with higher-curvature and nonlocal operators, including nonlocal quantum gravity (NLQG) and fractional quantum gravity (FQG). The paper claims that for non-Ricci-flat black hole solutions, these theories must have zero coefficients for R\u00b2 and (Riemann)\u00b2 terms in the action, no additional real poles in the graviton propagator, and a spectrally positive inverse form factor. It additionally derives a covariant Wald entropy formula for these theories and connects it to the Bekenstein-Hawking entropy-area law under the same constraints, while contrasting the FQG entropy with Barrow's fractal black-hole entropy proposal. The review board agrees that the observational framing is timely and the Ricci-flat compatibility argument is sound, but raises persistent concerns about: the circularity of using GR-inferred horizon areas to constrain non-GR dynamics; the logical tension between an approximate low-curvature derivation and exact area-law conclusions; incomplete derivations of the nonlocal Wald entropy; and an explicitly open gap in the FQG positivity argument. The paper is better characterized as a suggestive no-go argument than a proved theorem.",
+  "reviewer_disagreements": [
+    "Gemini awarded an 8.0 in cycle 1 ('promising') while Claude and Codex scored 5.1\u20135.5 ('contested'/'routine'), primarily because Gemini rated the Wald entropy reduction and Barrow entropy comparison as 'well_supported' \u2014 a judgment that Claude and Codex explicitly rejected as too generous given the compressed and unverified derivation steps.",
+    "After cross-review in cycle 2, Gemini significantly downgraded to 4.0 ('weak_evidence') after accepting the other reviewers' circularity and incomplete-derivation objections, partially converging with Claude and Codex but landing below them on technical soundness.",
+    "Codex rated the non-Ricci-flat no-go constraint as 'major' severity for being a sufficient-condition-only argument, whereas Claude noted the paper is transparent about this limitation and that it does not misrepresent the result as a necessity theorem \u2014 this is a difference in severity assessment rather than a factual disagreement.",
+    "All three reviewers agreed that the Ricci-flat Schwarzschild/Kerr compatibility result is the cleanest and most reliable claim in the paper, and all three converged on the FQG positivity gap and observational circularity as the two most persistent concerns."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The observational premise is partially circular: the horizon areas in GW250114 are inferred using Kerr's area formula and GR-based waveform models. Applying these GR-derived quantities as strict constraints on non-GR actions requires an additional bridge argument \u2014 or modified-gravity waveform models \u2014 that the paper does not provide. The constraint is therefore a theoretical self-consistency condition rather than a fully model-independent empirical one.",
+      "paper_location": "Abstract; Eq. (1) discussion of GW250114; conclusion paragraph",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex",
+        "gemini",
+        "claude"
+      ]
+    },
+    {
+      "objection": "The focusing condition (Eq. 10) is derived by dropping O(R\u00b2) curvature-squared terms in a low-curvature regime, yet the central premise is the *exact* validity of Hawking area monotonicity. This logical tension \u2014 using an approximate inequality to argue for exact action constraints \u2014 is not resolved. Sign-indefinite subdominant terms that were dropped could in principle locally violate the exact condition.",
+      "paper_location": "Text between Eqs. (9) and (10); paragraph estimating curvature corrections after Eq. (10)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The extension of the Wald entropy formula to nonlocal and fractional theories (Eq. 14) relies on horizon geometric identities \u2014 specifically that f(\u25a1) acting on curvature at the bifurcation surface evaluates as f(0) times the curvature \u2014 that are asserted but not proved for infinite-derivative or fractional operators. Prior work [148] covers only spherically symmetric cases, and the covariant generalization requires additional justification involving operator domain, zero modes, and possible boundary or JKM-ambiguity terms.",
+      "paper_location": "Eqs. (13)\u2013(14) and surrounding text",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "For FQG, the positivity condition on the inverse operator \u25a1[F\u2080(\u25a1)]\u207b\u00b9 \u2014 needed to ensure the null energy condition is preserved under the focusing argument \u2014 is explicitly left unresolved, with the paper stating 'the calculation of the classicized dynamics of FQG is left for the future.' The main area-law conclusion for FQG therefore rests on an acknowledged open gap.",
+      "paper_location": "Paragraph beginning 'Finally, the first term in (10) must maintain the sign...'",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The conclusion 'If the area increases, so does the Wald entropy' conflates a stationary Wald Noether-charge entropy (derived at the bifurcation surface of a stationary Killing horizon) with the dynamical event-horizon entropy relevant to Hawking's area theorem. In higher-derivative and nonlocal gravity, these need not coincide, and monotonicity of the Noether charge along dynamical event horizons is not established.",
+      "paper_location": "Paragraph after Eq. (14): 'If the area increases, so does the Wald entropy'",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The abstract claims 'a rigorous realization of Barrow's fractal black holes,' but the paper itself states that FQG horizons are 'not rough \u00e0 la Barrow' and that the FQG entropy and Barrow entropy are 'essentially different.' The FQG horizon Hausdorff dimension is standard (d_H=2 for observers using multiscale rulers), not fractal in Barrow's sense. The comparison in Eq. (15) is a formal scaling analogy, not a rigorous realization of Barrow's geometric model.",
+      "paper_location": "Abstract; paragraphs comparing FQG entropy with Barrow entropy; Eq. (15)",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "Ricci-flat black holes (Schwarzschild, Kerr) are exact solutions of Stelle gravity, NLQG, and FQG when \u03b2\u2082=0, and are compatible with the standard Hawking area theorem on those backgrounds \u2014 since Ricci-flatness causes the modified field equations to reduce to the vacuum Einstein equations.",
+    "The postulate of exact area law provides observational motivation to set \u03b2\u2081=\u03b2\u2082=0 in these theories, a choice already known independently to preserve unitarity and renormalizability, lending coherence to the overall constraint program.",
+    "For FQG, the focusing condition requires the operator F\u2080(\u25a1) to be invertible on the real spectral support of classical solutions, which the paper argues rules out additional real poles (tachyonic or heavy modes) in the graviton propagator \u2014 a result with plausible internal logic.",
+    "The paper correctly identifies that the key constraint \u03b2\u2081=\u03b2\u2082=0 is a sufficient, no-go-type condition derived under approximations, and acknowledges that miraculous cancellations could in principle allow exceptions, rather than claiming a full necessity theorem."
+  ],
+  "technical_takeaway": "The paper argues that postulating exact Hawking area monotonicity in Stelle gravity and nonlocal/fractional quantum gravity (NLQG/FQG) forces: (i) vanishing action coefficients \u03b2\u2081 and \u03b2\u2082 for R\u00b2 and (Riemann)\u00b2 terms when non-Ricci-flat black hole solutions exist; (ii) absence of extra real poles in the FQG graviton propagator; and (iii) positivity of the inverse nonlocal operator's spectral representation. The Ricci-flat compatibility result is the cleanest claim, following directly from the fact that Schwarzschild/Kerr are exact solutions when \u03b2\u2082=0. The non-Ricci-flat constraint is derived from a low-curvature focusing condition (Eq. 10) in which curvature-squared terms are dropped \u2014 a sufficient but not necessary condition. The covariant Wald entropy extension to fractional form factors uses horizon geometric identities (e.g., f(\u25a1)R|_bifurcation = f(0)R|_bifurcation) that are asserted without proof for infinite-derivative operators. The FQG positivity condition is explicitly deferred to future work. The conclusion that Wald entropy monotonically tracks dynamical event-horizon area is stated without establishing the equivalence between stationary Noether-charge entropy and dynamical second-law entropy in this modified-gravity context."
+}

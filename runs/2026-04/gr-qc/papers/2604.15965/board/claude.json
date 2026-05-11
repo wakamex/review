@@ -1,0 +1,103 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Cycle 1 produced divergent clarity scores due to HTML rendering artifacts that stripped equations (Eqs. 2\u20133), Table 1 numerical values, selection thresholds, and prior bounds. Cycle 2 resolved these as artifacts after PDF inspection (Codex confirmed the PDF contains phase formulas, M < 80 M\u2299 and SNR > 10 thresholds, and prior range [\u22125,5]). Substantive objections\u2014dissipative-sector assumption, BBH single-parameter mapping, waveform attachment, absence of combined constraint, EM comparison caveats\u2014were stable across both cycles and supported by multiple reviewers. All three reviewers converged on 'routine' as the recommended verdict in cycle 2. One disagreement on severity (major vs. moderate for the BBH parameter mapping objection) was not resolved.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper tests whether gravitational waves from merging black holes show any deviation from what Einstein's general relativity predicts\u2014specifically, whether the black holes are described by the Kerr solution. Using 11 new events from the latest LIGO-Virgo catalog (GWTC-4), the paper finds no such deviation and reports tighter constraints than prior analyses. The review board found the results scientifically plausible and useful as a catalog update, but the work reuses an existing framework without new methodology. The most important caveat is that the paper does not present a combined constraint from all 11 events together, which would be the strongest statement the dataset could support.",
+  "human_spotchecks": [
+    "Verify that Eqs. (2)\u2013(3) in the PDF exactly reproduce the phase-correction formulas from Carson & Yagi (2020b) and Das et al. (2024), including the definition and value of \u03ba, all PN-order coefficients, mass-ratio powers, and sign conventions.",
+    "Check whether the four nominally omitted events (GW230628_231200, GW230904_051013, GW231108_125142, GW240109_050431) have blank or populated data fields in the PDF Table 1 for both \u03b1\u2081\u2083 and \u03b5\u2083, and whether the text's omission claim is accurate.",
+    "Confirm that the uniform prior range [\u22125, 5] for the deformation parameters does not dominate the posteriors for the seven retained events by comparing prior width to posterior width in Table 1 of the PDF.",
+    "Resolve the Johannsen (2013) citation: verify whether Phys. Rev. D 88, 044002 (2013) corresponds to arXiv:1304.7786 (not arXiv:1501.02809 as listed) by checking the DOI against the arXiv submission.",
+    "Check how the ppE phase corrections are implemented within IMRPhenomXPHM in the authors' analysis code: what frequency interval is used, whether corrections are tapered near merger, and whether any injection-recovery validation exists.",
+    "Verify in the prior work (Das et al. 2024 or Carson & Yagi 2020b) whether the single-parameter BBH treatment of \u03b1\u2081\u2083 and \u03b5\u2083 is theoretically justified for a binary with two potentially non-Kerr compact objects."
+  ],
+  "paper_id": "2604.15965",
+  "public_summary": "The paper extends the authors' GWTC-3 Johannsen-metric analysis (Das et al. 2024, EPJC 84:1237) to 11 BBH inspiral events from the fourth Gravitational-Wave Transient Catalog (GWTC-4). Using an unchanged theory-agnostic ppE framework\u2014Johannsen deformation parameters \u03b1\u2081\u2083 and \u03b5\u2083 as post-Newtonian phase corrections up to 4PN order\u2014the authors perform Bayesian parameter estimation on each event individually and find all posteriors consistent with zero, reinforcing the Kerr hypothesis. A comparison figure (Fig. 2) claims that GW constraints on \u03b1\u2081\u2083 have now matched the constraining power of X-ray reflection spectroscopy, making it a headline result. The simultaneous two-parameter analysis is again unconstrained due to strong degeneracies, as in the prior study. Three reviewers across two cycles independently rated the paper as an incremental but legitimate catalog update, with low methodological novelty and several modeling and reproducibility gaps that the authors should address. A minor but reproducible inconsistency was found: the text states four events are omitted from Table 1, but those event rows appear in the table structure. A possible citation error for the Johannsen (2013) reference (arXiv ID 1501.02809 predates the 2013 journal paper) was flagged by two reviewers.",
+  "reviewer_disagreements": [
+    "Cycle 1: Gemini assigned a clarity score of 7 while Claude assigned 3, based on the same HTML bundle. In cycle 2, both agreed the missing equations and Table 1 values were HTML rendering artifacts rather than actual manuscript omissions; clarity scores converged to the 4\u20135 range.",
+    "Cycle 1: Codex flagged the missing phase equations and Table 1 values as 'major' objections with potential to change the verdict. In cycle 2, Codex downgraded these after PDF inspection confirmed the content is present, shifting its recommended verdict from 'weak_evidence' to 'routine'.",
+    "Cycle 1: Gemini gave an overall score of 6.0 versus Claude and Codex at 4.5\u20134.8. In cycle 2 all three reviewers converged near 5.0, with Gemini explicitly lowering its score after adopting the combined-constraint and waveform-attachment objections raised by the other reviewers.",
+    "The severity of the single-parameter BBH mapping objection was rated 'major' by Codex in cycle 2 but was not independently elevated to 'major' by Claude or Gemini, who each treated related concerns as 'moderate'. This divergence was not fully resolved."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "No combined multi-event constraint is presented. All three reviewers in cycle 2 noted that the LVK tests-of-GR literature routinely stacks posteriors under a universal-parameter assumption. Reporting only per-event one-at-a-time posteriors understates the dataset's constraining power and weakens the headline comparison to electromagnetic bounds in Fig. 2.",
+      "paper_location": "Section III; Section IV, Fig. 2 discussion",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The assumption that dissipative (radiation-reaction) effects remain unchanged from GR at leading order is stated but not derived or cited to a Johannsen-specific calculation. If the Johannsen metric modifies energy flux, the phase template is systematically biased and the reported bounds are not clean constraints on the stated deformation parameters.",
+      "paper_location": "Section II.1, paragraph following Eq. (1)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The mapping from two compact objects' individual Johannsen deformations to a single event-level parameter in the BBH waveform is not specified. Without this, the constraints are on an uninterpreted phenomenological phase coefficient rather than on a well-defined Kerr-hypothesis test.",
+      "paper_location": "Section II.1 and Section III",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "How the inspiral-only ppE phase corrections are applied within IMRPhenomXPHM\u2014frequency cutoffs, tapering, treatment of the merger-ringdown regime\u2014is not described, making waveform consistency hard to assess at GWTC-4 SNRs.",
+      "paper_location": "Section II.1 and Section III",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper states four events are omitted from Fig. 1 and Table 1 due to weak \u03b5\u2083 constraints, yet those four event rows are present in the Table 1 structure. The inconsistency is minor but reproducibly identified.",
+      "paper_location": "Section III, Table 1",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The electromagnetic-versus-GW comparison in Fig. 2 uses 3\u03c3 intervals from methods with different source populations and systematic-error profiles without cross-method caveats. The claim that GW tests have reached X-ray constraining power is partly a visual scale comparison.",
+      "paper_location": "Section IV, Fig. 2",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The Johannsen (2013) reference lists arXiv:1501.02809, a 2015 submission, alongside a 2013 journal date. Two reviewers independently identified this as a likely bibliographic mismatch; the correct arXiv ID is probably arXiv:1304.7786.",
+      "paper_location": "References section, Johannsen (2013) entry",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "gemini"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "When \u03b1\u2081\u2083 and \u03b5\u2083 are varied one at a time, all individual-event posteriors are consistent with zero, providing no evidence for departures from the Kerr geometry.",
+    "Simultaneously varying both Johannsen deformation parameters leads to strong degeneracies that prevent meaningful joint constraints, consistent with the prior GWTC-3 analysis and the overlapping PN structure of the phase corrections.",
+    "The paper argues that individual-event GWTC-4 constraints are tighter than those from GWTC-3, which is qualitatively consistent with the higher SNRs in the newer catalog.",
+    "The paper argues that GW constraints on \u03b1\u2081\u2083 have reached the constraining power of X-ray reflection spectroscopy, as illustrated in the multi-method comparison (Fig. 2)."
+  ],
+  "technical_takeaway": "The paper applies the Johannsen-metric ppE framework from Das et al. (2024) to 11 GWTC-4 BBH inspiral events (M < 80 M\u2299, SNR > 10), constraining deformation parameters \u03b1\u2081\u2083 and \u03b5\u2083 one at a time via Bayesian inference (Bilby/Dynesty) with IMRPhenomXPHM as the base waveform. Individual posteriors are consistent with zero. Three moderate-severity concerns survived both review cycles: the assumption that dissipative-sector phase contributions are GR-equivalent is asserted but not derived for the Johannsen metric; the ppE correction is incorporated into a full IMR waveform without specifying frequency cutoffs or tapering; and no combined multi-event constraint is presented despite the paper treating the deformation parameters as universal. A major objection\u2014how two individual compact-object deformations map to one event-level parameter in a BBH\u2014was raised in cycle 2 and not rebutted in the manuscript. Cycle-1 concerns about missing equations and table values were resolved as HTML rendering artifacts in cycle 2."
+}

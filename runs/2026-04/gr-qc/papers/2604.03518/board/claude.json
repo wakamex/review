@@ -1,0 +1,117 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Two full adversarial review cycles. Cycle 1 produced independent reviews with divergent scores (claude 4.5, codex 2.4, gemini 2.0). Cycle 2 incorporated cross-reviewer feedback: claude substantially revised downward after accepting the internal formula inconsistency and dimensional concerns it had underweighted; gemini incorporated codex's \u03c3_ab=0 and MOG charge-scaling objections; codex disputed the dimensional inconsistency claims after checking the PDF but otherwise maintained its verdict. All three reviewers converged on major_flaw in cycle 2. The primary unresolved inter-reviewer disagreement is the dimensional consistency of Eqs. (10), (12), (23), which is flagged as a human spot-check. The internal formula inconsistency (h-dot vs. h dependence across sections) and the \u03c3_ab=0 gap in the GSL proof were the objections with strongest cross-reviewer convergence.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper tries to show that a black hole governed by Modified Gravity (MOG), when buffeted by a special kind of gravitational wave, behaves differently from one in ordinary General Relativity \u2014 emitting radiation in an irregular pattern and eventually stopping its evaporation at a cold, stable remnant. The review board found the central idea interesting, but identified multiple severe technical errors in the derivations that undermine the main results. The most critical problems are that the paper's own equations for the black hole's horizon contradict each other between sections, and that the proposed stable remnant cannot actually form under the theory's own rules. The paper as written should not be relied upon for quantitative conclusions.",
+  "human_spotchecks": [
+    "Verify whether the dimensional inconsistencies flagged in Eqs. (10), (12), and (23) are present in the published PDF: specifically, does Eq. (10) contain r_H\u00b2 or r_H in the numerator of the horizon shift, and does Eq. (23) use the correct power of \u03ba\u2080 in the denominator? The HTML rendering may have dropped exponents, and one reviewer (codex) disputes these errors after consulting the PDF.",
+    "Confirm whether the shear tensor \u03c3_ab of the null congruence is identically zero for the \u2113=0 spherically symmetric breathing perturbation defined in Section II. This point \u2014 if confirmed \u2014 permanently invalidates the GSL proof's claimed positive-definite driver.",
+    "Determine whether, in the standard STVG/MOG parametrization, both M_G and Q_G scale linearly with the bare mass M at fixed \u03b1. If so, Q_G/M_G is constant during Hawking evaporation and the black hole cannot approach the extremal bound through mass loss alone, falsifying the remnant argument.",
+    "Check whether the full linearized STVG field equations admit the pure angular breathing metric ansatz (h_\u03b8\u03b8 and h_\u03c6\u03c6 non-zero, all other components zero) without requiring accompanying perturbations in the scalar potential, massive vector field, and tt/rr/tr metric components. Reference [23] (Roshan 2013) tests Birkhoff's theorem in STVG but does not cover this perturbative sector.",
+    "Verify whether the Hayward/Kodama dynamical surface gravity for a metric with time-dependent areal radius R(t,r) = r\u221a(1+h_b(t)) reduces to f\u2032(r_A)/2, or whether additional time-derivative terms appear that the paper omits.",
+    "Check whether the radiation entropy flux dS_rad = dQ/T is genuinely second-order in the strain, given that the luminosity L(t) in Eq. (25) contains first-order corrections in both h and \u1e23 while T(t) in Eq. (24) also contains a first-order correction \u2014 whether the ratio L/T cancels at first order requires explicit algebra the paper does not provide.",
+    "Confirm the status (published, peer-reviewed, or preprint) of reference [18] (Lobos & Rodulfo 2026, arXiv:2602.21432), upon which the breathing mode parameterization is substantially based."
+  ],
+  "paper_id": "2604.03518",
+  "public_summary": "The paper investigates the dynamical and thermodynamic evolution of a black hole in Scalar-Tensor-Vector Gravity (MOG/STVG) perturbed by a scalar gravitational wave breathing mode. Working within linearized perturbation theory, the authors aim to show that the apparent horizon radius, surface gravity, and Hawking temperature are quasi-adiabatically modulated by both the scalar strain amplitude and velocity, that a transient apparent violation of the Generalized Second Law (GSL) is resolved by separating reversible first-order horizon kinematics from irreversible second-order entropy growth via the Raychaudhuri equation, and that the information paradox is addressed on two timescales: short-term non-thermal emission analogous to the dynamical Casimir effect, and long-term formation of a stable zero-temperature remnant as the black hole approaches the MOG extremal bound.\n\nA two-cycle adversarial review by three independent reviewers found the conceptual framing original but the technical execution deeply flawed. The most critical concern, upheld by all reviewers in the final cycle, is an internal inconsistency: the paper derives the apparent horizon radius as proportional to the strain velocity in Section II (Eqs. 10\u201312) but then silently replaces this with a formula proportional to the strain amplitude in Section III (Eqs. 18\u201319) and Section IV (Eq. 26), making the entire thermodynamic chain rest on mutually contradictory formulas. A second major structural flaw concerns the GSL proof: the paper claims that positive-definite shear-squared drives irreversible entropy growth, but the perturbation is explicitly spherically symmetric (\u2113=0), for which the null-congruence shear tensor vanishes identically, removing this claimed driver. A third fundamental problem concerns the extremal remnant: in standard STVG at fixed deformation parameter \u03b1, both the enhanced mass M_G and gravitational charge Q_G scale linearly with the bare mass M, keeping their ratio fixed throughout evaporation \u2014 so mass loss alone cannot drive the system toward the extremal bound the paper relies on. Additionally, the paper simultaneously invokes quasi-adiabatic thermal emission for its quantitative luminosity formula and claims adiabaticity breaks down for non-thermal emission, without any two-scale ordering argument to reconcile these statements. The non-thermal emission claim has no supporting quantum-field calculation. Reviewers also noted that the long-wavelength approximation (\u03bb >> r_g) used to justify a spatially uniform perturbation is incompatible with the QNM-frequency imprinting asserted in Section V, since QNMs have frequencies \u03c9 ~ 1/r_g.\n\nOne reviewer (codex) disputed the separately-raised concern about dimensional inconsistencies in Eqs. (10), (12), and (23), asserting after consulting the PDF that those formulas are dimensionally consistent; two other reviewers maintained the concern. This specific question is flagged for human spot-check. All three reviewers independently concluded that the paper has major technical flaws preventing its core results from being accepted as stated.",
+  "reviewer_disagreements": [
+    "Dimensional consistency of Eqs. (10), (12), and (23): reviewers gemini and claude identified what they assessed as dimensional errors (e.g., an L\u00b2 term where L is required in Eq. 10; an L\u207b\u00b2 correction term subtracted from an L\u207b\u00b9 surface gravity in Eq. 23). Reviewer codex explicitly disputes this after claiming to consult the PDF directly, asserting those formulas are dimensionally consistent. The discrepancy may arise from HTML rendering dropping exponents. This remains unresolved and is flagged as a human spot-check.",
+    "Severity of the apparent-horizon formula contradiction: codex and gemini both rate this as fatal; claude rates it as fatal in cycle 2 after upgrading from an initially underweighted moderate concern. There is no disagreement on the substance, only on whether it was independently visible without prompting from other reviewers.",
+    "Applicability of the Raychaudhuri framework itself: codex argues it is a 'category error' to apply the Raychaudhuri argument here given the missing horizon prescription and boundary conditions; claude accepts that the Raychaudhuri framework is conceptually appropriate for dynamical horizons but that specific gaps (\u03c3\u00b2=0, missing NEC) prevent the proof from closing. The practical consequence is the same but the framing differs.",
+    "claude's cycle-1 overall score (4.5) was substantially higher than codex (2.4) and gemini (2.0), reflecting a difference in how severely the missing intermediate steps were initially weighted. By cycle 2 all reviewers converged on a major-flaw verdict; claude revised downward to 3.0."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The paper gives contradictory first-order formulas for the apparent horizon radius and area. Equations (10) and (12) make these quantities depend on the strain velocity \u1e23(t), while Equations (18), (19), and (26) \u2014 used for all thermodynamic and GSL conclusions \u2014 depend instead on the strain amplitude h(t). A single first-order perturbative expansion of a single metric cannot produce both dependencies simultaneously. Because the temperature, luminosity, and entropy calculations all flow from these inconsistent formulas, the entire thermodynamic chain is internally inconsistent.",
+      "paper_location": "Section II Eqs. (10)\u2013(13) versus Section III Eqs. (18)\u2013(19) and Section IV Eq. (26)",
+      "severity": "fatal",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The GSL preservation proof relies on 'positive-definite shear squared' as the dominant driver of irreversible entropy growth in the Raychaudhuri equation. However, the perturbation is explicitly spherically symmetric (\u2113=0, no angular dependence). For any spherically symmetric perturbation, the shear tensor \u03c3_ab of the null congruence vanishes identically, removing this term entirely. The only remaining term in the Raychaudhuri equation that could ensure positivity is the energy flux T_ab k^a k^b, whose sign requires an explicit energy condition that the paper never states. The GSL proof therefore has no positive-definite driver.",
+      "paper_location": "Section IV, Eqs. (28)\u2013(29)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper argues that as the black hole evaporates, its mass approaches the extremal bound M_G = Q_G, yielding a stable zero-temperature remnant. In standard STVG at fixed deformation parameter \u03b1, both M_G = (1+\u03b1)M and Q_G \u221d \u03b1M scale linearly with the bare mass M, so their ratio is fixed during mass loss. Evaporation at fixed \u03b1 cannot drive a non-extremal black hole toward extremality. The remnant endpoint requires either a running \u03b1 or an independently conserved charge, neither of which is specified or derived.",
+      "paper_location": "Section V, Eqs. (30)\u2013(31), Figure 2(b)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex",
+        "gemini",
+        "claude"
+      ]
+    },
+    {
+      "objection": "The paper simultaneously invokes the quasi-adiabatic approximation \u2014 asserting the breathing-mode timescale is much longer than the emission timescale \u2014 to derive the Stefan-Boltzmann luminosity in Eq. (25), and then claims that 'rapid geometric fluctuations' break the adiabatic approximation to produce non-thermal particle creation. These two regimes are mutually exclusive without a two-scale ordering argument, which is absent. The quantitative emission results depend on the quasi-adiabatic assumption while the main physical claims depend on its breakdown.",
+      "paper_location": "Section III.1, paragraphs after Eq. (24) and Section V",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper claims that non-thermal emission imprints quasinormal-mode (QNM) frequencies on the outgoing flux. QNMs have characteristic frequencies \u03c9 ~ 1/r_g (wavelengths ~ r_g). This violates the long-wavelength approximation (\u03bb >> r_g) that the paper uses in Section II to eliminate spatial gradients and justify a purely temporal perturbation. A wave constructed under the long-wavelength approximation cannot simultaneously carry QNM-scale frequency information.",
+      "paper_location": "Section II (long-wavelength approximation) and Section V (QNM imprinting)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The claim of non-thermal particle creation analogous to the dynamical Casimir effect is stated by analogy only. No Bogoliubov transformation, stress-tensor expectation value, particle spectrum, greybody factor analysis, or estimate of non-adiabatic correction is provided. The only emission calculation in the paper is a purely thermal, quasi-adiabatic Stefan-Boltzmann formula, directly contradicting the non-thermal assertion.",
+      "paper_location": "Section III.1 and Section V",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The pure angular breathing metric ansatz (only h_\u03b8\u03b8 and h_\u03c6\u03c6 non-zero) is not shown to solve the full linearized STVG field equations. The derivation in Section II.1 provides only a schematic proportionality and omits gauge conditions, the tt/rr/tr constraint equations, the massive vector field perturbation, the scalar field equation, and boundary conditions. The physical status of the perturbation as a genuine MOG gravitational wave mode is therefore unestablished.",
+      "paper_location": "Section II.1, Eqs. (14)\u2013(17)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The paper argues that the zero-temperature remnant 'permanently houses the initial quantum state,' framing this as a resolution of the information paradox. A permanently stable, non-radiating remnant cannot transmit information to asymptotic observers; it defers rather than resolves the information loss problem. The paper cites Chen, Ong, and Yeom (2015) \u2014 its own reference [32] \u2014 which documents this standard objection to remnant scenarios, but does not address it.",
+      "paper_location": "Section V, Eqs. (30)\u2013(31)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The use of the quasi-local apparent horizon (rather than the global teleological event horizon) as the thermodynamic boundary for a dynamically perturbed black hole is conceptually appropriate and follows established frameworks (Hayward 1994; Ashtekar\u2013Krishnan 2004).",
+    "The static Schwarzschild-MOG metric admits an extremal bound where the surface gravity vanishes; this follows from prior work by Moffat (2015b) and is not new to this paper.",
+    "Gravitational waves in MOG/STVG can carry scalar breathing polarizations not present in standard GR, because MOG relaxes the rigidity constraints of Birkhoff's theorem for the scalar sector, consistent with cited prior results.",
+    "The conceptual combination of MOG black hole thermodynamics, dynamical apparent horizons, and scalar breathing-mode perturbations is an original synthesis not explicitly present in the prior literature, representing incremental novelty.",
+    "Qualitatively, a time-varying scalar perturbation that dilates the transverse metric will shift the apparent horizon radius at first order in the perturbation amplitude; this physical mechanism is standard and plausible in structure even if the specific formulas are disputed."
+  ],
+  "technical_takeaway": "The paper derives a dynamical apparent horizon, modulated surface gravity, and Hawking luminosity for a Schwarzschild-MOG black hole perturbed by an \u2113=0 scalar breathing mode, then argues GSL preservation via Raychaudhuri order-separation and a dual-pathway information-paradox resolution. Reviewers across two adversarial cycles identified: (1) a fatal internal inconsistency between the horizon formulas in Sections II (h-dot dependent) and III\u2013IV (h dependent), propagating through the entire thermodynamic chain; (2) that for a spherically symmetric \u2113=0 mode the null-congruence shear tensor \u03c3_ab vanishes identically, removing the claimed positive-definite driver of irreversible entropy growth in the GSL proof; (3) that in standard STVG at fixed \u03b1 both M_G and Q_G scale linearly with M, so Q_G/M_G is conserved under mass evaporation and the extremal bound is never approached \u2014 invalidating the remnant endpoint; (4) a self-contradiction between invoking the quasi-adiabatic approximation for the Stefan-Boltzmann luminosity and simultaneously claiming adiabaticity breakdown drives non-thermal emission; (5) that the \u2113=0 long-wavelength approximation used to derive the horizon shift is incompatible with the QNM-frequency imprinting claimed in Section V. The STVG perturbation ansatz (pure angular sector) is also not verified against the full linearized field equations. No Bogoliubov or stress-tensor calculation supports the non-thermal emission claim."
+}

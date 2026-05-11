@@ -1,0 +1,162 @@
+{
+  "confidence": 0.65,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 5.5,
+    "novelty": 7,
+    "reviewer_confidence": 6.5,
+    "significance": 8,
+    "technical_soundness": 6.5
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Added inner-boundary condition as a new moderate technical objection \u2014 this was missed in cycle 1 but raised validly by Codex. Added multiple-ends ambiguity as a new moderate objection. Incorporated the passage from (II.40) to (II.41)\u2013(II.42) as a new moderate objection, also raised by Codex. Overall score and verdict unchanged. Reviewer confidence slightly increased (0.62 \u2192 0.65) after finding no fatal flaws in my prior analysis and no compelling reason to revise the 7.0 score upward.",
+    "invalid_points_from_other_reviewers": [
+      "Gemini rating technical soundness 9/10: This is too generous given that the central computational step (boundary term cancellation, the 'commutation calculation') is completely omitted, L\u00b2 membership of (II.34) is unverified, and the inner boundary condition is not addressed. A technical soundness score of 9 is inconsistent with these omissions even for a letter-format paper by leading experts.",
+      "Gemini having zero missing assumptions: The paper relies on several unstated or deferred conditions (Fefferman\u2013Graham fall-off, inner boundary spinor conditions, L\u00b2 membership, global spin structure) that warrant explicit listing. Treating the paper as having no missing assumptions overstates its completeness.",
+      "Codex severity 'major' for the global solvability of (II.34) being 'asserted conditionally': While the L\u00b2 membership is a real gap, calling the solvability argument 'asserted conditionally and then used as if unconditional' slightly overstates the problem. The paper's 'if' conditional is real but the authors likely intend the reader to verify it via [6, 26] for the specific geometries considered; this is more a citation gap than a logical error."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Codex: Inner boundary condition for the Witten spinor at outer/marginally-outer-trapped surfaces is not displayed in the proof, despite being part of the theorem statement. This is a genuine moderate gap, even though the standard argument from [35] likely applies to the modified Witten equation (II.3).",
+      "Codex: The treatment of multiple asymptotic ends is not specified \u2014 the proof is written for a single end while the introduction allows any number.",
+      "Codex: The passage from the weighted charge (II.40) to the AdS global charge inequalities (II.41)\u2013(II.42) is terse for non-constant conformal factor and needs more justification.",
+      "Gemini: The omission of the commutation calculation is the central local gap for auditability \u2014 both Codex and Gemini flag this, consistent with my prior major objection."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "The weighted holographic energy (II.40) is non-negative for all four-dimensional solutions satisfying the stated hypotheses.",
+      "notes": "Proof structure is complete at the outline level: SLSW identity \u2192 L\u00b2 spinor \u2192 finite boundary integral \u2192 positivity. However, two non-trivial steps are asserted without demonstration: (a) the divergent boundary terms in (II.38)\u2013(II.39) are claimed to cancel via 'a commutation calculation' when (II.26) holds, without showing the calculation; (b) the log-term in (II.36) is claimed to give a vanishing boundary contribution because its leading coefficient is 'orthogonal to \u03c6\u2080' \u2014 an inner-product argument not presented. Both are plausible given reference [16], but not auditable from the letter alone.",
+      "paper_location": "Section II, eq. (II.40) and surrounding text",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Saturating the inequality (II.40) with weighted energy = 0 forces the spacetime to be a Siklos wave.",
+      "notes": "Chain: vanishing weighted energy \u2192 parallel spinor along \u03a3 \u2192 imaginary Killing spinor in a development \u2192 Baum\u2013Leitner [10, Thm 5.1] \u2192 Siklos wave. The intermediate step ('assuming there is one' for a Cauchy development) hedges the conclusion but the scope is not quantified. Otherwise the invocation of [10] is correct modulo footnote 6.",
+      "paper_location": "Section II, paragraph beginning 'The question then arises...'",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Positivity of a holographic charge associated with a null conformal Killing vector holds for spacetimes with Siklos-wave conformal boundary geometry.",
+      "notes": "Extension of the main theorem cited as following from the same spinor machinery. Spin structure requirement (trivial on partial Cauchy surface) is stated but details for general Siklos-wave boundaries are not given. Plausible but not auditable.",
+      "paper_location": "Section II, paragraphs after (II.45)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Perturbative positivity of Hamiltonian energy (II.47) holds for vacuum metrics near a vacuum static background (itself near AdS), in all spacetime dimensions.",
+      "notes": "Established via positivity of the second-variation operator from [7] plus continuous metric-dependence. Attributed to Kr\u00f6ncke (footnote 7). Logic is sound but conditions 'both metrics close to AdS' are restrictive. Scope is narrower than the main result.",
+      "paper_location": "Section II, paragraph on (II.46)\u2013(II.47)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The 2D twistor equation (II.26) has non-trivial solutions for spherical sections and for tori with trivial spin structure, but not for higher genus.",
+      "notes": "Well-known result in 2D spin geometry; citation to [36, Note A.2.2] is appropriate. Conformal invariance of the 2D twistor equation and trivial-spin-structure restriction are both standard.",
+      "paper_location": "Section II, paragraphs around (II.26)\u2013(II.34)",
+      "support_level": "well_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The right-hand side of (II.34) lies in L\u00b2 for the boundary geometries under consideration.",
+      "paper_location": "Section II, eq. (II.34)",
+      "why_it_matters": "The existence of the Witten spinor with the required boundary behaviour \u2014 which drives the positivity argument \u2014 depends on this. For non-constant-curvature boundary sections this is not automatic and requires quantitative decay estimates not presented."
+    },
+    {
+      "assumption": "The inner boundary condition imposed on the Witten spinor at outer/marginally-outer-trapped surface components makes the inner SLSW term non-negative (or removable) for the modified Witten equation (II.3) with cosmological constant.",
+      "paper_location": "Introduction (trapped boundary hypothesis); Section II, (II.4)\u2013(II.7)",
+      "why_it_matters": "Without this, the SLSW identity includes an uncontrolled inner boundary contribution that could spoil nonnegativity. Standard Witten-argument papers handle this with APS/MIT-bag conditions; the paper does not state which condition is imposed or verify its sign."
+    },
+    {
+      "assumption": "The 'mild supplementary asymptotic conditions' required to write the metric in form (II.1) are satisfied by the spacetimes under consideration.",
+      "paper_location": "Section II, around eq. (II.1)",
+      "why_it_matters": "The metric ansatz (II.1) relies on Fefferman\u2013Graham [31] and Graham\u2013Lee [37] under specific fall-off and smoothness conditions. If matter fields or geometry fail these conditions, the entire calculation breaks down. The paper defers to these references without listing the required conditions."
+    },
+    {
+      "assumption": "The initial-data hypersurface \u03a3 admits a global spin structure compatible with the bulk spinor construction and consistent with the boundary spin structure imposed on the conformal boundary sections.",
+      "paper_location": "Section I, hypotheses paragraph",
+      "why_it_matters": "The paper states the required boundary spin structure condition (trivial on T\u00b2) but does not address whether the induced spin structure on \u03a3 is globally compatible, particularly for spacetimes with multiple asymptotic ends or non-trivial topology."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Does the 'commutation calculation' showing that the singular part of the boundary integrand (II.38)\u2013(II.39) vanishes when the twistor equation (II.26) holds actually work out with the specific connection coefficients (II.13)\u2013(II.14) and sign conventions of the paper?",
+      "why_model_cannot_resolve": "This requires explicit spinor index computation with the specific connection coefficients and the twistor equation constraint. The relevant terms involve products of spinor components at order O(\u03c1\u207b\u00b9) and verifying cancellation requires tracking all spinor indices through the boundary integrand \u2014 a calculation not displayed and not reliably reproducible from the HTML-rendered paper."
+    },
+    {
+      "question": "Does the standard inner-boundary argument for outer/marginally-outer-trapped surfaces (APS or MIT-bag boundary conditions making the SLSW inner boundary term non-negative) carry through for the modified Witten equation (II.3) with the cosmological constant term included?",
+      "why_model_cannot_resolve": "The standard argument for \u039b=0 is well-documented (e.g., Parker\u2013Taubes, Gibbons et al. [35]), but the \u039b\u22600 case introduces an extra term in the Witten equation that could in principle affect the inner boundary sign. Checking this requires access to the detailed calculation for the modified operator, which is not in the paper."
+    },
+    {
+      "question": "Is the L\u00b2 membership of the right-hand side of (II.34) guaranteed for general smooth conformally static boundary metrics (not just constant-curvature ones), given the specific form of \u03c6\u2080 from (II.21)\u2013(II.25)?",
+      "why_model_cannot_resolve": "This requires detailed analysis of decay rates of \u03c6\u2080 near the boundary in the coordinates of (II.10)\u2013(II.11), combined with the elliptic theory of [6, 26]. The paper cites these references but the verification for non-round boundary metrics involves quantitative estimates not displayed."
+    },
+    {
+      "question": "Does Theorem 5.1 of Baum\u2013Leitner [10] apply under the conditions established here (existence only of a Cauchy surface, possible black-hole boundaries) without additional global hyperbolicity or completeness assumptions?",
+      "why_model_cannot_resolve": "Access to [10] (Math. Z. 247, 2004) is needed to check whether Theorem 5.1 assumes conditions beyond what is established in the positivity proof, particularly regarding the geometry of the development in the presence of inner boundaries."
+    }
+  ],
+  "novelty_assessment": "The result is genuinely novel in extending holographic energy positivity beyond the conformally Einstein (Birmingham\u2013Kottler) boundary setting. The key technical idea \u2014 introducing a conformal weight \u03c6 from 2D uniformization of boundary sections and connecting it to solutions of the twistor equation \u2014 is not present in the prior literature, including the closely related Cheng\u2013Skenderis paper [16] that the proof is 'inspired by'. The characterisation of zero-energy states as Siklos waves is a new rigidity result. The contrast with Hickling\u2013Wiseman [40] (non-positive holographic energy in 2+1 dimensions) highlights why the conformal weight is essential. The perturbative result (II.47) is more incremental, applying known stability theory from [7] to new background metrics. The higher-dimensional conjecture (II.48) is well-motivated but unproved. Overall: meaningful advance with a conceptually clean new idea by leading experts in the field.",
+  "overall_score_10": 7,
+  "paper_id": "2604.08183",
+  "recommended_verdict": "promising",
+  "reviewer": "claude",
+  "score_rationale": "The result addresses a genuine open problem and the proof strategy is well-motivated. The authors are leading experts and the approach intelligently adapts the Witten spinor method. However, the 7-page letter format leaves the most critical computational step (divergent boundary term cancellation, between eqs. II.39 and II.40) as a bare assertion. Additional unverified steps include: L\u00b2 membership for (II.34), the inner boundary condition at trapped surfaces (a gap I missed in cycle 1 and which Codex correctly identified), and the passage from (II.40) to (II.41)\u2013(II.42) for non-constant conformal factor. These are moderate gaps \u2014 plausible given the cited background, but not auditable from this text. Gemini's score of 8 with technical soundness 9 is too generous given these omissions; a score of 7 with technical soundness 6.5 better reflects the balance between the genuine importance of the result and the incomplete presentation. Significance is high (positivity of energy is foundational in AdS/CFT and this substantially extends the known regime). Clarity is penalised by HTML rendering issues and the letter format with multiple deferred computations.",
+  "summary": "The paper proves positivity of a conformally-weighted holographic energy for four-dimensional asymptotically AdS spacetimes with conformally static conformal boundary and spherical or compatible toroidal cross-sections. The proof adapts the Witten spinor method, with the key novelty being a conformal weight \u03c6 from 2D uniformization of boundary sections connected to solutions of the twistor equation. Zero-energy states are characterised as Siklos waves. The paper is a 7-page letter by leading experts and cites heavily for sub-computations.",
+  "technical_objections": [
+    {
+      "confidence": 0.65,
+      "evidence": "Text reads 'a commutation calculation shows that the singular part of the integrand vanishes when (II.26) holds.' Neither the commutation nor the integral cancellation is exhibited. The referenced equation numbers are also partially garbled in the HTML.",
+      "objection": "The cancellation of the divergent boundary term is asserted but not shown. The paper says 'a commutation calculation shows that the singular part of the integrand vanishes when (II.26) holds.' This is the pivot of the proof connecting bulk positivity to positivity of the holographic boundary charge, but no computation is displayed.",
+      "paper_location": "Section II, paragraph between (II.39) and (II.40)",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "The SLSW identity (II.4) on a truncated slice has both an outer (conformal boundary) and an inner (horizon/trapped) boundary contribution. The proof passes immediately to (II.7) and thence to infinity without treating the inner term.",
+      "objection": "The black-hole / compact inner-boundary case is included in the theorem statement, but the proof does not display the inner boundary condition for the Witten spinor or the sign argument for the associated SLSW boundary contribution. For outer/marginally-outer-trapped surfaces the standard APS-type or MIT-bag boundary condition makes the inner term non-negative; this is well-established for the standard Witten equation (cf. [35]) but the modified equation (II.3) with cosmological constant requires a parallel statement that is not given.",
+      "paper_location": "Introduction (trapped boundary hypothesis); Section II, SLSW identity (II.4)\u2013(II.7)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.5,
+      "evidence": "Text reads 'If the right-hand side is in L\u00b2, one shows by standard methods that a solution exists...' \u2014 the 'if' is load-bearing and is not discharged within the paper.",
+      "objection": "The existence result for solutions of (II.34) asserts 'by standard methods that a solution exists' when the right-hand side is in L\u00b2. The L\u00b2-membership of the right-hand side is not verified for general conformally static boundary geometries; it is stated only conditionally.",
+      "paper_location": "Section II, around eq. (II.34)\u2013(II.35)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.55,
+      "evidence": "The paper cites [50, 27, 15] and says 'as in [50, 27, 15], one concludes...' without showing that the conformal weight does not modify the angular-momentum or center-of-mass terms.",
+      "objection": "The passage from the weighted charge (II.40) to the global AdS charge inequalities (II.41)\u2013(II.42) \u2014 energy, centre of mass, angular momentum \u2014 is terse for non-constant conformal factor \u03c6. It is not demonstrated that varying over the conformally-rescaled twistor spinors produces exactly the Killing-vector combinations appearing in (II.41)\u2013(II.42).",
+      "paper_location": "Section II, after (II.40), especially (II.41)\u2013(II.42)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.55,
+      "evidence": "Parenthetical remark '(the log term gives a vanishing contribution to the boundary integral because its leading coefficient is orthogonal to \u03c6\u2080)' with no proof or reference.",
+      "objection": "The log-term in the asymptotic expansion (II.36) is claimed to give zero boundary contribution because 'its leading coefficient is orthogonal to \u03c6\u2080.' This orthogonality is not proved or given a precise citation.",
+      "paper_location": "Section II, after (II.36)\u2013(II.37)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.6,
+      "evidence": "Footnote 2 says the result is 'compatible with any number of asymptotic ends' but the proof is written for a single asymptotic region.",
+      "objection": "The treatment of spacetimes with multiple asymptotic ends is not specified: the proof is written near a single conformal boundary component, but the hypotheses explicitly allow any number of asymptotic ends. Whether (II.40) holds end-by-end or for the total charge, and whether the spin structure condition is imposed globally or per-end, is not clarified.",
+      "paper_location": "Introduction footnote 2; Section II around (II.34)\u2013(II.40)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "HTML source contains multiple instances of blank equation labels and table cells with no visible content, particularly around (II.4) and the SLSW identity. This is a rendering artifact but obstructs audit.",
+      "objection": "Several formula labels and equation cross-references in the HTML source are corrupted or blank, preventing independent verification of certain critical cross-references in the divergence argument.",
+      "paper_location": "Multiple locations in Section II",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

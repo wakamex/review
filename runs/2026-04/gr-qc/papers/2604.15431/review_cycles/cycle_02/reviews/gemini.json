@@ -1,0 +1,110 @@
+{
+  "confidence": 0.85,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 7.0,
+    "novelty": 6.0,
+    "reviewer_confidence": 8.0,
+    "significance": 7.0,
+    "technical_soundness": 5.0
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Lowered scores for technical soundness and overall score. Promoted in-sample validation and ad-hoc data excision to major technical objections. Added objections regarding overclaimed SXS validation and unsupported IMR applicability based on points raised by Claude and Codex.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": [
+      "The global-fit validation is entirely in-sample, raising severe generalization concerns.",
+      "SXS validation is claimed in the abstract but only a single example is shown in Appendix A.",
+      "IMR applicability is asserted but not demonstrated via actual waveform stitching or PE tests.",
+      "Single-resolution RIT waveforms with an assumed Gaussian noise floor likely underestimate true numerical errors."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "The rational exponential (RatExp) template provides a significantly more accurate representation of highly eccentric post-merger waveforms than traditional hyperbolic tangent (HypTan) templates.",
+      "notes": "Local fits clearly demonstrate an improvement in mismatches by better accommodating the transient complexities intrinsic to highly eccentric orbits.",
+      "paper_location": "Sec. III, Sec. V.1, Appendix A",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "Constrained global polynomial fits capture the parameter space with mismatches around 10^-3.",
+      "notes": "The evaluation is entirely in-sample, which raises overfitting concerns, especially for three-parameter cubic polynomials. Furthermore, a narrow parameter region still yields high mismatches.",
+      "paper_location": "Sec. V.3, Figs. 5 & 6",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The model is validated against SXS simulations.",
+      "notes": "The abstract implies broad validation, but Appendix A presents only a single illustrative SXS case, explicitly deferring full catalog analysis to future work.",
+      "paper_location": "Abstract, Appendix A",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "The model can be directly combined with EOB and phenomenological inspiral waveforms to produce accurate IMR waveforms.",
+      "notes": "No IMR stitching procedure, complete waveform mismatches, or parameter estimation validations are presented in the paper to support this practical claim.",
+      "paper_location": "Abstract, Sec. VI",
+      "support_level": "unsupported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "Remnant mass and spin from metadata are accurate enough not to degrade QNM frequency constraints.",
+      "paper_location": "Sec. III",
+      "why_it_matters": "The template coefficients are constrained by these values. Errors in remnant parameters for single-resolution simulations propagate to QNM frequencies and degrade the template accuracy."
+    },
+    {
+      "assumption": "BMS supertranslation effects on the quadrupolar waveform are negligible.",
+      "paper_location": "Sec. II.2",
+      "why_it_matters": "The parameterization claims gauge invariance, but BMS frame ambiguities can introduce small amplitude/phase offsets which might corrupt the high-precision QNM fits for eccentric configurations."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "What fraction of the 233 RIT simulations were discarded due to falling in the positive bimodal posterior branch, and do they cluster in a specific physical regime?",
+      "why_model_cannot_resolve": "The manuscript does not provide a list, count, or parameter distribution of the discarded simulations."
+    },
+    {
+      "question": "How sensitive is the constrained merger time (and thus the global fit coefficients) to the unspecified high-frequency noise filter?",
+      "why_model_cannot_resolve": "The filter parameters are missing from the text, requiring independent code execution to test stability."
+    }
+  ],
+  "novelty_assessment": "The integration of the RatExp template with the dynamics-based non-circular parameterization represents a valuable incremental advancement for post-merger modeling of comparable-mass, highly eccentric binaries. The conceptual components are mostly drawn from previous literature, but their synthesis is practically useful.",
+  "overall_score_10": 6.5,
+  "paper_id": "2604.15431",
+  "recommended_verdict": "promising",
+  "reviewer": "gemini",
+  "score_rationale": "While the application of the RatExp template to highly eccentric binaries shows clear local improvements, the paper's technical soundness is compromised by its reliance on entirely in-sample validation for high-order polynomial fits, the ad-hoc discarding of bimodal posterior data, and an oversimplified error model for single-resolution NR data. Furthermore, claims of broad SXS validation and direct IMR applicability are overstated given the presented evidence. The methodology is promising, but requires more rigorous out-of-sample validation and transparent data handling to be fully convincing.",
+  "summary": "The paper presents a phenomenologically informed model for the quadrupolar post-merger gravitational wave emission from non-spinning binary black holes on highly eccentric orbits. It uses a rational exponential (RatExp) template matched to numerical merger data from 233 RIT simulations to extract complex quasinormal mode amplitudes via a Bayesian framework. Polynomial global fits are built across symmetric mass ratio and dynamics-based merger quantities (effective energy and angular momentum). While local fits show substantial improvement over quasi-circular ans\u00e4tze, the global fits are evaluated purely in-sample, validation against the SXS catalog is limited to a single case despite broader claims in the abstract, and several ad hoc data handling choices (e.g., discarding bimodal posteriors, unspecified filtering) undermine confidence in the model's generalizability and readiness for IMR applications.",
+  "technical_objections": [
+    {
+      "confidence": 0.95,
+      "evidence": "Mismatches are reported against the exact same NR simulations used to construct the global fits. No held-out, leave-one-out, or cross-validation is performed, which is critical when fitting three-parameter cubic polynomials.",
+      "objection": "In-sample validation of high-dimensional global fits.",
+      "paper_location": "Secs. IV.2 and V.3",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "The authors discard simulations falling in a specific branch for bimodal coefficients to force monotonicity, without quantifying the physical impact or the fraction of data discarded, potentially biasing the validity region.",
+      "objection": "Arbitrary excision of posterior samples.",
+      "paper_location": "Sec. V.1",
+      "severity": "major",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "The filter type and parameters used to determine the phase gradient inflection point are unspecified, making the pipeline irreproducible and the sensitivity of the constrained coefficients unknown.",
+      "objection": "Lack of specifics regarding the high-frequency noise filter for merger time.",
+      "paper_location": "Sec. III",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "Using single-resolution RIT waveforms and setting the noise floor from a late-time constant offset fails to capture finite-resolution truncation errors or phase systematics.",
+      "objection": "Assumed Gaussian noise floor for RIT simulations underestimates errors.",
+      "paper_location": "Sec. IV.1",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "confidence": 0.72,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 6.5,
+    "novelty": 4,
+    "reviewer_confidence": 6.5,
+    "significance": 5,
+    "technical_soundness": 6
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Lowered technical_soundness from 6.5 to 6.0 and overall score from 5.5 to 5.2 based on the k<2 WDL gap (codex objection, confirmed valid) and the SDL notation inconsistency (flagged as needing human spotcheck rather than confirmed error). PPN \u03b2 issue confirmed as genuine. Maintained 'routine' rather than 'contested' because the SDL concern is most likely a rendering artifact, and no objection reaches 'fatal' confidence. Clarified that the QNM-as-Gaussian-prior issue, while valid, does not alone overturn the paper's qualitative conclusions.",
+    "invalid_points_from_other_reviewers": [
+      "Gemini rates technical soundness 8/10 and treats all issues as minor, ignoring the structural concerns about the WDL formula coverage gap and the QNM prior conflation \u2014 this is too generous given those unresolved issues.",
+      "Codex's SDL inconsistency at 'major, would_change_verdict_if_true=true' overstates the certainty: the HTML renders mathematical notation poorly throughout, and Fig. 2 shows the SDL result aligning with numerical integration, making a fundamental algebraic error unlikely. The severity should be 'moderate pending human spotcheck' rather than assumed major.",
+      "Codex's 'contested' verdict is too strong absent confirmed fatal errors; the paper is routine applied work with identifiable but not fatal weaknesses."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Codex: k<2 WDL formula gap is real \u2014 Eq. (20b) is labeled k>2 but the posterior spans below k=2. This is a genuine omission not in my cycle-1 review.",
+      "Codex: SDL c1/c2 notation inconsistency in Eqs. (24)\u2013(29) needs human spotcheck of the PDF; HTML rendering artifacts are the most likely explanation given Fig. 2 internal consistency, but it cannot be dismissed without inspecting the typeset source.",
+      "Codex and my prior review (convergent): QNM-derived intervals used as Gaussian likelihood inputs conflate perturbative validity criteria with observational constraints.",
+      "Codex: GRAVITY S2 precession constrains (2+2\u03b3\u2212\u03b2)/3; using it as a pure \u03b3 prior requires showing \u03b2=1 for the DD BH \u2014 this is not done in the paper."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "Analytical WDL deflection-angle expansion in terms of DD BH parameters \u03b5 and \u03b1",
+      "notes": "Eqs. (20a)\u2013(20b) split into k=2 and k>2 branches. The final posterior for \u03b1 (labeled k in Codex notation, k=2.51\u00b10.64) extends below k=2, for which no WDL formula is provided. This is a genuine coverage gap that affects the PPN likelihood term in the combined analysis.",
+      "paper_location": "Sec. III.1, Eqs. (18)\u2013(20)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "SDL deflection angle exhibits the universal logarithmic divergence with analytically computable coefficients for DD BH",
+      "notes": "The Bozza (2002) framework is correctly invoked and Fig. 2 shows the SDL curve converging to the numerical solution near the photon sphere, suggesting the end result is correct. However, the intermediate notation in Eqs. (24)\u2013(29) is internally ambiguous in the HTML rendering (c1 vs c2 singular/regular labeling), and needs human spotcheck of the typeset PDF.",
+      "paper_location": "Sec. III.2, Eqs. (21)\u2013(33)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "PPN parameter \u03b3 extracted from WDL and constrained via GRAVITY S2 monitoring at ~1% level",
+      "notes": "S2 Schwarzschild precession constrains (2+2\u03b3\u2212\u03b2)/3 in PPN language, not \u03b3 alone. The paper uses \u03b3=1.00\u00b10.01 as a Gaussian prior on light-deflection \u03b3 without explicitly showing \u03b2=1 for the DD model or that the Schwarzschild-precession measurement maps cleanly to the light-deflection \u03b3. This is a gap acknowledged in my missing assumptions.",
+      "paper_location": "Sec. IV.1, Eqs. (35)\u2013(37)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "EHT shadow constraints from M87* and Sgr A* bound the DD shadow radius",
+      "notes": "Methodology is standard. The spin-systematic justification (few-percent effect, Falcke 2000) is qualitatively reasonable but the ~4\u20135% bias is not folded into the quoted error budget, which matters when constraining \u03b5 ~ O(0.01\u20130.1).",
+      "paper_location": "Sec. IV.2, Eqs. (38)\u2013(40)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Joint Fisher-matrix analysis yields \u03b5 and \u03b1 constraints consistent with GR at ~1\u03c3",
+      "notes": "The QNM-derived intervals fed as Gaussian priors come from a 10%-deviation tolerance criterion, not an astrophysical observation. Treating them as independent Gaussian measurements on equal footing with EHT and GRAVITY data is not justified. This inflates the apparent precision of the combined constraint.",
+      "paper_location": "Sec. IV.3, Eqs. (42)\u2013(49)",
+      "support_level": "partially_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "\u03b2_PPN = 1 for the DD BH solution, so that the S2 Schwarzschild-precession measurement maps directly to a Gaussian constraint on \u03b3 alone",
+      "paper_location": "Sec. IV.1, Eq. (36)\u2013(37)",
+      "why_it_matters": "Schwarzschild precession constrains (2+2\u03b3\u2212\u03b2)/3. If the nonlocal action modifies \u03b2, the GRAVITY-derived likelihood term is wrong and the combined constraint is biased."
+    },
+    {
+      "assumption": "The WDL expansion in Eq. (20b) (valid for k>2) can be applied or smoothly extrapolated to the k<2 region sampled in the joint posterior",
+      "paper_location": "Sec. III.1 and Sec. IV.3",
+      "why_it_matters": "For non-integer k with 1<k<2, non-integer powers of 1/r appear at different orders in the large-r expansion and the truncation error of the given formula is unknown. The PPN likelihood term may be applying an invalid formula for part of the posterior."
+    },
+    {
+      "assumption": "Statistical independence of PPN, shadow (M87* and Sgr A*), and QNM contributions in the global \u03c7\u00b2 (Eq. 42)",
+      "paper_location": "Sec. IV.3, Eq. (42)",
+      "why_it_matters": "All three observables are functions of the same (\u03b5, \u03b1) metric, so their theoretical predictions are not independent as functions of the parameters, even if the observational noise is uncorrelated."
+    },
+    {
+      "assumption": "Gaussian posteriors for all observational inputs",
+      "paper_location": "Sec. IV.3, Eqs. (43)\u2013(45)",
+      "why_it_matters": "EHT shadow and GRAVITY S2 bounds have non-Gaussian systematic components; using Gaussian likelihoods can artificially tighten the confidence regions."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "In the SDL derivation (Eqs. 24\u201329 of the PDF, not the HTML), does c1(r0) vanish at the photon sphere r_m (consistent with the photon-sphere condition) or diverge? Is it c1 or c2 that governs the leading divergence in the Taylor expansion of f(z, r0)?",
+      "why_model_cannot_resolve": "The HTML rendering loses superscripts, fraction bars, and subscript distinctions throughout Sec. III.2. The codex reviewer read an internal contradiction in this section (confidence 0.86), but Fig. 2 shows the SDL curve converging correctly, suggesting the error may be notational/rendering rather than substantive. Only the typeset PDF can confirm this."
+    },
+    {
+      "question": "Does \u03b2_PPN = 1 for the DD BH solution derived in D'Agostino & De Falco (2025a), and is the mapping from GRAVITY S2 Schwarzschild-precession accuracy to a Gaussian prior on \u03b3 alone valid for this metric?",
+      "why_model_cannot_resolve": "Requires the third-order metric expansion of the DD BH solution and matching to the PPN post-Newtonian formalism for orbital precession. The companion paper (JCAP 2025:046) would need to be consulted."
+    },
+    {
+      "question": "Is a valid WDL deflection-angle expansion available for 1 < k < 2, and is it consistent with the formula in Eq. (20b) as a limiting case? Do the numerical examples in Fig. 2 fall strictly above k=2?",
+      "why_model_cannot_resolve": "The paper's Fig. 2 is for specific (k, \u03b5) values that are not clearly readable in the HTML source (rendering gaps). Whether the authors ever evaluate the combined likelihood at k<2 requires inspecting the companion code or the analytic expressions in the companion paper."
+    },
+    {
+      "question": "Are the dimensionless shadow radii in Eqs. (39)\u2013(40) numerically consistent with the EHT published angular diameters, masses, and distances for M87* and Sgr A*?",
+      "why_model_cannot_resolve": "The HTML source does not render the numerical values in Eqs. (39)\u2013(40) clearly enough for cross-checking against the cited EHT papers."
+    }
+  ],
+  "novelty_assessment": "The paper is an application paper within an ongoing self-contained research program. The DD BH solution and its basic properties originate in companion papers by the same authors. The Bozza (2002) SDL formalism and WDL series expansion are long-established tools. An independent lensing analysis was already performed in Li and Zhang (2026), which this paper explicitly revisits. The contribution is: (1) a more systematic analytical treatment and clarification of the Li\u2013Zhang derivation; (2) the first quantitative DD BH parameter space bounds combining PPN + shadow + QNM constraints via Fisher matrix. This is incremental applied work, not a conceptual advance. Novelty score 4/10.",
+  "overall_score_10": 5.2,
+  "paper_id": "2604.13223",
+  "recommended_verdict": "routine",
+  "reviewer": "claude",
+  "score_rationale": "The paper is competent applied work that correctly implements established lensing formalisms and obtains the expected GR-consistency result. Technical soundness is lowered to 6.0 from cycle 1 due to: (i) a genuine WDL coverage gap for k<2 (Codex objection, confirmed valid) \u2014 the posterior spans this regime but no formula is given; (ii) ambiguity in the SDL intermediate notation that requires PDF-level spotcheck; (iii) the QNM-as-Gaussian-prior conflation. Novelty remains low (4/10): the problem was already treated by Li & Zhang (2026) and the DD BH solution comes from companion papers. Significance is moderate (5/10): the result is GR consistency at current precision, which is unsurprising. Clarity is reduced slightly (6.5) because the k-regime coverage for the WDL formula is not addressed. Overall 5.2 reflects a technically adequate but incremental paper with identifiable methodological weaknesses that weaken the precision of the quoted constraints, accepted for PRD but not a standout contribution.",
+  "summary": "The paper derives gravitational lensing observables for DD black holes in the revised Deser\u2013Woodard nonlocal gravity theory, combining WDL and SDL deflection angle expansions with EHT shadow, GRAVITY S2 PPN, and prior QNM constraints via a Fisher-matrix joint analysis. After reviewing the other cycle-1 assessments, I maintain a \"routine\" verdict but sharpen three objections: (1) the WDL formula coverage gap for k<2 in the parameter posterior; (2) the PPN \u03b2-sector ambiguity in the GRAVITY constraint mapping; and (3) the SDL notation inconsistency flagged by codex, which I assess as probably a rendering artifact given Fig. 2 internal consistency, but which still requires human inspection of the typeset source.",
+  "technical_objections": [
+    {
+      "confidence": 0.78,
+      "evidence": "Eq. (20a) is labeled k=2; Eq. (20b) is k>2. The QNM prior span and the lower 1\u03c3 boundary of the final \u03b1/k posterior fall below 2. For non-integer k with 1<k<2, the ordering of omitted terms in the series changes and the formula in (20b) cannot be directly applied.",
+      "objection": "WDL formula gap for k<2: only k=2 and k>2 branches are provided, but the final posterior (k=2.51\u00b10.64 at 1\u03c3) and the QNM prior (k spanning 1\u20132.84) include k<2 where the expansion is undefined as presented",
+      "paper_location": "Sec. III.1, Eqs. (20a)\u2013(20b); Sec. IV.3, Eq. (47)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.55,
+      "evidence": "Codex reviewer identified this at confidence 0.86. However, Fig. 2 shows the SDL curve converging correctly to the numerical solution, which is difficult to reconcile with a fundamental derivation error. The discrepancy is more consistent with HTML rendering artifacts (lost superscripts, fraction bars) than a real algebraic error. Human inspection of the PDF is needed to resolve.",
+      "objection": "SDL intermediate notation is internally inconsistent in the HTML rendering: the text states c1(rm)\u2192\u221e but the photon-sphere condition (Eq. 9) requires c1(rm)=0; Eq. (28) appears to expand c2 while the prose identifies it as the regular quantity",
+      "paper_location": "Sec. III.2, Eqs. (24)\u2013(29)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "The paper states: 'requiring deviations from the Schwarzschild predictions to remain within 10%, we found the allowed intervals.' This is a prior on the model's perturbative regime, not a measured Gaussian datum. The combined \u03c7\u00b2 includes it as a statistically equivalent term to EHT and GRAVITY measurements.",
+      "objection": "QNM-derived bounds entered as Gaussian likelihood terms (Eq. 41) were obtained by requiring Schwarzschild deviations to remain within 10%\u2014a perturbativity tolerance, not an astrophysical measurement. Treating them as independent observed data conflates theoretical range-of-validity choices with observational evidence.",
+      "paper_location": "Sec. IV.3, Eqs. (41)\u2013(43)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.75,
+      "evidence": "The paper cites Gainutdinov (2020) and Losada et al. (2025) for the 1% accuracy statement but does not derive \u03b2_PPN for the DD model. The DW action can modify both PPN parameters; the paper assumes \u03b2=1 implicitly without justification.",
+      "objection": "PPN constraint uses \u03b3=1.00\u00b10.01 from GRAVITY S2 precession but Schwarzschild precession constrains (2+2\u03b3\u2212\u03b2)/3. If \u03b2\u22601 in the DD BH (not discussed), the mapping to a Gaussian prior on \u03b3 alone is incorrect.",
+      "paper_location": "Sec. IV.1, Eqs. (35)\u2013(37)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "Falcke et al. (2000) spin correction is cited qualitatively. EHT M87* uncertainty is ~10% but M87* spin is high; the unfolded systematic could be 4\u20135%, comparable to the nonlocal correction being constrained.",
+      "objection": "Spin-systematic from applying EHT constraints to a spherically symmetric model is acknowledged but not quantified; the ~4% shadow diameter shift for rapidly spinning BHs is not added to the error budget in Eqs. (39)\u2013(40)",
+      "paper_location": "Sec. IV.2, Eqs. (39)\u2013(40)",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "The paper explicitly states: 'the coefficients c_n cannot be determined in closed form, but can be computed once a specific value of \u03b1 is fixed.'",
+      "objection": "Claim of 'general analytical expressions' for the WDL deflection angle is overstated: coefficients c_n in Eq. (19) cannot be determined in closed form for general \u03b1, requiring numerical input once \u03b1 is fixed",
+      "paper_location": "Abstract; Sec. III.1, Eq. (19)",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

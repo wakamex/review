@@ -1,0 +1,133 @@
+{
+  "confidence": 0.69,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 5.8,
+    "novelty": 5.0,
+    "reviewer_confidence": 6.9,
+    "significance": 5.2,
+    "technical_soundness": 4.2
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "No prior cycle; this is the initial review.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "The DD black-hole metric is a first-order deformation of Schwarzschild with parameters xi and k, with photon sphere and critical impact parameter given analytically.",
+      "notes": "The photon-sphere formula follows plausibly from A C' - A' C = 0 for A=1-2/r-xi/r^k, but the metric itself is imported from earlier work and not rederived here.",
+      "paper_location": "Sec. II, Eqs. (6)-(14)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The paper derives weak-field deflection expansions in r0 and b, reducing to Schwarzschild when xi -> 0.",
+      "notes": "The Schwarzschild limits in the displayed terms look consistent, but the printed b-expansion only treats k=2 and k>2, while the model and later likelihood use k>1.",
+      "paper_location": "Sec. III.A, Eqs. (18)-(20)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The strong-deflection angle has the logarithmic form alpha(b)=-delta log(b/bm-1)+lambda with coefficients for the DD spacetime.",
+      "notes": "The universal logarithmic form is standard, but the local derivation as printed contains contradictory statements about c1 and c2 near the photon sphere.",
+      "paper_location": "Sec. III.B, Eqs. (21)-(33)",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "Current PPN and EHT shadow measurements, combined with earlier QNM bounds, imply xi=0.044 +/- 0.039 and k=2.51 +/- 0.64, consistent with GR at 1.13 sigma.",
+      "notes": "The numerical pipeline is described, but key likelihood inputs are not clearly justified as independent Gaussian measurements of the modeled quantities.",
+      "paper_location": "Sec. IV, especially Eqs. (37)-(49)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "DD black holes remain observationally viable and provide a framework for testing nonlocal deviations from GR.",
+      "notes": "The qualitative viability claim is plausible within current large uncertainties, but the quantitative strength of the constraints is weaker than the conclusion suggests.",
+      "paper_location": "Abstract and Sec. V",
+      "support_level": "partially_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "A valid weak-deflection expansion for the full sampled domain k>1, especially 1<k<2.",
+      "paper_location": "Sec. III.A and Sec. IV.C",
+      "why_it_matters": "The combined constraints sample or report values below k=2, but the printed b-series is not given for that interval."
+    },
+    {
+      "assumption": "S2 precession can be represented as an independent Gaussian constraint gamma=1.00 +/- 0.01 on the light-deflection PPN parameter.",
+      "paper_location": "Sec. IV.A, Eq. (37)",
+      "why_it_matters": "Without this mapping, the PPN term in the combined chi-square is not an auditable observational constraint on the DD lensing coefficient."
+    },
+    {
+      "assumption": "The QNM intervals are statistically interpretable as independent 1-sigma Gaussian measurements of xi and k.",
+      "paper_location": "Sec. IV.C, Eq. (41)",
+      "why_it_matters": "This assumption materially affects the best fit and the claimed 1.13-sigma consistency with GR."
+    },
+    {
+      "assumption": "First-order-in-xi formulas remain accurate over the plotted/example and likelihood regions.",
+      "paper_location": "Secs. II-IV",
+      "why_it_matters": "The solution and lensing observables are perturbative, but the paper uses xi values around 0.1 in examples and Gaussian ranges without showing truncation-error control."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Are Eqs. (26)-(29) in the author PDF/source typographical errors, or is the c1/c2 strong-deflection derivation genuinely incorrect?",
+      "why_model_cannot_resolve": "The extracted text strongly indicates a contradiction, but a human should inspect the exact typeset fractions and superscripts before deciding whether this is only a notation/printing issue."
+    },
+    {
+      "question": "Does the DD metric's large-r expansion independently give the same gamma as Eq. (36), and in which coordinate gauge?",
+      "why_model_cannot_resolve": "This requires a careful asymptotic expansion of the full B(r) expression and comparison with the correct PPN coordinate convention."
+    },
+    {
+      "question": "Can GRAVITY S2 results be legitimately converted into gamma=1.00 +/- 0.01 for this metric?",
+      "why_model_cannot_resolve": "This needs domain expertise in PPN orbital fits and the cited observational analyses, beyond the local derivation in the paper."
+    }
+  ],
+  "novelty_assessment": "The paper is incremental but useful: it extends recent work on DD black-hole lensing by organizing WDL/SDL formulas and applying existing PPN, EHT, and QNM constraints. The main novelty is the combined phenomenological constraint, but that novelty is weakened by the questionable statistical interpretation of the inputs and by the strong-deflection derivation issues.",
+  "overall_score_10": 5.0,
+  "paper_id": "2604.13223",
+  "recommended_verdict": "contested",
+  "reviewer": "codex",
+  "score_rationale": "The research direction is sensible and some baseline geodesic formulas look standard, but the printed SDL derivation has a serious local inconsistency and the headline constraints rely on unsupported observational/statistical conversions. I would treat the paper as interesting but not technically secure without revisions or independent checks of these points.",
+  "summary": "The paper studies weak- and strong-deflection lensing for the DD nonlocal black-hole metric and combines PPN, EHT shadow, and earlier QNM bounds to constrain the deformation parameters. The geodesic setup and the broad program are reasonable, but I found local issues in the printed strong-deflection derivation and in the statistical/observational interpretation of the constraints. I do not certify the full derivations.",
+  "technical_objections": [
+    {
+      "confidence": 0.86,
+      "evidence": "From Eq. (24a), c1(r0)=r0(A0 C0'/C0 - A0'). Using the photon-sphere condition Eq. (9), c1(rm) should vanish, not diverge. The text then states c1(rm)->infinity and expands sinh^{-1}(1/x) for x->0, while Eq. (28) appears to expand c2 even though the preceding sentence says c2 is regular and c1 is the singular/vanishing quantity. This undermines the displayed route to Eqs. (32)-(33).",
+      "objection": "The strong-deflection derivation appears internally inconsistent at the photon sphere.",
+      "paper_location": "Sec. III.B, Eqs. (24)-(29)",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.78,
+      "evidence": "Eq. (35) is a light-deflection formula involving gamma, but the adopted 1% GRAVITY/S2 statement concerns Schwarzschild orbital precession. In PPN language, pericenter precession constrains a combination involving beta and gamma, not gamma alone; for k=2 the DD g_tt term also changes the beta-sector coefficient. The paper does not supply the mapping from S2 precession accuracy to a Gaussian prior on gamma alone.",
+      "objection": "The PPN likelihood input gamma=1.00 +/- 0.01 is not derived from the cited S2 observable in the way used in the paper.",
+      "paper_location": "Sec. IV.A, Eqs. (35)-(37)",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.82,
+      "evidence": "The QNM input is described as intervals obtained by requiring deviations from Schwarzschild predictions to remain within 10%, then converted to xi_QNM=0.07 +/- 0.04 and k_QNM=1.7 +/- 0.9. That is a tolerance criterion or prior-like range, not a measured Gaussian datum, and it is then combined with electromagnetic constraints as statistically independent.",
+      "objection": "The combined likelihood treats earlier QNM 'allowed intervals' as independent Gaussian observations, which is not justified by the text.",
+      "paper_location": "Sec. IV.C, Eqs. (41)-(43)",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.72,
+      "evidence": "Eq. (20b), explicitly used to obtain Eq. (36), is labeled k>2; Eq. (20a) is k=2. The model domain is k>1 and the final 1-sigma interval k=2.51 +/- 0.64 extends below 2, while the QNM prior spans k in (1,2.84). No separate weak-field expansion is provided for 1<k<2, where noninteger powers could affect the ordering of omitted terms.",
+      "objection": "The weak-field formula used for the PPN comparison is displayed only for k=2 and k>2, but the final parameter analysis includes k below 2.",
+      "paper_location": "Sec. III.A Eq. (20), Sec. IV.A Eq. (36), Sec. IV.C Eq. (47)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.64,
+      "evidence": "The conversion of observed angular diameter to bm uses static spherical geometry for rotating sources and treats mass, distance, and angular-size uncertainties effectively as Gaussian inputs. The paper acknowledges spin weakly affects average diameter, but does not propagate EHT modeling uncertainties, mass-distance covariance, or emission-model dependence into the likelihood.",
+      "objection": "The EHT shadow likelihood is simplified enough that the quoted constraints should not be presented as robust observational bounds without additional systematics.",
+      "paper_location": "Sec. IV.B, Eqs. (38)-(40)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

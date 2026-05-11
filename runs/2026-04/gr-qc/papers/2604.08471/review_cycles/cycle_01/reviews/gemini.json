@@ -1,0 +1,82 @@
+{
+  "confidence": 0.9,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 6,
+    "novelty": 7,
+    "reviewer_confidence": 9,
+    "significance": 5,
+    "technical_soundness": 2
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "N/A",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "Pyramid interferometers geometrically isolate chirality, with the non-coplanar (ET-PyET) correlation channel being natively blind to the unpolarized background.",
+      "notes": "Mathematical derivation shows this is physically and mathematically false. Because the xy-projections of the tilted arms strongly align with the planar arms, the detector tensors have a large inner product, making the channel highly sensitive to the unpolarized background.",
+      "paper_location": "Abstract and text below Eq. 14 (specifically the statement $\\gamma_I^{1,4} = 0$).",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "A Tower-Extended Pyramid configuration with a 1-km above-ground tower does not suffer a significant noise penalty in the high-frequency regime.",
+      "notes": "The paper assumes that because ET is shot-noise limited above 10 Hz underground, a 1-km skyscraper will be too. This completely ignores the orders-of-magnitude increase in input environmental and wind noise on a tall structure.",
+      "paper_location": "Figure 2 caption and 'Sensitivity and dominant noise sources' section.",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "A projected network channel (Eq. 16) can successfully isolate the V-mode signal.",
+      "notes": "The theoretical linear combination can isolate V if perfectly calibrated. However, the paper incorrectly treats this as an 'ideal case' optimization rather than a strict necessity, and fails to account for the noise penalty of subtracting the massive I-mode signal.",
+      "paper_location": "Equation 16",
+      "support_level": "partially_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The unpolarized background I can be perfectly subtracted without relative calibration errors.",
+      "paper_location": "Equation 16",
+      "why_it_matters": "Since the non-coplanar channel is actually highly sensitive to the unpolarized intensity, isolating the vastly smaller chiral signal V relies entirely on the precise subtraction of the planar channel's signal. Tiny miscalibrations will leave residual I-mode noise that easily overwhelms the V-mode signal."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Verify the analytical claim $\\gamma_I^{1,4} = 0$ given the explicitly defined arm vectors in Eq. 13.",
+      "why_model_cannot_resolve": "The model's tensor calculations strongly indicate that $d_1 \\cdot d_4$ is near-maximal, rendering $\\gamma_I^{1,4}$ strictly non-zero. A human expert should confirm if the authors made a blatant analytical error or if there is an unstated coordinate transformation that somehow orthogonalizes the detectors."
+    }
+  ],
+  "novelty_assessment": "The conceptual idea of physically extending terrestrial third-generation GW detectors into the third dimension (e.g., adding a tilted arm) to natively probe SGWB chirality is novel. While 3D networks have been discussed theoretically, this specific co-located architecture provides a new and interesting direction for facility design.",
+  "overall_score_10": 3,
+  "paper_id": "2604.08471",
+  "recommended_verdict": "major_flaw",
+  "reviewer": "gemini",
+  "score_rationale": "While the core concept of a colocated 3D interferometer to detect GW chirality is novel and interesting, the paper suffers from a fatal analytical error. The central claim that the tilted arm naturally blinds the detector to the unpolarized background ($\\gamma_I = 0$) is mathematically false based on their own geometry; tilting an arm by a small angle leaves it highly sensitive to the same unpolarized background as the planar arms. Consequently, their SNR calculations\u2014which assume perfect native isolation\u2014are completely invalid. Furthermore, assuming a 1-km skyscraper will have the same noise profile as a deep underground cavern above 10 Hz is physically unjustifiable. These major flaws compromise the paper's main narrative and quantitative results.",
+  "summary": "The paper proposes the 'Pyramid interferometer' concept, a 3D extension of the Einstein Telescope (ET) achieved by adding non-coplanar (tilted) arms. The authors claim this configuration geometrically isolates the circular polarization (Stokes-V) of the stochastic gravitational-wave background (SGWB), making the cross-correlation between a planar arm and a tilted arm natively blind to the unpolarized intensity (Stokes-I). This is presented as a novel terrestrial probe of parity violation. The paper also proposes a 1-km vertical tower extension to improve high-frequency sensitivity.",
+  "technical_objections": [
+    {
+      "confidence": 0.95,
+      "evidence": "Using the explicit arm vectors provided in Eq. 13, the non-coplanar arms ($u_4, v_4$) are mostly parallel to the planar arms ($u_1, v_1$) for small tilt heights $h$. The contraction of their detector tensors is $d_1 \\cdot d_4 = \\frac{L^2}{L^2+h^2} (d_1 \\cdot d_1)$, which is strictly positive and near-maximal for $h \\ll L$. Therefore, the intensity overlap reduction function $\\gamma_I^{1,4}$ is large, not zero, and the channel will be dominated by the unpolarized Stokes-I background.",
+      "objection": "The central claim that the non-coplanar pair (1,4) is natively blind to the unpolarized background ($\\gamma_I^{1,4} = 0$) is mathematically incorrect.",
+      "paper_location": "Abstract, Eq. 15, and text surrounding Eq. 15.",
+      "severity": "fatal",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "Because $\\gamma_I^{1,4} \\neq 0$, the raw ET-PyET correlation is heavily contaminated by the unpolarized background. While the authors introduce a projection method (Eq. 16) to theoretically isolate V, extracting it requires subtracting the I-dominated planar channel. The SNR formula in Eq. 20 uses only instrumental noise $P_1 P_4$ and completely ignores the massive cosmic variance / residual noise introduced by subtracting the highly dominant unpolarized background.",
+      "objection": "The SNR formula for the circular polarization mode (Eq. 20) and resulting sensitivity curves are invalid because they ignore the Stokes-I background.",
+      "paper_location": "Equation 20 and Figure 3.",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "The authors dismiss low-frequency environmental noise for the 1-km tower by relying on the noise budget of the underground Einstein Telescope. A 1-km skyscraper experiences immense structural sway, vibrations, and wind loads. It is physically implausible that standard suspension systems can suppress this dramatically higher input noise to the quantum shot-noise limit in the 10-100 Hz band without extensive, proven modeling.",
+      "objection": "The assumption that a 1-km above-ground tower will be shot-noise limited above 10 Hz is physically unrealistic.",
+      "paper_location": "Section 'Sensitivity and dominant noise sources' and Figure 2.",
+      "severity": "major",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "The review bundle contained only the PRL HTML landing page (abstract, metadata, reference list) due to a scraping artifact \u2014 the article body was absent and key numerical values in the abstract were dropped as rendering artifacts. In cycle 1 this caused gemini to issue a fatal rating based on bundle incompleteness rather than paper quality; claude and codex flagged this as a data limitation and gave provisional assessments. In cycle 2 the codex reviewer accessed the full published text and confirmed the central quantitative result (3.67 \u00b1 0.49 times kinematic dipole, 5.4\u03c3). All three reviewers converged on a 'contested' verdict in cycle 2. Gemini updated its assessment in cycle 2 based on methodological details extracted by codex. The paper is published in Phys. Rev. Lett. 135, 201001 (November 2025) after revision from March to September 2025.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper argues that distant radio galaxies are more clustered in one direction of the sky than our standard cosmological model predicts \u2014 and by a surprisingly large factor. The review board found the core statistical idea (using a more appropriate probability model for source counts) genuinely useful and novel. However, reviewers raised serious concerns about whether the headline 5.4-sigma significance survives full accounting of measurement systematics, correlations between the three surveys used, and methodological choices in how uncertainty is propagated. The paper is peer-reviewed and published in Physical Review Letters, but whether the anomaly is real or partially inflated by technical choices remains an open expert question.",
+  "human_spotchecks": [
+    "Does the released Zenodo code (10.5281/zenodo.17166250) jointly sample the negative-binomial overdispersion parameter p with the dipole amplitude and direction via MCMC, or is p fixed from empirical moments before MCMC runs? If plug-in, how large are the p-dipole correlations in the likelihood?",
+    "In the final three-survey combination, is LoTSS-DR2 included with a free dipole direction or with the direction effectively fixed to an external reference (e.g., CMB dipole)? Does the combined 5.4\u03c3 result change materially when LoTSS-DR2 is excluded, and does the paper report such a robustness check?",
+    "Does the combined likelihood across NVSS, RACS-low, and LoTSS-DR2 include an explicit cross-survey covariance model, or does it multiply independent per-survey likelihoods? If independent, is there a sensitivity analysis showing that the combined sigma is robust to this assumption?",
+    "Are the 5.4\u03c3 and 4.5\u03c3 discrepancies corrected for the number of survey combinations and flux-cut choices explored in the analysis (look-elsewhere correction)? What is the trial factor associated with selecting 'robust' versus 'problematic' surveys?",
+    "What null tests are reported \u2014 e.g., dipole amplitude in Galactic coordinates, dipole in pixel-shuffled catalogues, jackknife half-survey tests \u2014 and do they pass at the level expected from pure noise? This is the primary defense against systematic artifacts.",
+    "Is the paper's claim to the first significant detection of an excess radio dipole using radio surveys alone accurate, given prior analyses by Wagenveld et al. (2023), Oayda et al. (2024), Darling (2022), and Secrest et al. (2022)?"
+  ],
+  "paper_id": "bm-211-01",
+  "public_summary": "This PRL Letter addresses a long-standing tension in observational cosmology: the amplitude of the radio source-count dipole \u2014 measuring asymmetry in the distribution of radio galaxies across the sky \u2014 has repeatedly appeared larger than the standard cosmological model (\u039bCDM) predicts from Earth's motion through the universe. The paper argues that previous analyses contained a statistical flaw: radio sources often appear as multiple resolved components (jets, lobes), inflating pixel source counts beyond what a Poisson model assumes. The authors introduce a new Bayesian estimator based on the negative binomial distribution, which explicitly models this \"overdispersion,\" and apply it to three wide-area radio surveys spanning 144 MHz to 1.4 GHz (NVSS, RACS-low, LoTSS-DR2). The combined result claims a dipole amplitude 3.67 \u00b1 0.49 times the kinematically expected value \u2014 a 5.4\u03c3 discrepancy with \u039bCDM. The paper is accepted and published in PRL after revision (March\u2013September 2025). The review board confirmed that radio source counts are indeed overdispersed and that the negative binomial approach is a genuine methodological improvement over prior Poisson-based estimators. Three substantive concerns emerged: (1) the overdispersion parameter appears to be fixed from empirical data rather than jointly inferred with the dipole, potentially underestimating uncertainty in the final significance; (2) the combined likelihood across three partially overlapping surveys may not account for cross-survey correlations, making the combined error bar artificially small; and (3) LoTSS-DR2 is included in the headline result despite the paper's own statement that it yields unreliable dipole direction estimates as a standalone survey. Whether these issues substantially reduce the 5.4\u03c3 figure requires auditing the released Zenodo code and analysis pipeline. The review bundle contained only HTML metadata and references (missing the article body due to a scraping artifact); quantitative results cited here were confirmed by one reviewer accessing the full published text.",
+  "reviewer_disagreements": [
+    "Gemini (cycle 1) rated the paper fatally flawed with score 1/10 based on the bundle missing the article body text, assigning this a 'fatal' severity with high confidence (0.9). Claude and codex correctly identified this as a scraping/rendering artifact in the review bundle, not a defect in the published paper. All reviewers converged on 'contested' in cycle 2 after quantitative results were confirmed from the full text.",
+    "Gemini (cycle 2) downgraded the 5.4\u03c3 claim to 'unsupported' while claude and codex rated it 'partially_supported' \u2014 reflecting different thresholds for how much weight to assign to systematic concerns versus formal statistical results in a peer-reviewed PRL publication.",
+    "The severity of including LoTSS-DR2 in the headline result was rated major by both gemini and claude in cycle 2, while codex softened it to moderate in cycle 2 after noting the paper acknowledges and simulates the mask issue and that the RACS-low + NVSS two-survey combination independently yields a large excess."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The headline 5.4\u03c3 significance appears to be a formal statistical figure, not a fully marginalized systematic uncertainty statement. Flux calibration errors, survey geometry effects, Galactic foreground contamination, and local-source contamination are discussed qualitatively in the paper but are not evidently included as nuisance parameters in the sigma budget.",
+      "paper_location": "Abstract; Results Table III; Conclusion and systematics discussion",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The combined likelihood across three surveys with substantially overlapping sky coverage does not appear to account for cross-survey covariance from shared large-scale structure, correlated calibration modes, or common source populations. Treating the three catalogues as independent overstates the precision of the combined dipole and directly inflates the reported sigma discrepancy.",
+      "paper_location": "Results, combined RACS-low + NVSS + LoTSS-DR2 rows of Table III; Data and theory likelihood construction",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "LoTSS-DR2 is included in the headline three-survey combination despite the paper's own acknowledgment that it yields unreliable free-direction dipole retrievals as a standalone survey due to its limited sky coverage (~27% of the full sky). How the combination conditions on or corrects for this instability \u2014 and whether the combined direction is effectively pinned to an external reference \u2014 is not fully transparent from the paper text.",
+      "paper_location": "Results: classification of surveys as problematic versus robust; combined LoTSS-DR2 + RACS-low + NVSS result in Table III",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The overdispersion parameter p of the negative binomial appears to be fixed by a plug-in empirical mean/variance procedure rather than jointly inferred with the dipole amplitude and direction via MCMC. If p is correlated with the dipole amplitude in the likelihood, the reported posterior uncertainty on the dipole may be understated, partially undermining the paper's core claim to provide better-calibrated uncertainty.",
+      "paper_location": "Data and theory, Eq. (8) discussion; MCMC amplitude/direction estimation",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper evaluates multiple surveys and flux-density cuts, then emphasizes the 'stable' surveys and a preferred three-survey combination. Unless analysis choices were pre-specified or corrected for with a look-elsewhere factor, the reported significance may be optimistically selected from a larger space of explored combinations.",
+      "paper_location": "Data descriptions and Results discussion of robust flux cuts, problematic surveys, and final survey combination",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "claude"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "Radio source counts in all examined surveys are significantly overdispersed relative to a Poisson model, and the negative binomial distribution provides a substantially better fit \u2014 supported by reduced chi-squared comparisons across six surveys in Table I of the paper.",
+    "The combined source-count dipole from NVSS, RACS-low, and LoTSS-DR2 is measured at 3.67 \u00b1 0.49 times the kinematic expectation, with the measured direction approximately consistent with the CMB dipole direction \u2014 confirmed from the full published text.",
+    "RACS-low and NVSS independently yield stable, unconstrained dipole direction retrievals, providing the robust backbone of the combined result; the paper's own classification of surveys as 'robust' versus 'problematic' lends credibility to this distinction.",
+    "The negative-binomial Bayesian estimator for overdispersed radio source counts is a genuine methodological advance over prior Poisson-based dipole estimators, motivated by well-understood multi-component radio source morphology."
+  ],
+  "technical_takeaway": "The paper introduces a negative-binomial Bayesian estimator for the radio source-count dipole, motivated by overdispersion from multi-component radio sources, and combines NVSS, RACS-low, and LoTSS-DR2 to claim d/d_exp = 3.67 \u00b1 0.49 at 5.4\u03c3 over the \u039bCDM kinematic prediction. All three reviewers converged on a \"contested\" assessment: the overdispersion model is descriptively well-supported (Table I reduced chi-squared comparisons), but the headline significance rests on a plug-in treatment of the overdispersion parameter p rather than joint MCMC inference, unclear cross-survey covariance modeling for surveys with overlapping sky, and the inclusion of LoTSS-DR2 in the headline combination despite the paper's own acknowledgment of its unreliable free-direction retrievals as a standalone survey. Code-level audit of the Zenodo release is needed to resolve whether these choices materially inflate the reported discrepancy."
+}

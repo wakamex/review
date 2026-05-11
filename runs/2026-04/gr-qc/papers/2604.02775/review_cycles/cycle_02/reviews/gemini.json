@@ -1,0 +1,109 @@
+{
+  "confidence": 0.95,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 3,
+    "novelty": 7,
+    "reviewer_confidence": 9,
+    "significance": 3,
+    "technical_soundness": 1
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "I have maintained my fatal objection regarding the 3D vs 2D Bessel function mismatch, which was missed by the other reviewers. I have incorporated and upgraded the severity of the 'missing reference' objection to major, as all reviewers agreed this makes the paper unauditable. I have also added objections raised by Claude and Codex regarding the junction conditions and the uncontrolled averaging.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": [
+      "The departure from standard Israel-Darmois junction conditions in favor of conformal Killing equations is unjustified within the text.",
+      "The replacement of a discrete sum over sub-regions with a continuous all-sky average is mathematically uncontrolled.",
+      "The missing companion paper Umeh:2026pm (reference '000000') makes the core derivation impossible to evaluate.",
+      "The MOND acceleration scale a_0 in Eq. 26 is introduced without derivation."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "Spacetime caustics can be avoided by gluing spacetime sheets with opposite orientations, producing a covariant backreaction term in the effective energy-momentum tensor.",
+      "notes": "The theoretical derivation heavily references an unavailable companion paper (Umeh:2026pm, cited as '000000'), making the validity of the action decomposition and boundary regularisation impossible to assess. Furthermore, the departure from standard Israel-Darmois junction conditions is unjustified.",
+      "paper_location": "Section III",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "The backreaction contribution leads to an effective density profile that solves the missing mass problem in galaxies.",
+      "notes": "The ODE presented in Eq 22 is algebraically inconsistent with the density definition in Eq 21. Additionally, the averaging procedure used to obtain this density is mathematically uncontrolled.",
+      "paper_location": "Section IV, Equation 21-22",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "The resulting gravitational potential naturally produces flat galaxy rotation curves in the outskirts.",
+      "notes": "The author incorrectly solves a 3D spherical differential equation using 2D cylindrical modified Bessel functions. The flat rotation curve is a mathematical artifact of using the incorrect $K_0$ solution.",
+      "paper_location": "Section IV, Equation 23-26",
+      "support_level": "unsupported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The physical equivalence between spacetime caustics in structure formation and the glued spacetime sheets with opposite orientations.",
+      "paper_location": "Section III",
+      "why_it_matters": "Without physical justification, gluing a time-reversed or orientation-reversed spacetime to model the exterior of a galaxy halo appears to be an arbitrary mathematical artifact rather than a realistic cosmological mechanism."
+    },
+    {
+      "assumption": "The conformal Killing equation is the correct junction condition at the matter horizon boundary, replacing Israel-Darmois.",
+      "paper_location": "Section III",
+      "why_it_matters": "The entire backreaction derivation depends on what conditions are imposed at the gluing surface. If Darmois conditions are actually required, the resulting backreaction term would differ entirely."
+    },
+    {
+      "assumption": "The replacement of a discrete sum over sub-regions with a continuous all-sky average is valid.",
+      "paper_location": "Section III Eq. (15); Section IV Eq. (21)",
+      "why_it_matters": "The rotation curves depend critically on the radial profile of this averaged backreaction density. If this averaging introduces artifacts, the inferred force law is incorrect."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Is the parameter $\\beta$ implicitly redefined or is there missing text between Eq 21 and Eq 22?",
+      "why_model_cannot_resolve": "The text states 'and the parameter $\\beta$ is given by' immediately followed by 'Using the Poisson equation', implying a missing equation or typo in the manuscript that might explain the coefficient mismatch."
+    },
+    {
+      "question": "Does the unpublished companion paper (Umeh:2026pm) justify the conformal Killing junction conditions?",
+      "why_model_cannot_resolve": "The paper is listed as '000000' and is not provided in the bundle."
+    }
+  ],
+  "novelty_assessment": "The conceptual approach of using manifold surgery and boundary terms to model backreaction and replace dark matter is creative. However, the phenomenological success of the framework is completely undermined by execution errors, and the theoretical foundations are hidden in an unpublished reference.",
+  "overall_score_10": 2,
+  "paper_id": "2604.02775",
+  "recommended_verdict": "major_flaw",
+  "reviewer": "gemini",
+  "score_rationale": "The paper relies on a fatal mathematical error to derive its central claim (flat rotation curves). The author erroneously solves a 3D spherical differential equation using 2D cylindrical Bessel functions. Without this error, the geometric backreaction produces a standard Keplerian decline, not a flat rotation curve. Furthermore, the paper relies heavily on an unpublished, inaccessible companion paper for its foundational derivations and introduces major, unjustified departures from standard GR (such as abandoning Darmois junction conditions). While the idea is highly novel, the execution is fatally flawed and unauditable.",
+  "summary": "The paper proposes that the point-particle approximation in General Relativity breaks down at non-linear scales due to caustics, and that performing spacetime surgery to isolate these singularities generates a boundary term. This boundary term supposedly manifests as a geometric backreaction in the effective energy-momentum tensor. The author argues that this backreaction modifies the gravitational potential to produce flat galaxy rotation curves, eliminating the need for dark matter. However, the core claim relies on a fatal mathematical error in solving the radial Poisson equation (conflating 3D spherical and 2D cylindrical geometries). Furthermore, as noted by all reviewers, the manuscript relies entirely on an unpublished companion paper for its foundational derivations and introduces unjustified ad-hoc assumptions.",
+  "technical_objections": [
+    {
+      "confidence": 1.0,
+      "evidence": "Equation 22 explicitly includes the $(2/r)(d\\Phi_{BR}/dr)$ term. The text immediately following states 'homogenous limit of equation (22) is a Modified Bessel equation... general solution becomes $\\Phi_{BR}(r) = C_1 I_0(\\beta r) + C_2 K_0(\\beta r)$'.",
+      "objection": "Fatal mathematical error in the analytical solution of the gravitational potential. Equation (22) contains the 3D spherical Laplacian radial part $d^2/dr^2 + (2/r)d/dr$. The correct solutions to the homogeneous equation $\\Phi'' + (2/r)\\Phi' - \\beta^2\\Phi = 0$ are the spherical modified Bessel functions $i_0(\\beta r) \\propto \\sinh(\\beta r)/r$ and $k_0(\\beta r) \\propto e^{-\\beta r}/r$. The author incorrectly identifies the ODE and uses the 2D cylindrical modified Bessel functions $I_0(\\beta r)$ and $K_0(\\beta r)$. The claimed MOND-like flat rotation curve relies entirely on the incorrect logarithmic behavior of $K_0$ at small scales, which produces a $1/r$ force. The correct 3D spherical solution $k_0$ produces a standard $1/r^2$ force at small distances, which yields a standard Keplerian decline, not a flat rotation curve.",
+      "paper_location": "Section IV, Equation 22 and 23",
+      "severity": "fatal",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 1.0,
+      "evidence": "Key results necessary to trust the framework, such as the derivation of $\\tau_{ab}$ (Eq 13-14), the conformal Killing vector solution, and Eq 20 are deferred to 'Umeh:2026pm' which is listed as '000000' in the bibliography.",
+      "objection": "Over-reliance on unpublished companion papers for foundational derivations, preventing any verification.",
+      "paper_location": "Throughout, particularly Section III and IV",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "The text states 'The standard Israel-Darmois conditions prove suboptimal for this configuration; instead, we find that the diffeomorphism generating vector field satisfies the conformal Killing equation'. No physical or mathematical reason is provided for why Darmois conditions fail, which is a major deviation from standard GR.",
+      "objection": "Departure from Israel-Darmois junction conditions is entirely unjustified.",
+      "paper_location": "Section III",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "Equation 21 defines $\\rho_{BR} = \\frac{\\beta^2}{4\\pi G a^2} [\\frac{v_{disp}^2}{2} + \\Phi_b] \\Phi_{BR}$. Substituted into Poisson's equation $\\nabla^2 \\Phi_{BR} = 4\\pi G a^2 \\rho_{BR}$, the LHS of Eq 22 should be $\\nabla^2 \\Phi_{BR} - \\frac{\\beta^2 v_{disp}^2}{2} \\Phi_{BR} = \\beta^2 \\Phi_b \\Phi_{BR}$. Instead, Equation 22 is written as $\\nabla^2 \\Phi_{BR} - \\beta^2 \\Phi_{BR} = \\frac{2\\beta^2}{v_{disp}^2} \\Phi_b \\Phi_{BR}$. This mapping is inconsistent.",
+      "objection": "Algebraic and dimensional inconsistency in the derivation of the integro-differential equation for the potential.",
+      "paper_location": "Section IV, Equation 21 and 22",
+      "severity": "major",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

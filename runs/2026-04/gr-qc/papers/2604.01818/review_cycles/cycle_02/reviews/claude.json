@@ -1,0 +1,161 @@
+{
+  "confidence": 0.65,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 4,
+    "novelty": 5,
+    "reviewer_confidence": 5,
+    "significance": 5,
+    "technical_soundness": 5
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Downgraded overall score from 5.5 to 5.0. Added the 'cusp vs extremum' inconsistency as a major objection (missed in cycle 1 \u2014 this is the most significant new finding from other reviewers). Upgraded the severity of the 'independent probe' objection from minor to moderate after accepting gemini's argument that interior determinism makes the 'independence' claim conceptually wrong. Added the ensemble/Gibbs terminology issue as a minor objection. Maintained 'routine' verdict \u2014 the paper has genuine numerical observations but requires conceptual revision before the framing is defensible.",
+    "invalid_points_from_other_reviewers": [
+      "Gemini's 'inconsistent parameter fixing (L=1 vs varying P)' objection may be a non-issue: in extended phase space thermodynamics, pressure is an independent thermodynamic variable; fixing L=1 as a convenient scale while varying P via other parameters or through scaling symmetry is standard practice. This needs PDF verification before treating as a genuine inconsistency.",
+      "Codex's 'contested' verdict seems too strong. The main numerical observation \u2014 that the two branches have qualitatively distinct Kasner behavior \u2014 is not contested in its existence, only in how it is framed. The conceptual issues are real but do not undermine the numerical results, suggesting 'routine' is more appropriate than 'contested.'"
+    ],
+    "valid_points_from_other_reviewers": [
+      "Gemini: The interior geometry is deterministically fixed by horizon data via ODE integration; at a first-order transition, any exterior jump trivially propagates to the interior, so the 'independent probe' framing is conceptually overblown for the first-order case.",
+      "Gemini/Codex: The Kasner crossover line is defined inconsistently across the paper \u2014 'distinct extremum' (abstract/conclusion), 'abrupt change point' (main text), 'abrupt slope change' (Fig. 3 caption). If the feature is a non-analytic cusp, it signals an interior phase transition rather than a smooth crossover, making the 'Kasner crossover line' label physically misleading.",
+      "Codex/Gemini: Calling the on-shell potential the 'Gibbs free energy' while working in the canonical ensemble (fixed charge density) is incorrect thermodynamic terminology; Helmholtz free energy is appropriate, and the correct Hawking-Ross boundary terms for the fixed-charge ensemble should be verified.",
+      "Codex: The 'at the critical point' vs 'supercritical' wording near the Fig. 2 bottom panel discussion is genuinely confusing about which pressure is used for the crossover feature."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "The Kasner exponent p_t exhibits qualitatively different behavior (oscillatory vs. smooth) on the two stable branches of a first-order phase transition in scalarized AdS black holes.",
+      "notes": "The numerical observation is plausible and the scalar field profiles in Fig. 1 are consistent with known Josephson oscillation phenomenology. However, the physical mechanism explaining why one branch produces oscillatory p_t while the other does not is never given \u2014 only demonstrated numerically. The 'independence' framing is also conceptually misleading: in classical holography, the interior is deterministically fixed by horizon data via ODE integration, so any discontinuity across a first-order transition trivially propagates to the interior.",
+      "paper_location": "Abstract, main body, Fig. 2 top panel",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "A 'Kasner crossover line' defined by a feature of p_t(T) in the supercritical region is completely independent of the Widom line and Frenkel line.",
+      "notes": "The paper shows numerically that the Kasner crossover line (orange dashed) does not coincide with the Widom line (green dashed) in Fig. 3. However, independence is demonstrated for one parameter choice only. More seriously, the definition of this line is internally inconsistent: the abstract calls it a 'distinct extremum,' the main text calls it an 'abrupt change point,' and the Fig. 3 caption refers to points where 'slope changes abruptly.' A smooth extremum and a non-analytic cusp are mathematically distinct \u2014 if the feature is truly a cusp, it signals an interior phase transition (discrete change in Josephson oscillation count) rather than a smooth crossover, which would make calling it a 'crossover line' a mischaracterization.",
+      "paper_location": "Abstract, Fig. 3, Conclusion",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "This work is 'the first identification of the black hole singularity as a new class of probe for phase transitions.'",
+      "notes": "The group's own ref [33] (Zhao et al., arXiv:2512.24893) already investigated oscillatory Kasner behavior near a critical point in detail. The present paper extends this to first-order transitions but does not clearly demarcate why this constitutes a genuinely 'first' use of singularity geometry to probe phase transitions.",
+      "paper_location": "Introduction (repeated twice), Conclusion",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "Two stable branches of the first-order transition have qualitatively distinct interior scalar field profiles (oscillatory vs. monotone approaching the singularity).",
+      "notes": "Best-supported claim. Illustrated clearly in Fig. 1 and consistent with known Josephson oscillation phenomenology. Branch 1 (smaller horizon scalar field) has more oscillations before the Kasner epoch; Branch 2 settles smoothly.",
+      "paper_location": "Fig. 1 lower panel, surrounding text",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The near-singularity Kasner geometry is universal and fully characterizes the approach to the singularity via the exponent p_t.",
+      "notes": "Established background following Hartnoll et al. 2021 (ref [17]) and subsequent references [18-30]. Not a new claim of this paper.",
+      "paper_location": "Introduction, interior solutions section",
+      "support_level": "well_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The final Kasner epoch is uniquely determined by the thermodynamic state (horizon data), with no dependence on transient interior dynamics or the number of intermediate epochs.",
+      "paper_location": "Interior solutions section, eq. (24)-(27)",
+      "why_it_matters": "If p_t depends sensitively on subleading corrections or the path through Josephson oscillations and Kasner inversions, then p_t may not be a clean function of the thermodynamic branch. The paper assumes this without justification."
+    },
+    {
+      "assumption": "The specific parameter choices (fixed lambda, q, and pressure values) are representative; the qualitative behavior persists across a meaningful range.",
+      "paper_location": "Section on free energy: 'For convenience, we fix...'",
+      "why_it_matters": "If the oscillatory vs. smooth distinction in p_t is only present for narrow parameter windows, the physical significance is much reduced. No parameter sensitivity analysis is provided."
+    },
+    {
+      "assumption": "The near-singularity Kasner approximation is reached within the numerical integration range and the extracted p_t values are not extrapolations.",
+      "paper_location": "Interior solutions section",
+      "why_it_matters": "If the Kasner regime is only approached asymptotically and numerical simulations do not reach deep enough, the extracted p_t values may reflect transient behavior rather than true Kasner exponents."
+    },
+    {
+      "assumption": "A non-analytic interior feature (cusp in p_t) maps meaningfully onto the smooth supercritical crossover concept from boundary thermodynamics.",
+      "paper_location": "Abstract and Conclusion",
+      "why_it_matters": "Without a boundary observable calculation sensitive to this interior feature, claiming the Kasner exponent 'probes' the supercritical crossover is unsubstantiated. The interior may be invisible to boundary correlators at Lorentzian late times."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Is the feature in p_t(T) in the supercritical region (Fig. 2 bottom panel) a smooth extremum or a non-analytic cusp? Raw numerical data or higher-resolution plots are needed.",
+      "why_model_cannot_resolve": "The paper uses both 'distinct extremum' and 'abrupt change point' language. The visual resolution of plots in the HTML bundle is insufficient, and only the raw numerical data or PDF figure inspection can distinguish a smooth maximum from a cusp-like discontinuous derivative. This distinction changes the physical interpretation fundamentally."
+    },
+    {
+      "question": "Does ref [33] (Zhao et al., arXiv:2512.24893) already use the Kasner exponent as a probe of phase transitions, or does it only study oscillatory properties near a critical point without framing this as phase-transition diagnostics?",
+      "why_model_cannot_resolve": "The priority dispute requires reading that preprint. The distinction between 'studying p_t oscillations near a critical point' and 'using p_t as a diagnostic probe of phase transitions' is subtle and cannot be resolved from the citation context alone."
+    },
+    {
+      "question": "Do the full PDF equations and Gibbs free energy formula (Eq. 23) include the correct boundary terms for the canonical (fixed charge) ensemble, or are grand-canonical Hawking-Ross terms used inconsistently?",
+      "why_model_cannot_resolve": "The HTML rendering omits equation content. The ensemble/boundary term consistency must be verified by reading the PDF and cross-checking against standard references for holographic thermodynamics in fixed-charge ensembles."
+    },
+    {
+      "question": "Is there a physical mechanism explaining why Branch 1 (high-temperature) produces oscillatory p_t while Branch 2 (low-temperature) produces smooth p_t \u2014 e.g., related to the scalar field amplitude at the horizon?",
+      "why_model_cannot_resolve": "The paper provides no theoretical explanation, only numerical demonstration. A human expert in scalarized black hole interiors could assess whether the Josephson oscillation count on each branch naturally predicts this distinction."
+    }
+  ],
+  "novelty_assessment": "The paper makes an incremental but concrete contribution within a specific active subfield (interior geometry of holographic black holes). The connection between Kasner exponents and critical phenomena was already established by the same group in ref [33] (arXiv:2512.24893) for second-order transitions. The new contributions are: (1) extending to first-order phase transitions, demonstrating branch-dependent qualitative differences in p_t; (2) introducing the \"Kasner crossover line\" in the supercritical region. The first contribution is natural and well-executed numerically. The second is the more interesting conceptual contribution but is undercut by the inconsistent definition and the possibility that the interior feature is a non-analytic cusp (interior phase transition) rather than a smooth extremum (crossover). The priority claim (\"first identification\") is overstated given the prior work. Overall novelty is modest but genuine within the letter format.",
+  "overall_score_10": 5,
+  "paper_id": "2604.01818",
+  "recommended_verdict": "routine",
+  "reviewer": "claude",
+  "score_rationale": "Technical soundness: The core numerical observation (branch-dependent Kasner behavior) is built on a sound established framework, but the Kasner crossover line has an internally inconsistent definition, the Kasner inversion handling is unaddressed, the numerical extraction procedure is not auditable, and ensemble/free-energy terminology is incorrect. Novelty: Extension from second-order to first-order phase transitions is meaningful but incremental over the same group's prior work, and the \"first identification\" claim is overstated. Significance: The Kasner crossover line is a new concept, but (a) the interior is causally disconnected from the boundary, (b) the \"independence\" claim is conceptually overblown since the interior is deterministically fixed by horizon data, and (c) if the crossover feature is actually a cusp (interior phase transition), the physical interpretation is different from what is claimed. Clarity: The 5-page format compresses too much; the crossover line definition is inconsistent across sections, and equations are not auditable from the HTML. Reviewer confidence is moderate \u2014 this is a specialized subfield and PDF access plus reading ref [33] would resolve key ambiguities. Score reduced from 5.5 to 5.0 primarily due to the cusp-vs-extremum inconsistency and the conceptual overstatement of \"independence.\"",
+  "summary": "This letter studies scalarized AdS black holes with a charged scalar field and a nonlinear self-interaction term chosen to induce a first-order phase transition. The main claim is that the Kasner exponent p_t, characterizing the near-singularity geometry, serves as a sensitive probe of first-order phase transitions and supercritical crossover. On the high-temperature branch, p_t oscillates strongly with temperature; on the low-temperature branch, it varies smoothly. In the supercritical region, an extremum (or abrupt slope change \u2014 the paper is inconsistent) in p_t(T) defines a \"Kasner crossover line\" claimed to be independent of the Widom and Frenkel lines. The core numerical observation appears real, but the conceptual framing has significant problems: the \"independent probe\" claim is overblown, the Kasner crossover line definition is internally inconsistent, and the ensemble/free-energy terminology is incorrect.",
+  "technical_objections": [
+    {
+      "confidence": 0.85,
+      "evidence": "Three different characterizations appear across the paper: 'distinct extremum' (abstract, conclusion), 'abrupt change point' (main text), and 'points where the slope of p_t changes abruptly' (Fig. 3 caption). These are distinct mathematical objects. Fig. 2 bottom panel reportedly shows a sharp cusp feature.",
+      "objection": "The Kasner crossover line definition is internally inconsistent: the abstract says 'distinct extremum,' the main text says 'abrupt change point,' and the Fig. 3 caption says points where 'slope changes abruptly.' If the feature is a non-analytic cusp, it is an interior phase transition (discrete Josephson oscillation count change), not a smooth crossover \u2014 making the 'Kasner crossover line' label conceptually wrong.",
+      "paper_location": "Abstract; Fig. 2 bottom panel; Fig. 3 caption; Conclusion",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.88,
+      "evidence": "The interior solution is derived by integrating equations of motion from the horizon inward (Eqs. 13-16 supply boundary conditions). A first-order transition means horizon data jumps discontinuously; the interior consequence is therefore not independent but deterministic.",
+      "objection": "The claim that the interior geometry is an 'independent probe' of the phase transition is conceptually overblown. For a first-order phase transition, the interior is trivially determined by the horizon data via ODE integration \u2014 any discontinuous jump in exterior quantities guarantees a jump in all interior quantities, including p_t. The interior cannot determine which branch minimizes the free energy; the exterior thermodynamic calculation remains strictly required.",
+      "paper_location": "Abstract, Introduction, Conclusion",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.82,
+      "evidence": "Direct quotation: 'we work in the canonical ensemble by fixing the total charge density...yielding the following form for the Gibbs free energy.'",
+      "objection": "The thermodynamic ensemble/free-energy terminology is incorrect. The paper states it works in the canonical ensemble by fixing total charge density, but then refers to the resulting potential as the 'Gibbs free energy.' Fixed-charge ensembles yield Helmholtz-type potentials, not Gibbs free energy. This may also affect whether the Hawking-Ross boundary terms are correctly included for the fixed-charge ensemble.",
+      "paper_location": "Paragraph before equations (21)-(23)",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "The paper itself cites ref [33] and states that ref [33] 'investigated the properties of this inverse periodic behavior in detail.' The novel contribution here is extension to first-order transitions, which should be the stated priority claim.",
+      "objection": "The 'first identification' priority claim is overstated given the group's own prior reference [33] (Zhao et al., arXiv:2512.24893), which already used p_t to study oscillatory behavior near a (second-order) critical point.",
+      "paper_location": "Introduction (stated twice) and Conclusion",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.65,
+      "evidence": "Kasner inversions discontinuously change Kasner exponents. The paper says some trajectories undergo inversions without specifying which branch or how this affects the p_t oscillations on Branch 1.",
+      "objection": "The treatment of Kasner inversion is acknowledged but not analyzed. The reported p_t values may be pre- or post-inversion depending on the trajectory, and the paper does not clarify this for the oscillatory branch.",
+      "paper_location": "Interior solutions section: 'reaches a stable Kasner epoch after a Kasner inversion'",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "The paper fixes lambda, q, and pressure. No parameter sensitivity analysis is provided. Both lines being computed from the same equilibrium solution family leaves open the possibility of near-coincidence at different parameters.",
+      "objection": "The independence of the Kasner crossover line from the Widom line is demonstrated for one parameter slice only. No argument is given for why they should generically differ, and the physical origin of the distinction is unexplained.",
+      "paper_location": "Fig. 3 and surrounding text",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "The HTML rendering shows many equation environments with no visible content, including the nonlinear coupling term, the full EOM set (8)-(12), and the Kasner exponent formula (27).",
+      "objection": "The HTML source omits the explicit forms of most key equations (they render as empty table cells). The specific action, equations of motion, and Kasner relation cannot be independently verified from the provided text.",
+      "paper_location": "Equations (1)-(27) throughout",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

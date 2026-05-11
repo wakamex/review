@@ -1,0 +1,146 @@
+{
+  "confidence": 0.72,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 7.0,
+    "novelty": 6.5,
+    "reviewer_confidence": 7.2,
+    "significance": 7.5,
+    "technical_soundness": 6.5
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "No prior cycle; this is the initial review.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "Neglecting transient orbital resonances can induce parameter-estimation biases larger than statistical errors for many selected EMRI configurations.",
+      "notes": "Supported within the paper's ERM/NK model and restricted Fisher setup. The claim is appropriately caveated in Sec. V, but it should not be read as a model-independent quantitative statement for LISA-quality EMRI waveforms.",
+      "paper_location": "Abstract; Sec. IV; Figs. 2-4; Sec. V",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The 3:2 and 2:1 resonances produce the largest biases among the cases studied, while weaker resonances can still matter depending on orbit and coefficient signs.",
+      "notes": "The figures and discussion support this for the sampled configurations. Generality beyond the selected spin, mass ratio, eccentricities, inclinations, and coefficient tables is not established.",
+      "paper_location": "Sec. IV, paragraphs discussing Figs. 2-4",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Both the sign and magnitude of resonance-induced modifications to the integrals of motion are important for inferred biases.",
+      "notes": "The paper explicitly compares representative sign choices and coefficient prescriptions, showing changes in whether some weaker-resonance biases exceed the statistical threshold.",
+      "paper_location": "Sec. II sign prescription; Sec. IV discussion of Fig. 4; Sec. V",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The Fisher analysis is numerically validated by identifying stable finite-difference regions rather than relying on one Fisher estimate.",
+      "notes": "The numerical-stability checks address derivative/Fisher conditioning, but they do not validate the first-order systematic-bias expansion for the full ERM-NK waveform difference.",
+      "paper_location": "Sec. III, validation checks around Eqs. 9-10",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The qualitative conclusion should persist with more accurate waveform models, even though quantitative values may change.",
+      "notes": "This is plausible given prior resonance literature, but not demonstrated in this paper because all calculations use kludge waveforms and a phenomenological resonance model.",
+      "paper_location": "Sec. V",
+      "support_level": "unclear"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The omitted extrinsic parameters and initial phases are sufficiently non-degenerate with resonance-induced secular dephasing for the restricted Fisher bias to be representative.",
+      "paper_location": "Sec. III reduced Fisher-space paragraph",
+      "why_it_matters": "If this assumption fails, reported bias-to-statistical-error ratios may be materially overestimated or underestimated."
+    },
+    {
+      "assumption": "The ERM impulse and coefficient prescription adequately represents the relevant physical resonance effect for the selected orbits.",
+      "paper_location": "Sec. II model description; Table 1",
+      "why_it_matters": "The central result measures bias between NK and ERM waveforms; if ERM coefficients or impulse shape differ from the true self-force dynamics, the numerical biases may not transfer."
+    },
+    {
+      "assumption": "The waveform differences remain sufficiently small for first-order systematic-bias estimates whenever bias ratios are interpreted quantitatively.",
+      "paper_location": "Sec. III Eqs. 7-8; Sec. V caveat on large mismatches",
+      "why_it_matters": "Without this, large reported Fisher shifts should be treated only as indicators that the model is inadequate, not as parameter-offset estimates."
+    },
+    {
+      "assumption": "Rescaling all waveforms to SNR 20 does not hide physically relevant correlations between source distance, detector response, and bias assessment.",
+      "paper_location": "Sec. II paragraph on applying an overall scaling factor",
+      "why_it_matters": "The bias/statistical-error comparison depends on SNR, and realistic source distributions would change the practical frequency of threshold-exceeding cases."
+    },
+    {
+      "assumption": "The finite-difference step stability region found for each configuration is broad enough to make the reported bias ranges robust.",
+      "paper_location": "Sec. III validation procedure",
+      "why_it_matters": "Ill-conditioned EMRI Fisher matrices can amplify derivative noise; a narrow or configuration-dependent stable region would weaken the numerical reliability."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Do the equations and resonance definitions in the PDF contain any assumptions lost in the HTML extraction, especially the exact ERM flux modification and reduced Fisher parameter list?",
+      "why_model_cannot_resolve": "The supplied HTML text omits much of the mathematical notation, so some formula-level details cannot be audited from the bundle alone."
+    },
+    {
+      "question": "Are the Fisher derivative step ranges and condition numbers reported in the actual figures or supplementary materials sufficient to reproduce the stated bias intervals?",
+      "why_model_cannot_resolve": "The bundle summarizes validation checks but does not provide numerical derivative-step ranges or Fisher matrices."
+    },
+    {
+      "question": "Does prior work justify the restricted Fisher parameter space strongly enough for this application, or should a larger Fisher/sampling comparison be required?",
+      "why_model_cannot_resolve": "This requires domain judgment about EMRI parameter degeneracies and possibly access to code or additional numerical experiments."
+    }
+  ],
+  "novelty_assessment": "The paper appears incrementally novel relative to the cited literature: it extends earlier effective-resonance Fisher studies to several resonances, uses orbit-dependent coefficients, compares sign assignments, and contrasts coefficient prescriptions for one case. It is not a fundamentally new resonance theory or inference framework, but it is a useful focused study if the limitations are kept explicit.",
+  "overall_score_10": 7.0,
+  "paper_id": "2604.26011",
+  "recommended_verdict": "promising",
+  "reviewer": "codex",
+  "score_rationale": "The study addresses an important modeling issue for EMRI inference and gives a careful, caveated Fisher-based analysis over representative cases. The main qualitative conclusion is credible within the adopted model. The score is limited by the restricted Fisher space, phenomenological treatment of resonance phases/signs, reliance on kludge waveforms, and use of a first-order bias formula in regimes where the paper itself acknowledges it may not be quantitatively valid.",
+  "summary": "The paper studies systematic parameter-estimation bias in EMRI waveforms when transient orbital resonances are omitted. It uses a numerical-kludge baseline, an effective resonance model with orbit-dependent coefficients, and a restricted Fisher-matrix analysis over selected EMRI configurations. The qualitative message is plausible and the authors are careful about several limitations, but the quantitative Fisher bias claims rest on a restricted parameter space, phenomenological sign/coefficient prescriptions, and a linearized bias formula applied in regimes where waveform discrepancies can be large.",
+  "technical_objections": [
+    {
+      "confidence": 0.88,
+      "evidence": "The authors themselves note in Sec. V that for large mismatches and significant SNR losses, Eq. 7 cannot be regarded as an accurate estimate of the likelihood-peak shift. The Fisher validation in Sec. III checks local model-manifold behavior, not the validity of linearizing the full waveform error.",
+      "objection": "The quantitative bias estimates rely on the first-order Cutler-Vallisneri linearized bias formula even when the ERM-NK mismatch and SNR loss can be large.",
+      "paper_location": "Sec. III Eqs. 7-8; Sec. IV Figs. 2-3; Sec. V paragraph beginning 'For large mismatches...'",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "The analysis fixes or omits extrinsic parameters and initial phase variables, relying on the assumption that secular post-resonance phase growth is only weakly degenerate with simple phase offsets. No direct comparison with a larger Fisher space or sampling run is provided, so some reported biases could change after marginalization over omitted parameters.",
+      "objection": "The restricted Fisher parameter space may not support broad claims about parameter recovery bias in realistic EMRI inference.",
+      "paper_location": "Sec. III, paragraph defining the reduced Fisher subset after discussing ill-conditioned full Fisher matrices",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.86,
+      "evidence": "The exact coefficient signs and amplitudes depend on the radial-polar relative phase, but the paper samples only representative sign configurations. Fig. 4 shows that sign choices can move some weaker-resonance biases across the bias/statistical-error threshold.",
+      "objection": "The sign treatment of resonance coefficients is a reduced phenomenological prescription rather than a phase-resolved model, limiting the interpretation of threshold-crossing conclusions for weaker resonances.",
+      "paper_location": "Sec. II discussion of representative sign patterns; Sec. IV discussion of Fig. 4",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.83,
+      "evidence": "Table 1 covers four EMRI cases, one spin and mass-ratio choice, and selected resonances, with one configuration excluded due to kludge-flux breakdown. This supports statements about the studied cases, not a population-level prevalence statement.",
+      "objection": "The selected-orbit study is too small to substantiate general frequency claims such as 'for most orbits' without careful restriction to the paper's sampled configurations.",
+      "paper_location": "Abstract; Sec. IV; Sec. V final paragraphs",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.78,
+      "evidence": "The paper reports that Teukolsky-based and self-force-based prescriptions broadly agree for several cases but differ significantly for the 4:3 resonance. This weakens quantitative claims tied to particular bias magnitudes.",
+      "objection": "The dependence on external resonance-coefficient calculations is a significant uncertainty, and one available comparison differs by orders of magnitude for at least one resonance.",
+      "paper_location": "Sec. IV discussion of Fig. 3; Sec. V",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "The paper states that fluxes, especially for the Carter constant, break down for this configuration and yield a non-adiabatic trajectory. It is unclear how close other reported configurations are to similar kludge-pathology regimes.",
+      "objection": "One high-eccentricity, low-inclination 3:1 case is excluded because kludge fluxes break down near the separatrix, but the boundary of this failure mode is not characterized.",
+      "paper_location": "Table 1 caption; Sec. IV paragraph discussing 3:1 resonance",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

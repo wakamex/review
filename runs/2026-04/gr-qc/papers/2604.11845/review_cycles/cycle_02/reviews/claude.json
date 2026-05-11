@@ -1,0 +1,153 @@
+{
+  "confidence": 0.68,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 6,
+    "novelty": 4,
+    "reviewer_confidence": 7,
+    "significance": 5,
+    "technical_soundness": 6
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Added the massive-field boundary condition concern (QNM vs quasi-bound state near threshold) as a new moderate technical objection, prompted by codex reviewer. Slightly upgraded technical_soundness from 6 to 6.5 after noting gemini's point that the two WKB-time-domain agreements are explicitly quantified (0.16% and 0.45%) and do provide credible internal validation for the l=1 sector. Overall score adjusted marginally from 4.8 to 5.0 to reflect this. Maintained 'routine' verdict; codex's 'weak_evidence' and gemini's higher '6.0' both seem off-center relative to the evidence.",
+    "invalid_points_from_other_reviewers": [
+      "Codex classifies the boundary condition ambiguity as 'major / would change verdict if true'. This is overstated: the standard WKB\u2013Pad\u00e9 QNM framework for massive scalars inherently assumes Re(\u03c9) > \u03bc (outgoing waves), this is implicit but well-established in the cited literature, and the regime where it could fail is explicitly acknowledged as outside WKB reliability. It is a moderate clarity concern, not a verdict-changing flaw.",
+      "Codex classifies the extrapolation-beyond-WKB concern as 'major / would change verdict if true'. The paper itself states these are trends toward a quasi-resonance and explicitly calls for a Frobenius/Leaver follow-up to determine critical values precisely. The paper is not overclaiming exact critical values, so this is a moderate limitation properly scoped as future work.",
+      "Gemini rates technical_soundness 7/10 and gives only one 'minor' objection (the extrapolation), which is too lenient given the absence of l=0 time-domain benchmarks and the unexplained 'purely real' WKB entry."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Codex: The massive-field boundary condition near the scalar mass threshold (outgoing QNM vs decaying quasi-bound state) is not stated explicitly in the paper, which is a legitimate reproducibility gap especially in the near-resonant regime.",
+      "Codex: Time-domain validation is sparse (only two points, both l=1) for the full breadth of parameter-space claims made across five tables and multiple dilaton couplings.",
+      "Gemini: The explicitly quantified WKB\u2013time-domain discrepancies (0.16% and 0.45%) are a concrete positive indicator of method reliability in the well-behaved l=1 sector, which I underweighted in cycle 1."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "Massive scalar perturbations of EMD black holes exhibit quasi-resonances (Im(\u03c9) \u2192 0) as \u03bc approaches critical values, for multiple dilaton couplings.",
+      "notes": "The suppression trend is clear in tabulated and plotted data, but the actual approach to Im(\u03c9) = 0 is shown only by extrapolated cubic splines beyond the reliable WKB regime. The paper correctly acknowledges this limitation. The 'purely real' entry in the l=0 sector is not independently verified by time-domain integration and may be a WKB breakdown artifact.",
+      "paper_location": "Abstract, Section IV, Figure 6, Conclusions",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "WKB16 and time-domain Prony extraction agree to about 1\u20132% for representative parameter choices.",
+      "notes": "Two explicit benchmarks are provided with quantified discrepancies (0.16% and 0.45% in complex-frequency norm). Both are in the l=1 sector where WKB is more reliable. No l=0 time-domain cross-check is provided.",
+      "paper_location": "Section IV, Figures 3\u20134",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "Dilaton coupling shifts QNM frequencies by an amount (~35\u201345% reduction in Im(\u03c9)) substantially larger than estimated WKB numerical uncertainty (~0.1\u20130.5%).",
+      "notes": "Concrete quantitative comparison is provided. The dilaton shift dominates the numerical error by roughly two orders of magnitude, making this the most robustly supported claim.",
+      "paper_location": "Section IV, Conclusions",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "A systematic analysis of massive scalar perturbations over the EMD parameter space was previously missing.",
+      "notes": "Zinhailo (2019) arXiv:1909.12664 is cited only in the massless context; it is not confirmed whether that work also covers massive perturbations. Cannot verify from the bundle alone.",
+      "paper_location": "Introduction",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "QNMs can be used to estimate grey-body factors via an eikonal-limit correspondence.",
+      "notes": "Standard result from Konoplya and Zhidenko (2025, 2024c); this is an ancillary observation, not a new contribution.",
+      "paper_location": "Section IV, Eq. (18)",
+      "support_level": "well_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The effective potential (Eq. 11) retains a single dominant maximum across the full parameter range scanned; violations are flagged but no systematic criterion for excluding data points is provided.",
+      "paper_location": "Section III, discussion after Eq. (15)",
+      "why_it_matters": "WKB validity requires a dominant barrier maximum. For large \u03bc or near extremality the potential may flatten or develop secondary extrema, and data points in this regime could corrupt the trend analysis without the reader knowing which entries are affected."
+    },
+    {
+      "assumption": "The Prony method accurately extracts the fundamental QNM frequency from the time-domain signal in the presence of quasi-resonant modes, where the ringdown window may overlap with late-time oscillatory tails.",
+      "paper_location": "Section III, Figure 3 caption",
+      "why_it_matters": "For nearly real modes, the ringdown interval and late-time oscillatory tail become hard to disentangle, potentially biasing the Prony extraction of Im(\u03c9) toward zero."
+    },
+    {
+      "assumption": "The metric ansatz (Eq. 2) remains valid and free of pathologies (naked singularities, topology changes) across the full charge range Q \u2192 Q_max used in the study.",
+      "paper_location": "Section II, Eq. (5) and surrounding text",
+      "why_it_matters": "Near-extremal geometries may require separate near-horizon treatment; quasi-resonance trends extrapolated from moderate-Q data may not extend smoothly to Q \u2192 Q_max."
+    },
+    {
+      "assumption": "The outgoing boundary condition at infinity is implemented consistently in the WKB formula for all modes, including those where Re(\u03c9) is close to \u03bc (the scalar mass threshold).",
+      "paper_location": "Section III, Eq. (13)",
+      "why_it_matters": "Near the threshold, the asymptotic wave number sqrt(\u03c9\u00b2\u2212\u03bc\u00b2) becomes small and the distinction between QNMs and quasi-bound states is subtle; the paper does not specify the branch convention."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Does Zinhailo (2019) arXiv:1909.12664 already contain a systematic massive scalar perturbation analysis of dilaton black holes? If so, the novelty claim is significantly weakened.",
+      "why_model_cannot_resolve": "Cannot access the full text of Zinhailo (2019) to compare scope. The paper cites it only in the massless context, but the citation placement may be selective."
+    },
+    {
+      "question": "What are the actual numerical values in Tables I\u2013V, particularly: (a) the 'purely real' l=0 entry for \u03b1=\u221a3, and (b) the near-extremal \u03b1=\u221a3 entries showing \u03bc-independent high damping?",
+      "why_model_cannot_resolve": "The HTML bundle has a LaTeXML rendering failure for all table data; no numerical values are recoverable from the supplied source."
+    },
+    {
+      "question": "Is the 'purely real' frequency entry in the l=0, \u03b1=\u221a3 sector reproduced by time-domain integration, or is it a WKB breakdown artifact?",
+      "why_model_cannot_resolve": "No time-domain cross-check is provided for that specific parameter combination in the paper, and the actual table value is unreadable in this bundle."
+    },
+    {
+      "question": "Does the paper correctly implement outgoing boundary conditions for Re(\u03c9) close to \u03bc (the threshold), or does it inadvertently compute quasi-bound states in some near-resonant parameter combinations?",
+      "why_model_cannot_resolve": "Resolving this requires checking the numerical implementation details (sign conventions, branch cuts for sqrt(\u03c9\u00b2\u2212\u03bc\u00b2) in the asymptotic matching), which are not spelled out in the paper text."
+    }
+  ],
+  "novelty_assessment": "Narrow but genuine. Quasi-resonances in massive scalar perturbations are a known phenomenon for Schwarzschild, Reissner-Nordstr\u00f6m, and related backgrounds. The specific contribution is a systematic parameter scan over charge Q and dilaton coupling \u03b1 for the EMD family, which appears to fill a real gap in the literature (the citation structure consistently places massive EMD perturbations as unstudied). The quantitative finding that dilaton-induced shifts dominate over numerical uncertainty by ~2 orders of magnitude is a useful statement for ringdown spectroscopy in scalar-tensor gravity. However, the methodology is entirely standard (WKB-Pad\u00e9 + Gundlach time evolution), the qualitative result was predictable by analogy with related systems, and no analytic characterization of the critical mass values is provided. This is incremental work, not field-shaping.",
+  "overall_score_10": 5,
+  "paper_id": "2604.11845",
+  "recommended_verdict": "routine",
+  "reviewer": "claude",
+  "score_rationale": "Technical soundness 6/10: methodology is standard and largely correctly applied; the explicitly quantified WKB\u2013time-domain agreement (0.16% and 0.45%) provides credible validation in the l=1 sector. Deductions for absent l=0 time-domain benchmarks, the unexplained 'purely real' WKB entry, and the boundary condition ambiguity near threshold. Novelty 4/10: fills a genuine but narrow gap (first systematic massive scalar scan for EMD family); qualitative result and all methods are standard. Significance 5/10: useful quantitative data for ringdown spectroscopy in scalar-tensor gravity; dilaton-shift quantification is concrete, but no analytic insight into critical mass values or direct observational prediction. Clarity 6/10: prose is well-organized; minor deductions for the boundary condition omission and a proofreading typo ('sufficoently'). Reviewer confidence 7/10 (up from 6 in cycle 1): the other reviewers' analysis did not reveal anything I had fundamentally missed, increasing my confidence in this assessment.",
+  "summary": "The paper numerically studies massive scalar quasinormal modes of Einstein-Maxwell-dilaton (EMD) black holes for dilaton couplings \u03b1 = 0, 1, \u221a3, using 14th/16th-order WKB with Pad\u00e9 improvement and time-domain integration via the Gundlach-Price-Pullin scheme. The central finding is that increasing scalar field mass \u03bc causes Im(\u03c9) \u2192 0 (quasi-resonances) for multiple dilaton couplings, and that dilaton-induced spectral shifts are substantially larger than WKB numerical uncertainty. The methodology is entirely standard, and the result is an incremental parameter-space study filling a genuine but narrow gap in the existing literature. After reviewing two other reviewers (one more pessimistic, one more lenient), I maintain my cycle 1 assessment with minor adjustments.",
+  "technical_objections": [
+    {
+      "confidence": 0.8,
+      "evidence": "The two time-domain benchmarks (Figs. 3\u20134) are both for l=1. The paper itself warns the l=0 potential is 'more prone to changes in peak structure'. The 'purely real' l=0 entry for \u03b1=\u221a3 is mentioned only in text without independent validation.",
+      "objection": "WKB is used for the l=0 sector where it is least reliable for massive fields due to modified barrier profiles and possible multiple turning points, yet no l=0 time-domain cross-check is provided despite l=0 containing some of the most prominent quasi-resonance claims including the 'purely real' entry.",
+      "paper_location": "Section III, Section IV (l=0 subsection of Tables III\u2013V)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.65,
+      "evidence": "Eq. (13) states 'outgoing/ingoing boundary conditions' without specifying the massive-field branch convention for the asymptotic wave number sqrt(\u03c9\u00b2\u2212\u03bc\u00b2). Standard QNM practice assumes Re(\u03c9) > \u03bc for outgoing waves; this is implicit but not stated, and the extrapolation toward zero damping approaches the threshold where the assumption breaks down.",
+      "objection": "The boundary conditions for massive-field modes near the scalar mass threshold are not stated explicitly enough to distinguish outgoing QNMs (Re(\u03c9) > \u03bc) from quasi-bound states (Re(\u03c9) < \u03bc, exponentially decaying at infinity). The near-resonant regime is exactly where this distinction matters most.",
+      "paper_location": "Section III, Eq. (13), quasi-resonance discussion in Section IV and Figure 6",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "The paper explicitly states WKB is 'not expected to resolve the mode with high precision' near the real axis, yet calls the zero-crossing 'unambiguous'. Dotted extrapolation segments and formal zero crossings are not the same as computed eigenvalues. The paper correctly identifies Frobenius/Leaver methods as needed future work.",
+      "objection": "The quasi-resonance claim at its strongest (modes becoming 'arbitrarily long-lived at critical values of \u03bc') is supported by extrapolated splines beyond the regime where WKB is reliable, not by a convergent near-axis method.",
+      "paper_location": "Section IV, Figure 6 caption; Conclusions",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.6,
+      "evidence": "Black hole exterior QNMs generically have Im(\u03c9) \u2260 0 due to outgoing boundary conditions. An exact WKB zero of Im(\u03c9) for a non-extremal black hole suggests approximation failure rather than a genuine spectral zero. No time-domain verification is provided for this point.",
+      "objection": "The 'purely real' frequency entry (Im(\u03c9) = 0 exactly) in the l=0, \u03b1=\u221a3 sector is not physically expected for QNMs of a non-extremal black hole and could be a WKB breakdown artifact.",
+      "paper_location": "Section IV, discussion of l=0 Table III",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.65,
+      "evidence": "The paper observes this anomalous behavior but offers no qualitative explanation, weakening the claim that quasi-resonances are a universal 'robust physical signature' for all dilaton couplings studied.",
+      "objection": "The near-extremal \u03b1=\u221a3 case shows markedly different, non-quasi-resonant behavior (highly damped, \u03bc-independent branch) that is not reconciled with the overall quasi-resonance narrative.",
+      "paper_location": "Section IV, penultimate paragraph",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "Every table row shows empty cells in the HTML source. This is likely a publisher conversion artifact, not an author error, but it prevents auditing any specific numerical claim.",
+      "objection": "All table data are unreadable in the HTML bundle due to LaTeXML rendering failure; independent numerical verification is impossible from the supplied source.",
+      "paper_location": "Tables I\u2013V",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

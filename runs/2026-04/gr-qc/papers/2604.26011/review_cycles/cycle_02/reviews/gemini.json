@@ -1,0 +1,113 @@
+{
+  "confidence": 0.85,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 7,
+    "novelty": 6,
+    "reviewer_confidence": 8,
+    "significance": 6,
+    "technical_soundness": 5
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Lowered the overall score from 7 to 6, decreased technical soundness to 5, and updated the recommended verdict from 'promising' to 'routine'. Reading the other reviewers correctly highlighted that the restriction of the Fisher matrix parameter space to avoid ill-conditioning is a fatal flaw for making quantitative claims about bias significance ratios. Combined with the previously noted breakdown of the linear bias formula, the paper's core quantitative claims cannot be strongly relied upon.",
+    "invalid_points_from_other_reviewers": [
+      "Codex mistakenly states in an objection that the Teukolsky vs self-force coefficient discrepancy occurs for the '4:3' resonance. Both the text and Figure 3 explicitly identify this massive discrepancy for the 3:1 resonance."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Claude and Codex both correctly argue that truncating the Fisher parameter space (excluding extrinsic parameters) without justification heavily undermines the bias significance claims.",
+      "Claude astutely caught the textual/table inconsistency in Table 1 regarding Case (iii) for the 3:1 resonance, where data is reported despite claims that the configuration was excluded due to flux breakdown.",
+      "Claude rightly points out that the massive discrepancy between Teukolsky and self-force coefficients for the 3:1 resonance is left completely unexplained, harming the reliability of the baseline assumption."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "Neglecting transient orbital resonances in EMRI parameter estimation leads to significant losses in recovered SNR.",
+      "notes": "Supported within the context of the utilized numerical kludge waveforms.",
+      "paper_location": "Abstract, Section IV, Table 1",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "Neglecting transient orbital resonances induces a systematic error in parameter estimation that exceeds the corresponding statistical fluctuation.",
+      "notes": "While the numerical results show ratios > 1, the quantitative validity is severely compromised by both the breakdown of the linear bias approximation at large mismatches and the artificial restriction of the Fisher parameter space, which likely underestimates true statistical uncertainties.",
+      "paper_location": "Abstract, Section IV, Figure 2",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The sign of the resonance-induced modifications to the integrals of motion significantly affects the induced bias, potentially shifting it across the significance threshold.",
+      "notes": "Clearly demonstrated for weaker resonances by flipping the relative sign of the modification to the Carter constant flux.",
+      "paper_location": "Section IV, Figure 4",
+      "support_level": "well_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "Extrinsic parameters (sky location, distance, orientation) and initial phases are sufficiently decoupled from resonance-induced secular dephasing that fixing them does not significantly alter the inferred bias-to-uncertainty ratio.",
+      "paper_location": "Section III",
+      "why_it_matters": "If there are meaningful degeneracies, the marginalization over extrinsic parameters would inflate the 1-sigma statistical error bounds, potentially causing many 'significant' biases to fall below the detection threshold."
+    },
+    {
+      "assumption": "The linear bias approximation, even when formally invalid for large mismatches, provides qualitatively accurate relative scalings between different resonances and orbits.",
+      "paper_location": "Section IV, Section V",
+      "why_it_matters": "The paper uses linear bias metrics as 'qualitative indicators' for large mismatches, but higher-order terms could fundamentally change the parameter degeneracy directions, altering even the qualitative ordering of which parameters are most biased."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Is the massive discrepancy between Teukolsky-based and self-force-based coefficients for the 3:1 resonance (shown in Figure 3) a known issue in the literature or a potential error in coefficient tabulation?",
+      "why_model_cannot_resolve": "Requires accessing the raw numerical coefficient data from the cited papers [22] and [35] to verify if the discrepancy is fundamental physics or a typo."
+    },
+    {
+      "question": "Why does Table 1 report bias and mismatch values (0.026/0.009/0.035) for Case (iii) 3:1 resonance while listing 'N/A' for duration and explicitly stating in the caption that this configuration was excluded?",
+      "why_model_cannot_resolve": "Requires authors to clarify whether the numbers left in the table are artifacts from an earlier draft or if the text description of the exclusion is incorrect."
+    }
+  ],
+  "novelty_assessment": "The novelty is moderate. It incrementally extends earlier Fisher studies (e.g., Speri & Gair 2021) from the 3:2 resonance to the 4:3, 2:1, and 3:1 resonances using orbit-dependent coefficients and exploring representative sign patterns. The comparison between Teukolsky-based and self-force-based coefficients is a useful, albeit brief, addition.",
+  "overall_score_10": 6,
+  "paper_id": "2604.26011",
+  "recommended_verdict": "routine",
+  "reviewer": "gemini",
+  "score_rationale": "While the paper tackles an important modeling challenge for EMRIs, the quantitative reliability of its core result (parameter biases significantly exceeding statistical error) is compromised. The methodology suffers from a combination of using a linearized bias formula in large-mismatch regimes and artificially truncating the Fisher parameter space, which likely deflates the true statistical uncertainties. The results are competent qualitative indicators that transient resonances matter, but the specific numerical findings are too heavily caveated and structurally limited to warrant a higher score.",
+  "summary": "This paper investigates the impact of transient orbital resonances on parameter estimation for extreme-mass-ratio inspirals (EMRIs) observed by LISA. Using a phenomenological effective resonance model (ERM) combined with Numerical Kludge (NK) waveforms and a Fisher-matrix analysis, the authors evaluate the systematic bias induced when low-order resonances (4:3, 3:2, 2:1, 3:1) are neglected. The findings suggest that neglecting these crossings causes significant signal-to-noise ratio losses and parameter biases exceeding 1-sigma statistical uncertainties. The analysis explores multiple orbits and different relative sign prescriptions for resonance-induced modifications to integrals of motion.",
+  "technical_objections": [
+    {
+      "confidence": 0.9,
+      "evidence": "Table 1 reports mismatches frequently exceeding the validity threshold (e.g., 1.030). The first-order bias approximation assumes small waveform differences. Although the authors add a caveat in Section V, reporting precise, massive numerical values (e.g., 361 sigma) derived from a broken assumption is highly misleading.",
+      "objection": "Invalid application of the linear Cutler-Vallisneri bias formula to cases with large waveform mismatches.",
+      "paper_location": "Section IV (Table 1), Section V",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "To circumvent matrix ill-conditioning, the authors artificially fix extrinsic parameters and initial phases, claiming without numerical proof that secular post-resonance phase growth is only weakly degenerate with them. Ignoring these correlations artificially shrinks the projected statistical uncertainty, directly inflating the reported bias significance ratio.",
+      "objection": "Unjustified restriction of the Fisher parameter space, leading to underestimated statistical errors.",
+      "paper_location": "Section III",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "Figure 3 shows the induced bias for the 3:1 resonance differs by several orders of magnitude depending on whether Teukolsky-based or self-force-based coefficients are used. This massive theoretical uncertainty is noted but completely unaddressed physically, casting doubt on the robustness of the 3:1 results.",
+      "objection": "Unexplained, extreme discrepancy between theoretical resonance coefficients.",
+      "paper_location": "Section IV, Figure 3",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "The Table 1 caption explicitly states that due to kludge flux breakdown, the high-eccentricity, low-inclination orbit for the 3:1 resonance (Case iii) is not considered or reported. Yet, the table lists 'N/A' for duration but simultaneously publishes specific bias and mismatch values (0.026, 0.009, 0.035) for that exact row.",
+      "objection": "Inconsistent reporting of the excluded high-eccentricity 3:1 resonance case.",
+      "paper_location": "Table 1, Section IV",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "The authors adopt a reduced phenomenological prescription by picking two representative relative-sign patterns rather than tracking the full continuous resonant-phase dependence. The presented biases are highly sensitive to these specific arbitrary phase choices.",
+      "objection": "Incomplete modeling of the resonance phase dependence.",
+      "paper_location": "Section II, Section IV",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

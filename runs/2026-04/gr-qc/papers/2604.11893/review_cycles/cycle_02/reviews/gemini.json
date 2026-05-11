@@ -1,0 +1,111 @@
+{
+  "confidence": 0.85,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 8,
+    "novelty": 8,
+    "reviewer_confidence": 8,
+    "significance": 8,
+    "technical_soundness": 7
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Downgraded the verdict to 'promising' and technical soundness to 7 after considering the other reviewers' points on mode truncation, the highly idealized spherical/non-spinning setup, and the omission of non-radiative torques, which collectively introduce moderate uncertainties in the quantitative dephasing estimates.",
+    "invalid_points_from_other_reviewers": [
+      "Complaints about missing symbols in the HTML text (e.g., missing \u03bc, \u03b1) are artifacts of the arXiv HTML rendering process, not scientific flaws of the manuscript itself."
+    ],
+    "valid_points_from_other_reviewers": [
+      "The choice of cloud mass M_cloud/M = 0.01 is optimistic/idealistic, and realistic post-resonance cloud masses would be smaller, scaling down the dephasing estimates.",
+      "Mode truncation at l_max=3 is not explicitly justified and could affect results near the ISCO.",
+      "The extrapolation procedure to remove O(\u03b1\u00b2) terms introduces unquantified systematic uncertainty."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "Corrections to the polar sector of the GW flux can dominate all other dissipative cloud signatures, particularly for small scalar field masses.",
+      "notes": "The fully coupled Zerilli-like equations are integrated to compute fluxes, showing a clear regime where polar corrections are largest. However, this is demonstrated for a specific idealistic cloud mass and spherical ground-state configuration.",
+      "paper_location": "Abstract and Flux contributions (Fig. 1 and Fig. 2)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The polar correction behaves like a redshift at small radii and low compactness, and as a mass shift at large radii.",
+      "notes": "The asymptotic scaling analytically matches the expected post-Newtonian mass shift, and the small radius limit is numerically shown to converge to a redshift.",
+      "paper_location": "Flux redshift and Appendix .5",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "Conservative corrections to the geodesic energy and frequency induce a dephasing that significantly dominates the effects of scalar radiation in the considered parameter space.",
+      "notes": "The dephasing calculation effectively demonstrates the dominance of conservative terms for the chosen parameters. However, the calculation relies on an assumed purely radiative energy balance law that omits non-radiative torques.",
+      "paper_location": "Dephasing (Fig. 4)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Scalar perturbations weakly couple to the polar metric sector, so the polar flux is primarily sourced by the metric backreaction of the cloud.",
+      "notes": "Demonstrated numerically by setting scalar perturbations to zero, which barely changes the result except near the turnover point.",
+      "paper_location": "Flux contributions (point iv)",
+      "support_level": "well_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The inspiral is sufficiently far from scalar resonances and floating orbits such that neglected horizon and resonant effects do not alter the flux hierarchy.",
+      "paper_location": "Perturbation Equations; Appendix .6",
+      "why_it_matters": "Resonances can significantly enhance the scalar radiation channels, which could invalidate the dephasing comparisons that establish the dominance of conservative/polar corrections."
+    },
+    {
+      "assumption": "The decay of the quasi-bound scalar cloud state is negligible over the orbital timescale and observational window.",
+      "paper_location": "Framework; Dephasing",
+      "why_it_matters": "If the cloud depletes due to scalar radiation on a timescale comparable to the EMRI observation, the environmental corrections would dynamically evolve, scaling down the cumulative dephasing."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Are the polar fluxes at infinity properly normalized to correspond to a gauge-invariant GW energy flux in the modified non-vacuum background?",
+      "why_model_cannot_resolve": "Requires checking the detailed Zerilli gauge perturbation formalism beyond what is explicitly provided in the text."
+    },
+    {
+      "question": "Do the full polar Einstein-Klein-Gordon matrix equations (Eq 9) exactly match the stated perturbative ordering?",
+      "why_model_cannot_resolve": "The 6D coupled matrix equations are summarized, but the explicit background-dependent matrix components are omitted from the text."
+    }
+  ],
+  "novelty_assessment": "The paper is highly novel as it completes the analysis of the metric backreaction for scalar clouds in EMRIs by fully treating the coupled polar sector. Previous works either treated only the decoupled axial sector or just the direct scalar radiation. Finding that polar and conservative corrections dominate over the often-emphasized scalar radiation is a highly significant conceptual step for EMRI modeling.",
+  "overall_score_10": 8,
+  "paper_id": "2604.11893",
+  "recommended_verdict": "promising",
+  "reviewer": "gemini",
+  "score_rationale": "The authors present the first comprehensive analysis of the fully coupled polar sector of GW emission for EMRIs in a scalar cloud. The demonstration that conservative and polar metric backreactions can dominate over direct scalar radiation is a highly significant contribution to environmental EMRI waveform modeling. The numerical methods are solid, and the analytical limits neatly match numerical results. However, the quantitative dephasing estimates rely on several manageable but significant idealizations (spherical symmetry, non-spinning primary, purely radiative energy balance, l_max=3 mode truncation), which warrants a 'promising' verdict with strong scores for novelty and significance.",
+  "summary": "The paper investigates the relativistic backreaction of a spherically symmetric scalar dark matter cloud on the gravitational wave emission of an extreme-mass-ratio inspiral (EMRI). The authors find that the fully coupled polar sector of the metric perturbations can dominate the dissipative corrections for small scalar masses (\u03bcM \u2272 0.2) at small separations. At close separation, the polar correction acts like a gravitational redshift, whereas at large separation it manifests as a mass shift. Ultimately, the conservative corrections (shifts in geodesic energy and frequency) to the dephasing heavily dominate over the purely dissipative scalar radiation and axial/polar corrections.",
+  "technical_objections": [
+    {
+      "confidence": 0.9,
+      "evidence": "The evolution in Eq. (27) assumes purely radiative dissipation. As noted in the discussion, recent work (e.g., Refs. [46, 72]) shows non-radiative torques can be significant in extended matter environments, which could add additional secular dephasing that competes with the analyzed terms.",
+      "objection": "Neglect of non-radiative torques in the energy balance evolution.",
+      "paper_location": "Eq. (27) and Discussion",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "Superradiant clouds predominantly form around rotating black holes and are inherently non-spherical (typically dipole or quadrupole density distributions). While used as a proxy, rotation and non-sphericity might significantly alter the mode coupling in the polar sector and the resonance structure.",
+      "objection": "The assumption of a spherical cloud and non-spinning primary is a significant idealization of actual superradiant clouds.",
+      "paper_location": "Framework, Eq. (4) and Discussion",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "Fig. 5 shows significant unphysical O(\u03b1\u2074) contributions. Although the authors show good agreement between linear and quadratic fits, the accuracy of the polar flux at very small \u03b1 could still harbor unquantified systematic uncertainty.",
+      "objection": "Extrapolating the O(\u03b1\u00b2) flux from relatively large \u03b1 values could be sensitive to higher-order contamination.",
+      "paper_location": "Appendix .3",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.75,
+      "evidence": "The paper states that polar and axial perturbations are summed up to l=3 and horizon fluxes are ignored. For high-frequency orbits near the ISCO or near resonances, these omissions could quantitatively impact the dephasing.",
+      "objection": "Mode truncation at l_max=3 and neglect of horizon fluxes are not explicitly justified with convergence tests.",
+      "paper_location": "Numerical Procedure and Appendix .6",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

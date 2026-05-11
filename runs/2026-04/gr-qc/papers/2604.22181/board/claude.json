@@ -1,0 +1,112 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Two full review cycles completed. Cycle 1 produced a wide score spread (2.0\u20134.5) driven by Gemini's fatal algebraic-error claims. In cycle 2, Gemini fully retracted those claims after inspecting the LaTeX source, raising its score from 2.0 to 4.0 and shifting its verdict from major_flaw to weak_evidence. Codex explicitly rejected the same claims. Claude cycle 2 retained uncertainty at reduced confidence due to HTML equation rendering limitations. All three cycle-2 reviews converge on: basic Kerr algebra is correct; Horndeski sector has undefined constants and inconsistent percentages; slow-rotation approximation applied to M87* is uncontrolled; IFT is local only; 'duality' and 'degeneracy breaking' framing overstates the algebra. The HTML rendering of the arXiv source suppressed some equations, which contributed to the cycle-1/cycle-2 disagreement and to several open human spotchecks.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper tries to make black hole physics more directly testable by rewriting standard formulas \u2014 for how light bends near a black hole and how it thermally radiates \u2014 in terms of the shadow size seen by telescopes like the EHT, rather than the black hole's mass, which can only be inferred indirectly. The review board found the central mathematical idea sound for the simplest (Kerr) case, but found the headline claims for modified-gravity black holes either unverifiable (key constants are never defined) or internally inconsistent (quoted percentages differ between sections). The most important caveat is that several numerical predictions cannot be independently checked from the paper as written.",
+  "human_spotchecks": [
+    "Verify whether the Horndeski temperature constants (\u03ba, \u03b7_E, or equivalent structural functions) in Eq. 46 are explicitly derivable from the metric components in Eqs. 40\u201343 via the surface gravity formula, and whether those values reproduce the headline luminosity-deviation percentage when the EHT scalar-hair bound is applied.",
+    "Resolve the internal inconsistency in the Horndeski luminosity deviation: the paper quotes approximately 20% in Section IV.3 but approximately 52% (or 36% in some readings) in the Abstract and Conclusion. Determine which value, if any, is correct.",
+    "Check whether the stationary envelope condition \u2202R_sh/\u2202r_ps = 0 holds at the photon sphere for the \u00b1 shadow branches of Eq. 5 in the Kerr-MOG and Horndeski metrics beyond the Schwarzschild and slow-rotation limits, and whether the resulting IFT Jacobian is strictly positive throughout the parameter ranges used.",
+    "Assess whether the slow-rotation expansion of the mass-shadow inversion introduces truncation errors comparable to or larger than the claimed percent-level MOG and Horndeski effects when applied to M87*, given current constraints on its dimensionless spin a* \u2248 0.5\u20130.98.",
+    "Confirm that the EHT angular shadow diameter convention used to derive the physical shadow boundary is consistent with the theoretical photon-sphere critical-curve radius appearing in the analytic formulas, accounting for plasma emission modeling and image-reconstruction systematics."
+  ],
+  "paper_id": "2604.22181",
+  "public_summary": "The paper aims to construct a unified phenomenological framework in which the observable photon shadow radius R_sh replaces the unobservable bare mass M as the central variable governing both gravitational lensing and Hawking radiation for rotating black holes. Applying the Implicit Function Theorem, the paper argues that a smooth local inversion M = M(R_sh, a, ...) exists wherever the shadow radius is strictly increasing in mass, and uses this to re-express the weak deflection angle (via the Gauss-Bonnet theorem) and the Hawking temperature and integrated luminosity as explicit functions of R_sh. The framework is applied to three spacetimes \u2014 standard Kerr, Kerr-MOG (Scalar-Tensor-Vector Gravity), and a rotating Horndeski scalar-tensor black hole \u2014 and EHT observations of M87* are used to anchor numerical predictions. After two cycles of cross-review, the basic Kerr algebra was found to be internally consistent. The modified-gravity applications contain significant gaps: the Horndeski sector introduces constants that are never derived from the metric, the claimed luminosity deviations are quoted inconsistently across sections, and the slow-rotation equatorial approximation is applied without error estimation to a source (M87*) whose spin may be large. The \"thermodynamic-optical duality\" terminology and \"degeneracy breaking\" claims overstate what the algebra delivers \u2014 a useful reparameterization, not a reduction in the number of free parameters.",
+  "reviewer_disagreements": [
+    "Cycle-1 Gemini alleged fatal dimensional errors in all deflection-angle formulas (Eqs. 15, 26, 36, 45) and a factor-of-2 error in the Hawking temperature (Eq. 28), assigning a score of 2.0. In cycle 2, Gemini fully retracted both claims after reviewing the LaTeX source equations directly, attributing the prior objections to misreading the math rendering. This reversal is the largest single shift across the review process.",
+    "Cycle-1 scores spanned 2.0 (Gemini) to 4.5 (Claude), an unusually wide range driven almost entirely by Gemini's subsequently retracted algebraic-error claims. After retraction, cycle-2 scores converged to 3.5\u20134.2, with consistent 'weak_evidence' verdicts from all three reviewers.",
+    "In cycle 2, Claude retained uncertainty about the algebraic errors at reduced confidence (citing inaccessible HTML rendering), while Codex and Gemini both independently confirmed the basic Kerr algebra is correct after inspecting the displayed equations. This residual uncertainty in Claude's cycle-2 review is a rendering artifact, not a substantive disagreement about the math.",
+    "All three cycle-2 reviewers agree that the Horndeski constants are undefined and the percentage claims are unreliable, but Codex specifically notes that the paper quotes approximately 20% in Section IV.3 versus approximately 52% in the Abstract and Conclusion \u2014 an internal inconsistency not flagged by the other reviewers."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The Horndeski temperature formula (Eq. 46) introduces dimensionless constants (\u03ba, \u03b7_E or equivalent structural functions) described as 'determined by the scalar gradient at the horizon' but never derived from the metric components given in Eqs. 40\u201343. The headline quantitative claim \u2014 a specific percentage deviation in Hawking luminosity under EHT scalar-hair bounds \u2014 is therefore unverifiable from the paper as written.",
+      "paper_location": "Section IV.3, Eqs. 46\u201348; Abstract; Conclusion",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper quotes the Horndeski luminosity deviation as approximately 20% in Section IV.3 but as approximately 52% (or 36% in some versions) in the Abstract and Conclusion. This internal numerical inconsistency, combined with the undefined constants, makes the headline phenomenological claim irreproducible.",
+      "paper_location": "Section IV.3 vs. Abstract and Conclusion",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The Implicit Function Theorem proof of mass-shadow invertibility is verified only for the Schwarzschild limit and the slow-rotation Kerr expansion. The paper asserts the result is universal for all physically valid configurations, but provides no corresponding non-degeneracy analysis for the Kerr-MOG or Horndeski metrics, nor for near-extremal regimes or the \u00b1 (prograde/retrograde) branch structure of Eq. 5.",
+      "paper_location": "Section II.1, Eqs. 6\u201310; Section III.1, Eq. 17",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "Rotating black hole shadows are asymmetric and observer-inclination dependent, but the framework reduces the shadow to a single scalar equatorial critical impact parameter. The EHT mass inversions (Eqs. 25, 35, 44) use a single branch of Eq. 5 without specifying which branch or how the full shadow contour is handled, losing geometric information essential for robust parameter extraction.",
+      "paper_location": "Section II.1, Eqs. 2\u20135; Section IV applications",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The slow-rotation (a \u226a M) approximation used throughout is applied to EHT numerical predictions for M87*, whose dimensionless spin is constrained to a* \u2248 0.5\u20130.98 in various analyses. The truncation errors in the mass-shadow inversion and all derived observables are never estimated, and the approximation is also internally inconsistent with the paper's own near-extremal analysis in Eq. 24.",
+      "paper_location": "Sections II.1, III.2 (Eq. 24), IV.1\u2013IV.3",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The claim that the framework 'breaks the inherent degeneracy between bare mass and modified field strengths' is overstated. Substituting M = M(R_sh, a, \u03b1, \u03b7) does not reduce the number of free parameters; a second independent observable is still required to constrain M and any modified-gravity coupling jointly.",
+      "paper_location": "Abstract; Section IV.2; Conclusion",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The greybody-factor error term \u03b5 and the superradiant correction \u03b4L_SR (Eqs. 21\u201323) are introduced formally but never evaluated or numerically bounded for any of the three spacetimes. The percent-level luminosity predictions for Kerr-MOG and Horndeski rest on a luminosity formula whose systematic error is unquantified.",
+      "paper_location": "Section III.2, Eqs. 19\u201324; Section IV.1\u2013IV.3 luminosity formulas",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The EHT-observed angular ring diameter is directly converted to a physical shadow boundary and inserted into the analytic formulas without accounting for plasma emission systematics, image-reconstruction uncertainties, mass-distance degeneracy, or the distinction between the observed ring and the theoretical photon-sphere critical curve radius.",
+      "paper_location": "Section IV.1, M87* observational constraint paragraph; Sections IV.2\u2013IV.3",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "gemini"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "For the standard Kerr metric in the slow-rotation, equatorial-observer limit, the mass-shadow inversion M \u2248 R_sh/(3\u221a3) is algebraically consistent, and the resulting expressions for the weak deflection angle (scaling as R_sh/b), Hawking temperature (scaling as 1/R_sh), and Stefan-Boltzmann luminosity (scaling as 1/R_sh\u00b2) are dimensionally correct within the stated approximations.",
+    "For a fixed observable shadow radius, the qualitative contrast between MOG-modified lensing and MOG-modified Hawking luminosity \u2014 the repulsive vector field amplifies the deflection angle while suppressing the thermal emission \u2014 is physically plausible from the structure of the Kerr-MOG metric and is consistent with prior literature on that spacetime.",
+    "Anchoring theoretical predictions to the EHT-measured shadow radius rather than the inferred bare mass is a computationally efficient approach for EHT-era phenomenology, and the mass-shadow inversion is locally well-defined at fixed spin and modified-gravity parameters by an Implicit Function Theorem argument verified explicitly in the Schwarzschild limit.",
+    "The eikonal-limit identification of the absorption cross-section with the photon shadow area (\u03c3_abs \u2248 \u03c0R_sh\u00b2) is a standard and defensible high-energy baseline for estimating Hawking luminosity, and the paper correctly identifies that superradiant and greybody corrections are suppressed in the slow-rotation limit."
+  ],
+  "technical_takeaway": "The paper re-parameterizes the weak deflection angle and semiclassical Hawking thermodynamics for Kerr, Kerr-MOG, and rotating Horndeski spacetimes by substituting a locally unique M(R_sh) inversion \u2014 justified via the Implicit Function Theorem \u2014 in place of the unobservable bare mass. The basic Kerr algebra (Eqs. 26, 28, 30) was confirmed dimensionally and algebraically consistent by two of three reviewers after cross-checking the LaTeX source. However, the IFT argument is only explicitly verified for the Schwarzschild and slow-rotation Kerr limits and is not independently checked for the MOG and Horndeski metrics. The Horndeski sector introduces dimensionless constants (\u03ba, \u03b7_E or equivalent structural functions) that are never derived from the stated metric components, making the headline luminosity-deviation claim (variously quoted as ~20%, ~36%, and ~52% in different parts of the manuscript) unverifiable. Additional systematic concerns include: the slow-rotation equatorial approximation applied to likely high-spin M87*; reduction of the asymmetric rotating shadow to a single scalar R_sh without justification; and uncontrolled greybody/superradiant corrections to the Stefan-Boltzmann luminosity baseline. The \"thermodynamic-optical duality\" framing and \"degeneracy breaking\" claim overstate what is a local, parameter-fixed change of variables."
+}

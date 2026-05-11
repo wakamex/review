@@ -1,0 +1,86 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Two review cycles with three LLM reviewers each. Cross-review in cycle 2 led to modest score adjustments (overall mechanical average 6.27 \u2192 6.13) and surfaced the \u03c8-tubing definitional concern raised by Gemini and partially contested by Claude. The three primary objections\u2014unproved all-graph closure conjecture (eq. 47/53), IBP boundary terms without stated conditions (eq. 40), and unproved eq. (26) used as foundational input\u2014were consistent across both cycles and all reviewers. Codex raised the cut-tubing definition for cyclic graphs as major; Claude reclassified it as moderate/human-spotcheck after reasoning that b-tubes accommodate non-bridge deletions; Gemini maintained major. Recommended verdicts split: claude and gemini 'promising', codex 'contested'. Eigensystem conjecture (eqs. 55\u201356) was uniformly rated moderate or minor since it is not load-bearing for the main differential equation result.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper proposes a new mathematical method for computing quantities related to the early universe (called wavefunction coefficients) in cosmological models, using geometric ideas tied to Feynman graph diagrams. The review board found the core algebraic mechanism clean and the worked examples compelling, with the approach offering a natural combinatorial structure absent from competing methods. The most important caveat is that the paper's central structural assertion\u2014that a specific coefficient is always a \"region variable\" for any diagram\u2014is explicitly unproved for arbitrary diagrams, so the claimed generality rests on a conjecture supported by examples rather than a theorem.",
+  "human_spotchecks": [
+    "Verify the explicit 4\u00d74 matrices M_X and M_Y for the P\u2082 path graph (eqs. 77\u201378): do they anticommute as claimed, and do the eigenvectors (eqs. 80\u201383) match the general formula (55) when instantiated for that graph? (LaTeX-to-HTML rendering artifacts may obscure exact matrix entries.)",
+    "Confirm the 18-dimensional basis and the 11+3+3+1 block structure of the differential equations for the P\u2083 path graph (Section 4.1) by independent enumeration of all \u03c8-tubings on a three-vertex path graph.",
+    "Verify that the 10 differential forms (eqs. 104\u2013113) for the double-edge cyclic graph (Section 4.2) have only simple poles (are genuinely logarithmic) in the integration variables, and that the stated block-diagonal structure of the coefficient matrix is correct.",
+    "Clarify whether the \u03c8-tubing definition (Section 2.2, eq. 8) correctly handles non-bridge edge deletions in cyclic multigraphs: specifically, are connected components of G with a subset of edges removed always valid b-tubes (connected subgraphs) rather than requiring vertex-induction, and does the labeled-edge convention (Y^(1), Y^(2)) suffice to disambiguate all cases?",
+    "Check whether the differential equation closure formula (eq. 53) holds for small cyclic graphs not displayed in the paper (e.g., a triangle or four-cycle), by explicit enumeration of cut tubings and region variables."
+  ],
+  "paper_id": "bm-178-02",
+  "public_summary": "The paper introduces a positive-geometry approach to canonical differential equations for cosmological wavefunction coefficients in power-law FRW spacetimes. Rather than using the kinematic-flow approach's dressed-graph basis, the authors insist on logarithmic differential forms throughout, obtaining a master-integral basis labeled by \u03c8-tubings of Feynman graphs\u2014the same combinatorial objects defining cosmological polytopes. The \u03b5-form property is claimed to follow automatically from the algebraic identity d_int \u03c9 = \u2212d_kin \u03c9, and the differential equation coefficients are conjectured to be logarithms of region variables with a natural tubing description. The paper works out examples for path graphs P\u2082 and P\u2083, a star graph, and a double-edge cyclic graph. The paper's conclusions explicitly list the basis decomposition (eq. 26), the all-graph closure of the differential equations (eq. 53), and the eigensystem formulae (eqs. 55\u201356) among conjectures for which general proofs remain to be found. Reviewer consensus treats the \u03b5-form mechanism as the most secure claim and the all-graph closure conjecture as the primary open technical gap.",
+  "reviewer_disagreements": [
+    "Severity of the \u03c8-tubing definition issue for cyclic/multigraphs: Gemini rates it major (confidence 0.95) on the grounds that non-bridge edge deletions yield components that are not vertex-induced subgraphs; Claude disputes this, arguing b-tubes (connected subgraphs) by definition accommodate non-bridge deletions and labels it a moderate/human-spotcheck issue; Codex revised from major to moderate after cross-review.",
+    "Overall recommended verdict: Claude and Gemini rate the paper 'promising'; Codex rates it 'contested', citing the unproved all-graph claims and the under-specified analytic setup for twisted integrals as sufficient to withhold endorsement.",
+    "Clarity: Gemini scored clarity at 9 in cycle 1 and 7 in cycle 2 (citing the \u03c8-tubing definitional inconsistency as an expositional flaw); Claude revised upward from 7.0 to 7.5 in response to Gemini's initial assessment; Codex settled at 6.8. The range (6.8\u20137.5 after cross-review) reflects genuine disagreement about how clearly the combinatorial definitions are presented for non-tree graphs.",
+    "Whether the IBP boundary-term issue (eq. 40) would change the verdict if confirmed to be problematic: Codex says yes (would_change_verdict_if_true: true for the related soundness claim); Claude and Gemini say no, treating it as a standard unstated assumption in this class of twisted-integral papers.",
+    "Significance scores diverged: Gemini scored significance 8/8 across cycles; Claude 7/7; Codex 6.6/6.8\u2014reflecting different weighting of the conjectural state of the main results versus the novelty of the combinatorial framing."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The core conjecture that the coefficient c in eq. 47 is always a region variable is unproved and is the load-bearing claim for the all-graph closure formula (eq. 53). The paper explicitly acknowledges in Section 3.3 and the conclusions that a proof is beyond its scope. If this conjecture fails for some graph class, the claimed generality of the differential equation framework is invalidated.",
+      "paper_location": "Section 3.3, below eq. 47; Section 5 (Conclusions)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The \u03c8-tubing definition in Section 2.2 may be inconsistent for graphs with cycles or multiple edges: the text asserts that each connected component of G with a subset of edges removed is a U-tube (vertex-induced subgraph) of G, but removing a non-bridge edge of a cycle leaves a component that is a spanning subgraph with a missing edge, not a vertex-induced subgraph. Gemini rates this major; Claude argues b-tubes (connected subgraphs) accommodate non-bridge deletions and downgrades it to a notational/spotcheck issue. This definitional question is unresolved across reviewers.",
+      "paper_location": "Section 2.2, definition of \u03c8-tubings before eq. (8); Section 4.2",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "gemini",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The derivation of eq. (42) drops integration-by-parts boundary terms without specifying the convergence domain for twist parameters or the class of integration contours. For twisted integrals, boundary terms vanish under standard conditions on Re(\u03b5_i), but these conditions are neither stated nor cited.",
+      "paper_location": "Section 3.2, transition from eq. 34 to eq. 40",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The decomposition of the flat-space canonical form into \u03c8-tubings (eq. 26) is used as a foundational input for the master-integral basis, but the conclusions explicitly list it among general formulae for which a proof has not been provided.",
+      "paper_location": "Section 2.4, eq. 26; Section 5 (Conclusions)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The number of master integrals equals the number of \u03c8-tubings, which can grow substantially with graph complexity (18 for P\u2083 vs. fewer in the kinematic-flow basis). No complexity bound or growth rate is stated, making practical utility for multi-loop graphs unclear.",
+      "paper_location": "Section 4.1, path graph P\u2083 discussion",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "For any twisted integral of a logarithmic form, differentiation with respect to kinematic variables yields a right-hand side proportional to twist parameters \u03b5, guaranteeing the canonical (\u03b5) form\u2014this follows structurally from d\u00b2=0 and integration by parts (Section 3.2, eq. 42), conditional on boundary terms vanishing.",
+    "Explicit examples for path graphs P\u2082 and P\u2083, the star graph, and the double-edge cyclic graph verify that the proposed \u03c8-tubing basis and region-variable coefficients satisfy the conjectured differential equations in each case.",
+    "The approach provides a distinct alternative to the kinematic-flow method: master integrals labeled by the same combinatorial objects (\u03c8-tubings) that define cosmological polytopes, with the acknowledged trade-off of a larger basis (18 functions for P\u2083).",
+    "In all examined examples the coefficient matrix admits an eigensystem with a natural combinatorial description via subtubings and region variables (eqs. 55\u201356), and the diagonalization process is consistent with the general conjecture.",
+    "The method applies without fundamental modification to graphs with cycles, as illustrated by the double-edge cyclic graph example with 10 basis forms and a block-diagonal coefficient structure."
+  ],
+  "technical_takeaway": "The paper derives \u03b5-form (canonical) differential equations for FRW wavefunction coefficients by expressing master integrals as twisted integrals of logarithmic differential forms labeled by \u03c8-tubings of Feynman graphs. The \u03b5-form property is argued to follow structurally from d_int \u03c9 = \u2212d_kin \u03c9 for logarithmic forms (Section 3.2, eq. 42), conditional on integration-by-parts boundary terms vanishing. The coefficient matrix entries are conjectured to be d log of region variables, and the eigensystem to be describable by subtubings (eqs. 55\u201356). These conjectures are verified in detail for path graphs P\u2082 and P\u2083, a star graph, and a double-edge cyclic graph, but no general proof is given. The basis is larger than the kinematic-flow approach (18 functions for P\u2083) as the explicit price of staying within logarithmic forms."
+}

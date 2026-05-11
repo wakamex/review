@@ -1,0 +1,149 @@
+{
+  "confidence": 0.72,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 5.8,
+    "novelty": 3.6,
+    "reviewer_confidence": 7.2,
+    "significance": 4.2,
+    "technical_soundness": 5.8
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "I raise the score and move from weak_evidence to routine because the raw HTML contains the missing equations and numbers: alpha/M <= 0.452, efficiency about 8.9%, frequency range (673/M-4360/M) Hz, TOV-limited nu_U about 1450 Hz, M <= 43.6 solar masses, and delay <= 1.3 ms. The QPO-table reduction is also verifiable. I keep concerns about resonance-domain checks, observational interpretation, and time-delay specification.",
+    "invalid_points_from_other_reviewers": [
+      "The claim that all numerical values are absent from the HTML source is not correct after inspecting the raw HTML math alt text; the loss occurred in the review bundle extraction.",
+      "The quoted maximum mass of 30.6 solar masses appears incorrect; the paper states 43.6 solar masses.",
+      "The earlier suspicion that RP0=RP1=RP2=ER1 or ER3=TD might fail under Table 1 is not supported; the raw table entries collapse as claimed when nu_theta=nu_phi.",
+      "The statement that cosmological redshift would dominate the shadow-QPO differential time delay is not established by the paper text and is not a clean objection to the local calculation as framed."
+    ],
+    "valid_points_from_other_reviewers": [
+      "The other reviewers are right that the work is a routine application of standard QPO machinery to a previously studied static metric.",
+      "The concern about applying HF-QPO source interpretations to a nonrotating black hole is valid and materially limits significance.",
+      "The objection that the paper gives no actual source-by-source QPO data fit is valid; the mass bound is a broad phenomenological estimate.",
+      "The point that the chosen NLG form factor makes the conclusions model-specific is valid."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "The NLG metric is taken with f(r)=1-2 G_eff(r) M/r and the black-hole parameter range is alpha/M <= 0.452.",
+      "notes": "The raw HTML contains the previously missing bound alpha/M <= 0.452 and the explicit G_eff expression. The large-r normalization appears consistent with G_eff -> G.",
+      "paper_location": "Section II, Eqs. (6)-(9), paragraph before Fig. 1",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "Increasing alpha lowers the ISCO radius and the circular-orbit energy and angular momentum, while increasing radiative efficiency to about 8.9%.",
+      "notes": "The formulas for E, L, and the ISCO condition are standard for this metric ansatz. The monotonicity and maximum efficiency are supported mainly by plots rather than analytic proof or tabulated numerical data.",
+      "paper_location": "Sections III.2-III.3, Eqs. (18)-(21), Figs. 3-6, Conclusion",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "For the static spherical metric, Omega_phi equals Omega_theta, while Omega_r is governed by the usual derivative combination of f(r).",
+      "notes": "The displayed formulas reduce correctly to the Schwarzschild coordinate-frequency relations when f=1-2M/r. The trend with alpha remains numerical/plot-based.",
+      "paper_location": "Section IV, Eqs. (22)-(27), Figs. 7-8",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The 11 listed QPO prescriptions reduce to 7 effective models because nu_theta=nu_phi, with RP0=RP1=RP2=ER1 and ER3=TD.",
+      "notes": "The raw table entries support this reduction. The earlier concern that Table 1 was unauditable was an artifact of the stripped review bundle.",
+      "paper_location": "Section V, Table 1 and paragraph following it",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "Under 2 nu_U = 3 nu_L, resonant radii decrease with alpha, upper frequencies increase over about (673/M-4360/M) Hz, the TOV-imposed upper frequency is about 1450 Hz, and M is bounded by about 43.6 solar masses using nu_U >= 100 Hz.",
+      "notes": "The numerical values are visible in the raw HTML. The mass bound is only a rough phenomenological bound because it uses a classification threshold rather than source-by-source QPO fits, and the resonance roots are not documented with domain checks.",
+      "paper_location": "Section V, Figs. 10-12, Conclusion",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The shadow-QPO gravitational time delay increases with alpha but stays below about 1.3 ms.",
+      "notes": "The value is stated, but the paper does not show a clear time-delay integral, null path, observer convention, or separation of coordinate and observed time.",
+      "paper_location": "Section V, Fig. 14 and surrounding paragraph",
+      "support_level": "unclear"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The dimensionless parameter alpha/M is held fixed when converting to physical frequencies and mass bounds.",
+      "paper_location": "Eq. (28), Fig. 12",
+      "why_it_matters": "The 1/M frequency scaling used for the quoted mass limit is valid only under a consistent scaling convention for alpha."
+    },
+    {
+      "assumption": "The plotted resonant radii always correspond to physically admissible circular disk orbits.",
+      "paper_location": "Section V, Figs. 10-12",
+      "why_it_matters": "A formal algebraic 3:2 root inside the ISCO or outside the real-frequency domain should not be used for QPO predictions."
+    },
+    {
+      "assumption": "Geodesic frequencies remain adequate proxies for the relevant disk modes in the NLG spacetime.",
+      "paper_location": "Sections IV-V",
+      "why_it_matters": "Several QPO models involve fluid modes, pressure, disk thickness, magnetic fields, or warping; the paper assumes the modified gravity only changes the background geodesic frequencies."
+    },
+    {
+      "assumption": "A static nonrotating black hole is a useful phenomenological baseline for HF-QPO sources.",
+      "paper_location": "Section II, Eq. (5); Section V",
+      "why_it_matters": "Spin strongly changes ISCOs and epicyclic frequencies, so source-level inferences from a spherical model are limited."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Do the numerical r_ISCO, r_ph, r_3:2, and frequency curves actually satisfy the stability-domain and positivity conditions for every model over 0 <= alpha/M <= 0.452?",
+      "why_model_cannot_resolve": "The paper provides plots but no tables, code, or root-branch diagnostics; a reliable check requires recomputing the curves."
+    },
+    {
+      "question": "Is the time-delay calculation in Fig. 14 based on a defensible null-geodesic/arrival-time definition?",
+      "why_model_cannot_resolve": "The relevant formula is not displayed, so the model cannot distinguish a valid hidden calculation from an ad hoc plotted estimate."
+    },
+    {
+      "question": "Are the monotonic trends with alpha analytically true or merely observed over a numerical grid?",
+      "why_model_cannot_resolve": "The plots indicate trends, but no proof or grid-resolution/error information is supplied."
+    }
+  ],
+  "novelty_assessment": "The novelty is low to moderate. The metric is imported from earlier NLG work, and the geodesic/QPO pipeline is standard and widely used in modified-black-hole phenomenology. The application to this NLG metric and the shadow-QPO delay plot are useful incremental additions, but there is no new QPO mechanism, no data fitting, and no substantial methodological advance.",
+  "overall_score_10": 5.4,
+  "paper_id": "2604.25254",
+  "recommended_verdict": "routine",
+  "reviewer": "codex",
+  "score_rationale": "The core geodesic and epicyclic-frequency formulas are standard and mostly check out locally, and the missing numerical values are recoverable from the raw HTML. The paper is therefore more competent than my first-cycle review could verify. Still, it remains a routine template application with limited novelty, no data fitting, a static approximation for spin-sensitive sources, and insufficient documentation of numerical root/domain checks and the time-delay calculation.",
+  "summary": "The paper applies standard circular-geodesic, ISCO, epicyclic-frequency, and phenomenological HF-QPO machinery to a static spherically symmetric nonlocal-gravity black-hole metric. After inspecting the raw HTML math alt text, several values that were missing from the bundle are recoverable, so my prior clarity and evidence concerns are reduced. I still do not certify the full numerical calculation: the main remaining issues are limited novelty, plot-only numerical support, unverified resonance-domain checks, and weak observational interpretation.",
+  "technical_objections": [
+    {
+      "confidence": 0.72,
+      "evidence": "The paper says the resonance condition determines r_3:2 and then plots monotone curves, but it does not give root counts, excluded branches, or inequalities comparing r_3:2 with r_ISCO over alpha/M <= 0.452.",
+      "objection": "The resonance-radius analysis does not explicitly show that each 3:2 solution is unique, outside the ISCO, and in the stable domain where nu_r is real and all model frequencies are positive.",
+      "paper_location": "Section V, Figs. 10-12",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.88,
+      "evidence": "The paper explicitly calls the 100 Hz threshold approximate/rough. Observed microquasar HF-QPO modeling is usually sensitive to spin, while the metric used here is static and spherical.",
+      "objection": "The mass bound is not a strong observational constraint because it is derived from the rough condition nu_U >= 100 Hz in a static nonrotating spacetime, without fitting actual HF-QPO sources or including spin.",
+      "paper_location": "Section V, paragraph around Fig. 12",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.84,
+      "evidence": "Only a qualitative statement is given: disk and cosmological effects are neglected and only gravitational redshift is considered. No propagation integral, observer location, or precise time coordinate is displayed.",
+      "objection": "The time-delay prediction is not sufficiently specified to be independently audited.",
+      "paper_location": "Section V, Fig. 14",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "The paper chooses A(p^2)=exp(-alpha p/2) and derives a particular G_eff(r). It does not test sensitivity to other admissible form factors.",
+      "objection": "The results are specific to the chosen nonlocal form factor rather than generic to nonlocal gravity, but the paper sometimes presents them broadly as NLG predictions.",
+      "paper_location": "Section II, Eqs. (8)-(9); Abstract and Conclusion",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "The equation writes a term like E^2/g_tt even though g_tt=-f(r), while the following displayed expression uses +E^2/f(r), which is the sign needed for the later effective potential. This appears to be a typo rather than a propagated error.",
+      "objection": "There is a local sign/notation inconsistency in the intermediate radial equation.",
+      "paper_location": "Section III.1, Eq. (12)",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

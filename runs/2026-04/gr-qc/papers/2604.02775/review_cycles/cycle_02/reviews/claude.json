@@ -1,0 +1,165 @@
+{
+  "confidence": 0.7,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 3.5,
+    "novelty": 6,
+    "reviewer_confidence": 6,
+    "significance": 5,
+    "technical_soundness": 2
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Elevated verdict from weak_evidence to major_flaw and lowered overall score from 4.0 to 3.0 based on a credible new objection from the gemini reviewer: that equation (22) is a 3D spherical Poisson equation solved with 2D cylindrical Modified Bessel functions, making the flat rotation curve an artifact of using K\u2080 (log behavior) instead of the correct k\u2080 (exponential decay giving Keplerian decline). Also added the algebraic/dimensional inconsistency between eqs. (21) and (22) as a new major objection. Technical soundness lowered from 3.5 to 2.0. Significance lowered from 7.0 to 5.0 since the main quantitative result is contested. Reviewer confidence raised from 5.0 to 6.0 with additional reviewer perspectives available.",
+    "invalid_points_from_other_reviewers": [
+      "None of the other reviewers' objections appear clearly wrong. The Bessel function error (gemini, confidence 1.0) I rate at 0.80 rather than 1.0 because the HTML rendering may not faithfully reproduce the exact coefficient in eq. (22), and the exact geometry of the problem (spherical vs. cylindrical) should be verified from the PDF before declaring it fatal rather than major."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Gemini: The 3D spherical Laplacian in eq. (22) should yield spherical Modified Bessel solutions i\u2080/k\u2080, not cylindrical I\u2080/K\u2080; using K\u2080 gives the logarithmic potential needed for flat rotation curves but is mathematically incorrect for the stated 3D geometry. This is a specific, technically sound objection I did not catch in cycle 1.",
+      "Gemini: Algebraic/dimensional inconsistency between eqs. (21) and (22)\u2014direct coefficient comparison shows a mismatch that cannot be resolved without assuming v_disp\u00b2=2 in unstated units.",
+      "Codex: The focusing argument conflates \u03b8=0 (local expansion vanishing) with non-extendibility of geodesics without specifying vorticity, shear, energy conditions, or sign conventions precisely enough for the claimed generality.",
+      "Codex: Empirical support is too thin for claiming the mechanism 'naturally' produces flat rotation curves\u2014one Hernquist-profile example with no fit to observed data, no baryonic Tully-Fisher comparison, no accounting for mass-to-light uncertainties."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "A 'matter horizon' precedes caustic formation in expanding spacetimes, providing a natural cut surface for spacetime surgery.",
+      "notes": "The Raychaudhuri/focusing argument is standard, but the specific identification of the matter horizon as a unique pre-caustic surface is operationally defined here and fleshed out only in inaccessible companion papers. Another reviewer correctly noted that the paper conflates \u03b8\u21920 with non-extendibility without stating the precise vorticity/shear/energy-condition hypotheses needed.",
+      "paper_location": "Section II, around eq. (6) and the definition of \u03c4*",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Gluing two spacetime sheets across the matter horizon at the action level gives a covariant backreaction term in the effective energy-momentum tensor.",
+      "notes": "Every substantive step is attributed to Umeh:2026pm (reference '000000', inaccessible). The junction condition departure from Israel-Darmois to conformal Killing is unjustified within this paper. Cannot be independently audited.",
+      "paper_location": "Section III, eqs. (10)\u2013(14)",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "Standard Israel-Darmois junction conditions are 'suboptimal' and should be replaced by a conformal Killing equation at the shared boundary, yielding SO(1,4) and SO(2,3) isometry groups.",
+      "notes": "No argument is given in this paper. Departing from Darmois conditions is a non-trivial claim in GR thin-shell theory; it is entirely deferred to Umeh:2026ajv.",
+      "paper_location": "Section III, paragraph beginning 'The standard Israel-Darmois conditions prove suboptimal'",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "The backreaction potential satisfies a Modified Bessel equation and the solution naturally produces flat galaxy rotation curves.",
+      "notes": "The paper invokes 3D spherical geometry ('spherical mass distribution', boundary condition at r=0) and eq. (22) appears to contain the 3D spherical Laplacian (d\u00b2\u03a6/dr\u00b2 + (2/r)d\u03a6/dr), but then solves using cylindrical Modified Bessel functions I\u2080/K\u2080. The correct homogeneous solutions for the 3D spherical case are spherical modified Bessel functions i\u2080(\u03b2r) = sinh(\u03b2r)/r and k\u2080(\u03b2r) = e^{\u2212\u03b2r}/r, which give Keplerian (not flat) rotation curves. The flat rotation curve appears to be an artifact of the incorrect function class K\u2080 ~ \u2212ln(r). Additionally, the paper claims the homogeneous limit is 'a Modified Bessel equation of order 1' but displays order-0 solutions (I\u2080, K\u2080), an internal inconsistency.",
+      "paper_location": "Section IV, eqs. (20)\u2013(25), Figure 3",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "The backreaction force displays MOND-like behavior (~1/r) in the deep-MOND regime, independent of galaxy evolutionary phase.",
+      "notes": "The MOND acceleration scale a\u2080 appears without derivation or constraint from the framework. If the Bessel function error is confirmed, the MOND-like scaling likewise disappears.",
+      "paper_location": "Section IV, eq. (26)",
+      "support_level": "unclear"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The Poisson equation for \u03a6_{BR} is cylindrical (1/r d\u03a6/dr term) rather than spherical (2/r d\u03a6/dr term), which would justify using I\u2080/K\u2080.",
+      "paper_location": "Section IV, eq. (22)",
+      "why_it_matters": "If the geometry is 3D spherical (as suggested by the context), the correct solutions are i\u2080/k\u2080 and flat rotation curves do not arise. The entire quantitative claim about rotation curves depends on this choice."
+    },
+    {
+      "assumption": "The conformal Killing equation is the correct junction condition at the matter horizon boundary, replacing Israel-Darmois.",
+      "paper_location": "Section III",
+      "why_it_matters": "The entire backreaction derivation depends on what conditions are imposed at the gluing surface. If Darmois conditions are required, the resulting backreaction term may differ and the rotation curve result may not follow."
+    },
+    {
+      "assumption": "The bulk and shear viscosity terms introduced in eq. (16) are subdominant or can be consistently specified without introducing new free parameters.",
+      "paper_location": "Section III, eq. (16)",
+      "why_it_matters": "Viscosity coefficients are additional degrees of freedom; if unconstrained, they can be tuned to fit rotation curves, undermining predictive power."
+    },
+    {
+      "assumption": "The isothermal approximation for velocity dispersion \u03c3_v is a good approximation for generic galaxies.",
+      "paper_location": "Section IV, discussion of eq. (21) and conclusion",
+      "why_it_matters": "The paper itself acknowledges 'exactly flat rotation curves may be obtained by relaxing the isothermal approximation,' quantifying the deviation requires going beyond this approximation."
+    },
+    {
+      "assumption": "The spacelike boundary contribution to the effective EMT is indeed subdominant compared to the timelike boundary contribution.",
+      "paper_location": "Section III, discussion after eq. (13)",
+      "why_it_matters": "Stated without quantitative estimate; if comparable, it modifies the backreaction term and rotation curve result."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Does equation (22) in the PDF contain the 3D spherical Laplacian coefficient (2/r)d\u03a6/dr or the 2D cylindrical (1/r)d\u03a6/dr? If it is the 3D form, the use of I\u2080/K\u2080 is incorrect and the flat rotation curve is a mathematical artifact.",
+      "why_model_cannot_resolve": "The HTML source drops most equation content. The coefficient (2 vs 1) in the radial Laplacian is the critical distinction and cannot be read from the available bundle. This is the most consequential question for the paper's validity."
+    },
+    {
+      "question": "Is Umeh:2026pm (reference 23, arXiv ID '000000') now publicly available? If so, does it provide valid derivations of eqs. (12)\u2013(14), (20), the conformal Killing junction conditions, and the boundary energy density/pressure?",
+      "why_model_cannot_resolve": "The reference has a placeholder arXiv ID and cannot be retrieved; the entire technical foundation of the letter depends on this paper."
+    },
+    {
+      "question": "Does arXiv:2601.19812 (Umeh:2026ajv) provide a rigorous justification for replacing Israel-Darmois conditions with the conformal Killing equation at the matter horizon boundary?",
+      "why_model_cannot_resolve": "This companion paper is publicly available but was not included in the review bundle; auditing it requires domain expertise in junction condition theory."
+    },
+    {
+      "question": "Is the MOND acceleration scale a\u2080 derived from first principles within the framework (Umeh:2026pm), or is it an external input? Can the framework reproduce its known magnitude ~1.2\u00d710\u207b\u00b9\u2070 m/s\u00b2?",
+      "why_model_cannot_resolve": "The derivation of eq. (26) is not given; whether a\u2080 emerges from the framework requires access to Umeh:2026pm and careful calculation."
+    }
+  ],
+  "novelty_assessment": "The combination of matter-horizon regularization, manifold surgery at the action level, and emergence of flat rotation curves from pure geometric backreaction is creative and, if correct, would be genuinely novel. The SO(1,4)/SO(2,3) boundary symmetry structure is an interesting geometric element absent from prior backreaction frameworks (Buchert, R\u00e4s\u00e4nen, Green-Wald). The departure from Israel-Darmois conditions is double-edged: novel if correct, possibly incorrect if unjustified. However, novelty is substantially undermined by cycle 2 findings: if the flat rotation curve is an artifact of a Bessel function error rather than a genuine consequence of the framework, the central novel result evaporates. The broader spacetime surgery framework may still be original, but the specific cosmological output (rotation curves, MOND-like scaling) would need to be rederived with the correct functions.",
+  "overall_score_10": 3,
+  "paper_id": "2604.02775",
+  "recommended_verdict": "major_flaw",
+  "reviewer": "claude",
+  "score_rationale": "Technical soundness lowered to 2.0 (from 3.5): the gemini reviewer identified a probable fatal error\u2014using 2D cylindrical Bessel functions I\u2080/K\u2080 to solve what appears to be a 3D spherical Poisson equation. If confirmed, the flat rotation curve (the paper's central result) is an artifact of the wrong function class (K\u2080 ~ \u2212ln r gives flat curves; the correct k\u2080 ~ e^{\u2212r}/r gives Keplerian decline). An additional algebraic inconsistency between eqs. (21) and (22) further undermines the computation. These compound the already-present issues of an inaccessible companion paper and unjustified junction conditions. Novelty held at 6.0: the spacetime surgery idea at the action level is original regardless of the computational error. Significance lowered to 5.0 (from 7.0): explaining flat rotation curves from GR backreaction would be highly significant, but that claim now appears invalid pending correction; the broader multi-scale framework may retain value. Clarity lowered to 3.5 (from 4.0): internal inconsistency between 'order 1 Bessel equation' and order-0 solutions, figure mislabeling, and reliance on inaccessible derivations compound readability problems. Reviewer confidence raised to 6.0 (from 5.0): the additional reviewer perspectives sharpen the specific location of the potential fatal error. Overall 3.0: the paper contains a creative idea but has a probable fatal computational error at the core of its main result, an inaccessible companion paper for all non-trivial derivations, and unjustified junction conditions. These would need to be resolved before the paper could support any positive verdict.",
+  "summary": "This 5-page letter proposes that geodesic breakdown at a \"matter horizon\" in GR motivates spacetime surgery: cutting and gluing two sheets with opposite orientation, deriving a geometric backreaction contribution to the effective EMT, and showing this produces flat galaxy rotation curves without dark matter. The central quantitative result\u2014flat rotation curves\u2014rests on Modified Bessel solutions to an integro-differential Poisson equation. Cycle 2 incorporates a credible objection from another reviewer that equation (22) is the 3D spherical radial Poisson equation (Laplacian term d\u00b2\u03a6/dr\u00b2 + (2/r)d\u03a6/dr), but the paper solves it with 2D cylindrical Modified Bessel functions I\u2080/K\u2080 rather than the correct spherical functions i\u2080/k\u2080. If confirmed, this would mean the flat rotation curve is a mathematical artifact of using the wrong function class, since K\u2080 ~ \u2212ln(r) gives a logarithmic potential (constant v), whereas the correct spherical k\u2080 ~ e^{\u2212r}/r gives Keplerian decline. A secondary algebraic inconsistency between eqs. (21) and (22) was also identified. Together with the already-flagged inaccessible companion paper and unjustified junction conditions, the paper cannot be independently verified and contains at least one potentially fatal computational error.",
+  "technical_objections": [
+    {
+      "confidence": 0.8,
+      "evidence": "Paper explicitly describes spherical geometry and inner boundary at r=0 for a spherical mass distribution. The text states 'Modified Bessel equation of order 1' but displays order-0 solutions I\u2080, K\u2080\u2014already internally inconsistent. The cylindrical modified Bessel I\u2080/K\u2080 correspond to the 2D Laplacian d\u00b2\u03a6/dr\u00b2 + (1/r)d\u03a6/dr, not the 3D Laplacian with the (2/r) coefficient. This objection was raised at confidence 1.0 by another reviewer.",
+      "objection": "Probable fatal error: 3D spherical Poisson equation solved with 2D cylindrical Bessel functions. The paper works in spherical geometry ('spherical mass distribution', boundary at r=0) so eq. (22) has the 3D Laplacian d\u00b2\u03a6/dr\u00b2 + (2/r)d\u03a6/dr. The substitution u=r\u03a6 transforms this to u''\u2212\u03b2\u00b2u=0, yielding spherical solutions i\u2080(\u03b2r)=sinh(\u03b2r)/r and k\u2080(\u03b2r)=e^{\u2212\u03b2r}/r. Instead the paper uses I\u2080(\u03b2r) and K\u2080(\u03b2r) (cylindrical). K\u2080 has logarithmic behavior K\u2080~\u2212ln(r) at small r which gives a 1/r force and flat rotation curves; k\u2080 gives 1/r\u00b2 force and Keplerian decline. The flat rotation curve result is an artifact of using the wrong Bessel function class.",
+      "paper_location": "Section IV, eqs. (22)\u2013(23)",
+      "severity": "fatal",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "Direct algebra check of the substitution path. Gemini reviewer identifies this at 0.95 confidence with explicit coefficient comparison.",
+      "objection": "Algebraic and dimensional inconsistency between eqs. (21) and (22). Substituting the definition \u03c1_{BR} = (\u03b2\u00b2/4\u03c0Ga\u00b2)[v_{disp}\u00b2/2 + \u03a6_b]\u03a6_{BR} from eq. (21) into the Poisson equation \u2207\u00b2\u03a6_{BR} = 4\u03c0Ga\u00b2\u03c1_{BR} should give \u2207\u00b2\u03a6_{BR} \u2212 \u03b2\u00b2(v_{disp}\u00b2/2)\u03a6_{BR} = \u03b2\u00b2\u03a6_b\u03a6_{BR}. Equation (22) instead reads \u2207\u00b2\u03a6_{BR} \u2212 \u03b2\u00b2\u03a6_{BR} = (2\u03b2\u00b2/v_{disp}\u00b2)\u03a6_b\u03a6_{BR}. These match only if v_{disp}\u00b2=2 in unstated dimensionless units, breaking the explicit v_{disp} dependence.",
+      "paper_location": "Section IV, eqs. (21) and (22)",
+      "severity": "major",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "Reference 23 is listed as '000000'. Section III states 'the steps on how to decompose the action...are given Umeh:2026pm'; Section IV attributes backreaction density/pressure, solutions, and boundary conditions to the same reference.",
+      "objection": "Key companion paper (Umeh:2026pm) is inaccessible: reference 23 carries arXiv ID '000000'. Every substantive derivation in Sections III\u2013IV\u2014equations of motion (12), effective EMT (13\u201314), propagation equation (20), boundary conditions, viscosity terms\u2014is deferred to this paper.",
+      "paper_location": "References, and throughout Sections III\u2013IV",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "No argument given in this paper; entirely deferred to Umeh:2026ajv. The sign and magnitude of the backreaction term depend on these conditions.",
+      "objection": "Departure from Israel-Darmois junction conditions is unjustified within this paper. The paper calls standard Darmois conditions 'suboptimal' without explanation and replaces them with a conformal Killing equation. This is a non-trivial departure requiring rigorous justification; none is provided.",
+      "paper_location": "Section III, paragraph starting 'The standard Israel-Darmois conditions prove suboptimal'",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "Eq. (26) introduces a\u2080 with only a label; no expression for a\u2080 in terms of framework parameters is given. The known value ~1.2\u00d710\u207b\u00b9\u2070 m/s\u00b2 must emerge from the theory to constitute a prediction.",
+      "objection": "The MOND acceleration scale a\u2080 appears in eq. (26) without derivation or constraint from the framework. If a\u2080 is a free parameter fitted to data, the 'MOND-like' scaling is a relabeling rather than a prediction.",
+      "paper_location": "Section IV, eq. (26)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.75,
+      "evidence": "Paper states 'we replaced the sum with an all-sky average' without qualification. Since the rotation-curve result depends on the radial profile of this averaged density, this step is not bookkeeping but a load-bearing assumption.",
+      "objection": "The replacement of the discrete sum over particle matter-horizons by an all-sky average in eqs. (15) and (21) is mathematically uncontrolled: no convergence criteria, statistical homogeneity scale, window function, or error estimate are provided.",
+      "paper_location": "Section III eq. (15); Section IV eq. (21)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.98,
+      "evidence": "Figure captions are explicit: Fig. 2 = 'nested sequence of sub-regions across cosmic time'; Fig. 3 = 'galaxy rotation curves of a typical galaxy.'",
+      "objection": "Figure reference error: Section IV states 'rotation curves are given in figure 2' but Figure 2 is the hierarchical cosmic-time diagram; Figure 3 contains the rotation curves.",
+      "paper_location": "Section IV, paragraph 'Furthermore, \u03b1 and \u03b2 are functions...'",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Two adversarial cross-review cycles completed. Gemini scored 1/10 (fatal) in both cycles based on HTML bundle truncation at Section III due to a LaTeXML rendering failure; codex reported consulting the arXiv PDF and provided Section III details. Gemini accused codex of hallucinating these details; this meta-dispute is flagged as a human spotcheck. Claude and codex converged on a 'contested' verdict (~4.7\u20134.9) in cycle 2, with the sigma-convention inconsistency in the unmodelled hierarchy as the primary unresolved technical concern. Mechanical average of cycle 2 scores (excluding gemini's rendering-artifact penalty) places the paper at borderline routine/contested quality. The review bundle HTML source was genuinely truncated and several abstract numerical values were stripped by the renderer; all such gaps are flagged as human spotchecks.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper applies a new analysis tool called SCoRe to data from LIGO's third gravitational-wave catalog (GWTC-3), looking for subtle population-level signs that something beyond standard physics\u2014such as effects from theories beyond General Relativity or exotic compact objects\u2014might leave a mass-dependent fingerprint in the signals. Using the 30 highest signal-to-noise events, the paper finds no such fingerprint: Bayes factors of 0.16\u20130.5 consistently disfavor the existence of a mass-scale threshold across the tested range. The review board found the methodology promising and the null result scientifically informative, but flagged an unresolved statistical question about how the \"no deviation\" baseline is defined that could affect the headline numbers. Readers should treat the reported Bayes factors as provisional until that convention question is clarified.",
+  "human_spotchecks": [
+    "Sigma convention in Section III.A: Does the authors' intended generative model use sigma=0 or sigma=1 as the no-deviation null hypothesis? Is the +1 in the event likelihood variance purely measurement noise, with sigma exclusively representing population scatter? This question directly affects whether the reported Bayes factors are computed against the correct null.",
+    "PDF Section III completeness: Does the arXiv PDF contain an intact Section III with Table I (event parameters), Figure 1 (threshold search results), and Figure 3 (full-population alpha distribution)? This would resolve the gemini-vs-codex meta-dispute about whether codex's Section III details are accurate or hallucinated.",
+    "Missing abstract values: Verify the numerical mass-scale endpoints (rendered as 'M_sun and M_sun' in the HTML) and the second Bayes factor (rendered as blank) from the PDF abstract.",
+    "Noise calibration diagnostics: Does the paper include any off-source, time-slide, injection, or posterior predictive validation showing that the alpha statistics for these 30 GWTC-3 residual segments follow the assumed unit-Gaussian distribution?",
+    "EFT section documentation: Does Section III.B provide quantitative sensitivity estimates (upper bounds, sensitivity curves, or prior-dependence checks) for the EFT power-law search beyond the qualitative statement that posteriors are uninformative?",
+    "Source-parameter uncertainty sensitivity: Does the paper assess the sensitivity of threshold Bayes factors to the delta-function MLE approximation, particularly for events near tested mass thresholds with broad credible intervals?",
+    "Publication status of prior SCoRe framework papers [dideronNewFrameworkStudy2023] and [dideronDetectingUnmodeledSourcedependent2025]: Are these peer-reviewed and published, or still preprints? The validity of the framework derivations depends on independent review of the foundational papers."
+  ],
+  "paper_id": "2604.27185",
+  "public_summary": "Dideron, Mukherjee, and Lehner apply the SCoRe pipeline\u2014which their group developed and previously tested only on simulated data\u2014to 30 high-SNR events from GWTC-3. The pipeline focuses on cross-correlated residual power between the LIGO Hanford and Livingston detectors after subtracting best-fit waveforms, enabling a model-agnostic search for coherent population-level deviations. Two analyses are presented: an unmodelled test for different residual-power distributions above and below a total-mass threshold, and a modelled search for an EFT-motivated power-law scaling of deviations with total mass. Both return negative results. The review board conducted two adversarial cross-review cycles. Reviewers agreed that the theoretical framework is well-motivated, the Bayesian hierarchical structure is conceptually sound, and the first-time deployment on real data is a valuable milestone. However, a central statistical question\u2014whether sigma=0 or sigma=1 defines the no-deviation null in the unmodelled hierarchy\u2014was raised with high confidence by two reviewers and not resolved. Additional concerns about the scope of the null claim, source-parameter uncertainty at mass thresholds, and the lack of real-data noise calibration diagnostics were upheld across cycles. The review was complicated by a LaTeXML rendering failure that truncated the HTML source at Section III; one reviewer used this to declare the paper unreviewable, a conclusion the other two reviewers rejected after consulting the PDF. The resulting meta-dispute is flagged for human resolution.",
+  "reviewer_disagreements": [
+    "Gemini vs codex (meta-dispute, unresolved): Gemini maintained across both cycles that Section III is entirely absent and the paper is unreviewable; codex reported accessing the arXiv PDF and provided specific Section III details including Table I, Figure 1, Figure 3, the missing mass range (~2.5\u201360 solar masses), and the missing Bayes factor (0.07). Gemini explicitly accused codex of hallucinating these details. This dispute cannot be resolved from the review artifacts alone and requires a human to verify the PDF.",
+    "Gemini's fatal/1 scores vs claude/codex ~4.7\u20134.9 contested verdicts: Gemini applied maximum penalty for the HTML bundle truncation, treating it as a fatal paper flaw rather than a review-source artifact. Claude and codex both concluded the truncation reflects a LaTeXML rendering problem in the HTML bundle, not a deficiency in the paper itself, and evaluated accordingly.",
+    "Scope of the rendering-artifact objection: Claude downgraded the Section III rendering issue from 'major' (cycle 1) to 'moderate' (cycle 2) after incorporating codex's PDF context, while gemini escalated it to 'fatal' in both cycles. The three reviewers thus disagree on whether the missing HTML sections represent a reviewability problem for the paper vs. the review process."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The unmodelled hierarchy appears internally inconsistent about what sigma represents. The event likelihood is written with variance sigma^2+1, which implies sigma is latent population scatter and +1 is measurement noise variance, making sigma=0 the no-deviation null. However, the text and figure captions consistently identify sigma=1 as the noise/no-deviation model. These two conventions are mathematically incompatible and directly affect the reported Bayes factors (0.16\u20130.5 and ~0.07).",
+      "paper_location": "Section III.A, population prior for alpha, event likelihood after marginalization, Figure 1 caption, Figure 3 caption",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex",
+        "claude"
+      ]
+    },
+    {
+      "objection": "The abstract and conclusion overstate the scope of the null result by claiming it disfavors 'any mass scale.' The statistic tested is variance differences in cross-correlated residual power obtained with a constant-in-time template and a zero-mean Gaussian population model. Section II.3 explicitly notes that the statistic can yield alpha=0 for deviations that do not overlap the chosen template. Mass-dependent deviations in mean, sign, phase/time structure, or frequency structure are not excluded by this analysis.",
+      "paper_location": "Abstract; Section III.A conclusion; Section II.3",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "claude"
+      ]
+    },
+    {
+      "objection": "Mass-threshold event classification uses a delta-function approximation at the MLE for source parameters, ignoring parameter estimation uncertainty. Many component masses listed in Table I have credible intervals broad enough to straddle plausible threshold values. For sparse threshold bins where Bayes factors are modest, propagating mass uncertainty could materially change the threshold posteriors.",
+      "paper_location": "Section III.A, pi(theta)=delta(theta_MLE) approximation; Table I",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "claude"
+      ]
+    },
+    {
+      "objection": "The Gaussian/independent-noise calibration of the alpha (Wiener-filter) statistic is assumed but not demonstrated for real GWTC-3 residuals. No off-source, time-slide, injection, or posterior predictive calibration is presented to show that the computed alpha values for these waveform-subtracted detector segments actually follow the assumed unit-Gaussian distribution.",
+      "paper_location": "Section II.1 likelihood assumptions; Section III.A real-data application",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "claude"
+      ]
+    },
+    {
+      "objection": "The printed CRISP likelihood formula (Section II.1, Equation 4) may contain a typographical or rendering error: the denominator uses an expression that appears to take an expectation of K_D(t)\u2014which is itself already defined as an expectation in Equation 3\u2014creating apparent redundancy. A separate minor notation error uses the integration variable 't' in both the integrand and the limits of Equation 2.",
+      "paper_location": "Equation 2; Equation 4, Section II.1",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The EFT power-law search (Section III.B) is under-documented relative to its claims. The paper states posteriors are uninformative up to very large effective tidal deformability values and therefore no inference on the power-law index is possible, but provides no event-level likelihood plots, sensitivity curves, or prior-dependence diagnostics to support or quantify this.",
+      "paper_location": "Section III.B",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "codex",
+        "claude"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The SCoRe/CRISP framework provides a theoretically grounded, detector-agnostic approach to population-level GW deviation searches by focusing on coherent cross-correlated residual power between detectors, without requiring a precise strain-level model of the deviation.",
+    "The Bayesian hierarchical structure (Equations 5\u20139, Section II.2) is internally consistent and incorporates selection effects through a detectability fraction, with the Wiener filter providing optimal inference under the assumed noise model.",
+    "The paper argues this is the first application of SCoRe to real GWTC-3 data; the two prior SCoRe papers by the same authors used only simulated gravitational-wave data.",
+    "The EFT power-law search is honestly characterized as uninformative: posteriors are consistent with prior up to large effective tidal deformability values, a result qualitatively expected from the information loss implicit in the CRISP compression and the data-processing inequality argument (Section II.1).",
+    "The CRISP statistic is explicitly less informative than a full strain-level likelihood (by the data processing inequality), and Section II.3 correctly warns that agnostic templates will miss deviations with poor temporal overlap\u2014a caveat the paper acknowledges."
+  ],
+  "technical_takeaway": "The paper claims its first real-data application of the SCoRe/CRISP framework to GWTC-3, compressing waveform-subtracted detector residuals into cross-correlated power and performing a Bayesian hierarchical population inference over a mass-threshold hypothesis. The primary result is Bayes factors of 0.16\u20130.5 disfavoring a binary mass-scale demarcation in the ~2.5\u201360 solar mass range, and a full-population Bayes factor of ~0.07 consistent with noise. A secondary EFT power-law search cannot constrain the power-law index given current detector sensitivity. The main unresolved technical concern is an apparent inconsistency in the unmodelled hierarchy: the event likelihood is written with variance sigma^2+1 (implying sigma=0 is the no-deviation null), while the text and figure captions identify sigma=1 as the noise/no-deviation model\u2014these are mathematically incompatible conventions that directly affect the reported Bayes factors. Additional moderate concerns include overstatement of the null result's scope (the statistic can miss mass-dependent deviations in mean, sign, or temporal structure), use of a delta-function approximation at the mass MLE that ignores source-parameter uncertainty near thresholds, and absence of off-source or time-slide validation of the Gaussian alpha calibration on real GWTC-3 residuals."
+}

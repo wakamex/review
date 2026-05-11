@@ -1,0 +1,91 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Cycle 1 produced substantial disagreement: Gemini raised a potentially fatal objection (non-minimal coupling = probe-limit mass shift) and scored the paper 4/10 with 'weak_evidence'; Claude and Codex scored 6\u20136.7 with 'promising'. In cycle 2, Gemini retracted the fatal objection after correctly identifying the coupling as exp(\u03b1|\u03c8|\u00b2)F\u00b2 from the raw HTML; all three reviewers converged on 'promising'. Codex additionally accessed the PDF to resolve HTML rendering gaps and confirmed scalar mass m\u00b2=\u22122. Equations are not readable in the HTML bundle provided to reviewers, making equation-level verification impossible without the PDF; this limitation is flagged in all cycle-1 reviews and partially resolved by cycle-2 PDF/HTML inspection by Codex and Gemini. Persistent unresolved concerns (surviving both cycles): free energy derivation not shown, critical-point localization criteria not stated, QNM convergence undocumented, parameter-space coverage thin.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper uses a theoretical framework called holographic duality to model how a strongly-coupled quantum fluid changes phase\u2014much like water boiling\u2014under unusual parameter settings. The review board found the central observation plausibly novel: a single coupling parameter can push the system through not one but two phase-transition critical points, producing a \"re-entrant\" phase structure. The main caveat is that this result is demonstrated purely numerically on a narrow slice of parameter space, with no analytical explanation for why a second critical point must exist, and with key numerical documentation missing.",
+  "human_spotchecks": [
+    "Verify from the PDF that the non-minimal coupling in Eq. 1 is h(\u03c8)=exp(\u03b1|\u03c8|\u00b2) multiplying F_{\u03bc\u03bd}F^{\u03bc\u03bd}, and confirm the exact parameter names used in the equations of motion (Eqs. 6\u20137) to ensure the coupling enters the matter-sector equations non-trivially as a radially dependent function.",
+    "Check whether Eq. 11 is correctly derived as the Helmholtz free energy for the fixed-charge-density (canonical) ensemble, including all required Maxwell boundary terms and the Legendre transformation from the holographic grand canonical on-shell action.",
+    "Verify that the linearized perturbation equations (Eqs. 13\u201317) correctly account for contributions from the exponential non-minimal coupling to the QNM spectrum, and that the gauge redundancy is properly removed in the determinant condition (Eq. 23) so that no spurious or missing physical modes affect the stability conclusions.",
+    "Reproduce Fig. 11 with finer \u03b1 scans and at least two different spectral grid sizes to confirm that both critical endpoints are numerically stable and that the region between them is genuinely supercritical rather than a very narrow unresolved first-order region."
+  ],
+  "paper_id": "2604.00960",
+  "public_summary": "The paper investigates the phase structure and stability of a holographic superfluid model in the probe limit, augmenting the standard Einstein-Maxwell-scalar theory with two higher-order scalar self-interactions (\u03bb\u2084|\u03c8|\u2074 and \u03bb\u2086|\u03c8|\u2076) and a non-minimal coupling between the scalar field and the Maxwell kinetic term, h(\u03c8)=exp(\u03b1|\u03c8|\u00b2)F\u00b2. Using free-energy branch comparison and quasinormal mode (QNM) calculations, the paper argues that thermodynamic and dynamical stability are mutually consistent across second-order, zeroth-order, and Cave-of-Wind (COW) phase transitions. The headline finding\u2014described by the authors as new to holographic superfluid models\u2014is a \"double critical phenomenon\": for suitably chosen fixed parameters, varying \u03b1 drives the system through two successive critical endpoints, so the first-order spinodal region collapses, re-expands, and the system re-enters a first-order-dominated regime. A potentially fatal cycle-1 objection (that the non-minimal coupling reduces trivially to a scalar mass shift in the probe limit) was retracted in cycle 2 once the coupling was confirmed from the raw HTML source as exp(\u03b1|\u03c8|\u00b2)F\u00b2, which is radially non-trivial and genuinely distinct from a mass term. Remaining reviewer concerns, which survived both cycles, include: the canonical-ensemble thermodynamic potential is stated without derivation of the requisite Legendre transformation and Maxwell boundary terms; the locations of critical endpoints are read from phase diagrams visually, with no reproducible numerical criterion given; QNM spectral convergence and grid-size dependence are not reported; and the double-critical behavior is demonstrated at a single parameter value (\u03c4=2.85, \u03bb=\u22124) without a surrounding robustness map showing where in the (\u03bb, \u03c4, \u03b1) space it occurs.",
+  "reviewer_disagreements": [
+    "In cycle 1, Gemini rated novelty 3/10 and recommended 'weak_evidence', arguing the non-minimal coupling \u03b7R|\u03c8|\u00b2 reduces to a trivial scalar mass shift in the probe limit. Claude and Codex both rated novelty \u22657 and recommended 'promising'. In cycle 2, Gemini retracted this objection after confirming from the raw HTML that the coupling is exp(\u03b1|\u03c8|\u00b2)F\u00b2, not a Ricci scalar coupling; Gemini raised its novelty score to 7 and joined the 'promising' consensus.",
+    "Codex (cycle 2) accessed the PDF and confirmed that m\u00b2=\u22122, L=1, and r\u2095=1 are explicitly stated; Claude had listed missing scalar mass specification as a moderate concern. This is an artifact of HTML-bundle rendering, not a paper-level flaw.",
+    "Claude maintained persistently lower overall scores (5.8 in cycle 2) versus Codex (6.8) due to residual uncertainty about the coupling form that Claude acknowledged could not be resolved from the HTML alone, while Codex and Gemini updated their assessments after consulting the PDF or raw HTML source."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The canonical-ensemble (fixed charge density) free energy in Eq. 11 is asserted without deriving it from the holographic renormalized on-shell action. For the probe limit at fixed charge density, a Legendre transformation from the grand canonical potential and careful treatment of Maxwell boundary terms are required. If the thermodynamic potential is incorrect, the locations of all phase boundaries and critical endpoints could be systematically wrong.",
+      "paper_location": "Section II, Eq. 11 and surrounding discussion",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex",
+        "gemini",
+        "claude"
+      ]
+    },
+    {
+      "objection": "Critical endpoints and spinodal boundaries are identified visually from phase diagrams. The paper does not state any reproducible numerical criterion for locating a critical point (e.g., coincident free-energy extrema, merger of spinodal branches, a zero QNM mode), and reports no coordinates, step sizes, or error estimates for the two critical points in Fig. 11 that constitute the central 'double critical' claim.",
+      "paper_location": "Section IV, Figs. 7, 9, 10, 11",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex",
+        "claude"
+      ]
+    },
+    {
+      "objection": "The double critical phenomenon is demonstrated only at one specific parameter choice (\u03bb=\u22124, \u03c4=2.85) identified by a qualitative argument from the non-monotonicity observed in Fig. 10. No two-dimensional robustness map in (\u03c4, \u03b1) or (\u03bb, \u03c4, \u03b1) space is provided, so it is unclear whether the double-critical structure is a robust feature of the model or an isolated numerical occurrence.",
+      "paper_location": "Section IV, discussion around Figs. 10\u201311",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "claude"
+      ]
+    },
+    {
+      "objection": "The QNM computation uses a spectral method (det M = 0) but provides no convergence tests, grid-size dependence, or error estimates. The paper explicitly omits the full evolution of one mode branch in the COW case, citing focus on the lowest mode. Without convergence documentation, the stability assignments for subtle cases\u2014in particular the two claimed critical endpoints\u2014cannot be independently verified.",
+      "paper_location": "Section II following Eq. 23; Section III, Figs. 2, 4, 6",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper works entirely in the probe limit (backreaction neglected) without assessing whether the double critical phenomenon survives in the fully backreacted model. Gravitational backreaction is known to qualitatively alter holographic superfluid phase diagrams, so the physical significance of the result cannot be assessed without at least a perturbative backreaction estimate.",
+      "paper_location": "Section II, probe-limit discussion following Eq. 11",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper provides no analytical understanding\u2014Landau expansion, effective potential, bifurcation argument, or otherwise\u2014for why a second critical point must emerge. The double critical phenomenon is discovered by scanning \u03b1 and invoking 'as expected' after a qualitative non-monotonicity argument. Without a mechanism, it is unclear how general or robust the result is.",
+      "paper_location": "Section IV, discussion around Fig. 11; Section V",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "Thermodynamic stability (lower free energy) and dynamical stability (absence of positive-imaginary quasinormal modes) are mutually consistent for the representative second-order, zeroth-order, and COW transition examples computed in this model, confirming on numerical grounds a relationship expected from general holographic principles.",
+    "When only the negative quartic term \u03bb\u2084|\u03c8|\u2074 is present (no \u03bb\u2086 stabilizer), the zeroth-order phase transition branch corresponds to higher free energy and to QNM modes with positive imaginary parts, confirming it is both thermodynamically and dynamically unstable\u2014consistent with the result previously established by Zhao et al. (2023).",
+    "For fixed \u03bb\u2084 and \u03bb\u2086, increasing the non-minimal coupling \u03b1 is numerically shown to shrink the spinodal region of the first-order phase transition until it reaches a critical point, beyond which the system enters a supercritical region\u2014a behavior the authors argue is analogous to the effect of gravitational backreaction studied in related models."
+  ],
+  "technical_takeaway": "The paper claims a \"double critical phenomenon\" in a probe-limit AdS\u2084 holographic superfluid whose Lagrangian includes \u03bb\u2084|\u03c8|\u2074 and \u03bb\u2086|\u03c8|\u2076 scalar self-interactions and a Maxwell-sector non-minimal coupling h(\u03c8)=exp(\u03b1|\u03c8|\u00b2)F\u00b2: as \u03b1 increases with \u03bb\u2084 and \u03bb\u2086 fixed, the spinodal region of first-order phase transitions first collapses to a critical point, enters a supercritical phase, and then reconstitutes at a second critical point. Free-energy and quasinormal mode (QNM) stability analyses are reported to agree across second-order, zeroth-order, and Cave-of-Wind (COW) transition examples. Reviewers in cycle 2 reached consensus that the coupling is h(\u03c8)F\u00b2, not an \u03b7R|\u03c8|\u00b2 curvature coupling, so the probe-limit mass-shift objection raised in cycle 1 was retracted. Persistent gaps: the canonical-ensemble free energy is asserted without deriving the Legendre transform and boundary terms; critical endpoints are identified visually rather than by stated numerical criteria; QNM spectral convergence is undocumented; and the double-critical region is mapped only on a one-dimensional parameter slice."
+}

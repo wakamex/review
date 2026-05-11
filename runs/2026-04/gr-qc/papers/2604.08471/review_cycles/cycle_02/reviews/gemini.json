@@ -1,0 +1,98 @@
+{
+  "confidence": 0.95,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 5,
+    "novelty": 7,
+    "reviewer_confidence": 9,
+    "significance": 6,
+    "technical_soundness": 2
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "I am maintaining my 'major_flaw' verdict and my core technical objections. I have incorporated the excellent points from Claude and Codex regarding the lack of a realistic noise budget for the 1-km tower into my main critique.",
+    "invalid_points_from_other_reviewers": [
+      "Claude's 'promising' verdict is too generous given that they could not verify the central mathematical claim (due to HTML rendering) which turns out to be false. A fundamentally incorrect SNR calculation that artificially inflates sensitivity by ignoring the projection noise penalty is a fatal flaw."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Codex correctly identified that exact cancellation of the intensity overlap reduction function is asserted but not robustly justified, and highlighted the risk of I-mode leakage.",
+      "Both Claude and Codex rightfully flagged the unrealistic assumption that a 1-km above-ground tower would share the same noise PSD as an underground cavern without a dedicated noise analysis."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "The non-coplanar (ET-PyET) correlation channel is natively blind to the unpolarized background ($\\gamma_I = 0$).",
+      "notes": "Mathematically, the trace inner product of the detector tensors for a planar arm and a small-angle tilted arm is near-maximal, not zero. Thus, the raw channel remains highly sensitive to the unpolarized background.",
+      "paper_location": "Abstract, Eq. 15, and surrounding text.",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "A projected network channel (Eq. 16) can isolate the V-mode signal from the I-mode signal.",
+      "notes": "While theoretically correct as a linear algebraic projection, the paper fails to propagate the substantial noise penalty of this subtraction into the SNR calculations.",
+      "paper_location": "Equation 16",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The SNR for the V-mode in the Pyramid configuration is calculated using only instrumental noise P_1 P_4.",
+      "notes": "Because the raw channel is not natively blind to Stokes-I, projecting it out introduces noise from the subtracted planar channel and cosmic variance. Eq. 20 completely ignores this, rendering the sensitivity curves in Fig. 3 invalid.",
+      "paper_location": "Equation 20 and Figure 3",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "A 1-km above-ground tower does not suffer a significant noise penalty at high frequencies.",
+      "notes": "It is physically unrealistic to assume a 1-km skyscraper will match the shot-noise limited high-frequency noise floor of a deep underground cavern without addressing wind buffeting, thermal gradients, and massive seismic upconversion.",
+      "paper_location": "Section 'Sensitivity and dominant noise sources'",
+      "support_level": "unsupported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The unpolarized background can be perfectly subtracted without incurring a noise penalty or being limited by calibration errors.",
+      "paper_location": "Equations 16 and 20",
+      "why_it_matters": "Because the Stokes-I signal is typically orders of magnitude larger than Stokes-V, even tiny miscalibrations in the projection will leave residual I-mode noise that overwhelms the V-mode signal, severely degrading the true SNR."
+    },
+    {
+      "assumption": "The 1-km tower arm has identical noise properties to the underground ET arms above 10 Hz.",
+      "paper_location": "Sensitivity and dominant noise sources section",
+      "why_it_matters": "The sensitivity forecasts in Fig. 3 heavily depend on this assumption, which ignores the vastly different environmental conditions above ground."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Confirm that for the Pyramid geometry defined, the inner product of the detector tensors Tr(D_1 D_4) is non-zero, meaning the raw ET-PyET channel is NOT natively blind to Stokes-I.",
+      "why_model_cannot_resolve": "While my derivation strongly indicates the trace is near-maximal for small tilt angles, a human expert should verify if the authors implicitly invoke some unstated geometric magic angle that perfectly orthogonalizes the tensors, or if they simply made an error."
+    }
+  ],
+  "novelty_assessment": "The geometric concept of utilizing a colocated, non-coplanar extension to terrestrial GW detectors to break the parity degeneracy and probe SGWB chirality is a neat and novel idea. However, the execution and sensitivity claims are deeply flawed.",
+  "overall_score_10": 3,
+  "paper_id": "2604.08471",
+  "recommended_verdict": "major_flaw",
+  "reviewer": "gemini",
+  "score_rationale": "While the 3D non-coplanar concept is interesting (Novelty: 7), the execution suffers from fatal flaws (Technical Soundness: 2). The central claim that the tilted arm is natively blind to Stokes-I is mathematically incorrect for a standard pyramid. Consequently, they must use a projection (Eq. 16), but their SNR calculation (Eq. 20) entirely ignores the massive noise penalty and calibration requirements of that projection, rendering the sensitivity curves invalid. Furthermore, all reviewers agree that assuming a 1-km skyscraper has the same noise profile as a deep underground facility is physically unjustified. These issues necessitate a major revision.",
+  "summary": "The paper proposes the 'Pyramid interferometer', a 3D extension of the Einstein Telescope (ET) featuring non-coplanar arms, to detect the circular polarization (Stokes-V) of the stochastic gravitational-wave background. It claims this geometry isolates chirality, making the ET-PyET cross-correlation natively blind to the unpolarized intensity (Stokes-I). A 1-km vertical tower is also proposed to improve high-frequency sensitivity.",
+  "technical_objections": [
+    {
+      "confidence": 0.95,
+      "evidence": "The intensity overlap reduction function $\\gamma_I$ is proportional to the trace of the product of the two detector tensors. For a planar ET detector and a PyET detector sharing a vertex with a small tilt $h \\ll L$, the detector tensors are heavily aligned, yielding a large, non-zero $\\gamma_I$. The channel will be dominated by Stokes-I.",
+      "objection": "The claim that the ET-PyET pair is natively blind to the unpolarized background ($\\gamma_I^{1,4} = 0$) is mathematically false for any standard pyramid geometry.",
+      "paper_location": "Abstract and Eq. 15.",
+      "severity": "fatal",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "Since the raw ET-PyET channel is sensitive to Stokes-I, extracting Stokes-V requires the projection defined in Eq. 16. This subtraction linearly combines the outputs of multiple detectors. Consequently, the noise power in the projected channel must include the noise from the subtracted planar channels. Eq. 20 incorrectly uses only $P_1 P_4$, vastly overestimating the sensitivity.",
+      "objection": "The SNR formula (Eq. 20) and resulting sensitivity curves (Fig. 3) are invalid because they ignore the noise penalty of projecting out the Stokes-I background.",
+      "paper_location": "Equation 20 and Figure 3.",
+      "severity": "fatal",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "As noted by all reviewers, a 1-km free-standing structure experiences severe wind loads, thermal expansion, and sway. These generate massive low-frequency noise that inevitably upconverts into the >10 Hz band, making the straightforward application of the underground ET noise budget to the tower arm inappropriate.",
+      "objection": "The assumption that a 1-km tall above-ground tower will achieve the same high-frequency noise floor as the underground ET is physically unjustified.",
+      "paper_location": "Section 'Sensitivity and dominant noise sources'",
+      "severity": "major",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

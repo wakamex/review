@@ -1,0 +1,102 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "All three reviewers independently identified major technical deficiencies in cycle 1; all three converged on a 'major_flaw' verdict in cycle 2. The fatal objection (b(r) independence of photon sphere in Teo metric) was raised by gemini in cycle 1 and accepted by claude in cycle 2 after reconsidering; codex agreed with the narrow form but hedged on absoluteness. Gemini corrected two of codex's specific claims in cycle 2 (throat normalization reading, redshift asymptotic-flatness reading), creating unresolved textual disputes flagged as human spot-checks. The slow-rotation violation and mixed-profile provenance objections were accepted by all three reviewers by cycle 2. Score trend: mechanical average dropped from 2.667 (cycle 1) to 1.767 (cycle 2), reflecting convergence toward lower technical soundness and significance.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper proposes that hypothetical tunnels through space called wormholes could be sustained by a form of energy tied to quantum properties of the universe's cosmic horizon, known as holographic dark energy, and studies how such wormholes would look to a distant observer. The review board found a serious mathematical problem at the heart of the paper: the shadow size and shape of a wormhole, using the mathematical framework the authors chose, turns out to be completely independent of which dark energy model is used, so the paper's central claim\u2014that different dark energy models produce detectably different shadows\u2014cannot follow from the analysis presented. Several additional technical problems were identified, including that the \"slow rotation\" approximation the entire analysis relies on is violated by the numerical values the authors themselves use.",
+  "human_spotchecks": [
+    "Verify in the Teo (1998) metric whether b(r) appears anywhere in the null geodesic effective potential beyond an overall (1\u2212b/r) prefactor that vanishes at photon-sphere conditions; specifically, determine whether throat light rings or higher-order coupling through the matter stress tensor restores any b(r) dependence on the shadow.",
+    "Obtain the original LaTeX source for Eqs. (19)\u2013(21) to determine whether the redshift function arguments are r\u2080/r (which would vanish asymptotically and satisfy the boundary condition) or r/r\u2080 (which would not); the HTML rendering is ambiguous and the two forms have opposite asymptotic behavior.",
+    "Check the LaTeX for the integration constants in Eqs. (14)\u2013(16) and the sentence after Eq. (16) to resolve whether the paper sets \u03b5_th=r\u2080 unconditionally (Codex's reading, implying an algebraic error) or correctly sets C such that b(r\u2080)=r\u2080 after integrating from r\u2080 (Gemini's reading).",
+    "Check whether Anderhalden et al. (2012) (JCAP 10:047) or any paper it cites provides an entropy-based or holographic derivation of the 1/r\u00b2+log-correction density profile, which would partially rehabilitate the 'mixed HDE' label.",
+    "Verify whether \u03c9(r)=2J/r\u00b3 is a valid slow-rotation solution of the linearized stationary-axisymmetric Einstein equations for any reasonable HDE stress tensor at the stated throat radii, or whether it requires an additional matter-sourced correction that the paper neglects."
+  ],
+  "paper_id": "2604.18246",
+  "public_summary": "The paper aims to study slowly rotating traversable wormholes embedded in holographic dark energy (HDE), using the Teo (1998) rotating wormhole metric and three representative HDE density profiles\u2014R\u00e9nyi, mixed, and Moradpour. The authors construct wormhole shape functions by integrating the HDE energy densities through the Einstein field equations, analyze the null energy condition, and then study photon motion, photon-sphere locations, Lense-Thirring splitting, and shadow morphology using three ad hoc hyperbolic redshift functions. The paper claims that R\u00e9nyi-supported wormholes produce smaller, asymmetric shadows while mixed and Moradpour-supported wormholes produce larger, nearly circular shadows.\n\nAfter two adversarial review cycles, the board identifies a critical mathematical problem: in the Teo wormhole metric, the effective potential governing null geodesics depends only on the metric components g_tt, g_t\u03c6, and g_\u03c6\u03c6. The shape function b(r)\u2014the only quantity that differs between the three HDE models\u2014enters only g_rr and cancels from the photon-sphere conditions. This means the claimed HDE-model-dependent shadow differences cannot be derived from the authors' own setup; any apparent differences arise from the independently chosen redshift functions, which are never linked to the HDE density profiles by field equations.\n\nSeparately, the paper's slow-rotation approximation (|\u03a9r| \u226a 1) is violated at the numerical parameter values the authors explicitly quote and in the spin values shown in the figures (up to J=0.7). The \"mixed HDE\" profile is taken directly from a dark-matter N-body halo fitting paper and is relabeled without any entropy or holographic derivation. The Einstein system is also underclosed: only the energy density \u03c1(r) is specified, and the pressures needed to evaluate the null energy condition are not derived. These compound flaws undermine the central theoretical and observational conclusions.",
+  "reviewer_disagreements": [
+    "Throat normalization: Codex argues that the integration constants \u03b5_th in Eqs. (14)\u2013(16) should be r\u2080 \u2212 F_model(r\u2080) rather than r\u2080, so the throat condition b(r\u2080)=r\u2080 is not satisfied. Gemini (cycle 2) disputes this, asserting that the paper leaves the constant as C and correctly states it is fixed by the throat condition, concluding that Codex misread the paper. Whether this is an algebraic error or a correct application is unresolved without access to the original LaTeX.",
+    "Asymptotic flatness of redshift functions: Codex maintains that \u03a6_Cosh=\u03a6\u2080[1\u2212sech(r/r\u2080)] and \u03a6_Tanh=\u03a6\u2080tanh(r/r\u2080) tend to \u03a6\u2080 (not 0) as r\u2192\u221e, violating the metric boundary condition. Gemini (cycle 2) dismisses this as Codex misreading the function arguments (r\u2080/r versus r/r\u2080); Claude (cycle 2) also notes the HTML rendering is ambiguous. The sign of this objection depends on the exact LaTeX forms.",
+    "Severity of the b(r) independence claim: Gemini and Claude (cycle 2) treat the photon-sphere independence from b(r) as a fatal flaw. Codex (cycle 2) agrees the off-throat photon-sphere equations do not directly depend on b(r) in the displayed formulas, but hedges that throat light rings or the allowed radial domain could involve b(r), calling the absolute 'fatal' version unresolved pending a human spot-check.",
+    "HDE application to a static spacetime: Gemini and Codex treat the substitution of a cosmological horizon IR cutoff with a static radial coordinate as a major or moderate flaw destroying the thermodynamic basis of the HDE models. Claude in cycle 1 did not flag this independently and accepted the setup more provisionally."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "In the Teo wormhole metric, the null geodesic effective potential V_eff depends only on g_tt, g_t\u03c6, and g_\u03c6\u03c6. The shape function b(r)\u2014the only metric component modified by the three HDE models\u2014enters exclusively via g_rr, which acts as a conformal factor for the radial velocity and does not alter the roots of V_eff=0 or V_eff\u2032=0. Consequently, the photon-sphere location and shadow size are mathematically independent of which HDE model is used, and the paper's central observational claim is not derivable from the stated setup.",
+      "paper_location": "Section V.2\u2013V.3 and Section VI; Abstract",
+      "severity": "fatal",
+      "supporting_reviewers": [
+        "gemini",
+        "claude"
+      ]
+    },
+    {
+      "objection": "The slow-rotation expansion parameter |\u03a9r|\u22482J/r\u00b2 evaluates to approximately 1.25 (R\u00e9nyi), 0.82 (mixed), and 0.60 (Moradpour) at the throat radii quoted in the paper. None of these values is parametrically small, and the figures extend to J=0.7, further violating the linear-in-J approximation upon which all photon-sphere and shadow formulas depend.",
+      "paper_location": "Section V.1 representative values; Figures 1\u20132",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The 'mixed energy density' profile (Eq. 9) is taken from Anderhalden et al. (2012), an N-body simulation paper studying mixed cold+warm dark matter galactic halos. The paper provides no holographic, entropy-based, or thermodynamic derivation connecting this profile to any generalized entropy or cosmic horizon, making the 'mixed HDE' label physically unfounded.",
+      "paper_location": "Section III.2, Eq. (9); citation to Anderhalden et al. (2012)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The three hyperbolic redshift functions (Eqs. 19\u201321) are introduced as free choices unrelated to the HDE density profiles; no field equation or equation of state links \u03a6(r) to \u03c1_HDE(r). Attributing shadow and photon-sphere differences to specific HDE models when the differences arise from independently chosen redshift functions is a category error.",
+      "paper_location": "Section V, Eqs. (19)\u2013(21); Section VI conclusions",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The Einstein system is underclosed: only \u03c1(r) is determined through b\u2032(r)=8\u03c0G\u03c1(r)r\u00b2, while the radial pressure p_r and transverse pressure p_t are never derived. The null energy condition \u03c1+p_r depends on p_r, which requires either a second Einstein equation or an equation of state; neither is provided. NEC violation is therefore asserted rather than demonstrated.",
+      "paper_location": "Section IV, Eqs. (11)\u2013(12)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The paper claims the shadows and photon spheres of different HDE-supported wormholes differ observationally, but no quantitative shadow angular size (in microarcseconds or as a fraction of throat radius), no observer coordinates or inclination, and no ray-tracing procedure are specified. The observational claims cannot be evaluated against EHT data.",
+      "paper_location": "Section VI; Abstract",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "Section V.3 describes increasing spin as pushing prograde orbits outward, while Section VI states that co-rotating photons shift inward. These descriptions cannot simultaneously be correct without an unexplained sign convention change.",
+      "paper_location": "Section V.3 text around Figures 1\u20132; Section VI first paragraph",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "codex",
+        "claude"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The formal mathematical structure\u2014integrating b\u2032(r)=8\u03c0G\u03c1(r)r\u00b2 from the chosen HDE density to obtain shape functions\u2014is a standard and consistently applied procedure within the Morris-Thorne wormhole framework.",
+    "The R\u00e9nyi HDE density profile (Eq. 8) reduces to the standard Bekenstein-Hawking form in the appropriate parameter limit and is internally consistent with its cited prior derivations.",
+    "The qualitative Lense-Thirring frequency formula (Eq. 22) and the first-order impact parameter splitting formula (Eqs. 31-32) are standard results that follow formally from linearizing geodesic equations in the slow-rotation regime, conditional on that approximation being valid.",
+    "The paper is well-organized and notation is consistent throughout; the logical flow from metric setup to NEC analysis to photon dynamics to shadow discussion is clear."
+  ],
+  "technical_takeaway": "The paper applies the Teo (1998) slowly rotating wormhole metric with three HDE density profiles (R\u00e9nyi, mixed, Moradpour) and claims HDE-model-dependent photon-sphere locations and shadow morphology. A fatal objection, accepted by two of three reviewers in cycle 2, is that in the Teo metric the null geodesic effective potential depends only on g_tt, g_t\u03c6, and g_\u03c6\u03c6; the shape function b(r)\u2014the sole metric component modified by the HDE models\u2014enters exclusively via g_rr and does not appear in the photon-sphere conditions V_eff=0 and V_eff\u2032=0 away from the throat. Consequently, any shadow differences in the paper must be driven by the independently chosen hyperbolic redshift functions, not the HDE physics. Additional major flaws include: the slow-rotation expansion parameter |\u03a9r|\u22482J/r\u00b2 evaluates to 0.6\u20131.25 at the stated throat values (not \u226a1), with figures extending to J=0.7; the \"mixed\" density profile is sourced from an N-body dark-matter halo paper (Anderhalden et al. 2012) without any holographic or entropy-based derivation; the Einstein system is underclosed because only \u03c1(r) is fixed while pressures and the redshift function are chosen freely; and parameter inequalities guaranteeing flaring-out and NEC violation are never derived."
+}

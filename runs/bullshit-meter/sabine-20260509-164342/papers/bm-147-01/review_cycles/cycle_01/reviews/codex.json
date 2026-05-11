@@ -1,0 +1,141 @@
+{
+  "confidence": 0.64,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 4.5,
+    "novelty": 8.0,
+    "reviewer_confidence": 6.4,
+    "significance": 7.0,
+    "technical_soundness": 5.0
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "No prior cycle available.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "Direct pulsar acceleration measurements can constrain localized dark matter substructure near the Sun.",
+      "notes": "The conceptual reduction from period drift to LOS acceleration is grounded in prior pulsar timing work, and the paper defines a localized residual relative to a smooth potential. However, the extraction of a sub-halo signal from sparse LOS-only accelerations depends strongly on modeling and selection assumptions.",
+      "paper_location": "Introduction; 'Constraints on dark matter sub-halos' section, equations (5)-(8)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "One binary pulsar pair, PSR J1640+2224/PSR J1713+0747, plus nearby pulsars yields a fitted sub-halo mass and Galactocentric position.",
+      "notes": "The supplied bundle omits the actual numerical mass/location values in several places, including the abstract and tables. The support also depends on adding nearby binary and solitary pulsars after identifying the candidate pair, which needs clearer statistical conditioning.",
+      "paper_location": "Results section; Table 2; Figure 1 discussion",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "Bayes factors of roughly 20-40 provide tentative evidence for a sub-halo model over smooth-potential alternatives.",
+      "notes": "Bayes factors are reported, but the likelihood, exact null model, Savage-Dickey setup, prior density at the null, and treatment of the search over 351 pairs/five selected pairs are not sufficiently specified in the supplied text to make the evidence auditable.",
+      "paper_location": "Abstract; Results section; Table 3",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Gas and stars cannot explain the measured localized acceleration deviation.",
+      "notes": "The paper attempts conservative upper limits from Gaia, galpy disk, HI, and CO data. But the method is summarized rather than fully specified, and the main text itself acknowledges that a broader range of small-scale baryonic distributions has not been marginalized over.",
+      "paper_location": "Appendix, 'Accelerations from stars and gas'; Results discussion near Figure 2",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Massive sub-halos within several kpc of the Sun are disfavored by the full pulsar sample.",
+      "notes": "The claim may be plausible, but the supplied Table 2 lacks visible numerical upper limits, and the selection/coverage function for the 27 binary pulsars is not shown in enough detail to judge the strength of the exclusion.",
+      "paper_location": "Abstract; Results section; Table 2",
+      "support_level": "unclear"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The model comparison must condition on the full anomaly-search procedure, including pair enumeration, thresholds, and later inclusion of nearby pulsars.",
+      "paper_location": "Constraints section and Results section",
+      "why_it_matters": "Without this assumption, local Bayes factors for a selected candidate are not global evidence for a sub-halo detection."
+    },
+    {
+      "assumption": "The smooth-potential residuals and pulsar acceleration errors are independent or have a specified covariance model.",
+      "paper_location": "Equation (5)-(7) discussion and MCMC description",
+      "why_it_matters": "Correlated systematics from distance, Galactic potential modeling, or timing calibrations could mimic a localized residual and alter the inferred significance."
+    },
+    {
+      "assumption": "The baryonic foreground model is complete enough at sub-kpc scales around the candidate region.",
+      "paper_location": "Appendix, 'Accelerations from stars and gas'",
+      "why_it_matters": "The dark-matter interpretation requires ruling out ordinary mass concentrations or unmodeled baryonic structure at the same acceleration scale."
+    },
+    {
+      "assumption": "Solitary pulsar acceleration estimates using empirical magnetic-braking calibration can be combined consistently with binary-pulsar accelerations in the same likelihood.",
+      "paper_location": "Introduction and Results sections where solitary pulsars are added",
+      "why_it_matters": "If these measurements have different systematics or larger unmodeled scatter, the fitted sub-halo parameters and evidence can be biased."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Do the original PDF/arXiv source equations and tables contain the missing numerical values and formulas, and do they match the reported conclusions?",
+      "why_model_cannot_resolve": "The supplied review bundle has malformed or blank mathematical content, so a human should inspect the original source or PDF."
+    },
+    {
+      "question": "Are the reported Savage-Dickey Bayes factors computed after marginalizing over the full search strategy and prior volume?",
+      "why_model_cannot_resolve": "The paper summary does not provide enough likelihood/evidence details to reconstruct the calculation."
+    },
+    {
+      "question": "Could local baryonic structure, distance/parallax systematics, or correlated Galactic-potential residuals reproduce the PSR J1640+2224/PSR J1713+0747 signal?",
+      "why_model_cannot_resolve": "Answering this requires data-level checks against Gaia/gas maps and timing uncertainties beyond the supplied text."
+    }
+  ],
+  "novelty_assessment": "The proposed use of direct pulsar acceleration residuals to search for local dark matter substructure is novel and potentially significant. The novelty is stronger as a proof-of-principle method than as a secure detection, because the statistical treatment of candidate selection and nuisance structure is not yet convincing from the supplied text.",
+  "overall_score_10": 5.6,
+  "paper_id": "bm-147-01",
+  "recommended_verdict": "contested",
+  "reviewer": "codex",
+  "score_rationale": "Interesting and potentially important method, but the detection-level interpretation is not yet locally auditable. The largest concerns are post-selection/look-elsewhere effects, under-specified Bayes-factor methodology, sparse LOS-only data, and incomplete treatment of correlated residuals and small-scale baryonic alternatives. The supplied text also loses key equations and numbers, lowering clarity and confidence.",
+  "summary": "The paper proposes using line-of-sight pulsar accelerations to identify localized deviations from smooth Galactic potential models and interprets one nearby correlated excess, centered on PSR J1640+2224/PSR J1713+0747 and supplemented by nearby binary/solitary pulsars, as tentative evidence for a dark matter sub-halo near the Sun. The idea is interesting, but the supplied text leaves several local technical steps hard to audit: many equations and numerical parameter values are absent in the rendered bundle, the anomaly selection appears partly post hoc, and the Bayes factors do not clearly account for the search/selection procedure or prior-volume sensitivity.",
+  "technical_objections": [
+    {
+      "confidence": 0.78,
+      "evidence": "The workflow first searches 351 possible binary pairs, selects five localized deviations above threshold, then performs MCMC and reports Bayes factors for the sub-halo model. The text does not state that the Bayes factors include this selection procedure, multiple trials, or the thresholding rule. If they are conditional only on the selected region, they can overstate global evidence.",
+      "objection": "The reported Bayes factors appear not to account for the look-elsewhere effect from scanning many pulsar pairs and then focusing on the most significant localized excess.",
+      "paper_location": "'Constraints on dark matter sub-halos' section describing 351 possible pairs and five selected pairs; Results section reporting Bayes factors; Table 3",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.72,
+      "evidence": "The paper says location priors span a 1 kpc cube and mass priors span two orders of magnitude, but does not specify the exact ranges, the null point used for Savage-Dickey, whether mass is sampled linearly or logarithmically, or how boundary/null issues are handled. Bayes factors for weak localized anomalies can vary substantially with these choices.",
+      "objection": "The Savage-Dickey Bayes factor calculation is under-specified and may be sensitive to arbitrary prior choices, especially because the sub-halo mass/location priors are described as flat and uninformative over finite ranges.",
+      "paper_location": "Results section: 'We use the python package emceee and adopt flat, uninformative priors...' and Table 3",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "The text states that after an initial characterization using the candidate pair, additional binary pulsars and solitary pulsars near the common center are selected and fitted. This may be reasonable as a follow-up, but it must be treated as targeted/post-selected rather than as an a priori model comparison unless the full selection rule is included in the likelihood/evidence calculation.",
+      "objection": "The candidate construction appears partly circular: nearby solitary and binary pulsars are added after the PSR J1640+2224/PSR J1713+0747 pair is identified, but the inference is presented as a coherent sub-halo fit without clearly conditioning on that data-selection step.",
+      "paper_location": "Results section paragraph beginning 'Once we have obtained an initial characterization...'",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.64,
+      "evidence": "The exclusion rests mainly on scale: disequilibrium features are said to occur over few-kpc scales, while the search uses pair separations below 0.5 kpc. The paper does not show a quantitative covariance model for correlated acceleration residuals from non-axisymmetric or time-dependent Galactic structures at the relevant locations.",
+      "objection": "The paper asserts that large-scale disequilibrium features cannot produce the localized signal, but the argument is qualitative relative to the precision of the result.",
+      "paper_location": "Results section paragraph beginning 'The Milky Way is now known...' and earlier localization criterion discussion",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.61,
+      "evidence": "The paper uses Gaia stars, galpy disk, HI, and CO estimates and imposes a minimum acceleration threshold. But several numerical values are missing in the supplied text, and the authors acknowledge that they have not considered a broad range of small-scale baryonic distributions aside from the spiral arm model.",
+      "objection": "The baryonic-contamination threshold is not fully reproducible from the supplied text and may not cover compact or structured baryonic mass distributions sufficiently broadly.",
+      "paper_location": "Appendix, 'Accelerations from stars and gas'; Results paragraph noting future work should marginalize over small-scale baryonic distributions",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "The abstract contains blank mass and coordinate values; equations render as empty table cells; Tables 2 and 3 list parameters without visible numerical entries in the supplied source text. This may be a bundle/rendering issue rather than a paper issue, but it blocks verification of the claimed masses, upper limits, priors, and accelerations from the material supplied for review.",
+      "objection": "Several equations, tables, and numerical results are absent or malformed in the provided arXiv HTML text, preventing independent audit of the central calculation from this bundle alone.",
+      "paper_location": "Abstract; equations (1)-(24); Tables 1-3",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

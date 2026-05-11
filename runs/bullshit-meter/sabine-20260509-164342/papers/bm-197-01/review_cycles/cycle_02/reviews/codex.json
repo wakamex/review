@@ -1,0 +1,152 @@
+{
+  "confidence": 0.73,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 6.2,
+    "novelty": 6.6,
+    "reviewer_confidence": 7.3,
+    "significance": 6.7,
+    "technical_soundness": 5.4
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "I lower the overall score from 7.0 to 6.1 and change the verdict from promising to contested. Claude's review largely corroborates the postselection, finite-size, overclaiming, and discord-specification concerns. Gemini's local-observable counterexample strengthens my prior concern about Eq. 4, though I do not accept that it invalidates the whole paper.",
+    "invalid_points_from_other_reviewers": [
+      "Gemini's fatal overall verdict is too strong on the provided bundle: the local-observable problem does not by itself invalidate the tomographic mutual-information and branching data.",
+      "Calling the experiment merely tautological understates the value of implementing and measuring the finite noisy circuit; it is limited, not empty.",
+      "The claim that the paper's novelty is weak overall depends on treating the local witness as the only novelty; the geometric superconducting-circuit demonstration still has some independent novelty."
+    ],
+    "valid_points_from_other_reviewers": [
+      "The unreported postselection rate in the Fig. 2 geometric-state experiment is a real methodological gap.",
+      "The engineered conditional-gate structure limits the claim from general observation of classicality to controlled simulation of a model.",
+      "The local observable is insufficiently specified in the main text and its general one-to-one interpretation is mathematically suspect.",
+      "The Holevo/discord optimization needs clarification.",
+      "The measurement-problem language is overextended."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "The experiment realizes branching-state geometry in a 12-qubit superconducting circuit, with reconstructed system states clustering around pointer states as environment size grows.",
+      "notes": "The data are consistent with clustering in the implemented conditional-gate model. Support is limited by the engineered pointer-basis interactions and by postselection onto the logical subspace without reported rejection rates.",
+      "paper_location": "Results, 'Branching states and quantum Darwinism'; Fig. 2C-E; Materials and Methods, 'Measurement of the geometric state'",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The nine-qubit experiment observes a mutual-information plateau for partial environment fragments in the tested model.",
+      "notes": "Within the finite circuit family, the mutual-information data appear to track the numerical predictions and are the strongest experimental part of the paper. This remains a finite engineered simulation, not a demonstration of macroscopic objectivity.",
+      "paper_location": "Results, 'Decoherence and quantum Darwinism'; Fig. 3C",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The reported Holevo-bound and discord data verify near-classical correlations in fragments and quantum correlations only globally.",
+      "notes": "The qualitative behavior is plausible, but the main text does not clearly specify the measurement optimization used for the Holevo quantity/discord. If the calculation is basis-restricted, the claim should be narrowed.",
+      "paper_location": "Results, 'Decoherence and quantum Darwinism'; Fig. 3D; Materials and Methods, 'Measurement of the quantum discord'",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "A local observable provides a general inexpensive one-to-one quantifier of branching or quantum Darwinism.",
+      "notes": "Fig. 4 supports correlation for one chosen observable in one circuit sweep. The general one-to-one claim is not supported in the main text: an off-diagonal system operator can vanish for any state decohered in the pointer basis, even if the measured fragment contains no redundant record.",
+      "paper_location": "Results, 'Local observables'; Eq. 4; Fig. 4; supplementary text section 1D referenced",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "The work robustly verifies quantum Darwinism in general and paves the way to settling the measurement problem.",
+      "notes": "The experiments support selected signatures in small programmable circuits. They do not resolve the definite-outcome problem, derive the Born rule, or establish everyday/macroscopic classicality.",
+      "paper_location": "Abstract; Introduction final paragraph; Results and Discussion",
+      "support_level": "unsupported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The local-observable theorem is restricted enough to avoid decohered-but-unrecorded false positives.",
+      "paper_location": "Results, 'Local observables'; supplementary text section 1D",
+      "why_it_matters": "Without such restrictions, the observable witnesses loss of pointer-basis coherence, not redundant encoding across environmental fragments."
+    },
+    {
+      "assumption": "Logical-subspace postselection is small and independent of branch, fragment outcome, and environment size.",
+      "paper_location": "Materials and Methods, 'Measurement of the geometric state'",
+      "why_it_matters": "Branch-dependent leakage would directly distort the reconstructed geometric state and the apparent clustering."
+    },
+    {
+      "assumption": "The known pointer basis and engineered conditional interactions are representative of the quantum-Darwinism setting being claimed.",
+      "paper_location": "Results, Figs. 2-4",
+      "why_it_matters": "Several diagnostics are tailored to the chosen pointer basis; this supports verification inside a designed model more than discovery of emergent pointer states."
+    },
+    {
+      "assumption": "Finite environments with 4 to 10 qubits adequately capture redundancy rather than a small-system plateau artifact.",
+      "paper_location": "Introduction Fig. 1 discussion; Results Figs. 2D and 3C-D",
+      "why_it_matters": "Quantum Darwinism is about many independent records; small fragments can show suggestive signatures without establishing scalable objectivity."
+    },
+    {
+      "assumption": "Tomography reconstruction errors and entropy/discord biases are controlled well enough for the reported information-theoretic quantities.",
+      "paper_location": "Materials and Methods, 'Quantum state tomography' and 'Measurement of the quantum discord'",
+      "why_it_matters": "The central information quantities depend on reconstructed density matrices and matrix functions that can be sensitive to systematic tomography error."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Does supplementary text section 1D prove a genuinely necessary-and-sufficient relation for the local observable, and does it address decohered product-state false positives?",
+      "why_model_cannot_resolve": "The supplement is referenced but not included in the bundle; the main text alone supports only a one-sided or model-specific diagnostic."
+    },
+    {
+      "question": "What are the leakage/postselection rates in the Fig. 2 geometric-state tomography, and are they branch- or environment-outcome dependent?",
+      "why_model_cannot_resolve": "The main text says leakage outcomes are discarded but does not provide the needed numerical rates or dependence tests."
+    },
+    {
+      "question": "Was the Holevo quantity/discord computed with a true optimization over measurements, and if so over what measurement class?",
+      "why_model_cannot_resolve": "The methods section omits the optimization details needed to distinguish full discord from a fixed-basis accessible-information diagnostic."
+    },
+    {
+      "question": "What exact hypotheses justify the Eq. 1 decomposition of a generic joint pure state?",
+      "why_model_cannot_resolve": "The equation is incompletely visible in the HTML extraction and the supplement/theorem statement is needed to determine whether this is a notation issue or a real mathematical restriction."
+    }
+  ],
+  "novelty_assessment": "The novelty remains moderate-to-good as an experimental and methodological contribution: superconducting-circuit implementation, geometric-state visualization of branching, and comparison of information-theoretic signatures in a controlled platform. The novelty is weakened if the local observable is only a coherence witness rather than a general scalable Darwinism quantifier. The conceptual framework itself is largely inherited from prior quantum-Darwinism and branching-state theory.",
+  "overall_score_10": 6.1,
+  "paper_id": "bm-197-01",
+  "recommended_verdict": "contested",
+  "reviewer": "codex",
+  "score_rationale": "The core finite-circuit demonstrations look useful and partly convincing, especially the mutual-information plateau, but technical soundness is limited by supplement-dependent proof claims, unreported postselection, underspecified discord optimization, and a likely false-positive problem for the local observable. The work is worth attention as a controlled experimental simulation, not as a complete verification of quantum Darwinism or a resolution of the measurement problem.",
+  "summary": "The paper reports controlled superconducting-circuit demonstrations of quantum-Darwinism signatures: geometric branching, mutual-information plateaus, suppressed discord on partial fragments, and a proposed local observable witness. After reading the other reviews, I still view the finite experimental program as interesting and partly convincing within its engineered circuit family. I lower my prior assessment because the local-observable claim has a clearer mathematical false-positive problem than I initially emphasized, and because the key geometric data still depend on unreported postselection. I do not certify the full proof chain or the supplement-dependent claims.",
+  "technical_objections": [
+    {
+      "confidence": 0.88,
+      "evidence": "The text says the system factor of the observable rotates pointer states to orthogonal states. For a state block-diagonal in the pointer basis, such as rho_SF = (p|0><0| + (1-p)|1><1|) tensor rho_F, the expectation of any off-diagonal A_S tensor B_F is zero although fragment F carries no information about S. Thus <O_W>=0 is not sufficient for quantum Darwinism unless the supplement imposes much stronger state-family assumptions.",
+      "objection": "The proposed local observable has false positives: it can vanish under ordinary local decoherence without redundant environmental records.",
+      "paper_location": "Results, 'Local observables'; Eq. 4",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.84,
+      "evidence": "The paper states that outcomes leaking out of the logical basis due to experimental imperfections are discarded. Without the discarded fraction and branch/fragment dependence, one cannot tell whether postselection sharpens the Bloch-sphere clustering or changes the integrated probability distributions.",
+      "objection": "Postselection in the geometric-state tomography is not quantified and could bias the observed branch clustering.",
+      "paper_location": "Materials and Methods, 'Measurement of the geometric state'; Fig. 2C-E",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "The experiments use 9 to 12 qubits, selected initial states, known pointer bases, and conditional gates designed to encode the relevant records. This is valuable as a controlled simulation, but it is not an independent demonstration that natural macroscopic environments generically produce objective classical reality.",
+      "objection": "The strongest language about complete or robust verification overstates what finite engineered conditional-gate circuits establish.",
+      "paper_location": "Abstract; Results, 'Decoherence and quantum Darwinism'; Discussion",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.65,
+      "evidence": "Quantum discord requires optimizing over measurements, but the methods section presents conditional entropies without clearly stating the measurement set or optimization procedure. If only a fixed pointer/computational basis is used, the reported discord is a model-specific diagnostic rather than the full discord quantity.",
+      "objection": "The Holevo-bound/discord calculation is underspecified in the main text.",
+      "paper_location": "Introduction definition of Holevo bound; Materials and Methods, 'Measurement of the quantum discord', Eqs. 9-12",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.56,
+      "evidence": "The text says any joint pure state can be expressed using orthonormal states of S, F, and the environment complement indexed by system and fragment labels. A generic tripartite pure state does not generally admit a product-basis expansion with all conditional complement vectors mutually orthogonal. This may be a notation/extraction issue, but if used as a theorem it needs explicit hypotheses.",
+      "objection": "The claimed general tripartite representation around Eq. 1 is not obviously valid as written.",
+      "paper_location": "Results, 'Branching states and quantum Darwinism', discussion around Eq. 1",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    }
+  ]
+}

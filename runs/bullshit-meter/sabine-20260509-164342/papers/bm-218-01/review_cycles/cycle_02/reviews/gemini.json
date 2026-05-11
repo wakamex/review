@@ -1,0 +1,95 @@
+{
+  "confidence": 0.95,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 3,
+    "novelty": 6,
+    "reviewer_confidence": 9,
+    "significance": 3,
+    "technical_soundness": 2
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "I have maintained my score and primary fatal objection. Both Codex and Claude correctly observed that the HTML rendering of the paper omitted crucial equations and numerical values in tables, which I have now added as a major objection. Codex also independently corroborated my main theoretical objection, noting that the authors conflate aggregate gate error estimates with rigorous forbidden-outcome probability bounds.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": [
+      "Codex and Claude noted the severe HTML rendering issues that caused equations and table values to be lost, making the results numerically unauditable.",
+      "Codex identified that the noise models conflate aggregate gate error estimates with rigorous forbidden-outcome probability bounds, matching my fatal objection.",
+      "Claude and Codex pointed out that the paper does not address the preparation independence assumption on a shared chip, where correlated noise and crosstalk might violate it."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "The first experimental realization of the PBR test on a superconducting qubit architecture, extending up to a 5-qubit system.",
+      "notes": "The experimental execution on the IBM hardware is likely valid, but the theoretical framework used to interpret the test results is fundamentally flawed, and key circuit parameters (like the n=5 measurement basis) are missing from the text.",
+      "paper_location": "Section I, paragraph 4",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Noise-aware error tolerances derived from device calibration allow the determination of when an experimental outcome violates the epistemic bound.",
+      "notes": "The authors calculated the expected quantum circuit noise (the device noise floor) and incorrectly substituted it as the theoretical epistemic tolerance bound, which mathematically invalidates the test.",
+      "paper_location": "Section I, paragraph 5; Section II (Eq. 4-8)",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "Distant qubit pairs fail the PBR test due to the increased circuit depth and corresponding decoherence.",
+      "notes": "The distant pairs 'failed' to meet the authors' calculated device noise floor, but their observed errors (e.g., $10^{-2}$) remain overwhelmingly below the actual theoretical epistemic bound (which is ~14.6% for n=2), meaning they successfully ruled out the epistemic model.",
+      "paper_location": "Section III, 'Distant qubit pairs'",
+      "support_level": "unsupported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "Actual evaluation of the noisy trace distance $D_c(\\rho_0, \\rho_1)$ to establish the true epistemic threshold.",
+      "paper_location": "Section II, under 'Overlap and distance'",
+      "why_it_matters": "The authors define the modified epistemic bound in Eq. 4 using classical trace distance, but they substitute expected circuit error for this bound instead of computing the true allowed error limit for ruling out epistemic models."
+    },
+    {
+      "assumption": "Preparation independence holds for independently prepared qubits on the same superconducting chip.",
+      "paper_location": "Section I; Section III experimental design",
+      "why_it_matters": "The PBR theorem requires independently prepared systems to have product ontic states. The authors do not sufficiently bound or account for correlated noise and crosstalk on the shared substrate, which could violate this core assumption."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Did the authors intend a different, non-standard formulation of the PBR protocol?",
+      "why_model_cannot_resolve": "The text directly equates the expected quantum gate error (Eq 6) with the epistemic ontological bound (Eq 4). An expert should verify if there is any unconventional benchmarking context where this equality was intended, as it contradicts standard PBR frameworks."
+    },
+    {
+      "question": "Are the missing equations, table values, and angle parameters present in the original PDF?",
+      "why_model_cannot_resolve": "The supplied bundle text has empty mathematical fields and table cells likely due to LaTeX-to-HTML conversion errors."
+    }
+  ],
+  "novelty_assessment": "The execution of a PBR test on a superconducting processor and the scaling to 5-qubit clusters across a chip is a novel and structurally impressive physical experiment. However, the theoretical interpretation contributes negative value to the field due to fundamental misconceptions about the theorem's bounds, and the manuscript text is severely compromised by missing data.",
+  "overall_score_10": 2,
+  "paper_id": "bm-218-01",
+  "recommended_verdict": "major_flaw",
+  "reviewer": "gemini",
+  "score_rationale": "While the experimental data collection on a 156-qubit device is a competent technical feat, the paper is fundamentally undermined by a severe theoretical misunderstanding. The authors conflated the predicted expected noise of the quantum circuit (~0.1%) with the absolute theoretical bound required to rule out the $\\psi$-epistemic model. Because their experimental noise occasionally exceeded their simulation, they incorrectly concluded those test cases 'failed', whereas they actually produced strong evidence validating the ontological model. Furthermore, the provided manuscript is missing critical equations and data in tables, heavily impairing its clarity and verifiability.",
+  "summary": "The paper presents an experimental realization of the Pusey-Barrett-Rudolph (PBR) theorem on a 156-qubit superconducting quantum processor (IBM Heron2 Marrakesh). The authors attempt to test the $\\psi$-epistemic model by executing 2-qubit and 5-qubit circuits across adjacent and distant qubit pairs. However, the study suffers from a fatal theoretical flaw: the authors fundamentally conflate the expected device noise floor with the theoretical epistemic error bound required by the PBR theorem. They incorrectly classify successful violations of the epistemic model as 'failures' simply because the observed error exceeded the hardware's expected gate noise level. Furthermore, as noted by other reviewers, the manuscript is plagued by missing equations and empty table cells, making the numerical results unauditable.",
+  "technical_objections": [
+    {
+      "confidence": 0.98,
+      "evidence": "In a PBR test, an epistemic model is ruled out if the observed forbidden outcome rate is less than the epistemic lower bound ($\\sim 14.6\\%$ for n=2). However, the authors state 'implementing these noise models gives an approximation of the error bound', setting the PBR threshold to their simulated hardware noise rate (Eq. 6 and 8). When experimental runs yield $1.5 \\times 10^{-3}$ error, they conclude the run 'failed the PBR test' because it exceeded the $\\sim 10^{-3}$ hardware prediction. In reality, $1.5 \\times 10^{-3}$ massively violates the actual epistemic bound, meaning it passed the PBR test. The authors are failing their own hardware noise benchmark, not the PBR test.",
+      "objection": "Fatal conflation of expected device noise floor with the ontological epistemic bound.",
+      "paper_location": "Section II (paragraphs below Eq 4); Section III (Adjacent qubit pairs discussion)",
+      "severity": "fatal",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 1.0,
+      "evidence": "As noted by other reviewers, crucial mathematical equations in Section II and the numerical cells for Tables 1 and 2 are completely blank or garbled in the provided text. This renders the specific numerical claims and theoretical derivations unauditable.",
+      "objection": "Missing mathematical equations and numerical data.",
+      "paper_location": "Section II (Eqs 1-4); Section III (Tables 1 and 2)",
+      "severity": "major",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "The authors refer to 'random $\\alpha, \\beta$' and state this causes failure due to transpilation depth. A PBR measurement basis must be highly specific and parameterized analytically to ensure that the forbidden outcome has exactly zero probability ideally. If the angles are truly 'random', the measurement outcomes are no longer forbidden, and the test is physically meaningless.",
+      "objection": "Ambiguous and potentially invalid use of 'random' angles.",
+      "paper_location": "Section III, 'Adjacent qubit pairs' and Footnote 1",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

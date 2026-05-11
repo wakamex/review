@@ -1,0 +1,84 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Two review cycles with three reviewers. Gemini was the highest-confidence reviewer in cycle 1 (0.9) but significantly revised downward in cycle 2 (4/10) after cross-review with codex and claude, incorporating the Markov-at-resonance and Gibbs thermalization objections. Claude maintained a 'promising' verdict across both cycles. Codex maintained 'contested' throughout. The HTML source has severe equation rendering failures (most numbered equations render as empty table cells), preventing direct algebraic verification of key intermediate steps \u2014 this is noted as a source artifact rather than a paper flaw but limits reviewer confidence in technical soundness scores.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper proposes that a quantum two-level system (an \"atom\") undergoing uniform acceleration inside a carefully designed cylindrical cavity can maintain its quantum coherence better than the same atom sitting still \u2014 the opposite of what the standard Unruh effect would predict. The review board found the central physical mechanism plausible and grounded in established mathematics, but identified three technical concerns that limit confidence in the strongest claims: the paper overstates \"exact\" vanishing of decoherence when only strong suppression is demonstrated, applies a standard approximation (Markovian dynamics) in regimes where it formally breaks down, and makes an incomplete argument for a secondary thermalization claim. The core counter-intuitive effect is likely real, but several quantitative conclusions need more careful mathematical justification.",
+  "human_spotchecks": [
+    "Algebraic verification of Eq. 12 (decoherence rate = half emission rate): does this identity hold exactly under the stated Markov and RWA approximations, or does the numerical prefactor depend on further approximation choices? HTML rendering failures in the provided source prevented direct verification.",
+    "Gibbs thermalization check (Appendix C): when the excitation rate A(\u03a9) and de-excitation rate A(\u2212\u03a9) are computed separately for the accelerated cavity detector, do they satisfy the detailed-balance relation A(\u2212\u03a9)/A(\u03a9) = e^{\u2212\u03b2\u03a9} at the Unruh temperature? This is necessary but not verified in the paper.",
+    "Mode-sum convergence for suppression valleys: do the decoherence-rate minima in Fig. 1 remain near-zero after summing all transverse and longitudinal modes with a physical cavity linewidth, finite detector switching, and convergence-tested mode cutoffs?",
+    "Markov self-consistency in suppression valleys: is the bath correlation time in the suppression valleys (between resonances) genuinely much shorter than the inverse decoherence rate in the parameter windows shown in Fig. 1(a)? This quantitative check is not presented in the paper.",
+    "Trajectory geometry from reference [24] (Stargen and Lochan, PRL 2022): what is the precise acceleration-axis orientation and detector radial position used to derive the cavity Wightman function, and does the decoherence suppression persist for alternative trajectory orientations within the cylindrical geometry?"
+  ],
+  "paper_id": "2604.02422",
+  "public_summary": "The paper investigates the decoherence of a uniformly accelerated Unruh-DeWitt detector coupled to a scalar field inside a cylindrical cavity. By showing that the decoherence rate is proportional to the cavity Purcell factor (ratio of cavity to free-space emission rates), the authors unify quantum-optics and relativistic quantum information language. The central counter-intuitive result is that, at moderate accelerations with cavity radius tuned to parameter windows between resonance points, the decoherence rate falls strongly below both the free-space thermal baseline and the inertial-cavity baseline. The physical mechanism is that the accelerated detector's coupling to cavity modes is governed by modified Bessel functions of imaginary order whose oscillatory structure produces valleys of weak effective coupling. For large accelerations, the free-space thermal Planckian result is recovered analytically. Appendix C additionally claims that the accelerated cavity detector thermalizes to a Gibbs state despite the non-Planckian cavity mode structure.\n\nCross-review confirmed the qualitative suppression mechanism as physically plausible. However, three concerns were raised by multiple reviewers: the claim that rates \"exactly vanish\" is overstated (only strong suppression is demonstrated for the full mode sum); the Markov approximation is applied at resonances where the spectral density diverges and the approximation formally breaks down; and the Gibbs thermalization argument in Appendix C is logically incomplete. Additionally, the detector trajectory geometry (radial position in cylinder, orientation of acceleration axis) and scalar field boundary conditions are not specified in the paper and are inherited implicitly from a companion reference. These concerns affect peripheral and resonance-specific claims more than the main suppression result, but prevent the paper's strongest quantitative conclusions from being accepted without further verification.",
+  "reviewer_disagreements": [
+    "Gemini reversed position dramatically between cycles: cycle 1 rated the paper 8/10 with high confidence (0.9), calling the analysis 'mathematically solid' and the mode-cancellation issue 'minor'; cycle 2 downgraded to 4/10 ('weak_evidence') after adopting the Markov-at-resonance and Gibbs thermalization objections raised by codex and claude. This is the largest single-reviewer shift in the cycle.",
+    "Claude and codex disagreed on the overall verdict across both cycles: claude maintained 'promising' (arguing the Macdonald-function suppression mechanism is too solidly confirmed by Gemini's expert assessment to warrant 'contested'), while codex maintained 'contested' (arguing the overextended claims and missing setup details prevent a promising classification). Gemini cycle 2 sided with a 'weak_evidence' verdict.",
+    "Severity of the exact-vanishing objection diverged across reviewers: gemini cycle 1 rated it minor (would not change verdict); codex rated it major (would change verdict if true); claude rated it moderate (would not change verdict). This reflects genuine disagreement about whether strong suppression without exact zeros is still a publishable, interesting result.",
+    "Codex rated three objections as 'major, would_change_verdict_if_true' (Markov at resonance, exact vanishing, Gibbs thermalization), implying the paper's core claims are not established; claude judged none of these as verdict-changing, treating them as concerns requiring clarification rather than fatal flaws."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The Markov master equation is applied at and near cavity resonances where the spectral density diverges, which violates the flat-bath, short-bath-correlation-time requirement for Markovian evolution. At resonances the bath correlation time diverges and the dynamics becomes Jaynes-Cummings-like (Rabi oscillations), not exponential decay. This formally invalidates the 'instantaneous decoherence' claims at resonance points, though the suppression valleys between resonances are a less severe regime for the approximation.",
+      "paper_location": "Section II, Eq. 8; Section II.1, Eqs. 11-13 and paragraph following Eq. 13",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper claims both transition and decoherence rates 'exactly vanish' for a finely tuned cavity, implying effective decoupling and perfect purity preservation. This is unsupported: the total rate is a sum over all transverse modes, each contributing non-negatively, and tuning a single geometric parameter (cavity radius) cannot simultaneously extinguish contributions from all modes. Strong suppression is demonstrated numerically, but exact vanishing is not.",
+      "paper_location": "Section II.2, text following Fig. 1 ('both the transition rates and decoherence rates vanish for such a finely tuned cavity'); Appendix C, Eqs. 39-41",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "Appendix C's claim that the accelerated cavity detector asymptotically thermalizes to a Gibbs state is logically incomplete. The paper's argument rests on the decoherence rate \u0393(\u03a9) being an even function of the energy gap. However, \u0393(\u03a9) = [A(\u03a9)+A(\u2212\u03a9)]/2 is a symmetric combination; its evenness places no constraint on the ratio A(\u2212\u03a9)/A(\u03a9), which must equal e^{\u2212\u03b2\u03a9} (detailed balance) for a Gibbs stationary state to follow.",
+      "paper_location": "Appendix C, text following Eq. 35",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "gemini",
+        "claude"
+      ]
+    },
+    {
+      "objection": "The detector trajectory geometry (radial position within the cylinder, orientation of acceleration axis relative to the cylinder axis) and the scalar field boundary conditions (Dirichlet vs. Neumann at cavity walls) are not stated in the paper. The Wightman function, mode coupling, and resonance structure all depend on these choices; different configurations can yield qualitatively different suppression profiles.",
+      "paper_location": "Section II setup; Section II.2 before Eq. 14; Eq. 2",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper derives stationary (time-independent) Markovian transition and decoherence rates and asymptotic steady-states for a uniformly accelerated detector inside a finite cylindrical cavity of length L. A uniformly accelerated worldline cannot remain inside a finite spatial region indefinitely, making the geometric stationarity assumption underlying the constant-rate framework and the asymptotic limits in Appendix C physically inconsistent without further justification.",
+      "paper_location": "Section II.2 setup; Appendix C, Eqs. 28-30",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "gemini",
+        "codex"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The qualitative physical mechanism \u2014 acceleration-induced spectral broadening via Macdonald functions K_{i\u03a9/a}(m_n/a) governing the accelerated detector's response to transverse cavity modes \u2014 produces oscillatory suppression valleys in decoherence as a function of cavity radius; this mechanism is accepted by expert reviewers as physically grounded in established Unruh response theory.",
+    "For large accelerations (acceleration scale much larger than inverse cavity radius), cavity geometry becomes irrelevant and the free-space thermal Planckian decoherence rate is recovered; this limit is verified analytically in Appendix A via Neumann's addition theorem.",
+    "The decoherence rate is structurally proportional to the Purcell enhancement factor (cavity-to-free-space emission rate ratio) in both the inertial and accelerated regimes, following from the decomposition of the Wightman function into symmetric and antisymmetric parts under Markov and RWA approximations.",
+    "Inertial detectors exhibit Purcell-enhanced decoherence near cavity resonances, consistent with standard cavity-QED phenomenology."
+  ],
+  "technical_takeaway": "The paper argues that the decoherence rate of an Unruh-DeWitt detector in a cylindrical cavity equals one-half the emission rate in both inertial and accelerated regimes, making it proportional to the Purcell enhancement factor. The physical suppression mechanism \u2014 oscillatory zeros of Macdonald functions K_{i\u03a9/a}(m_n/a) governing the accelerated detector's response to transverse cavity modes \u2014 was confirmed by expert reviewers as physically grounded. Three objections survived cross-review: (1) the paper's claim that rates \"exactly vanish\" for finely tuned cavity parameters is unsupported, because tuning a single geometric parameter (cavity radius) cannot simultaneously extinguish contributions from the infinite sum of transverse modes; (2) the Markov master equation is formally invalid at cavity resonances where the spectral density diverges, affecting the \"instantaneous decoherence\" claims at resonance but not the suppression valleys between them; (3) the Appendix C Gibbs thermalization argument is logically incomplete \u2014 evenness of the decoherence rate \u0393(\u03a9)=\u0393(\u2212\u03a9) does not imply the detailed-balance relation A(\u2212\u03a9)/A(\u03a9)=e^{\u2212\u03b2\u03a9} needed to fix a Gibbs asymptotic state."
+}

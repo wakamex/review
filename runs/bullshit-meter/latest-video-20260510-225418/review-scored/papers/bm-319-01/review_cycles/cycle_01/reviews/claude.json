@@ -1,0 +1,137 @@
+{
+  "confidence": 0.65,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 7,
+    "novelty": 7,
+    "reviewer_confidence": 6,
+    "significance": 7,
+    "technical_soundness": 6
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "First cycle; no prior review to compare against.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "For the HP definition and \u03b1 in the interval specified by Theorem 2 (which covers all super-renormalizable cases), there always exists a Riemann sheet with no poles at all, so unitarity is not threatened by complex or real extra modes.",
+      "notes": "The proof strategy is presented with separate cases for irrational \u03b1 (Weyl equidistribution) and rational \u03b1 (explicit arithmetic conditions). For rational \u03b1 the key condition reduces to an inequality on p and q; the paper claims it holds for q \u2264 p+1 but the exact boundary and whether that covers all required renormalizability ranges needs independent verification. The formula rendering in the HTML source is incomplete, making a full check of edge cases difficult.",
+      "paper_location": "Section 3.2, Theorem 2 (Appendix B)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Perturbative unitarity holds at ALL loop orders for the HP, HS, and HA models with the fakeon prescription, and for NH with the Feynman prescription.",
+      "notes": "The paper provides explicit one-loop calculations for scalar (6.1) and gauge/gravity (6.3\u20136.4) models and gives structural arguments based on the propagator splitting (eq. 84). Higher-loop generalization is asserted as 'straightforward' or 'immediate' without proof. For theories with nonlocal fractional operators and complex propagator structure, this is a non-trivial claim that deserves more careful treatment. The argument is essentially that (i) the complex pairs are fakeonized and contribute zero to the optical theorem's imaginary part and (ii) the remaining standard piece respects unitarity by known results\u2014this logic is sound if the fakeon prescription is valid, but that validity is borrowed from Anselmi's work without independent verification for this propagator.",
+      "paper_location": "Section 6 (especially 6.1\u20136.4), abstract, conclusions",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The physical spectrum for all HP, HS, HA, NH models with \u03b1 > 0 is the same: a single standard massless/massive mode, with everything else purely virtual.",
+      "notes": "Follows from the spectral decomposition: the standard pole at p\u00b2=0 contributes via the branch point (eq. 56), while all other content (complex pairs from the discontinuity, complex-conjugate poles) is either fakeonized or removed by sheet choice. The individual calculations appear consistent.",
+      "paper_location": "Sections 4\u20135, conclusions",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The non-hermitian fractional theory (NH) preserves unitarity despite lacking a well-defined classical limit, provided \u03b1 satisfies condition (80).",
+      "notes": "The scalar NH result (6.2) is computed explicitly and the spectral density positivity argument in (80) is clear. The gauge/gravity NH case (6.4) computes the four-point amplitude but leaves the mass integrations unperformed ('we do not perform the rest of the calculation here'), so the claim for gravity rests on an incomplete demonstration.",
+      "paper_location": "Sections 5.1.3, 6.2, 6.4",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The theory is super-renormalizable for specific ranges of \u03b1 covered by the analysis, so both renormalizability and unitarity are simultaneously achievable.",
+      "notes": "The renormalizability analysis (BPHZ argument, power counting) is stated to be unchanged from Calcagni:2022shb and relies only on power counting unaffected by the hermitian vs. non-hermitian distinction. This part is not new and is accepted as established prior work.",
+      "paper_location": "Section 2.1, abstract",
+      "support_level": "well_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The fakeon prescription of Anselmi\u2013Piva, originally developed for theories with a finite number of isolated complex poles at fixed masses, extends without modification to the case of a continuum of complex-conjugate pairs with mass parameter integrated from 0 to \u221e, as appears in the spectral density (58).",
+      "paper_location": "Section 4.4, eq. (58); Section 6.1, eqs. (88)\u2013(90)",
+      "why_it_matters": "If the prescription requires modifications or fails for a continuous spectrum, the unitarity proof for all hermitian models breaks down at the tree level. The paper notes this case but does not verify the prescription's properties for it."
+    },
+    {
+      "assumption": "The BPHZ renormalization argument from prior work (Calcagni:2022shb) that controls sub-divergences at all loop orders is unaffected by the change from the non-hermitian to the self-adjoint kinetic operator and by the modified Riemann-sheet structure of the propagator.",
+      "paper_location": "Section 2.1, last paragraph ('All these results were obtained for the non-hermitian fractional QFT (2) but they hold also for the model (3)')",
+      "why_it_matters": "The claim is asserted with a brief comment that BPHZ 'relies on a power counting not affected by the property of hermiticity,' but power counting alone does not establish that the combinatorics of sub-diagram subtractions work identically when the propagator has a different analytic structure on the Riemann surface."
+    },
+    {
+      "assumption": "There exists a consistent Hilbert space construction (or at least a consistent S-matrix framework) for the self-adjoint fractional theory in Lorentzian signature, not just an Euclidean path-integral formulation with analytic continuation.",
+      "paper_location": "Section 5.2 (Wick rotation discussion), Section 4.4",
+      "why_it_matters": "The unitarity argument is framed in terms of optical theorem and scattering amplitudes, which implicitly requires a well-defined Lorentzian formulation. The paper notes (Section 5.2) that Wick rotation is possible due to the convergence of fractional form factors on the whole complex plane, but the Osterwalder\u2013Schrader conditions are only mentioned, not verified for the full theory."
+    },
+    {
+      "assumption": "Classicization of the fakeonized theory (deriving the correct classical equations of motion from the quantum theory) can be carried out to a level that preserves consistency with the claimed quantum unitarity results.",
+      "paper_location": "Section 7 (conclusions, second-to-last paragraph)",
+      "why_it_matters": "The paper acknowledges that classicization is needed and is 'work in progress.' If classicization fails or yields equations inconsistent with the propagator structure, the physical picture of the purely virtual modes is incomplete."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Does Theorem 2's condition for rational \u03b1 (that a certain arithmetic inequality holds for all n in the relevant range) actually cover the full gravity super-renormalizability window from eqs. (13a)\u2013(13d)? Specifically, for the minimal case \u03b1 = p/q needed for one-loop super-renormalizability of gravity, does q \u2264 p+1 hold?",
+      "why_model_cannot_resolve": "The HTML source renders the mathematical formulas incompletely (many expressions appear as LaTeX fragments rather than rendered notation), making it impossible to parse conditions (122)\u2013(124) precisely enough to verify coverage of specific \u03b1 values."
+    },
+    {
+      "question": "In the NH gauge/gravity one-loop calculation (Section 6.4), does the positivity of the integrand in eq. (109) survive when the vertex factors (k\u00b2)^\u03b3 from eq. (103) are properly accounted for after integrating over the continuum masses?",
+      "why_model_cannot_resolve": "The paper explicitly leaves the mass integrals unperformed. A human expert can check whether the derivative-vertex momentum factors preserve positivity of the integrand across the full mass range."
+    },
+    {
+      "question": "Are the proofs in appendices B and C (especially Theorems 8, 14, 20 with their exceptional values) free of errors in the rational-\u03b1 boundary cases, particularly the claimed exceptions at odd \u03b1 = p/q with specific (p,q)?",
+      "why_model_cannot_resolve": "The proofs involve chains of modular arithmetic inequalities that are tedious to verify symbolically; the HTML rendering also obscures several intermediate steps. A human with access to the PDF and computation software can check the claims systematically."
+    },
+    {
+      "question": "Is the reference Briscese:2026jcf (companion paper with black hole and gravitational wave analysis) available, and do its results corroborate or conflict with the spectral claims here?",
+      "why_model_cannot_resolve": "This is a companion paper whose content is not available in the review bundle and may not yet be publicly accessible. It could contain cross-checks or additional assumptions not visible here."
+    }
+  ],
+  "novelty_assessment": "The paper makes several genuine contributions. First, the systematic analysis of Riemann sheets and the classification theorems (Theorems 1\u201324) for the HP, HS, HA, and NH operators are new and substantially more complete than prior work. Second, Theorem 2\u2014guaranteeing existence of pole-free Riemann sheets for all \u03b1 in the super-renormalizable range\u2014is a significant technical result that eliminates the cumbersome mass-regularization procedure of Calcagni:2022shb. Third, the clean spectral decomposition of the full (not just UV-limit) propagator in eq. (84) and the resulting structural unitarity argument are cleaner and more direct than prior treatments. Fourth, the universality-class argument across different kinetic-term definitions is a new conceptual contribution. The paper is less novel in its application of the fakeon prescription (imported from Anselmi's work) and in the renormalizability analysis (carried over from prior papers). Compared with nonlocal QFT with entire form factors (NLQG), the paper correctly identifies a structural advantage (Wick rotation works globally) and a disadvantage (complex modes require fakeon treatment). Overall, the novelty is real and the paper advances the fractional-QFT program meaningfully, though the 'all-orders unitarity proof' label somewhat overstates what is explicitly demonstrated.",
+  "overall_score_10": 6.5,
+  "paper_id": "bm-319-01",
+  "recommended_verdict": "promising",
+  "reviewer": "claude",
+  "score_rationale": "Technical soundness is 6/10: the tree-level and one-loop calculations are detailed and appear correct, the Riemann-sheet classification theorems are systematically developed, and the spectral decomposition is clean. However, the central 'all-orders' unitarity claim rests on assertions of straightforwardness rather than proof, and the NH gauge/gravity calculation is explicitly left incomplete. Novelty is 7/10: the Riemann-sheet classification and Theorem 2 are genuine new results; the structural unitarity argument is cleaner than prior work. Significance is 7/10: if the framework is correct, it provides a substantially simpler foundation for fractional QFT/FQG and resolves a long-standing ambiguity in the unitarity treatment; the result would be important for this line of quantum gravity research. Clarity is 7/10: the paper is well-organized with a logical theorem/proof structure, though the heavy mathematical content and equation-rendering issues in HTML make independent verification harder. Reviewer confidence is 6/10: the conceptual and structural arguments are assessable, but full verification of the appendix theorems and the higher-loop claims requires more specialized expertise and access to the full PDF.",
+  "summary": "Calcagni and Briscese study perturbative unitarity of quantum field theories with self-adjoint fractional powers of the d'Alembertian (fractional QFTs and fractional quantum gravity, FQG). The main technical work is a systematic analysis of the multi-valued propagator on its Riemann surface, including a classification of pole distributions (Theorems 1\u201324 in appendices B\u2013C), and the identification of \"empty\" sheets (Theorem 2) on which all extra poles are absent. The paper argues that unitarity holds at all perturbative orders for the hermitian polynomial (HP), hermitian simple (HS), and hermitian asymmetric (HA) variants via the Anselmi\u2013Piva fakeon prescription applied to the complex-conjugate pairs that populate the propagator discontinuity, and for the non-hermitian (NH) variant via the standard Feynman prescription in restricted ranges of the fractional exponent \u03b1. One-loop examples for scalar, gauge, and gravity models are computed explicitly; higher-loop generalization is asserted to be immediate. The paper also claims universality classes across different fractional kinetic-term definitions because the physical asymptotic spectrum\u2014a single standard mode for \u03b1 > 0\u2014is the same regardless of which definition is used.",
+  "technical_objections": [
+    {
+      "confidence": 0.8,
+      "evidence": "Section 6.1 ends: 'The generalization to loops and generic potential is straightforward.' Section 6.2 ends: 'The generalization to arbitrary loop orders follows the same scheme.' Section 6.4 ends: 'Generalization to higher orders is immediate as long as (80) is enforced.' No intermediate steps are given.",
+      "objection": "The 'all-orders' unitarity proof is structural, not complete. The one-loop examples in sections 6.1\u20136.4 are explicit, but the generalization to arbitrary loop order is repeatedly stated as 'straightforward' or 'immediate' without proof. In theories with nonlocal operators, the BPHZ renormalization structure is used to control divergences, but unitarity at arbitrary loop order with complex propagators and fractional vertices requires independent argument (e.g., valid Cutkosky rules at each order, absence of additional branch cuts generated by loop integration over fractional propagators).",
+      "paper_location": "Sections 6.1\u20136.4, final paragraphs of each",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.65,
+      "evidence": "Section 4.4 states that 'one must apply the fakeon prescription anyway because (58) is the continuous superposition of complex pairs, which break Lorentz invariance in other prescriptions.' Section 6.1 defines the amplitude via average analytic continuation (89) and asserts 'since M\u0303 is real, it gives no contribution to the sum over asymptotic states in the optical theorem'\u2014but this is asserted, not proven for the continuum case.",
+      "objection": "The unitarity proof for hermitian models depends entirely on the Anselmi\u2013Piva fakeon prescription being valid and Lorentz-invariant for the specific complex-conjugate pairs arising from fractional propagators. The paper cites Anselmi's work extensively (refs 32\u201337) but does not independently verify the prescription works for the continuum of complex-conjugate pairs in eq. (58) with a continuous mass parameter, as opposed to isolated pairs with fixed masses. The integration over the mass continuum could, in principle, restore Lorentz-symmetry violations.",
+      "paper_location": "Section 4.4, eq. (58); Section 6.1, eqs. (89)\u2013(90)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.55,
+      "evidence": "The abstract claims these results 'drastically simplify previous characterizations of fractional quantum gravity, which is super-renormalizable for [specific \u03b1].' The empty-sheet interval depends on the integer n_0 chosen; the paper says 'one can increase n_0 ad hoc' but this n_0 also enters the definition of the kinetic operator (25), so changing it may alter the theory.",
+      "objection": "Theorem 2 (HP: empty sheets for rational \u03b1) has a condition that is only stated to hold when the maximum of a certain quantity satisfies an inequality implying q \u2264 p+1 (i.e., essentially \u03b1 = p/q with p \u2265 q\u22121). It is not clear that this covers all the renormalizability windows listed in Section 2.1, particularly the gravity case (13c)\u2013(13d) with specific ranges. If the required \u03b1 values for one-loop super-renormalizability of gravity fall outside the empty-sheet interval, the simplification claimed in the introduction does not apply to the gravitational sector.",
+      "paper_location": "Theorem 2 (Appendix B); renormalizability ranges in Section 2.1, eqs. (13a)\u2013(13d)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.6,
+      "evidence": "Equation (105) contains three terms whose mass integrals are not evaluated. The Cutkosky-rule conclusion in (108)\u2013(109) is stated as a general argument, but the derivation relies on fixed m_1, m_2 before integrating, and the positivity statement at (109) requires checking that the vertex-momentum factors do not introduce sign-changing contributions after smearing.",
+      "objection": "In Section 6.4 (NH gauge and gravity), the one-loop four-point amplitude computation is left incomplete: the mass integrals in equation (105) are explicitly not performed ('we do not perform the rest of the calculation here'). Yet the section concludes with a claim about unitarity via the Cutkosky rule (eqs. 107\u2013109) and condition (80). The positivity argument in (109) relies on the spectral density \u03c1_{NH} being non-negative, but \u03c1_{NH} depends on the vertex factors from the derivative interactions (the factors (k\u00b2)^\u03b3 in eq. 103), which the calculation does not track through the mass integration.",
+      "paper_location": "Section 6.4, eqs. (103)\u2013(109)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.5,
+      "evidence": "The paper says 'A change of sign of \u03b1_0 results in a rotation of the phases \u03b2_l, a different positioning of the poles in the complex plane and the appearance of real poles... All of this pertains to the mathematical presentation of the theory but leaves the physics untouched.' This is stated but not demonstrated.",
+      "objection": "The paper fixes the coefficient \u03b1 (sign) in eq. (37)\u2013(38) as a 'convention' and claims this does not change the physics. However, this sign choice affects whether the UV kinetic term is positive or negative definite, i.e., whether the high-energy degrees of freedom are healthy or ghost-like. A sign flip that moves physical poles from one sheet to another while leaving the 'physical' sheet empty is a non-trivial rearrangement, and the claim that physics is unaffected needs more justification.",
+      "paper_location": "Section 3.2, eqs. (37)\u2013(38) and surrounding discussion",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

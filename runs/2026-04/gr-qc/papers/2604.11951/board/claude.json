@@ -1,0 +1,84 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Two review cycles completed. Gemini cycle-1 raised four objections rated 'fatal' with confidence 0.95\u20131.0; all four were fully retracted in cycle 2 after gemini acknowledged hallucinating the explicit metric form from unrendered HTML. The retraction substantially reduced the severity of the strongest objections, but three convergent issues survived adversarial cross-review: the C(\u03c1) definition inconsistency (Eq. 15), the algebraic errors in Appendix A, and the physically invalid ESO 325-G004 lens model. HTML rendering gaps for key equations (Eqs. 6\u20137, 14\u201315) are a central obstacle throughout both cycles; all critical unresolved questions require PDF inspection.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper asks whether a specific type of \"regular\" black hole \u2014 one that removes the central singularity without introducing a second problematic boundary called a Cauchy horizon \u2014 would look different from an ordinary black hole when its gravity bends light. The review board found the scientific question legitimate but the execution troubled: key mathematical definitions in the paper appear internally inconsistent, and the one observational comparison meant to test the model (using a distant galaxy) is physically invalid as set up. The most accessible observable the paper predicts (the black-hole shadow size) turns out to be identical to an ordinary Schwarzschild black hole, meaning current telescopes cannot use it to test the model, and the predictions that could distinguish it require angular resolution far beyond any near-future instrument.",
+  "human_spotchecks": [
+    "Read Eqs. (6)\u2013(7) from the original PDF to determine the exact functional forms of the areal radius h(r) and mass function m(r) for the Bardeen-like metric. Verify whether the metric has a positive minimum areal radius (regular geometry) or a zero-crossing (singularity at r=\u2113). This is the single most important unresolved question and cannot be determined from the HTML bundle.",
+    "Check whether C(\u03c1) in Eq. (15) is a typographic error (should be r(\u03c1)\u00b2 to match the angular term in Eq. 14) or reflects the actual numerical computation. If the computation used C=r rather than C=r\u00b2, all strong-field observables (photon sphere, \u03b8\u221e, S, R_mag, time delays) must be recomputed.",
+    "Verify whether the metric studied in the main text (Bardeen-like, Eqs. 6\u20137) and the metric in Appendix A (explicitly called 'Hayward-like', Eq. A1\u2013A2) are the same spacetime from Calza et al. (2025), or two distinct geometries. If different, the regularity properties proved in Appendix A do not apply to the metric used in Sections II\u2013III.",
+    "Perform the weak-field expansion integral in Eq. (8) for the actual metric (once Eqs. 6\u20137 are confirmed) to first order in \u2113\u00b2/b\u00b2, and verify the sign of the \u2113-dependent correction in Eq. (12). A positive sign (paper's claim) or negative sign (gemini's retracted claim) has direct bearing on the distinguishability from standard Bardeen black holes.",
+    "Confirm the numerical value of \u2113_max from Eq. (A8) and check whether \u2113=0.77 in Tables 2\u20133 is measured in units of M or 2M, and whether it falls within the physically admissible black-hole parameter range."
+  ],
+  "paper_id": "2604.11951",
+  "public_summary": "The paper aims to show that a newly proposed class of regular black holes \u2014 which avoids both the central singularity and a secondary \"Cauchy horizon\" instability \u2014 leaves distinctive imprints on gravitational lensing that future telescopes could detect. Using standard analytical tools (the Bozza strong-deflection-limit method and a weak-field perturbative expansion), it computes predicted bending angles, Einstein ring radii, image separations, flux ratios, and time delays. The paper claims that the regularization parameter \u2113 enhances the weak-field deflection angle (positive correction, unlike the standard Bardeen black hole which gives a negative correction), leaves the black-hole shadow size unchanged from the Schwarzschild value, and shifts the SDL observables S and R_mag in measurable but presently unresolvable ways for Sgr A* and M87*.\n\nThe review board's main concerns, which converged across independent reviewers, are: (a) the angular metric coefficient C(\u03c1) appears inconsistently defined between consecutive equations in the SDL derivation, potentially corrupting the photon-sphere condition and all strong-field results; (b) the appendix that is supposed to justify the spacetime's regularity contains algebraic limits that do not follow from the displayed formula for the areal radius, and it labels the metric differently from the main text; (c) the comparison to the Einstein ring of galaxy ESO 325-G004 treats an extended galaxy's total mass (including dark matter) as a compact point-like black hole, which is physically unjustified and provides no meaningful constraint on \u2113; and (d) the \u2113-independence of the shadow radius, which is the paper's most structurally interesting claim, is only documented numerically for five parameter values and lacks an analytic derivation. A notable episode: one reviewer's cycle-1 assessment raised four \"fatal\" objections with high stated confidence, but in cycle 2 that reviewer fully retracted all four after acknowledging the explicit metric formula had been hallucinated from an HTML rendering gap. This underscores that the most critical questions here require inspection of the original PDF equations, not the HTML bundle.",
+  "reviewer_disagreements": [
+    "Gemini's cycle-1 review asserted four 'fatal' objections with stated confidence of 0.95\u20131.0 (singularity at r=\u2113, metric inconsistency between sections, wrong sign in weak-field correction, and mathematically impossible constant shadow radius). In cycle 2, gemini fully retracted all four after acknowledging the explicit metric formula had been hallucinated from unrendered HTML equations; the specific form h(r)=\u221a(r\u00b2\u2212\u2113\u00b2) that grounded all four claims was not established by the paper bundle. Claude and codex had already flagged this overconfidence in cycle 1.",
+    "Claude escalated verdict from 'routine' (cycle 1) to 'major_flaw' (cycle 2), while codex maintained 'weak_evidence' throughout both cycles. The disagreement centers on whether the C(\u03c1) inconsistency and Appendix A errors reflect an actual computational flaw or merely poor typesetting; codex holds that the fatal claims remain unproven from the supplied material and should be resolved by human spot-check rather than assumed.",
+    "All reviewers agree the weak-field sign claim (positive vs. negative \u2113-correction) is a critical question, but disagree on how to treat it in the absence of legible PDF equations. Claude and codex flag it as unresolvable from the HTML bundle; gemini's cycle-1 claim of a definitive negative correction was retracted, leaving the question open pending PDF inspection."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The angular metric coefficient C(\u03c1) is inconsistently defined between Eq. (14) and Eq. (15). The line element in Eq. (14) contains r(\u03c1)\u00b2d\u03a9\u00b2, which requires C(\u03c1)=r(\u03c1)\u00b2 in the Bozza SDL framework; however, Eq. (15) sets C(\u03c1)=r(\u03c1). This inconsistency propagates into the photon-sphere condition (Eq. 16), the critical impact parameter (Eq. 18), the SDL coefficients \u0101 and b\u0304, and all downstream strong-field observables (\u03b8\u221e, S, R_mag, time delay). If the computation actually used C=r\u00b2 (the correct convention), the text contains at minimum an auditing-critical typographic error; if C=r was used computationally, the strong-field results are incorrect.",
+      "paper_location": "Section III.1, Eqs. (14) and (15)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex",
+        "claude",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "Appendix A's stated small-\u03c1 asymptotics, stationary-point location, and branch structure do not follow algebraically from the displayed radius function r(\u03c1) in Eq. (A2). This matters because Appendix A is intended to justify the claimed regularity (no Cauchy horizon) of the spacetime; if the supporting algebra is wrong, the regularity premise of the paper cannot be taken as established. Additionally, Appendix A labels the metric 'Hayward-like' while the main text uniformly calls it 'Bardeen-like,' leaving ambiguous whether the analytic properties proved in the appendix apply to the metric actually studied.",
+      "paper_location": "Appendix A, Eqs. (A2)\u2013(A9); contrast with 'Bardeen-like' labeling throughout main text",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The galaxy-scale lensing comparison in Appendix B applies a compact, spherically symmetric point-mass black-hole weak-field deflection formula to the total mass of galaxy ESO 325-G004, which includes an extended dark-matter halo and stellar distribution. This lens model is physically invalid for extended-mass galactic lensing, and the paper's own text acknowledges the \u2113-corrections are 'highly suppressed' at galaxy scales. The claimed consistency with the observed Einstein ring provides no meaningful constraint on \u2113.",
+      "paper_location": "Appendix B, Eq. (B1), Fig. 8(a); Section IV discussion of total lens mass",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The claimed \u2113-independence of the critical impact parameter u_m is documented numerically for five values of \u2113 in Table 1, but no analytic proof or derivation sketch is provided. The photon-sphere radius r_ps itself is \u2113-dependent (Eq. 17), so independence of u_m requires a specific algebraic cancellation in the metric that the paper does not demonstrate. Given the C(\u03c1) inconsistency in the SDL setup, the numerical support cannot be treated as reliable without independent recalculation.",
+      "paper_location": "Section III.1, Eq. (18) and surrounding discussion; Table 1",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The normalization of \u2113 is inconsistent across tables: Table 1 appears to label entries in units of \u2113/2M, while Tables 2\u20133 appear to use \u2113/M. The paper states an upper bound \u2113_max \u2248 4M/(3\u221a3) \u2248 0.77M (Eq. A8) but never gives its numerical value explicitly in the main text. The value \u2113=0.77 used in Tables 2\u20133 may therefore be at or beyond the extremal bound, and cross-table comparisons of numerical trends are ambiguous.",
+      "paper_location": "Bound after Eq. (7); Appendix A Eq. (A8); Table 1 vs. Tables 2\u20133",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "claude"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The Bozza SDL and weak-field expansion are well-established frameworks correctly identified and cited, and the paper's methodological program (computing deflection angle, Einstein ring, \u03b8\u221e, S, R_mag, and time delays for a parametric regular-BH metric) is a legitimate phenomenological approach.",
+    "The paper's claim that the black-hole shadow radius (critical impact parameter) is numerically identical to the Schwarzschild value for all tabulated \u2113 values is internally consistent within Table 1, regardless of whether the analytic argument for this independence is complete.",
+    "The SDL coefficients \u0101 and b\u0304 in Table 1 show a monotonic trend (\u0101 increasing, b\u0304 decreasing with \u2113) that is internally consistent and, if the metric definitions are resolved, plausibly reflects a genuine feature of this geometry.",
+    "The paper correctly notes that the \u2113-dependent observables S and R_mag require nanoarcsecond-scale angular resolution far beyond current and near-future technology, appropriately tempering any observational claims.",
+    "The ESO 325-G004 comparison is explicitly acknowledged by the paper to have negligible sensitivity to \u2113 ('corrections are highly suppressed'), which is correct; reviewers confirm the comparison adds no discriminating power."
+  ],
+  "technical_takeaway": "The paper applies the Bozza strong-deflection-limit (SDL) formalism and a standard weak-field expansion to the Bardeen-like no-Cauchy-horizon metric of Calza et al. (2025). Cross-review identified two convergent structural problems that survived adversarial scrutiny: (1) Eq. (15) defines the angular metric coefficient C(\u03c1)=r(\u03c1), inconsistent with the r(\u03c1)\u00b2d\u03a9\u00b2 angular term displayed in Eq. (14), propagating into the photon-sphere condition and all downstream strong-field observables; (2) Appendix A's asymptotics and branch-point derivations do not follow algebraically from the displayed radius function r(\u03c1) in Eq. (A2), and the appendix labels the metric \"Hayward-like\" while the main text uniformly calls it \"Bardeen-like,\" leaving the identity of the studied spacetime ambiguous. The \u2113-independence of the critical impact parameter is numerically tabulated but analytically unproved given these inconsistencies, and the ESO 325-G004 comparison applies a compact-lens formula to an extended galaxy mass distribution where \u2113-corrections are maximally suppressed, yielding no constraint on \u2113. The qualitative trends (\u2113-dependent SDL coefficients, \u2113-independent shadow radius) may survive after metric corrections, but cannot be certified in the present form."
+}

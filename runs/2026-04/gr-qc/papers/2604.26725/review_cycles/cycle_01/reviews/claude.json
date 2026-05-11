@@ -1,0 +1,145 @@
+{
+  "confidence": 0.55,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 3,
+    "novelty": 4,
+    "reviewer_confidence": 5,
+    "significance": 5,
+    "technical_soundness": 5
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "First cycle; no prior review.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "The resolved simple-pole basis {e^{i\u03c9\u2081t}, e^{i\u03c9\u2082t}} becomes ill-conditioned on a finite window as the pole splitting \u03b4\u21920, with the Gram matrix condition number blowing up.",
+      "notes": "This is a correct classical result (essentially Prony/Vandermonde near-degeneracy). The paper's Eq. (8) gives explicit Gram matrix entries. The numerical illustration in Fig. 1 is consistent. No controversy here.",
+      "paper_location": "Section 'Finite-window necessity of centered organization', Eq. (8), Fig. 1",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The centered first-jet basis {e^{i\u03c9ct}, t\u00b7e^{i\u03c9ct}} remains O(1)-conditioned on the same finite window as \u03b4\u21920.",
+      "notes": "The two functions are linearly independent with a non-vanishing Gram determinant for any finite T regardless of \u03b4. The claim is correct. Supplemental Sec. C is cited for the exact condition number, but this section is not included in the bundle.",
+      "paper_location": "Section 'Finite-window necessity of centered organization', Eq. (8), Fig. 1",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "An exact algebraic reorganization of the two-pole Green-function block (Eq. 3) exists around the center frequency \u03c9c and half-splitting \u03b4, without requiring a true pole merger.",
+      "notes": "This is straightforward partial fraction algebra around (\u03c9-\u03c9c)\u00b2-\u03b4\u00b2. The exact expressions for the coefficients A and B in Eq. (4) are not visible due to HTML rendering failure, but the reorganization itself is algebraically trivial and uncontroversial.",
+      "paper_location": "Eq. (1)-(4)",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The finite-window time-domain waveform from a near-degenerate pair has a carrier-plus-first-jet structure at leading order in \u03b5 = |\u03b4|T, with the next-order error controlled by \u03b7 = |\u03b4|\u00b2T\u00b2.",
+      "notes": "This follows from Taylor-expanding e^{i\u03b4t} \u2248 1 + i\u03b4t + O(\u03b4\u00b2t\u00b2) over the window. The claim is correct as a statement about Taylor approximation. The paper's novelty framing (two-scale hierarchy with named parameters \u03b5, \u03b7) is essentially a restatement of this standard expansion. The zeroth-order error in Fig. 3 does not collapse cleanly onto a single \u03b5 curve, which the paper acknowledges but does not fully explain.",
+      "paper_location": "Eqs. (9)-(14), Fig. 2-3",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Kerr QNMs in a near-degenerate neighboring-overtone sector show the same conditioning advantage of the centered basis, with amplification ratio of order several at representative small-\u03b4 points.",
+      "notes": "The Kerr analysis is explicitly restricted to conditioning comparisons only, not amplitude-level ringdown modeling. The specific numerical values quoted in the text appear to be blanked out in the HTML rendering, making independent verification impossible from the bundle.",
+      "paper_location": "Section 'Representative Kerr realization', Fig. 4",
+      "support_level": "partially_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "Neighboring-pole dominance: the two-pole block (Eq. 1) is assumed to dominate the full Green-function response on the restricted local window, with all other poles contributing negligibly.",
+      "paper_location": "Section 'Local effective two-pole response skeleton'",
+      "why_it_matters": "For real Kerr ringdowns, multiple overtones and angular modes are present. The validity of the local two-pole approximation depends on how isolated the near-degenerate pair is from other poles, which is not quantified."
+    },
+    {
+      "assumption": "The parameter \u03b5 = |\u03b4|T is assumed to be small (\u03b5 \u226a 1) for the carrier-plus-first-jet expansion to be valid, but no criterion is given for when real Kerr QNM near-degenerate pairs satisfy this in gravitational-wave observations.",
+      "paper_location": "Eq. (13), Section 'Local interference diagnostics'",
+      "why_it_matters": "If \u03b5 is not small for the relevant Kerr QNM pairs at astrophysically accessible spin values, the entire framework is inapplicable to real data."
+    },
+    {
+      "assumption": "The residues R\u2081, R\u2082 of the two neighboring poles are assumed to be of comparable magnitude (no anomalous cancellation in A = R\u2081+R\u2082). The paper carves out the suppressed-A case without giving conditions for it.",
+      "paper_location": "Eq. (4), Section 'Local interference diagnostics'",
+      "why_it_matters": "Specific initial data or source configurations may preferentially excite one mode over another, making A small and invalidating the zeroth-order approximation."
+    },
+    {
+      "assumption": "The paper works with complex frequencies and assumes the standard QNM completeness / pole-dominance picture throughout. No mention of potential branch-cut contributions, which can be non-negligible at early/intermediate times.",
+      "paper_location": "Section 'Local effective two-pole response skeleton'",
+      "why_it_matters": "For signals with significant branch-cut contributions, the two-pole block does not capture the full response even locally, potentially biasing the centered-basis fitting."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Are the actual formulas in Eqs. (1)-(15) correct as stated in the PDF? The HTML bundle contains only equation scaffolding with no rendered mathematical content.",
+      "why_model_cannot_resolve": "The bundle source text has all equation cells blank due to LaTeXML rendering failure. The PDF must be consulted to see the actual mathematics."
+    },
+    {
+      "question": "Does the Supplemental Material (Secs. A, B, C) contain valid derivations supporting the Gram matrix condition-number claims (Eq. 8) and the coefficient-recovery tests?",
+      "why_model_cannot_resolve": "The supplemental is entirely absent from the bundle. The core conditioning claims in the main text depend on results proven only there."
+    },
+    {
+      "question": "How does this centered-basis approach compare in practice to established near-degenerate mode extraction methods (ESPRIT, subspace methods, SVD-regularized Prony) in terms of ringdown parameter recovery accuracy?",
+      "why_model_cannot_resolve": "The paper makes no such comparison; assessing whether this is a meaningful advance over the signal-processing literature requires domain expertise and numerical benchmarking outside the bundle."
+    },
+    {
+      "question": "What specific Kerr spin values and mode pairs were used in the Kerr realization section, and what is the amplification ratio reported? These values appear blanked in the HTML.",
+      "why_model_cannot_resolve": "The HTML renders blank where numerical values should appear (e.g., 'the median and pair-spread ratios are ___ and ___'). The PDF is needed."
+    }
+  ],
+  "novelty_assessment": "The core observation\u2014that near-degenerate exponentials are ill-conditioned on finite windows and should be replaced by a center-plus-variation basis\u2014is a classical result in numerical analysis (Prony's method, Vandermonde conditioning, ESPRIT/MUSIC literature). The paper's specific contribution is (a) casting this in the frequency-domain Green-function language of GW ringdown, (b) connecting it explicitly to Jordan-chain / exceptional-point terminology, and (c) defining the two-scale (\u03b5, \u03b7) hierarchy for the specific two-pole case. These are incremental but potentially useful reframings for the GW ringdown community, which has been increasingly focused on near-degenerate QNMs. The paper does not, however, demonstrate improved performance over existing state-of-the-art methods for near-degenerate mode extraction (e.g., SVD-regularized Prony, subspace methods), which limits how much practical novelty can be claimed.",
+  "overall_score_10": 4,
+  "paper_id": "2604.26725",
+  "recommended_verdict": "routine",
+  "reviewer": "claude",
+  "score_rationale": "The central mathematical observation (ill-conditioning of near-degenerate exponential bases on finite windows) is correct, but it is a classical result in numerical analysis applied to a specific GW context. The practical two-scale hierarchy (\u03b5, \u03b7) is essentially a restatement of a two-term Taylor expansion. Novelty is incremental. Clarity is hampered severely by HTML rendering failures that blank all equations and the complete absence of the cited Supplemental Material; the paper cannot be fully evaluated from the bundle as provided. The Kerr analysis is restricted to conditioning comparisons rather than end-to-end parameter recovery. No comparison with existing near-degenerate mode extraction methods is made. Overall, a competent but routine contribution that may be useful to the GW ringdown spectroscopy community as a framing paper, but does not reach the threshold for a high-impact result.",
+  "summary": "The paper argues that near-degenerate resonance poles on a finite observation window are better represented in a \"centered\" basis (carrier plus first-jet) rather than as two independently resolved damped sinusoids. The resolved basis becomes ill-conditioned as the pole splitting \u03b4\u21920 on any finite window [0,T], while the centered first-jet basis remains well-conditioned. The authors define two diagnostics \u03b5 ~ |\u03b4|T (correction-onset parameter) and \u03b7 ~ |\u03b4|\u00b2T\u00b2 (residual accuracy parameter), verifying the resulting two-scale hierarchy with toy numerics and a representative Kerr QNM sector. The paper is primarily a methods-level contribution aimed at the gravitational-wave ringdown spectroscopy community.",
+  "technical_objections": [
+    {
+      "confidence": 0.95,
+      "evidence": "The source HTML shows equations as rows of empty table cells. The paper itself notes: 'Experimental support, please view the build logs for errors.' The bundle text contains only prose and equation labels, no formula content.",
+      "objection": "Critical equation content is absent from the submitted bundle due to HTML rendering failures. Equations (1)-(15) are all present only as table scaffolding with blank cells; the actual mathematical expressions are invisible. This makes rigorous independent verification of every formula in the paper impossible from the source as provided.",
+      "paper_location": "Throughout, all numbered equations",
+      "severity": "major",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.99,
+      "evidence": "At least five distinct claims are deferred to the Supplemental with phrasing like 'see Sec. C of the Supplemental Material' or 'Details of the derivation ... are given in Sec. A of Supplemental Material.'",
+      "objection": "The Supplemental Material (Sections A, B, C) is cited multiple times for key derivations\u2014Green-function derivation (Sec. A), basis constructions (Sec. B), and Gram matrix condition numbers and coefficient-recovery tests (Sec. C)\u2014but is entirely absent from the bundle. The main text cannot be self-contained without it.",
+      "paper_location": "Sections 'Local effective two-pole response skeleton', 'Finite-window necessity', 'Local interference diagnostics'",
+      "severity": "major",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "References [25,26] cited for 'finite-time windowing and resolvability considerations' are Talbot et al. 2021 and Clarke et al. 2024 (GW-specific), not the signal-processing literature on subspace methods or Vandermonde conditioning.",
+      "objection": "The core observation\u2014that near-degenerate exponentials become ill-conditioned on a finite window and that expanding around the center frequency is preferable\u2014is a classical result in numerical analysis (Prony 1795, modern ESPRIT/MUSIC literature) and appears in numerical linear algebra texts. The paper does not cite or compare against this prior literature, making the novelty claim hard to assess.",
+      "paper_location": "Introduction, 'Finite-window necessity' section",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.75,
+      "evidence": "The paper says 'For generic local windows in which the zeroth-order coefficient is not anomalously suppressed...' without characterizing how common this suppression is in realistic ringdown scenarios.",
+      "objection": "The analysis explicitly excludes 'anomalous zeroth-order suppression' (cases where A \u2248 0) without providing criteria for when this occurs in practice for Kerr QNMs. If the sum of residues is naturally small\u2014which can happen for specific excitations\u2014the two-scale hierarchy fails and the paper's organizational framework breaks down.",
+      "paper_location": "Section 'Local interference diagnostics', Eq. (13) discussion",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "Paper states: 'the zeroth-order error is only partially organized by a single-\u03b5 collapse, while two-scale fits involving both \u03b5 and \u03b7 improve the description substantially.'",
+      "objection": "The zeroth-order error in Fig. 3 (right panel) does not collapse onto a single \u03b5 scaling curve; the paper acknowledges 'remaining spread' and appeals to two-scale fits. This partial failure of the single-parameter hierarchy weakens the claim that \u03b5 alone controls correction onset.",
+      "paper_location": "Section 'Local interference diagnostics', Fig. 3",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "The paper explicitly states: 'The role of the Kerr analysis is restricted: not to provide a full amplitude-side implementation, but to test whether the same local reorganization appears in a nontrivial gravitational resonance problem.'",
+      "objection": "The Kerr numerical section does not demonstrate actual improvement in ringdown parameter estimation (posterior widths, bias, SNR thresholds) relative to the standard resolved-pole approach. The comparison is limited to condition numbers and perturbation amplification ratios. Practitioners would need to see extraction accuracy on realistic waveforms.",
+      "paper_location": "Section 'Representative Kerr realization', Fig. 4",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

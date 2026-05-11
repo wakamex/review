@@ -1,0 +1,92 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Two full review cycles completed. Cycle 1 identified the inaccessible companion paper and unjustified junction conditions as the primary concerns. Cycle 2 introduced a new high-stakes objection from gemini (fatal Bessel function error) that claude partially accepted and codex rejected after PDF inspection. The dispute over the Bessel function class is the primary unresolved technical disagreement and is flagged as a mandatory human spotcheck. Codex also updated its assessment of the companion paper availability, noting arXiv:2604.01112v2 is now public. All reviewers held moderate-to-high confidence (7.1\u20137.8 average reviewer_confidence in cycle 2). Technical soundness scores diverged sharply (gemini: 1, claude: 2, codex: 3.8), reflecting the contested status of the Bessel objection. The HTML source of the paper was used for review; rendering artifacts in mathematical expressions may affect the reliability of equation-level objections.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper argues that a purely geometric effect in General Relativity\u2014arising from how matter clumps develop mathematical singularities\u2014can explain why the outer regions of galaxies rotate faster than visible matter alone would predict, without invoking dark matter. The review board found the underlying idea creative and potentially significant, but identified serious technical concerns. The paper defers all substantive derivations to a companion paper listed under a placeholder arXiv identifier (\"000000\"), making independent evaluation impossible, and a key mathematical step\u2014the choice of Bessel functions used to solve the core equation\u2014is disputed between reviewers and needs human expert verification.",
+  "human_spotchecks": [
+    "CRITICAL: Does equation (22) in the published PDF contain the 3D spherical Laplacian coefficient (2/r)d\u03a6/dr or the 2D cylindrical (1/r)d\u03a6/dr? Does the paper apply a g = r\u00b2d\u03a6/dr substitution yielding I\u2081/K\u2081 solutions (as codex reports from the PDF), or does it directly display I\u2080/K\u2080 without such a substitution (as gemini claims from the HTML)? This single question determines whether the flat rotation curve result is a mathematical artifact.",
+    "Is Umeh:2026pm (reference 23, currently listed as '000000') now available at arXiv:2604.01112v2 or elsewhere? If so, does it provide valid derivations of equations (12)\u2013(14), (20), the boundary energy density and pressure in eq. (14), and the conformal Killing junction conditions? Does it justify the claim that the spacelike boundary contribution is subdominant?",
+    "Does arXiv:2601.19812 (Umeh:2026ajv, publicly available) provide a rigorous mathematical justification for replacing Israel\u2013Darmois junction conditions with the conformal Killing equation at the matter horizon boundary? Is the physical motivation for 'opposite orientation' of the glued sheet defined precisely?",
+    "Is the MOND acceleration scale a\u2080 derived from first principles within the framework of arXiv:2604.01112, or is it an external input parameter? Can the framework reproduce the known magnitude ~1.2\u00d710\u207b\u00b9\u2070 m/s\u00b2?",
+    "Are the rotation curves in Figure 3 numerically reproducible from the equations and stated parameters (a = 1 Mpc, total mass M_T, \u03c3_v in km/s)? Do the parameter values correspond to realistic observed galaxies, and can the framework fit a sample of rotation curves beyond the single Hernquist-profile illustration without hidden tuning?"
+  ],
+  "paper_id": "2604.02775",
+  "public_summary": "The paper introduces a 5-page framework in which the standard point-particle approximation of matter in GR is replaced by a hierarchical \"spacetime surgery\" construction. The author identifies a \"matter horizon\"\u2014the proper time or distance at which a local geodesic congruence first focuses\u2014as a natural regularization surface. Spacetime is cut at this horizon and glued to a sheet of opposite orientation; the junction conditions are imposed at the variational (action) level using Gibbon\u2013Hawking\u2013York and Hayward corner terms. The resulting boundary term produces a geometric backreaction contribution \u03c4_{ab} to the effective energy-momentum tensor. After averaging over many subregions, the backreaction density sources an additional gravitational potential \u03a6_{BR} satisfying an integro-differential equation that the paper argues reduces to a Modified Bessel equation of order 1 (though order-0 solutions I\u2080/K\u2080 are displayed\u2014an internal inconsistency flagged by reviewers). The solutions, combined with a Hernquist baryonic profile, are claimed to produce flat rotation curves matching both dwarf and massive galaxy observations, and a MOND-like C/r force scaling in the deep-field regime. Almost all non-trivial derivations are deferred to two companion papers: arXiv:2601.19812 (publicly available) and a second paper listed with placeholder ID \"000000,\" making independent audit of the core mechanism impossible from the submitted Letter alone.",
+  "reviewer_disagreements": [
+    "Bessel function error severity: gemini rates the 3D-spherical-vs-2D-cylindrical Bessel mismatch as fatal (confidence 1.0 in both cycles); claude rates it as a probable fatal error (confidence 0.8, cycle 2), noting the HTML source may not faithfully render the coefficient; codex rejects the objection after reviewing the actual PDF, reporting that the paper applies a g = r\u00b2d\u03a6/dr substitution and obtains I\u2081/K\u2081 solutions in a transformed variable, not I\u2080/K\u2080 as alleged. This is the primary unresolved technical dispute.",
+    "Algebraic inconsistency of eqs. (21)\u2013(22): gemini and claude identify a coefficient mismatch at confidence ~0.85\u20130.95; codex disputes whether the density formula in the HTML bundle matches the actual PDF, making the specific comparison unreliable from the HTML source alone.",
+    "Significance and recoverability: gemini assigns significance 3/10 in both cycles and recommends major_flaw; codex assigns significance 6.5/10 and recommends weak_evidence both cycles, accepting the paper as potentially significant if the companion derivations hold; claude moves from weak_evidence (cycle 1, significance 7) to major_flaw (cycle 2, significance 5) after accepting gemini's Bessel objection.",
+    "Accessibility of companion paper: all reviewers agree the placeholder '000000' reference is problematic, but codex notes that the arXiv abstract links to arXiv:2604.01112v2, which is now publicly available as a companion paper, partially mitigating (but not eliminating) the unauditability concern."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The key companion paper (Umeh:2026pm, reference 23) carries the placeholder arXiv ID '000000' and is not publicly accessible. Every substantive derivation in Sections III\u2013IV\u2014equations of motion (12), effective EMT (13\u201314), energy density and pressure (14), propagation equation (20), conformal Killing junction conditions, and viscosity terms\u2014is deferred entirely to this paper. The Letter cannot be independently evaluated as submitted.",
+      "paper_location": "References list and throughout Sections III\u2013IV",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper dismisses standard Israel\u2013Darmois junction conditions as 'suboptimal' and replaces them with a conformal Killing equation at the matter horizon boundary, yielding SO(1,4) and SO(2,3) isometry structures. No argument for this replacement is given within the Letter. In standard GR thin-shell theory, the Darmois conditions (metric continuity and extrinsic curvature jump constraint) are necessary for a well-defined distributional geometry; departing from them is a non-trivial claim that requires rigorous justification, which is entirely deferred to arXiv:2601.19812.",
+      "paper_location": "Section III, paragraph beginning 'The standard Israel-Darmois conditions prove suboptimal'",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "Gemini (both cycles, confidence 1.0) and claude (cycle 2, confidence 0.8) identify a probable fatal error: eq. (22) appears to contain the 3D spherical radial Laplacian d\u00b2\u03a6/dr\u00b2 + (2/r)d\u03a6/dr, but the paper solves it with 2D cylindrical Modified Bessel functions I\u2080/K\u2080. The correct homogeneous solutions for the 3D case are spherical modified Bessel functions k\u2080(\u03b2r) = e^{\u2212\u03b2r}/r, which produce Keplerian (1/r\u00b2) force and rotational decline, not flat curves. The flat rotation curve would then be an artifact of the incorrect K\u2080 ~ \u2212ln(r) logarithmic behavior. Codex disputes this after reviewing the actual PDF, reporting that the paper applies a g = r\u00b2d\u03a6/dr substitution and obtains I\u2081/K\u2081 in a transformed variable. The status of this objection is unresolved and requires human expert verification against the PDF.",
+      "paper_location": "Section IV, equations (22)\u2013(23)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "Gemini and claude identify an algebraic and dimensional inconsistency between eqs. (21) and (22): directly substituting the backreaction density definition from eq. (21) into the Poisson equation should produce a homogeneous mass term proportional to \u03b2\u00b2(v\u00b2_{disp}/2)\u03a6_{BR}, but eq. (22) contains \u03b2\u00b2\u03a6_{BR} with the source scaled as 2\u03b2\u00b2/v\u00b2_{disp}. These match only if v\u00b2_{disp} = 2 in unstated dimensionless units, which would break the explicit velocity-dispersion dependence of the result. Codex notes the formula rendered in the HTML bundle may differ from the actual PDF and questions whether the specific density formula used is present in the published text.",
+      "paper_location": "Section IV, equations (21) and (22)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The replacement of the discrete sum over particle positions and matter horizons with an all-sky average in eqs. (15) and (21) is mathematically uncontrolled: no convergence criteria, statistical homogeneity scale, gauge prescription, window function, or error estimate are provided. Since the radial profile of this averaged backreaction density directly determines the rotation curve shape, this is a load-bearing assumption rather than a bookkeeping step.",
+      "paper_location": "Section III eq. (15); Section IV eq. (21)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The MOND acceleration scale a\u2080 appears in eq. (26) labeled but without derivation or constraint from the framework. For the 'MOND-like' scaling to constitute a prediction rather than a relabeling, a\u2080 must emerge from the theory with the correct magnitude (~1.2\u00d710\u207b\u00b9\u2070 m/s\u00b2). The paper does not show this.",
+      "paper_location": "Section IV, equation (26)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The Raychaudhuri/geodesic deviation argument that a local expansion scalar \u03b8 can vanish at finite proper time for converging initial data under the weak energy condition is standard GR; the paper's invocation of it to motivate a natural regularization surface is conceptually sound at the qualitative level.",
+    "The use of Gibbon\u2013Hawking\u2013York and Hayward corner terms to regularize boundary contributions to the Einstein\u2013Hilbert action when spacetime has non-smooth boundaries is well-established; the paper's appeal to these structures is technically appropriate at the framework level.",
+    "The paper's identification of the Israel\u2013Darmois thin-shell formalism as the relevant junction-condition tool, and its claim that for conformally related induced metrics an alternative condition may be more natural, points to a genuine mathematical question\u2014though whether conformal Killing equations are the correct alternative is precisely what requires verification in the companion papers.",
+    "The conceptual synthesis\u2014matter-horizon regularization, action-level manifold surgery, emergence of an effective viscous fluid, and application to rotation curves\u2014is acknowledged by all three reviewers as novel relative to existing approaches such as Buchert averaging, Green\u2013Wald backreaction, EFTofLSS, and standard dark matter or MOND models."
+  ],
+  "technical_takeaway": "The paper proposes that GR backreaction from action-level spacetime surgery at \"matter horizons\" (pre-caustic surfaces motivated by the Raychaudhuri equation) generates a geometric effective EMT contribution. Through a Poisson equation for the backreaction potential\u2014argued to reduce to a Modified Bessel equation\u2014the paper claims flat galaxy rotation curves and MOND-like 1/r force scaling emerge naturally. Two issues dominate the adversarial cross-review: (1) reference 23 (Umeh:2026pm, arXiv ID \"000000\") is inaccessible, deferring every non-trivial derivation\u2014equations of motion (12), effective EMT (13\u201314), propagation equation (20), junction conditions, and viscosity terms\u2014outside the paper; (2) a disputed mathematical error in eq. (22)\u2013(23): gemini and claude argue the 3D spherical Laplacian (d\u00b2\u03a6/dr\u00b2 + (2/r)d\u03a6/dr) should yield spherical Bessel solutions k\u2080 ~ e^{\u2212\u03b2r}/r (Keplerian decline), not cylindrical I\u2080/K\u2080, making flat rotation curves an artifact of the wrong function class; codex disputes this after inspecting the actual PDF, reporting a g = r\u00b2d\u03a6/dr substitution yielding I\u2081/K\u2081 in a transformed variable. The departure from Israel-Darmois junction conditions in favor of conformal Killing equations is flagged as unjustified by all three reviewers."
+}

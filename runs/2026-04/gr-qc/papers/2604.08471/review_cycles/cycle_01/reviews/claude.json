@@ -1,0 +1,120 @@
+{
+  "confidence": 0.68,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 5,
+    "novelty": 7,
+    "reviewer_confidence": 6,
+    "significance": 8,
+    "technical_soundness": 6
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "First cycle; no prior review to compare against.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "Colocated planar detector networks cannot detect the isotropic Stokes-V (circular polarization) component of the SGWB, independent of their relative orientation (no-go theorem).",
+      "notes": "This result is established in the prior literature (Seto & Taruya 2007/2008, Smith & Caldwell 2017) and is correctly cited. The paper restates it via the vanishing of \u03b3_V for coplanar configurations.",
+      "paper_location": "Abstract and paragraph before Eq. (12)",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "For the Pyramid (ET-PyET non-coplanar pair) geometry, \u03b3_I = 0 exactly and \u03b3_V \u2260 0, enabling pure Stokes-V sensitivity.",
+      "notes": "This is the core technical result. The claim is asserted and the conditions \u03b3_I = 0 (requiring the ET and PyET detector tensors to be orthogonal: Tr[D^ET \u00b7 D^PyET] = 0) are geometrically non-trivial. The explicit derivation is deferred to supplemental material not included in the bundle. Without it, the exact vanishing of \u03b3_I cannot be independently audited. The co-location approximation (valid since h ~ 1 km gives d/\u03bb ~ 3\u00d710^{-4} \u226a 1 at 10-100 Hz) is appropriate, but the geometric orthogonality condition depends on the exact arm-direction definitions in Eq. (13), which are not fully readable due to HTML rendering issues.",
+      "paper_location": "Eq. (15) and surrounding discussion",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The Pyramid configuration achieves optimal channel separation (one channel pure I, one pure V), unlike the ET-CE non-colocated combination which produces mixed I-V responses.",
+      "notes": "This follows directly from the \u03b3_I = 0 claim. If that claim holds, the separation is exact. The comparison with ET-CE in Table 1 is qualitatively sound (ET-CE gives mixed I-V response per Seto & Taruya), but no quantitative comparison of the V-mode SNR between optimal Pyramid and optimal ET-CE configurations is provided.",
+      "paper_location": "Eq. (16) and Table 1, Discussion section",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Placing the non-coplanar arm above ground (tower extension up to 1 km) does not significantly degrade sensitivity in the target frequency band.",
+      "notes": "The argument is that at frequencies above ~1 Hz, shot noise dominates over seismic/Newtonian noise, so being above ground is not a penalty. This is physically plausible but relies on the noise budget shown in Fig. S2, which is itself taken from ET design studies for the underground configuration. Above-ground-specific noise sources (wind-induced tilt, thermal gradients, anthropogenic seismic) are not separately quantified for a 1 km tower. The claim is presented qualitatively without a dedicated noise analysis for the tower arm.",
+      "paper_location": "Main text, 'Sensitivity and dominant noise sources' section; Supplemental S1/S2",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The Double Pyramid improves the circular-polarization SNR by a factor of \u221a2 relative to the Minimal Pyramid.",
+      "notes": "This follows from adding two independent parity-sensitive channels in quadrature, which is standard. Assuming the two non-coplanar channels are truly independent and have the same noise properties, the \u221a2 improvement is correct.",
+      "paper_location": "Main text, paragraph after Eq. (20)",
+      "support_level": "well_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The co-location approximation (d\u00b7f/c \u226a 1) is assumed to hold for the Pyramid geometry at all relevant frequencies, treating the beam splitters at different heights as effectively colocated.",
+      "paper_location": "Eqs. (10)\u2013(15), discussion of 'colocated' Pyramid",
+      "why_it_matters": "For h = 1 km and f = 100 Hz, d/\u03bb ~ 3\u00d710^{-4}, which is negligible. For the underground Minimal Pyramid with h at the ET depth (~100\u2013300 m), the approximation is even better. The assumption is physically well-motivated and holds across the target band. However, the paper does not explicitly state when this approximation is invoked, nor check whether \u03b3_I vanishes only in the strict d = 0 limit or also at finite d relevant for the tower."
+    },
+    {
+      "assumption": "The PyET (non-coplanar) arm is assumed to have the same shot noise level (same arm length, same laser power, same optical configuration) as the standard ET arms.",
+      "paper_location": "Eqs. (18)\u2013(20), SNR expressions",
+      "why_it_matters": "The SNR formulas use a single noise PSD P_n. The tilted arm may have different practical noise characteristics. If the above-ground tower arm has a worse noise PSD, the V-mode SNR would degrade accordingly. This assumption is never explicitly stated or justified."
+    },
+    {
+      "assumption": "The SGWB is assumed to be isotropic. The no-go theorem and the Pyramid's \u03b3_V sensitivity both apply to the isotropic case.",
+      "paper_location": "Eq. (3), throughout",
+      "why_it_matters": "For an anisotropic SGWB, even coplanar detectors can in principle have non-zero response to circular polarization (through directional measurements). The paper's claims about channel separation are specific to the isotropic case. This is stated implicitly but not explicitly flagged as a key assumption."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Does the specific Pyramid geometry defined in Eq. (13) exactly enforce Tr[D^ET \u00b7 D^PyET] = 0 (i.e., \u03b3_I = 0 for the ET-PyET pair in the co-located limit), and does this hold for all values of the Pyramid height h or only for special geometric choices?",
+      "why_model_cannot_resolve": "The arm directions in Eq. (13) are not readable in the HTML source due to rendering failures. The derivation is in the supplemental material (Ref. [31]) which is not included in the bundle. Verifying the exact orthogonality of detector tensors requires the explicit vector definitions and the integral of the product of antenna patterns over the sphere."
+    },
+    {
+      "question": "Is the projected V-mode sensitivity (dashed curves in Fig. 3) for ET-PyET and ET-PyET tower competitive with or superior to an optimally projected ET-CE V-mode sensitivity, and how does it compare to theoretically predicted chiral SGWB amplitudes from specific inflation models?",
+      "why_model_cannot_resolve": "Fig. 3 is not rendered in the HTML source. The paper does not show an optimally projected ET-CE V-mode curve for comparison, so the claimed advantage cannot be quantitatively assessed without the actual figure and ET-CE V-mode computation."
+    },
+    {
+      "question": "Is the assertion that 'the non-coplanar arm being above ground does not lead to significant loss of sensitivity' at f > 1 Hz backed by a dedicated noise analysis for a 1 km tower structure, accounting for wind-driven tilt noise, anthropogenic seismic, and temperature-gradient-induced length changes?",
+      "why_model_cannot_resolve": "The supplemental material (Ref. [31]) is only partially included and does not appear to contain a tower-specific noise budget. Assessing whether above-ground noise is genuinely subdominant requires either a dedicated experimental estimate or comparison with existing above-ground interferometer noise data at relevant frequencies."
+    }
+  ],
+  "novelty_assessment": "The core novelty \u2014 using colocated non-coplanar interferometry to achieve clean geometric separation of Stokes-I and Stokes-V channels \u2014 is genuinely new as a concrete design proposal. The underlying mathematical framework (overlap reduction functions \u03b3_I, \u03b3_V; the no-go theorem for coplanar networks) is established in the literature (Seto & Taruya 2007/2008; Smith & Caldwell 2017). The specific contribution is showing that a simple geometric extension of ET (adding one or two tilted arms) achieves what non-colocated ET-CE combinations cannot: exact I-V channel separation, without requiring a fully independent observatory. The Tower-Extended configuration, while engineering-speculative, extends the design space in a useful way. The concept is clean and the motivation from parity-violation physics is well-contextualized. The novelty is incremental relative to the Seto & Taruya framework but represents a significant and actionable design insight for next-generation detector planning.",
+  "overall_score_10": 6.5,
+  "paper_id": "2604.08471",
+  "recommended_verdict": "promising",
+  "reviewer": "claude",
+  "score_rationale": "The paper identifies a clean and potentially important geometric principle \u2014 colocated non-coplanarity for I-V channel separation \u2014 that is genuinely novel and could influence next-generation detector design. Significance is high because detecting SGWB chirality would be a direct probe of parity-violating early-Universe physics currently inaccessible to any planned instrument. However, the central mathematical claim (\u03b3_I = 0 exactly for ET-PyET) is not derived in the main text and cannot be audited from the bundle due to supplemental material absence and severe HTML rendering failures. The noise analysis for the tower arm is qualitative. These gaps lower technical soundness and limit reviewer confidence. Clarity is reduced by the rendering issues and the 6-page format forcing key derivations entirely into inaccessible supplemental material. The paper is promising but needs the core geometric claim verified and a tower-specific noise budget before it can be considered technically solid.",
+  "summary": "The paper proposes \"Pyramid\" interferometer designs \u2014 non-coplanar extensions of the Einstein Telescope \u2014 as a way to evade the no-go theorem that colocated planar detectors cannot measure the isotropic Stokes-V (circular polarization) component of a stochastic gravitational-wave background (SGWB). The central claim is that for the Pyramid geometry, the coplanar ET-ET correlation channel has \u03b3_I \u2260 0 and \u03b3_V = 0 (sensitive to intensity only), while the non-coplanar ET-PyET channel has \u03b3_I = 0 and \u03b3_V \u2260 0 (sensitive to chirality only). This \"channel separation\" is presented as superior to ET-CE non-colocated combinations, which produce mixed I and V responses. Three design variants are proposed: Minimal Pyramid (one tilted arm), Double Pyramid (two tilted arms), and Tower-Extended Minimal Pyramid (tilted arm extended to a 1 km above-ground tower). Power-law sensitivity curves suggest the Pyramid configurations can reach sensitivities near the BBN bound for the V component.",
+  "technical_objections": [
+    {
+      "confidence": 0.65,
+      "evidence": "The arm directions defining the Minimal Pyramid in Eq. (13) are not fully readable in the HTML source. The derivation of Eqs. (14)\u2013(15) is deferred to supplemental material (Ref. [31]) that is not included in this bundle. There is no intermediate step shown verifying Tr[D^ET \u00b7 D^PyET] = 0.",
+      "objection": "The central claim \u03b3_I = 0 for the ET-PyET pair (Eq. 15) is asserted but not derived in the main text. The condition requires the ET and PyET detector tensors to be exactly orthogonal (Tr[D^ET \u00b7 D^PyET] = 0). Whether this holds for the specific Pyramid geometry defined in Eq. (13) \u2014 and for all pyramid heights h, not just special values \u2014 is not demonstrated. If this orthogonality is only approximate or holds only for specific h, the channel separation is not clean.",
+      "paper_location": "Eq. (13)\u2013(15)",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.75,
+      "evidence": "The paper states 'the fact that the non-coplanar arm is not underground does not lead to significant loss of sensitivity' but references only the ET noise budget (Ref. [30]) without providing an above-ground noise estimate. The Jeddah Tower reference [28] is an architectural conference paper, not a seismic or precision-mechanics analysis.",
+      "objection": "The noise analysis for the above-ground tower arm (Tower-Extended Minimal Pyramid) is insufficient. The paper asserts that above-ground placement does not impose a significant noise penalty at high frequencies by citing the ET noise budget (Fig. S2), but this budget was derived for the underground configuration. Wind loading, seismic coupling, thermally-driven tower sway, and atmospheric pressure fluctuations on a 1 km free-standing structure are not quantified.",
+      "paper_location": "Figure 2 and 'Sensitivity and dominant noise sources' section",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "Eq. (21) gives the ET-CE SNR formula including both I and V, but no optimally projected V-only ET-CE sensitivity curve is plotted in Fig. 3 for comparison. The paper's claim of superiority over ET-CE is therefore only qualitative.",
+      "objection": "No quantitative comparison is given between the Pyramid's Stokes-V SNR and the best achievable Stokes-V SNR from an ET-CE combination. The paper argues qualitatively that ET-CE gives a 'mixed' response (Table 1), but does not show whether an optimally projected ET-CE network might still outperform or match the Pyramid for V-mode sensitivity.",
+      "paper_location": "Table 1, Discussion section",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "Multiple equations appear as empty cells or with missing variables in the HTML source ('| | | | | | |' pattern). The detector specifications in Eq. (13) are listed as '| |' with no readable content.",
+      "objection": "The HTML source has significant rendering artifacts (missing equation content, unrendered LaTeX) throughout. Several key equations \u2014 including the arm directions in Eq. (13) and the overlap functions in Eqs. (14)\u2013(15) \u2014 appear as empty or incomplete in the rendered text. This makes independent verification of the mathematical claims impossible from this source.",
+      "paper_location": "Equations (8)\u2013(16) throughout",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

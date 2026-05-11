@@ -1,0 +1,138 @@
+{
+  "confidence": 0.68,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 6.5,
+    "novelty": 8.0,
+    "reviewer_confidence": 6.8,
+    "significance": 8.5,
+    "technical_soundness": 7.0
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "N/A: first review cycle.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "SPT-3G D1 provides the deepest high-resolution CMB maps used for a TT/TE/EE analysis and the tightest lensed EE and TE measurements in specified multipole ranges.",
+      "notes": "The paper provides instrument/noise descriptions and SNR comparisons, but the bundle has missing numeric ranges/values in several places and I cannot verify the external comparison to all prior measurements from the excerpt alone.",
+      "paper_location": "Abstract; Introduction; Section II; Fig. 1 and Fig. 11 discussion",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The SPT-3G D1 TT/TE/EE spectra are internally consistent and well fit by LCDM, and SPT-only constraints are consistent with Planck and ACT DR6.",
+      "notes": "The described blind validation program, null tests, simulation tests, and likelihood framework support this, but much of the detailed validation and final cosmology tables are outside the provided truncated text or have missing rendered values.",
+      "paper_location": "Section II claims 1-2; Sections VI-VII referenced",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Ground-based SPT+ACT CMB data reach Planck-like constraining power on some parameters for the first time.",
+      "notes": "This is plausible and important, but the provided table values are stripped from the bundle, and the claim requires careful comparison of dataset definitions, priors, and parameter subsets.",
+      "paper_location": "Abstract; Introduction; Section II claim 3",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "CMB data alone show no evidence for extensions beyond LCDM, while CMB+DESI BAO combinations show 2-3 sigma deviations in some extended models.",
+      "notes": "The claim is outside the locally auditable portion of the truncated bundle. It is also sensitive to look-elsewhere effects, dataset choices, and model-prior volume.",
+      "paper_location": "Abstract; Introduction; Section II claims 6-7; Sections VII.3-VII.4 referenced",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "The data products and likelihood code are publicly available.",
+      "notes": "The excerpt gives public SPT and GitHub links for the likelihood/data products, though I did not access them.",
+      "paper_location": "Introduction; Section V.4; Section X referenced",
+      "support_level": "well_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The one-dimensional transfer-function approximation captures the mean filtering effect well enough for cosmology after masking and harmonic weighting.",
+      "paper_location": "Section IV.1.2",
+      "why_it_matters": "If residual anisotropic filtering or mode coupling leaks into TE/EE at a level comparable to statistical errors, parameter constraints and consistency tests could be biased."
+    },
+    {
+      "assumption": "Quickmock simulations are accurate enough for transfer-function and covariance calibration after Fullmock correction.",
+      "paper_location": "Sections III.6, IV.1.2, IV.6; Appendix A referenced",
+      "why_it_matters": "The paper relies heavily on many Quickmock simulations plus fewer Fullmock simulations. Any mismatch in scanning, filtering, noise, or masking behavior could propagate into underestimated covariance or residual bias."
+    },
+    {
+      "assumption": "Foreground models and priors remain adequate over the adopted multipole range and do not absorb or mimic beam/calibration systematics.",
+      "paper_location": "Section V.2.2; Appendix E referenced",
+      "why_it_matters": "High-ell TT is foreground dominated, and polarized beam/nuisance parameters are partly inferred from internal frequency consistency. Degeneracies could affect cosmological inferences and extension-model preferences."
+    },
+    {
+      "assumption": "Ignoring super-sample lensing covariance while marginalizing over its likelihood-level effect is sufficient for this sky fraction and precision.",
+      "paper_location": "Section IV.6; Section V.2.1",
+      "why_it_matters": "The survey covers only about 4% of the sky, so large-scale modes and sample variance are important. Incorrect treatment could change covariance and goodness-of-fit."
+    },
+    {
+      "assumption": "The post-unblinding changes were not tuned to cosmological outcomes and are fully documented in Appendix B.",
+      "paper_location": "Introduction; Sections IV.2.2, IV.2.3, V.2; Appendix B referenced",
+      "why_it_matters": "The credibility of blind-analysis claims depends on transparent separation between data-quality corrections and result-driven tuning."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Do Appendix A, Appendix B, and the untruncated validation sections quantitatively justify the transfer-function/covariance approximations and post-unblinding changes?",
+      "why_model_cannot_resolve": "The supplied bundle is truncated before most detailed validation material and many equations/numbers are stripped from the HTML text."
+    },
+    {
+      "question": "Are the SPT+ACT vs Planck constraining-power and 'tightest to date' claims correct under matched priors and dataset definitions?",
+      "why_model_cannot_resolve": "This requires checking the complete tables, external ACT/Planck likelihood definitions, and prior choices beyond the excerpt."
+    },
+    {
+      "question": "Does the covariance regularization in Eq. 38 preserve correct coverage in end-to-end simulations, not just acceptable chi-square behavior?",
+      "why_model_cannot_resolve": "The excerpt states validation exists but does not provide enough simulation coverage diagnostics to audit frequentist coverage or posterior calibration."
+    }
+  ],
+  "novelty_assessment": "The paper appears novel and significant as an experimental cosmology analysis: new SPT-3G TT/TE/EE band powers from 2019-2020 observations, high-precision small-scale polarization constraints, a curved-sky pipeline, primary-CMB use of constrained inpainting, and public multi-frequency and lite likelihoods. The novelty is mostly methodological and data-driven rather than mathematical. Some headline novelty claims, especially 'first' and 'tightest' statements, need external cross-checking because the supplied bundle omits many numeric values.",
+  "overall_score_10": 7.4,
+  "paper_id": "bm-094-01",
+  "recommended_verdict": "promising",
+  "reviewer": "codex",
+  "score_rationale": "The work is substantial, likely important, and presents many careful validations, but I would not treat the proof of robustness as fully audited from this truncated bundle. The main reservations concern nontrivial simulation-calibrated approximations, covariance regularization, and post-unblinding systematic-model additions. These are manageable caveats for a strong experimental paper rather than clear fatal flaws.",
+  "summary": "The paper presents SPT-3G 2019-2020 Main-field TT/TE/EE power spectra, a detailed power-spectrum/likelihood pipeline, validation tests, and cosmological constraints alone and in combination with ACT, Planck, and DESI. From the provided bundle, the work appears technically serious and extensively cross-checked, but several important conclusions rest on nontrivial modeling approximations for filtering, inpainting, beam polarization, and covariance regularization that I cannot independently certify from the excerpt alone.",
+  "technical_objections": [
+    {
+      "confidence": 0.72,
+      "evidence": "Filtering, weighting, mask, Polspice regularization, and covariance effects are assumed to decouple or be representable by one-dimensional transfer functions and diagonal rescalings. The paper says these are validated with Quickmock/Fullmock simulations, but the excerpted derivation itself does not establish when off-diagonal mode coupling is negligible.",
+      "objection": "The likelihood/covariance treatment relies on several approximate factorizations of non-isotropic processing effects that are not locally derived in the excerpt.",
+      "paper_location": "Sections IV.1.2, IV.6; Eqs. 9-13 and 31-38",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.78,
+      "evidence": "The paper states that conditional tests fail because the covariance is highly conditioned and that a small fraction of sample variance is added to the diagonal, lowering average chi-square by about 60 points. This may be justified, but it weakens purely statistical interpretation unless the unmodeled frequency inconsistencies are quantitatively diagnosed.",
+      "objection": "The covariance matrix is deliberately regularized after stringent conditional tests fail, and the impact on goodness-of-fit and parameter inference depends on trusting the regularization criterion.",
+      "paper_location": "Section IV.6; Eq. 38 and surrounding text",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "The paper says quadrupolar beam leakage, polarized beam modeling, and foreground-model updates were added after unblinding. These corrections affect TE/EE and nuisance modeling, and the main excerpt mostly summarizes rather than fully reproduces the post-unblinding decision record.",
+      "objection": "Post-unblinding additions to the model are substantial enough to require especially careful audit.",
+      "paper_location": "Introduction; Sections IV.2.2, IV.2.3, V.2; Appendix B referenced",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.63,
+      "evidence": "The method uses local constraining regions, inpaints the full-depth coadd rather than each bundle, and treats frequencies separately. The paper acknowledges these approximations induce residual correlated noise and bias, then subtracts/calibrates them using Fullmock plus sign-flip simulations. The local argument does not fully demonstrate robustness to foreground non-Gaussianity or source-cluster environments around the masked regions.",
+      "objection": "The primary-CMB inpainting method is novel here and depends on calibrated residual-bias corrections from simulations, but the excerpt gives limited quantitative stress tests of the approximations.",
+      "paper_location": "Section IV.3; Eqs. 20-26",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "The bundle shows phrases such as 'We report a Hubble constant of from SPT-3G alone' and tables with empty cells. This is likely a bundle/rendering issue rather than a paper flaw, but it prevents an independent local check of many reported constraints.",
+      "objection": "Several headline numerical claims cannot be audited from the supplied bundle because mathematical values and table entries are missing in the cleaned arXiv HTML text.",
+      "paper_location": "Abstract; Section II; Table 1; multiple equations and parameter statements",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Two-cycle adversarial cross-review with three independent reviewers. Cycle 2 incorporated explicit cross-reviewer critiques. The \u03ba arithmetic inconsistency (\u03b7\u00b7\u03c1 = 0.169 \u2260 reported \u03ba = 0.400) was independently confirmed by all three reviewers in cycle 2. Codex confirmed in cycle 2 that the PDF version contains rendered equations, partially invalidating claude's HTML-rendering objection as a paper-quality issue (it remains a bundle-accessibility limitation). All three reviewers independently confirmed the absence of Supplemental Secs. A\u2013C from the supplied arXiv paper and the irreproducibility of the Kerr section. Novelty disagreement (trivial rebranding vs. incremental reframing) was not resolved by cross-review. Equations in the source bundle are blank due to LaTeXML rendering failure; equation content from the text narrative was used where available for synthesis.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper argues that when two nearly identical ringing signals overlap\u2014as can happen in gravitational waves from merging black holes\u2014it is more stable to describe them jointly around a shared \"carrier\" frequency than as two separate, independent signals. The review board found the core mathematical idea correct but classical, already well-known in signal processing under names like Prony's method and ESPRIT. A concrete numerical inconsistency in the figures, missing supporting derivations, and an irreproducible gravitational-wave application prevent full verification. The paper may offer useful conceptual framing for the gravitational-wave ringdown community, but it does not demonstrate that it outperforms existing methods.",
+  "human_spotchecks": [
+    "Verify in the published PDF whether Eq. (13) defines \u03ba = \u03b7\u00b7\u03c1 and whether the Fig. 2 caption values \u03b7 = 0.260, \u03c1 = 0.650, \u03ba = 0.400 are mutually consistent. If \u03ba \u2260 \u03b7\u00b7\u03c1 as computed (0.169 \u2260 0.400), determine whether the error is in the definition, the caption, or the numerics.",
+    "Check whether Supplemental Material Secs. A, B, and C are included in any ancillary or source package on arXiv for 2604.26725, and if so whether they contain valid derivations for the Green-function reduction (Sec. A), the Gram-matrix condition-number constant 7 + 4\u221a3 for the centered basis (Sec. C), and the coefficient-recovery tests (Sec. C).",
+    "Identify the specific Kerr QNM pair (spin parameter a, overtone indices l, m, n) and effective window length T_eff used in the Kerr realization section, and assess whether the quoted conditioning ratios (reported as approximately 5.60 and 7.35 for q50/q90 spread, Ramp = 7.00, at a = 0.8810, \u03b7 = 0.049145) are reproducible from publicly available QNM frequency tables using a stated inversion protocol.",
+    "Assess whether the centered first-jet framework, as applied to near-degenerate Kerr quasinormal modes, offers quantitative improvement over existing near-degenerate mode extraction methods (SVD-regularized Prony, ESPRIT, subspace methods) for parameter recovery at finite SNR\u2014a comparison the paper does not make.",
+    "Determine whether the Gram-matrix conditioning analysis of Eq. (8), proved for the real-splitting slice, extends to complex splittings (with unequal imaginary parts) relevant to Kerr overtone pairs, either in the supplemental material or by independent derivation."
+  ],
+  "paper_id": "2604.26725",
+  "public_summary": "The paper introduces what it calls a \"finite-window centered organization\" for pairs of nearly identical resonance poles in open-wave systems, with gravitational-wave black-hole ringdown as the primary application. When two modes share nearly the same complex frequency, fitting them independently as two separate damped sinusoids becomes numerically ill-conditioned on any finite observation window. The paper argues that a reorganized \"centered\" description\u2014a common carrier frequency plus a first-order correction term (first-jet)\u2014remains well-conditioned and captures the waveform hierarchy through two dimensionless parameters, \u03b5 and \u03b7, that quantify correction onset and residual accuracy respectively. The paper claims to verify this structure with toy two-pole numerics and a representative Kerr quasinormal mode calculation. The review board found the algebraic reorganization and basic conditioning observation correct but classical. The novelty is assessed as incremental: the observation that nearly coincident exponential bases are ill-conditioned on finite windows, and that a confluent (carrier-plus-derivative) basis regularizes this, is standard in the Prony and subspace-method literature. The paper's potential value lies in packaging this observation explicitly for the gravitational-wave ringdown community, where near-degenerate overtone pairs are a live concern. However, three significant issues survived adversarial cross-review: a concrete arithmetic inconsistency in Fig. 2 parameters, the complete absence of Supplemental Material cited for essential derivations, and an irreproducible Kerr numerical section using undefined terminology. The analysis is also restricted to a simplified real-splitting case and lacks any noise or SNR model, leaving the practical advantage claim incompletely supported.",
+  "reviewer_disagreements": [
+    "Novelty assessment diverged significantly: gemini rated novelty 2/10 across both cycles, characterizing the work as a mischaracterization of trivial standard mathematics; claude rated it 4/10 as incremental but potentially useful reframing for the GW ringdown community; codex settled at 3.3/10, agreeing the core is routine but acknowledging domain-specific packaging value. This disagreement was not resolved in cross-review.",
+    "Severity of the \u03ba arithmetic inconsistency differed: gemini upgraded it to 'major' in cycle 2 (arguing it reflects a serious bookkeeping or calculation error), while claude and codex maintained 'moderate' (arguing it is more likely a typo that would not change the verdict).",
+    "The HTML equation-rendering objection was partially invalidated in cycle 2: codex confirmed the PDF has rendered equations and that the blank-equation issue is a bundle-extraction artifact, not a deficiency of the paper itself. Claude retained the objection scoped to bundle-review inaccessibility rather than paper quality.",
+    "Recommended verdict differed: gemini recommended 'weak_evidence' in both cycles; claude and codex both recommended 'routine', reflecting disagreement on whether the combination of low novelty, the \u03ba inconsistency, and the Kerr reproducibility issues fall below the routine threshold."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "A concrete arithmetic inconsistency in Fig. 2: the paper defines \u03ba = \u03b7\u00b7\u03c1 in Eq. (13) and reports \u03b7 = 0.260, \u03c1 = 0.650, and \u03ba = 0.400 in the figure caption, but 0.260 \u00d7 0.650 = 0.169 \u2260 0.400. This contradiction in the toy numerics\u2014the primary empirical support for the two-scale hierarchy\u2014was confirmed independently by all three reviewers and points to either a definition ambiguity, a typo, or an arithmetic error in the numerical demonstration.",
+      "paper_location": "Eq. (13) and Fig. 2 caption",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "Supplemental Material Secs. A, B, and C\u2014cited for the Green-function derivation (Sec. A), basis constructions (Sec. B), and Gram-matrix condition-number proofs and coefficient-recovery tests (Sec. C)\u2014are absent from both the review bundle and the submitted arXiv PDF. Multiple claims in the main text are not self-contained without them.",
+      "paper_location": "Sections 'Local effective two-pole response skeleton', 'Finite-window necessity of centered organization', 'Local interference diagnostics'",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The Kerr quasinormal mode section uses undefined terminology ('L-only band', 'surrogate layer', 'validation band', 'failure pocket') and omits the QNM mode-pair labels, effective window length T_eff, perturbation/noise model, inverse-problem protocol, and code or data. The results cannot be reproduced or independently assessed from the text.",
+      "paper_location": "Section 'Representative Kerr realization', Fig. 4",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The conditioning result in Eq. (8) is derived explicitly only along a real-splitting slice, but the paper applies it rhetorically to the complex-splitting Kerr quasinormal mode case without providing the corresponding complex-window Gram-matrix analysis. Kerr QNMs have complex frequencies with unequal damping rates, and the generalization is asserted but not demonstrated.",
+      "paper_location": "Eq. (8), Section 'Representative Kerr realization'",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper provides no noise or SNR model. Ill-conditioning of the resolved basis is only practically limiting when measurement noise is present; in a noiseless setting, an ill-conditioned system can be inverted to machine precision. The practical resolvability advantage of the centered basis depends jointly on the splitting, window length, and SNR\u2014a dependence the paper does not analyze.",
+      "paper_location": "Throughout, particularly Section 'Finite-window necessity of centered organization'",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper does not engage with the signal-processing literature in which the core observation\u2014that nearly coincident exponentials are ill-conditioned on finite windows and that a confluent carrier-plus-derivative basis regularizes this\u2014is a classical result (Prony's method, ESPRIT, MUSIC, SVD-regularized Prony). Without this positioning, the novelty claim cannot be rigorously assessed and the prior art is underacknowledged.",
+      "paper_location": "Introduction, Section 'Finite-window necessity of centered organization'",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The \u03b7\u00b2 residual hierarchy after including the first-jet correction is stated without deriving explicit bounds on the residue ratio \u03c1 = |(R\u208a \u2212 R\u208b)/(R\u208a + R\u208b)|. Expanding Eq. (10), the remainder contains terms proportional to (R\u208a + R\u208b)\u03b4\u00b2t\u00b2 and (R\u208a \u2212 R\u208b)\u03b4\u00b3t\u00b3, so the scaling depends on residue ratios beyond \u03b7 alone. The paper excludes the anomalous-suppression case (A \u2248 0) without characterizing how often this occurs for Kerr QNMs.",
+      "paper_location": "Eqs. (10)\u2013(14), Section 'Local interference diagnostics'",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The zeroth-order error in Fig. 3 (right panel) does not collapse cleanly onto a single \u03b5 scaling curve; the paper acknowledges 'remaining spread' and appeals to two-scale fits involving both \u03b5 and \u03b7 to improve the description, partially undermining the claim that \u03b5 alone controls correction onset.",
+      "paper_location": "Section 'Local interference diagnostics', Fig. 3",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The resolved simple-pole basis {e^{i\u03c9\u2081t}, e^{i\u03c9\u2082t}} becomes ill-conditioned on a finite window as the pole splitting \u03b4\u21920, with the Gram matrix condition number diverging\u2014a classical result in numerical analysis (Prony/Vandermonde) that the paper's Eq. (8) and Fig. 1 illustrate consistently.",
+    "The centered first-jet basis {e^{i\u03c9_c t}, t\u00b7e^{i\u03c9_c t}} is linearly independent with non-vanishing Gram determinant for any finite window length T regardless of the splitting \u03b4, so it remains O(1)-conditioned as \u03b4\u21920.",
+    "An exact algebraic reorganization of the two-pole Green-function block around the center frequency \u03c9_c and half-splitting \u03b4 exists without requiring a true pole merger or exceptional-point coalescence (Eqs. 1\u20134, straightforward partial fractions).",
+    "On a finite window with |\u03b4|T \u226a 1, the two-pole time-domain response admits a carrier-plus-first-jet structure at leading order, with the next-order error formally controlled by |\u03b4|\u00b2T\u00b2, as a direct consequence of Taylor-expanding the interference envelope (Eqs. 9\u201311)."
+  ],
+  "technical_takeaway": "The paper recasts the classical near-degenerate exponential ill-conditioning result (Prony/Vandermonde) into the Green-function language of gravitational-wave ringdown, proposing a carrier-plus-first-jet basis and a two-scale hierarchy governed by \u03b5 = |\u03b4|T and \u03b7 = |\u03b4|\u00b2T\u00b2. The algebraic reorganization of the two-pole block (Eqs. 1\u20134) is exact partial-fraction algebra; the conditioning contrast (Eq. 8) is demonstrated only along the real-splitting slice and is not extended to complex QNM splittings. A concrete arithmetic inconsistency in Fig. 2 (reported \u03ba = 0.400 vs. computed \u03b7\u00b7\u03c1 = 0.260 \u00d7 0.650 = 0.169, contradicting Eq. 13) was confirmed by all three reviewers. Supplemental Secs. A\u2013C cited for key derivations and coefficient-recovery tests are absent from the submission. The Kerr numerical section uses undefined terminology and omits mode labels, T_eff, perturbation model, and inverse-problem protocol, making it irreproducible. No noise or SNR model is provided, leaving the practical instability claim unquantified. No comparison to existing near-degenerate mode extraction methods (ESPRIT, SVD-regularized Prony) is made."
+}

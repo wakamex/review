@@ -1,0 +1,165 @@
+{
+  "confidence": 0.72,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 5.9,
+    "novelty": 5.0,
+    "reviewer_confidence": 7.2,
+    "significance": 5.2,
+    "technical_soundness": 4.2
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "I modestly increased confidence after the other reviews independently supported several statistical and systematics concerns, especially the PPN beta/gamma mapping, QNM-as-Gaussian issue, and EHT spin/systematics. I did not adopt the more positive view that the SDL derivation is clearly sound, because the local c1/c2 issue remains concrete in the provided text. Overall score is unchanged: interesting but not technically secure enough for an unqualified positive assessment.",
+    "invalid_points_from_other_reviewers": [
+      "Gemini's statement that Eq. (47) gives alpha=0.01 +/- 0.04 and gamma=-0.56 +/- 0.62 appears to use incorrect parameter names and values; the provided paper text and prior extraction give xi=0.044 +/- 0.039 and k=2.51 +/- 0.64.",
+      "Gemini's high technical-soundness rating appears to underweight the unshown PPN mapping and the QNM likelihood issue.",
+      "Claude's claim that the SDL derivation appears internally consistent is not supported against the specific c1/c2 contradiction in the provided Sec. III.B text, though this may be a rendering or typographical issue requiring human inspection.",
+      "Claude's perturbative-validity objection mentions alpha<0; that concern is weak if the intended sampled exponent domain is k>1, though the broader truncation-error concern remains valid."
+    ],
+    "valid_points_from_other_reviewers": [
+      "The paper's novelty is incremental because it applies standard Bozza/WDL/Fisher tools to a recently proposed metric and revisits earlier DD lensing work.",
+      "The claim of fully general analytical WDL expressions is overstated, since the r0-to-b coefficients are not closed-form for general exponent and require fixed parameter choices.",
+      "The S2/GRAVITY precession constraint should involve a PPN combination including beta and gamma, not gamma alone unless a model-specific reduction is shown.",
+      "Spin and other EHT modeling systematics are acknowledged but not folded into the shadow likelihood.",
+      "The Fisher/Gaussian approximation is a caveat, especially with few inputs and nonlinear dependence on the exponent."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "The DD black-hole metric is a first-order deformation of Schwarzschild with parameters xi and k, with photon sphere and critical impact parameter given analytically.",
+      "notes": "The photon-sphere setup is standard for a static spherical metric, but the metric is imported from earlier work and the perturbative domain of validity near the photon sphere/horizon is not demonstrated in this paper.",
+      "paper_location": "Sec. II, Eqs. (6)-(14)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The paper derives weak-field deflection expansions in r0 and b, reducing to Schwarzschild when xi -> 0.",
+      "notes": "The Schwarzschild limits look plausible, but the b-expansion as printed treats k=2 and k>2 while the model and final inference include k below 2. Other reviewers' point that the 'general analytical' claim is overstated also seems valid because the r0-to-b coefficients are not closed-form for general exponent.",
+      "paper_location": "Sec. III.A, Eqs. (18)-(20)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The strong-deflection angle has the logarithmic form alpha(b)=-delta log(b/bm-1)+lambda with coefficients for the DD spacetime.",
+      "notes": "The logarithmic form is standard from Bozza-type analyses, and other reviewers considered it routine. However, the paper text as provided still appears locally inconsistent about which coefficient vanishes/diverges at the photon sphere, so the specific derivation and coefficients need spot-checking rather than automatic acceptance.",
+      "paper_location": "Sec. III.B, Eqs. (21)-(33)",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "Current PPN and EHT shadow measurements, combined with earlier QNM bounds, imply xi=0.044 +/- 0.039 and k=2.51 +/- 0.64, consistent with GR at 1.13 sigma.",
+      "notes": "The pipeline is described, but the PPN input from S2 precession, the EHT shadow reduction, and the QNM intervals are not all shown to be independent Gaussian measurements of the modeled quantities.",
+      "paper_location": "Sec. IV, especially Eqs. (37)-(49)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "DD black holes remain observationally viable and provide a framework for testing nonlocal deviations from GR.",
+      "notes": "Viability under current uncertainties is plausible. The strength and precision of the quoted constraints should be framed as exploratory rather than robust observational bounds.",
+      "paper_location": "Abstract and Sec. V",
+      "support_level": "partially_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "A valid weak-deflection expansion for the full sampled domain k>1, especially 1<k<2.",
+      "paper_location": "Sec. III.A and Sec. IV.C",
+      "why_it_matters": "The combined constraints sample or report values below k=2, but the printed b-series is not given for that interval."
+    },
+    {
+      "assumption": "S2 precession can be represented as an independent Gaussian constraint gamma=1.00 +/- 0.01 on the light-deflection PPN parameter.",
+      "paper_location": "Sec. IV.A, Eq. (37)",
+      "why_it_matters": "Without an explicit mapping including possible beta-sector changes, the PPN term in the combined chi-square is not an auditable observational constraint on the DD lensing coefficient."
+    },
+    {
+      "assumption": "The QNM intervals are statistically interpretable as independent 1-sigma Gaussian measurements of xi and k.",
+      "paper_location": "Sec. IV.C, Eq. (41)",
+      "why_it_matters": "This assumption materially affects the best fit and the claimed 1.13-sigma consistency with GR."
+    },
+    {
+      "assumption": "First-order-in-xi formulas remain accurate over the plotted/example and likelihood regions.",
+      "paper_location": "Secs. II-IV",
+      "why_it_matters": "The solution and lensing observables are perturbative, but the paper does not show truncation-error control near the photon sphere or over the quoted parameter ranges."
+    },
+    {
+      "assumption": "Static spherical shadow predictions can be compared to EHT M87* and Sgr A* measurements with only negligible unmodeled spin, plasma, and emission-model uncertainty.",
+      "paper_location": "Sec. IV.B, Eqs. (38)-(40)",
+      "why_it_matters": "Those effects may be comparable to the precision claimed for the inferred deformation parameters, even if they do not invalidate a rough exploratory comparison."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Are Eqs. (26)-(29) in the author PDF/source typographical/rendering errors, or is the c1/c2 strong-deflection derivation genuinely incorrect?",
+      "why_model_cannot_resolve": "The extracted text strongly indicates a contradiction, but a human should inspect the exact typeset equations and possibly recompute the local Bozza expansion before deciding whether this is only an HTML conversion issue."
+    },
+    {
+      "question": "Does the DD metric's large-r expansion give the same PPN gamma as Eq. (36), and what happens to beta in the coordinate gauge relevant to S2 precession?",
+      "why_model_cannot_resolve": "This requires careful asymptotic expansion of the full A(r), B(r) metric and comparison with the appropriate PPN coordinate convention and orbital-precession observable."
+    },
+    {
+      "question": "Can GRAVITY S2 results legitimately be converted into gamma=1.00 +/- 0.01 for this metric?",
+      "why_model_cannot_resolve": "This needs domain expertise in PPN orbital fits and the cited observational analyses, not just the local light-deflection formula."
+    },
+    {
+      "question": "Are the numerical shadow-radius values in Eqs. (39)-(40) reproduced from the EHT angular diameter, mass, and distance inputs with correct uncertainty propagation?",
+      "why_model_cannot_resolve": "The HTML extraction omits some numerical details, and a reliable check requires the original PDF values and EHT measurement conventions."
+    },
+    {
+      "question": "Do the displayed SDL coefficients in Eqs. (33a)-(33b) match an independent symbolic expansion of the DD metric to first order in xi?",
+      "why_model_cannot_resolve": "The algebra is lengthy, parameter-dependent, and sensitive to notation/rendering; it should be checked by hand or with a symbolic notebook against the original equations."
+    }
+  ],
+  "novelty_assessment": "My novelty assessment remains mostly unchanged after the other reviews. The paper is incremental: the DD metric comes from companion work, WDL/SDL lensing methods are standard, and an earlier Li-Zhang lensing analysis is explicitly being revisited. The main added value is an organized DD-specific lensing treatment plus a combined PPN-shadow-QNM phenomenological constraint. That is useful but not field-shaping, and the statistical caveats limit the strength of the novelty claim.",
+  "overall_score_10": 5.0,
+  "paper_id": "2604.13223",
+  "recommended_verdict": "contested",
+  "reviewer": "codex",
+  "score_rationale": "The research direction is reasonable and the basic geodesic framework is standard, but the paper's strongest quantitative claims rest on unresolved derivational and statistical assumptions. The other reviews reinforced the incremental-novelty and likelihood-input concerns, while their more positive SDL assessment did not resolve the specific local inconsistency I found. I therefore keep a contested verdict and a mid-low technical score pending human mathematical spot-checks.",
+  "summary": "The paper studies weak- and strong-deflection lensing for the DD nonlocal black-hole metric and combines PPN, EHT shadow, and earlier QNM bounds to constrain the deformation parameters. After reading the other reviews, I still view the project as sensible and incrementally useful, but I retain the main concerns: the printed strong-deflection derivation needs a human algebra/typesetting check, and the headline constraints rely on proxy likelihood inputs whose statistical meaning is not adequately established. I do not certify the full proof or all symbolic coefficients.",
+  "technical_objections": [
+    {
+      "confidence": 0.78,
+      "evidence": "From Eq. (24a), c1(r0)=r0(A0 C0'/C0 - A0'). Using the photon-sphere condition Eq. (9), c1(rm) should vanish, not diverge. The provided text then says c1(rm) diverges and appears to expand the wrong coefficient in Eq. (28). Other reviewers did not flag this, but they did not address this local contradiction.",
+      "objection": "The strong-deflection derivation appears internally inconsistent at the photon sphere.",
+      "paper_location": "Sec. III.B, Eqs. (24)-(29)",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.84,
+      "evidence": "Eq. (35) is a light-deflection formula involving gamma, while the cited GRAVITY/S2 result concerns orbital Schwarzschild precession. In PPN language that precession constrains a combination involving beta and gamma, not gamma alone. Claude's review independently made this beta/gamma mapping objection, which strengthens the concern.",
+      "objection": "The PPN likelihood input gamma=1.00 +/- 0.01 is not derived from the cited S2 observable in the way used in the paper.",
+      "paper_location": "Sec. IV.A, Eqs. (35)-(37)",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.86,
+      "evidence": "The QNM input is described as intervals obtained by requiring deviations from Schwarzschild predictions to remain within 10%, then converted into xi_QNM=0.07 +/- 0.04 and k_QNM=1.7 +/- 0.9. That is closer to a tolerance/prior choice than an observational Gaussian datum. Claude also identified this issue; Gemini underweighted it as only routine Fisher-matrix uncertainty.",
+      "objection": "The combined likelihood treats earlier QNM allowed intervals as independent Gaussian observations, which is not justified by the text.",
+      "paper_location": "Sec. IV.C, Eqs. (41)-(43)",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.72,
+      "evidence": "Eq. (20b), used to obtain Eq. (36), is labeled k>2; Eq. (20a) is k=2. The model domain is k>1 and the final interval k=2.51 +/- 0.64 extends below 2. No separate weak-field expansion is provided for 1<k<2, where the ordering of noninteger-power terms can change.",
+      "objection": "The weak-field formula used for the PPN comparison is displayed only for k=2 and k>2, but the final parameter analysis includes k below 2.",
+      "paper_location": "Sec. III.A Eq. (20), Sec. IV.A Eq. (36), Sec. IV.C Eq. (47)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "The paper applies a static spherical shadow formula to M87* and Sgr A*, which are expected to rotate, and does not propagate spin, emission-model, plasma, mass-distance covariance, or EHT modeling systematics in the likelihood. Both other reviewers also flagged the spin/systematics issue.",
+      "objection": "The EHT shadow likelihood is simplified enough that the quoted constraints should not be presented as robust observational bounds without additional systematics.",
+      "paper_location": "Sec. IV.B, Eqs. (38)-(40)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.63,
+      "evidence": "The solution is described as first order in a small parameter, but examples and priors include xi values of order 0.1 and the near-photon-sphere regime is used for SDL and shadow constraints. Claude's perturbative-validity objection is directionally valid, though its speculation about negative exponents is less relevant if the intended domain is k>1.",
+      "objection": "Perturbative first-order formulas are used across examples and likelihood regions without a clear truncation-error estimate.",
+      "paper_location": "Secs. II-IV, especially Eq. (6) and Fig. 2",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

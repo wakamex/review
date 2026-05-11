@@ -1,0 +1,109 @@
+{
+  "confidence": 0.9,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 3,
+    "novelty": 2,
+    "reviewer_confidence": 9,
+    "significance": 3,
+    "technical_soundness": 4
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "I have downgraded my technical soundness and overall scores after incorporating excellent observations from other reviewers regarding a direct arithmetic contradiction in Figure 2 and the absence of critical Supplemental Material. I maintain my stance that the theoretical novelty is extremely low.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": [
+      "codex correctly identified a direct arithmetic contradiction in Figure 2 where kappa is stated as 0.400, but the product of eta (0.260) and rho (0.650) is 0.169, which violates Equation 13.",
+      "Both claude and codex correctly observed that the heavily relied-upon Supplemental Material is missing, rendering several claims unsupported.",
+      "claude appropriately pointed out that the condition number issue for near-degenerate exponentials is a standard result in the ESPRIT/MUSIC and Prony's method literature.",
+      "codex correctly noted that the paper proves conditioning claims on a real-splitting slice but applies them to complex Kerr QNM splittings without proof."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "On a finite observation window, the resolved simple-pole basis for near-degenerate poles becomes ill-conditioned, whereas the centered first-jet basis remains regular.",
+      "notes": "This is a standard result in numerical linear algebra (e.g., Vandermonde matrix conditioning). However, the specific proofs are deferred to missing Supplemental Material, and the text mathematically only analyzes real splittings rather than the complex splittings relevant to QNMs.",
+      "paper_location": "Section: Finite-window necessity of centered organization, Eq (8) and Fig 1",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The centered organization reveals a two-scale hierarchy where $\\eta$ and $\\kappa$ control the linear correction, and $\\eta^2$ controls the residual truncation error.",
+      "notes": "While conceptually derived from a trivial Taylor expansion, the numerical demonstration in Figure 2 contains a direct arithmetic contradiction ($\\kappa \\neq \\eta \\rho$), and Figure 3 shows the error scaling is more complex than the simple proposed hierarchy.",
+      "paper_location": "Section: Local interference diagnostics, Eqs (13)-(14), Figs 2-3",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "Kerr quasinormal modes provide a representative gravitational realization of this finite-window centered organization.",
+      "notes": "The section lacks mathematical definitions for concepts like \"L-only band\" or \"surrogate layer\", and omits the specifics of the QNM pairs, $T_{eff}$, perturbation levels, or noise models. The claims are completely irreproducible from the text provided.",
+      "paper_location": "Section: Representative Kerr realization, Fig 4",
+      "support_level": "unsupported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The signal-to-noise ratio (SNR) is high enough to make the theoretical conditioning relevant.",
+      "paper_location": "Throughout the paper, particularly in 'Finite-window necessity of centered organization'",
+      "why_it_matters": "In a purely theoretical noiseless setting, ill-conditioned matrices can still be inverted up to machine precision. The practical resolvability limit depends jointly on the window size, the splitting, and the SNR, which is not analyzed."
+    },
+    {
+      "assumption": "The condition number scaling derived for real splittings applies identically to the complex splittings of Kerr QNMs.",
+      "paper_location": "Eq. (8) and Representative Kerr realization section",
+      "why_it_matters": "Kerr QNMs have complex frequencies with different damping rates. The real-slice calculation in Eq (8) does not mathematically guarantee the same conditioning behavior for damped complex poles."
+    },
+    {
+      "assumption": "The two near-degenerate poles strictly dominate the signal on the finite window without significant branch-cut or prompt response contributions.",
+      "paper_location": "Section: Local effective two-pole response skeleton",
+      "why_it_matters": "If branch cuts or other overtones are comparable in magnitude over the short observation window, the minimal two-pole block approximation fails to capture the true waveform dynamics."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Are the missing Supplemental Materials (Sections A, B, and C) available in the authors' original source files, and do they actually contain rigorous proofs for the complex splitting case?",
+      "why_model_cannot_resolve": "The provided manuscript text entirely omits the supplemental sections referenced in the text."
+    },
+    {
+      "question": "Can the Kerr QNM results in Figure 4 be reproduced using known QNM data and standard parameter estimation techniques?",
+      "why_model_cannot_resolve": "The paper completely omits the specific mode pairs, spin parameters, surrogate details, and inversion protocol used."
+    }
+  ],
+  "novelty_assessment": "The novelty is extremely low. The core observation that near-degenerate exponentials are ill-conditioned and can be approximated via Taylor expansion into a 'carrier plus first-jet' (or linear drift) over a short time window is a foundational result in signal processing (e.g., Prony's method, ESPRIT). Rebranding this trivial mathematics as a new physical 'response principle' for QNMs offers minimal conceptual advancement.",
+  "overall_score_10": 3,
+  "paper_id": "2604.26725",
+  "recommended_verdict": "weak_evidence",
+  "reviewer": "gemini",
+  "score_rationale": "The theoretical contribution is a restatement of basic Taylor expansions and well-known conditioning issues with near-degenerate exponentials. Technical soundness is severely compromised by a direct arithmetic contradiction in Figure 2 ($\\kappa \\neq \\eta \\rho$), missing Supplemental Material containing critical proofs, and the unproven use of a real-splitting analysis for complex QNM applications. Clarity and reproducibility are very poor in the final section. These compounding flaws justify a low overall score.",
+  "summary": "The paper investigates the response of open-wave systems with two near-degenerate resonance poles when observed over a finite time window. It points out that fitting such a signal with two resolved damped sinusoids is ill-conditioned due to near linear dependence of the basis functions. Instead, it proposes a \"centered organization\" which expands the signal around a shared carrier frequency, resulting in a basis consisting of a carrier and a \"first-jet\" (a linearly growing envelope term) based on a Taylor expansion. The paper argues that this organization reveals a two-scale hierarchy governed by the parameter $\\Delta\\omega T$ and its square, and briefly applies this concept to Kerr black hole quasinormal modes.",
+  "technical_objections": [
+    {
+      "confidence": 0.95,
+      "evidence": "The observation that near-degenerate exponentials are ill-conditioned on a finite window and can be expanded into a carrier-plus-linear term is a classical result in signal processing (e.g., Prony's method, ESPRIT). Packaging this as a new \"finite-window response principle\" is a mischaracterization of standard math.",
+      "objection": "The core mathematical result is simply a first-order Taylor expansion and is heavily oversold.",
+      "paper_location": "Section: Time-domain projection of local two-pole interference, Eqs (10)-(11)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.99,
+      "evidence": "Equation (13) defines $\\kappa = \\eta \\rho$. The caption for Figure 2 reports $\\eta = 0.260$, $\\rho = 0.650$, and $\\kappa = 0.400$. However, the product of 0.260 and 0.650 is 0.169, not 0.400. This arithmetic contradiction indicates a serious bookkeeping or calculation error in the toy numerics.",
+      "objection": "The numerical parameters reported in Figure 2 directly contradict the definition of the diagnostic parameter $\\kappa$ in Equation 13.",
+      "paper_location": "Eq. (13) and Fig. 2 caption",
+      "severity": "major",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "The manuscript cites Section A for the Green-function derivation, Section B for basis constructions, and Section C for condition number proofs and recovery tests. This Supplemental Material is absent from the submission bundle.",
+      "objection": "Essential derivations and numerical tests are deferred to missing Supplemental Material, rendering core claims unauditable.",
+      "paper_location": "Throughout the text, specifically references to Sections A, B, and C of the Supplemental Material.",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "The authors use terms like \"L-only band\", \"surrogate layer\", and \"validation band\" without mathematically defining them. They do not specify the Kerr parameters (spin, overtone numbers), the noise assumptions, or the specific inversion protocol used to generate the results.",
+      "objection": "The application to Kerr QNMs is opaque, undefined, and irreproducible.",
+      "paper_location": "Section: Representative Kerr realization, Fig 4",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    }
+  ]
+}

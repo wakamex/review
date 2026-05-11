@@ -1,0 +1,127 @@
+{
+  "confidence": 0.68,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 5.7,
+    "novelty": 4.6,
+    "reviewer_confidence": 6.8,
+    "significance": 5.3,
+    "technical_soundness": 6.1
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "No prior cycle; this is an initial local-audit review.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "For first-class constraints, second-class constraints, and gauge conditions, the determinant of the combined bracket matrix factorises as the determinant of the second-class block times the square of the first-class gauge-fixing matrix determinant.",
+      "notes": "The block-matrix argument is locally convincing for finite-dimensional regular systems, with equal numbers of first-class constraints and gauge conditions and with the strong first-class bracket conditions imposed on the constraint surface. The paper does not fully specify the operator-theoretic version needed for field theories.",
+      "paper_location": "Abstract; Section I; Section II.2, equations (1)-(6)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "If the first-class gauge-fixing matrix is singular, then the combined constraint/gauge-fixing matrix is singular even in the presence of gauge-condition/second-class cross-couplings.",
+      "notes": "Given the displayed block form, a right null vector of the gauge-fixing matrix gives an immediate null vector of the full matrix. This is a clean local argument.",
+      "paper_location": "Section II.3",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "In the algebraic case, the Hamiltonian admissibility criterion agrees with the Lagrangian action-level completeness criterion of Motohashi, Suyama, and Takahashi.",
+      "notes": "The statement is plausible only after assuming that the canonical generator has independent algebraic gauge parameters matching the first-class constraints used in the matrix. The paper correctly notes that derivative terms in gauge parameters invalidate the simple determinant criterion, but the precise matching hypotheses are thin.",
+      "paper_location": "Section III",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "For spherically symmetric gravity and modified gravity theories with second-class constraints, completeness of the lapse/shift metric ansatz is unaffected by the second-class sector.",
+      "notes": "The conclusion seems stronger than the algebraic factorisation proves. Diffeomorphism transformations are typically differential in the gauge parameters, and Section III/V acknowledge that the determinant criterion is neither necessary nor sufficient in that setting.",
+      "paper_location": "Section IV",
+      "support_level": "unclear"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "A precise finite-dimensional or functional-analytic setting in which the relevant determinant, inverse, and Schur complement are defined.",
+      "paper_location": "Section II.2; Section IV",
+      "why_it_matters": "Without this, the proof establishes a local algebraic identity for regular finite-dimensional systems but does not directly justify claims about gravitational field theories."
+    },
+    {
+      "assumption": "The gauge generator must have algebraic, independent gauge parameters matching the first-class constraints used in the Hamiltonian matrix, or else a separate proof for the full differential completeness operator is needed.",
+      "paper_location": "Section III; Section IV",
+      "why_it_matters": "This is exactly where Lagrangian pre-fixing can differ from Hamiltonian admissibility, and it is central to the gravity application."
+    },
+    {
+      "assumption": "Constraint regularity and local invertibility of the second-class matrix on the relevant gauge-fixed submanifold.",
+      "paper_location": "Section II.1",
+      "why_it_matters": "The determinant factorisation and the equivalence of invertibility criteria fail or require modification at irregular points, ineffective constraints, or rank-changing surfaces."
+    },
+    {
+      "assumption": "Boundary conditions and treatment of residual/global gauge transformations in the spherically symmetric gravity example.",
+      "paper_location": "Section IV",
+      "why_it_matters": "Residual diffeomorphisms and zero modes can determine whether the ansatz is complete, independently of the local bracket determinant."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Does the Motohashi-Suyama-Takahashi spherical ansatz analysis match exactly the gauge conditions and field-dependence assumptions used in Section IV?",
+      "why_model_cannot_resolve": "The arXiv HTML bundle omits or mangles several equations, and confirming the external paper's detailed operator calculation requires expert cross-checking."
+    },
+    {
+      "question": "Is the determinant factorisation already a known consequence in the constrained-systems literature beyond the cited Dirac-bracket intuition?",
+      "why_model_cannot_resolve": "Novelty depends on prior literature coverage, not just on the local correctness of the algebraic computation."
+    },
+    {
+      "question": "For the cited modified gravity examples, do the first-class and second-class constraint splits actually satisfy the hypotheses needed for the claimed gauge-fixing conclusion?",
+      "why_model_cannot_resolve": "This is model-specific and depends on the detailed Hamiltonian analysis of each theory."
+    }
+  ],
+  "novelty_assessment": "The determinant identity is a useful compact packaging of a standard Dirac-bracket decoupling intuition, but the novelty appears modest: the core proof is an elementary Schur-complement computation once the constraints are placed in the stated block form. The attempted bridge to action-level completeness and modified gravity is more interesting, but it is also the least fully justified part of the paper.",
+  "overall_score_10": 5.6,
+  "paper_id": "2604.16990",
+  "recommended_verdict": "routine",
+  "reviewer": "codex",
+  "score_rationale": "The central finite-dimensional Schur-complement identity is likely correct and clearly presented, but it is a modest observation and the most ambitious claims concern gravity/action-level completeness where the paper's own caveats appear to undercut the conclusion. The score reflects a useful but routine algebraic note with unresolved scope issues rather than a certified broad result.",
+  "summary": "The note gives a short Schur-complement argument that, for a regular constrained Hamiltonian system split into first-class constraints, second-class constraints, and gauge-fixing functions, the full constraint/gauge-fixing bracket matrix is invertible exactly when the usual first-class gauge-fixing matrix is invertible. The finite-dimensional algebraic identity looks plausible under the stated strong first-class and regularity assumptions. The main concerns are with scope: the gravity/action-level completeness discussion appears to rely on conclusions that the paper itself says do not follow in the non-algebraic or differential-operator case, and the field-theoretic determinant/invertibility assumptions are not spelled out.",
+  "technical_objections": [
+    {
+      "confidence": 0.82,
+      "evidence": "Section III states that when gauge transformations involve derivatives of gauge parameters, the matrix of Poisson brackets is neither sufficient nor necessary for Lagrangian completeness, and Section V says an analogous decoupling in that context remains open. Section IV nevertheless concludes that completeness is determined by the same bracket matrix alone in gravity/modified gravity settings, where diffeomorphism transformations generally involve derivatives of gauge parameters.",
+      "objection": "The gravity application appears to overextend the algebraic determinant result to a non-algebraic completeness problem.",
+      "paper_location": "Section IV, especially the claim that the second-class sector cannot affect completeness in modified gravity; compare Section III and Section V",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.74,
+      "evidence": "The proof uses ordinary determinants, inverses, and Schur complements. In gravity, the corresponding objects are differential or integral operators indexed by spatial points; invertibility depends on boundary conditions, function spaces, smearing, and treatment of zero modes. These assumptions are not specified.",
+      "objection": "The determinant and Schur-complement proof is written as a finite-dimensional matrix argument, but the application is to field-theoretic constraint algebras with distributional kernels and possible boundary zero modes.",
+      "paper_location": "Section II.2 and Section IV",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.6,
+      "evidence": "The paper says the strong first-class definition can always be achieved by redefining constraints with second-class constraints and that the conclusion is basis-independent. Locally this is standard when the second-class matrix is invertible and the constraints are regular, but the formula itself uses a special block form with vanishing first-class/second-class brackets. The transformation properties of the gauge-fixing matrix and of the full determinant under such redefinitions are not shown.",
+      "objection": "The basis-dependence of the strong first-class split is not fully controlled.",
+      "paper_location": "Section II.1",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.78,
+      "evidence": "The text describes isolated points where the gauge-fixing determinant vanishes as Gribov-type obstructions. In field theories or global gauge-fixing problems, the zero set need not be isolated and may reflect boundary conditions, residual gauge symmetries, or global topology. The local determinant criterion does not address these cases.",
+      "objection": "The discussion of Gribov obstructions is too narrow.",
+      "paper_location": "Section II.1",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.62,
+      "evidence": "The argument assumes a remaining first-class gauge sector plus a second-class block that decouples from admissibility. Some modified gravity models have altered gauge symmetry structure, extra fields, or second-class constraints whose relation to lapse/shift ansatz choices is model-dependent. The paper does not verify the hypotheses for the cited classes.",
+      "objection": "The modified-gravity examples are cited too generically for the stated conclusion.",
+      "paper_location": "Section IV, references to scalar-tensor and massive gravity examples",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "confidence": 0.82,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 2.5,
+    "novelty": 6.0,
+    "reviewer_confidence": 8.2,
+    "significance": 5.5,
+    "technical_soundness": 3.0
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "No prior cycle; this is the first review.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "This is the first superconducting-qubit realization of the PBR test, extended from 2-qubit to 5-qubit circuits on IBM Heron2 Marrakesh.",
+      "notes": "The hardware platform and selected circuit families are described, but the text does not supply enough circuit specifications, angles, transpiled-depth statistics, or numerical data to make the realization auditable from the manuscript alone.",
+      "paper_location": "Introduction; Conclusion",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "A significant majority of adjacent qubit pairs and adjacent five-qubit configurations violate the epistemic/PBR bound.",
+      "notes": "The reported percentages, thresholds, and error rates appear blank or lost in the supplied text. Tables 1 and 2 have empty numerical cells, and the text says 'approximately exhibited' without a number.",
+      "paper_location": "Abstract; Experimental Implementation, paragraphs 'Adjacent qubit pairs' and 'Adjacent Five-qubit groups'; Tables 1-2",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "Noise-aware analytical bounds based on depolarizing, decoherence, and readout models determine when the PBR test should pass or fail.",
+      "notes": "The displayed equations are largely missing symbols in the provided text, and the derivation from forbidden-outcome probabilities to epistemic overlap bounds is not reviewable. The models are plausible as heuristics, but the stated bounds are not justified.",
+      "paper_location": "Section II, especially Eqs. 1-9 and Table 1",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "Passing/failing probability decreases with physical separation because SWAP insertion increases circuit depth and accumulated noise.",
+      "notes": "This qualitative trend is physically plausible and described coherently, but the numerical support in Table 2 is absent and the sample-selection/statistical methodology is not specified enough to audit.",
+      "paper_location": "Experimental Implementation, 'Distant qubit pairs'; Simulated Experiments",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The results rule out the epistemic interpretation of quantum mechanics or support the ontic view of the wave function.",
+      "notes": "PBR tests address classes of ontological models under assumptions such as preparation independence, not all epistemic interpretations. The manuscript itself notes a theoretical critique in Section IV, which conflicts with the broader conclusion.",
+      "paper_location": "Abstract; Introduction; Discussion; Conclusion",
+      "support_level": "unsupported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "Preparation independence holds for independently prepared qubits on the same superconducting chip.",
+      "paper_location": "Introduction; Section III experimental design",
+      "why_it_matters": "PBR conclusions depend on preparation independence. Shared control electronics, calibration drift, crosstalk, and correlated noise can violate the operational independence assumptions unless bounded or experimentally characterized."
+    },
+    {
+      "assumption": "The implemented noisy measurement remains the intended PBR measurement up to errors covered by the proposed tolerance.",
+      "paper_location": "Section II ideal circuit; Section III transpilation discussion",
+      "why_it_matters": "Heavy transpilation, SWAP insertion, and arbitrary controlled rotations can change the effective measurement. The pass/fail interpretation requires a validated mapping from hardware outcome frequencies to the theoretical PBR measurement."
+    },
+    {
+      "assumption": "Calibration values on the day of execution accurately describe the noise during all circuits and shots.",
+      "paper_location": "Section III, hardware/calibration paragraph",
+      "why_it_matters": "The paper relies on daily calibration data for thresholds, but drift and context-dependent errors can affect forbidden-outcome frequencies."
+    },
+    {
+      "assumption": "The chosen preparation angles satisfy the PBR threshold and are exactly those used in the compiled experiments.",
+      "paper_location": "Section III, 'Choice of preparation angle'",
+      "why_it_matters": "The visible manuscript omits or garbles the numerical angles. Without these, neither the PBR condition nor the claimed tolerance thresholds can be checked."
+    },
+    {
+      "assumption": "The reported selected qubit pairs/groups are not biased in a way that invalidates the claimed majority or trend results.",
+      "paper_location": "Section III, adjacent and distant qubit selection paragraphs",
+      "why_it_matters": "The paper selects best/worst CZ pairs, five configurations, and distance classes, but does not fully describe sampling counts or selection rules. This affects any claim about processor-wide behavior."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Are the missing equations, table values, and angle parameters present in the original PDF/LaTeX but lost in the arXiv HTML extraction?",
+      "why_model_cannot_resolve": "The supplied bundle text has many blank mathematical fields and table cells; a human should inspect the authoritative source rendering."
+    },
+    {
+      "question": "Is the claimed 'first superconducting-qubit realization' accurate relative to prior literature through October 2025?",
+      "why_model_cannot_resolve": "This requires a literature check beyond the supplied manuscript, and the present review should not rely on memory for novelty certification."
+    },
+    {
+      "question": "Does the n=5 circuit actually implement a valid PBR measurement with one forbidden outcome for every preparation string?",
+      "why_model_cannot_resolve": "The manuscript text does not include the explicit measurement basis or enough circuit parameters to verify the construction."
+    }
+  ],
+  "novelty_assessment": "A superconducting-hardware implementation of a PBR-style benchmark could be novel and useful, especially if the 5-qubit and distance-dependent experiments are fully specified. However, the manuscript's novelty is currently difficult to assess because the core data, exact circuits, and mathematical bounds are not presented in auditable form. The benchmarking angle is promising but needs sharper separation from broad foundational claims.",
+  "overall_score_10": 3.6,
+  "paper_id": "bm-218-01",
+  "recommended_verdict": "weak_evidence",
+  "reviewer": "codex",
+  "score_rationale": "The experimental idea is interesting and could become a useful NISQ benchmark, but the supplied paper text is not review-ready: central equations and numerical results are missing, the noise-bound derivation is unclear, the 5-qubit construction is under-specified, and the foundational conclusion is overstated. I score it as weak evidence rather than a major flaw because some issues may be due to HTML extraction, but from the provided bundle the main claims are not locally auditable.",
+  "summary": "The paper reports a superconducting-qubit implementation of PBR-type tests on IBM Heron2 Marrakesh, with 2-qubit adjacent/distant pairs and selected 5-qubit groups, and proposes noise-aware thresholds using depolarizing and decoherence/readout models. The experimental direction is interesting, but the reviewable manuscript text omits key equations, numerical thresholds, preparation angles, table entries, and raw/statistical criteria. Several interpretive claims also overstate what a noisy, device-level PBR experiment can rule out. I cannot certify the proof or experimental conclusions from the supplied text.",
+  "technical_objections": [
+    {
+      "confidence": 0.92,
+      "evidence": "Equations are rendered mostly as vertical bars or empty placeholders, and variables such as the overlap, trace distance, epsilon tolerance, preparation angle, and circuit parameters are not consistently visible. The claimed comparison 'observed to the bound' therefore has no checkable mathematical definition in the supplied text.",
+      "objection": "The key PBR/noise-bound derivation is not auditable because the equations and variables are missing or garbled.",
+      "paper_location": "Section II, 'Overlap and distance', Eqs. 1-4; Section III, Eq. 10-11",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "The abstract says the experiment rules out 'the epistemic interpretation of quantum mechanics', while later text weakens this to tension with psi-epistemic models under preparation independence and notes critiques that PBR rules out only a specific ontological model. These statements are not equivalent.",
+      "objection": "The manuscript overclaims the interpretation result beyond the assumptions of the PBR theorem and beyond what a noisy experiment can establish.",
+      "paper_location": "Abstract; Introduction; Conclusion",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "Tolerance entries, best/worst error rates, percentages passing, concrete observed forbidden-outcome rates, and several angle values are absent in the supplied text. Claims like 'significant majority' and 'approximately exhibited a violation' are therefore unsupported locally.",
+      "objection": "The experimental evidence is not reproducible from the paper text because the main numerical tables are blank or incomplete.",
+      "paper_location": "Table 1; Table 2; adjacent-pair and distant-pair result paragraphs",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.82,
+      "evidence": "The paper says the n-qubit extension forbids a measured string, but does not give the actual 5-qubit measurement basis/circuit, parameter values, proof of the zero-probability property, or an explicit relation between the 2^5 inputs and forbidden outcomes. Multi-controlled rotations are mentioned later without a precise circuit definition.",
+      "objection": "The five-qubit PBR construction is asserted but not specified or proved in enough detail.",
+      "paper_location": "Section II, 'Ideal PBR measurement'; Section III, 'Adjacent Five-qubit groups'",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.78,
+      "evidence": "The depolarizing section describes a synthesized circuit error from gate counts, but it is not shown that this quantity upper-bounds the specific forbidden-outcome probabilities used in the PBR criterion. The decoherence model uses a rough cumulative scaling, neglects idling at one point, and then claims crosstalk is accounted for without an explicit crosstalk term.",
+      "objection": "The noise models appear to conflate aggregate gate error estimates with rigorous forbidden-outcome probability bounds.",
+      "paper_location": "Section II, 'Depolarizing model' and 'Thermodynamical model'; Eqs. 6-8",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.86,
+      "evidence": "The paper does not specify confidence intervals, multiple-comparison handling across many circuits/outcomes, exact pass/fail thresholds, or how readout mitigation/calibration uncertainty is propagated. For a PBR pass/fail classification, this is a material omission.",
+      "objection": "Statistical decision criteria are missing for 100,000-shot experiments.",
+      "paper_location": "Section III, execution description; result paragraphs",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.74,
+      "evidence": "The adjacent-pair paragraph states directly connected pairs have 'no crosstalk between other qubits', while the thermodynamic model says its analytical bound accounts for crosstalk. Neither statement is supported by a measurement or model, and crosstalk can occur even for locally connected qubits on superconducting processors.",
+      "objection": "There are internal tensions about crosstalk and nonlocal experiments.",
+      "paper_location": "Section III, 'Adjacent qubit pairs'; Section II, 'Thermodynamical model'",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

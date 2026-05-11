@@ -1,0 +1,93 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Two full review cycles completed. All three reviewers participated in both cycles. Cycle 2 included explicit cross-review integration: claude upgraded the severity of the dwarf constraint objection after accepting gemini's sharper formulation; codex lowered its overall score from 7.0 to 6.5 after accepting points about bubble-template circularity and the dwarf constraint applicability; gemini incorporated claude's and codex's points on trials-factor correction and ICS degeneracy. The GIEM zero-point test (Section 3.4.5) is the consensus strongest element; the energy-independent bubble template construction and the dwarf constraint inapplicability of the MW density argument are the consensus strongest objections. The HTML source stripped scientific notation exponents from cross-section values and the cell-size value throughout, making several quantitative spot-checks impossible from the rendered bundle.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper analyzes fifteen years of NASA's Fermi space telescope gamma-ray data and claims to find an unexplained glow from the Milky Way's outer halo that peaks at an energy of about 20 billion electron volts \u2014 notably distinct from a previously known glow near the galactic center. The review board found the excess intriguing and not obviously a numerical artifact, particularly because it persists in an independent cross-check using the telescope team's own reference background model. However, serious concerns remain: the analysis constructs its main background templates from the same data being analyzed (creating a potential circularity), and the dark matter interpretation would require annihilation rates roughly five times higher than limits set by independent observations of dwarf galaxies \u2014 a tension the paper's main defense does not adequately address. The excess warrants follow-up but cannot currently be taken as evidence for dark matter detection.",
+  "human_spotchecks": [
+    "The HTML rendering of the arXiv source stripped all scientific notation exponents from cross-section values throughout the paper (e.g., rendering '(5\u20138)\u00d710\u207b\u00b2\u2075 cm\u00b3/s' as bare '(5\u20138)'). A reviewer must access the original PDF or LaTeX source to verify the quantitative magnitude of the tension with the thermal relic cross section and dwarf spheroidal upper limits.",
+    "The cell size used in the coarse-cell likelihood calculation is absent from the HTML rendering. The validity of the PSF-omission approximation \u2014 asserted without numerical demonstration \u2014 depends on this value being well above the LAT 68% containment angle of ~0.85\u00b0 at 1 GeV.",
+    "An injection-recovery test is needed: injecting a synthetic NFW-\u03c1\u00b2 halo signal at the claimed flux level into real Fermi LAT data, then running the full pipeline including iterative bubble template construction, to determine whether the pipeline recovers the input signal without spectral bias or artificially suppresses/enhances it.",
+    "Quantitative assessment of whether the dwarf spheroidal J-factor methodology uncertainties from refs [67, 68] are large enough to span the factor of ~5 required to reconcile the claimed cross section with published 95% upper limits under consistent channel, profile, and confidence-level assumptions.",
+    "A dedicated MCMC fit with the three ICS sub-components (optical, infrared, CMB) treated as independent free templates simultaneously with the NFW-\u03c1\u00b2 halo template, to bound the ICS-halo degeneracy that the paper acknowledges but defers to future work."
+  ],
+  "paper_id": "bm-206-01",
+  "public_summary": "The paper presents a search for gamma-ray annihilation signals from dark matter in the Milky Way halo using fifteen years of Fermi Large Area Telescope data. Modeling the diffuse gamma-ray sky with templates for cosmic-ray interactions (GALPROP), catalogued point sources, the Fermi bubbles, Loop I, and an isotropic background, the paper argues for a residual halo-like component peaking near 20 GeV. This excess is reported to be approximately spherically symmetric, morphologically consistent with a smooth NFW annihilation profile (NFW-\u03c1\u00b2), and distinct from the previously known 2\u20133 GeV Galactic center excess by both spectral peak and preferred density profile. Multiple systematic checks are presented: quadrant splits, alternative Fermi bubble templates constructed at 1.5 GeV instead of 4.3 GeV, GALPROP parameter variations, point-source masking, and a comparison against the LAT standard interstellar emission model (GIEM). The GIEM test \u2014 which the paper correctly treats as a lower limit \u2014 independently yields 6.7\u20137.4\u03c3 at peak bins.\n\nThe review board identified several objections that survived adversarial cross-review. The Fermi bubble templates are constructed from data residuals at a single energy bin (4.3 GeV) and applied as energy-independent across all 13 bins; since the Fermi bubbles and diffuse emission mismatches are known to vary with energy, this can introduce spectral residuals that the broad halo template absorbs. The headline 13\u201319\u03c3 figures are uncorrected local per-bin likelihood ratios; no global significance accounting for the 13 energy bins tested or the three morphological templates is reported, making the GIEM test floor (~6.7\u03c3) the more reliable characterization. The ICS component \u2014 the astrophysical background morphologically closest to a spherical halo \u2014 is acknowledged as a possible source of degeneracy but is not freely fitted simultaneously with the halo template in a dedicated test. The WIMP interpretation requires an annihilation cross section approximately five times above published dwarf spheroidal 95% upper limits; the paper's primary defense invokes Milky Way halo density profile uncertainty, but dwarf galaxy constraints are derived from independent J-factor measurements and are entirely unaffected by that uncertainty. The paper correctly frames the dark matter interpretation as feasible rather than confirmed, and notes that CTAO, future dwarf galaxy surveys, and neutrino detectors could verify or refute it.",
+  "reviewer_disagreements": [
+    "Overall verdict: claude and codex recommend 'promising' while gemini recommends 'weak_evidence'. The disagreement centers on how much weight to assign the GIEM cross-check (6.7\u20137.4\u03c3): claude finds it a meaningful independent floor; gemini considers it insufficient to overcome the background-modeling concerns.",
+    "Severity of the dwarf spheroidal constraint: gemini treats it as effectively fatal for the dark matter interpretation; claude and codex rate it as a major concern that weakens the DM interpretation without ruling out the excess as an observational anomaly deserving follow-up.",
+    "Technical soundness scores differ substantially: gemini 4/10, claude 5/10, codex 5.8/10 in cycle 2. The spread reflects differing assessments of how circular the bubble-template construction is and how much the ICS degeneracy undermines the result."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The Fermi bubble templates are constructed from fit residuals at a single energy bin (4.3 GeV) and applied as energy-independent across all 13 energy bins from 1.5 to 810 GeV. Since the Fermi bubbles and diffuse emission mismatches are known to exhibit energy-dependent morphology, this procedure can introduce spectral residuals at other energies that the broad, spherically symmetric halo template then absorbs. The paper itself demonstrates sensitivity to this choice: substituting a 1.5 GeV construction energy shifts the halo zero-crossing and raises the peak normalization.",
+      "paper_location": "Sections 3.1, 3.4.2",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The headline significance figures of 13\u201319\u03c3 are local per-bin likelihood ratios from fixed-template fits and are not corrected for the 13 energy bins searched, the three morphological templates tested, or the multiple GALPROP variants explored. No global (trials-corrected) detection significance is reported. The GIEM zero-point test, which is structurally more independent, yields 6.7\u20137.4\u03c3 and is the more honest characterization of the detection strength.",
+      "paper_location": "Section 3.2, Abstract",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The WIMP interpretation requires an annihilation cross section approximately five times above the 95% upper limits from dwarf spheroidal galaxy observations. The paper argues that Milky Way halo density profile uncertainty can resolve this tension, but dwarf spheroidal constraints are derived entirely from J-factor measurements of the dwarf galaxies themselves and are independent of the Milky Way's density profile. The paper's primary defense is therefore inapplicable to the external dwarf constraint specifically.",
+      "paper_location": "Section 4.3.2",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The inverse Compton scattering (ICS) component is identified as the astrophysical background with morphology most similar to a spherical halo (Section 4.1, Figure 14). The paper acknowledges the degeneracy and states that further investigation would be worthwhile, but no dedicated test jointly fits the ICS sub-components (optical, infrared, CMB) simultaneously with the halo template. The GALPROP parameter variations tested (Section 3.4.4) are not targeted at this specific degeneracy.",
+      "paper_location": "Sections 4.1, 3.4.4, Figure 14",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "Only 5 of the 128 GALPROP parameter sets explored by the LAT team in ref [47] are tested as systematics. The cosmic-ray source distribution change to the SNR model already produces qualitatively different low-energy behavior, suggesting the envelope of GALPROP-induced uncertainty is not adequately sampled.",
+      "paper_location": "Section 3.4.4",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The baseline NFW-\u03c1\u00b2 fit yields an unphysical negative halo flux at the 1.5 GeV energy bin. If the background model is sufficiently inadequate to require negative flux to match data at low energies, it may also generate artifactual positive residuals at higher energies.",
+      "paper_location": "Section 3.2, Figure 8",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "gemini"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "A halo-like spectral excess near 20 GeV is present as a residual in the 15-year Fermi LAT dataset and persists in the structurally independent GIEM zero-point test at 6.7\u20137.4\u03c3 at peak bins (Section 3.4.5), which bypasses the data-derived bubble templates used in the baseline analysis.",
+    "The excess is approximately isotropic across all four Galactic quadrant splits and the 45\u00b0-rotated variants below 20 GeV, supporting a physical rather than a directionally localized systematic origin (Section 3.4.1, Figure 15 top).",
+    "The spectral peak of the claimed excess (~20 GeV) and the preferred morphological template (NFW-\u03c1\u00b2, consistent with smooth annihilation) are quantitatively distinct from the known GC GeV excess (~2\u20133 GeV, steeper density profile), indicating they cannot be the same component (Section 4.3.1).",
+    "The halo excess spectrum survives replacement of the structured Fermi bubble template with a flat template and with masking of the negative residual region, yielding 9.1\u03c3 at the 21 GeV bin under the flat-bubble variant (Section 3.4.2)."
+  ],
+  "technical_takeaway": "Totani (2025) reports a ~20 GeV halo-like residual in 15-year Fermi LAT Pass 8 UltraClean data over |b|>20\u00b0, |l|<90\u00b0, using MCMC maximum-likelihood fits of GALPROP, point-source, Loop I, isotropic, and iteratively constructed Fermi-bubble templates. The NFW-\u03c1\u00b2 (smooth annihilation) morphological template is preferred over NFW-\u03c1\u00b9 at ~2\u03c3 near the 21 GeV peak bin. Headline local per-bin significances are 13\u201319\u03c3, falling to 6.7\u20137.4\u03c3 in the structurally independent GIEM zero-point test (Section 3.4.5). Critical unresolved issues surviving adversarial cross-review: (1) Fermi bubble templates are constructed from 4.3 GeV fit residuals and applied energy-independently, risking spectral artifact absorption by the halo template; (2) no global (trials-corrected) significance is reported; (3) ICS-halo morphological degeneracy is acknowledged but not jointly marginalized; (4) only 5 of 128 GALPROP parameter sets are tested; (5) the WIMP interpretation requires ~5\u00d7 the cross section permitted by dwarf spheroidal 95% upper limits, and MW halo density uncertainty is irrelevant to those externally derived J-factor constraints."
+}

@@ -1,0 +1,141 @@
+{
+  "confidence": 0.68,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 6.5,
+    "novelty": 8.0,
+    "reviewer_confidence": 6.8,
+    "significance": 7.6,
+    "technical_soundness": 6.7
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "No prior cycle; this is the initial review.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "The fully coupled polar sector of the metric perturbation in a scalar cloud can provide a dominant dissipative correction to the GW flux, especially for low scalar masses and small separations.",
+      "notes": "The paper gives a concrete numerical procedure and plots comparing polar, axial, and scalar channels. However, the claim depends on numerical implementation details that are only summarized, on extrapolation in the cloud amplitude parameter, and on truncations in modes and horizon fluxes.",
+      "paper_location": "Abstract; Introduction; Flux contributions; Fig. 1; Scalar mass scaling; Fig. 2",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "At small separation and low compactness, polar flux corrections are well approximated by a simple redshift, analogous to the axial sector.",
+      "notes": "The numerical comparison in Fig. 3 and the axial derivation support the analogy, but the paper does not appear to give an analytic derivation for the polar sector; it is presented as an empirical numerical conclusion.",
+      "paper_location": "Flux redshift; Fig. 3; Appendix .4",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "At large separation and high compactness, the polar correction approaches a mass-shift scaling of the Schwarzschild flux.",
+      "notes": "Appendix .5 gives a plausible PN scaling argument and numerical convergence plots for several harmonics. The range over which this approximation controls the full summed flux is not fully quantified in the text.",
+      "paper_location": "Flux contributions item (ii); Appendix .5; Fig. 7",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "For representative EMRI parameters, conservative corrections dominate the cloud-induced dephasing, and polar flux corrections dominate the dissipative dephasing in the low-mass regime.",
+      "notes": "The dephasing examples are useful but are not a parameter-estimation study. They rely on extending a vacuum-style energy balance law to the environmental system and omitting non-radiative torques and horizon-flux corrections.",
+      "paper_location": "Dephasing; Fig. 4; Appendix .6; Appendix .7",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The results motivate including polar and conservative cloud corrections in beyond-vacuum EMRI templates.",
+      "notes": "As a motivation claim this is reasonable: the reported corrections are potentially large in the examples. It should not be read as a quantified statement about detectability or parameter bias without the future parameter-estimation work the authors themselves call for.",
+      "paper_location": "Abstract; Discussion",
+      "support_level": "well_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The inspiral is sufficiently far from scalar resonances and floating-orbit features that neglected horizon and resonant effects do not alter the flux hierarchy.",
+      "paper_location": "Perturbation Equations after Eq. (8); Dephasing; Appendix .6",
+      "why_it_matters": "The hierarchy between polar, scalar, and axial channels is central to the paper. Resonances can make scalar channels large and could invalidate representative dephasing comparisons."
+    },
+    {
+      "assumption": "Mode truncations used for scalar, polar, and axial perturbations are adequate across the parameter ranges shown.",
+      "paper_location": "Numerical Procedure final paragraph",
+      "why_it_matters": "The paper lists different mode sums for different sectors, but the visible text does not quantify truncation errors. Dominance comparisons can be sensitive if omitted higher modes are non-negligible."
+    },
+    {
+      "assumption": "The scalar cloud decay and evolution through resonances are negligible over the observational interval used for the waveform examples.",
+      "paper_location": "Framework; Dephasing",
+      "why_it_matters": "The cloud mass and profile control the size of the correction. If cloud depletion or resonance history changes the cloud mass, the one-year dephasing estimates scale accordingly."
+    },
+    {
+      "assumption": "The gauge and flux definitions used for polar perturbations provide a gauge-invariant or otherwise physically comparable energy flux at infinity in the non-vacuum background.",
+      "paper_location": "Perturbation Equations; Eq. (8); Flux contributions",
+      "why_it_matters": "The paper works in Zerilli gauge and uses an infinity flux formula. The comparison with vacuum and axial sectors depends on the normalization and gauge choices matching physical radiated power."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Do the full polar Einstein-Klein-Gordon equations, source terms, and boundary conditions used in the code exactly match the stated perturbative ordering and gauge?",
+      "why_model_cannot_resolve": "The paper text summarizes the six-dimensional system but does not expose enough algebra for a complete local audit."
+    },
+    {
+      "question": "Are the polar fluxes at infinity and their redshift/mass-shift normalizations defined consistently with gauge-invariant GW energy flux in this non-vacuum background?",
+      "why_model_cannot_resolve": "This requires checking the detailed perturbation formalism and possibly the implementation, beyond what is visible in the bundle."
+    },
+    {
+      "question": "How large are horizon-flux, non-radiative torque, and mode-truncation corrections in the exact parameter points used for Figs. 1, 4, and 8?",
+      "why_model_cannot_resolve": "The paper gives qualitative caveats and some numerical checks but not a complete error budget for these omitted effects."
+    }
+  ],
+  "novelty_assessment": "The novelty appears promising: previous work emphasized scalar radiation and axial metric effects, while this paper targets the fully coupled polar gravitational sector and conservative metric backreaction in a scalar-cloud EMRI model. The result is significant if the numerics are correct. The novelty is somewhat bounded by the simplified spherical Schwarzschild setup and by related environmental EMRI work where polar/environmental corrections were already known to matter in other matter profiles.",
+  "overall_score_10": 7.1,
+  "paper_id": "2604.11893",
+  "recommended_verdict": "promising",
+  "reviewer": "codex",
+  "score_rationale": "The paper is interesting and likely worth surfacing because it identifies a plausible missing relativistic correction in scalar-cloud EMRI modeling. The main caveats are not obvious fatal flaws, but they do limit strength: dephasing uses an assumed environmental energy balance, horizon and non-radiative effects are not included, and the detailed coupled polar system is not fully auditable from the text provided. The score reflects a promising contribution with meaningful unresolved technical checks rather than a certified proof or calculation.",
+  "summary": "The paper studies EMRIs in a spherically symmetric massive scalar cloud around a Schwarzschild black hole, emphasizing metric-backreaction effects in the polar gravitational sector. It develops a numerical coupled polar-scalar perturbation calculation and argues that polar flux corrections and conservative geodesic shifts can dominate previously studied scalar-radiation signatures in relevant regimes. I did not certify the full calculation; my review focuses on local assumptions, reductions, and support for the claims visible in the provided text.",
+  "technical_objections": [
+    {
+      "confidence": 0.86,
+      "evidence": "Appendix .6 states that the vacuum energy balance law is extended to the environmental EMRI and notes that recent work suggests non-radiative torque corrections. The main dephasing figures then use this assumed evolution.",
+      "objection": "The dephasing calculation assumes a radiative energy-balance law for the environmental EMRI, while the paper itself notes that non-radiative torques may need to be included.",
+      "paper_location": "Appendix .6, Eq. (27) discussion; Discussion final paragraph",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.72,
+      "evidence": "The text says horizon flux corrections remain subdominant away from resonances and are not computed in this work. The dephasing conclusions rely on flux balances in regimes where resonances and near-horizon effects are explicitly relevant concerns for EMRIs.",
+      "objection": "Horizon-flux corrections are omitted from the new polar analysis, with only a qualitative assertion that they are subdominant away from resonances.",
+      "paper_location": "Perturbation Equations paragraph after Eq. (8); Appendix .6",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.82,
+      "evidence": "The paper assumes a spherical quasi-bound ground state, ignores slow decay, and treats it as a proxy for bound states around rotating black holes. The Discussion then suggests the conclusions may hold for dipole/quadrupole clouds and spinning primaries, but those cases are not computed here.",
+      "objection": "The physical model is a spherical scalar cloud on a non-spinning Schwarzschild background used as a proxy for superradiant clouds, but extrapolations to realistic rotating, nonspherical clouds are stronger than the demonstrated setup supports.",
+      "paper_location": "Framework; Discussion",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.64,
+      "evidence": "The polar system is summarized as a six-dimensional first-order matrix equation with matrix A depending on background fields; details are deferred or omitted in the visible text. The method compares to vacuum fluxes and uses residual checks, but a reader cannot locally audit all coupling terms from the paper alone.",
+      "objection": "The numerical accuracy discussion gives useful internal checks but limited reproducibility: the coupled equations, matrices, source normalization, and mode truncation error are not fully exposed in the main text provided.",
+      "paper_location": "Perturbation Equations; Numerical Procedure; Appendix .2; Appendix .3",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.74,
+      "evidence": "Appendix .3 says unphysical higher-order terms are significant for the masses used and are removed by linear/quadratic extrapolation from three amplitude points. The authors report stability below the desired precision, but this remains a numerically delicate step central to the polar flux claim.",
+      "objection": "The extrapolation procedure removes higher-order terms in the scalar-cloud amplitude, but the reported physical correction can be small enough that the extrapolated component matters materially.",
+      "paper_location": "Numerical Procedure; Appendix .3; Fig. 5",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "The provided HTML-derived bundle omits many mathematical symbols and parameter values, e.g. phrases such as 'we identify scalar field masses as the regime' and 'At large , both terms terms' lack the relevant variables or ranges.",
+      "objection": "Several statements about scalar-mass regimes and dominance thresholds are hard to audit in the provided text because key numerical values and symbols are missing or obscured in the HTML rendering.",
+      "paper_location": "Abstract; Introduction; Scalar mass scaling; Dephasing; Appendices",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

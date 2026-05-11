@@ -1,0 +1,83 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "In cycle 2, Gemini explicitly corrected a Codex cycle-1 misread: Gemini states the SDL text says c1(rm)\u21920, not infinity, and that Codex confused the vanishing of c1 at the photon sphere with the subsequent expansion of the divergent integral in terms of 1/c1. Figure 2 numerical consistency corroborates a correct SDL result. This objection is therefore referred to human spotcheck rather than carried as a confirmed flaw. Gemini upgraded the QNM-as-data issue to 'fatal' in cycle 2, a judgment not fully shared by claude (moderate) or codex (major); all three independently confirmed the problem, so it is reported at 'major' severity as the minimum agreed level. The PPN \u03b2/\u03b3 mapping gap was independently raised by claude and codex in cycle 1 and validated by gemini in cycle 2, making it one of the most robustly supported objections.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper tests a modified gravity theory \u2014 called nonlocal gravity \u2014 by studying how its predicted black holes bend light, comparing the results to measurements from the GRAVITY telescope and the Event Horizon Telescope. The review board found the lensing mathematics broadly sound but identified two serious problems in the statistical analysis: prior theoretical bounds were fed into the analysis as though they were real observational data, and a key gravitational measurement was applied in a way that implicitly assumes a result the paper never derives. The qualitative conclusion \u2014 that these nonlocal black holes are broadly consistent with current observations \u2014 is plausible, but the specific confidence levels quoted should not be taken at face value until these issues are addressed.",
+  "human_spotchecks": [
+    "SDL derivation (Eqs. 24-29 in the typeset PDF, not the HTML): Does c1(r\u2080) vanish at the photon sphere r_m (as required by the photon-sphere condition Eq. 9) or diverge? Is the leading singular behavior governed by c1 or c2? The HTML source loses superscripts and fraction bars throughout Sec. III.2, and reviewer readings of this section were mutually contradictory; Figure 2 supports a correct end result but the intermediate steps require PDF-level verification.",
+    "\u03b2_PPN for the DD black hole: Does the revised Deser-Woodard action yield \u03b2 = 1 for the DD metric derived in D'Agostino & De Falco (2025a, JCAP 2025:046)? If \u03b2 \u2260 1, the GRAVITY S2 Schwarzschild-precession bound cannot be mapped directly to a Gaussian prior on \u03b3 alone, and the PPN likelihood term in Eq. (42) is incorrect.",
+    "WDL formula coverage for 1 < k < 2: Does the paper supply or reference a valid deflection angle expansion for this range, and do any numerical examples or likelihood evaluations fall strictly below k = 2? The HTML source does not render the parameter values used in Fig. 2 legibly enough to confirm.",
+    "Numerical consistency of shadow radii (Eqs. 39-40): Are the dimensionless shadow radii for M87* and Sgr A* numerically consistent with the EHT published angular diameters, masses, and distances from Akiyama et al. (2019a, 2022a)? Several numerical values are not readable in the HTML rendering.",
+    "GRAVITY-to-\u03b3 conversion: Can the GRAVITY S2 Schwarzschild-precession accuracy (~1%) be legitimately converted into \u03b3 = 1.00 \u00b1 0.01 specifically for the DD black hole metric, accounting for the correct PPN orbital-precession formula and gauge conventions? This requires domain expertise in PPN orbital fits and the cited Gainutdinov (2020) and Losada et al. (2025) analyses."
+  ],
+  "paper_id": "2604.13223",
+  "public_summary": "The paper aims to constrain the \"DD black hole\" \u2014 a static, spherically symmetric solution of the revised Deser-Woodard nonlocal gravity theory \u2014 by studying its gravitational lensing signatures. Starting from the two-parameter family of metrics (deformation amplitude \u03b5 and radial exponent \u03b1), the authors derive analytical deflection angle expansions in both the weak-deflection limit (WDL) and the strong-deflection limit (SDL). They then compare predicted observables against GRAVITY collaboration measurements of the S2 star's orbit (PPN), Event Horizon Telescope shadow sizes for M87* and Sgr A*, and quasinormal mode (QNM) bounds from a companion paper, combining all three via a Fisher-matrix joint likelihood to report approximately 1.13\u03c3 consistency with general relativity.\n\nThe review board found the lensing derivations methodologically sound in broad strokes. The logarithmic divergence of the deflection angle in the strong-field limit follows the standard Bozza (2002) framework and is confirmed by numerical integration in Figure 2. The weak-field expansion correctly reduces to the Schwarzschild result as \u03b5 \u2192 0 for the k = 2 and k > 2 cases where explicit formulas are given.\n\nHowever, two structural problems in the statistical analysis were independently identified by multiple reviewers. First, the QNM bounds used as one of three likelihood inputs were derived by requiring that deviations from Schwarzschild predictions remain within 10% \u2014 a theoretical perturbativity criterion, not an astrophysical measurement \u2014 and treating them as independent Gaussian observations is statistically unjustified. Second, the GRAVITY constraint is applied as a Gaussian prior on the PPN parameter \u03b3 alone, but the S2 Schwarzschild-precession measurement constrains (2+2\u03b3\u2212\u03b2)/3; the paper implicitly assumes \u03b2 = 1 for the DD metric without deriving it. These two issues together mean that the quoted confidence intervals and the specific 1.13\u03c3 GR-consistency figure cannot be accepted as stated. Additional concerns include the absence of a WDL formula for 1 < k < 2 despite the posterior spanning that region, and unquantified spin systematics in the EHT shadow constraints. The paper also revisits a prior lensing analysis of the same metric by Li and Zhang (2026) rather than being the first such study, and the DD black hole solution itself is imported from companion papers rather than derived here.",
+  "reviewer_disagreements": [
+    "SDL intermediate notation (Eqs. 24-29): Codex flagged a major internal inconsistency, claiming the text states c1(rm) diverges while the photon-sphere condition requires c1(rm) = 0. Gemini explicitly refuted this in cycle 2, stating the text says c1(rm) \u2192 0 and that Codex misread the derivation of the subsequent divergent expansion. Claude assessed it as likely an HTML rendering artifact, citing Figure 2's correct numerical convergence as evidence against a real algebraic error. This objection was not confirmed by cross-review and is referred to human spotcheck.",
+    "Overall severity of the QNM-as-data problem: Gemini rated this 'fatal' and downgraded its verdict to 'major_flaw' in cycle 2; Codex rated it 'major'; Claude rated it 'moderate' and maintained a 'routine' verdict. The objection itself is agreed upon; the disagreement is about whether it alone overturns the paper's qualitative conclusions.",
+    "Overall verdict: Gemini moved from 'routine' (cycle 1) to 'major_flaw' (cycle 2) and assigned technical soundness 3/10; Claude maintained 'routine' at 5.2/10; Codex maintained 'contested' at 5.0/10. The divergence stems primarily from different weightings of the statistical methodology flaws versus the soundness of the underlying lensing derivations."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The quasinormal mode bounds fed into the joint Fisher-matrix likelihood (Eq. 41) were derived by requiring deviations from Schwarzschild predictions to remain within 10% \u2014 a theoretical perturbativity criterion for the companion paper's calculation \u2014 not an astrophysical observation. Treating them as statistically independent Gaussian observational data on equal footing with EHT and GRAVITY measurements (Eq. 43) is invalid and materially inflates the apparent precision of the combined parameter constraints and the quoted 1.13\u03c3 GR-consistency figure.",
+      "paper_location": "Sec. IV.3, Eqs. (41)-(43)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The GRAVITY S2 Schwarzschild-precession measurement constrains the PPN combination (2+2\u03b3\u2212\u03b2)/3, not \u03b3 alone. The paper applies this measurement directly as a Gaussian prior on the light-deflection PPN parameter \u03b3 = 1.00 \u00b1 0.01 (Eq. 37) without computing \u03b2 for the DD metric or demonstrating that \u03b2 = 1. If the nonlocal action modifies \u03b2, the PPN likelihood term in the combined analysis is incorrect and the associated parameter constraints are biased.",
+      "paper_location": "Sec. IV.1, Eqs. (35)-(37)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The WDL deflection angle expansions are provided only for k = 2 (Eq. 20a) and k > 2 (Eq. 20b), but the final joint posterior (k = 2.51 \u00b1 0.64 at 1\u03c3) and the QNM prior (k spanning approximately 1 to 2.84) extend below k = 2, where non-integer powers of 1/r appear at different orders in the large-r expansion. No WDL formula is given for 1 < k < 2, leaving the PPN likelihood term undefined or applied outside its range of validity for part of the posterior.",
+      "paper_location": "Sec. III.1, Eqs. (20a)-(20b); Sec. IV.3, Eq. (47)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The EHT shadow constraints are derived using the static, spherically symmetric shadow formula applied to M87* and Sgr A*, which are expected to be rapidly rotating. The resulting ~4-5% systematic bias in shadow diameter from spin is acknowledged by citing Falcke et al. (2000) but is not added to the quoted measurement uncertainties in Eqs. (39)-(40), and could be comparable to the nonlocal correction being constrained.",
+      "paper_location": "Sec. IV.2, Eqs. (38)-(40)",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The abstract claims 'general analytical expressions for the deflection angle' in the WDL, but the paper explicitly states that the conversion coefficients between periastron radius r\u2080 and impact parameter b (Eq. 19) cannot be determined in closed form for general \u03b1, requiring numerical input once \u03b1 is fixed. The WDL expressions are therefore not general analytical results.",
+      "paper_location": "Abstract; Sec. III.1, Eq. (19)",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The strong-deflection-limit deflection angle for DD black holes exhibits the universal logarithmic divergence characteristic of all static spherically symmetric spacetimes, with SDL coefficients that are numerically confirmed against direct integration in Figure 2.",
+    "The WDL deflection angle reduces to the Schwarzschild result as \u03b5 \u2192 0 for the k = 2 and k > 2 branches where explicit formulas are provided.",
+    "The photon sphere radius and critical impact parameter for the DD metric are expressible as analytic perturbative corrections to their Schwarzschild values (Eqs. 8 and 14).",
+    "The paper argues that DD black holes are qualitatively consistent with current astrophysical observations at the level of precision accessible to present instruments, a conclusion that is plausible even if the specific confidence level is methodologically compromised."
+  ],
+  "technical_takeaway": "The paper derives WDL and SDL gravitational lensing observables for DD black holes in the revised Deser-Woodard nonlocal gravity model, correctly applying the Bozza (2002) SDL formalism and standard WDL series expansion. Two structural problems in the joint Fisher-matrix analysis were independently confirmed by multiple reviewers: (1) QNM-derived perturbativity tolerance intervals from a companion paper are entered as independent Gaussian likelihood terms on equal footing with EHT and GRAVITY measurements \u2014 a statistically unjustified conflation of theoretical range-of-validity criteria with observational data; (2) the GRAVITY S2 Schwarzschild-precession bound, which constrains the PPN combination (2+2\u03b3\u2212\u03b2)/3, is applied as a direct Gaussian prior on \u03b3 alone without computing \u03b2 for the DD metric. Additional unresolved issues include the absence of a WDL deflection formula for 1 < k < 2 despite the final posterior extending below k = 2, and spin-related EHT systematics that are acknowledged but not propagated into the error budget."
+}

@@ -1,0 +1,101 @@
+{
+  "confidence": 0.95,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 2,
+    "novelty": 7,
+    "reviewer_confidence": 9,
+    "significance": 7,
+    "technical_soundness": 1
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Maintained the prior assessment that the missing text precludes a full review. Incorporated theoretical critiques regarding the CCBH framework and SFRD assumptions, as well as observations about the garbled abstract text from other reviewers.",
+    "invalid_points_from_other_reviewers": [
+      "Claude's score of 5.5 and 'promising' verdict are too generous for a submission where the entire main text and crucial abstract numbers are missing. A bundle in this state is fundamentally 'not review-ready'."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Claude correctly highlighted that the theoretical basis of CCBHs is contested and that fixing the SFRD complicates the parameter count claim.",
+      "Codex correctly identified that key mathematical symbols and numbers were dropped from the abstract text itself."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "The CCBH model has the same number of free parameters as the standard comparison model.",
+      "notes": "The comparator model name is missing from the scraped text due to formatting errors. Furthermore, tying DE production to fixed SFRDs introduces hidden model selection choices and uncertainties, complicating parameter counting.",
+      "paper_location": "Abstract",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "The CCBH model accurately recovers cosmological expansion history and agrees with early-time baryon abundance.",
+      "notes": "Plausible by construction since the mechanism operates primarily after reionization, but unauditable without the full results and methodology sections.",
+      "paper_location": "Abstract",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "The model reduces tension with the local distance ladder and relaxes constraints on the summed neutrino mass, finding a peaked positive value.",
+      "notes": "The actual numerical values, confidence intervals, and the baseline models are missing from the abstract, and the supporting derivations are absent.",
+      "paper_location": "Abstract",
+      "support_level": "unclear"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The exact comparator model for the 'same number of free parameters' claim.",
+      "paper_location": "Abstract",
+      "why_it_matters": "Without knowing the baseline model (e.g., \u039bCDM, w0waCDM), the fairness of the statistical model comparison cannot be assessed."
+    },
+    {
+      "assumption": "The chosen cosmic star formation rate densities (SFRDs) can be treated as fixed inputs without inflating the effective parameter space.",
+      "paper_location": "Abstract",
+      "why_it_matters": "SFRD measurements carry significant systematic uncertainties. Fixing them to two bracketing models hides model dependence and potential degrees of freedom."
+    },
+    {
+      "assumption": "Black holes formed from stellar collapse are exotic compact objects with dark-energy-dense interiors.",
+      "paper_location": "Implicit in CCBH framework",
+      "why_it_matters": "Cosmological mass coupling depends on the interior having a non-zero effective dark energy equation of state, an assumption that fails for classical GR black holes."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Can the full text of the paper, including equations, methodology, and results, be provided?",
+      "why_model_cannot_resolve": "The source document in the review bundle is heavily truncated, containing only metadata, the abstract, and references."
+    },
+    {
+      "question": "What are the actual numerical values for the summed neutrino mass and confidence intervals?",
+      "why_model_cannot_resolve": "These specific values were lost during the abstract's text extraction/rendering process."
+    }
+  ],
+  "novelty_assessment": "Applying the CCBH framework to DESI DR2 data and proposing that late-time baryon consumption shifts the neutrino mass constraint surface to a positive value is an interesting and novel phenomenological application. However, the theoretical foundation is contested, and without the main text, the execution of this novel idea cannot be evaluated.",
+  "overall_score_10": 2,
+  "paper_id": "bm-125-01",
+  "recommended_verdict": "weak_evidence",
+  "reviewer": "gemini",
+  "score_rationale": "The overall score is 2 because the review bundle is fundamentally not review-ready. The main text is missing entirely, and the abstract has rendering errors that omit key numerical values and comparator models. While the proposed resolution of the Hubble tension and neutrino mass constraints is novel and potentially significant (reflected in those dimension scores), the technical soundness and clarity must be scored minimally because no derivations, methodology, or results are provided to support the contested theoretical framework.",
+  "summary": "The paper investigates a model where matter converts to dark energy via cosmologically coupled black holes (CCBHs), with formation tied to the cosmic star formation rate density (SFRD). Using DESI DR2 and CMB data, the authors claim this model matches expansion history, reduces Hubble tension, and yields a positive neutrino mass constraint. However, as noted in the previous cycle and corroborated by the other reviewers, the review bundle contains only the abstract, author list, and references. The main text is entirely missing, and the abstract itself contains rendering errors that obscure key mathematical symbols and numerical results, making the paper unreviewable.",
+  "technical_objections": [
+    {
+      "confidence": 1.0,
+      "evidence": "Sections such as Introduction, Theory, Methods, Results, and Discussion are listed in the outline but their contents are entirely absent.",
+      "objection": "The main text of the paper is missing, preventing any technical evaluation.",
+      "paper_location": "Entire Document",
+      "severity": "fatal",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 1.0,
+      "evidence": "Phrases like 'same number of free parameters as ,' and 'peaked positive (95% confidence) and , respectively' indicate critical omissions in the text extraction.",
+      "objection": "Key mathematical symbols and numerical results are missing from the abstract.",
+      "paper_location": "Abstract",
+      "severity": "major",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "Standard GR black holes in cosmological backgrounds do not generically gain mass from expansion in the manner required by the CCBH model.",
+      "objection": "The theoretical basis for cosmological coupling of black hole masses requires exotic compact objects rather than standard classical black holes, which is non-standard and actively contested.",
+      "paper_location": "Implicit in CCBH framework",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

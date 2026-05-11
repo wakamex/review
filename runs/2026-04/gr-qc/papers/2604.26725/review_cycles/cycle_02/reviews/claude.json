@@ -1,0 +1,180 @@
+{
+  "confidence": 0.6,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 3,
+    "novelty": 4,
+    "reviewer_confidence": 5,
+    "significance": 5,
+    "technical_soundness": 4
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Added the \u03ba arithmetic inconsistency (\u03b7\u00b7\u03c1=0.169 vs stated \u03ba=0.400 in Fig. 2 caption) as a new technical objection\u2014missed in cycle 1. Added noise/SNR as a missing assumption (valid point from Gemini). Made the real-splitting vs complex-splitting conditioning limitation more explicit as a separate objection (sharpened from Codex). Added the residue-ratio bound gap as a separate objection (from Codex, valid). Lowered technical_soundness from 5 to 4 due to the \u03ba inconsistency and real-splitting-only conditioning derivation. Overall score held at 4.",
+    "invalid_points_from_other_reviewers": [
+      "Gemini's framing of the Taylor expansion as fatally 'oversold' is overstated as a technical objection; it is better classified as a low-novelty issue. The paper does not misrepresent the math, it just frames a basic result in elaborate language.",
+      "Codex's claim that the \u03ba inconsistency and absent supplemental 'would_change_verdict_if_true' for a verdict upgrade to promising/strong_select is too strong; fixing these issues would at most upgrade routine to a cleaner routine, not to a high-impact result."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Codex: Fig. 2 caption \u03ba=0.400 contradicts \u03ba=\u03b7\u00b7\u03c1=0.169 given stated \u03b7=0.260, \u03c1=0.650\u2014a concrete numerical inconsistency I missed in cycle 1.",
+      "Codex: Conditioning result is proved only on the real-splitting slice (Eq. 8) but is applied to complex-splitting Kerr QNMs without derivation.",
+      "Codex: The \u03b7\u00b2 residual hierarchy depends on residue ratios beyond \u03b7 alone; explicit bounds are missing.",
+      "Codex: Kerr realization parameters (mode pair, T_eff, protocol) are too under-specified to reproduce.",
+      "Gemini: Noise and SNR are entirely absent. The ill-conditioning advantage is SNR-dependent and this omission leaves the practical claims incomplete.",
+      "Gemini: Key Kerr section terms ('L-only band', 'surrogate layer', 'validation band') are undefined and irreproducible."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "The resolved simple-pole basis becomes ill-conditioned on a finite window as pole splitting \u03b4\u21920, with Gram matrix condition number diverging.",
+      "notes": "Correct classical result (Prony/Vandermonde near-degeneracy). Numerical Fig. 1 is consistent. The explicit Gram entry formula in Eq. (8) is derived only along the real-splitting slice, not the complex-splitting case relevant to Kerr QNMs.",
+      "paper_location": "Section 'Finite-window necessity of centered organization', Eq. (8), Fig. 1",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The centered first-jet basis {e^{i\u03c9ct}, t\u00b7e^{i\u03c9ct}} remains O(1)-conditioned on the finite window as \u03b4\u21920.",
+      "notes": "The two basis functions are linearly independent with non-vanishing Gram determinant for any finite T regardless of \u03b4. The constant 7+4\u221a3 for the centered basis condition number is stated without derivation in the main text; proof is deferred to absent Supplemental Sec. C.",
+      "paper_location": "Section 'Finite-window necessity of centered organization', Eq. (8), Fig. 1",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "An exact algebraic reorganization of the two-pole Green-function block (Eq. 3) exists around center \u03c9c and half-splitting \u03b4, without requiring a true pole merger.",
+      "notes": "Straightforward partial fraction algebra around (\u03c9-\u03c9c)\u00b2-\u03b4\u00b2. The actual formula content is invisible in the HTML due to rendering failure, but the reorganization is algebraically uncontroversial.",
+      "paper_location": "Eqs. (1)-(4)",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The time-domain waveform from a near-degenerate pair has a carrier-plus-first-jet structure at leading order in \u03b5=|\u03b4|T, with next-order error controlled by \u03b7=|\u03b4|\u00b2T\u00b2.",
+      "notes": "Follows from Taylor-expanding e^{i\u03b4t} \u2248 1+i\u03b4t+O(\u03b4\u00b2t\u00b2). The zeroth-order error in Fig. 3 does not collapse cleanly onto a single \u03b5 curve, which the paper acknowledges. Additionally, there is a concrete arithmetic inconsistency in Fig. 2 caption: with stated \u03b7=0.260 and \u03c1=0.650, the product \u03b7\u00b7\u03c1=0.169, not \u03ba=0.400 as reported, contradicting Eq. (13) which defines \u03ba=\u03b7\u00b7\u03c1.",
+      "paper_location": "Eqs. (9)-(14), Figs. 2-3",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Kerr QNMs in a near-degenerate neighboring-overtone sector show the same conditioning advantage of the centered basis, with amplification ratio of order several at representative small-\u03b4 points.",
+      "notes": "Analysis restricted to conditioning comparisons only. Key terms ('L-only band', 'surrogate layer', 'validation band') are undefined. The mode pair, T_eff, perturbation/noise model, surrogate construction, and validation criterion are not specified. Not reproducible from the text.",
+      "paper_location": "Section 'Representative Kerr realization', Fig. 4",
+      "support_level": "unclear"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "Noise and SNR are entirely absent from the analysis. Ill-conditioning of the resolved basis is only practically limiting when measurement noise is present; in a noiseless setting one can invert ill-conditioned systems to machine precision.",
+      "paper_location": "Throughout, but especially 'Finite-window necessity of centered organization'",
+      "why_it_matters": "The practical resolving power on a finite window depends on both |\u03b4|T and SNR jointly. The centered-basis advantage over the resolved basis is SNR-dependent; without this, the paper's practical claims are incomplete."
+    },
+    {
+      "assumption": "Neighboring-pole dominance: the two-pole block dominates the full Green-function response on the restricted window, with all other poles and branch-cut contributions negligible.",
+      "paper_location": "Section 'Local effective two-pole response skeleton'",
+      "why_it_matters": "For real Kerr ringdowns, multiple overtones and branch-cut contributions are present. The validity of the local two-pole approximation is not quantified."
+    },
+    {
+      "assumption": "\u03b5=|\u03b4|T is assumed small, but no criterion is given for when relevant Kerr QNM near-degenerate pairs satisfy \u03b5\u226a1 at astrophysically accessible spin values and observation windows.",
+      "paper_location": "Eq. (13), Section 'Local interference diagnostics'",
+      "why_it_matters": "If \u03b5 is not small for the relevant pairs, the entire expansion is inapplicable to real data."
+    },
+    {
+      "assumption": "The residues R\u2081, R\u2082 are of comparable magnitude with no anomalous cancellation in A=R\u2081+R\u2082. The paper carves out the suppressed-A case without characterizing its frequency for Kerr QNMs.",
+      "paper_location": "Eq. (4), Section 'Local interference diagnostics'",
+      "why_it_matters": "Specific initial data may preferentially excite one mode, making A small and invalidating the zeroth-order approximation without warning."
+    },
+    {
+      "assumption": "The real-splitting conditioning analysis (Eq. 8) extends to complex splittings without modification.",
+      "paper_location": "Eq. (8), Representative Kerr realization",
+      "why_it_matters": "Kerr QNM splittings are complex; the Gram matrix structure and condition number for complex \u03c3 on a finite window may differ from the real-slice result."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "In the PDF, does Eq. (13) define \u03ba=\u03b7\u03c1, and if so are the Fig. 2 caption values \u03b7=0.260, \u03c1=0.650, \u03ba=0.400 consistent? If \u03ba\u2260\u03b7\u03c1 the definition or the numerics contain an error.",
+      "why_model_cannot_resolve": "All equation content is blank in the HTML bundle. The arithmetic check requires seeing the actual formula and caption values from the PDF."
+    },
+    {
+      "question": "Does the Supplemental Material (Secs. A, B, C) contain valid derivations for the Green-function reduction, Gram matrix condition-number formula (7+4\u221a3), and coefficient-recovery tests?",
+      "why_model_cannot_resolve": "The supplemental is absent from the bundle. The core conditioning claims depend on results proven only there."
+    },
+    {
+      "question": "What specific Kerr spin values, QNM mode-pair labels (n, l, m), and observation window T_eff were used in the Kerr realization? Are the quoted amplification ratios reproducible from publicly available QNM tables?",
+      "why_model_cannot_resolve": "The HTML renders blank where numerical values appear, and the protocol for the Kerr inverse problem is not specified in the main text."
+    },
+    {
+      "question": "How does the centered-basis approach compare quantitatively to SVD-regularized Prony or ESPRIT for near-degenerate mode extraction in terms of parameter recovery error at finite SNR?",
+      "why_model_cannot_resolve": "No such comparison is made in the paper; assessing practical advance over the signal-processing literature requires domain expertise and benchmarking outside the bundle."
+    },
+    {
+      "question": "Is the real-splitting Gram matrix conditioning analysis (Eq. 8) extended to complex splittings in the supplemental, and if so does the conclusion hold for the damping-rate difference relevant to Kerr overtone pairs?",
+      "why_model_cannot_resolve": "The main text restricts to real splitting explicitly; the extension would be in the absent supplemental."
+    }
+  ],
+  "novelty_assessment": "The core observation\u2014that near-degenerate exponentials are ill-conditioned on finite windows and should be replaced by a center-plus-variation basis\u2014is classical in numerical analysis (Prony's method, Vandermonde conditioning, ESPRIT/MUSIC literature). The paper's specific contribution is (a) casting this in the frequency-domain Green-function language of GW ringdown, (b) connecting it to Jordan-chain/exceptional-point terminology, and (c) defining the two-scale (\u03b5, \u03b7) hierarchy for the two-pole case. These are potentially useful reframings for the GW ringdown community. However, the paper does not compare against existing near-degenerate mode extraction methods, does not cite the relevant signal-processing prior work, and the 'two-scale hierarchy' is essentially a two-term Taylor expansion with named parameters. Novelty is incremental at best.",
+  "overall_score_10": 4,
+  "paper_id": "2604.26725",
+  "recommended_verdict": "routine",
+  "reviewer": "claude",
+  "score_rationale": "The central mathematical observation (ill-conditioning of near-degenerate exponential bases on finite windows; carrier-plus-first-jet expansion) is correct but classical. The concrete \u03ba arithmetic inconsistency in Fig. 2 (\u03b7\u00b7\u03c1=0.169 vs stated \u03ba=0.400) is a quality-control concern that was missed in cycle 1. The conditioning derivation is restricted to the real-splitting slice and not extended to complex-splitting Kerr QNMs. The Kerr section uses undefined terminology and is not reproducible. The absent supplemental material prevents full verification. No comparison with established near-degenerate mode-extraction methods is made. Noise/SNR is entirely absent from the analysis, making practical claims incomplete. Technical soundness drops to 4 due to the \u03ba inconsistency and real-vs-complex-splitting gap. Novelty remains 4 (incremental reframing). Significance 5 (potentially useful to GW ringdown community as framing). Clarity 3 (equation rendering failure, opaque Kerr section). Overall 4: competent but routine, with unresolved numerical and methodological issues.",
+  "summary": "The paper argues that near-degenerate resonance poles on a finite observation window are better represented in a centered basis (carrier plus first-jet) rather than as two independently resolved damped sinusoids. The resolved basis becomes ill-conditioned as the pole splitting \u03b4\u21920, while the centered first-jet basis remains well-conditioned. Two diagnostics \u03b5~|\u03b4|T and \u03b7~|\u03b4|\u00b2T\u00b2 define a two-scale hierarchy, verified with toy numerics and a representative Kerr QNM sector. The paper is a methods-level contribution aimed at the GW ringdown spectroscopy community.",
+  "technical_objections": [
+    {
+      "confidence": 0.9,
+      "evidence": "Codex reviewer flagged this at 0.99 confidence. If \u03ba=\u03b7\u03c1 by definition, the three stated values \u03b7=0.260, \u03c1=0.650, \u03ba=0.400 are mutually inconsistent. This is either a definition ambiguity, a typo, or an arithmetic error in the numerical demonstration.",
+      "objection": "Arithmetic inconsistency in Fig. 2 parameters: \u03ba=0.400 is reported but \u03b7\u00b7\u03c1 = 0.260\u00d70.650 = 0.169 \u2260 0.400, contradicting Eq. (13) which defines \u03ba=\u03b7\u03c1.",
+      "paper_location": "Eq. (13) and Fig. 2 caption",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "The source HTML shows equations as rows of empty table cells. The bundle itself notes 'Experimental support, please view the build logs for errors.'",
+      "objection": "All equation content is absent from the submitted bundle due to HTML rendering failures; Eqs. (1)-(15) are present only as blank table scaffolding.",
+      "paper_location": "Throughout, all numbered equations",
+      "severity": "major",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.99,
+      "evidence": "At least five distinct claims are deferred to the Supplemental with phrases like 'see Sec. C of the Supplemental Material.' The main text is not self-contained without them.",
+      "objection": "The Supplemental Material (Secs. A, B, C), cited for the Green-function derivation, basis constructions, Gram matrix condition numbers, and coefficient-recovery tests, is entirely absent from the bundle.",
+      "paper_location": "Sections 'Local effective two-pole response skeleton', 'Finite-window necessity', 'Local interference diagnostics'",
+      "severity": "major",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "Paper explicitly states Eq. (8) is 'along the transparent real-splitting slice.' Kerr QNM splittings are complex. The extension to complex splittings is asserted but not derived in the main text or cited supplemental.",
+      "objection": "The conditioning result (Eq. 8) is derived only along the real-splitting slice, but is applied rhetorically to complex-splitting Kerr QNMs without the corresponding complex-window analysis.",
+      "paper_location": "Eq. (8), Representative Kerr realization section",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "Codex reviewer identified this at 0.78 confidence. Expanding Eq. (10), relative error at next order depends on the ratio \u03c1=|(R\u208a-R\u208b)/(R\u208a+R\u208b)| and on normalization, not only on \u03b7\u00b2.",
+      "objection": "The \u03b7\u00b2 residual hierarchy after first-jet correction is not derived with explicit residue bounds; the remainder from Eq. (10) includes terms proportional to (R\u208a+R\u208b)\u03b4\u00b2t\u00b2 and (R\u208a-R\u208b)\u03b4\u00b3t\u00b3, so the scaling depends on residue ratios beyond \u03b7 alone.",
+      "paper_location": "Eqs. (10)-(14)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "The paper does not identify the QNM pair labels, T_eff, perturbation/noise model, or inverse problem definition. Data available only by request.",
+      "objection": "The Kerr realization section uses undefined terminology ('L-only band', 'surrogate layer', 'validation band') and provides insufficient detail to reproduce the results.",
+      "paper_location": "Section 'Representative Kerr realization', Fig. 4",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "References [25,26] cited for 'finite-time windowing and resolvability considerations' are GW-specific (Talbot 2021, Clarke 2024), not the numerical analysis or signal-processing literature where this result is classical.",
+      "objection": "The paper does not engage with the signal-processing literature on near-degenerate exponential fitting (Prony, ESPRIT, MUSIC, SVD-regularized methods), making novelty impossible to assess rigorously.",
+      "paper_location": "Introduction, 'Finite-window necessity' section",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "Paper acknowledges 'remaining spread' and appeals to two-scale fits involving both \u03b5 and \u03b7 to improve the description.",
+      "objection": "The zeroth-order error in Fig. 3 does not collapse onto a single \u03b5 curve, weakening the claim that \u03b5 alone controls correction onset.",
+      "paper_location": "Section 'Local interference diagnostics', Fig. 3",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Cross-cycle consensus formed by cycle 2 on the tautology objection (all three reviewers, independently). Gemini maintained 'fatal' severity and 'major_flaw' verdict throughout; claude and codex converged on 'major' severity with a 'routine'/'weak_evidence' verdict, explicitly rejecting 'fatal' as disproportionate given the paper's honest scope and correct observations. The HTML rendering issue (all displayed equations lost) affected all reviewers' ability to audit formulas directly and is flagged as a persistent audit limitation. No reviewer had access to the PDF or underlying code/data.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper examines how the frequency separation between neighboring oscillation modes of a spinning black hole changes as the spin varies, finding that the closest-approach spin location shifts depending on which pair of overtones is examined. The review board found the core numerical observation plausible and likely genuine. However, the proposed \"explanation\" for why this drift occurs was unanimously identified as mathematically circular: the paper's central diagnostic reduces to the elementary calculus condition for a minimum, restated in complex notation, rather than revealing new physical insight into black hole perturbation theory. The most important caveat is that the paper honestly acknowledges this limited scope, but its main mechanistic claim does not reach beyond what is already implied by differentiating a squared modulus.",
+  "human_spotchecks": [
+    "Verify the PDF for fully rendered equations, sector labels (l, m values), overtone indices (n values), exact spin grid parameters, and diagnostic numerical values \u2014 the HTML source renders all displayed equation environments as empty table cells, making formula-level audit impossible from the review bundle.",
+    "Assess whether the qnm package's overtone label-tracking algorithm is robust against label switches and branch ambiguities for overtones n=3\u20136 in the spin range a/M \u2208 [0.75, 0.97], and whether known failure modes exist for the Leaver continued-fraction solver at high overtone index in this regime.",
+    "Check whether prior Kerr QNM literature \u2014 particularly Yang et al. 2025, Lo et al. 2025, Cavalcante et al. 2024, and Motohashi 2025 on eigenvalue repulsion, exceptional points, and resonant excitation \u2014 already documents pair-dependent gap minima or closely related drift observations, which would affect the novelty of the observational claim.",
+    "Determine whether the six 'positive' validation cases and two 'no-trigger' controls in Table 2 were identified by a pre-specified reproducible selection rule applied to the full candidate universe in the appendix scan, or were chosen post-hoc after visual inspection of favorable examples."
+  ],
+  "paper_id": "2604.24584",
+  "public_summary": "The paper tracks the complex-frequency separation between adjacent quasinormal mode overtones of Kerr black holes as the spin parameter varies, observing that the minimum separation occurs at pair-dependent spin values even within the same angular sector. To characterize this drift, the authors introduce a diagnostic D = Re(z* \u2202_a z) \u2014 where z is the complex frequency difference between two neighboring modes \u2014 and argue that minimum drift is equivalent to drift of D's dominant zero crossing. They further interpret this as a \"radial turning event\" of the separation vector in the complex-frequency plane. A restricted validation set of 6 triggered cases and 2 smooth controls is presented. The review board reached cross-cycle consensus that the central explanatory mechanism is a tautological reformulation: D equals one-half the derivative of the squared gap magnitude, so D = 0 is simply the first-derivative test for a minimum restated in complex notation, and the radial turning interpretation follows trivially from polar decomposition. The paper does not explain why different pairs reach that minimum at different spins in terms of any structural feature of the Teukolsky equation, mode mixing, or continued-fraction eigenvalue problem. The empirical observation of drift may be a genuine phenomenological finding, but reproducibility is hampered by under-specified numerical methods, missing code and data, unverified overtone label tracking, and an HTML rendering that drops all mathematical expressions.",
+  "reviewer_disagreements": [
+    "Severity of the tautology objection: Gemini rated it 'fatal' and recommended 'major_flaw' with scores of 2\u20133/10, arguing the paper's theoretical core is vacuous. Claude and codex rated it 'major' but not fatal (~4.2\u20134.5/10), reasoning that the empirical observation of drift is independent of the tautological framing and that the paper neither misrepresents its contribution nor claims more than it demonstrates. Claude explicitly rejected gemini's characterization as disproportionate.",
+    "Support level for the empirical drift observation: Claude rated the mainline observational claim as 'well_supported' based on coarse/refined scan agreement, while codex maintained 'partially_supported' throughout both cycles, weighting the under-specified methodology more heavily as a barrier to establishing robustness."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The central explanatory mechanism is mathematically tautological. The diagnostic D = Re(z* \u2202_a z) equals (1/2) d|z|\u00b2/da by standard calculus, so the statement 'the minimum is governed by D = 0' is a restatement of the minimum condition itself. The 'radial turning event' picture follows trivially from polar decomposition (\u2202_a r = 0 iff Re(z* \u2202_a z)/|z| = 0). No independent physical explanation for why different pairs have their D = 0 crossings at different spins is provided; the paper redescribes the observation rather than explaining it.",
+      "paper_location": "Eqs. (6)-(10), (21)-(23); sections on local minimum-setting mechanism, global consistency, and conclusion",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The numerical methodology is under-specified for a robustness claim. The paper names the public qnm package and a coarse spin grid but does not provide the package version, solver tolerances, angular spectral truncation, derivative estimation method, refined-scan procedure, or branch-continuation protocol. Data are available only on request. This prevents independent reproduction of the reported gap minima.",
+      "paper_location": "Numerical setup section; Data availability statement",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The label-fixed overtone tracking assumption is crucial but insufficiently justified. The paper acknowledges Kerr QNM branching, avoided crossings, eigenvalue repulsion, and near-extremal complications in its own introduction, yet does not describe the continuation criterion, how label swaps are detected or prevented, or how tracking was verified for overtones n=3\u20136 at intermediate-to-high spin. If a label switch occurs near an avoided crossing, the observed gap minimum could be a tracking artifact rather than a physical feature.",
+      "paper_location": "Numerical setup section; introduction citing refs on eigenvalue repulsion and exceptional points",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The validation set (6 triggered cases, 2 controls) is too small and appears to have been selected post-hoc from a broader appendix scan without a stated candidate universe, selection rules, or false-positive rate. The quantitative agreement criterion \u2014 that the sampled minimum and dominant zero crossing lie within one coarse scan step \u2014 is guaranteed by construction since D = 0 is the minimum condition, providing no independent quantitative check.",
+      "paper_location": "Table 2; restricted representative validation section; appendix overview",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The paper documents that at least two neighboring overtone pairs in the l=m=2 Kerr sector develop robust interior minima in their complex-frequency gap at different spin values, with the drift confirmed as non-artifactual across coarse and refined scan grids.",
+    "The mathematical identity D = Re(z* \u2202_a z) = (1/2) d|z|\u00b2/da is correct, and D = 0 does exactly characterize the interior minimum of the gap magnitude for differentiable, nonzero complex separation \u2014 this much is uncontested.",
+    "The broader appendix scan supports the observation that interior gap minima are not universal across all Kerr neighboring-overtone pairs: some exhibit clear triggered behavior while others remain smooth, indicating selective rather than generic occurrence.",
+    "The paper is appropriately and consistently honest about the limited scope of its results, explicitly disclaiming a family-wide law and restricting validation to a small representative set."
+  ],
+  "technical_takeaway": "The paper aims to show that interior minima in the neighboring-overtone gap |\u0394\u03c9_{n,n+1}(a)| are pair-dependent along a Kerr spin scan, and argues that this drift is governed by a \"real-projection diagnostic\" D = Re(z* \u2202_a z) whose zero marks the minimum. All three reviewers across both cycles confirmed that D = (1/2) d|z|\u00b2/da, making D = 0 tautologically equivalent to the minimum condition itself; the \"radial turning event\" picture follows by polar decomposition without additional physical content. The empirical observation of pair-dependent drift appears non-artifactual from coarse/refined scan agreement, but reproducibility is limited by under-specified numerical methodology (no package version, solver tolerances, or branch-tracking protocol), an 8-case validation set that appears post-hoc selected, and HTML source rendering that drops all displayed equations. No connection to the Teukolsky operator eigenvalue structure or mode mixing is established."
+}

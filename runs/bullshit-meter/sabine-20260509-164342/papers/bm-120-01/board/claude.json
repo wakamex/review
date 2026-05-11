@@ -1,0 +1,94 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Two full review cycles completed. Cycle 2 involved cross-review integration: codex lowered its score from 6.8 to 5.8 and revised verdict from 'promising' to 'routine' after incorporating claude's MCMC sampling-failure objection and gemini's quantification of the best-fit/mean discrepancy. Gemini upgraded the MCMC objection from 'major' to 'fatal' in cycle 2 and issued verdict 'weak_evidence' at score 4.0. Claude maintained score 5.0 and verdict 'routine' across both cycles. Final mechanical average (cycle 2): 4.933/10. The mean-based lifespan from eq. (5.2) was not rendered in the HTML source bundle; gemini read ~2000 Gyr while codex initially read ~39.4 Gyr \u2014 this conflict is surfaced as a priority human spotcheck. String-theory remarks in Section 6 were consistently flagged as speculative by all reviewers and are not treated as technical support for the cosmological inference.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper argues that recent dark energy observations, if taken at face value, suggest our universe contains a negative cosmological constant that will eventually cause it to collapse in a \"big crunch\" roughly 33 billion years from now. The review board found the physics setup coherent but the central statistical claim \u2014 that a negative cosmological constant is highly probable \u2014 is not reliably established by the analysis presented. The most important caveat is that the headline 33-billion-year figure comes from a single cherry-picked parameter point in a highly skewed distribution; using average parameters instead yields an estimate roughly 60 times longer (~2000 billion years), and the DES observations driving the result are not yet confirmed by independent DESI analysis.",
+  "human_spotchecks": [
+    "Confirm the numerical value of the mean-based lifespan in eq. (5.2): gemini reads ~2000 Gyr (2.05 \u00d7 10^3 Gyr) while codex initially read ~39.4 Gyr; the HTML extraction does not render the equation. Checking the PDF or LaTeX source is required to resolve this discrepancy, since the factor-of-~60 vs. factor-of-~1.2 gap changes the severity assessment of the best-fit/mean objection.",
+    "Audit ref. [24]'s statistical methodology: determine whether the model-comparison between separately-run AdS and dS MCMC chains uses properly matched priors and a formally computed Bayes factor, or whether it rests on an ad hoc log-likelihood comparison between the two best-fit points.",
+    "Run a formal combined DES+DESI fit of the aDE AdS model (not just a visual overlay) to determine whether \u039b < 0 is still preferred when both datasets are included, given Footnote 6's concession that thawing models are disfavored by DESI alone.",
+    "Clarify whether the best-fit parameter values in eq. (3.1) are the joint maximum-likelihood point or the product of 1D marginalized posterior modes, since for a strongly degenerate non-Gaussian posterior these can differ substantially and the distinction affects how the 33.3 Gyr lifespan should be interpreted.",
+    "Independently reproduce the 33.3 Gyr lifespan by numerically integrating eqs. (2.6) and (4.7) with the parameters in eq. (3.1), checking solver choice and convergence near the turnaround H = 0 and during the rapid collapse phase, to confirm the result is not an integration artifact."
+  ],
+  "paper_id": "bm-120-01",
+  "public_summary": "Luu, Qiu, and Tye apply their previously published axion Dark Energy (aDE) model \u2014 an ultralight axion field plus a cosmological constant \u039b \u2014 to forecast the future of the universe. The paper argues that the Dark Energy Survey (DES) and DESI measurements, which claim at 4.2\u03c3 that dark energy is dynamical (equation of state w \u2260 \u22121), can be explained by the aDE model with a negative \u039b. A negative \u039b in a Friedmann cosmology inevitably leads to a big crunch, and the paper estimates the resulting lifespan at 33.3 billion years using numerically integrated Friedmann and axion equations, with an analytic approximation as a cross-check.\n\nThe review board found the paper clearly written and the physical motivation coherent: if DES/DESI data are confirmed and the aDE model is correct, estimating the universe's lifespan is a natural and important calculation. The numerical implementation of the forward integration is technically competent and internally consistent.\n\nHowever, the paper's central claim \u2014 that a negative cosmological constant is highly probable \u2014 rests on a statistical methodology that the authors themselves partially undermine. Footnote 4 discloses that joint MCMC sampling across the \u039b > 0 and \u039b < 0 regions fails because the sampler gets trapped at the de Sitter attractor. The authors work around this by running separate chains for each case, but this procedure does not yield a valid joint posterior probability P(\u039b<0), and no Bayes factor or formal model-comparison statistic is reported.\n\nFurther undermining the headline number, the paper discloses that the posterior is highly skewed and degenerate: the best-fit parameters used to derive the 33.3 Gyr lifespan sit far outside the mean, and using mean-value parameters instead gives a lifespan on the order of ~2000 Gyr \u2014 roughly 60 times longer. The paper does not propagate any credible interval over the lifespan from the posterior.\n\nA third concern is the observational basis: the key fit is DES-only, and Footnote 6 concedes that \"other recent studies show that the minimal thawing dark energy model similar to our aDE model with \u039b=0 is less favored than the \u039bCDM model when constrained by DESI data.\" The paper provides only a visual overlay of curves against DESI data points, not a formal DESI fit. The big-crunch conclusion may not survive a combined DES+DESI analysis.\n\nThe string-theory remarks in Section 6 are speculative connections to Calabi\u2013Yau orientifold models and the string axiverse; they are suggestive but not derived results for this specific phenomenological setup, and should not be counted as technical support for the cosmological inference. Similarly, qualitative statements about giant black holes shielding the crunch singularity and possible cyclic transitions go beyond the homogeneous FLRW framework used for the lifespan calculation.",
+  "reviewer_disagreements": [
+    "Severity of the MCMC sampling failure: gemini upgraded this objection from 'major' (cycle 1) to 'fatal' in cycle 2, while claude and codex maintained it at 'major' throughout both cycles. All three agreed it is the most fundamental methodological problem.",
+    "Overall paper quality: codex scored the paper 6.8/10 with verdict 'promising' in cycle 1, whereas claude and gemini scored it 5.0/10 and 6.0/10 respectively with verdict 'routine.' In cycle 2, after cross-review, codex lowered its score to 5.8/10 and aligned on 'routine,' but still remained above claude (5.0) and gemini (4.0), reflecting residual disagreement about the value of the conditional forward integration.",
+    "Numerical value of the mean-based lifespan in eq. (5.2): codex initially read it as approximately 39.4 Gyr in cycle 1; gemini identified it as ~2000 Gyr. The HTML-extracted source does not render eq. (5.2) numerically, so neither could fully audit it \u2014 flagged as a human spotcheck.",
+    "Significance score: codex (cycle 2) scored significance at 6.6, claude at 6.0, and gemini at 4.0, reflecting different weights placed on the conditionality of the result."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The paper's core statistical claim \u2014 that there is 'high probability' for a negative cosmological constant \u2014 is not established by the reported analysis. Footnote 4 discloses that joint AdS+dS MCMC chains get trapped at the de Sitter attractor and cannot explore the AdS region; the authors resolve this by running separate chains for each case. Separate chain comparison does not yield a valid joint posterior P(\u039b<0), and no Bayes factor or prior-matched model-comparison statistic is reported.",
+      "paper_location": "Abstract; Section 3; Footnote 4",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The headline lifespan of 33.3 Gyr is derived from best-fit parameters that the paper itself describes as 'way outside the range of the mean value.' Mean-value parameters yield a lifespan of approximately 2000 Gyr \u2014 roughly 60 times longer \u2014 indicating the best-fit lies in a low-probability-mass region of a highly skewed, degenerate posterior. No credible interval or posterior-predictive distribution for the lifespan is reported.",
+      "paper_location": "Section 5; eqs. (5.1)\u2013(5.2)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The \u039b < 0 preference and the big-crunch conclusion rest on a DES-only fit. Footnote 6 concedes that 'other recent studies show that the minimal thawing dark energy model similar to our aDE model with \u039b=0 is less favored than the \u039bCDM model when constrained by DESI data.' Figure 1 provides only a visual overlay of curves against DESI data points; no formal combined DES+DESI fit of the aDE model is performed.",
+      "paper_location": "Section 3 Footnote 6; Section 5 first bullet; Figure 1",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The numerical forward integration that produces the 33.3 Gyr result does not specify the ODE solver, step-size control, or variable transformations near H = 0 and during the rapid kinetically-dominated collapse phase. The result cannot be independently reproduced from the paper text alone.",
+      "paper_location": "Section 4.2; eqs. (4.6)\u2013(4.8); Figures 3\u20134",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The analytic approximate lifespan formula (eq. 4.5) assumes the axion energy density behaves as matter (\u03c1_axion \u221d a^{\u22123} via coherent oscillations). Section 4.2 immediately notes that 'the axion is still rolling towards its minimum in the first period today' and 'the evolution of \u03c6 cannot be simply approximated as matter-like.' The approximation is presented as a 'good estimate' in a regime where its own premises are violated.",
+      "paper_location": "Section 4.1; beginning of Section 4.2",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "Qualitative statements about enhanced black-hole formation, giant black holes shielding the crunch singularity, and possible transitions to a next cosmic cycle are not derived from the homogeneous FLRW model used for the lifespan calculation, and are presented without sufficient caveat in Section 6.",
+      "paper_location": "Section 6, Astrophysical/Cosmological Implications",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "DES and DESI measurements claim dynamical dark energy (w \u2260 \u22121) at 4.2\u03c3 significance \u2014 an external observational result accurately cited from refs. [2] and [3]; whether it survives further scrutiny is an open empirical question independent of this paper.",
+    "Conditional on the best-fit parameters in eq. (3.1), numerical integration of the coupled Friedmann and axion equations predicts a maximum scale factor followed by big-crunch collapse, with the calculation terminating at a total lifespan of ~33.3 Gyr.",
+    "Using mean posterior parameters rather than best-fit parameters yields a dramatically different lifespan (~2000 Gyr), demonstrating extreme sensitivity to the choice of point estimator in a highly skewed, degenerate posterior \u2014 a result the paper itself reports transparently.",
+    "A negative cosmological constant in a flat FLRW universe with matter generically drives eventual collapse (standard GR result); the phase-space analysis in Section 4.1 and Figure 2 illustrates this correctly for the approximate model.",
+    "The best-fit AdS aDE curve provides a visually comparable fit to DES BAO+SN data as the CPL/\u039bCDM parameterization, as shown in Figure 1 \u2014 though this is dataset-specific and not extended to a formal DESI fit."
+  ],
+  "technical_takeaway": "The paper applies an ultralight axion plus cosmological constant (aDE) model to estimate the universe's lifespan, given DES/DESI-motivated best-fit parameters that prefer \u039b < 0. Conditional on those parameters, the coupled Friedmann and Klein\u2013Gordon equations yield a big-crunch lifespan of ~33.3 Gyr. However, three compounding methodological problems prevent this from being a robust posterior prediction: (1) joint AdS+dS MCMC chains fail to explore the AdS region due to a dS attractor (Footnote 4), so no valid joint posterior probability P(\u039b<0) exists; (2) best-fit and mean-value parameters give lifespans differing by ~60\u00d7 (33 Gyr vs. ~2000 Gyr), indicating the headline value lies in a low-probability-mass region of a degenerate posterior; and (3) the DES-only fit is not confirmed by a formal DESI analysis, with Footnote 6 conceding that thawing dark energy models similar to aDE are less favored than \u039bCDM under DESI constraints. The forward integration itself (Sections 4.1\u20134.2) is technically routine once parameters are fixed, and the analytic approximation invoked as a cross-check applies in a regime the paper itself acknowledges violates its premises."
+}

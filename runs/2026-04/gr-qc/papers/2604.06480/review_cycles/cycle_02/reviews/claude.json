@@ -1,0 +1,145 @@
+{
+  "confidence": 0.75,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 5,
+    "novelty": 5,
+    "reviewer_confidence": 7,
+    "significance": 2,
+    "technical_soundness": 2
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Substantial downgrade from 5/10 'promising' to 2.5/10 'major_flaw'. My Cycle 1 review flagged the C^1 smoothness issue and vacuum state underspecification but missed the deeper non-injectivity of the u coordinate identified by the gemini reviewer. After auditing that argument carefully, I find it mathematically sound: u = 0 at both horizons, v covers all three regions via a single ingoing null coordinate, ingoing null rays pass through both horizons, hence the coordinate map is 2-to-1. This is a fatal flaw in the coordinate construction that undermines all numerical results.",
+    "invalid_points_from_other_reviewers": [
+      "Gemini assigns confidence 1.0 to all three objections; this is excessive for a physics paper where the HTML rendering is incomplete and the exact form of eq. (6) for u(\u0169) cannot be fully audited. Confidence 0.75-0.85 is more appropriate.",
+      "Codex's claimed sign error in eq. (22) is flagged at 0.82 confidence but requires human verification of the integral conventions; I cannot confirm or deny this from the HTML source alone."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Gemini: u is non-monotonic (positive in outer, negative in trapped, positive in inner) and equals zero at both horizons \u2014 along any ingoing null ray (fixed v) passing through both horizons, u = 0 at two distinct spacetime points, making (u,v) a non-injective and hence invalid global chart.",
+      "Gemini: The tunneling amplitude being large when \u0394u \u2248 0 is an artifact of the coordinate fold, not a physical proximity between inner and outer regions.",
+      "Gemini: Canonical quantization using modes e^{-iku} on a folded spacetime conflates degrees of freedom from causally disconnected regions.",
+      "Codex: The conformal vacuum defined by (u,v) is not identified as the physical vacuum produced by gravitational collapse; different vacuum choices give different tunneling amplitudes.",
+      "Codex: T = (U+V)/2 is not generally the proper time for static observers in the conformally flat frame, so the claim that the vacuum is the ground state for observers with proper time T is incorrect.",
+      "Codex: The inference from nonzero spacelike amplitude to a physical tunneling channel is stronger than what the calculation establishes \u2014 this is the Hegerfeldt effect dressed as a dynamical process.",
+      "Codex: The 4D evaporation rate estimate is not derived from the model."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "A global null coordinate (u,v) can be constructed covering inner, trapped, and outer regions simultaneously with a finite, positive conformal factor.",
+      "notes": "The coordinate u = 0 at both the outer horizon and the inner horizon. Any ingoing null ray (v = const) passes through both horizons. The coordinate chart therefore assigns the same (u=0, v=v_0) to two distinct spacetime points. A non-injective map is not a valid coordinate chart, making the claimed globally regular metric form ds\u00b2 = \u03a9\u00b2(-du dv) invalid as a global description.",
+      "paper_location": "Section II, eqs. (6)-(8)",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "A massless scalar field on this spacetime has a non-vanishing transition amplitude between causally disconnected one-particle states in the inner and outer regions.",
+      "notes": "The amplitude is computed from the flat-space propagator in (u,v) coordinates. Because the coordinate chart is non-injective, the propagator confuses distinct physical points. The apparent smallness of \u0394u between inner-region and outer-region wavepackets is a coordinate artifact, not a physical effect.",
+      "paper_location": "Section III, eqs. (14)-(18)",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "The total tunneling probability asymptotes to a value depending only on the surface gravities of the two horizons.",
+      "notes": "The asymptotic formula is derived from an integral that relies on the invalid (u,v) coordinates. Even setting aside the coordinate issue, the approximation |v'-v| \u2248 |u'-u| in eq. (20) lacks justification, and key intermediate equations are not readable in the HTML rendering.",
+      "paper_location": "Section III, eqs. (22)-(23)",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "For a 4D quantum-gravity-corrected black hole, the tunneling rate is comparable to Hawking evaporation and may help purify Hawking radiation.",
+      "notes": "This is an order-of-magnitude estimate assuming several strong loop-quantum-gravity-motivated inputs (\u03ba_i ~ \u03ba_o, w ~ r_Planck, N ~ M/m_Planck) that are not derived from the model. The 4D tunneling formula itself is only a dimensional analogy. The 2D calculation it extrapolates from is itself invalid.",
+      "paper_location": "Section IV, eq. (26)",
+      "support_level": "unsupported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "A valid global conformal chart covering all three spacetime regions can be constructed such that the massless scalar field equation reduces to the flat-space wave equation throughout.",
+      "paper_location": "Section II-III, eqs. (6)-(11)",
+      "why_it_matters": "The entire QFT calculation rests on this. In 2D, any spacetime is locally conformally flat, and global conformal charts exist for simply connected regions. But the specific (u,v) chart in the paper is non-injective and hence invalid. A genuine global chart may exist but would require a different construction, and the resulting tunneling probability could differ substantially."
+    },
+    {
+      "assumption": "The physical Hilbert space separates into independent inner-region and outer-region degrees of freedom, so that a transition amplitude between them is well-defined.",
+      "paper_location": "Section III, eqs. (15)-(19)",
+      "why_it_matters": "In a valid QFT construction, the trapped region between the horizons would lead to correlations between inner and outer regions (analogous to the thermofield double), but the inner/outer Hilbert spaces would not be independently definable without specifying a state. The paper assumes they are independent without justification."
+    },
+    {
+      "assumption": "The inner horizon surface gravity \u03ba_i is of the same order as the outer horizon surface gravity \u03ba_o for realistic quantum-gravity-corrected black holes.",
+      "paper_location": "Section IV, items (ii) and (iii)",
+      "why_it_matters": "The asymptotic tunneling probability scales as 1/(\u03ba_i^{-1} + \u03ba_o^{-1}). If \u03ba_i >> \u03ba_o (Planckian inner horizon), the rate would be suppressed differently, and the comparison with Hawking evaporation would not hold."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Is the global coordinate u (eq. 6) genuinely non-injective as described? Specifically: does an ingoing null ray v = const (as defined by eq. 2) in fact pass through both the outer horizon r = r_o and the inner horizon r = r_i, and if so, does u = 0 at both intersection points?",
+      "why_model_cannot_resolve": "The exact functional form of u(\u0169) in eq. (6) and the exact definition of v in eq. (2) are not fully legible from the HTML rendering. A human with the PDF/LaTeX source can verify in minutes whether the same v-label is used for ingoing null rays throughout all three regions and whether u = 0 at both horizons along such a ray."
+    },
+    {
+      "question": "If the coordinate u is indeed non-injective, is there a natural fix \u2014 for example a Kruskal-like two-horizon coordinate analogous to the Reissner-Nordstrom Penrose diagram \u2014 that would salvage the physical content of the paper?",
+      "why_model_cannot_resolve": "This requires a specialist in QFT on curved spacetimes with inner horizons to determine whether a valid global conformal chart exists, and whether the tunneling calculation gives a parametrically similar asymptotic result in that valid chart."
+    },
+    {
+      "question": "Does eq. (22) have a sign error in the logarithmic finite-time correction term, as claimed by the codex reviewer?",
+      "why_model_cannot_resolve": "Key equations are not readable in the HTML; the integral and sign conventions must be checked from the PDF or LaTeX source."
+    },
+    {
+      "question": "Is the Hegerfeldt-type localized one-particle state transition amplitude used here an operationally meaningful probability for particle escape in a gravitational context, or purely a kinematic statement about vacuum correlations?",
+      "why_model_cannot_resolve": "This is an interpretational question in quantum field theory on curved spacetimes that requires specialist knowledge of detector models, Newton-Wigner localization, and the operational meaning of localized states near horizons."
+    }
+  ],
+  "novelty_assessment": "The conceptual proposal \u2014 that Hegerfeldt-type vacuum correlations across horizons could enable a form of particle tunneling out of a black hole \u2014 is an interesting observation and has some originality in the black hole context. The connection to surface gravities as the relevant geometric scale is a specific result that, if derivable from a valid calculation, would be noteworthy. However, the specific technical execution fails at the coordinate construction level, and the physics of spacelike propagation in QFT on curved spacetime via conformal mapping is not new. The information-loss speculation is not developed. If the coordinate problem is fixed, the surviving novelty would be moderate.",
+  "overall_score_10": 2.5,
+  "paper_id": "2604.06480",
+  "recommended_verdict": "major_flaw",
+  "reviewer": "claude",
+  "score_rationale": "The paper's entire quantitative result \u2014 the asymptotic tunneling probability and its dependence on surface gravities \u2014 rests on a global conformal coordinate (u,v) that appears to be non-injective: u = 0 at both the outer and inner horizons, and since v is a single ingoing null coordinate labeling rays that pass through both horizons, two distinct spacetime points share the same (u,v) = (0, v_0) coordinates. A non-injective coordinate chart is not valid. The Fock quantization and propagator computed in these coordinates conflate distinct physical points, and the apparent small \u0394u driving the tunneling amplitude is a coordinate artifact rather than a physical effect. This undermines all numerical claims. The conceptual physical idea \u2014 that QFT vacuum correlations enable Hegerfeldt-type propagation between causally disconnected regions in a black hole spacetime \u2014 is legitimate and interesting, and if a valid coordinate construction is found, there may be a real result here. The 4D speculation and information-loss discussion are undeveloped regardless of the coordinate issue. The paper needs fundamental revision of its coordinate construction before any of its specific claims can be taken seriously.",
+  "summary": "The paper computes tunneling amplitudes for a massless scalar field between causally disconnected inner and outer regions of a 2D non-singular black hole, claiming the probability is polynomially suppressed by the sum of inverse surface gravities. The core strategy is to exploit 2D conformal invariance to reduce the problem to flat-space QFT in a global null coordinate (u, v) covering all three spacetime regions. A fatal problem undermines this strategy: the coordinate u takes the value 0 at both the outer and inner horizons, and since v is a single ingoing null coordinate that labels rays passing through both horizons, the map (u,v) \u2192 spacetime is 2-to-1 at the horizons. The chart is non-injective and hence invalid as a global coordinate system. The mode decomposition, Fock vacuum, and propagator computed in these coordinates conflate distinct spacetime points, making the tunneling probability formula an artifact of the coordinate fold rather than a genuine physical result.",
+  "technical_objections": [
+    {
+      "confidence": 0.8,
+      "evidence": "The paper explicitly states u > 0 (outer), u < 0 (trapped), u > 0 (inner), u = 0 at both horizons. The coordinate v covers all three regions and is constant along ingoing null rays. In a non-singular black hole, a single ingoing null ray from the exterior passes through both the outer horizon (r = r_o) and the inner horizon (r = r_i). Both map to u = 0 under the paper's construction, at the same v value. The metric form ds\u00b2 = \u03a9\u00b2(-du dv) cannot serve as a valid global metric for a non-injective chart.",
+      "objection": "The global coordinate u is non-injective: u = 0 at both the outer and inner horizons, and any ingoing null ray v = const passes through both. The coordinate map (u,v) \u2192 spacetime is therefore 2-to-1 at (0, v_0) for each v_0, making it an invalid global chart.",
+      "paper_location": "Section II, paragraph beginning 'Note that u>0 in the outer region...'; eqs. (6)-(8)",
+      "severity": "fatal",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.78,
+      "evidence": "The integral in eq. (19)-(22) is dominated by configurations where \u0394u is small. In the paper's (u,v) system, points in the outer region just above r_o and in the inner region just below r_i can both have u \u2248 0 (by continuity from the horizon values), making \u0394u arbitrarily small. This is the coordinate fold, not tunneling.",
+      "objection": "The tunneling probability is an artifact of the coordinate fold. In a valid coordinate chart, the inner and outer regions would be separated by a finite u-distance. The apparent proximity (\u0394u \u2248 0) that drives the large transition amplitude is a consequence of the coordinate identification u = 0 at both horizons, not a physical effect.",
+      "paper_location": "Section III, eqs. (19)-(21), the approximation \u0394u \u2248 0",
+      "severity": "fatal",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.75,
+      "evidence": "If u is non-injective, a mode e^{-iku} at a given k has support at multiple distinct physical locations for the same u value. The commutation relations [a_k, a\u2020_{k'}] = \u03b4(k-k') then describe a field entangled across the coordinate fold, not a local field in each region. Causality structure is lost.",
+      "objection": "Canonical quantization on the folded spacetime conflates the inner and outer region degrees of freedom. Modes e^{-iku} created by a\u2020_k simultaneously excite both regions (they share u values), so independent inner/outer Fock spaces do not exist in this construction.",
+      "paper_location": "Section III, eqs. (11)-(13)",
+      "severity": "fatal",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "The paper states 'this is the ground state for observers whose proper time is t' but T = (U+V)/2 in the conformally flat frame, and proper time along a fixed-X worldline is \u03c4 = \u222b\u03a9(T,X)dT \u2260 T unless \u03a9 = 1. So the claimed vacuum is not the ground state for static observers even in its own terms.",
+      "objection": "The vacuum state is implicitly defined as the ground state of the Hamiltonian in (u,v) coordinates (eq. 13), but this is not identified as a physical vacuum. For an evaporating black hole the Unruh vacuum is appropriate; for an eternal black hole the Hartle-Hawking vacuum. The tunneling probability depends on this choice, and no argument is given that the (u,v) vacuum is the physical one.",
+      "paper_location": "Section III, below eq. (13)",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.75,
+      "evidence": "The Hegerfeldt effect is a property of the vacuum state's correlations; it does not define a local detector probability or invariant information-transfer rate. The paper acknowledges causality is not violated but then uses this same amplitude to estimate rates comparable to Hawking evaporation, which requires a much stronger physical interpretation.",
+      "objection": "Non-vanishing spacelike propagator (Hegerfeldt effect) does not constitute physical particle escape. The paper conflates the kinematic property that \u27e80|\u03c6(x)\u03c6(x')|0\u27e9 \u2260 0 for spacelike (x,x') with a dynamical mechanism by which a localized particle escapes the black hole.",
+      "paper_location": "Section I and Section III discussion after eq. (18)",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.65,
+      "evidence": "The paper says u can be made smooth 'in a small neighbourhood' without affecting physics, but provides no argument. For QFT mode matching at horizons, the smoothness of the coordinate directly affects Bogoliubov coefficients.",
+      "objection": "The C^1 (non-smooth) property of u at the horizons, which the paper acknowledges, is a symptom of the non-injectivity rather than an independent fixable issue. The paper dismisses it with 'this will not affect the resulting physics' with no justification.",
+      "paper_location": "Section II, below eq. (7)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

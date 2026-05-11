@@ -1,0 +1,127 @@
+{
+  "confidence": 0.65,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 5,
+    "novelty": 5.5,
+    "reviewer_confidence": 6,
+    "significance": 5.5,
+    "technical_soundness": 5
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "First cycle review.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "A massless scalar field on a 2D non-singular black hole spacetime with inner and outer horizons has a non-zero propagator between causally disconnected points in the inner and outer regions.",
+      "notes": "This follows directly from the conformal flatness argument: the metric is conformally flat in (\u0169,v) coordinates, the massless scalar is conformally invariant in 2D, so the propagator is the flat-space one in these coordinates. Non-vanishing for spacelike separation is a standard QFT result.",
+      "paper_location": "Section III, around eq. (14)",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The total tunneling probability (from inner region to all of outer region) asymptotes to a value that depends only on the surface gravities \u03ba_i and \u03ba_o of the inner and outer horizons.",
+      "notes": "The result follows from the computation but relies on (i) the implicit vacuum state choice (Hartle-Hawking-like) defined by the global \u0169 coordinate, (ii) an approximation |v'-v| \u2248 |u'-u| used in eq. (20) whose validity needs more careful justification, and (iii) localization of states in \u0169 rather than physical radial coordinate r.",
+      "paper_location": "Section III, eqs. (22)-(23)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The tunneling probability is polynomially (not exponentially) suppressed by (\u03ba_i + \u03ba_o)^{-1}.",
+      "notes": "The polynomial suppression is inherited from the flat-space Hegerfeldt tunneling result. The asymptotic form (eq. 23) is stated but eq. (22) is not fully readable in the HTML rendering.",
+      "paper_location": "Abstract and eq. (23)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "For a 4D Schwarzschild black hole, the tunneling rate is of the same order as Hawking evaporation, suggesting tunneling may help purify Hawking radiation.",
+      "notes": "The 4D estimate relies on dimensional scaling arguments and several strong assumptions labeled (i)-(v), including a specific loop-quantum-gravity-motivated relation \u03ba_i ~ \u03ba_o. The 4D tunneling formula itself (scaling as (\u03ba_i + \u03ba_o)^{-3}) is not derived but asserted by dimensional analogy.",
+      "paper_location": "Section IV, eq. (26)",
+      "support_level": "unsupported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "Which vacuum state is physically appropriate for this non-singular black hole spacetime, and how this choice affects the computed tunneling probability.",
+      "paper_location": "Section III, below eq. (13)",
+      "why_it_matters": "The tunneling probability is derived entirely from the propagator, which depends on the vacuum state. Hartle-Hawking, Unruh, and Boulware vacua give different correlations between inner and outer regions. The paper does not specify which vacuum is used or argue it is the most physical one."
+    },
+    {
+      "assumption": "The background spacetime is treated as exactly stationary for the purpose of quantization, but the paper notes it is only approximately so.",
+      "paper_location": "Section II, paragraph below eq. (1)",
+      "why_it_matters": "If the spacetime is not exactly stationary, there is no exact Killing vector and the energy eigenstates (used to define the vacuum via eq. 13) are not well-defined globally. The paper acknowledges this but does not bound the error introduced by the stationary approximation."
+    },
+    {
+      "assumption": "The two-dimensional result directly generalizes to give physical insight about four-dimensional black holes.",
+      "paper_location": "Section IV",
+      "why_it_matters": "In 2D, conformal invariance eliminates greybody factors entirely. In 4D, these factors are significant and can strongly suppress emission. The paper acknowledges greybody factors exist but does not estimate their magnitude, making the 4D speculation unreliable."
+    },
+    {
+      "assumption": "The inner horizon surface gravity \u03ba_i is of the same order as \u03ba_o for realistic quantum-gravity-corrected black holes.",
+      "paper_location": "Section IV, item (ii) and (iii)",
+      "why_it_matters": "The asymptotic tunneling probability scales as 1/(\u03ba_i + \u03ba_o). If \u03ba_i >> \u03ba_o (as in some models where the inner horizon is near Planckian), the tunneling rate would be strongly suppressed and the comparison with Hawking evaporation would fail."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Are eqs. (20)-(22) (the main integral computation for tunneling probability) correct as written? The HTML rendering of several equations is blank, making it impossible to verify the intermediate steps.",
+      "why_model_cannot_resolve": "Critical equations are not rendered in the HTML source; the computation from eq. (19) to eq. (22)-(23) cannot be audited without the PDF or LaTeX source."
+    },
+    {
+      "question": "Does the C^1 (but non-C^2) property of the global coordinate \u0169 at the horizons cause any measurable physical effect in the QFT, e.g., spurious particle production or mode mixing at the horizons?",
+      "why_model_cannot_resolve": "This requires a careful mode-matching calculation near the horizons for the specific \u0169 coordinate construction in eqs. (6)-(7), which requires detailed knowledge of Bogoliubov coefficient techniques for piecewise-smooth coordinates."
+    },
+    {
+      "question": "Is the vacuum state implicitly defined by the global \u0169 coordinate the same as, or distinct from, the Hartle-Hawking vacuum for this spacetime? And does the Unruh vacuum give a qualitatively different tunneling probability?",
+      "why_model_cannot_resolve": "Identifying the vacuum via Bogoliubov transformations between \u0169-modes and region-specific modes requires a detailed calculation not present in the paper, and the answer depends on the specific form of \u0169(r) in eq. (6)."
+    }
+  ],
+  "novelty_assessment": "The paper combines two known results\u2014(1) the Hegerfeldt effect (spacelike single-particle propagation in QFT is non-zero) and (2) conformal flatness of 2D massless scalar in curved spacetime\u2014to compute a concrete tunneling amplitude between causally disconnected black hole regions. The construction of a global null coordinate \u0169 covering all three spacetime regions is a specific technical contribution, as is the identification of the asymptotic tunneling probability in terms of surface gravities. However, computing propagators across horizons using global conformal coordinates is a standard technique in 2D black hole QFT (as in Unruh-DeWitt detectors and Hartle-Hawking calculations). The novel element is the explicit sum over all final positions in the outer region and the identification of the surface-gravity dependence of the asymptote. The information-loss speculation is not novel and not developed sufficiently to constitute an independent contribution.",
+  "overall_score_10": 5,
+  "paper_id": "2604.06480",
+  "recommended_verdict": "promising",
+  "reviewer": "claude",
+  "score_rationale": "The core calculation is technically coherent in its setup: conformal invariance of the 2D massless scalar reduces the problem to flat-space QFT in global null coordinates, and the flat-space propagator is non-zero for spacelike separations. The asymptotic tunneling probability depending only on surface gravities is an interesting result. However, the paper has several significant gaps that prevent a higher score: (1) the vacuum state is never explicitly identified\u2014it is implicitly a Hartle-Hawking-like vacuum defined by the global \u0169 coordinate, and the dependence of results on this choice is not addressed; (2) the approximation |v'-v| \u2248 |u'-u| in the main integral lacks justification; (3) key equations (20)-(22) are unreadable in the HTML, blocking full technical verification; (4) the physical interpretation of the tunneling as a genuine escape mechanism (vs. a kinematic property of vacuum correlations) is not firmly established; and (5) the 4D extension and information-loss discussion are speculative. The paper is a short 5-page note with an interesting idea that needs more careful development. Novelty is moderate\u2014combining Hegerfeldt nonlocality with black hole physics via conformal flatness is not entirely new, but the explicit surface-gravity formula is a specific contribution.",
+  "summary": "The paper considers a massless scalar field on a 2D non-singular black hole spacetime with Painlev\u00e9-Gullstrand coordinates, containing both inner and outer horizons. The author exploits conformal invariance of the 2D massless scalar to map the QFT onto flat-space Minkowski QFT in a global null coordinate (\u0169, v) that covers all three spacetime regions (inner, trapped, outer). The main calculation evaluates transition amplitudes between localized one-particle states in causally disconnected regions (inner to outer) using the resulting flat-space propagator, finding a non-vanishing tunneling probability that asymptotes polynomially in the sum of inverse surface gravities. The paper speculates this may be relevant to the information loss problem.",
+  "technical_objections": [
+    {
+      "confidence": 0.8,
+      "evidence": "The paper states 'this is the ground state for observers whose proper time is t' without discussing alternatives. In standard black hole QFT, the Killing vacuum (Boulware), the Hartle-Hawking vacuum, and the Unruh vacuum give different physics. The choice of \u0169 as the global null coordinate is equivalent to making a specific Hartle-Hawking-type choice.",
+      "objection": "The vacuum state used is implicitly a Hartle-Hawking-like state defined by global null coordinate \u0169, but this is not identified or justified as the physically relevant vacuum. For an evaporating black hole the Unruh vacuum is standard. The tunneling amplitudes between regions depend sensitively on the vacuum choice, and different choices (e.g., Boulware vacuum, which has no correlations across the horizon for a static exterior observer) could give qualitatively different results.",
+      "paper_location": "Section III, below eq. (13)",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.65,
+      "evidence": "The paper states 'by changing the definition for \u0169 in a small neighbourhood of [the horizons], \u0169 can be made twice-differentiable (or even smooth) everywhere, but this will not affect the resulting physics; therefore, for simplicity I will work with the choice (6).' No justification is given for the claim that it will not affect physics.",
+      "objection": "The global null coordinate \u0169 (eq. 6-7) is only C^1 at the horizons, not smooth. The paper acknowledges this but dismisses it without proof, claiming the physics is unaffected. In QFT, the smoothness of mode functions at horizons matters for Bogoliubov coefficients and mode matching, and a C^1 but non-smooth coordinate could introduce spurious mode mixing.",
+      "paper_location": "Section II, below eq. (7)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.6,
+      "evidence": "The paper says 'using the approximation that |v'-v| \u2248 |u'-u| (for both signs)' without discussion of when this is valid. For wavepackets localized near the horizons, the null coordinate geometry is significantly stretched relative to Minkowski space.",
+      "objection": "The approximation |v'-v| \u2248 |u'-u| used in eq. (20) to simplify the propagator for the tunneling regime is not justified. In the near-horizon regime\u2014where most tunneling occurs\u2014the relationship between u and v coordinates is governed by the surface gravity, and this approximation may not hold.",
+      "paper_location": "Section III, eq. (20)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "The states in eqs. (16)-(17) are localized in \u0169, and the initial state in eq. (19) is placed 'a distance w inside the inner horizon.' The relationship \u0169(r) near the horizon is log-singular (from eq. 2: d\u0169/dr ~ 1/(r - r_h)), so a wavepacket of width w in \u0169 near r_i corresponds to a highly compressed region in r.",
+      "objection": "The localized single-particle states are defined in terms of the \u0169 coordinate (eq. 15-17), not the physical radial coordinate r. A state 'localized at position x_0 in \u0169' corresponds to a spread-out region in physical space, whose width and shape depend on the geometry near the horizons. The paper does not translate the wavepacket width w from \u0169-space to physical space, making it unclear what physical configuration is being described.",
+      "paper_location": "Section III, eqs. (16)-(19)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "The introduction explicitly invokes Hegerfeldt (1974) and notes spacelike propagation. The calculation is just computing \u27e8\u03c8_outer|\u03c8_inner\u27e9 via the propagator. Whether this represents a physically realizable process\u2014rather than a property of vacuum correlations\u2014is not established.",
+      "objection": "The paper conflates the Hegerfeldt quantum nonlocality (propagator non-vanishing for spacelike separation) with physical particle tunneling. The Hegerfeldt effect is a kinematic feature of the vacuum state's correlations, not a dynamical process where a localized particle escapes. The paper notes causality is not violated, but the physical meaning of the computed 'tunneling probability' as an actual escape mechanism needs stronger justification.",
+      "paper_location": "Section I and III",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    }
+  ]
+}

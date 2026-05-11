@@ -1,0 +1,92 @@
+{
+  "confidence": 0.9,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 7,
+    "novelty": 5,
+    "reviewer_confidence": 9,
+    "significance": 4,
+    "technical_soundness": 3
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Downgraded overall score from 7 to 4 and changed recommended verdict from 'routine' to 'major_flaw'. Added major objections regarding the statistical invalidity of treating theoretical QNM bounds as observational data, and the incorrect application of the GRAVITY S2 precession bound.",
+    "invalid_points_from_other_reviewers": [
+      "Codex claims the strong-deflection derivation is internally inconsistent because the text supposedly states $c_1(r_m) \\to \\infty$. This is factually incorrect; the text explicitly states 'one has $c_1(r_m) \\to 0$'. Codex likely misread the text describing the subsequent expansion of the divergent term $1/c_1(x)$ or the divergent integral itself."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Both Claude and Codex correctly identified that the QNM bounds are theoretical limits (requiring <10% deviations to trust the perturbative expansion), not observational measurements, making their inclusion in a joint $\\chi^2$ statistically invalid.",
+      "Both reviewers astutely noted that the GRAVITY S2 measurement bounds Schwarzschild precession (which depends on both $\\gamma$ and $\\beta$), meaning the direct assignment to $\\gamma$ is flawed unless $\\beta=1$ is proven for the DD metric."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "The deflection angle in the weak-deflection and strong-deflection limits can be analytically expanded for the DD black hole.",
+      "notes": "The derivations generally follow standard, well-established formalisms (e.g., Bozza for the SDL), but the WDL coefficients require fixing $\\alpha$ numerically, limiting the claim of fully 'general analytical expressions'.",
+      "paper_location": "Section III",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Current PPN measurements from GRAVITY constrain the DD black hole's weak-field behavior.",
+      "notes": "The S2 precession measurement constrains a combination of PPN parameters $(2+2\\gamma-\\beta)/3$, but the paper improperly applies this directly as a bound on $\\gamma$ alone without showing $\\beta=1$ for the DD metric.",
+      "paper_location": "Section IV.1",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "Joint Fisher-matrix analysis of PPN, EHT shadow, and QNM constraints restricts the DD parameter space and reports $1\\sigma$ consistency with GR.",
+      "notes": "The QNM bounds were originally derived as a theoretical validity condition (requiring deviations from GR to be $<10\\%$), not as observational data. Treating them as an independent Gaussian likelihood term is statistically invalid.",
+      "paper_location": "Section IV.3, Figure 3",
+      "support_level": "unsupported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The QNM parameter intervals represent independent, observationally derived Gaussian probability distributions.",
+      "paper_location": "Section IV.3, Equation 43",
+      "why_it_matters": "Without this assumption, the joint Fisher matrix analysis breaks down, as one cannot arbitrarily multiply likelihoods of data with theoretical bounds masquerading as data."
+    },
+    {
+      "assumption": "The PPN parameter $\\beta$ is exactly 1 in the DD black hole spacetime.",
+      "paper_location": "Section IV.1, Equation 37",
+      "why_it_matters": "If $\\beta \\neq 1$, the S2 orbital precession bound does not cleanly map to $\\gamma = 1.00 \\pm 0.01$, breaking the weak-field observational constraint used in the paper."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Can the WDL coefficients in Eq (20a) and (20b) be robustly utilized for $\\alpha < 2$?",
+      "why_model_cannot_resolve": "Codex noted the expansions might be explicitly split into cases for $\\alpha = 2$ and $\\alpha > 2$, while the valid parameter space explored extends to $\\alpha = 0.8$. The exact mathematical branch structure in the unparsed equations needs human visual verification."
+    }
+  ],
+  "novelty_assessment": "The paper's analytical approach relies on well-established phenomenological techniques (Bozza's SDL formalism, WDL expansions, Fisher matrices). Its main novelty lies in applying these standard methods to the recently proposed DD black hole solution and providing joint observational bounds. However, because the joint bounds suffer from serious methodological flaws, the impactful novelty is significantly diminished.",
+  "overall_score_10": 4,
+  "paper_id": "2604.13223",
+  "recommended_verdict": "major_flaw",
+  "reviewer": "gemini",
+  "score_rationale": "The manuscript presents an otherwise standard application of light deflection formalisms to a new metric. However, the parameter estimation contains fundamental methodological errors. Treating a theoretical requirement (that QNM deviations remain within 10% of GR) as an independent Gaussian observational constraint in a joint likelihood analysis is statistically invalid. Furthermore, applying the GRAVITY S2 precession measurement as a direct constraint on the PPN $\\gamma$ parameter neglects its dependence on $\\beta$, which is uncalculated for this model. These issues invalidate the main quantitative conclusions of the paper.",
+  "summary": "The paper derives weak and strong gravitational lensing deflection angles for the DD black hole, a static, spherically symmetric solution in the revised Deser-Woodard nonlocal gravity theory. It then uses observational data from the GRAVITY experiment (PPN constraints) and the Event Horizon Telescope (shadow radii for M87* and Sgr A*) to constrain the theory's parameters ($\\epsilon$ and $\\alpha$). Finally, these bounds are combined with previous quasinormal mode (QNM) constraints in a joint Fisher-matrix likelihood analysis to report a $1\\sigma$ consistency with General Relativity.",
+  "technical_objections": [
+    {
+      "confidence": 0.95,
+      "evidence": "The paper states that the QNM bounds were obtained by 'requiring deviations from the Schwarzschild predictions to remain within 10%'. This is a theoretical self-consistency bound to ensure perturbative validity, not an observational measurement. Including it as a $\\chi^2_{\\text{QNM}}$ term in the Fisher matrix conflates theoretical priors with data, invalidating the derived confidence intervals.",
+      "objection": "Theoretical priors from QNM analysis are improperly treated as independent Gaussian observational data in the joint likelihood.",
+      "paper_location": "Section IV.3, Equations 41-43",
+      "severity": "fatal",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "The 1% accuracy bound from the GRAVITY collaboration concerns the Schwarzschild precession of the S2 star, which in PPN formalism depends on $(2+2\\gamma-\\beta)/3$. The authors equate this directly to $\\gamma - 1 = \\mathcal{O}(10^{-2})$, implicitly assuming $\\beta = 1$ without deriving the PPN parameter $\\beta$ for the DD metric.",
+      "objection": "The GRAVITY S2 constraint is improperly mapped to the PPN parameter $\\gamma$ without accounting for $\\beta$.",
+      "paper_location": "Section IV.1, Equations 35-37",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "The paper applies spherically symmetric shadow equations to M87* and Sgr A*. While citing Falcke et al. (2000) to argue spin effects are small (few percent), this systematic uncertainty is comparable to or larger than the stated observational errors and is not folded into the final parameter constraints.",
+      "objection": "Constraints derived from EHT shadow measurements assume a static spacetime, neglecting the systematic effects of black hole spin.",
+      "paper_location": "Section IV.2",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

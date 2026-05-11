@@ -1,0 +1,94 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Two full adversarial review cycles completed. All three reviewers independently converged on the temperature-dependence of \u03b1 and the numerical reproducibility gaps as the central problems; these objections strengthened from cycle 1 to cycle 2 as reviewers cross-validated each other's findings. The dimensionally inconsistent velocity equations were flagged by codex in cycle 1 and validated by gemini in cycle 2; claude consistently argued this is most likely an arXiv HTML rendering artifact (dropping square-root and superscript symbols) rather than a genuine paper error, and this remains unresolved pending PDF inspection. The paper's HTML source was the review medium; several formula presentation issues are plausibly rendering artifacts rather than paper errors, and a PDF inspection is recommended before treating them as certified flaws. Gemini maintained a more severe verdict ('major_flaw') across both cycles relative to claude and codex ('routine' and 'weak_evidence' respectively), primarily on the basis of the temperature-dependence problem and the non-upper-bound reporting.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper proposes a clever experiment combining seismic wave measurements and cosmic-ray muon imaging to test whether quantum gravity modifies the elastic properties of aluminum at laboratory scales. The key innovation is that muon-based density measurement avoids the circularity of using gravity to test gravity. The review board found the core concept genuinely novel and interesting, but was uniformly troubled by a central result: the inferred quantum-gravity parameter varied by a factor of ~100 across temperatures, which is inconsistent with it being a universal constant of nature. The most important caveat is that this unexplained temperature variation strongly suggests the analysis is fitting ordinary thermal behavior of aluminum rather than a quantum-gravity signal.",
+  "human_spotchecks": [
+    "PDF or TeX source inspection: Do the elastic-wave velocity equations read v_P\u00b2 = (K + 4S/3)/\u03c1 and v_S\u00b2 = S/\u03c1 (standard Christoffel form with square roots and density division), or do they actually omit these elements as rendered in the arXiv HTML? This determines whether the dimensional inconsistency is a rendering artifact or a genuine paper error.",
+    "PDF or TeX source inspection: Are the polylogarithm argument w and coefficient y explicitly defined (e.g., w = exp(-\u03b8/T) by analogy with the Bose-Einstein weight at the Debye temperature)? Is a numerical value and source for the anharmonicity parameter q for aluminum stated?",
+    "Literature check: Is the nearly two-orders-of-magnitude temperature variation in the inferred \u03b1 (Fig. 1) consistent with, in tension with, or previously discussed in the author's own prior papers Ref. [28] (Kozak, Pach\u00f3\u0142, Wojnar, Ann. Phys. 2025) and Ref. [37] (Pach\u00f3\u0142, Wojnar, CQG 2023)? Do those papers also report temperature-dependent \u03b1 bounds, and if so is there a proposed explanation?",
+    "Materials physics check: Can ordinary temperature dependence of aluminum's elastic constants, thermal expansion, phonon anharmonicity, and Debye-model failure modes quantitatively account for the observed trend in Fig. 1 without invoking quantum-gravity physics? A standard solid-state calculation or literature comparison would resolve whether the signal is plausibly a Debye-model artifact.",
+    "GUP parameter convention check: Are the quoted \u03b1 bounds (reported in units of s\u00b2/kg\u00b2\u00b7m\u00b2) directly comparable to the existing laboratory GUP bounds catalogued in Ref. [16] (Bosso et al., CQG 2023) under the same parameter normalization and units? The paper references [16] for comparison but provides no conversion table."
+  ],
+  "paper_id": "2604.07333",
+  "public_summary": "The paper proposes combining laboratory seismic wave velocity measurements with cosmic-ray muon tomography (muography) on an aluminum block to constrain the Generalized Uncertainty Principle (GUP) parameter \u03b1, a quantity encoding possible quantum-gravity modifications to phase space. The central novelty is recognizing that standard density measurements rely on gravity \u2014 creating a circularity when testing modified gravity \u2014 and that muography, which exploits electromagnetic muon-matter stopping power described by the Bethe-Bloch equation, can provide a gravity-independent density input. This breaks the degeneracy in the system of seismic-velocity equations (two equations, three unknowns: bulk modulus, shear modulus, density), allowing extraction of the GUP-modified bulk modulus predicted by a modified Debye crystal model. The paper applies this program to published aluminum data from Matsushima et al. 2024 (Ref. [34]).\n\nAll three reviewers across two adversarial cycles found the conceptual idea genuine and cross-disciplinarily interesting. However, execution raises serious concerns that survived cross-review scrutiny. Most critically, the paper claims to report that the inferred \u03b1 varies by approximately two orders of magnitude between 4 K and 300 K (Fig. 1). Since \u03b1 is postulated as a universal constant of quantum gravity, such temperature dependence strongly implies the GUP-modified Debye model is absorbing unmodeled ordinary thermal anharmonicities in aluminum rather than isolating a quantum-gravity signal. The paper acknowledges this variation but provides only speculative physical interpretations \u2014 effective phonon mass, modified dispersion relations \u2014 without any quantitative model fitted to the trend. Additional unresolved issues include undefined mathematical variables in key formulas (the polylogarithm argument w and coefficient y, and the anharmonicity parameter q for aluminum), making the derivation unauditable; the reporting of a specific non-zero \u03b1 value rather than an upper bound (statistically unjustified absent a positive detection); and the use of a zero-temperature bulk modulus from an external ab initio source (Ref. [21]) that partially reintroduces the gravitational-model dependence the method aimed to eliminate. The paper is best read as a proof-of-concept proposal for a future dedicated experiment rather than a completed constraint analysis, and several apparent formula presentation problems may be HTML rendering artifacts pending PDF inspection.",
+  "reviewer_disagreements": [
+    "Severity of the temperature variation in \u03b1: Gemini classifies this as 'fatal' (the model definitively absorbs standard thermal effects), while claude and codex classify it as 'major' but leave open the possibility of a physical explanation that is not yet quantified. The distinction matters for whether the paper requires fundamental revision or only a more careful analysis.",
+    "Severity of the dimensionally inconsistent velocity equations: Claude argues (confidence ~40% it is a real error) that this is almost certainly an HTML rendering artifact given the authors' competence and the textbook nature of the Christoffel relations, and places it at 'moderate' severity pending PDF verification; codex and gemini assign it 'major' severity conditional on PDF confirmation.",
+    "Classification of the numerical reproducibility problem: Codex lists the non-reproducible numerical constraint as a standalone 'major' objection separate from the rendering issues; claude treats it as a combination of rendering artifacts and genuinely thin reporting warranting 'moderate' severity, arguing the constraint methodology is at least partially describable from the text.",
+    "Novelty assessment: Gemini emphasizes the conceptual innovation of muography-for-gravity-independence as a strong novel contribution; claude and codex agree the idea is genuine but describe it as incremental over the author's own prior seismic-GUP work (Ref. [28], Kozak, Pach\u00f3\u0142, Wojnar 2025), where seismic wave approaches to GUP constraints were already developed."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The paper claims to report that the inferred GUP parameter \u03b1 varies by approximately two orders of magnitude as the aluminum sample temperature changes from ~4 K to ~300 K (Fig. 1). Since \u03b1 is defined in the paper as a fundamental constant of the deformed momentum algebra, this temperature variation is inconsistent with treating it as universal. All three reviewers conclude this most plausibly indicates the GUP-modified Debye model is absorbing unmodeled ordinary thermal anharmonicity in aluminum rather than isolating a quantum-gravity signal. The paper's speculative interpretations (phonon effective mass, phase-space deformation at higher momenta, LIV) are not developed quantitatively and do not resolve the tension.",
+      "paper_location": "Figure 1 and the two paragraphs beginning 'The sensitivity of the gravity parameter...' and 'One possible explanation...'",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper reports a specific non-zero central value for \u03b1 rather than a statistically appropriate upper bound. Because standard physics (\u03b1 = 0) must fall within the experimental uncertainty margins of the bulk modulus measurement, the data logically support only an upper limit \u03b1 < \u03b1_max. Reporting a positive central value implies a discovery of quantum gravity effects that is entirely unsupported by the uncertainty analysis provided.",
+      "paper_location": "Paragraph beginning 'It is straightforward to determine the value of the parameter from \\eqref kbulk'",
+      "severity": "major",
+      "supporting_reviewers": [
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The numerical constraint on \u03b1 is not independently reproducible from the paper as presented: the polylogarithm argument w and coefficient y appearing in F^mod_vib, L_Li, and L_Ln are never defined in the accessible text; the anharmonicity parameter q for aluminum has no stated numerical value or cited source; no explicit inversion formula, input table, or uncertainty propagation is provided; and no normalization comparison to the parameter conventions of Ref. [16] is given.",
+      "paper_location": "Equations for F^mod_vib and bulk modulus K (around Eqs. 7-8); paragraph beginning 'It is straightforward to determine...'",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The elastic-wave velocity equations as rendered read v_P = K + 4S/3 \u03c1 and v_S = S \u03c1, which are dimensionally inconsistent with physical velocities. The correct forms require division by density under a square root. If this reflects a genuine typographic error rather than an HTML rendering artifact (which drops square-root and superscript-2 symbols), the extraction of K from seismic data is invalid. PDF inspection is required before this can be dismissed.",
+      "paper_location": "Equations immediately preceding Eq. (9)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "gemini",
+        "claude"
+      ]
+    },
+    {
+      "objection": "The claim that muography provides a fully gravity-independent density measurement is overstated relative to the actual analysis. The paper acknowledges that Lorentz Invariance Violation (a quantum-gravity effect) can alter muon multiplicity in cosmic-ray air showers, but dismisses this on the grounds that LIV changes muon number rather than energy. However, muographic flux modeling systematics, detector acceptance, path-length calibration, composition corrections, and possible GUP modifications to Bethe-Bloch stopping power are not discussed and not propagated into the error budget.",
+      "paper_location": "Paragraphs on muography and LIV discussion near end of paper",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper substitutes the zero-temperature bulk modulus K\u2080 from Ref. [21] (an external measurement under different conditions, described as an 'experimental reference value') in place of a self-consistent value from the muon-plus-seismic protocol, justifying this because [34] was 'likely' performed at ambient temperature. This mixed-dataset approach partially reintroduces the gravitational-model dependence the proposed method was designed to eliminate, and introduces an unquantified systematic that is never assessed.",
+      "paper_location": "Paragraph beginning 'In [34], the bulk modulus ... However, since the experiment was likely performed at ambient temperature K, we instead adopt the experimental reference value GPa reported in [21]'",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The conceptual approach of using muography as a gravity-independent density input to break the (K, S, \u03c1) degeneracy in the seismic-velocity system is logically coherent: muon propagation is governed by the electromagnetic Bethe-Bloch stopping formula rather than by local gravitational forces, making it less directly coupled to the gravitational model under test than conventional weighing methods.",
+    "The GUP-modified Debye thermodynamic chain \u2014 deformed phase-space volume element \u2192 modified density of states \u2192 modified Helmholtz free energy \u2192 modified pressure \u2192 modified isothermal bulk modulus \u2014 is standard in the GUP-thermodynamics literature and physically coherent in structure, consistent with prior work including the author's own Refs. [28, 37].",
+    "The paper's identification that the Debye temperature can be extracted from seismic P/S-wave velocities and muographic density alone, independently of specific-heat curves or X-ray Debye-Waller methods that may themselves acquire quantum-gravitational corrections, is sound in principle and follows from standard solid-state formulas.",
+    "The paper correctly identifies that the proposed setup requires substantial experimental development beyond the existing Ref. [34] apparatus \u2014 specifically more detection channels, multilayer detectors, precise trajectory reconstruction, controlled environmental conditions, and proper seismic velocity uncertainty reporting \u2014 before a robust constraint can be claimed."
+  ],
+  "technical_takeaway": "The paper derives GUP-modified Debye thermodynamics (quadratic momentum correction to phase-space volume) yielding a modified isothermal bulk modulus K(\u03b1), then argues that combining seismic P/S-wave velocities with muographic density eliminates the dominant \u03c1-uncertainty and allows extraction of \u03b1 from aluminum data in Ref. [34]. All three reviewers in both cycles flag two central problems: (1) the inferred \u03b1 varies by ~2 orders of magnitude from 4 K to 300 K, inconsistent with treating \u03b1 as a universal GUP parameter and suggesting unmodeled thermal anharmonicity absorption; (2) the numerical result is not independently reproducible due to undefined polylogarithm variables (w, y), an unstated anharmonicity parameter q for aluminum, absent uncertainty propagation, and no explicit normalization comparison to the Ref. [16] convention. Additionally, the paper reports a specific non-zero central value for \u03b1 rather than an upper bound, which is statistically unjustified given that \u03b1 = 0 (standard physics) must fall within experimental uncertainty margins. The conceptual contribution \u2014 muographic density as a gravity-independent third equation in the (K, S, \u03c1) system \u2014 is real but incremental over the author's prior seismic-GUP work in Ref. [28]."
+}

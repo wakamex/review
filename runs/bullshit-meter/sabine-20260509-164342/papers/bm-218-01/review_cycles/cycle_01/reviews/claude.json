@@ -1,0 +1,155 @@
+{
+  "confidence": 0.72,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 5,
+    "novelty": 5,
+    "reviewer_confidence": 6,
+    "significance": 5,
+    "technical_soundness": 6
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "First cycle; no prior review.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "First experimental realization of the PBR test on a superconducting qubit architecture",
+      "notes": "Prior experimental PBR tests used trapped ions [12] and spin systems [13]. The superconducting-platform claim appears credible given the literature cited, though an exhaustive literature search cannot be done here.",
+      "paper_location": "Abstract, Introduction",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "A significant majority of adjacent 2-qubit pairs and 5-qubit configurations violate the \u03c8-epistemic bound",
+      "notes": "The abstract says 'significant majority' but the HTML rendering omits the precise percentage for n=2 adjacent pairs (text reads 'approximately [missing value] exhibited a violation'). Without this number the quantitative claim cannot be verified from the paper as rendered.",
+      "paper_location": "Abstract, Section III",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Passing probability decreases monotonically with qubit separation, dropping to ~25% at distance-7 pairs",
+      "notes": "Table 2 is partially rendered in HTML without numeric cell values, so the trend is described narratively but not fully verifiable from this source. The physical mechanism (SWAP-gate overhead increasing circuit depth) is well-motivated.",
+      "paper_location": "Section III (Distant qubit pairs)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Noise-aware tolerance bounds derived from calibrated depolarizing and thermodynamic models capture device behavior in the small-n regime",
+      "notes": "The models agree within ~factor of 2 for small circuits but diverge substantially for deeper circuits. The paper explicitly acknowledges this discrepancy, limiting the generality of the claim.",
+      "paper_location": "Section II, Simulated Experiments",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Results 'support the ontic view of the wave function'",
+      "notes": "This is a significant overstatement. Passing a noisy PBR test on a NISQ device\u2014where the noise bounds themselves depend on contested model accuracy\u2014does not constitute a foundational ruling in favor of onticism. The paper itself acknowledges in the Discussion that alternative epistemic models may still be consistent.",
+      "paper_location": "Conclusion",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "PBR protocol can serve as a device-level benchmark for quantumness",
+      "notes": "The idea is interesting and the observed correlation between passing rate and coherence parameters is suggestive. However, the authors themselves note that comparison with Quantum Volume and XEB benchmarks requires further investigation.",
+      "paper_location": "Abstract, Discussion",
+      "support_level": "partially_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "Preparation independence holds on the shared superconducting chip",
+      "paper_location": "Section I, PBR theorem statement",
+      "why_it_matters": "The PBR theorem's core assumption is that independently prepared systems have product ontic states. On a shared chip with common control electronics, crosstalk, and correlated noise, this assumption may be violated. If violated, the epistemic bound derived from independent noise models is inapplicable and the test loses its foundational force."
+    },
+    {
+      "assumption": "Device calibration parameters used in noise models reflect the actual error distribution during the experiment",
+      "paper_location": "Section II noise models, Section III experimental setup",
+      "why_it_matters": "The authors use 'calibrated gate error rates, readout errors, and T\u2081, T\u2082 values obtained on the day of execution.' Day-of-calibration parameters may not capture run-to-run drift, non-Markovian effects, or correlated errors. Underestimated noise expands the allowed tolerance and makes it easier to falsely 'pass' the test."
+    },
+    {
+      "assumption": "100,000 shots are sufficient for statistical convergence of forbidden-outcome probabilities near the tolerance threshold",
+      "paper_location": "Section III, adjacent qubit pairs",
+      "why_it_matters": "When forbidden-outcome probabilities are of order 10\u207b\u00b3 (as implied by the noise estimates), 100,000 shots yield ~O(10) events for the rarest outcomes. The statistical uncertainty is then O(30%), which may be comparable to the margin by which some pairs 'pass' or 'fail' the test. No confidence intervals or p-values are reported."
+    },
+    {
+      "assumption": "The single-qubit depolarizing model for gate errors is independent across qubits",
+      "paper_location": "Section II, Depolarizing model",
+      "why_it_matters": "Superconducting qubits on a shared substrate can exhibit correlated noise (ZZ coupling, leakage to neighboring qubits). Independent depolarizing channels do not capture these correlations, potentially leading to incorrect noise bounds."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "What is the exact fraction of adjacent n=2 qubit pairs that passed the PBR test at the minimal angle? The HTML rendering omits this number.",
+      "why_model_cannot_resolve": "The relevant quantity is missing from the rendered HTML source. A human reviewer should check the PDF or arXiv HTML directly."
+    },
+    {
+      "question": "Are the numeric entries in Table 2 (error rates by configuration and angle) correct and consistent with the noise model predictions stated in the text?",
+      "why_model_cannot_resolve": "Table 2 cell values are not rendered in the HTML source provided. Verification requires the PDF."
+    },
+    {
+      "question": "Does Equation (1) correctly state the relationship between forbidden-outcome probability \u03b5 and classical trace distance d_cl for the n-qubit PBR protocol, and is the direction of the inequality consistent with ruling out \u03c8-epistemic models?",
+      "why_model_cannot_resolve": "The equation involves a specific bound from references [15,12] in the context of the maximally \u03c8-epistemic model. The exact statement in those references should be cross-checked by a specialist in quantum foundations."
+    },
+    {
+      "question": "Is the preparation angle \u03b8 chosen for n=5 consistent with the PBR threshold condition (Eq. 10), and is the resulting entangling circuit design correct?",
+      "why_model_cannot_resolve": "The n=5 angle is not stated explicitly in the paper. Verifying this requires tracing through the circuit design and checking the zero-probability conditions for all 2^5 input configurations."
+    },
+    {
+      "question": "Is reference [21] (Unnikrishnan, Academia Quantum, 2025) a peer-reviewed source, and does its critique of the PBR framework correctly identify a logical contradiction or merely a presentation concern?",
+      "why_model_cannot_resolve": "This requires access to the paper and independent assessment by a quantum foundations expert. The journal 'Academia Quantum' is relatively new and its peer-review standards are unclear."
+    }
+  ],
+  "novelty_assessment": "The primary novelty is the first experimental PBR test on a superconducting qubit platform, which is a legitimate hardware milestone. Extension to 5 qubits adds incremental scope. The noise-aware framework extends existing work from trapped-ion implementations [12] to a new device class, with platform-specific adaptations (native gate set compilation, readout error matrix). The proposed use of PBR passing rate as a NISQ benchmark is a genuinely interesting framing, though underdeveloped relative to established benchmarks like Quantum Volume. Overall, the novelty is incremental: it is a new platform for a known protocol, with engineering contributions to noise modeling but no new theoretical insight into quantum foundations or ontology.",
+  "overall_score_10": 5.5,
+  "paper_id": "bm-218-01",
+  "recommended_verdict": "routine",
+  "reviewer": "claude",
+  "score_rationale": "The paper is a competent engineering demonstration of a known protocol on a new hardware platform. The noise modeling framework is reasonable and the experimental design is well-motivated. However, several issues lower the score: (1) key quantitative results are missing from the rendered source, making direct verification impossible; (2) the foundational conclusion (\"supporting the ontic view\") is substantially overstated relative to what a noisy NISQ experiment can demonstrate, and contradicts caveats in the Discussion; (3) the preparation independence loophole\u2014critical to the PBR theorem\u2014is not addressed for the shared-chip context; (4) the noise models are acknowledged to underperform at scale, raising questions about the validity of bounds for larger circuits. The benchmarking framing is interesting but underdeveloped. Technical soundness is moderate (6): the noise analysis is locally reasonable but has acknowledged gaps at scale and the foundational overreach is a presentation flaw. Novelty (5): first on superconducting hardware is genuinely new, but builds entirely on established theoretical and experimental frameworks. Significance (5): useful for NISQ benchmarking but limited foundational impact. Clarity (5): some missing values and the inequality directions in Eqs. 1-4 could be more precisely stated. Reviewer confidence (6): the general framework is assessable, but missing table values and circuit details for n=5 limit audit depth.",
+  "summary": "This paper presents the first experimental implementation of the Pusey-Barrett-Rudolph (PBR) no-go theorem on a superconducting quantum processor (IBM Heron2 Marrakesh, 156 qubits). The authors prepare pairs or groups of qubits in non-orthogonal states, apply entangling circuits designed so certain measurement outcomes have zero probability under quantum mechanics, and check whether observed forbidden-outcome probabilities exceed the \u03c8-epistemic bound. They derive noise-aware tolerance bounds using two complementary noise models (depolarizing and thermodynamic amplitude/phase damping), calibrated to device parameters. The main experimental finding is that a \"significant majority\" of adjacent 2- and 5-qubit configurations pass the PBR test, while passing probability degrades with qubit separation. The paper also proposes using the PBR protocol as a hardware-level benchmark for \"quantumness\" in NISQ devices.",
+  "technical_objections": [
+    {
+      "confidence": 0.85,
+      "evidence": "The paper cites Unnikrishnan [21] who argues PBR rules out only a specific ontological model, not all \u03c8-epistemic interpretations. The paper does not resolve this tension before drawing its foundational conclusion.",
+      "objection": "Foundational conclusion overstated: the Conclusion asserts the results 'support the ontic view of the wave function,' but a noisy NISQ experiment cannot adjudicate interpretational questions that the PBR theorem itself only partially resolves (and which reference [21] critiques). The Discussion contradicts the Conclusion by acknowledging that 'alternative epistemic models may yet offer a consistent foundation.'",
+      "paper_location": "Conclusion vs. Section IV Discussion",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "'they diverge markedly as circuit depth grows\u2014especially after transpilation inserts multiple SWAP gates\u2014indicating that these simple noise models under-estimate cumulative errors in deeper circuits'",
+      "objection": "Circular noise modeling: The noise tolerance bounds are derived from device-calibrated parameters and then compared to measurements on the same device. The paper explicitly states that 'simple noise models underestimate cumulative errors in deeper circuits.' If the noise bounds are too generous (underestimated), some configurations scored as 'passing' may actually be noise-dominated rather than quantum.",
+      "paper_location": "Section II, Simulated Experiments paragraph",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.75,
+      "evidence": "The paper notes crosstalk avoidance only for adjacent pairs connected via tunable couplers but does not model or bound shared systematic errors across qubits.",
+      "objection": "Preparation independence loophole unaddressed: the PBR theorem's key assumption is that independently prepared qubits have product ontic states. On a shared superconducting chip, qubits can share correlated noise, crosstalk through the coupling bus, and common-mode calibration drifts, potentially violating this assumption in a way that is not captured by the independent depolarizing or thermodynamic models.",
+      "paper_location": "Section I (PBR theorem statement), Section III",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "Text reads 'approximately [missing value] exhibited a violation of the \u03c8-epistemic bound.' Table 2 rows appear in HTML structure but cell values are not rendered.",
+      "objection": "Key quantitative results are missing from the paper as rendered. The fraction of adjacent pairs passing the test (Section III), and most numeric entries in Table 2, are absent in the HTML source. This prevents independent verification of the central experimental claims.",
+      "paper_location": "Section III, Table 2",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "The paper uses a single effective gate duration 'for simplicity' and neglects identity gate (idling) errors until noting them as a caveat at the end of the section.",
+      "objection": "The thermodynamic error approximation (Eq. 8) conflates T\u2081 and T\u2082 decoherence into a single additive formula without accounting for mixed contributions or the specific pulse shapes. The approximation p_therm \u2248 t_gate/(2T\u2081) + t_gate/T\u2082 assumes independent error channels and small-angle linearization, which breaks down for multi-qubit circuits where the total error can exceed the perturbative regime.",
+      "paper_location": "Section II, Thermodynamical model, Eq. 8",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "The paper states 'For the n=2 case, the minimum valid value satisfying Eq. 10 is [value]' with a specific parametrization, but provides no equivalent for n=5.",
+      "objection": "For the n=5 case, the choice of preparation angle \u03b8 satisfying Eq. (10) is not explicitly stated. The paper describes the n=2 case (\u03b8 = \u03c0/4 for \u03c6) in detail but the analogous n=5 derivation and resulting angle are absent, making the 5-qubit experimental design harder to audit.",
+      "paper_location": "Section III, adjacent five-qubit groups",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

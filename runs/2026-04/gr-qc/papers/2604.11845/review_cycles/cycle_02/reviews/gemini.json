@@ -1,0 +1,90 @@
+{
+  "confidence": 0.85,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 6,
+    "novelty": 5,
+    "reviewer_confidence": 8,
+    "significance": 5,
+    "technical_soundness": 4
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Lowered recommended verdict from 'routine' to 'weak_evidence' and reduced technical soundness score. Expanded technical objections to incorporate the lack of \u2113=0 time-domain validation and the ambiguity of massive-field boundary conditions near the threshold.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": [
+      "codex correctly identified the missing explicit branch choices for massive fields near the mass threshold, which is critical for distinguishing QNMs from quasi-bound states.",
+      "claude insightfully noted that the time-domain validations were only performed for \u2113=1, conveniently avoiding the \u2113=0 sector where WKB is most suspect and where the extraordinary 'purely real' mode is claimed."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "Increasing scalar-field mass strongly suppresses damping for several branches, signaling an approach to quasi-resonant, very long-lived oscillations.",
+      "notes": "Supported by trends, but the limit Im(\u03c9) \u2192 0 itself is based on extrapolation in a regime where WKB breaks down, and boundary conditions near the threshold are not strictly specified.",
+      "paper_location": "Abstract, Section IV",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "WKB and time-domain evolution show sub-percent relative difference in the parameter space where the potential peak is well defined.",
+      "notes": "Only demonstrated for \u2113=1; critically absent for \u2113=0 where the potential is most modified and WKB most suspect.",
+      "paper_location": "Section IV",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The dilaton-induced shifts in the quasinormal spectra are substantially larger than the estimated numerical uncertainty.",
+      "notes": "The comparison assumes WKB order-differences represent the full error, which is likely false near quasi-resonances and for low multipoles.",
+      "paper_location": "Section V (Conclusions)",
+      "support_level": "partially_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "A precise branch convention for the massive outgoing condition at infinity, and clarification on how it is maintained as Re(\u03c9) approaches \u03bc.",
+      "paper_location": "Section III, Eq. (13)",
+      "why_it_matters": "Essential for confirming that the long-lived modes computed are actual quasinormal modes and not quasi-bound states."
+    },
+    {
+      "assumption": "The effective potential maintains a standard barrier shape with a single dominant maximum across the entirety of the sampled parameter space prior to the quasi-resonance threshold.",
+      "paper_location": "Section III",
+      "why_it_matters": "If the potential develops multiple extrema or loses its local maximum prematurely, the WKB formula becomes invalid."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Are the data tables (I-V) and equations (1-18) accurately populated in the actual PDF?",
+      "why_model_cannot_resolve": "The provided HTML-to-text extraction has stripped the contents of all equations and data tables, rendering them as blank structures."
+    }
+  ],
+  "novelty_assessment": "The methodology (WKB-Pad\u00e9 + time-domain integration) and the phenomenology (massive scalar fields yielding quasi-resonances) are both standard. The primary novelty lies in the specific parameter sweep of the Einstein-Maxwell-dilaton background. However, the lack of rigorous treatment in the actual quasi-resonant regime limits the impact of this contribution.",
+  "overall_score_10": 4,
+  "paper_id": "2604.11845",
+  "recommended_verdict": "weak_evidence",
+  "reviewer": "gemini",
+  "score_rationale": "While the topic is physically relevant and the baseline methodology is standard, the evidence supporting the paper's strongest claims is weak. The reliance on WKB extrapolations near the real axis, the absence of time-domain validation for the \u2113=0 sector (where a highly suspect 'purely real' mode is claimed), and the lack of explicit massive-field boundary conditions significantly undermine the technical soundness in the regime of interest. The score is lowered to reflect these unaddressed methodological gaps highlighted in the review cycle.",
+  "summary": "This paper investigates the quasinormal modes (QNMs) of massive scalar perturbations in the background of static, spherically symmetric Einstein-Maxwell-dilaton (EMD) black holes. The author employs higher-order WKB-Pad\u00e9 approximations alongside a time-domain integration scheme to compute the complex frequencies. The main finding is that increasing the mass of the scalar field strongly suppresses the damping rate, leading to quasi-resonant, long-lived oscillation modes. The paper argues that these shifts and the onset of quasi-resonances are robust physical signatures dependent on the dilaton coupling parameter.",
+  "technical_objections": [
+    {
+      "confidence": 0.8,
+      "evidence": "For massive fields, the asymptotic behavior is highly sensitive to the branch cut when Re(\u03c9) approaches \u03bc. The text asserts QNM boundary conditions but does not provide the required analytical precision for the quasi-resonant regime.",
+      "objection": "The boundary conditions for massive fields near the mass threshold (where \u03c9 \u2248 \u03bc) are not explicitly defined. It is unclear how the branch choice for the asymptotic wave number \u221a(\u03c9\u00b2 - \u03bc\u00b2) is handled to rigorously distinguish outgoing QNMs from quasi-bound states or threshold resonances.",
+      "paper_location": "Section III, Section IV (quasi-resonance discussion)",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "WKB is notoriously unreliable for \u2113=0 massive modes. The time-domain benchmarks (Figs 3 and 4) only test \u2113=1, conveniently avoiding the parameter space where the strongest and most suspect claims are made.",
+      "objection": "A 'purely real' mode is claimed for the \u2113=0, \u03b1=\u221a3 sector based on WKB, but this is highly likely to be a WKB breakdown artifact rather than a genuine physical zero. No time-domain validation is provided for this or any other \u2113=0 mode.",
+      "paper_location": "Section IV, paragraph 4",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "WKB inherently fails when the imaginary part of the frequency approaches zero (as turning points merge). Fitting polynomials to invalid data points to find a zero-crossing does not constitute proof of the mode's existence.",
+      "objection": "Reliance on extrapolated WKB results near the real-frequency axis to declare an 'unambiguous signal' of quasi-resonances is mathematically unsound.",
+      "paper_location": "Section IV (discussion of extrapolations in Fig. 6) and Section V",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    }
+  ]
+}

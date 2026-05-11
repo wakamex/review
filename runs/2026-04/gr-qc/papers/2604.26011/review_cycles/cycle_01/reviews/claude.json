@@ -1,0 +1,135 @@
+{
+  "confidence": 0.75,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 7,
+    "novelty": 4,
+    "reviewer_confidence": 7,
+    "significance": 6,
+    "technical_soundness": 6
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "First cycle; no prior review to compare against.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "For most orbits studied, neglecting resonance crossings induces SNR losses and parameter biases exceeding 1-sigma statistical uncertainty.",
+      "notes": "Results are supported within the ERM+NK kludge framework, but the validity of the Cutler-Vallisneri bias formula breaks down for large mismatches (explicitly acknowledged in Sec. V). For those cases, the reported biases are qualitative indicators only, not quantitative estimates.",
+      "paper_location": "Abstract, Sec. IV, Figs. 2\u20133",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Both the sign and amplitude of resonance-induced modifications to integrals of motion play a crucial role in determining the induced bias.",
+      "notes": "Fig. 4 clearly shows that changing the sign of the Carter-constant flux modification moves the bias for weaker resonances across the threshold. The demonstration is clear and internally consistent.",
+      "paper_location": "Abstract, Sec. IV, Figs. 2 and 4",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The 3:2 and 2:1 resonances produce the largest biases; 4:3 and 3:1 are subdominant but can be significant.",
+      "notes": "The ordering is physically plausible given the resonance strength scaling in Eq. 2, but it depends on Teukolsky-based coefficients from a single prior reference [22]. The large discrepancy between Teukolsky and self-force coefficients for the 3:1 resonance (Fig. 3, several orders of magnitude) suggests coefficient uncertainty can dominate the ranking.",
+      "paper_location": "Sec. IV, Tab. 1",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The results provide evidence that accurate resonance modeling is necessary for EMRI detection and parameter estimation with LISA.",
+      "notes": "The qualitative conclusion is well-motivated, but rests on kludge waveforms that the authors acknowledge may not meet LISA search requirements. Generalization beyond the four sampled orbits and the fixed spin/mass-ratio is not demonstrated.",
+      "paper_location": "Abstract, Sec. V",
+      "support_level": "partially_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "Extrinsic-intrinsic parameter degeneracies are negligible for bias estimation.",
+      "paper_location": "Sec. III, Fisher parameter space",
+      "why_it_matters": "Bias in intrinsic parameters can be partially absorbed by shifts in extrinsic parameters (distance, sky location) when their correlations are included. Excluding extrinsic parameters could overestimate or underestimate biases in individual intrinsic parameters."
+    },
+    {
+      "assumption": "A fixed SNR=20 rescaling represents a meaningful detection scenario for all orbits.",
+      "paper_location": "Sec. II",
+      "why_it_matters": "Fixing SNR by overall amplitude rescaling treats all waveforms as equally detectable, but the orbital configurations may differ substantially in their actual astrophysical distance distribution. The choice of SNR=20 as lower limit (stated as detection threshold) does not reflect the full detected EMRI population."
+    },
+    {
+      "assumption": "The ERM phenomenological model captures the qualitatively correct resonance phenomenology for all four resonances studied.",
+      "paper_location": "Sec. II",
+      "why_it_matters": "The ERM was introduced and calibrated primarily for the 3:2 resonance in [50]. Its accuracy for 4:3, 2:1, and 3:1 resonances, particularly for the impulse function shape, is assumed but not independently validated."
+    },
+    {
+      "assumption": "Only a single resonance crossing occurs during the observation; no cumulative or overlapping resonance effects.",
+      "paper_location": "Sec. II, evolution setup",
+      "why_it_matters": "The paper initializes the inspiral close to a single resonance. In practice, multiple resonances are crossed during an EMRI evolution; cumulative effects (studied in [34]) could change the bias landscape significantly."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Are the Teukolsky-based resonance coefficients from [22] (Flanagan, Hughes, Ruangsri 2014) valid for the specific orbital configurations in Table 1, or were they computed for different reference orbits and interpolated?",
+      "why_model_cannot_resolve": "The paper states coefficients are 'computed from Teukolsky-based calculations [22]' for the investigated orbits, but the mapping between the paper's orbital parameters and [22]'s tabulated results cannot be verified without access to the underlying code and the supplementary calculations."
+    },
+    {
+      "question": "What is the physical reason for the several-orders-of-magnitude discrepancy between Teukolsky-based and self-force-based 3:1 resonance coefficients?",
+      "why_model_cannot_resolve": "This requires domain expertise in both Teukolsky equation calculations and self-force computations, and possibly direct comparison of the coefficient tables from [22] and [35]. The paper does not provide the raw coefficient values in the 3:1 case."
+    },
+    {
+      "question": "Is the quadrupole formula applied in Boyer-Lindquist coordinates (Sec. II) a valid approximation for the strong-field EMRI configurations studied, particularly near separatrix for Case (i) 3:1 resonance?",
+      "why_model_cannot_resolve": "Assessing the error introduced by using the quadrupole formula rather than a full multipole decomposition for orbits close to the separatrix requires quantitative comparison with more accurate waveform calculations."
+    }
+  ],
+  "novelty_assessment": "The paper makes an incremental but useful contribution. The 3:2 resonance with fixed coefficients was analyzed in [50]; the extension to four resonances (4:3, 3:2, 2:1, 3:1) with orbit-dependent Teukolsky-based coefficients and separate flux modifications for E, L, C is the main advance over prior work. The methodological contribution of reporting bias ranges (rather than single Fisher estimates) from a validated step-size window is a good practice that adds reliability. The comparison between Teukolsky-based [22] and self-force-based [35] coefficients for the same orbits is new and reveals a significant discrepancy for the 3:1 resonance, which is a useful finding. The paper does not introduce new theoretical tools or derivations; it is primarily an applied numerical study within an existing framework.",
+  "overall_score_10": 5.5,
+  "paper_id": "2604.26011",
+  "recommended_verdict": "routine",
+  "reviewer": "claude",
+  "score_rationale": "Technical soundness is 6: methodology is careful and well-described with a good Fisher validation procedure, but the kludge waveform limitation, restricted parameter space, breakdown of the linear bias formula for large mismatches, and the unexplained Teukolsky/self-force discrepancy collectively limit reliability of the quantitative results. Novelty is 4: this is a direct extension of [50] and [34] to more resonances with the same ERM framework; the comparison with self-force coefficients is the most novel element. Significance is 6: the work is relevant for LISA EMRI science and confirms that resonance modeling matters across multiple resonances, but the kludge-waveform caveat and single-orbit case studies limit the operational impact. Clarity is 7: writing is clear and the Fisher validation procedure is well-explained; the unexplained N/A entries and absence of condition number values are minor gaps. Overall 5.5 reflects competent, community-relevant work that is methodologically sound within its approximations, but incremental and with significant caveats that prevent strong conclusions.",
+  "summary": "This paper investigates parameter-estimation bias in extreme-mass-ratio inspirals (EMRIs) caused by transient orbital resonances, using a Fisher-matrix approach. The authors augment a numerical kludge (NK) waveform with an effective resonance model (ERM) and compute the bias induced when resonance effects are neglected in parameter recovery. They study four resonances (4:3, 3:2, 2:1, 3:1) across four orbital configurations (spanning low-to-moderate eccentricities and inclinations), using Teukolsky-based resonance coefficients. The main finding is that, for most orbits, neglecting resonance crossings induces parameter biases exceeding the 1-sigma statistical uncertainty. The paper builds incrementally on Refs. [50] and [34], extending to multiple resonances with orbit-dependent Teukolsky coefficients and providing a careful Fisher-validation procedure.",
+  "technical_objections": [
+    {
+      "confidence": 0.75,
+      "evidence": "The paper restricts to {M, mu, a, p_0, e_0, iota_0, phi_r+phi_theta, phi_r-phi_theta} under the claim that secular post-resonance phase growth is 'only weakly degenerate with simple phase offsets.' No numerical support is given for this claim. In principle, correlations with sky-location, luminosity distance, and spin-orientation angles can redistribute bias projections significantly.",
+      "objection": "Restricted Fisher parameter space: extrinsic parameters and full correlations are excluded without adequate justification.",
+      "paper_location": "Sec. III, parameter-space definition",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "The paper states 'for large mismatches and significant losses in the recovered SNR, the first-order Cutler\u2013Vallisneri bias formula can no longer be regarded as an accurate estimate.' Several table entries show SNR losses and mismatches where this caveat applies, but no clear demarcation is given in the figures to indicate which entries are reliable vs. qualitative.",
+      "objection": "Large-mismatch cases exceed the regime of validity of the linear Cutler-Vallisneri bias formula, yet the results are still tabulated numerically.",
+      "paper_location": "Sec. V, discussion of large biases",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "Fig. 3 shows the 3:1 resonance bias differs by several orders of magnitude between the two coefficient prescriptions. The paper notes this but offers no physical interpretation. This raises the question of which prescription is more reliable and whether the Teukolsky coefficients from [22] are appropriate for the orbits used.",
+      "objection": "Several-orders-of-magnitude discrepancy between Teukolsky-based and self-force-based coefficients for the 3:1 resonance is not explained.",
+      "paper_location": "Sec. IV, Fig. 3",
+      "severity": "major",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "The table caption explains that the kludge fluxes break down for the 'high-eccentricity, low-inclination orbit' for the 3:1 resonance, but Case (iii) has e=0.70, iota=0.35, which matches this description \u2014 yet bias values are still reported for this case while t and T are N/A. The inconsistency between showing N/A for t,T but valid bias values is unexplained.",
+      "objection": "The N/A entries for resonance duration and time in Table 1 for Case (iii), 3:1 resonance are unexplained in the table caption.",
+      "paper_location": "Table 1, Case (iii), 3:1 row",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "The actual sign of resonance coefficients depends on the resonant phase at crossing (phi_r - n/m * phi_theta), which is not computed from the inspiral trajectory. Instead, the paper selects two representative combinations. This means the reported biases reflect specific phase choices rather than a physically motivated distribution.",
+      "objection": "The representative sign prescription is ad hoc: only two out of four possible sign combinations are studied, and the resonant phase at crossing is not tracked self-consistently.",
+      "paper_location": "Sec. II, sign prescription; Sec. IV",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "The paper mentions that the reparameterization 'significantly reduces kappa' but provides no numerical values for kappa before or after. Without this, the reader cannot gauge how close the matrices are to singular.",
+      "objection": "The Fisher condition number after reparameterization is not reported, making it difficult to independently assess numerical stability.",
+      "paper_location": "Sec. III",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

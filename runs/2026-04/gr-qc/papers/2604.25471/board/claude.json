@@ -1,0 +1,82 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Two full review cycles completed. Cycle 1 established the main claims and objections. Cycle 2 incorporated cross-reviewer findings: claude added the Fig. 6 l=0/l=1 labeling inconsistency (flagged by gemini with 0.95 confidence) and downgraded the boundary condition concern from moderate to minor after weighing gemini's non-identification against codex's major rating; gemini revised technical soundness downward (8\u21925) after accepting claude's observation that all HTML table data were missing; codex maintained its cycle-1 position. The HTML rendering dropped all numerical table cell content and key equations, which limited quantitative verification and contributed to the spread in technical soundness scores across reviewers. The boundary condition objection (Eq. 14) remained unresolved across cycles due to absent equation rendering. Final mechanical average 5.0/10 across both cycles.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper attempts to show how a recently proposed singularity-free black hole \"rings\" when disturbed by a massive scalar field, using two standard numerical techniques to map out the ringing frequency and decay rate. The review board found the core qualitative trends plausible and internally consistent, but the paper applies an established recipe to a single new geometry without introducing new methods or phenomena. The most important caveat is that the exotic matter holding the black hole together\u2014a so-called phantom scalar field\u2014has known theoretical instabilities that the paper does not address, so the physical significance of the results remains uncertain.",
+  "human_spotchecks": [
+    "Verify Tables 1-5 in the PDF: do the numerical QNM values exist, and do the claimed WKB14/WKB16 Pad\u00e9 agreement percentages (stated to be below ~1% for most entries, with a few-percent exception in the l=0 high-mass sector) hold as described in Section IV?",
+    "Verify Fig. 6: does it plot data for l=0 or l=1? The narrative text says l=0 but the figure caption says l=1 and cites Table II. Determine which is the error and whether the extrapolated threshold \u03bc_c value changes materially.",
+    "Verify Eq. (14) and the WKB implementation: does the code impose the correct massive-field outgoing boundary condition with asymptotic wave number \u221a(\u03c9\u00b2-\u03bc\u00b2), or does it use the massless form with \u03c9? This requires inspecting either the code or the derivation, not available in the HTML source.",
+    "Assess phantom DBI background stability: does the source paper (Parvez & Shankaranarayanan 2025, arXiv:2511.14047) establish dynamical stability of the phantom branch against ghost or gradient instabilities, and do any stability results extend to the massive scalar perturbation sector studied here?",
+    "Apply Leaver's continued-fraction method (or equivalent convergent procedure) to this geometry to determine whether it confirms the quasiresonance trend and whether the extrapolated threshold is in the correct ballpark; the paper itself defers this to future work and flags the metric would need to be cast into rational parametrized form."
+  ],
+  "paper_id": "2604.25471",
+  "public_summary": "The paper studies how an asymptotically flat, singularity-free (regular) black hole responds to perturbations by a massive scalar field. The black hole geometry is taken from a recently proposed model sourced by a phantom Dirac-Born-Infeld scalar, a form of exotic matter. Using high-order WKB approximation with Pad\u00e9 resummation and characteristic time-domain integration with Prony fitting, the paper aims to map out how the quasinormal ringing frequency and damping rate depend on both the scalar field mass and the black hole's regularity scale. The paper also argues that for large enough field mass the damping approaches zero, indicating so-called quasiresonant behavior.\\n\\nThe review board found the qualitative trends consistent with the established literature on massive scalar quasinormal modes and noted that the two numerical methods agree for the explicitly reported test cases. However, several concerns survived cross-review. The phantom scalar background that supports the geometry generically suffers from ghost instabilities that are not analyzed in this work, limiting the physical interpretation. The estimate for the onset of quasiresonances rests on an extrapolation of data that the authors themselves flag as unreliable without a more rigorous computational method. A concrete labeling inconsistency in Figure 6\u2014the narrative text and the figure caption disagree on which multipole mode is plotted\u2014has not been corrected. The time-domain validation covers only two configurations without the numerical details needed to reproduce or audit it. Reviewers were unable to verify the central numerical tables because they did not render in the HTML version of the paper; this is likely a rendering artifact rather than a paper defect, but it limited the depth of quantitative review. Overall, the paper is a competent incremental contribution that catalogs quasinormal modes for one new geometry but does not introduce new methods or identify qualitatively new physics.",
+  "reviewer_disagreements": [
+    "Boundary condition presentation in Eq. (14): Codex rates this a major concern (confidence 0.86), arguing the displayed outgoing boundary condition uses exp(\u00b1i\u03c9r*) as if the potential vanishes at infinity, whereas the paper states V\u2192\u03bc\u00b2 there, requiring the correct wave number \u221a(\u03c9\u00b2-\u03bc\u00b2) with a branch prescription. Claude rates it a minor presentation gap (confidence 0.55), arguing the Konoplya high-order WKB code explicitly cited by the paper subtracts the asymptotic potential value and handles massive fields correctly in practice. Gemini notes that the relevant equations are not rendered in the HTML source and declines to confirm either position without the PDF. The disagreement could not be resolved across review cycles.",
+    "Overall severity assessment: Codex maintained a 'weak_evidence' verdict across both cycles, treating the boundary condition issue and quasiresonance extrapolation as verdict-changing concerns. Claude and gemini both settled on scores of 5/10 in cycle 2 with a 'routine' characterization, viewing the same issues as presentation gaps and acknowledged limitations respectively. This reflects a genuine disagreement about whether the unresolved boundary condition question materially undermines the tabulated results.",
+    "Technical soundness scoring shifted across cycles: Gemini scored 8/10 in cycle 1 (confident the methodology was correctly applied) then revised down to 5/10 in cycle 2 after noting the missing HTML tables preclude direct verification. Claude held at 6/10 across both cycles. Codex scored 5/10 both cycles. The large initial spread and subsequent convergence reflect that the HTML rendering artifact introduced genuine ambiguity about the depth of validation achievable from the available source."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The background geometry is supported by a phantom (negative-kinetic-energy) DBI scalar field. Phantom fields generically suffer from ghost or gradient instabilities. The paper does not analyze whether this background is dynamically stable against such instabilities for any of the parameter values used, nor does it extend the massless-perturbation stability result cited from the source paper to the massive scalar case studied here. This limits the physical interpretation of the computed spectrum.",
+      "paper_location": "Section II, action equations (1)-(2) and surrounding discussion",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "There is a concrete textual inconsistency in the quasiresonance discussion: the narrative text states the data in Fig. 6 are for the fundamental mode with l=0 and a=0.6, while the figure caption states l=1 and references Table II, which is the l=1 table. This mislabeling corrupts the stated physical conclusions for the quasiresonance plot, because the threshold value and qualitative extrapolation depend on which multipole sector is actually shown.",
+      "paper_location": "Section IV, Fig. 6 caption and surrounding text",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The critical field mass \u03bc_c at which the damping rate is estimated to vanish (indicating quasiresonance onset) is obtained by quadratic extrapolation of WKB16 data. The WKB approximation degrades precisely as Im(\u03c9)\u21920, near the mass threshold where modes approach bound states. Different polynomial fits to the same table data yield materially different threshold values. The paper correctly acknowledges that Leaver's continued-fraction method is required for a rigorous result but presents the extrapolated \u03bc_c prominently without sufficient caveating of its quantitative unreliability.",
+      "paper_location": "Section IV, Fig. 6 and final paragraph before Conclusions",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The time-domain validation is too sparse to support the paper's language about robustness of the full spectrum. Only two Prony extractions are reported, both for fundamental modes at moderate masses. No grid convergence data, initial data specification, extraction radius, fitting-window choices, sampling intervals, or Prony stability variation are provided. The validation does not cover overtones, the l=0 high-mass sector, or the parameter range relevant to the quasiresonant extrapolation.",
+      "paper_location": "Section III.2, Figs. 3-4",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "No comparison with the a\u21920 (Schwarzschild) limit is provided. The regular geometry should reduce to Schwarzschild as the regularity parameter a\u21920, and matching against well-known massive scalar Schwarzschild QNMs would furnish an independent benchmark for the WKB implementation and time-domain code.",
+      "paper_location": "Section IV, Tables 1-5",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "gemini"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "Increasing the test-field mass raises the real part of the quasinormal frequency and decreases the damping rate\u2014a trend consistent with established massive QNM phenomenology and confirmed by percent-level agreement between WKB-Pad\u00e9 and time-domain Prony results for the two explicitly reported representative configurations.",
+    "Increasing the regularity parameter a of the DBI-supported geometry generally lowers both the oscillation frequency and the damping rate; for l\u22651 and moderate field masses, the paper argues this shift exceeds the internal WKB numerical uncertainty (difference between 16th- and 14th-order Pad\u00e9 estimates).",
+    "For sufficiently large field masses, the time-domain profiles show oscillatory late-time tails with a power-law envelope that dominate the signal before any ultra-long-lived quasinormal mode can appear as an isolated exponentially damped ringdown, consistent with known massive-field tail behavior.",
+    "The WKB-Pad\u00e9 and time-domain Prony extraction yield consistent complex frequencies\u2014agreement within a few percent in both real and imaginary parts\u2014for the two configurations shown in Figs. 3 and 4."
+  ],
+  "technical_takeaway": "The paper applies high-order WKB+Pad\u00e9 (up to 16th order) and Gundlach-Price-Pullin time-domain integration with Prony extraction to compute massive scalar quasinormal modes of the Parvez-Shankaranarayanan phantom-DBI regular black hole. The qualitative trends\u2014increasing \u03bc raises Re(\u03c9) and reduces |Im(\u03c9)|; increasing regularity parameter a lowers both\u2014are consistent with the established massive-QNM literature and are internally coherent between the two methods for representative cases. The quasiresonance threshold \u03bc_c is an extrapolated estimate from quadratic fitting of WKB data in the regime where WKB accuracy degrades, acknowledged by the authors as requiring Leaver confirmation. A concrete textual inconsistency (Fig. 6 label: narrative says l=0, caption says l=1 referencing Table II) is unresolved. The phantom background's stability against ghost/gradient instabilities is not analyzed. All five numerical tables were absent from the HTML source used for review, preventing direct verification of the central quantitative results."
+}

@@ -1,0 +1,112 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Two full review cycles were completed. In cycle 2, all three reviewers independently converged on the background-degeneracy contradiction as the primary objection; Claude upgraded this from an underweighted concern in cycle 1. The DIC formula error was first raised by Claude in cycle 1 and confirmed by Gemini in cycle 2. The 'amplitude compensation' overstatement was independently raised by all three reviewers in cycle 2. Reviewer confidence scores were high (7\u20139/10) across both cycles, with Gemini consistently at 9/10. The mechanical average score declined from 4.33 (cycle 1) to 3.67 (cycle 2), driven primarily by downward revisions to technical_soundness (4.0 \u2192 3.17) and significance (4.83 \u2192 4.0). The selected final score is the cycle 2 mechanical average.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper tests a modified gravity model \u2014 called \"Hybrid f(Q)\" \u2014 as a geometric alternative to the cosmological constant, fitting it against data on how the universe expands and how large-scale structures grow. The review board found the perturbation-sector analysis potentially interesting but identified a significant internal contradiction: the paper claims the model is observationally indistinguishable from standard cosmology in background data, yet the paper's own results show background data actually prefer the Hybrid model. Until this inconsistency is resolved and the statistical formulas are independently verified, the main conclusions cannot be relied upon.",
+  "human_spotchecks": [
+    "Algebraic check: Does Eq. (15) with \u03b1\u2081=1 substituted and the present-day normalization condition applied reduce exactly to the \u039bCDM Hubble function H(z), or does the \u03b1\u2082 inverse-Q term remain in the late-time background? This determines whether the 'background degeneracy' claim is mathematically correct, only asymptotically correct, or simply wrong \u2014 and resolves the central internal contradiction.",
+    "Code audit: Did the authors' MCMC pipeline implement the DIC using the formula printed in Eq. (23) (which computes 2p_D) or the standard formula DIC = 2D\u0304 \u2212 D_min? If the wrong formula was used, all DIC values in Table 2 must be recalculated before the model preference claims can be assessed.",
+    "Perturbation theory check: Is the G_eff formula from Jim\u00e9nez et al. [11] (arXiv:1906.10027, Eq. applicable to the Hybrid model with the specific inverse-Q term, when perturbations are taken in the coincident gauge? Does the presence of the 1/Q term introduce additional scalar propagating degrees of freedom or modify the quasi-static G_eff expression?",
+    "Numerical verification: Do the \u0394AIC and \u0394DIC values reported in Table 2 (partially obscured in the HTML rendering) actually fall within the Jeffrey's scale ranges claimed in the text, and are the same parameter counts k applied consistently to \u039bCDM and Hybrid across all four dataset combinations?",
+    "Viability region check: Is the MCMC prior U[0,5] on \u03b1\u2082 consistent with the viability constraint derived in Eq. (18)? If the constraint implies a disjoint allowed interval or upper bound below 5, the sampler may have explored unphysical parameter space."
+  ],
+  "paper_id": "2604.11865",
+  "public_summary": "The paper investigates a three-parameter Hybrid f(Q) gravity model \u2014 combining linear, constant-like, and inverse non-metricity terms \u2014 as a physically bounded alternative to the cosmological constant. The authors first derive analytical viability conditions, concluding that the linear coupling must be set to exactly unity (\u03b1=1) to avoid catastrophic Early Dark Energy that would disrupt Big Bang Nucleosynthesis and CMB acoustic peaks. They then argue this locks the model's background expansion into a geometric degeneracy with \u039bCDM, motivating the use of Redshift-Space Distortion (RSD) data to probe the perturbation sector. MCMC analysis on four dataset combinations (CC+SN+BAO, with and without a SH0ES H\u2080 prior, and with and without RSD) finds a suppressed effective gravitational constant G_eff at late times and an elevated clustering amplitude \u03c3\u2088, which the paper frames as an \"amplitude compensation mechanism\" providing a falsifiable signature testable by future surveys. The review board's central finding is that the paper's narrative is internally self-contradictory: it simultaneously claims background-only probes cannot distinguish the model from \u039bCDM, while reporting that background-only data achieve a statistically superior AIC/DIC fit and that reconstructed background quantities (q\u2080, w_eff\u2080) differ between the two models. This contradiction, compounded by an apparent error in the DIC formula and unverified perturbation-sector assumptions, leaves the paper's main statistical conclusions in an unreliable state pending revision.",
+  "reviewer_disagreements": [
+    "On verdict severity: Gemini and Codex (cycle 2) recommended 'major_flaw', while Claude (cycle 2) recommended 'contested', arguing the background-degeneracy issue is partly a narrative framing problem \u2014 the \u03b1\u2082 inverse-Q term does modify late-time background dynamics, so the paper may be using 'degeneracy' loosely to mean 'high-z asymptotic degeneracy' rather than a complete background degeneracy at all redshifts.",
+    "On whether the DIC formula error changes the verdict: Claude and Codex treated it as moderate (would not change verdict if code used the correct formula), while Gemini treated it as potentially verdict-changing if the wrong formula was also used in the numerical pipeline.",
+    "On the significance of the SH0ES prior being outdated (Riess et al. 2019 vs. 2022): Claude raised this as a minor concern; Codex and Gemini did not treat it as independently significant given the larger issues.",
+    "On the 'amplitude compensation' framing: All reviewers agreed it is overstated, but disagreed on whether it represents a moderate or minor problem given that the underlying numerical result (\u03c3\u2088 increases when G_eff < G) is physically consistent and correctly described in its narrow sense."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The paper's central narrative is internally inconsistent. The introduction and Section III claim that background-only probes (CC, SN, BAO) cannot distinguish the Hybrid model from \u039bCDM due to a geometric degeneracy. Yet Section V.1 explicitly reports that the Base combination yields a statistically superior AIC/DIC fit for the Hybrid model, and Table 3 shows different reconstructed present-day values of q\u2080 and w_eff\u2080 between the two models under background-only data. A model that is background-degenerate with \u039bCDM cannot simultaneously provide improved background-only fits or different background-derived parameters.",
+      "paper_location": "Section I and Section III (degeneracy claim) vs. Section V.1, Table 2, and Table 3 (improved background fits and different reconstructed parameters)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The DIC formula in Eq. (23) appears incorrect. The paper defines DIC = D\u0304 \u2212 D_min where D = \u22122ln(L). This expression equals 2p_D (twice the effective number of parameters), not the DIC itself. The standard DIC = D_min + 2p_D = 2D\u0304 \u2212 D_min. If this formula was also used in the numerical pipeline, all reported DIC values and the associated model preference claims are invalid.",
+      "paper_location": "Section IV.2, Eq. (23), Table 2",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The statistical preference claims (AIC/DIC) are not sufficiently auditable. The paper does not report chi-squared minima, effective parameter counts per dataset combination, covariance treatment for the RSD compilation, or sufficient likelihood details to reproduce the model comparison. Since the claimed preference is modest and the background-degeneracy framing is contradicted by the results, these omissions are consequential.",
+      "paper_location": "Section IV.2, Section V.1\u2013V.2, Table 2",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex",
+        "claude"
+      ]
+    },
+    {
+      "objection": "The G_eff formula used for the perturbation analysis is borrowed from Jim\u00e9nez et al. [11] under the quasi-static approximation without independent re-derivation for this specific Hybrid model or discussion of connection/gauge choice in f(Q) perturbation theory. In f(Q) gravity, perturbation theory is sensitive to connection choices; the coincident-gauge result may differ when the connection is perturbed. No ghost or gradient stability conditions are checked for the MCMC-constrained parameter space.",
+      "paper_location": "Section II.1 (G_eff formula), Section IV.1.2, Eq. (21), Figures 7\u20138",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The \u03b1=1 constraint is presented as a mathematically exact necessity, but the derivation only shows qualitatively that deviations cause large Early Dark Energy at high redshift. No quantitative tolerance bound (e.g., |1\u2212\u03b1| < \u03b5 with \u03b5 derived from BBN light element abundances or CMB power spectra) is established. Fixing \u03b1=1 by hand may constitute a form of fine-tuning rather than a derived result.",
+      "paper_location": "Section III, Eq. (20), Figure 1",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The 'amplitude compensation mechanism' \u2014 elevated \u03c3\u2088 under suppressed G_eff \u2014 is a standard MCMC parameter degeneracy present in any modified gravity model where G_eff < G. The MCMC sampler raises \u03c3\u2088 to fit observed large-scale structure under weaker gravity; framing this as a novel physical mechanism or a uniquely falsifiable signature overstates the result.",
+      "paper_location": "Section V.2, Abstract, Section VI",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The MCMC prior on \u03b1\u2082 is listed as U[0,5] in Table 1, which may include parameter regions forbidden by the paper's own viability condition Eq. (18). If the sampler explored unphysical parameter space, the reported posteriors and information criteria could be contaminated.",
+      "paper_location": "Section III, Eqs. (16)\u2013(18), Table 1",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "codex",
+        "claude"
+      ]
+    },
+    {
+      "objection": "The quasi-static approximation (QSA) is used to derive G_eff and the growth equation (21) without a scale-validity check. If the RSD compilation includes data near the Hubble scale, scale-dependent effects in extended teleparallel gravity could significantly alter the growth rate and invalidate the G_eff-based modification.",
+      "paper_location": "Section II.1, Section IV.1.2",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "gemini"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The condition \u03b1=1 is qualitatively well-motivated: Eq. (20) shows that \u03b1\u22601 generates an effective early dark energy component scaling as the matter/radiation density, and Figure 1 numerically confirms that even small deviations catastrophically amplify early-universe energy density, disrupting BBN and CMB acoustic peaks.",
+    "The late-time suppression of G_eff (relative to GR) follows from the model structure and the reported MCMC posteriors, which consistently constrain the relevant coupling to negative values across all dataset combinations including RSD.",
+    "The claim that background-only probes alone are insufficient to resolve the tension between \u039bCDM and this model class is supported in spirit by the broad posterior overlap shown in Figure 2, even if the specific degeneracy claim is contradicted by the paper's own information criteria.",
+    "The DESI DR2 BAO data and Pantheon+ supernova compilation used represent current state-of-the-art background datasets, and the use of an MCMC pipeline with convergence diagnostics (Gelman-Rubin) is appropriate methodology."
+  ],
+  "technical_takeaway": "The paper derives that the linear f(Q) coupling \u03b1 must equal 1 to avoid catastrophic Early Dark Energy domination at high redshift, then asserts this forces complete \u039bCDM background degeneracy. All three reviewers independently identified that Section V.1 simultaneously reports background-only AIC/DIC improvements and reconstructed q\u2080/w_eff\u2080 values that differ from \u039bCDM, which directly contradicts the degeneracy claim. Two reviewers flagged that the DIC formula in Eq. (23) computes 2p_D (the effective parameter penalty) rather than the standard DIC = 2D\u0304 \u2212 D_min, calling all DIC-based model comparisons into question. The G_eff suppression result is borrowed from a prior reference under the quasi-static approximation without re-derivation or stability verification for this specific model, and the \"amplitude compensation mechanism\" is a standard MCMC parameter degeneracy present in any modified gravity model where G_eff < G."
+}

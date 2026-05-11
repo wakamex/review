@@ -1,0 +1,100 @@
+{
+  "confidence": 0.9,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 4,
+    "novelty": 3,
+    "reviewer_confidence": 9,
+    "significance": 4,
+    "technical_soundness": 4
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "I completely retract my previous objections regarding algebraic and dimensional errors in the deflection angle and thermodynamic formulas (Eqs. 26, 28, 30). Upon reviewing the LaTeX source equations directly, the derivations and dimensions in the standard Kerr limit are perfectly correct. My previous assessment was based on misreading the math rendering.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": [
+      "Reviewer 'claude' correctly identifies that explicit expressions for the Horndeski constants (\\kappa, \\eta_E) are missing, making the headline quantitative claims unverifiable.",
+      "Both reviewers astutely note that the slow-rotation, equatorial approximation is applied to M87*, which is highly spinning and involves an asymmetric shadow ring, introducing unconstrained truncation errors.",
+      "Reviewer 'codex' correctly points out that the Hawking luminosity approximation lacks explicit control over greybody factors and superradiance.",
+      "Both reviewers agree that framing a standard parameter substitution as a 'duality' is an overstatement and does not independently break parameter degeneracies."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "Re-parameterizing the black hole mass in terms of the shadow radius constitutes a fundamental 'thermodynamic-optical duality'.",
+      "notes": "As noted by all reviewers, this is a standard mathematical change of variables (parameter substitution) and does not represent a physical duality. It imparts no new physical meaning beyond standard phenomenological parameterization.",
+      "paper_location": "Abstract, Section III.1",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "The framework breaks the degeneracy between bare mass and modified field strengths in modified gravity regimes.",
+      "notes": "Substituting $M$ for $R_{sh}$ merely shifts the parameters. A single measurement of the shadow radius cannot independently constrain both the mass and a modified gravity parameter without a second independent observable.",
+      "paper_location": "Abstract, Section IV.2, Conclusion",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "Rotating Horndeski scalar hair drives up to a specific percentage deviation in Hawking emission under current EHT limits.",
+      "notes": "The constants $\\kappa$ and $\\eta_E$ required to calculate this deviation are never defined in terms of the metric components, making the numerical result impossible to verify from the text alone.",
+      "paper_location": "Abstract, Section IV.3",
+      "support_level": "unclear"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The \"stationary envelope condition\" ($\\partial R_{sh} / \\partial r_{ps} = 0$) holds globally for the $\\pm$ branches of generic rotating spacetimes.",
+      "paper_location": "Section II.1",
+      "why_it_matters": "The local validity of the Implicit Function Theorem is hinged on this condition, which is only explicitly checked for the Schwarzschild and slow-rotation limits. If it fails in highly spinning or modified gravity regimes, the mass inversion breaks down."
+    },
+    {
+      "assumption": "Independent knowledge of other spacetime parameters (spin, inclination).",
+      "paper_location": "Section II.1, Section IV",
+      "why_it_matters": "The framework treats $R_{sh}$ as the sole independent variable to replace $M$, implicitly assuming that spin $a$ and observer inclination are either known or negligible. Without fixing these, $R_{sh}$ alone cannot break parameter degeneracies."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Are the constants \\kappa and \\eta_E in Eq. 46 derivable from the provided Horndeski metric components in Eqs. 40-43, and do they mathematically support the headline percentage deviation in luminosity?",
+      "why_model_cannot_resolve": "The explicit derivation of surface gravity in terms of these constants is skipped in the text. A human expert would need to compute the surface gravity for the provided metric to verify if it factors into the form given in Eq. 46."
+    }
+  ],
+  "novelty_assessment": "Low. Expressing theoretical parameters like mass in terms of direct observables (like the shadow radius) is a standard algebraic substitution used routinely in phenomenological astrophysics. Framing this basic change of variables as a profound 'thermodynamic-optical duality' overstates the novelty and physical significance of the work. The applications to modified gravity are somewhat useful but remain formulaic.",
+  "overall_score_10": 4,
+  "paper_id": "2604.22181",
+  "recommended_verdict": "weak_evidence",
+  "reviewer": "gemini",
+  "score_rationale": "In my previous review, I incorrectly penalized the paper for hallucinated algebraic errors, which I now fully retract. However, as the other reviewers highlight, the paper still suffers from significant methodological flaws. The conceptual framing of a 'duality' overstates a standard parameter substitution. Furthermore, the quantitative claims depend on undefined parameters (in the Horndeski case) and the application of slow-rotation, single-branch approximations to the high-spin, asymmetric M87* EHT data. The integrated luminosity calculations also lack rigorous bounds on greybody and superradiant corrections. These issues render the phenomenological predictions unreliable, justifying a verdict of weak evidence.",
+  "summary": "The paper proposes to re-parameterize classical weak deflection and semiclassical Hawking thermodynamics in terms of the observable black hole shadow radius $R_{sh}$ rather than the intrinsic bare mass $M$. The authors frame this change of variables as a \"thermodynamic-optical duality\". They apply this parameter substitution to Kerr, Kerr-MOG, and rotating Horndeski spacetimes, aiming to constrain deviations from General Relativity using M87* EHT observations.",
+  "technical_objections": [
+    {
+      "confidence": 0.95,
+      "evidence": "Eq. 46 introduces a temperature $T_H$ parameterized by constants $\\kappa$ and $\\eta_E$, which are described as \"determined by the scalar gradient at the horizon.\" However, these constants are never explicitly defined or derived from the metric components (Eqs. 40-43). The headline claim of a specific percentage deviation in luminosity relies entirely on these undefined parameters.",
+      "objection": "Undefined constants in Horndeski spacetime predictions make quantitative claims unverifiable.",
+      "paper_location": "Section IV.3 (Eqs. 46-48)",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "The explicit mass-shadow inversions (Eqs. 25, 35, 44) are derived using a \"low-spin approximation ($a \\ll M$)\". However, the resulting formulas are applied directly to the M87* EHT data. M87* is widely considered to have a high spin ($a^* \\gtrsim 0.5$). Using a truncated slow-spin series introduces unconstrained and potentially large errors into all numerical estimates.",
+      "objection": "Inconsistent application of the slow-rotation approximation to EHT constraints.",
+      "paper_location": "Section II.1 (Eq. 25), Section IV (Applications)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "Eq. 5 gives separate critical impact parameters for prograde and retrograde orbits. However, the mass inversion uses a single scalar $R_{sh}$ without addressing how the asymmetric shadow contour of a highly rotating black hole is mapped to this value. The EHT shadow integrates over all orbits, making the single-branch inversion physically insufficient for robust parameter extraction.",
+      "objection": "Loss of geometric information by treating the rotating shadow as a single scalar radius.",
+      "paper_location": "Section II.1 (Eq. 5), Section IV",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "The luminosity formulation (Eqs. 21-24) relies heavily on the eikonal limit (geometric cross-section) and asserts bounds on superradiant corrections. However, these corrections and the modified greybody factors $\\Gamma_{l,m}$ are never explicitly computed or bounded for the Kerr-MOG or Horndeski spacetimes. The asserted precision of the luminosity suppression/enhancement is therefore unsubstantiated.",
+      "objection": "Uncontrolled approximations in the semiclassical luminosity derivations.",
+      "paper_location": "Section III.2, Section IV",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

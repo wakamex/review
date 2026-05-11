@@ -1,0 +1,93 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Two review cycles completed. Cycle 1 established the core objections; cycle 2 included cross-reviewer commentary that sharpened the major objections (restricted Fisher space, linearized bias formula breakdown) and introduced a factual disagreement about which resonance shows the largest coefficient discrepancy. Gemini revised its verdict downward from 'promising' to 'routine' in cycle 2 after weighing the two major quantitative limitations together; claude revised upward from 'routine' to 'promising' after crediting the multi-resonance comparison more. Codex maintained 'promising' across both cycles. The cross-prescription comparison revealing the large coefficient discrepancy and the sign-dependence demonstration (Figure 4) were the most consistently credited original contributions. The paper's kludge-waveform framework is acknowledged throughout as a limiting factor, but reviewers agreed the qualitative conclusion about resonance importance is expected to survive with more accurate models.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper asks whether ignoring a specific orbital phenomenon \u2014 transient resonances, which occur when an inspiralling object's orbital frequencies reach a simple ratio \u2014 would cause scientists to misread the properties of gravitational-wave sources in future space-based detectors like LISA. The review board finds the qualitative warning credible: the paper presents consistent evidence that these resonances leave a detectable imprint, and that modeling their sign and amplitude correctly is important. However, two structural limitations of the analysis mean the specific numerical bias estimates should not be taken at face value, and the results should be read as a well-motivated case study rather than a definitive quantitative forecast.",
+  "human_spotchecks": [
+    "Are the Teukolsky-based resonance coefficients cited from [Flanagan, Hughes, Ruangsri 2014] computed at exactly the orbital parameters (p_0, e_0, iota_0) listed in Table 1, or were they obtained from a reference calculation and applied to these orbits via interpolation or extrapolation? Verifying this requires access to the underlying code or supplementary coefficient tables from that reference.",
+    "The large discrepancy between Teukolsky-based and self-force-based coefficient prescriptions for one resonance \u2014 reviewers disagree whether it is the 3:1 or 4:3 resonance \u2014 should be verified against the raw numerical values in the cited references [22] and [35] to determine whether it reflects a genuine theoretical difference, a tabulation error, or an artifact of the HTML rendering of Table 1.",
+    "Table 1 Case (iii), 3:1 resonance: the table lists 'N/A' for resonance duration but reports specific bias and mismatch values (0.026 / 0.009 / 0.035), while the caption states this configuration was excluded. Authors should clarify whether these numbers are artifacts of an earlier draft or whether the exclusion description is incorrect.",
+    "Would including extrinsic parameters and independent initial phases in the Fisher analysis \u2014 or a comparison MCMC run \u2014 materially change which bias-to-uncertainty ratios exceed the one-sigma threshold? This requires additional numerical experiments that are not provided in the paper.",
+    "Are Fisher condition numbers before and after reparameterization, and the finite-difference step windows over which the bias ranges were computed, documented in supplementary materials or code repositories? Their absence in the main text makes independent reproducibility of the reported bias ranges difficult to assess."
+  ],
+  "paper_id": "2604.26011",
+  "public_summary": "Extreme-mass-ratio inspirals (EMRIs) \u2014 systems in which a stellar-mass compact object slowly spirals into a supermassive black hole \u2014 are among the most scientifically valuable targets for the planned LISA space-based gravitational wave observatory. Their long orbital evolution means that transient orbital resonances, moments when radial and polar orbital frequencies reach a low-order rational ratio, are generically encountered and can accumulate a measurable phase shift in the emitted gravitational waves.\n\nThis paper aims to quantify the parameter-estimation bias introduced when these resonances are omitted from waveform templates used in matched-filter analysis. The authors extend a phenomenological effective resonance model (ERM) to four resonances \u2014 the 4:3, 3:2, 2:1, and 3:1 commensurabilities \u2014 and apply a Fisher-matrix approach across four representative orbital configurations with resonance coefficients drawn from Teukolsky-equation-based calculations.\n\nThe paper claims that, for most of the studied configurations, neglecting resonance crossings produces signal-to-noise ratio losses and parameter biases exceeding the one-sigma statistical threshold. It also argues that both the sign and amplitude of the resonance-induced modifications to the orbital integrals of motion are crucial: changing the sign of the Carter-constant flux modification can shift weaker-resonance biases from above to below the significance threshold, as illustrated in Figure 4. A comparison between Teukolsky-based and self-force-based coefficient prescriptions for the same orbits reveals qualitative agreement for most resonances but a large discrepancy for one resonance, which the paper leaves physically unexplained.\n\nReview identified two major cross-cutting limitations. First, for the cases with the largest reported biases, the first-order Cutler-Vallisneri bias formula on which the estimates rest is acknowledged by the authors to be outside its regime of validity \u2014 making those specific large numbers qualitative indicators rather than quantitative estimates. Second, the Fisher analysis excludes extrinsic parameters (sky location, distance, spin orientation) to avoid numerical ill-conditioning, justified by an unvalidated assumption about degeneracy with phase offsets; including these parameters could materially change which cases register as significant. The paper is clear about both limitations, and the qualitative message \u2014 that resonance modeling is necessary and that coefficient accuracy matters \u2014 is expected to remain valid with more accurate waveform frameworks.",
+  "reviewer_disagreements": [
+    "Which resonance shows the orders-of-magnitude Teukolsky/self-force coefficient discrepancy: codex (cycle 2) attributes it to the 4:3 resonance based on its reading of the Table 1 slash-separated entries; claude and gemini attribute it to the 3:1 resonance based on the Section IV text and the Figure 3 caption. This factual disagreement was not resolved in cross-review and is flagged as a human spotcheck.",
+    "Severity of the restricted Fisher space objection: codex and gemini rate it 'major' on the grounds that it could cause systematic overestimation of bias significance and would change the verdict if confirmed; claude rates it 'moderate', noting that the approach follows field convention established in the prior work of Speri and Gair (2021).",
+    "Overall verdict in cycle 2: codex and claude converge on 'promising'; gemini revises down to 'routine' after reconsidering that both major quantitative limitations \u2014 the broken bias formula and the restricted parameter space \u2014 together undermine the core numerical claims.",
+    "Novelty assessment: claude (cycle 2) scores novelty 5, viewing the paper as a direct incremental extension of prior work with the cross-prescription comparison as the most distinctive element; codex scores it 6.2, crediting the multi-resonance orbit-dependent Teukolsky-coefficient comparison more heavily; gemini scores it 6, consistent with a solid incremental extension."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The Cutler-Vallisneri first-order linearized bias formula is applied to configurations where the waveform mismatch is large (reported values up to 1.030 in Table 1), a regime in which the authors themselves state in Section V that the formula 'can no longer be regarded as an accurate estimate.' No figure or table marks which entries fall inside vs. outside the regime of validity, so readers cannot distinguish quantitatively reliable bias estimates from qualitative indicators. Precise numerical values such as bias ratios on the order of hundreds of sigma in this regime should not be read as parameter offsets.",
+      "paper_location": "Section III Equations 7-8; Section IV Figures 2-3, Table 1; Section V caveat paragraph",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The Fisher analysis excludes extrinsic parameters (sky location, luminosity distance, spin-orientation angles) and initial phase variables to avoid numerical ill-conditioning, justified by the claim that secular post-resonance phase growth is 'only weakly degenerate with simple phase offsets.' No numerical comparison with a larger Fisher space or sampling-based run is provided to support this assumption. Including extrinsic parameters would increase the statistical uncertainty bounds and could shift some reported bias-to-uncertainty ratios below the significance threshold.",
+      "paper_location": "Section III, Fisher parameter space definition; claim justified by citation to prior work [50] without independent validation for the resonance regime",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "For at least one resonance, the Teukolsky-based and self-force-based resonance coefficient prescriptions disagree by several orders of magnitude, but the paper offers no physical interpretation or reconciliation. This leaves the reliability of the Teukolsky-based coefficients for that resonance uncertain and makes the corresponding bias estimates difficult to interpret.",
+      "paper_location": "Section IV, Figure 3 and associated discussion; Section V",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The resonance-coefficient sign prescription is a reduced phenomenological choice: only two representative relative-sign combinations are studied rather than the full continuous resonant-phase dependence. Figure 4 demonstrates that this choice is decisive for weaker resonances, so the fraction of threshold-crossing cases depends on the chosen sign patterns rather than reflecting a physically characterized distribution.",
+      "paper_location": "Section II sign-prescription discussion; Section IV Figure 4",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The abstract's phrasing 'for most of the orbits considered' implies broader generality than is warranted: only four orbital configurations are studied at a single spin (a = 0.9M) and mass ratio, and one configuration is excluded due to kludge-flux breakdown near the separatrix. The sample is too small for population-level frequency claims.",
+      "paper_location": "Abstract; Table 1; Section V",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "Table 1, Case (iii), 3:1 resonance row reports bias and mismatch values while also listing 'N/A' for resonance duration and stating in the caption that this configuration was excluded due to kludge-flux breakdown. The inconsistency between the exclusion statement and the reported numerical entries is not explained.",
+      "paper_location": "Table 1 caption; Section IV, 3:1 resonance paragraph",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "gemini"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The sign and amplitude of resonance-induced modifications to the integrals of motion (energy, angular momentum, Carter constant) materially affect the inferred parameter bias: changing the sign of the Carter-constant flux modification moves weaker-resonance biases from above to below the one-sigma statistical threshold, as demonstrated in Figure 4.",
+    "Neglecting resonance crossings produces measurable waveform mismatch and signal-to-noise ratio losses in all studied configurations; this result holds independent of the validity of the Fisher bias formula.",
+    "Low-order resonances (3:2 and 2:1) produce larger effects than high-order subdominant resonances (4:3 and 3:1) for the orbital configurations studied, consistent with the empirical resonance-strength scaling of Equation 2.",
+    "The comparison between Teukolsky-based [Flanagan, Hughes, Ruangsri 2014] and self-force-based [Lynch et al. 2024] resonance coefficients reveals broad qualitative agreement for several resonances but a large discrepancy for at least one resonance, demonstrating that coefficient-prescription uncertainty is a non-negligible source of variability in bias estimates."
+  ],
+  "technical_takeaway": "The paper applies a Fisher-matrix analysis \u2014 using numerical kludge (NK) waveforms augmented by a phenomenological effective resonance model (ERM) with orbit-dependent Teukolsky-based coefficients \u2014 to estimate systematic parameter bias when resonance crossings are omitted from template waveforms. Two objections survived all review cycles: (1) the Cutler-Vallisneri first-order bias formula is applied in large-mismatch regimes (mismatches up to 1.030) where the authors themselves acknowledge it is invalid, so tabulated bias ratios in those cases are qualitative indicators only; and (2) the Fisher parameter space excludes extrinsic parameters under an unvalidated degeneracy assumption, which likely deflates statistical error bounds and inflates the bias-to-uncertainty ratios. The strongest internally-consistent finding is that sign and amplitude of resonance-induced modifications to the constants of motion are decisive, with sign changes moving weaker-resonance biases across the significance threshold \u2014 a result that does not depend on the large-mismatch regime."
+}

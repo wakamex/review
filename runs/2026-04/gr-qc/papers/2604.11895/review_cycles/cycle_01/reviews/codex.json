@@ -1,0 +1,146 @@
+{
+  "confidence": 0.72,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 6.5,
+    "novelty": 8.0,
+    "reviewer_confidence": 7.2,
+    "significance": 7.5,
+    "technical_soundness": 6.5
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "No prior cycle; this is the first review.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "A greybody-factor based frequency-domain model can reproduce the full complex post-merger ringdown waveform, not only its amplitude.",
+      "notes": "The paper presents a concrete ansatz and numerical fits showing low mismatches for selected NR waveforms. However, the phase correction is phenomenological and source-dependent, so the support is empirical rather than a derivation from the greybody factor alone.",
+      "paper_location": "Main text, GreyRing section; Appendix B, GreyRing model",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "GreyRing achieves very low mismatches for the dominant quadrupolar mode over comparable-mass, aligned-spin SXS simulations, typically outperforming or matching state-of-the-art time-domain ringdown models.",
+      "notes": "The SXS validation is meaningful for the stated aligned-spin/quasicircular regime. The comparison is weakened by use of an unweighted frequency-domain mismatch and by insufficient detail on the exact simulation set, fitting/training separation, and whether the same fitted nuisance parameters are optimized per waveform.",
+      "paper_location": "Validation against numerical simulations; Fig. 2; Appendix B and Fig. 5",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "GreyRing enables a new post-merger-only consistency test of GR by inferring the remnant mass and spin from the greybody factor and comparing with standard QNM spectroscopy.",
+      "notes": "The proposed test is conceptually plausible, but it is not fully agnostic: the template assumes the Kerr reflection amplitude and a chosen phenomenological correction, and the nuisance parameters may absorb deviations or biases. Independence from QNM spectroscopy is methodological, not a clean separation of physical assumptions.",
+      "paper_location": "Tests of gravity with GreyRing section",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "For GW250114, GreyRing gives remnant mass and spin posteriors consistent with standard ringdown/full-signal analyses and slightly narrower than standard black-hole spectroscopy.",
+      "notes": "The reported consistency is plausible, but the inference fixes several extrinsic parameters and appears not to include the full set of detector-analysis systematics, calibration uncertainty, PSD uncertainty, and model uncertainty. The precision comparison to standard spectroscopy is therefore not obviously like-for-like.",
+      "paper_location": "Application to GW250114; Fig. 3; Appendix D",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "GreyRing avoids overtone/start-time ambiguities because it works in the frequency domain over a band rather than choosing an early time-domain ringdown start.",
+      "notes": "The method does avoid a literal time-domain start-time choice, but it introduces a lower frequency cutoff and a model-validity band. Appendix D shows the phenomenological parameters depend strongly on the lower cutoff, so the analogous systematic is shifted rather than removed.",
+      "paper_location": "Tests of gravity with GreyRing; Discussion; Appendix D",
+      "support_level": "partially_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The phenomenological phase correction is sufficiently flexible to fit NR waveforms but not so flexible that it absorbs physical deviations or biases the inferred Kerr mass/spin.",
+      "paper_location": "GreyRing section, Eq. (4); Appendix B GreyRing model",
+      "why_it_matters": "This is central to interpreting GreyRing as a GR/no-hair test rather than only a high-quality phenomenological fit."
+    },
+    {
+      "assumption": "Fixed extrinsic parameters do not materially affect the GW250114 mass/spin credible intervals or the comparison with QNM spectroscopy.",
+      "paper_location": "Appendix D real-data setup",
+      "why_it_matters": "The paper's claim of comparable or better precision depends on credible intervals that may broaden under full marginalization."
+    },
+    {
+      "assumption": "The unweighted mismatch distribution is a reliable proxy for detector-noise-weighted model error in the frequency bands used for current and future observations.",
+      "paper_location": "Validation section and Discussion",
+      "why_it_matters": "Without this assumption, the stated SNR reach for parameter estimation is not directly supported by the reported mismatch values."
+    },
+    {
+      "assumption": "Neglecting spherical-spheroidal mode mixing and nonlinearities is harmless for the dominant-mode GW250114 analysis and for the frequency range used.",
+      "paper_location": "Appendix B Fits to numerical simulations; Discussion",
+      "why_it_matters": "The authors identify these effects as future work; if non-negligible, they can bias the inferred remnant parameters or distort subdominant-mode validation."
+    },
+    {
+      "assumption": "The selected frequency window isolates the post-merger physics in a way that is robust across events, not just for SXS:BBH:3617 and GW250114-like systems.",
+      "paper_location": "Appendix B fitting range; Appendix D cutoff study",
+      "why_it_matters": "The proposed test needs an operational prescription for choosing the frequency band without tuning to a known answer."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Do the missing equations in the provided HTML bundle hide assumptions or normalizations that materially affect the reflection-amplitude model?",
+      "why_model_cannot_resolve": "Several displayed equations are absent from the text extraction, so a human should inspect the PDF/source equations before judging the exact mathematical formulation."
+    },
+    {
+      "question": "Is the comparison with TEOBPM and LVK/pyRing analyses performed with sufficiently comparable mismatch definitions, frequency bands, priors, and marginalized parameters?",
+      "why_model_cannot_resolve": "The bundle summarizes results but does not provide the full configurations or code needed to audit the comparison quantitatively."
+    },
+    {
+      "question": "Does the phase of the Kerr reflection amplitude, plus the chosen correction, have a theoretically justified branch convention and behavior across the full sampled frequency range?",
+      "why_model_cannot_resolve": "The extracted text does not show the explicit phase formula and branch handling; this is a technical point requiring inspection of implementation or equations."
+    }
+  ],
+  "novelty_assessment": "The central idea appears novel and timely: using the complex greybody/reflection amplitude, rather than only QNM frequencies or only greybody-modulated amplitudes, as the basis for a frequency-domain ringdown test. The paper builds on a series of recent works by overlapping authors, so the main novelty is the phase-complete GreyRing waveform and its proposed Bayesian consistency test. The contribution is promising, but the current version reads more like a proof-of-concept plus empirical validation than a mature, fully reproducible precision-test framework.",
+  "overall_score_10": 7.0,
+  "paper_id": "2604.11895",
+  "recommended_verdict": "promising",
+  "reviewer": "codex",
+  "score_rationale": "The paper is technically interesting and plausibly important, with a compelling new waveform ansatz and strong empirical performance in the aligned-spin NR regime. I lower the soundness and clarity scores because the strongest claims about precision, robustness, and superiority over standard spectroscopy rely on fixed-parameter real-data analyses, unweighted mismatch diagnostics, nonpublic code, and phenomenological nuisance terms whose role in a GR test is not fully pinned down. These are manageable caveats rather than evidence of a fatal flaw.",
+  "summary": "The paper introduces GreyRing, a frequency-domain post-merger waveform ansatz in which each multipole is modeled using the Kerr black-hole reflection amplitude/greybody factor plus a small number of phenomenological amplitude and phase parameters. It validates the ansatz against aligned-spin, comparable-mass SXS simulations, proposes a ringdown-only consistency test by comparing remnant mass/spin inferred from GreyRing with QNM spectroscopy, and applies it to GW250114. The idea is interesting and potentially useful, but several claims of precision, robustness, and comparison with standard spectroscopy appear stronger than the presented validation supports.",
+  "technical_objections": [
+    {
+      "confidence": 0.82,
+      "evidence": "Appendix D states that sky location, inclination, polarization, and distance are fixed to Table 2 values, while only coalescence time and phase are varied/marginalized. The main text then compares GreyRing credible regions with standard LVK/pyRing QNM analyses and says they are compatible and slightly narrower.",
+      "objection": "The real-data precision claim is not established under a like-for-like inference setup because several extrinsic parameters are fixed rather than marginalized.",
+      "paper_location": "Appendix D, first two paragraphs; Application to GW250114",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.78,
+      "evidence": "Appendix D reports that low frequency cutoffs bias the phenomenological parameters due to inspiral contamination, high cutoffs lose constraining power, and only an intermediate band gives stable recovery. This is a model-validity choice similar in spirit to choosing a ringdown start time, even if mass/spin appear less sensitive in their examples.",
+      "objection": "The claim that the method avoids start-time/systematic choices is overstated because the frequency-domain analysis depends on a lower cutoff that plays an analogous role.",
+      "paper_location": "Appendix D, discussion of Figs. 9-10; Tests of gravity with GreyRing",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.74,
+      "evidence": "The paper explicitly defines the inner product without detector-noise weighting, then uses an indistinguishability criterion of the form mismatch below inverse SNR squared to claim adequacy for future detectors. That criterion is normally tied to the detector-noise-weighted waveform error in the analysis band, so the inference from one quantity to the other needs justification.",
+      "objection": "The mismatch/accuracy claims are based on an unweighted intrinsic mismatch, but the paper later invokes parameter-estimation indistinguishability criteria for detector SNRs.",
+      "paper_location": "Validation against numerical simulations, Eqs. (5)-(6); Discussion paragraph on SNR 100-300",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.69,
+      "evidence": "Each multipole has free phenomenological amplitude/phase parameters in addition to the Kerr mass and spin. Appendix D notes significant correlations among phenomenological parameters and broader distributions, but the paper does not show that these parameters cannot mimic changes in the reflection amplitude or hide beyond-GR deviations across the tested band.",
+      "objection": "The model includes source-dependent nuisance parameters whose degeneracies with mass and spin are not sufficiently characterized for a GR consistency test.",
+      "paper_location": "GreyRing section; Appendix B; Appendix D Fig. 11 discussion",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.76,
+      "evidence": "The numerical validation is for comparable-mass, quasicircular, nonprecessing/aligned-spin SXS simulations, with mode mixing and nonlinearities explicitly neglected or deferred. Yet several discussion statements advertise new precision tests broadly; the limitations are acknowledged later, but should qualify the main claims more directly.",
+      "objection": "Validation scope is narrower than some headline language suggests.",
+      "paper_location": "Validation against numerical simulations; Discussion final paragraphs",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.86,
+      "evidence": "The paper says codes are available upon request. For a waveform model whose evidence rests heavily on numerical fits, posterior comparisons, frequency-band choices, and sampler settings, public code or detailed configuration files are important for auditing the low mismatch and GW250114 claims.",
+      "objection": "Reproducibility is limited because the codes are available only upon request and the exact fitting/inference configurations are not fully specified in the text bundle.",
+      "paper_location": "Software section; Appendix B-D",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}
