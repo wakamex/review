@@ -394,6 +394,20 @@ JSON failures are recorded as artifacts rather than fatal process exits. It
 does not overwrite existing reviewer JSON. When a paper's gaps are filled, it
 refreshes that paper's board synthesis with `--overwrite-board`.
 
+For Sabine bullshit-meter batches, compare the mechanical LLM quality score
+against Sabine's score with:
+
+```bash
+python3 scripts/analyze_bullshit_meter_alignment.py \
+  --teasers runs/bullshit-meter/sabine-20260509-164342/teasers.json \
+  --teasers runs/bullshit-meter/latest-video-20260510-225418/review-scored/teasers.json \
+  --json-output runs/bullshit-meter/latest-video-20260510-225418/review-scored/alignment-with-prior-sabine-run.json \
+  --markdown-output runs/bullshit-meter/latest-video-20260510-225418/review-scored/alignment-with-prior-sabine-run.md
+```
+
+Higher LLM score means stronger paper; higher Sabine score means more bullshit,
+so negative correlation is the expected alignment direction.
+
 Artifacts for the first test paper live under:
 
 ```text
