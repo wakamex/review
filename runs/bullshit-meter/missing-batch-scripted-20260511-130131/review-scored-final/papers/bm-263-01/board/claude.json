@@ -1,0 +1,85 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Two full review cycles were completed. Cycle 1 produced divergent assessments (gemini 9/10 strong_select vs. claude/codex ~7.1 promising). Cycle 2 cross-review led gemini to revise down to 8/10 promising after accepting the 10-Mpc extrapolation, polar-constraint, and finite-box objections raised by claude and codex. Claude and codex converged tightly (7.0 and 7.2) with near-identical objection sets. The 'only if' overclaiming objection emerged as a shared moderate concern across all three reviewers by cycle 2. The primary unresolved disagreement is novelty (gemini 9 vs claude 5.5 vs codex 7.2). The final mechanical average is 7.4/10 from the cycle-2 scores. All objections included in this synthesis are supported by at least two reviewers or by explicit paper text.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper tries to explain why our cosmic neighborhood appears unusually calm \u2014 galaxies around the Milky Way and Andromeda are moving away from each other more quietly than expected given how massive those two galaxies appear to be. The authors argue that the discrepancy disappears if the dark matter in our region is spread out in a flat pancake shape rather than a sphere, with large empty voids above and below. The review board found the central demonstration promising and well-executed, but flagged that the paper's strongest language (\"the only way this works\") goes beyond what 169 constrained simulations and 31 nearby galaxy tracers can rigorously establish. The main caveat for a general reader is that the predicted structure beyond about 4 megaparsecs \u2014 including the polar voids \u2014 is inferred from a mathematical model, not from direct observations.",
+  "human_spotchecks": [
+    "Sigma computation methodology: The paper quotes 5.4\u03c3 and 3.5\u03c3 discrepancies between the spherical model and ensemble mean flow at 1 and 2 Mpc. It is not stated in the visible paper text whether the denominator incorporates only simulation-to-simulation posterior scatter or also propagates observational uncertainties (distance errors, velocity errors, MW/M31 mass uncertainty). A fuller error budget could reduce these figures. Verification requires reading Supplementary Code 1.",
+    "HMC sampling independence: The paper's uncertainty ranges (16th\u201384th percentile over 169 realizations) are only reliable if the selected samples are effectively independent draws from the posterior. The thinning criterion, chain autocorrelation statistics, and effective sample size are deferred entirely to ref. 12 (Wempe et al. 2025, A&A 701, A178), which is not included in the review bundle.",
+    "\u039bCDM base rate for c/a \u2248 0.24 near MW\u2013M31 mass pairs: The claim of 'full consistency within the standard cosmological model' requires knowing how common a \u22480.24 minor-to-major axis ratio is in the dark-matter environments of similarly-massed galaxy pairs in large unconstrained \u039bCDM volumes (e.g., IllustrisTNG, EAGLE, Millennium). This calculation is not performed in the paper and requires a separate analysis with careful mass-ratio and separation matching.",
+    "Polar-region posterior uncertainty: All 31 kinematic tracers lie at low supergalactic latitude, so the posterior for polar structure (voids at 4\u20138 Mpc, infall \u2273100 km/s) is largely determined by the \u039bCDM prior rather than observations. Whether the posterior scatter reported for polar regions correctly reflects this prior-dominated uncertainty \u2014 rather than being artificially narrowed by the BORG inference machinery \u2014 requires inspection of the full HMC chain output and is beyond the scope of the bundled text."
+  ],
+  "paper_id": "bm-263-01",
+  "public_summary": "The Milky Way and Andromeda are falling toward each other while the galaxies around them are receding unusually quietly. For decades, models of this system have faced a contradiction: the two big galaxies appear heavy enough (by the \"timing argument\") to strongly attract nearby objects, yet the observed recession velocities are too calm for that much mass in a spherically symmetric configuration. Wempe et al. attempt to resolve this by constructing 169 constrained computer simulations of a Local Group-like environment within the standard \u039bCDM cosmological model. Their simulations converge on a configuration where the mass is strongly concentrated in a flat sheet aligned with the known Local Sheet and Supergalactic Plane, with large underdense voids above and below. In this geometry, matter at large distances along the sheet exerts an outward gravitational pull that partially offsets the infall of nearby galaxies, explaining why the Hubble flow looks quiet even around a massive pair. The authors validate that the inferred sheet reflects the kinematics of their 31 galaxy tracers, not merely their anisotropic sky positions, using a carefully designed mock inference test. They predict strong infall velocities (\u2273100 km/s) from the polar directions \u2014 currently unobservable due to a lack of known high-latitude dwarf galaxies within 5 Mpc \u2014 as a testable consequence. The review board regarded the paper as a promising and well-executed demonstration, noting it appears in Nature Astronomy (published January 2026) and passed external peer review. Sustained objections concern the strength of the \"only if\" language (the paper shows one working solution, not that no other geometry could work), the reliance on model extrapolation beyond the observationally constrained volume, finite simulation-box effects that become relevant at the 10-Mpc scale where conclusions are drawn, and the absence of a calculation showing how common this flat geometry is in generic \u039bCDM environments.",
+  "reviewer_disagreements": [
+    "Novelty: Gemini rated novelty 9/10 in both cycles, characterizing the BORG+Gadget-4 constrained-simulation approach as 'highly novel.' Claude rated novelty 5.5/10 both cycles, noting the pipeline is directly from the authors' own prior publications (refs 9 and 12) and the new contribution is application and geometric quantification rather than a methodological breakthrough. Codex settled at 7.2/10 in cycle 2, acknowledging the synthesis is novel while the method is not. No consensus was reached on this dimension.",
+    "Overall severity and verdict: Gemini initially gave 9/10 ('strong_select') in cycle 1, while Claude and Codex gave 7.0\u20137.1/10 ('promising'). By cycle 2, Gemini revised to 8/10 ('promising') after accepting the 10-Mpc extrapolation and polar-constraint objections raised by the other reviewers. A gap of ~1 point persisted through the final cycle.",
+    "Whether the 'only if' overclaiming objection is verdict-changing: Codex marked this objection 'would_change_verdict_if_true: true' in both cycles, arguing that weakening the claim to 'one consistent solution exists' materially reduces the paper's contribution. Claude marked the same objection 'would_change_verdict_if_true: false,' arguing that demonstrating the solution exists and quantifying it remains a meaningful 'promising' contribution regardless of whether other solutions also exist.",
+    "Severity of the finite-box limitation: Gemini rated the periodic boundary condition objection 'minor' in cycle 1 and maintained that the authors' own acknowledgment sufficiently addressed it. Claude and Codex both rated it 'moderate' across both cycles given that the claimed sheet extends to the exact scale (~10 Mpc) where the authors acknowledge boundary effects become non-negligible."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The headline 'only if mass is strongly concentrated in a plane' and 'demonstrating full consistency within the standard cosmological model' language is stronger than the inference supports. The paper demonstrates that a sheet-like posterior solution exists and reconciles the tension; it does not perform a model comparison excluding other non-spherical mass geometries or external tidal configurations that might also work.",
+      "paper_location": "Abstract: 'but only if mass is strongly concentrated in a plane out to 10 Mpc'; Discussion: 'demonstrating full consistency within the standard cosmological model'",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "Structural claims about the sheet extending to 5\u201310 Mpc and the polar voids are extrapolations well beyond the directly constrained volume. The 31 kinematic tracers lie within ~4 Mpc and at low supergalactic latitude, so the polar underdensity and strong polar infall (\u2273100 km/s) are posterior predictions dominated by the \u039bCDM prior rather than by observed kinematics.",
+      "paper_location": "Methods (tracer likelihood uses 31 galaxies within ~4 Mpc); Results Figs. 2\u20134 and Discussion claim sheet/void structure and flows to 8\u201310 Mpc; Fig. 2 white dots showing all tracers at low latitude",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex",
+        "claude",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The 40-Mpc simulation box with periodic boundary conditions produces acknowledged anisotropic tidal forces on scales \u227310 Mpc and may bias inferred structure to align with coordinate axes. The inferred sheet aligns better with the simulation x\u2013y plane (5\u20136 deg offset) than with the observed Local Sheet (13\u201315 deg offset), consistent with a partial box artifact. This limitation overlaps directly with the ~10-Mpc scale at which key conclusions are drawn.",
+      "paper_location": "Discussion limitations paragraph; inertia-tensor alignment angles reported in Results",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper does not quantify how common a c/a \u2248 0.24 mass environment is in generic \u039bCDM volumes near MW\u2013M31-mass pairs. Without this base rate, the phrase 'full consistency within \u039bCDM' conflates 'not excluded by \u039bCDM' with 'expected by \u039bCDM.' Prior work (Neuzil et al. 2020, ref. 19) documents that the observed Local Sheet environment is unusual, making this omission material.",
+      "paper_location": "Abstract ('demonstrating full consistency within the standard cosmological model'); Discussion; citation of Neuzil et al. 2020 (ref. 19) reporting c/a = 0.16 for observed galaxies without comparison to \u039bCDM distribution",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The quoted 5.4\u03c3 and 3.5\u03c3 discrepancy figures reference simulation-to-simulation posterior scatter across 169 constrained realizations, not an independent observational rejection of spherical symmetry in nature. Treating these figures as evidential sigma values for the real Universe requires the posterior ensemble to be a faithful representation of all uncertainty, which has not been independently validated in this paper.",
+      "paper_location": "Results, Fig. 1 discussion: 'The spherical model is 5.4\u03c3 below the ensemble mean flow at 1 Mpc and 3.5\u03c3 below it at 2 Mpc'",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "A spherical infall model applied to the ensemble's own mean mass profile falls 5.4\u03c3 below the ensemble mean flow at 1 Mpc and 3.5\u03c3 below it at 2 Mpc (where \u03c3 is the simulation-to-simulation posterior scatter across 169 realizations), demonstrating that spherical symmetry fails within the constrained posterior.",
+    "Individual realizations of the ensemble are consistently and strongly flattened, with c/a = 0.24 \u00b1 0.08 in the 2\u20134 Mpc shell and a maximum c/a of 0.45 across all 169 samples, ruling out approximately spherical geometries within the posterior.",
+    "The inferred minor axis of the mass distribution is aligned within ~13\u201318 deg of the observed Local Sheet north pole, consistent with the known luminous structure of the nearby Universe.",
+    "A mock inference using identical tracer positions but spherical-model velocities (with the same M(r) as the real posterior) recovers no preferred planar structure, demonstrating that the inferred sheet is driven by the observed peculiar velocities rather than the anisotropic sky distribution of the tracers.",
+    "The sheet geometry predicts a highly anisotropic velocity field with polar infall \u2273100 km/s out to 8 Mpc \u2014 a physically well-motivated and falsifiable prediction accessible to future high-latitude dwarf galaxy surveys."
+  ],
+  "technical_takeaway": "Wempe et al. use 169 constrained \u039bCDM resimulations (BORG Bayesian hierarchical inference + Gadget-4 zoom resimulations) to argue that the timing-argument lower bound on Local Group mass (\u03a3M\u2082\u2080\u2080,c \u2273 2\u00d710\u00b9\u00b2 M\u2609) and the quiet local Hubble flow (~30\u201335 km/s residuals within 4 Mpc) are simultaneously consistent within \u039bCDM only if the surrounding mass distribution is strongly flattened: c/a \u2248 0.24 in the 2\u20134 Mpc shell, aligned to within ~13\u201318 deg of the Local Sheet north pole, with \u03c1/\u03c1\u0304 \u2248 0.26\u20130.31 in the polar voids at 4\u20138 Mpc. In a sheet geometry the shell theorem does not apply; off-axis mass at large cylindrical radii exerts net outward force on in-plane tracers, partially offsetting infall and producing the observed low residuals despite high enclosed mass. A mock inference replacing observed tracer velocities with spherical-model predictions for the same tracer positions recovers no planar structure, providing meaningful validation that the sheet is kinematically driven. Cross-review identified three moderate objections that survived both cycles: the \"only if / full consistency\" framing overstates what the posterior comparison demonstrates (no model comparison against other non-spherical configurations), structural claims at 5\u201310 Mpc are extrapolations beyond the directly constrained ~4 Mpc tracer volume, and the \u039bCDM base rate for c/a \u2248 0.24 environments near MW\u2013M31-mass pairs is unquantified."
+}

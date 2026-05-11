@@ -1,0 +1,168 @@
+{
+  "confidence": 0.72,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 3.5,
+    "novelty": 5,
+    "reviewer_confidence": 7,
+    "significance": 4,
+    "technical_soundness": 3
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "I lowered the technical-soundness assessment slightly after the other reviews highlighted that Lemma 2 may be relying on a statistical-independence reading of no-retrocausality that erases ordinary forward correlations. I do not fully accept the strongest fatal reading, because the manuscript explicitly says its 'cannot influence' statements are postulated conditional independences; but that makes the assumptions much stronger and less well motivated than advertised.",
+    "invalid_points_from_other_reviewers": [
+      "Gemini's claim that Theorem 1 is simply mathematically invalid is too strong on the supplied text, because the paper explicitly postulates scenario-specific statistical conditional independences under the heading NRC. The problem is that these premises are stronger than ordinary no-retrocausality.",
+      "Gemini's specific Appendix B demand to prove P(d|c,a,x)=P(d|c) is not clearly necessary for a CHSH factorization with lambda = (c,d); the deeper issue is the recovery/compatibility of the constructed Q distribution with the actual operational probabilities.",
+      "Claude's assessment that the OPEM toy example is convincing is too generous; the example does not exhibit a concrete set of marginals that rules out a positive joint distribution.",
+      "Claude's statement that Section IV.3 clearly proves indispensability of Absoluteness of Pseudo Events overstates what is shown; the example shows loss of the convexity argument in a class of models, not a fully general impossibility theorem."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Claude is right that the undefined 'Causal Agency' phrase in Appendix A and the apparent identity of Definitions 3 and 4 are real textual/formal problems, though probably not by themselves verdict-changing.",
+      "Claude is right that support conditions and the applicability of Leifer-Pusey to the CTSF protocol need explicit treatment.",
+      "Gemini's central warning about conflating causal non-influence with statistical conditional independence is important. It is best read as a major challenge to the motivation and advertised meaning of NRC, not automatically as a formal disproof if the conditional independence is explicitly assumed.",
+      "Both reviewers correctly identify Appendix B/Theorem 2 as underdeveloped, especially around whether the constructed distribution really reproduces the operational data."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "A timelike Wigner-friend scenario can be formulated with Charlie/Alice before Debbie/Bob and with a distinction between pseudo-events and truly observed events.",
+      "notes": "The scenario and terminology are conceptually clear enough, although later formal definitions of the two event classes are ambiguous in the supplied rendering.",
+      "paper_location": "Sections II.2 and III.1; Figs. 1-3",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "AOE, ATS, NRC, and SPE imply a Causal Time-Symmetric Friendliness CHSH-type inequality.",
+      "notes": "The CHSH bound follows from the final hidden-variable-style factorization, but the derivation of that factorization depends on conditional independences that are either very strong assumptions or are not justified by ordinary no-retrocausality.",
+      "paper_location": "Section III.2, Theorem 1; Appendix A",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "Quantum mechanics violates the derived inequality up to the temporal CHSH/Tsirelson value 2 sqrt(2).",
+      "notes": "The measurement choices look like the standard construction, but the paper does not explicitly compute the correlators in the full Wigner-friend protocol with unitary erasure branches and the NSIT restriction.",
+      "paper_location": "Appendix A, quantum violation paragraph and Eqs. (53)-(56)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "AOE can be weakened to Operational Pseudo Event Mediation while preserving the no-go result.",
+      "notes": "The proof constructs a positive distribution from marginals and response functions and then treats it as reproducing the operational data. This appears to assume the relevant mediation/factorization rather than derive it from a clearly weaker operational principle.",
+      "paper_location": "Section IV.2, Definition 2 and Theorem 2; Appendix B",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "Absoluteness of pseudo-events cannot be discarded without losing the inequality, and algebraic/Boxworld correlations can then occur.",
+      "notes": "The example plausibly shows that context-dependent pseudo-event weights can destroy the CHSH convexity argument, but it is not a fully general necessity theorem.",
+      "paper_location": "Section IV.3, Eqs. (25)-(28)",
+      "support_level": "partially_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "A complete formal list of all conditional independences constituting NRC, SPE, and OPEM in variables a,b,c,d,x,y.",
+      "paper_location": "Section III.2; Appendix A; Appendix B",
+      "why_it_matters": "The theorem's validity turns on whether the key independences are explicit assumptions or are being derived from weaker causal prose."
+    },
+    {
+      "assumption": "A physical justification for treating 'future pseudo-event cannot influence past true event' as conditional statistical independence.",
+      "paper_location": "Section III.2, Assumption 3; Appendix A, Lemma 2",
+      "why_it_matters": "In timelike experiments, future outcomes can be statistically correlated with past outcomes via forward causal channels. Forbidding that is much stronger than no retrocausality."
+    },
+    {
+      "assumption": "A compatibility condition requiring the OPEM-constructed distribution to reproduce the actual operational statistics, not merely define a possible model.",
+      "paper_location": "Section IV.2 and Appendix B",
+      "why_it_matters": "Without this, Theorem 2 does not show that every theory satisfying the advertised operational assumptions obeys the CHSH bound."
+    },
+    {
+      "assumption": "Full-support or support-restricted conditioning for pseudo-event values.",
+      "paper_location": "Appendix A, Lemma 2",
+      "why_it_matters": "Several divisions and conditional probabilities are undefined on zero-probability events."
+    },
+    {
+      "assumption": "An explicit mapping from the CTSF protocol to the Leifer-Pusey no-signalling-in-time/time-symmetry result.",
+      "paper_location": "Section III.2 and Appendix A, Eqs. (55)-(56)",
+      "why_it_matters": "The quantum violation relies on a structural transfer from a prepare-measure theorem to a Wigner-friend protocol with pseudo-events and unitary erasure."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "What are the exact rendered conditional independences in Assumption 3 and Lemma 2?",
+      "why_model_cannot_resolve": "The HTML bundle drops substantial mathematical notation; a PDF/LaTeX check is needed to determine whether the strongest independence assumptions are explicitly stated or accidentally inferred."
+    },
+    {
+      "question": "Is the statistical-independence form of NRC defensible in a timelike prepare-measure Wigner-friend scenario?",
+      "why_model_cannot_resolve": "This is a foundations judgment about whether no retrocausality should forbid Bayesian information about past outcomes from future pseudo-events despite forward causal coupling."
+    },
+    {
+      "question": "Does the CTSF quantum protocol actually satisfy the NSIT/time-symmetry conditions used to import Leifer-Pusey's result?",
+      "why_model_cannot_resolve": "A domain expert should verify the mapping and compute the correlators with the reversible friend measurements included."
+    },
+    {
+      "question": "Is OPEM strictly weaker than AOE in the authors' intended semantics?",
+      "why_model_cannot_resolve": "The answer depends on the intended operational status of pseudo-event marginals, response functions, and constructed joint distributions, which is not fully formalized in the manuscript."
+    }
+  ],
+  "novelty_assessment": "The timelike Local Friendliness framing and the pseudo-event/truly-observed-event distinction are interesting and plausibly novel within a specialized quantum-foundations niche. However, the main inequality resembles known temporal CHSH/preparation-contextuality constructions, and the claimed weakening of AOE is not yet clearly separated from assuming a mediation factorization. Novelty remains plausible but is substantially caveated by the unresolved formal issues.",
+  "overall_score_10": 3.5,
+  "paper_id": "bm-251-01",
+  "recommended_verdict": "contested",
+  "reviewer": "codex",
+  "score_rationale": "The paper has an interesting conceptual direction, but the main results are not yet review-ready. Theorem 1 may be formally salvageable only by reading NRC as a strong conditional-independence assumption that suppresses normal forward statistical correlations; Theorem 2 still appears to assume much of the mediation structure it claims to derive; and the quantum realization is too compressed. The work is therefore contested rather than cleanly promising.",
+  "summary": "The paper proposes a timelike Wigner-friend no-go theorem using AOE, Axiological Time Symmetry, No Retrocausality, and Screening via Pseudo Events, then argues that a weakened Operational Pseudo Event Mediation assumption preserves the CHSH-type bound. After reading the other reviews, I think the central issue is sharper than in my first review: the proof appears to require strong statistical conditional independences between past truly observed events and future pseudo-events. If those independences are simply part of the stated assumptions, the theorem may be a formal Bell-type result under very strong premises; if they are meant to follow from ordinary no-retrocausality, the proof is not valid. The weakened-AOE theorem remains underjustified because the constructed distribution is too close to the desired mediation model.",
+  "technical_objections": [
+    {
+      "confidence": 0.86,
+      "evidence": "The argument needs past Alice outcomes to be independent of future Debbie pseudo-events under relevant conditioning, e.g. a relation of the form P(a|c,d,x,...) = P(a|c,x,...). In a timelike prepare-measure scenario, d can be statistically informative about a through the forward channel even if d does not causally influence a. The paper says 'cannot influence' is to be read statistically, so this may be an explicit premise rather than a proof error, but then the premise is far stronger than the label NRC suggests.",
+      "objection": "The proof uses a statistical-independence version of No Retrocausality that is much stronger than ordinary causal non-influence.",
+      "paper_location": "Section III.2, Assumption 3; Appendix A, Lemma 2",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "OPEM assumes operational marginals and response functions such as P(c,d|x,y), P(a|c,x), and P(b|c,d,y), constructs Q by multiplying them, and then uses Q to recover P(a,b|x,y). A separate compatibility condition showing that the actual operational statistics must equal this constructed marginal is not established; without it, the result is model construction, not a derivation from weaker assumptions.",
+      "objection": "Theorem 2 appears to build the desired mediation model into OPEM.",
+      "paper_location": "Section IV.2, Definition 2 and Theorem 2; Appendix B, Eqs. (57)-(60)",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.78,
+      "evidence": "Operational Time Symmetry is introduced for accessible observed events, but ATS extends the symmetry relation to joint distributions involving c and d. The authors acknowledge that ATS presupposes AOE in order to be formulated. This weakens the claim that locality has been replaced by an independently motivated or weaker time-symmetry assumption.",
+      "objection": "ATS is imposed on pseudo-events that may be unitarily erased, so its operational status is unclear.",
+      "paper_location": "Section III.2, Definition 1 and Assumption 2, especially Eq. (10) and the discussion after it",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.75,
+      "evidence": "The paper lists measurement directions and states that the averaged preparation is no-signalling in time, then invokes Leifer-Pusey. It does not spell out the initial state, Charlie/Debbie measurement unitaries, erasure branches, outcome conventions, and all four E_xy correlators for the actual CTSF protocol.",
+      "objection": "The quantum-violation paragraph is too compressed for the physical scenario claimed.",
+      "paper_location": "Appendix A, Eqs. (53)-(56)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.84,
+      "evidence": "The example says operationally inaccessible marginals may come from a quasi-probability distribution, but it does not exhibit concrete incompatible marginals or prove that no positive Kolmogorovian joint exists. Non-accessibility of a joint measurement is not by itself failure of existence of a joint distribution.",
+      "objection": "The toy example for strict weakness of OPEM over AOE is not convincing as written.",
+      "paper_location": "Section IV.2, example after Eq. (22)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.72,
+      "evidence": "Definitions 3 and 4 appear textually identical in the supplied version and both conclude only that 'the joint probability exists' without clearly displaying the variables. Appendix A also concludes with an undefined phrase, 'Causal Agency,' rather than the theorem's stated assumptions AOE, ATS, NRC, and SPE.",
+      "objection": "Definitions and terminology around the split of AOE are too ambiguous to audit.",
+      "paper_location": "Section IV.3, Definitions 3-4; Appendix A final paragraph",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "The derivation divides by probabilities such as P(c,d) or their conditional analogues. A full-support restriction, support-limited statement, or regular conditional probability convention is needed for zero-probability pseudo-event values.",
+      "objection": "The proof divides by conditional probabilities without stated support conditions.",
+      "paper_location": "Appendix A, Lemma 2, especially Eqs. (40)-(43)",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

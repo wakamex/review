@@ -1,0 +1,114 @@
+{
+  "confidence": 0.85,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 8,
+    "novelty": 6,
+    "reviewer_confidence": 8,
+    "significance": 7,
+    "technical_soundness": 4
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Downgraded score from 7 to 5 and verdict from 'promising' to 'weak_evidence'. I agree with the other reviewers that the paper's core novelty (the interpolation mechanism) is presented as an unsupported conjecture. Furthermore, the other reviewers correctly identified potentially fatal theoretical flaws: the late-time un-suppression of the MOND term due to X vanishing, and the oversimplified tensor mode argument.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": [
+      "The interpolation between regimes is an unsupported conjecture (Eq 33).",
+      "X -> 0 at z~0 means the MOND term will inappropriately turn on during late-time cosmology.",
+      "The argument that tensor modes are unmodified is too simplistic for a non-local action where past background curvature can source effects.",
+      "Stability of the combined interpolating model cannot be assumed from the stability of its limiting cases."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "The proposed model reproduces the cosmological successes of cold dark matter.",
+      "notes": "While the isolated cosmological model is mathematically equivalent to CDM, in the synthesized model the cosmological invariant X -> 0 at z~0 (Appendix 7), which threatens to inappropriately reactivate the MOND correction at late times.",
+      "paper_location": "Section 2",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The model reproduces MOND phenomenology and respects weak lensing in gravitationally bound systems.",
+      "notes": "Based on prior work by the authors, the specific non-local functional correctly reproduces MOND equations and maintains consistency with weak lensing constraints in static, isolated limits.",
+      "paper_location": "Section 3",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The single proposed equation smoothly interpolates between the cosmological and gravitationally bound regimes.",
+      "notes": "The transition mechanism via Equation (33) is a conjecture. The paper provides no analytical or numerical demonstration that the coupled system behaves as intended in a transition geometry.",
+      "paper_location": "Section 4",
+      "support_level": "unsupported"
+    },
+    {
+      "claim": "The model does not modify tensor mode propagation, satisfying multimessenger constraints.",
+      "notes": "The authors argue that the Ricci tensor vanishes for gravitational radiation. However, the non-local inverse d'Alembertian accumulates past matter distributions, meaning the source term may not be completely inert for GWs.",
+      "paper_location": "Section 4.2",
+      "support_level": "unclear"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The interpolation function f(X) and the non-local operator \u25a1\u207b\u00b9 behave well and remain stable in the highly nonlinear transition region.",
+      "paper_location": "Section 4",
+      "why_it_matters": "Non-local operators can introduce instabilities, ghosts, or unphysical feedback when applied outside the strictly controlled asymptotic regimes for which they were tuned."
+    },
+    {
+      "assumption": "Late-time zero-crossing of X does not spoil late-time cosmology.",
+      "paper_location": "Appendix 7",
+      "why_it_matters": "If f(X) grows at z~0, the model's equivalence to CDM breaks down precisely when precise observations exist."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Does the late-time behavior of X -> 0 at z~0 quantitatively ruin the background expansion and linear structure formation in the synthesized model?",
+      "why_model_cannot_resolve": "Requires solving the non-local background equations numerically over cosmic history, which the authors deferred to future work."
+    }
+  ],
+  "novelty_assessment": "The component models (mimetic dark matter and non-local MOND) were previously published. The novelty lies in synthesizing them via a single Lagrangian and interpolating functional. However, the interpolation mechanism remains an untested proposal.",
+  "overall_score_10": 5,
+  "paper_id": "bm-244-01",
+  "recommended_verdict": "weak_evidence",
+  "reviewer": "gemini",
+  "score_rationale": "While the component models (mimetic CDM and non-local MOND) are established in prior work, the core novelty of this paper is their synthesis via an interpolating functional. As correctly highlighted by other reviewers, this interpolation is asserted but not demonstrated, even in a toy model. Additionally, the paper overlooks critical theoretical issues in the synthesized model, such as the late-time (z~0) un-suppression of the MOND term when the cosmological invariant X vanishes, and potential non-local memory effects on tensor mode propagation. Without a concrete demonstration of the transition and an analysis of the coupled model's stability, the paper reads as an interesting but largely unsubstantiated proposal. Consequently, the technical soundness and overall score have been lowered significantly.",
+  "summary": "The paper proposes a unified non-local gravity model that interpolates between a mimetic gravity regime for cosmology (which mimics cold dark matter) and a MOND-like regime for gravitationally bound systems. The synthesis relies on an interpolation equation designed to naturally shift behavior based on whether spatial or temporal gradients dominate.",
+  "technical_objections": [
+    {
+      "confidence": 0.95,
+      "evidence": "The authors state: 'Although a definitive analysis in a realistic setting is obviously a formidable numerical undertaking... It will probably require some trial and error...'. No proof or toy model of the transition is provided.",
+      "objection": "The core claim that the unified model successfully interpolates between the MOND and cosmological regimes is completely undemonstrated.",
+      "paper_location": "Section 4.2",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "Appendix 7 shows that X -> 0 at late times (z~0). When X vanishes, the suppression function f(X) is no longer small. This means the MOND correction will inappropriately turn on during late-time cosmology, potentially spoiling the exact CDM mimicry the authors claim.",
+      "objection": "The vanishing of the cosmological invariant X at late times threatens the validity of the background cosmology.",
+      "paper_location": "Appendix 7 and Section 4.1",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.8,
+      "evidence": "The paper asserts tensor modes are unmodified because the source involves the Ricci tensor, which vanishes for GWs. But the non-local operator \u25a1\u207b\u00b9 means X accumulates past background curvature, potentially creating non-local memory effects that affect tensor propagation.",
+      "objection": "The tensor mode propagation argument is too local for a non-local theory.",
+      "paper_location": "Section 4.2",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "The authors rely on previous stability analyses of the purely cosmological and pure MOND limits. Stability in the asymptotic regimes does not guarantee stability of the highly non-linear, non-local coupled equations in the transition region.",
+      "objection": "Stability of the synthesized model is unverified.",
+      "paper_location": "Section 4.2",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "While a counter-example disproves strict mathematical equivalence to point particles, it does not guarantee the 4-velocity field remains caustic-free during general 3D asymmetric dynamical collapse.",
+      "objection": "The absence of caustics is proven only for a highly specialized, static, spherically symmetric case.",
+      "paper_location": "Section 6",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

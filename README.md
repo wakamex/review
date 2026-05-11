@@ -17,6 +17,7 @@ Live site: **<https://mihaicosma.com/review/>** — catalog, scatter, drill-down
 | `bs-meter · sabine` | Papers rated on Sabine Hossenfelder's bullshit-meter video series | 45 | `runs/bullshit-meter/sabine-20260509-164342/` |
 | `bs-meter · latest-video` | Latest Sabine bullshit-meter video (separate run) | 1 | `runs/bullshit-meter/latest-video-20260510-225418/review-scored/` |
 | `bs-meter · missing-video-318` | Backfill of a Sabine video missed by the main batch (arXiv 2405.06328) | 1 | `runs/bullshit-meter/missing-video-318-20260511-123655/review-scored/` |
+| `bs-meter · missing-batch-scripted` | Scripted backfill of 17 Sabine bullshit-meter videos missed by the main batch | 17 | `runs/bullshit-meter/missing-batch-scripted-20260511-130131/review-scored-final/` |
 
 The site renders the two bs-meter runs as one category, with Sabine's 0–10
 bullshit score (higher = more bullshit) shown alongside the board's 0–10

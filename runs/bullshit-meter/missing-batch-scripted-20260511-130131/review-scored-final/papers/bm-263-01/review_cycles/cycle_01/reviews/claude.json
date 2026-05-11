@@ -1,0 +1,139 @@
+{
+  "confidence": 0.72,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 8,
+    "novelty": 5.5,
+    "reviewer_confidence": 6,
+    "significance": 7.5,
+    "technical_soundness": 7
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "First cycle; no prior review to compare against.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "A spherical infall model applied to the constrained simulation ensemble's mass profile is 5.4\u03c3 below the ensemble mean flow at 1 Mpc and 3.5\u03c3 below at 2 Mpc, demonstrating that spherical symmetry fails to reproduce the simulated dynamics.",
+      "notes": "The comparison is between the spherical collapse model applied to the ensemble's own M(r) profile and the simulation's mass-weighted radial velocity. This is internally consistent. The \u03c3 values assume the posterior scatter characterizes the uncertainty, which is reasonable given 169 realizations.",
+      "paper_location": "Results section, Fig. 1 and surrounding text",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The inferred mass distribution is strongly sheet-like with minor-to-major axis ratio c/a = 0.24\u00b10.08 in the 2\u20134 Mpc shell and 0.30\u00b10.10 in the 4\u20138 Mpc shell, aligned within ~13\u201318 deg of the Local Sheet north pole.",
+      "notes": "Reported across all 169 realizations; maximum c/a of 0.45 across ensemble ensures the result is not driven by outliers. Alignment with the known Local Sheet is striking and lends physical credibility.",
+      "paper_location": "Results section, inertia tensor analysis",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The sheet-like mass distribution is driven by the observed tracer peculiar velocities rather than by the anisotropic spatial distribution of the tracers, as demonstrated by a mock inference using spherical model velocities.",
+      "notes": "The mock test design is sound: same tracer positions, velocities replaced by spherical model predictions with same M(r). Result shows no preferred plane. The residual +z/\u2212z asymmetry in the mock (attributed to M31 tangential velocity) is acknowledged but not fully quantified.",
+      "paper_location": "Discussion section; Extended Data Figs. 1\u20133",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The inferred Local Group mass is \u03a3M\u2082\u2080\u2080,c = 3.3\u00b10.6\u00d710\u00b9\u00b2 M\u2609.",
+      "notes": "This is at the higher end of literature estimates (refs 7, 8 give 1.3\u20132.3\u00d710\u00b9\u00b2 M\u2609). The value is consistent with the timing argument lower bound but substantially above some dynamical estimates. Reconciliation with lower estimates from refs 7\u20138 is not addressed in detail.",
+      "paper_location": "Results section",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The peculiar velocity field is strongly anisotropic, with infall velocities \u2273100 km/s from polar regions out to 8 Mpc, a prediction untested by current high-latitude tracer data.",
+      "notes": "Physically well-motivated and consistent with the sheet geometry, but entirely a simulation prediction. The claim that the anisotropy is 'obscured by the paucity of tracers at high supergalactic latitude' is correct but also means the central observational prediction is presently unverifiable.",
+      "paper_location": "Results section (Fig. 4); Discussion",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The discrepancy between timing argument masses and Hubble flow estimates is fully resolved within \u039bCDM by the sheet geometry, demonstrating 'full consistency within the standard cosmological model'.",
+      "notes": "The reconciliation is demonstrated within the ensemble, but the paper does not quantify how probable this sheet-like geometry is in generic \u039bCDM volumes. Without that, the 'full consistency' claim is slightly stronger than what is shown: it is consistent, not shown to be typical.",
+      "paper_location": "Abstract; Discussion",
+      "support_level": "partially_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The 35 km/s velocity scatter adopted for the 31 tracer galaxies (from ref. 8) is an accurate representation of the observational uncertainty in peculiar velocities, not dominated by systematic errors such as distance indicator biases.",
+      "paper_location": "Methods (Constrained Local Group simulations)",
+      "why_it_matters": "The scatter term controls how tightly the tracer velocities constrain the mass distribution. If 35 km/s is underestimated (e.g., due to Malmquist bias or distance ladder systematics), the inferred sheet would be artificially sharpened; if overestimated, the inference would be less constraining than claimed."
+    },
+    {
+      "assumption": "The 169 HMC samples are sufficiently independent to treat the ensemble statistics (means, percentiles) as representative of the posterior.",
+      "paper_location": "Methods; ref. 12",
+      "why_it_matters": "HMC chains can exhibit autocorrelation. If effective sample size is substantially below 169, the reported uncertainties (16th\u201384th percentiles) are underestimates. The independence criterion is deferred to ref. 12 without summary here."
+    },
+    {
+      "assumption": "The \u039bCDM prior used (Planck 2018 parameters) is correct. In particular, the cosmological constant \u03a9_\u039b affects the spherical collapse model's turnround radius and the timing argument mass estimate.",
+      "paper_location": "Methods (Constrained Local Group simulations)",
+      "why_it_matters": "The paper's reconciliation is conditional on \u039bCDM. Any modification to \u03a9_\u039b (e.g., from evolving dark energy) would shift the predicted v(r) relation and alter the degree of tension that needs resolving."
+    },
+    {
+      "assumption": "The mass-weighted velocity defined in Eq. (1) is the appropriate observable for comparison with the 31 tracer galaxies' recession velocities, and selection effects in the tracer catalogue do not bias this comparison.",
+      "paper_location": "Equation (1) and surrounding text",
+      "why_it_matters": "Galaxies are luminosity-selected, not mass-selected. If the 31 tracers are biased toward overdense or underdense environments within the sheet, the comparison with the mass-weighted mean velocity profile could be systematically off."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Is the 5.4\u03c3 discrepancy between the spherical model and the simulation ensemble mean at 1 Mpc computed using only the posterior simulation-to-simulation scatter, and does this scatter correctly propagate all sources of uncertainty (distance errors, velocity errors, MW/M31 mass uncertainty)?",
+      "why_model_cannot_resolve": "The \u03c3 calculation methodology is not spelled out in detail in the visible text. Whether the denominator is the standard deviation of ensemble means or includes observational uncertainties requires reading the supplementary code."
+    },
+    {
+      "question": "Do the 169 selected HMC realizations satisfy a formal thinning or independence criterion, and what is the effective sample size? The detail is deferred to ref. 12.",
+      "why_model_cannot_resolve": "Ref. 12 (Wempe et al. 2025, A&A 701) is not included in the bundle and cannot be read here."
+    },
+    {
+      "question": "How common is a c/a \u2248 0.24 mass environment around MW\u2013M31-mass pairs in unselected \u039bCDM simulations (e.g., IllustrisTNG, EAGLE, or Millennium)? This base rate is critical for evaluating whether 'consistent with \u039bCDM' implies 'expected' or merely 'not excluded.'",
+      "why_model_cannot_resolve": "This comparison requires access to large-volume cosmological simulation catalogs and a careful mass-ratio and separation matching procedure not conducted in this paper."
+    }
+  ],
+  "novelty_assessment": "The core Bayesian constrained-simulation framework (BORG + Gadget-4 resimulations of Local Group analogues) is directly from the authors' own prior work (refs 9, 12), so the methodology is not novel. The new contribution is the specific finding that this framework requires a strongly sheet-like mass geometry to simultaneously satisfy the timing argument and the quiet Hubble flow\u2014and the quantitative characterization of that geometry (axis ratios, alignment with Local Sheet, polar infall prediction). The physical insight that a non-spherical distribution relaxes the spherical infall tension is conceptually straightforward but has not been demonstrated quantitatively with constrained simulations before. The mock inference test as a validation tool is a methodologically clean addition. The paper's significance is moderate: it resolves a tension that has persisted for decades and produces a concrete, testable prediction, but it does not introduce a new theoretical framework or observational discovery.",
+  "overall_score_10": 7,
+  "paper_id": "bm-263-01",
+  "recommended_verdict": "promising",
+  "reviewer": "claude",
+  "score_rationale": "Technical soundness is solid: the BORG+Gadget-4 pipeline is established, the 169-realization ensemble is reasonably large, the mock inference test provides meaningful validation of the central claim, and the physical mechanism (non-spherical gravitational effects in a flattened system) is correct. Deductions for the 40-Mpc box limitation acknowledged by the authors, the complete absence of high-latitude kinematic constraints, and the lack of quantification of how probable this geometry is in generic \u039bCDM. Novelty is moderate: the methodology is the authors' own prior work; the new contribution is the geometric reconciliation and its quantification. Significance is relatively high given the long-standing nature of the timing argument tension and the concrete, testable prediction of strong polar infall. Clarity is high for a Nature Astronomy letter format. Reviewer confidence is limited by inability to verify numerical implementation and by the need to access supplementary code and ref. 12 to fully evaluate the HMC sampling and the \u03c3-computation methodology.",
+  "summary": "Wempe et al. use 169 constrained \u039bCDM resimulations (via the BORG Bayesian framework + Gadget-4) to resolve a long-standing tension between (a) the timing argument lower bound on Local Group mass (\u03a3M\u2082\u2080\u2080,c \u2273 2\u00d710\u00b9\u00b2 M\u2609) and (b) spherical infall models of the surrounding Hubble flow, which require very little external mass and imply an uncomfortably low total mass. Their resolution is geometric: the mass distribution around the Local Group is strongly sheet-like (c/a \u2248 0.24 in the 2\u20134 Mpc shell), aligned with the Local Sheet and Supergalactic Plane. In a flattened geometry the Shell theorem does not apply, so mass at large cylindrical radii near the plane exerts a net outward gravitational pull on nearby tracers, partially offsetting infall and explaining the apparent quietness of the Hubble flow despite large total enclosed mass. A mock inference replacing observed tracer velocities with predictions from a spherical model reproduces no planar structure, providing important validation that the inferred sheet is kinematically driven rather than an artifact of the anisotropic tracer distribution. The paper closes with a testable prediction: strong infall velocities (\u2273100 km/s) should exist from polar directions within 8 Mpc, currently unsampled by known high-latitude tracers.",
+  "technical_objections": [
+    {
+      "confidence": 0.65,
+      "evidence": "Authors acknowledge: 'periodic boundary conditions produce anisotropic forces on scales of 10 Mpc or more, and they may bias the structure to align with the coordinate axes.' They claim this does not affect conclusions on smaller scales, but the coordinate alignment of the inferred sheet (better aligned with the x\u2013y plane than with the observed Local Sheet) is consistent with a box artifact contribution.",
+      "objection": "The 40-Mpc simulation box with periodic boundary conditions produces anisotropic tidal forces at scales \u227310 Mpc and may bias the mass distribution to align with coordinate axes. The inferred sheet extends to at least 10 Mpc where these effects are acknowledged to be non-negligible.",
+      "paper_location": "Discussion, paragraph on simulation limitations",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.75,
+      "evidence": "Fig. 2 shows all tracers concentrated in the Local Sheet plane. The polar velocity field (Fig. 4) is entirely unconstrained by data and is a posterior prediction conditional on the sheet mass distribution inferred from in-plane tracers. The posterior scatter may underestimate uncertainty in polar regions.",
+      "objection": "All 31 flow tracer galaxies lie at low supergalactic latitude, so the Bayesian inference has no kinematic constraints from polar directions. The inferred polar underdensity and strong polar infall are extrapolations beyond the constrained region, yet they are presented as key structural results.",
+      "paper_location": "Results (Fig. 2, white dots); Discussion",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.5,
+      "evidence": "Authors write: 'a significant asymmetry remains between the +z and \u2212z directions\u2026 a quadrupolar matter distribution with the right orientation is visible about 8 Mpc from the centre.' This is a non-trivial residual that complicates the clean interpretation of the mock test.",
+      "objection": "The residual +z/\u2212z asymmetry in the mock spherical inference (Extended Data Fig. 2) is attributed to M31's tangential velocity but not quantitatively accounted for. If M31's proper motion torque requirement can itself induce a mild planar preference, the claimed contrast between real and mock inferences may be slightly overstated.",
+      "paper_location": "Extended Data Fig. 2 caption",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "No comparison to the distribution of c/a values in unselected \u039bCDM halo pairs of similar mass is presented. Prior work (ref. 19, Neuzil et al. 2020) documents that the observed local sheet is unusual, which would be relevant here.",
+      "objection": "The paper does not quantify how common a c/a \u2248 0.24 mass configuration is in generic \u039bCDM volumes near Milky Way\u2013Andromeda mass pairs. Without this base rate, 'full consistency within \u039bCDM' conflates 'not ruled out by \u039bCDM' with 'expected by \u039bCDM.'",
+      "paper_location": "Abstract ('demonstrating full consistency within the standard cosmological model'); Discussion",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.6,
+      "evidence": "The timing argument lower bound cited is ~2\u00d710\u00b9\u00b2 M\u2609 (from Li & White 2008, ref. 3). The paper's inferred value of 3.3\u00b10.6 is above this and above recent estimates, yet the tension with lower estimates (1.3\u00d710\u00b9\u00b2 M\u2609, ref. 7) is not discussed.",
+      "objection": "The inferred \u03a3M\u2082\u2080\u2080,c = 3.3\u00b10.6\u00d710\u00b9\u00b2 M\u2609 is substantially higher than several recent dynamical estimates (refs 7, 8: 1.3\u20132.3\u00d710\u00b9\u00b2 M\u2609). The paper does not explain how these discrepant estimates are reconciled or whether the higher mass value is driven by the prior choice.",
+      "paper_location": "Results section",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

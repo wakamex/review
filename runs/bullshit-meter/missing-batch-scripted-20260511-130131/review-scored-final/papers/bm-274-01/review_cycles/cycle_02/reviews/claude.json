@@ -1,0 +1,156 @@
+{
+  "confidence": 0.55,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 6,
+    "novelty": 7,
+    "reviewer_confidence": 5,
+    "significance": 7,
+    "technical_soundness": 5.5
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Codex's full-text review provides equation-level grounding that was absent in cycle 1. The dimensional issue in Eq. (3.10) is now the leading technical concern and is elevated to 'major / would_change_verdict_if_true.' The distance-scaling question in Eqs. (4.6)\u2013(4.7) is added as a new moderate objection. The NDA scalar production uncertainty (already noted in cycle 1) is strengthened by codex's citation of specific equations and author acknowledgment. Overall score held at 6.0; technical_soundness marginally reduced to 5.5 to reflect the dimensional ambiguity; reviewer_confidence raised from 4 to 5 because the codex review provides equation-level anchoring.",
+    "invalid_points_from_other_reviewers": [
+      "Gemini rated the paper 4/10 and 'weak_evidence' and filed a 'fatal' objection solely because their review bundle lacked full-text access. This conflates a review-process limitation with scientific paper quality. The paper is published in JHEP, and codex's review demonstrates that the paper has a coherent internal structure. The 'fatal' objection label is inapplicable as a judgment on the paper itself."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Codex: Eq. (3.10) dimensional ambiguity \u2014 P/14.1 MeV is neutrons/second, not flux density; first-wall area conversion is missing or implicit. This is the most consequential concrete technical issue identified.",
+      "Codex: Event-rate distance scaling in Eqs. (4.6)\u2013(4.7) may have the wrong sign/direction compared to the 1/(4\u03c0L\u00b2) flux factor in Eq. (3.11). Warrants direct equation inspection.",
+      "Codex: Scalar production uses NDA (Eqs. 3.8\u20133.9) without dedicated nuclear calculations; authors acknowledge this but it limits quantitative force of 'leading constraints' claim for CP-even scalars.",
+      "Codex: The two-orders-of-magnitude fusion-vs-fission flux comparison in the Introduction is unsupported by a simple neutron-per-energy estimate and needs a geometry-based justification.",
+      "Codex: N_D \u2248 6\u00d710\u00b3\u00b9 labeled as 'one metric ton' is actually ~1000 tonnes of D\u2082O (minor but a clear text error).",
+      "Codex: Notation inconsistency between Appendix A (g_\u03c6n, neutron density operator) and main-text benchmark (g_\u03c6n = 0, proton-only coupling)."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "Neutron interactions with lithium in DT fusion breeding blankets produce a detectable flux of dark sector scalars/pseudoscalars via nuclear M1 (and other) transitions.",
+      "notes": "Mechanism is well-motivated. Production rate depends on specific Li nuclear matrix elements with known tens-of-percent uncertainties. The paper cites the relevant nuclear data literature (refs 49\u201352) and is transparent about NDA approximations for scalar emission.",
+      "paper_location": "Abstract; Section 3 (Eqs. 3.1\u20133.4 per codex)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Year-long searches at ITER/DEMO/ARC can set leading constraints on dark scalar- and pseudoscalar-nucleon couplings.",
+      "notes": "Plausible for pseudoscalars where production rates are better constrained. For CP-even scalars the NDA production estimates (Eqs. 3.8\u20133.9) are acknowledged as rough by the authors; the 'leading constraints' claim for scalars is the most uncertain component.",
+      "paper_location": "Abstract; Section 5; Figures 7 and 8 (per codex)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The SNO axion bound can be recast for a CP-even scalar using the scalar deuterium-dissociation cross section.",
+      "notes": "Recast strategy is methodologically established. Full verification requires checking the angular distribution, polarization, and efficiency differences between CP-even and CP-odd scalars in the SNO heavy-water detector \u2014 flagged for human spot-check.",
+      "paper_location": "Section 5 (per codex); refs 65\u201366",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The fusion reactor neutron flux is qualitatively higher than fission reactors of comparable power, motivating enhanced sensitivity.",
+      "notes": "Per codex, the paper claims ~2 orders of magnitude advantage. Simple neutron-per-energy estimate gives DT fusion ~4\u20135\u00d7 more neutrons per unit thermal power than fission (1 n/17.6 MeV vs ~2.5 n/200 MeV). A factor of 100 would require additional geometry or wall-loading arguments that may not be adequately justified in the text.",
+      "paper_location": "Introduction (per codex: claim of ~two orders of magnitude higher flux)",
+      "support_level": "partially_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "An explicit first-wall area or wall-loading conversion factor is needed to translate total neutron production rate (neutrons/s) into flux density (neutrons/cm\u00b2/s) for use in production rate integrals.",
+      "paper_location": "Section 3.2, Eq. (3.10)",
+      "why_it_matters": "If missing or incorrectly stated, all projected sensitivity curves shift by the ratio of the assumed to the actual first-wall area, potentially by an order of magnitude."
+    },
+    {
+      "assumption": "The benchmark coupling structure sets neutron coupling g_\u03c6n = 0 while retaining proton coupling g_\u03c6p throughout the main text, but this must be tied to a consistent UV model. Section 2 benchmarks and Appendix A use different notation (g_\u03c6N, \u03c1_N as neutron density).",
+      "paper_location": "Section 2, Eqs. (2.12)\u2013(2.13); Appendix A, Eqs. (A.1)\u2013(A.9)",
+      "why_it_matters": "The projected reach and evasion of neutron-scattering constraints both depend on this coupling pattern; notation inconsistency risks sign or coupling errors in the sensitivity estimate."
+    },
+    {
+      "assumption": "Near-reactor backgrounds (neutrons, gammas) are assumed reducible to solar-neutrino-background levels at the proposed detector site, by analogy with SNO shielding. No quantitative radiation transport simulation is presented.",
+      "paper_location": "Section 4, background discussion",
+      "why_it_matters": "A SNO-like detector 10 m from ITER is a qualitatively harsher radiation environment than SNO's underground lab location. Practical S/\u221aB reach may fall well short of the projected sensitivity."
+    },
+    {
+      "assumption": "The exotic scalar mass is implicitly constrained to below the relevant nuclear transition energies (few MeV for the Li transitions). The paper should make explicit the mass window over which each exclusion curve applies.",
+      "paper_location": "Model assumptions section (inaccessible in abstract)",
+      "why_it_matters": "The accessible parameter space is bounded both above (by transition energy) and below (by existing laboratory limits); without an explicit statement, readers cannot judge whether the 'leading constraints' regime is large or narrow."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Is the neutron flux in Eq. (3.10) actually P/14.1 MeV divided by a first-wall area somewhere (implicit or explicit), or is a total-rate quantity mistakenly inserted as a flux density into Eq. (3.12)? If the latter, by how much do the sensitivity curves shift?",
+      "why_model_cannot_resolve": "Requires reading the full derivation and checking the numerical implementation or plotting code. JHEP peer review makes a gross error less likely but does not rule out an implicit area assumption that is not made explicit in the text."
+    },
+    {
+      "question": "In Eqs. (4.6)\u2013(4.7), does the (L/10 m)\u00b2 factor appear in the numerator (increasing events with distance, physically wrong) or the denominator? If in the numerator, is this a typo or a genuine scaling error propagated into Figures 7\u20138?",
+      "why_model_cannot_resolve": "Requires reading the published equation directly. The codex reviewer reports it at confidence 0.9 but acknowledges potential misread of equation formatting."
+    },
+    {
+      "question": "Does the SNO recast for the CP-even scalar correctly account for the different angular distribution, polarization structure, and deuteron-dissociation matrix element compared to the CP-odd (axion) case? Are the scalar vs. pseudoscalar detection cross sections properly distinguished?",
+      "why_model_cannot_resolve": "The recast methodology is in the body (Section 5) and Appendix A, requiring detailed nuclear matrix element comparison. CP-even and CP-odd scalars couple differently to the spin/isospin operators relevant in the SNO D\u2082O target."
+    },
+    {
+      "question": "Do the projected exclusion curves in Figures 7\u20138 actually lie below (i.e., set stronger limits than) the stellar cooling / SN1987A bounds from refs 80\u201382 (Hardy & Lasenby, Bottaro et al., Hardy et al.) in any connected mass window, or is the 'leading constraints' claim restricted to a parameter region already excluded by astrophysical bounds?",
+      "why_model_cannot_resolve": "Requires direct visual inspection of the exclusion plots overlaid on all cited existing bounds. The abstract asserts this but cannot be verified without the figures."
+    }
+  ],
+  "novelty_assessment": "The core novelty \u2014 using DT fusion breeding blankets as a production environment for light dark-sector particles, distinct from both solar observations and fission-reactor searches \u2014 is genuine and timely given increasing fusion construction activity. The specific combination of 14 MeV neutron source, Li-6/Li-7 blanket chemistry, and associated MeV-scale nuclear transitions creates a qualitatively different spectrum and geometry from fission searches. The recast of the SNO bound to a CP-even scalar is an additional, modest novel contribution. The overall framework (reactor-based axion/ALP nuclear-transition search) is established in the literature (refs 11\u201318), but this specific application is new. Novelty is solid for a phenomenology paper; the most novel element is the source concept, not the detection methodology.",
+  "overall_score_10": 6,
+  "paper_id": "bm-274-01",
+  "recommended_verdict": "promising",
+  "reviewer": "claude",
+  "score_rationale": "The paper is published in JHEP and proposes a genuine, timely new use of fusion reactors for dark sector searches. Novelty and significance remain at 7: the DT fusion + Li blanket combination is a distinct and underexplored probe, and leading constraints in any viable mass window would be valuable. Technical soundness drops from 6 to 5.5 reflecting the codex-identified dimensional ambiguity in Eq. (3.10), the unresolved distance-scaling question in Eqs. (4.6)\u2013(4.7), and the acknowledged NDA-level uncertainty in scalar production rates \u2014 none of which are definitively fatal but collectively mean the quantitative sensitivity claims cannot be fully trusted without human spotchecks. Reviewer confidence increases from 4 to 5 because codex's equation-level review provides structural grounding that was absent in cycle 1. Overall 6.0 reflects a competent, novel phenomenology paper with a credible publication venue, discounted by concrete unresolved technical questions whose resolution could shift projections by factors of a few to an order of magnitude.",
+  "summary": "This paper proposes DT fusion reactors as a novel source environment for light exotic scalars and pseudoscalars, produced via neutron capture on lithium in the tritium breeding blanket. The cycle 2 review incorporates specific equation-level findings from the codex reviewer, who had full-text access. The core mechanism and novelty hold up under scrutiny. The most serious outstanding issues are: (a) a potential dimensional inconsistency in the neutron flux normalization (Eq. 3.10, where P/14.1 MeV is a neutrons-per-second rate, not a flux density), (b) the distance-scaling factor in the detector event-rate formula (Eqs. 4.6\u20134.7) warranting a sign/direction check, and (c) the scalar production estimates resting on NDA rather than dedicated nuclear matrix element calculations. The paper is published in JHEP and its caveats on (c) are self-acknowledged; JHEP peer review makes a gross dimensional error in (a) less likely but not impossible. Verdict remains 'promising' with slightly higher reviewer confidence now grounded in the codex review.",
+  "technical_objections": [
+    {
+      "confidence": 0.65,
+      "evidence": "Identified by codex reviewer with confidence 0.75. The dimensional mismatch is straightforward: power divided by energy per neutron gives neutrons/second, not flux. JHEP peer review makes a gross error less likely, but an implicit or incorrectly stated area assumption is plausible.",
+      "objection": "Neutron flux normalization in Eq. (3.10) is dimensionally ambiguous: P/14.1 MeV yields neutrons per second (a rate), not a flux density (neutrons cm\u207b\u00b2 s\u207b\u00b9). A first-wall area or wall-loading conversion must be applied before inserting this into production-rate integrals. If the conversion is implicit and incorrect, all sensitivity curves shift.",
+      "paper_location": "Section 3.2, Eq. (3.10)",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.55,
+      "evidence": "Codex reviewer flags this at confidence 0.9. Without seeing the equation, it is possible the factor appears in the denominator (i.e., the formula is written as N \u221d 1/(L/10m)\u00b2) but the text description was ambiguous. Needs direct inspection.",
+      "objection": "The distance scaling in the event-rate formula (Eqs. 4.6\u20134.7) reportedly shows factors proportional to (L/10 m)\u00b2, which would increase event counts with distance, contradicting the 1/(4\u03c0L\u00b2) flux factor in Eq. (3.11). This could be a formatting artifact (factor in denominator) or a genuine sign error.",
+      "paper_location": "Section 4, Eqs. (4.6)\u2013(4.7); cf. Eq. (3.11)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "Basic neutron economy calculation. Codex flags at confidence 0.70. The claim may be true for a specific geometrical regime (e.g., fast-neutron wall loading near the first wall vs. thermalized flux at a fission detector) but is not demonstrated as stated.",
+      "objection": "The claim that fusion reactors offer ~two orders of magnitude higher neutron flux than fission reactors of comparable power is insufficiently justified. A naive neutron-per-energy estimate gives only a factor ~4\u20135 advantage (1 neutron/17.6 MeV vs ~2.5 neutrons/200 MeV). Two orders of magnitude would require geometry, moderation, or wall-loading arguments that should be made explicit.",
+      "paper_location": "Introduction (first page of published PDF per codex)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "Both codex and original review flag this. Authors are self-aware. For a phenomenology proposal paper, NDA scaling is accepted but limits the quantitative force of the 'leading constraints' claim for CP-even scalars specifically.",
+      "objection": "CP-even scalar production rates rest on NDA estimates (Eqs. 3.8\u20133.9) rather than dedicated nuclear matrix element calculations. The authors acknowledge this, but it means the projected exclusion curves for scalars carry unquantified order-of-magnitude uncertainty.",
+      "paper_location": "Section 3.1, Eqs. (3.8)\u2013(3.9); Appendix D; Section 6 caveats",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.55,
+      "evidence": "Known nuclear-structure issue; spread among refs 49\u201352 is documented. Codex did not flag uncertainty bands being shown, suggesting they may be absent.",
+      "objection": "Nuclear matrix element uncertainties for Li-7 neutron-capture transitions (6Li(n,\u03b3)7Li, 7Li(n,\u03b3)8Li) are at the tens-of-percent level in the literature (refs 49\u201352). No uncertainty bands on the projected exclusion curves are mentioned in the abstract or codex's equation-level notes.",
+      "paper_location": "Production rate calculation, refs 49\u201352",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "One tonne D\u2082O = 1000 kg / 20 g/mol \u00d7 6\u00d710\u00b2\u00b3 \u00d7 2 D atoms \u2248 6\u00d710\u00b2\u2078 D; 6\u00d710\u00b3\u00b9 D implies ~1000 tonnes. Codex confidence 0.95. Does not affect the sensitivity calculation if the number itself is used correctly, but indicates a text error.",
+      "objection": "The deuterium target count (N_D \u2248 6\u00d710\u00b3\u00b9) is described as corresponding to one metric ton of heavy water, but numerically corresponds to ~1000 metric tonnes. This is a labeling inconsistency in the text.",
+      "paper_location": "Section 4, text preceding Eqs. (4.6)\u2013(4.7)",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "Directly visible in reference list of the bundle.",
+      "objection": "Big Bang Theory TV show episodes appear as references 95 and 96, linked from a fan blog. The acknowledgments note this was used as a source for 'axion production discussion.' This is an unusual citation practice for a JHEP paper, even if intentionally playful.",
+      "paper_location": "References 95\u201396; Acknowledgments",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

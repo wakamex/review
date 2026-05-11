@@ -1,0 +1,87 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "Significant reviewer movement between cycles: gemini reversed from 7.5 (cycle 1, 'promising') to 4.5 (cycle 2, 'weak evidence') after incorporating codex's gap analysis regarding action-label superpositions and the architecture-specific scope of the Section 3.3 proof. Claude and codex moved more narrowly (6.5\u21926.2 and 4.2\u21924.8 respectively). All three reviewers independently identified the 'deliberation requires copying' premise and the resource-model inconsistency as genuine gaps by cycle 2. Codex raised the potential fidelity-comparison inconsistency (2/3 vs. 1/2 random baseline) as a moderate objection; the other reviewers did not independently verify this claim, flagging it as a human spotcheck. The final mechanical average of 5.17/10 reflects convergence on a contested-to-weak assessment of the technical claims as stated, though the narrowed linearity result and the philosophical framing retain value.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper tries to show that the rules of quantum mechanics physically prevent any purely quantum system from acting as a genuine deliberating agent \u2014 one that models the world, compares options, and reliably picks the best action. The review board found the underlying physics intuitions partially valid: quantum linearity really does create obstacles for a specific class of decision circuits analyzed in the paper. However, reviewers converged on a significant caveat \u2014 the paper's core premise, that deliberation requires making literal copies of information, may not hold for quantum systems that can evaluate alternatives using superposition and action labels without copying. Whether the impossibility result can be made fully general is an open technical question that would require specialist verification.",
+  "human_spotchecks": [
+    "Can the Section 3.3 linearity argument be extended to a general no-go theorem over all quantum combs or instruments for the stated agency task \u2014 including action-label superpositions, many-copy fidelity estimation, ancilla-based encoding, POVM dilations, and uncomputation strategies \u2014 or is the impossibility strictly confined to the paper's displayed controlled-unitary circuit family?",
+    "Does the labeled-superposition construction |A\u27e9U_A|\u03c8\u27e9 + |B\u27e9U_B|\u03c8\u27e9, which uses orthogonal action registers to keep branches distinguishable, constitute a viable quantum deliberation strategy that the paper's framework should have addressed? If so, does the Section 3.3 linearity argument still block this construction under the third agency condition?",
+    "Are the fidelity comparisons in Section 3.4 stated consistently? Specifically: is the 'random guessing' baseline the average Haar-random qubit fidelity (~1/2) or the optimal one-copy state-estimation limit (2/3), and does the paper's comparison between asymptotic cloning fidelity and guessing use a consistent convention throughout?",
+    "Is the orthogonality condition on the four states |c_00\u27e9, |c_01\u27e9, |c_10\u27e9, |c_11\u27e9 in the Section 3.3 proof (equations 3\u20134) both necessary and sufficient for the claimed contradiction, including degenerate cases where \u03b1=0 or \u03b2=0?",
+    "Do the 26 Bloch-sphere test states (permutations of axis-aligned and off-axis vectors) provide uniformly representative coverage of the sphere under the Haar measure, or do they cluster near coordinate axes in ways that systematically bias the worst/average/best fidelity statistics?"
+  ],
+  "paper_id": "bm-227-01",
+  "public_summary": "Adlam, McQueen, and Waegell argue that a system evolving purely unitarily \u2014 without decoherence, collapse, or any preferred basis \u2014 cannot satisfy three minimal conditions for agency: constructing a world-model of the environment, using copies of that model to deliberate over alternative actions, and reliably implementing the action that maximizes expected utility. The paper's primary technical claims are that world-modeling and deliberation conflict with the no-cloning theorem (which forbids copying arbitrary unknown quantum states), and that even if unlimited copies are supplied, quantum linearity prevents a unitary operation from reliably selecting and implementing a single best action. The paper then surveys approximate cloning strategies, evaluates sample quantum agency circuits numerically, and applies its conclusions to criticize quantum theories of consciousness (Orch OR, IIT) and libertarian free will (Kane). After two cycles of adversarial cross-review, the strongest technically supported result is the linearity impossibility for the specific controlled-unitary circuit architecture analyzed in Section 3.3. However, all three reviewers identified a shared gap: the paper does not rule out coherent quantum deliberation strategies that evaluate alternatives through orthogonal action-label registers or interference without literal state copying, and the third-condition failure criterion (requiring a pure, unentangled, single-action output) may encode classical assumptions into the definition of success. The paper's philosophical challenges to quantum theories of mind are substantive intellectual pressure, but they are not formal refutations and inherit the unresolved scope of the technical impossibility. The work is best read as a well-motivated conceptual argument with a genuinely obstructive narrowed result, rather than a fully general no-go theorem.",
+  "reviewer_disagreements": [
+    "Severity of the 'deliberation requires copying' gap: gemini (cycle 2) rates it fatal with confidence 0.95, codex rates it major with confidence 0.84, and claude rates it moderate \u2014 arguing the premise is well-motivated by classical decision theory and Richens et al. even if not formally proven for quantum systems.",
+    "Overall quality assessment shifted substantially between cycles: gemini reversed from 7.5/10 (cycle 1, 'promising') to 4.5/10 (cycle 2, 'weak evidence') after cross-review; claude moved narrowly from 6.5 to 6.2, retaining 'promising'; codex moved from 4.2 to 4.8, settling on 'contested'. The final mechanical average was 5.17/10.",
+    "Whether the labeled-superposition construction |A\u27e9U_A|\u03c8\u27e9 + |B\u27e9U_B|\u03c8\u27e9 fundamentally collapses the paper's conditions 1\u20132 argument or merely narrows it: codex and gemini treat it as a major architectural gap that invalidates the general impossibility, while claude holds that even labeled superpositions face the third-condition linearity obstruction, so the gap affects conditions 1\u20132 but not the full argument chain.",
+    "Whether the philosophical challenges to Orch OR, IIT, and Kane constitute substantive intellectual contributions independent of the technical gaps: claude and codex credit these as genuine challenges that survive scope-narrowing; gemini (cycle 2) treats them as inheriting the full weight of the unresolved technical premises."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The paper asserts but does not prove that deliberation requires literal physical duplication of the world-model state. Coherent quantum processes can evaluate alternatives using orthogonal action-label registers \u2014 producing states of the form |A\u27e9U_A|\u03c8\u27e9 + |B\u27e9U_B|\u03c8\u27e9 \u2014 without cloning the input state. The paper considers only unlabeled superpositions and dismisses them on the grounds that branches are indistinguishable, but labeled superpositions are distinguishable. This gap affects the central premise connecting classical decision theory to the no-cloning obstruction.",
+      "paper_location": "Sections 2.1 and 3.2, paragraphs beginning 'Perhaps our most important assumption' and 'One might think that instead of literally copying'",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The linearity impossibility in Section 3.3 applies only to the specific controlled-unitary architecture the paper analyzes \u2014 one that encodes U_A and U_B performance in two control qubits and requires a clean product-state output corresponding to a single best action. The paper does not show that the same impossibility extends to all coherent quantum decision procedures, including utility-bearing ancillas, uncomputation strategies, action-label superpositions, many-copy estimation schemes, or unitary dilations of measurement-like comparisons.",
+      "paper_location": "Section 3.3, bullets defining the desired controlled unitary and equations (3)\u2013(4)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper's 'purely quantum, no preferred basis' framing is applied inconsistently. The circuits in Section 3.3 use a computational basis (|0\u27e9, |1\u27e9), Pauli gates, a known fixed target state |\u03c4\u27e9, and controlled operations keyed to basis states \u2014 all of which implicitly rely on classical reference-frame structure. The paper does not account for whether these constitute classical resources that should disqualify the system from being 'purely quantum.'",
+      "paper_location": "Sections 3.2\u20133.3; introduction; circuit definitions in Section 3.5",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The third agency condition as operationalized requires the controlled unitary to yield a pure, unentangled product state corresponding to the single best action. This demands a non-linear argmax operation and thereby encodes classicality directly into the success criterion. Mixed strategies and stochastic policies that select the best action with high but non-unit probability are legitimate in classical decision theory, and their exclusion may make the impossibility result partially tautological.",
+      "paper_location": "Section 3.3, definition of agency condition 3 and the 'classical limit' discussion",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "No formal minimum-fidelity threshold for reliable agency is established. The claim that approximate cloning fidelity of 2/3 is 'insufficient' for agency is a qualitative judgment compared to random-state fidelity, without a principled criterion. Additionally, the random-guessing baseline used in the comparison may conflate the average Haar-random fidelity (~1/2) with the optimal one-copy state-estimation limit (2/3), potentially making the comparison internally inconsistent.",
+      "paper_location": "Sections 3.4\u20133.5, paragraph comparing asymptotic cloning fidelity to random guessing",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "For the specific controlled-unitary argmax circuit architecture analyzed in Section 3.3, quantum linearity prevents reliable selection of a single best action from a superposed evaluation state: the required map is non-linear and no unitary can implement it for arbitrary input states.",
+    "The no-cloning theorem places a genuine physical constraint on any deliberation strategy that requires perfect duplication of arbitrary unknown quantum states, a point the paper establishes clearly via the standard linearity proof of no-cloning.",
+    "If the environmental basis is known in advance, state-dependent cloning enables all three agency conditions, establishing a clean 'classical limit' that is consistent with decoherence-based emergence of classical agency from quantum mechanics.",
+    "Universal approximate cloning fidelity degrades toward an asymptote of 2/3 as the number of copies grows, a bound correctly derived from Gisin\u2013Massar (1997) and relevant to the multi-action deliberation scenario.",
+    "Quantum theories of agency, consciousness, and free will (including Orch OR, IIT, and Kane's libertarian model) face a genuine burden of identifying where classical resources enter their accounts \u2014 this challenge survives even the narrowed technical result."
+  ],
+  "technical_takeaway": "The paper derives a linearity impossibility for a specific controlled-unitary circuit implementing argmax action selection (Section 3.3), and applies the no-cloning theorem to deliberation conceived as literal state duplication. The linearity obstruction appears sound for that narrow architecture: a controlled unitary that maps basis evaluation states to correctly applied unitaries cannot, by linearity, yield a pure product-state output for arbitrary superposed inputs. However, the proof does not cover coherent alternatives using action-label registers (|A\u27e9U_A|\u03c8\u27e9 + |B\u27e9U_B|\u03c8\u27e9), interference-based evaluation, or POVM dilations. The \"deliberation requires copying\" premise is argued via classical decision theory and AI results but is not formally proven for quantum systems. The resource model for \"purely quantum\" systems is applied inconsistently: the paper's own circuits use a computational basis, a fixed target state |\u03c4\u27e9, and controlled operations that may themselves constitute implicit classical resources. Approximate cloning fidelity bounds (Gisin\u2013Massar) are correctly cited, but no formal minimum-fidelity threshold for agency failure is established. The numerical circuit evaluation covers 26 test states and 4 circuit designs \u2014 an explicitly incomplete sample."
+}

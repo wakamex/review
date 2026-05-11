@@ -1,0 +1,158 @@
+{
+  "confidence": 0.68,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 6.1,
+    "novelty": 7.2,
+    "reviewer_confidence": 6.8,
+    "significance": 6.8,
+    "technical_soundness": 5.7
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "No prior cycle; this is the initial review.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "Fusion reactors can produce detectable fluxes of exotic spin-0 particles through neutron capture and neutron scattering in blanket or structural materials.",
+      "notes": "The mechanisms are physically motivated and connected to known neutron interactions, but the paper itself emphasizes that a full reactor-geometry neutronics simulation is beyond scope.",
+      "paper_location": "Abstract; Sections 1 and 3, especially Eqs. (3.1)-(3.4) and Section 3.3",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Year-long searches at current or future fusion reactors can set leading constraints on scalar- and pseudoscalar-nucleon couplings.",
+      "notes": "The claim is plausible for the benchmark assumptions, but the reach depends on approximate flux normalization, detector placement, backgrounds, and model-dependent existing bounds.",
+      "paper_location": "Abstract; Section 5; Figures 7 and 8",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Scalar production in neutron absorption and scattering can be estimated by scaling known electromagnetic or neutron-scattering cross sections using NDA.",
+      "notes": "The paper is transparent that these are rough estimates. Without dedicated nuclear matrix-element calculations, this is not locally auditable to the precision implied by exclusion curves.",
+      "paper_location": "Section 3.1, Eqs. (3.8) and (3.9); Appendix D",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "A SNO-like heavy-water detector near a fusion reactor can detect the new flux through deuteron dissociation while remaining primarily sensitive to nucleon couplings.",
+      "notes": "The deuteron-dissociation channel is well motivated, but the event-rate normalization contains apparent distance-scaling and detector-mass wording issues.",
+      "paper_location": "Section 4, Eqs. (4.1)-(4.7)",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The SNO axion bound can be recast for a CP-even scalar using a solar scalar flux and the scalar deuterium-dissociation cross section.",
+      "notes": "The recast recipe is stated, but the review bundle does not provide enough intermediate numerical detail to audit the resulting exclusion region.",
+      "paper_location": "Section 5, discussion around the scalar bounds in Figure 8",
+      "support_level": "unclear"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "An explicit first-wall area or neutron wall-loading normalization is needed to convert reactor power into the flux used in production rates.",
+      "paper_location": "Sections 3.2-3.3, Eqs. (3.10)-(3.12)",
+      "why_it_matters": "The projected event rates are directly proportional to neutron flux, so an area normalization error would shift all sensitivity curves."
+    },
+    {
+      "assumption": "The effective target number N_X and attenuation factor \u03b5_atten = 0.1 should be justified for the same neutron spectrum used in the cross-section convolution.",
+      "paper_location": "Section 3.3, Eqs. (3.13)-(3.17)",
+      "why_it_matters": "The simplified accessible-target model replaces a transport calculation; consistency of attenuation, spectrum, and material geometry controls the flux normalization."
+    },
+    {
+      "assumption": "Suppression of neutron couplings while retaining proton couplings should be tied to viable UV flavor structures or treated explicitly as a benchmark-only assumption.",
+      "paper_location": "Section 2 benchmarks, Eqs. (2.12)-(2.13); Section 3 and Section 4 repeatedly set g_phi_n = 0",
+      "why_it_matters": "The projected reach and evasion of neutron-scattering constraints rely on this coupling pattern."
+    },
+    {
+      "assumption": "Backgrounds from reactor-generated neutrons and gammas after shielding need a quantitative detector model, not only an analogy with SNO shielding.",
+      "paper_location": "Section 4 background discussion after Eqs. (4.6)-(4.7)",
+      "why_it_matters": "A SNO-like detector 10 m from a fusion facility is a very different radiation environment from SNO; backgrounds may affect the claimed S/sqrt(B) reach."
+    },
+    {
+      "assumption": "Dedicated nuclear matrix elements for scalar emission, or uncertainty bands spanning plausible alternatives, are needed for quantitative scalar exclusion projections.",
+      "paper_location": "Section 3.1, Eqs. (3.8)-(3.9); Appendix D",
+      "why_it_matters": "The scalar reach can move substantially if the NDA scaling over- or underestimates the true emission rates."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Does the published numerical code or private calculation use the correct 1/L^2 detector-distance scaling despite Eqs. (4.6)-(4.7) showing (L/10 m)^2?",
+      "why_model_cannot_resolve": "The paper text only exposes the formula, not the plotting code or numerical notebooks behind Figures 7 and 8."
+    },
+    {
+      "question": "Is the neutron flux normalization in Eq. (3.10) actually implemented with a first-wall area or wall-loading factor?",
+      "why_model_cannot_resolve": "The paper states a flux value but does not show the area conversion or enough implementation detail to audit the normalization."
+    },
+    {
+      "question": "Are the scalar NDA production estimates within an order of magnitude of realistic nuclear calculations for Li and Fe transitions?",
+      "why_model_cannot_resolve": "This requires domain-specific nuclear-structure calculations or comparison with unpublished matrix elements, beyond the local paper text."
+    },
+    {
+      "question": "Are near-reactor neutron and gamma backgrounds plausibly reducible to below the solar-neutrino background assumed in the sensitivity estimate?",
+      "why_model_cannot_resolve": "This depends on facility layout, shielding design, detector siting, and transport simulations not provided in the paper."
+    }
+  ],
+  "novelty_assessment": "The main idea of using fusion-reactor breeding blankets as sources of exotic spin-0 particles appears novel relative to the paper's cited solar and fission-reactor literature. The novelty is strongest as a phenomenological proposal and source concept, not as a mature exclusion analysis. Several ingredients are adapted from known axion/ALP nuclear-transition and SNO-deuteron-dissociation methods.",
+  "overall_score_10": 6.4,
+  "paper_id": "bm-274-01",
+  "recommended_verdict": "promising",
+  "reviewer": "codex",
+  "score_rationale": "Interesting and plausibly novel proof-of-principle proposal, with transparent caveats and reasonable benchmark framing. The quantitative reach is not fully secure because central production and flux estimates are approximate, and I found local normalization/scaling issues that should be fixed or checked against the actual numerical implementation.",
+  "summary": "The paper proposes fusion reactors with lithium-rich breeding blankets as intense sources of light scalar or pseudoscalar particles produced through neutron capture or neutron scattering, and estimates sensitivity using a nearby SNO-like deuterium-dissociation detector. I do not certify the full phenomenological calculation, but the local structure is mostly coherent as a proof-of-principle study. The strongest caveats are that key production rates, especially for CP-even scalars, rest on NDA estimates rather than nuclear calculations, and I found several concrete normalization or scaling ambiguities that should be corrected before relying on the projected reaches quantitatively.",
+  "technical_objections": [
+    {
+      "confidence": 0.9,
+      "evidence": "Eq. (3.11) defines the spin-zero flux at the detector with a 1/(4\u03c0L^2) factor. Therefore the number of deuteron-dissociation events should scale as 1/L^2 for a fixed detector, but Eqs. (4.6)-(4.7) display factors proportional to (L/10 m)^2.",
+      "objection": "The event-rate estimates scale with detector distance in the wrong direction as written.",
+      "paper_location": "Section 4, Eqs. (4.6)-(4.7), compared with Eq. (3.11)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.75,
+      "evidence": "The expression \u03a6_n^total \u2243 P/14.1 MeV has units of neutrons per second, not neutrons cm^-2 s^-1. A first-wall area or wall-loading conversion is needed before using it as a flux in Eq. (3.12).",
+      "objection": "The neutron flux normalization in Eq. (3.10) is dimensionally incomplete unless an implicit first-wall area is being assumed.",
+      "paper_location": "Section 3.2, Eq. (3.10)",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "The paper assumes a SNO-like detector with 1000 tonnes of heavy water, then states N_D \u2248 6\u00d710^31 is the number of deuterium atoms in a metric ton. One metric ton of D2O contains about 6\u00d710^28 deuterium atoms; 6\u00d710^31 corresponds to roughly 1000 metric tonnes.",
+      "objection": "The deuterium target count is described as corresponding to one metric ton, but numerically corresponds to about 1000 tonnes of heavy water.",
+      "paper_location": "Section 4, text preceding Eqs. (4.6)-(4.7)",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "For equal thermal power, D-T fusion gives roughly one neutron per 17.6 MeV, while fission gives order 2-3 neutrons per about 200 MeV, a number-rate ratio of only a few before geometry and moderation. The paper does not define the flux comparison basis enough to support the two-orders statement.",
+      "objection": "The comparison claim that fusion reactors have neutron flux about two orders of magnitude higher than fission reactors of comparable power is insufficiently justified and appears inconsistent with a simple neutron-per-energy estimate.",
+      "paper_location": "Introduction, first page of the published PDF",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.75,
+      "evidence": "The main analysis sets g_phi_n = 0 and uses g_phi_p in Eq. (4.3), while Appendix A introduces L = g_phi_n Nbar N phi and calls rho_N the neutron density operator before later writing a generic g_phi_N. This is probably notation slippage, but it obscures exactly which one-body operator is being evaluated.",
+      "objection": "The scalar deuterium-dissociation appendix uses notation that conflicts with the proton-only benchmark used in the main text.",
+      "paper_location": "Appendix A, Eqs. (A.1)-(A.9), compared with Section 2 benchmarks and Eq. (4.3)",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "The authors explicitly state that scalar absorption estimates have large uncertainties and should be taken only as rough guidance, and that detailed nuclear calculations are absent. This limits the quantitative force of the leading-constraint claim for scalars.",
+      "objection": "The scalar production reach is driven by rough NDA production estimates that are not independently validated in the paper.",
+      "paper_location": "Section 3.1, especially Eqs. (3.8)-(3.9), and Section 6 caveats",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "The text refers to the ALP non-resonant neutron absorption estimate as Eq. (3.9), but Eq. (3.9) is the scalar neutron-scattering estimate. The Figure 7 caption instead points to Eq. (3.7), which appears to be intended.",
+      "objection": "There is an incorrect equation reference in the projected-sensitivity discussion for ALP non-resonant capture.",
+      "paper_location": "Section 5, paragraph beginning 'For ALP production...'",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

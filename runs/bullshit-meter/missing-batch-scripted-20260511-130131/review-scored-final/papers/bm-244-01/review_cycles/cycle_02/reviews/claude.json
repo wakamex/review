@@ -1,0 +1,183 @@
+{
+  "confidence": 0.73,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 7,
+    "novelty": 5,
+    "reviewer_confidence": 6,
+    "significance": 7,
+    "technical_soundness": 4.5
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Added a new major objection (solution-branch selection problem in eq. 33) that neither I nor other reviewers had explicitly isolated in cycle 1. Slightly lowered technical_soundness from 5 to 4.5 due to codex's valid point that eq. (33) modifies F relative to the pure CDM functional and the final model's cosmological perturbation theory is unchecked. Overall score remains 5.5. Maintained 'promising' against codex's 'contested'; the objections are about completeness and undemonstrated claims, not internal inconsistency, and the paper is honest about its limitations. Added the auxiliary-field equivalence assumption as a missing assumption following codex's observation.",
+    "invalid_points_from_other_reviewers": [
+      "Codex calls the automatic cosmological reproduction a 'major' objection with 'would_change_verdict_if_true: true.' This mischaracterizes the paper's intent: the cosmological construction is by design and the paper is transparent about it. The actual concern \u2014 whether the final synthesized model's perturbations are unmodified \u2014 is a subtler and more legitimate version of this objection, which I retain separately.",
+      "Gemini rates clarity at 9/10. This is too high. The paper relies heavily on unexplained equation references across sections, the HTML rendering strips equation content, and a reader without the four prior key references ([11,12,15,47]) cannot follow the derivations. Clarity of 7 is more appropriate.",
+      "Gemini rates cosmological and MOND claims as 'well_supported' without noting that these are entirely inherited from prior work; for the synthesized model, both are at best 'partially_supported' pending verification that eq. (33) does not disturb either limit.",
+      "Gemini's significance score of 8 and overall score of 7 seem too generous for a paper whose central new claim (the interpolation) is explicitly conjectural. The framework is physically motivated and potentially important, but significance should reflect demonstrated rather than hoped-for results."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Codex: The final model (with eq. 33) changes F relative to the pure dark-matter functional of [15]; the cosmological success claims are automatic for the Section 2 model but need checking for the synthesized model \u2014 this is a valid refinement of my cycle 1 analysis.",
+      "Codex: The late-time X \u2192 0 behavior is flagged as 'would_change_verdict_if_true: true' by codex with confidence 0.68; I rate this moderate severity only (f(X) at late times becoming non-negligible is a real issue that warrants a sentence in the paper), but agree it is underanalyzed.",
+      "Codex: The auxiliary-field Lagrangian equivalence (eq. 32) requires careful treatment of boundary conditions that the paper does not provide \u2014 a valid additional missing assumption.",
+      "Gemini: The caustic result being restricted to the static spherically symmetric case is correctly noted as limited, consistent with my cycle 1 assessment.",
+      "Both reviewers agree the interpolation is undemonstrated and should be labeled a conjecture, which I also flagged."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "The cosmological model (eqs. 5, 9) exactly reproduces all successes of cold dark matter including CMB anisotropies, BAO, and linear structure formation",
+      "notes": "This is definitionally correct at linear order: the stress tensor is constructed to satisfy dark matter conservation identically. However, eq. (33) modifies F relative to the pure CDM functional of [15]; whether the final synthesized model exactly reproduces cosmological perturbations at linear order requires checking that the MOND inhomogeneous term in (33) is genuinely negligible during decoupling and structure formation epochs. The paper argues f(X) is infinitesimal when X is large negative, and Appendix 7 supports this at high redshift. At very late times X \u2192 0, this suppression weakens.",
+      "paper_location": "Section 2, eq. (9)-(11), Conclusions",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "The gravitationally bound model (eq. 28) reproduces BTFR and weak lensing in the static spherically symmetric limit",
+      "notes": "The BTFR derivation is straightforward algebra. Lensing consistency (\u03a6 = \u03a8) follows from the static Einstein equations. Both are constructed constraints on the Lagrangian, not predictions; the underlying model was validated in [11,12]. No new validation is added here.",
+      "paper_location": "Section 3, eqs. (20)-(30)",
+      "support_level": "well_supported"
+    },
+    {
+      "claim": "A single equation (eq. 33) interpolates between the cosmological and MOND regimes, recovering each in its respective limit",
+      "notes": "The cosmological limit is supported analytically by Appendix 7. The MOND recovery is argued qualitatively: spatial dominance 'pushes F toward the MOND solution.' No quantitative calculation, dimensional estimate, or toy example is presented. Section 4.2 explicitly defers this to future numerical work. The interpolation is an asserted conjecture, not a demonstrated result. There is also a nontrivial solution-selection problem: eq. (33) has two branches and the mechanism by which the system transitions from the homogeneous cosmological branch to the MOND inhomogeneous branch has not been analyzed.",
+      "paper_location": "Section 4.1, eq. (33), Conclusions",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The field-theory 4-velocity does not form caustics in a smooth static spherically symmetric geometry",
+      "notes": "Appendix 6 gives a clean recursive proof for the static case. The result does not extend to dynamically evolving configurations relevant to structure formation or 3D asymmetric collapse. The paper acknowledges further studies are underway.",
+      "paper_location": "Section 2, Appendix 6",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The model does not modify tensor mode propagation, satisfying multimessenger GW constraints",
+      "notes": "The MOND sector argument (source has two Ricci tensor factors, which vanish for radiation) is correct locally. However, the nonlocal operator \u25a1\u207b\u00b9 in the definition of X (eq. 27) integrates over past curvature history including matter-dominated epochs; a propagating GW in a cosmological background will encounter nonzero X from that background, and the full quadratic action for tensor perturbations of the complete model has not been computed. The mimetic-sector argument relies on Barvinsky [47].",
+      "paper_location": "Section 4.2",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The model contains no instabilities, ghosts, or runaway behaviors",
+      "notes": "Individual regime stability is cited from [47] and [14]. The interpolating model combining both sectors has not been analyzed. New instabilities can arise precisely in the transition region between two otherwise stable configurations.",
+      "paper_location": "Section 4.2",
+      "support_level": "partially_supported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "Spatial metric gradients dominate over time derivatives inside gravitationally bound systems in a way that makes eq. (33) select the MOND inhomogeneous branch over the cosmological homogeneous branch",
+      "paper_location": "Section 4.1",
+      "why_it_matters": "This ordering assumption is the entire mechanism of the interpolation. If the transition is slow or incomplete, the MOND phenomenology would not be recovered and the synthesis would fail. No estimate of relative magnitudes is given."
+    },
+    {
+      "assumption": "The nonlocal inverse d'Alembertian \u25a1\u207b\u00b9 with null initial data on the end-of-inflation surface gives physically sensible results when evaluated inside a gravitationally bound system billions of years after inflation",
+      "paper_location": "Section 3.3, eq. (26)-(27)",
+      "why_it_matters": "One must integrate eq. (27) from t_i through all of cosmic history before reaching a galaxy. Sensitivity of X to this entire history, and whether the value inside a galaxy has the correct properties for MOND, is not demonstrated."
+    },
+    {
+      "assumption": "Nonlinear structure formation remains consistent with observations despite the interpolation mechanism potentially activating at intermediate scales",
+      "paper_location": "Section 5",
+      "why_it_matters": "The model is constructed to work in deep limits; the transition region governs halo mass functions, matter power spectrum at nonlinear scales, and lensing statistics. These are flagged as open problems but no constraints are placed."
+    },
+    {
+      "assumption": "Stability results of [47] and [14] carry over to the synthesized model with interpolating eq. (33)",
+      "paper_location": "Section 4.2",
+      "why_it_matters": "Stability of individual limiting models does not guarantee stability of an interpolating theory; new instabilities can appear precisely in the transition region."
+    },
+    {
+      "assumption": "The local auxiliary-field Lagrangian manipulations and surface-term additions (eq. 32) are fully equivalent to the intended nonlocal metric-only theory under variation",
+      "paper_location": "Section 4.1, eq. (32)",
+      "why_it_matters": "Nonlocal variational principles can differ from local auxiliary-field reformulations unless boundary conditions and allowed field variations at the initial surface are specified carefully; the paper does not address this."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Does reference [14] (Tan & Woodard 2018, JCAP 1804.01669) actually analyze perturbation stability for the model defined by eqs. (27)-(30) in Section 3, or only for an earlier class of models? The paper's claim that stability has been 'conducted with the same result' for the MOND model of Section 4 needs verification.",
+      "why_model_cannot_resolve": "I cannot retrieve arXiv:1804.01669 to verify whether its perturbative analysis covers the specific model defined by eqs. (27)-(30) or only an earlier variant."
+    },
+    {
+      "question": "Does the numerical calculation in [13] (Kim et al. 2016, PRD) establish that X \u2192 0 at z \u2248 0 creates any observational tension with late-time cosmology (e.g., the Hubble parameter, dark energy phenomenology, or the growth rate of structure)?",
+      "why_model_cannot_resolve": "Requires reading arXiv:1608.07858 and assessing whether the X vanishing has been analyzed for its impact on f(X) turning on at late cosmological times."
+    },
+    {
+      "question": "Is there any independent assessment in the literature of whether the nonlocal Woodard-Deffayet MOND model [11,12] passes cluster-scale or N-body tests beyond the BTFR and isolated static weak lensing?",
+      "why_model_cannot_resolve": "A literature search is needed to determine whether the gravitationally bound model has faced observational tests at cluster scales or for the diversity of disk galaxy rotation curves."
+    },
+    {
+      "question": "Does the solution-branch selection problem for eq. (33) have a known analogue in other nonlocal modified gravity theories, and if so, was it resolved?",
+      "why_model_cannot_resolve": "This requires expert knowledge of the nonlocal gravity literature (Maggiore-Mancarella, Deser-Woodard earlier work) to assess whether branch selection in such equations has been studied and whether there are known stability criteria."
+    }
+  ],
+  "novelty_assessment": "Incremental but genuine. The cosmological model (Section 2) and MOND model (Section 3) are both from prior publications by the same group ([15] and [11,12]). The mimetic gravity Lagrangian is from Chamseddine-Mukhanov [43,44]. The new contributions are: (1) the unified Lagrangian (eq. 31) and interpolating equation (eq. 33), (2) the qualitative argument for the regime transition mechanism, (3) the observation that f(X) can suppress MOND cosmologically while activating it in bound systems, and (4) the appendix demonstrating the two representations (continuum field vs. point particles) are inequivalent for caustics. This is a meaningful synthesis but combinatorial of existing ingredients from the same group. The paper's main value is as a theoretical framework paper establishing targets for follow-up numerical work. Novelty is modest \u2014 the conceptual steps are natural given the prior ingredients \u2014 but the synthesis was not a priori obvious and fills a real gap in the literature. Gemini's novelty score of 7 and codex's 6.8 both seem slightly high; 5-6 is more appropriate for work where the ingredients are all prior and the new element is their combination plus one new equation.",
+  "overall_score_10": 5.5,
+  "paper_id": "bm-244-01",
+  "recommended_verdict": "promising",
+  "reviewer": "claude",
+  "score_rationale": "Technical soundness at 4.5 (lowered from 5): the limiting regimes are sound by prior construction, but the synthesized model's central new claim \u2014 that eq. (33) produces a working interpolation \u2014 is undemonstrated, the solution-branch selection problem is unaddressed, the final model's cosmological perturbation theory is unchecked, and stability of the interpolating regime is unanalyzed. These are not minor gaps; they are the primary new results of the paper. Novelty at 5: the synthesis is clever and fills a real gap, but all ingredients are from prior work of the same group and the new element (eq. 33 plus f(X)) is a natural combination. Significance at 7: if the interpolation holds up, a single nonlocal gravity theory unifying MOND and cosmological dark matter phenomenology without new particles would be a genuine result; the potential importance justifies a higher score than the current technical maturity would support alone. Clarity at 7: the paper is well-structured, honest about limitations, and the logic is followable; however, heavy reliance on unexplained equation-numbering from prior papers and the HTML rendering loss of equation content reduce clarity for non-specialist readers. Reviewer confidence at 6: I can follow the algebraic structure and identify logical gaps, but cannot independently verify numerical claims in the appendices or confirm the cited prior results without accessing those papers. Overall 5.5 reflects a paper with genuine significance potential that is technically incomplete at its core new claim, presented as a framework paper rather than a completed result \u2014 which is honest, but limits the score.",
+  "summary": "Deffayet and Woodard synthesize two prior nonlocal gravity models \u2014 a cosmological mimetic-dark-matter construction and a nonlocal MOND realization \u2014 into a single Lagrangian governed by interpolating equation (33). Cycle 2 review after auditing codex and gemini reviewers. The core assessments are stable: each limiting regime is sound by prior construction, but the central new claim \u2014 that eq. (33) achieves a smooth, pathology-free interpolation in realistic geometries \u2014 remains qualitative and undemonstrated. The paper is honest about this. The other reviewers raise several overlapping concerns and one novel concern (that eq. 33 modifies F relative to the pure dark-matter functional, potentially altering cosmological predictions at the linear perturbation level for the final model). Gemini's high clarity score and \"well_supported\" labels for inherited claims are not accepted. Codex's labeling of the construction-by-design cosmological success as a \"major\" objection is partially rejected as unfair to the paper's stated purpose, but the underlying concern about the final model's linear perturbations is retained.",
+  "technical_objections": [
+    {
+      "confidence": 0.92,
+      "evidence": "Section 4.2 states: 'a definitive analysis in a realistic setting is obviously a formidable numerical undertaking' and proposes only a future toy 2D study. The paper's central new claim therefore rests entirely on an undemonstrated heuristic.",
+      "objection": "The claimed interpolation (eq. 33) is not demonstrated quantitatively. The paper asserts that spatial dominance 'pushes F toward the MOND solution' but provides no calculation, estimate, or dimensional analysis for any realistic transition geometry.",
+      "paper_location": "Section 4.1-4.2",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.82,
+      "evidence": "The paper says spatial gradients 'push F away from the homogeneous solution,' but does not establish whether this push is sufficient to cause full branch switching, or whether a mixed solution persists that satisfies neither MOND nor pure CDM equations.",
+      "objection": "Solution-branch selection problem in eq. (33) is unaddressed. The equation has (at minimum) a homogeneous cosmological branch and an inhomogeneous MOND branch; the mechanism by which a galaxy or cluster selects the MOND branch rather than remaining on the cosmological branch is not analyzed, even qualitatively in terms of initial conditions, perturbative instability of one branch, or attractor behavior.",
+      "paper_location": "Section 4.1, eq. (33)",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.78,
+      "evidence": "The paper claims cosmological success is automatic 'because the model defined by (5) and (9) is just dark matter,' but eq. (33) replaces those equations with a new coupled system. Whether the f(X) suppression is quantitatively sufficient across all relevant cosmological scales and epochs is asserted but not computed.",
+      "objection": "The final synthesized model's linear cosmological perturbation theory has not been verified. Eq. (33) defines F differently from the pure CDM functional of [15]; even if f(X) is small at high redshift, any residual MOND inhomogeneous term in F could modify CMB/BAO predictions at a level not guaranteed to be negligible without calculation.",
+      "paper_location": "Section 2.2, Section 4.1",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.78,
+      "evidence": "The paper says 'A similar analysis of perturbations for the MOND model of section 4 has been conducted with the same result [14].' Reference [14] is for an earlier MOND model, not the interpolating system of section 4.1.",
+      "objection": "Stability of the synthesized model is not analyzed. Citations to [47] (mimetic gravity) and [14] (MOND perturbations) cover limiting cases only; the coupled nonlocal system with the interpolating function f(X) has not been perturbatively analyzed.",
+      "paper_location": "Section 4.2",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "Authors write clusters 'may instead be the result of competition between the cosmological regime and the deep MOND regime.' No calculation supports this.",
+      "objection": "Cluster-scale phenomenology (galactic clusters, Bullet Cluster) is acknowledged as problematic but entirely deferred. The speculation that 'competition between cosmological and MOND solutions' resolves cluster discrepancies is unsupported.",
+      "paper_location": "Section 5",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.72,
+      "evidence": "The paper notes 'the accumulated positive contribution from early times is canceled to make X vanish' and cites [13] for numerical details, but does not assess whether this creates observational tension.",
+      "objection": "Appendix 7 shows X \u2192 0 at late cosmic times (z \u2248 0), weakening the suppression of f(X) in the current cosmological epoch. The implications for whether the MOND term is truly negligible during late-time structure formation, or whether it turns on cosmologically at low redshift, are not analyzed.",
+      "paper_location": "Appendix 7, eq. (51)-(52)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.52,
+      "evidence": "For a nonlocal action with background-dependent inverse d'Alembertians, variation can generate terms involving background curvature even when the local Ricci tensor vanishes on shell.",
+      "objection": "The tensor-mode propagation argument for the full nonlocal model is insufficiently rigorous. The Ricci-tensor vanishing argument is local; the nonlocal \u25a1\u207b\u00b9 operator in X accumulates background curvature history, and a complete quadratic tensor action for the synthesized model has not been derived.",
+      "paper_location": "Section 4.2",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.9,
+      "evidence": "Eq. (10) explicitly labels this a 'numerical coincidence.' The MOND constant and the Hubble scale being the same order is treated as an unexplained initial datum.",
+      "objection": "The numerical coincidence a\u2080 \u2248 cH\u2080/2\u03c0 is used as an input initial condition but not derived; the model has no mechanism explaining this coincidence, which is load-bearing for the synthesis working in both regimes simultaneously.",
+      "paper_location": "Section 2.2, eq. (10)",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

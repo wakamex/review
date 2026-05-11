@@ -1,0 +1,103 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "All three reviewers participated in both cycles. Scores declined from cycle 1 to cycle 2 (mechanical average 3.833 \u2192 3.500). The HTML source format caused loss of mathematical notation in several key equations and definitions; multiple human spotchecks are conditioned on PDF inspection. Gemini maintained a 'fatal flaw' verdict across both cycles (score 2.0); Claude downgraded from 5.5 to 5.0 and elevated the NRC concern from minor to major after engaging with Gemini's critique; Codex downgraded from 4.0 to 3.5 and shifted verdict from 'weak_evidence' to 'contested'. The central dispute \u2014 whether NRC's operational statistical-independence formulation constitutes a proof error or a strong-but-consistent definitional choice \u2014 cannot be resolved without PDF-level verification of Eqs. (11) and (29).",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper tries to show that quantum mechanics is fundamentally incompatible with certain common-sense assumptions about reality \u2014 specifically in a thought experiment where two measurements happen one after the other in time, rather than at separate locations in space. The review board found the central idea interesting and genuinely novel, but identified serious unresolved technical problems: the key proofs may rely on a definition of \"no retrocausality\" that is far stronger than the concept suggests, and the second main theorem's proof may assume what it sets out to prove. The best-supported result is a subsidiary finding showing that a particular absoluteness assumption cannot be dropped without losing the main inequality entirely.",
+  "human_spotchecks": [
+    "What is the exact rendered form of Eq. (29) in the PDF source? Does the 'most general causal factorisation admitting NRC' already write Alice's response as P(a|c,x) with no dependence on d, making the statistical independence P(a|c,d,x)=P(a|c,x) an explicit premise encoded in the causal factorisation rather than a derived consequence? The answer determines whether Gemini's 'fatal conflation' objection or Claude's 'debatable but internally consistent assumption' reading is correct.",
+    "What is the exact rendered form of Eq. (11) in the PDF? Does it explicitly state P(a|c,d,x) = P(a|c,x) as part of No Retrocausality, and if so, does the paper anywhere verify that quantum mechanics satisfies this strong form of NRC in the NSIT sector for the states and measurements used in the quantum violation example?",
+    "Do Definitions 3 and 4 in the LaTeX source contain distinct variable sets \u2014 e.g., P(a,b) in Definition 3 and P(c,d) in Definition 4 \u2014 or are they genuinely identical? The HTML rendering loses subscripts and mathematical notation, and the conceptual correctness of Section IV.3 depends entirely on these definitions being distinct.",
+    "Does the LaTeX source of Appendix A conclude with 'Absoluteness of Observed Events and Causal Agency' or with the four stated assumptions (AOE, ATS, NRC, SPE)? If 'Causal Agency' appears in the source, is it defined anywhere in the manuscript?",
+    "Does the Leifer\u2013Pusey (2017) Operational Time Symmetry theorem for no-signalling quantum preparations apply structurally to the CTSF scenario \u2014 which adds super-observers, unitary reversals, and pseudo-events not present in the standard prepare-measure setup of [17] \u2014 or does applying it to the CTSF context require an independent proof?"
+  ],
+  "paper_id": "bm-251-01",
+  "public_summary": "Mukherjee and Hance introduce the Causal Time-Symmetric Friendliness (CTSF) Paradox, a timelike analogue of the Local Friendliness no-go theorem due to Bong et al. In the standard Extended Wigner's Friend setting, two labs are spatially separated; here the authors replace spatial separation with a sequential (prepare-then-measure) arrangement and replace the locality assumption with Axiological Time Symmetry (ATS) \u2014 roughly, that operational time-symmetry holding for truly-observed events must also hold for potentially-erasable \"pseudo-events.\" Combined with Absoluteness of Observed Events (AOE), No Retrocausality (NRC), and Screening via Pseudo Events (SPE), the paper argues this yields a CHSH-type inequality violated by quantum mechanics. A second result claims AOE can be weakened to an operational mediation condition (OPEM) while preserving the bound, and a third result shows that removing the absoluteness of pseudo-events entirely allows Boxworld-level correlations, destroying the inequality. Three reviewers across two cycles found the conceptual framing and the Wigner's Friend literature positioning careful and interesting, but raised persistent concerns about the proofs. The most disputed issue is whether NRC, defined operationally as a statistical conditional independence between causally connected events, is physically defensible or silently smuggles in a stronger-than-advertised assumption. Theorem 2's proof is separately questioned as nearly circular because OPEM already posits the factorized response functions needed for the bound. Several textual anomalies \u2014 an undefined term \"Causal Agency\" in the Appendix A conclusion, and Definitions 3 and 4 appearing identical in the HTML rendering \u2014 remain unresolved pending PDF inspection. The impossibility result in Section IV.3 is the most cleanly supported finding.",
+  "reviewer_disagreements": [
+    "Gemini classifies the NRC statistical-independence issue and the Appendix B incompleteness as 'fatal' with confidence 1.0, concluding Theorem 1 is mathematically invalid. Claude argues this overstates the case: the paper explicitly defines NRC operationally as statistical conditional independence, making it a strong but internally consistent assumption choice rather than a proof error, and recommends the verdict 'promising' (score 5.0). Codex takes an intermediate position \u2014 the theorem may be formally salvageable given the stated NRC, but the assumption is much stronger and less physically motivated than advertised \u2014 and recommends 'contested' (score 3.5).",
+    "Claude considers the weakening of AOE to OPEM and the analogy with Leifer\u2013Pusey's \u03c8-mediation a genuine non-trivial conceptual contribution. Gemini and Codex argue that OPEM trivially encodes the needed LHV factorization in its definition, making Theorem 2 nearly circular and the contribution weaker than claimed.",
+    "Claude maintained throughout both cycles that the core proof structure of Theorem 1 (Lemmas 1\u20132 \u2192 Jensen/CHSH bound) is largely internally consistent as a conditional result. Gemini maintained in both cycles that the result is invalid; Codex shifted from 'plausibly valid but underspecified' to 'unclear' after cycle 2."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The paper's operational definition of No Retrocausality (NRC) includes the statistical conditional independence P(a|c,d,x) = P(a|c,x) \u2014 asserting that Alice's past truly-observed outcome is statistically independent of Debbie's future pseudo-event conditional on Charlie's pseudo-event. In the CTSF forward-causal chain, Alice's output determines the state Debbie measures, so observing Debbie's outcome provides Bayesian information about Alice's outcome even absent any backwards causation. Enforcing this independence either unphysically severs the forward signaling channel or constitutes a premise far stronger than 'no retrocausality' suggests. The paper does not verify that quantum mechanics satisfies this strong form of NRC in the relevant NSIT sector for the states and measurements used in the violation example.",
+      "paper_location": "Section III.2 Assumption 3 and Eq. (11); Appendix A Lemma 2 around Eq. (41)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "Theorem 2 claims to derive the CTSF inequality from the strictly weaker OPEM assumption, but OPEM (Definition 2, Eq. 19) directly posits response functions P(a|c,x) and P(b|c,d,y) whose product already constitutes a factorized joint distribution structurally equivalent to the LHV form needed for the CHSH bound. The proof in Appendix B constructs the desired distribution from these objects and marginalizes it; whether this amounts to deriving the bound from weaker premises or encoding the conclusion in the assumptions is not adequately addressed.",
+      "paper_location": "Section IV.2 Definition 2 (Eq. 19); Appendix B Eqs. (57)\u2013(60)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The conclusion of Appendix A attributes the incompatibility of quantum statistics to 'Absoluteness of Observed Events and Causal Agency,' but 'Causal Agency' is never defined anywhere in the paper. The theorem's stated assumptions are AOE, ATS, NRC, and SPE. This mismatch between the theorem statement and its proof conclusion is a direct textual inconsistency.",
+      "paper_location": "Appendix A, final paragraph",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "Axiological Time Symmetry (ATS, Assumption 2) is formulated in terms of a joint probability distribution over pseudo-events, which the paper itself acknowledges presupposes AOE in order to be stated. The analogy offered (realism is needed to state locality in Bell's theorem) is imprecise: in standard Bell formulations, realism and locality are logically separable. If ATS cannot be stated without AOE, the theorem's claim of deriving a contradiction from four independent assumptions is overstated.",
+      "paper_location": "Section III.2 Assumption 2 and surrounding discussion",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The quantum violation calculation in Appendix A outsources the key step \u2014 that no-signalling quantum preparations imply Operational Time Symmetry \u2014 to Leifer\u2013Pusey [17] without verifying that the CTSF scenario (which includes super-observers, unitary reversals, and pseudo-events) falls within the structural scope of that result. The violation claim therefore rests on an unverified transfer from a structurally different prepare-measure setup.",
+      "paper_location": "Appendix A quantum violation section, Eqs. (53)\u2013(56)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "Definitions 3 and 4 (Absoluteness of Truly-Observed Events and Absoluteness of Pseudo Events) appear textually identical in the HTML rendering, both concluding 'This means that the joint probability exists' with no visible distinction between P(a,b) and P(c,d). The logical split between the two is central to Section IV.3; if the identity reflects the source rather than a rendering artifact, the key implication structure in Eq. (23)\u2013(24) is undefined.",
+      "paper_location": "Section IV.3, Definitions 3 and 4",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The proof of Lemma 2 in Appendix A divides by P(c,d) without stating a full-support or positivity assumption. If any pseudo-event pair (c,d) has zero probability, the conditional probability step at Eq. (41) is undefined.",
+      "paper_location": "Appendix A Lemma 2, around Eq. (41)",
+      "severity": "minor",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The timelike Wigner's Friend scenario distinguishing pseudo-events (potentially unitarily erasable) from truly-observed events (never erased) provides a coherent operational setup for deriving friendliness-type constraints in a causally ordered, non-spatially-separated setting.",
+    "Without Absoluteness of Pseudo Events, the CTSF inequality collapses: the explicit deterministic counterexample in Section IV.3 (Eqs. 27\u201328) demonstrates that the CHSH convexity argument breaks down and algebraic Boxworld correlations become reachable.",
+    "OPEM is conceptually distinguishable from full AOE because it does not require the existence of a single global Kolmogorovian joint probability over all events; the toy example invoking quasi-probability distributions is conceptually reasonable, though its formal rigor is contested.",
+    "The de Broglie\u2013Bohm interpretation and Many-Worlds interpretation evade the CTSF no-go result through distinct mechanisms (violation of Screening via Pseudo Events and denial of AOE, respectively), as discussed in Section V.2."
+  ],
+  "technical_takeaway": "The paper introduces the Causal Time-Symmetric Friendliness (CTSF) no-go theorem by replacing spatial locality in the Local Friendliness framework with Axiological Time Symmetry (ATS), combined with AOE, No Retrocausality (NRC), and Screening via Pseudo Events (SPE), to derive a CHSH-type inequality the paper claims quantum mechanics violates. Two central proof concerns survive adversarial review: (1) the paper's operational NRC encodes statistical conditional independence P(a|c,d,x)=P(a|c,x) between Alice's past truly-observed event and Debbie's future pseudo-event, but in the forward-causal CTSF chain Alice's output determines the state Debbie measures, so this independence either silently severs the forward channel or constitutes an assumption far stronger than ordinary retrocausality; (2) Theorem 2's OPEM assumption directly posits the response functions P(a|c,x) and P(b|d,y) that are structurally equivalent to the LHV factorization needed for the CHSH bound, making the proof potentially circular. The strongest supported claim is the explicit Boxworld counterexample in Section IV.3, which shows that dropping Absoluteness of Pseudo Events destroys the inequality."
+}

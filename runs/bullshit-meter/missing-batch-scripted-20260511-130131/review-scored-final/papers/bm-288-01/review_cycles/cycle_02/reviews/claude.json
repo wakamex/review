@@ -1,0 +1,153 @@
+{
+  "confidence": 0.65,
+  "cycle": 2,
+  "dimension_scores": {
+    "clarity": 4,
+    "novelty": 4,
+    "reviewer_confidence": 6,
+    "significance": 2,
+    "technical_soundness": 3
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "Revised verdict from weak_evidence to major_flaw, and overall score from 4 to 3. Two factors drove the change: (1) all three reviewers independently identified the circularity from the same textual evidence, increasing confidence that it is not a misreading; (2) codex identified a clean additional mathematical error (footnote 9 conflates self-adjointness with discreteness) that I had missed. The self-adjointness/discreteness error is independently verifiable and does not require seeing the full text.",
+    "invalid_points_from_other_reviewers": [
+      "Gemini's score of 2/10 and fatal severity may be slightly too aggressive given that the full article text is not available and a more sophisticated justification for the constitutive assignments could appear in the missing sections. The verdict of major_flaw is appropriate, but confidence should remain bounded by the incomplete bundle.",
+      "Codex's verdict of 'contested' is too mild given the strength and convergence of the circularity evidence across all three reviewers. The circularity is not a point of genuine dispute among reviewers \u2014 all three agree on it."
+    ],
+    "valid_points_from_other_reviewers": [
+      "Codex: self-adjointness does not imply a purely discrete spectrum for a Coulomb-type operator on a half-line; the paper's footnote 9 claim is a mathematical error. This is a genuine and important objection I missed in cycle 1.",
+      "Codex: the nonlinear frequency-dependent spectral problem (coefficients evaluated at the eigenfrequencies being solved for) is not automatically isospectral with the linear Coulomb problem; a proof of equivalence is needed.",
+      "Codex: passivity and causality must be verified globally in frequency via Kramers-Kronig-type constraints, not just at the fitted eigenfrequencies.",
+      "Gemini: the circularity objection has very high confidence (0.95) and is supported by direct quotes from the article text \u2014 'With these assignments, the radial equation reduces to the hydrogenic Coulomb equation' \u2014 which constitutes explicit admission that the reduction is a deliberate assignment, not emergent physics."
+    ]
+  },
+  "main_claims": [
+    {
+      "claim": "Adding quadratic temporal dispersion to a dynamic-vacuum acoustic model yields a fully analytic, exactly isospectral mapping to the hydrogenic Coulomb problem.",
+      "notes": "The mathematical steps (Sturm-Liouville, separation of variables, Bogoliubov dispersion) are standard. However, exact isospectrality requires proving that the nonlinear frequency-dependent acoustic problem has exactly the hydrogenic eigenfrequencies and no additional solutions. The coefficients are evaluated at the very eigenfrequencies being solved for (footnote 6), making this a nonlinear spectral problem whose equivalence to the standard linear Coulomb problem is asserted but not demonstrated in the available text.",
+      "paper_location": "Abstract",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Angular-momentum quantization emerges within a classical-like dispersive acoustic framework without additional wave-mechanical postulates.",
+      "notes": "Angular quantum numbers arise from the Laplace-Beltrami spectrum on S\u00b2 under rotational symmetry and single-valuedness \u2014 identical to the procedure in any classical wave equation on R\u00b3 with spherical symmetry. This is not novel emergence; it is standard separation of variables. The paper partly acknowledges this in the abstract.",
+      "paper_location": "Abstract",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "The framework reproduces the Rydberg ladder with no free parameters.",
+      "notes": "The abstract simultaneously says 'no free parameters' and 'calibration to the reduced-mass Rydberg frequency fixes [two parameters].' Two empirically fixed parameters are free parameters that have been fitted, not derived. This is at minimum a misleading presentation and at worst an internally inconsistent claim within the same paragraph.",
+      "paper_location": "Abstract (final sentences)",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "The framework predicts isotope shifts and symmetry-respecting Stark/Zeeman analogues.",
+      "notes": "If the mapping to the Coulomb equation is exact, these would follow from standard perturbation theory on the acoustic operator. Whether they are genuine predictions or formal analogues inherited by construction from the hydrogen mapping is not distinguishable without the full article.",
+      "paper_location": "Abstract",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "Quantized hydrogenic structure emerges from the dispersive acoustic formulation without introducing it as an external assumption.",
+      "notes": "Footnote 6 explicitly states: 'Setting B = const, independent of \u03c9... With these assignments, the radial equation reduces to the hydrogenic Coulomb equation.' This is an externally imposed assignment, not an emergent consequence. The claim of emergence is directly contradicted by the paper's own text.",
+      "paper_location": "Abstract (concluding sentence); Article text (footnote 6 paragraph)",
+      "support_level": "unsupported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "The constitutive profile of the medium is independently motivated from vacuum acoustic physics rather than reverse-engineered from the target Coulomb potential.",
+      "paper_location": "Abstract ('proton-imprinted constitutive profile'); Footnote 6",
+      "why_it_matters": "If the profile is chosen to reproduce 1/r Coulomb behavior, isospectrality is definitional. The physical content of the result depends entirely on whether the profile has an independent derivation from vacuum physics."
+    },
+    {
+      "assumption": "Precise specification of the Hilbert space, inner product, domain, and endpoint boundary conditions (at r=0 and r\u2192\u221e) for the radial acoustic operator, needed to establish self-adjointness and discreteness of the bound spectrum.",
+      "paper_location": "Footnote 9",
+      "why_it_matters": "Singular Coulomb-type operators on a half-line require limit-point/limit-circle analysis at r=0 and r=\u221e. Different self-adjoint extensions may give different spectra. Without this, the spectral claim is incomplete."
+    },
+    {
+      "assumption": "The Bogoliubov dispersion relation, derived for a spatially uniform background, is validly applied to the spatially inhomogeneous proton-imprinted profile, particularly near r\u21920 where the Coulomb potential diverges.",
+      "paper_location": "Footnote 2; Section: MINIMAL ASSUMPTIONS AND DISPERSION",
+      "why_it_matters": "WKB or local-density approximations break down where the background varies on scales comparable to the wavelength. Near the singularity this is almost certainly violated. The validity conditions are not stated."
+    },
+    {
+      "assumption": "After two-parameter calibration, the framework makes strictly more than two independent quantitative predictions that are compared to data.",
+      "paper_location": "Abstract",
+      "why_it_matters": "A model with two fitted parameters that makes only two predictions is not predictive. The isotope shifts and Stark/Zeeman analogues need to be shown to follow without additional free parameters."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Is the 'proton-imprinted constitutive profile' explicitly derived from independent vacuum acoustic principles, or is it defined by analogy to the 1/r Coulomb potential? Does the main article body contain a first-principles derivation of the constitutive response, or only a statement that it is chosen to reproduce the Coulomb problem?",
+      "why_model_cannot_resolve": "The main article body sections (INTRODUCTION, MINIMAL ASSUMPTIONS AND DISPERSION, APPENDICES) are absent from the bundle. This is the most consequential question for determining whether the construction is circular."
+    },
+    {
+      "question": "Does the paper provide a rigorous spectral analysis establishing that the nonlinear frequency-dependent acoustic eigenproblem has exactly the hydrogenic eigenfrequencies and no spurious solutions?",
+      "why_model_cannot_resolve": "The available text only asserts isospectrality; the derivation is in sections not present in the bundle."
+    },
+    {
+      "question": "Does the paper correctly establish that the radial operator has a purely discrete bound-state spectrum (beyond citing self-adjointness alone), and does it address the continuous scattering spectrum and how the stop-band restriction eliminates it?",
+      "why_model_cannot_resolve": "Footnote 9's claim is mathematically incomplete as quoted; the full derivation may address this or may not."
+    },
+    {
+      "question": "After two-parameter calibration to the Rydberg frequency, how many independent quantitative predictions does the framework make, and are they compared numerically to NIST data?",
+      "why_model_cannot_resolve": "The MAPPING TO OBSERVATION section is not in the bundle. The abstract claims agreement with transition lines but no numbers are visible."
+    }
+  ],
+  "novelty_assessment": "The Madelung transformation (1927) and acoustic analogues of quantum mechanics (analogue gravity) are well-established. The specific contribution \u2014 adding Bogoliubov-type quadratic dispersion to recover the Coulomb bound-state spectrum analytically \u2014 builds on a 2019 predecessor by the same group (White et al., Phys. Open). If the construction is genuinely non-circular (constitutive profile independently motivated), the analytic isospectrality proof and frequency-dependent constitutive relations may represent a modest novel contribution. However, all three reviewers, from independent reading of the available text, conclude that the construction is likely circular: the Coulomb structure is encoded into the medium by design and then extracted as a result. If this is confirmed by reading the full article, the novelty reduces to a reformulation of known analog-Schr\u00f6dinger methods in a new language, with the 2019 predecessor already covering much of the ground.",
+  "overall_score_10": 3,
+  "paper_id": "bm-288-01",
+  "recommended_verdict": "major_flaw",
+  "reviewer": "claude",
+  "score_rationale": "Technical soundness drops to 3/10 (from 4) because codex identified a clean mathematical error in footnote 9 (self-adjointness \u2260 discrete spectrum for a Coulomb-type operator) that I missed in cycle 1, and the nonlinear spectral equivalence problem is a genuine unresolved gap. The circularity \u2014 explicit in the paper's own text \u2014 is confirmed by all three reviewers independently. Novelty remains at 4/10: the Bogoliubov-Coulomb acoustic mapping in this specific form may be new, but a 2019 predecessor exists and the likely circularity reduces novelty further. Significance drops to 2/10: if the construction is circular (constitutive profile reverse-engineered from the target), the result reduces to a known analog-Schr\u00f6dinger reformulation with no new physical content. Clarity is 4/10 (down from 5): the abstract contains an internal contradiction ('no free parameters' vs. calibration) and the 'emergence' framing is contradicted by the paper's own footnotes. Reviewer confidence rises to 6/10: convergence across all three reviewers on the circularity and the identification of the self-adjointness error increases confidence, but full text is still absent. The primary caution on the verdict is that the full article body may contain a more sophisticated argument; the score and verdict reflect what the available text supports.",
+  "summary": "The paper claims hydrogen-atom quantization emerges from a classical dispersive acoustic model of a \"dynamic vacuum.\" Adding Bogoliubov-type quadratic dispersion to a \"proton-imprinted\" constitutive medium is claimed to produce an operator exactly isospectral with the hydrogenic Coulomb Hamiltonian, with angular quantization from spherical symmetry, radial localization from a reactive stop band, and the Rydberg ladder from a frequency-scale mapping. After reading the other two reviewers, I am revising my verdict from weak_evidence to major_flaw. The circularity objection \u2014 that the constitutive coefficients are explicitly assigned at the target eigenfrequencies to reproduce the Coulomb equation \u2014 is confirmed by all three reviewers from independent reading of the same text. Codex also identifies an additional clean mathematical error: footnote 9 claims self-adjointness implies a \"real, discrete spectrum,\" which is wrong as stated for a Coulomb-type operator on a half-line (the hydrogen operator has both discrete and continuous spectrum; self-adjointness gives only reality). These two issues together substantially undermine the central claim of the paper.",
+  "technical_objections": [
+    {
+      "confidence": 0.88,
+      "evidence": "All three independent reviewers identified this from the same quote. The text explicitly says 'with these assignments' the equation 'reduces to' the target equation \u2014 this is construction, not derivation. The claim of emergence is directly contradicted by the paper's own explanatory note.",
+      "objection": "Circularity: the constitutive coefficients are explicitly assigned at the target eigenfrequencies to force the radial equation to become Coulombic, making the Coulomb spectrum a tautological output, not an emergent one.",
+      "paper_location": "Footnote 6: 'Setting B = const, independent of \u03c9, keeps the coupling strength constant across all eigenstates. With these assignments, the radial equation reduces to the hydrogenic Coulomb equation.'",
+      "severity": "fatal",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.85,
+      "evidence": "Standard functional analysis: the hydrogen Hamiltonian \u2212d\u00b2/dr\u00b2 \u2212 1/r is self-adjoint on an appropriate domain in L\u00b2(0,\u221e) and has spectrum = (\u2212\u221e,0) (discrete, bound states at E_n) \u222a [0,\u221e) (continuous, scattering states). Sturm-Liouville theory on a half-line does not automatically yield a purely discrete spectrum without limit-point/limit-circle analysis at both endpoints. Codex (reviewer 2) independently identified this.",
+      "objection": "Mathematical error in footnote 9: the paper claims self-adjointness of the radial operator on [0,\u221e) ensures a 'real, discrete spectrum,' citing Sturm-Liouville theory. This is false as stated. The Coulomb-type operator on a half-line has both discrete bound-state spectrum (n=1,2,...) AND a continuous spectrum for positive-energy (scattering) states. Self-adjointness guarantees reality of the spectrum, not discreteness. Discreteness of bound states requires additional arguments (normalizability in L\u00b2, behavior at infinity, stop-band restriction).",
+      "paper_location": "Footnote 9: 'With domain [0,\u221e), the radial operator is self-adjoint, ensuring a real, discrete spectrum (Sturm-Liouville theory).'",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.82,
+      "evidence": "A standard linear operator eigenproblem (L\u03c8 = \u03bb\u03c8) and a nonlinear frequency-dependent problem (L(\u03c9)\u03c8 = \u03c9\u03c8 evaluated self-consistently) are not automatically isospectral. The paper conflates the two without justification. Codex raised this independently.",
+      "objection": "Nonlinear spectral problem: evaluating frequency-dependent coefficients at the eigenfrequencies being solved for converts the eigenvalue problem into a nonlinear one. Exact isospectrality with the linear hydrogenic problem requires proving the nonlinear acoustic problem has exactly the same solutions and no spurious roots. No such proof is in the available text.",
+      "paper_location": "Article text: 'physically relevant solutions occur only at discrete eigenfrequencies... Evaluating the coefficients at these eigenfrequencies...'",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.92,
+      "evidence": "Two calibrated parameters are by definition free parameters that have been empirically constrained. 'No free parameters' is a well-defined term meaning the model makes predictions without any tunable inputs; that is not the case here. Both codex and I flagged this independently.",
+      "objection": "The 'no free parameters' claim is internally contradicted in the same abstract: two parameters are fixed by calibration to the Rydberg frequency, which is empirical fitting, not a derivation.",
+      "paper_location": "Abstract: 'Calibration to the reduced-mass Rydberg frequency fixes [parameters]... with no free parameters.'",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.7,
+      "evidence": "Causality requires the susceptibility functions to satisfy Kramers-Kronig constraints globally in frequency, not just at fitted points. The available text provides no such verification. Codex raised this independently.",
+      "objection": "Passivity and causality of the constitutive model are asserted but not verified. A frequency-dependent medium that matches desired eigenvalues at discrete frequencies may not satisfy Kramers-Kronig relations or be energetically passive across a frequency band.",
+      "paper_location": "Abstract: 'reactive stop band consistent with causal, passive dispersion.'",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.95,
+      "evidence": "Any wave equation (classical electromagnetic, acoustic, elastic) in R\u00b3 with spherical symmetry produces integer angular labels from S\u00b2 boundary conditions. The paper partly acknowledges this. All three reviewers flagged this.",
+      "objection": "The claim of angular momentum emergence is trivially true for any wave equation with spherical symmetry and therefore overstated as a novel feature of the acoustic framework.",
+      "paper_location": "Abstract",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}

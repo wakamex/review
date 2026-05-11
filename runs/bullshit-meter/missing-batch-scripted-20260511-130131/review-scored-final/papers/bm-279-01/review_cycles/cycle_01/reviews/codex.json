@@ -1,0 +1,146 @@
+{
+  "confidence": 0.64,
+  "cycle": 1,
+  "dimension_scores": {
+    "clarity": 5.0,
+    "novelty": 5.0,
+    "reviewer_confidence": 6.4,
+    "significance": 6.0,
+    "technical_soundness": 5.0
+  },
+  "followup_notes": {
+    "changes_from_prior_cycle": "No prior cycle; this is the initial review.",
+    "invalid_points_from_other_reviewers": [],
+    "valid_points_from_other_reviewers": []
+  },
+  "main_claims": [
+    {
+      "claim": "RAR fermionic core-halo configurations can fit the S2 orbit comparably to a black-hole potential while also incorporating halo-scale mass constraints.",
+      "notes": "The paper gives a concrete modeling framework and S2 best-fit parameters. Support is weakened by incomplete reporting of priors, sampler diagnostics, and by reliance on older/reduced S2 data rather than the more precise GRAVITY data the authors themselves flag.",
+      "paper_location": "Abstract; Sections 2.1-3.1; especially lines 499-503, 533-540, 843-849",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "For the selected S2 data set, the 56 keV fermion model is favored over the 300 keV model with log Bayes factor B_1,2 = 10.1.",
+      "notes": "The numerical claim is reported, but the evidence calculation is not independently auditable because uniform prior ranges/parameterization and evidence-estimator uncertainties are not specified.",
+      "paper_location": "Section 3.1 and Table 3; lines 850-851 and 701-713",
+      "support_level": "unclear"
+    },
+    {
+      "claim": "G-object data do not yield a conclusive preference among black-hole and fermionic models.",
+      "notes": "The limited orbital coverage and mostly small Bayes factors support caution. But the G-object comparison fixes central potentials at S2 maximum-likelihood values, so uncertainty in those potentials is not propagated.",
+      "paper_location": "Section 3.2 and Discussion; lines 853-856 and 945-947",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "Changing outer-halo constraints to GAIA-DR3-like mass constraints leaves the fitted S2 orbital parameters essentially unchanged.",
+      "notes": "The robustness exercise is described and a figure is cited, but the text does not provide enough numerical diagnostics to audit the stated <=0.1 per cent variation.",
+      "paper_location": "Section 3.3; lines 918-923",
+      "support_level": "partially_supported"
+    },
+    {
+      "claim": "For all stellar objects tested, black-hole and fermionic models predict orbital parameters differing by less than 1 per cent.",
+      "notes": "Table 5 appears to contradict this: for example G2 has a = 0.464 versus 0.450 arcsec and P = 115.27 versus 109.78 yr between M_0a and M_1a; G5 has a = 2.270 versus 2.366 arcsec and P = 1246.99 versus 1322.51 yr. These exceed 1 per cent.",
+      "paper_location": "Abstract line 503; Table 5 lines 864-873 and 878-885",
+      "support_level": "unsupported"
+    }
+  ],
+  "missing_assumptions": [
+    {
+      "assumption": "Explicit bounds and parameterization for all uniform priors.",
+      "paper_location": "Section 2.3 lines 637-642 and 837",
+      "why_it_matters": "Without prior supports, the reported marginal likelihoods and Bayes factors cannot be independently checked or interpreted quantitatively."
+    },
+    {
+      "assumption": "Observational errors in RA, Dec., and radial velocity are independent Gaussian errors with negligible covariance/systematic floors.",
+      "paper_location": "Equation (8), lines 686-691",
+      "why_it_matters": "The posterior widths and model evidences can change if correlated astrometric uncertainties or instrument-specific systematics are included."
+    },
+    {
+      "assumption": "For G objects, uncertainty in the central potential inferred from S2 is negligible compared with G-object orbital-parameter uncertainty.",
+      "paper_location": "Section 2.3 lines 696-699; Section 3.2 line 853",
+      "why_it_matters": "The G-object Bayes factors condition on fixed potentials; propagating potential uncertainty could reduce or change the apparent evidence."
+    },
+    {
+      "assumption": "G objects can be treated as test particles following geodesics, with nongravitational forces, gas dynamics, and extended-source effects negligible for the data used.",
+      "paper_location": "Introduction lines 518-524; orbital dynamics Section 2.2 lines 619-633",
+      "why_it_matters": "The paper discusses controversy over G2's nature, but the fitting model assumes purely gravitational motion."
+    },
+    {
+      "assumption": "The numerical construction of RAR metric functions and geodesic integration is sufficiently accurate over the full sampled parameter space.",
+      "paper_location": "Sections 2.1-2.2, lines 539-540 and 631-634",
+      "why_it_matters": "The model equations are mostly delegated to prior papers; numerical tolerances and boundary-condition handling are not detailed here."
+    }
+  ],
+  "needs_human_spotcheck": [
+    {
+      "question": "Do the authors define prior ranges, sampler settings, and MCEvidence uncertainties in the PDF, supplementary material, or figure axes not captured cleanly in the HTML text?",
+      "why_model_cannot_resolve": "The accessible HTML text only states 'uniform priors' and shows some posterior figures; it does not provide full machine-checkable prior/evidence details."
+    },
+    {
+      "question": "Is the abstract's '<1 per cent' claim intended to exclude G-object periods, semimajor axes, and all model-predicted quantities, or is it simply inconsistent with Table 5?",
+      "why_model_cannot_resolve": "The wording says 'all stellar objects tested' and 'orbital parameters', while Table 5 contains larger discrepancies; resolving author intent requires human judgment or author clarification."
+    },
+    {
+      "question": "Are the observational covariance matrices or systematic-error treatments available in the cited data sources and implicitly used in code despite equation (8)'s diagonal presentation?",
+      "why_model_cannot_resolve": "The paper text presents only a diagonal likelihood; a domain reviewer should check whether the cited datasets or code impose additional covariance handling."
+    }
+  ],
+  "novelty_assessment": "The work appears incrementally novel rather than field-shaping: it extends prior RAR fermionic-dark-matter fits by adding a 300 keV high-compactness case, updated G2/G-object data, and a robustness check against different halo constraints. The broad idea of fermionic core-halo alternatives to Sgr A* and prior S2/G2 analyses is heavily inherited from earlier work cited by the authors.",
+  "overall_score_10": 5.0,
+  "paper_id": "bm-279-01",
+  "recommended_verdict": "weak_evidence",
+  "reviewer": "codex",
+  "score_rationale": "The modeling program is concrete and the cautious high-level conclusion that current data do not decisively distinguish the potentials is plausible. However, the quantitative evidence claims are under-audited because prior ranges, convergence diagnostics, and evidence uncertainties are missing, and one headline numerical claim appears contradicted by Table 5. I therefore view the paper as interesting but only weakly supported in its strongest statistical and summary claims.",
+  "summary": "The paper is an astrophysical/statistical modeling study, not a mathematics paper in the usual proof-theoretic sense. It compares Schwarzschild black-hole and fermionic RAR dark-matter potentials for S2 and several G objects around Sgr A*, using geodesic orbit fitting and MCMC/Bayes-factor summaries. The central qualitative conclusion, that current S2/G-object data do not cleanly distinguish the models, is plausible and cautiously stated in places. However, several local issues make the quantitative Bayesian claims and one headline '<1 per cent' claim difficult to audit.",
+  "technical_objections": [
+    {
+      "confidence": 0.9,
+      "evidence": "Several M_0a versus M_1a entries in Table 5 differ by more than 1 per cent, including G2 semimajor axis and period, and G5 semimajor axis and period. The precession entries also differ dramatically for G2, though those may be classified as model-predicted rather than fitted orbital parameters.",
+      "objection": "The abstract's '<1 per cent' orbital-parameter statement appears contradicted by the paper's own tabulated G-object fits.",
+      "paper_location": "Abstract line 503; Table 5 lines 864-873 and 878-885",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.86,
+      "evidence": "The paper defines Bayesian evidence and says uniform priors are assumed, but gives no prior bounds or parameterization details. Marginal likelihoods and log Bayes factors are prior-volume sensitive, especially for 12-dimensional RAR parameter spaces.",
+      "objection": "The Bayes factors are not reproducible from the text because the prior supports are not specified.",
+      "paper_location": "Section 2.3, lines 637-688 and 837-838; Table 3 lines 701-713",
+      "severity": "major",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.82,
+      "evidence": "The text says convergence is 'guaranteed' by integrated autocorrelation time and a chain-length criterion, but does not report chain lengths, tau_f values, walker counts, burn-in handling, acceptance fractions, effective sample sizes, or uncertainty in the MCEvidence estimates.",
+      "objection": "The MCMC convergence and evidence-estimation claims are under-documented.",
+      "paper_location": "Section 2.3, lines 837-838; Appendix A lines 3654-3656",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.78,
+      "evidence": "The paper fixes M_0a, M_1a, and M_2a potentials because G-object coverage is sparse, then computes Bayes factors only over the G-object orbital parameters. This is a plug-in comparison, not a full Bayesian comparison of the underlying central-potential models.",
+      "objection": "The G-object model comparison conditions on fixed S2 maximum-likelihood potentials rather than marginalizing over the S2-inferred potential uncertainty.",
+      "paper_location": "Section 2.3 lines 696-699; Section 3.2 lines 853-856; Discussion lines 945-946",
+      "severity": "moderate",
+      "would_change_verdict_if_true": true
+    },
+    {
+      "confidence": 0.68,
+      "evidence": "The log-likelihood is a simple sum of squared residuals divided by sigma_k^2. For mixed astrometric and radial-velocity data from different instruments/analyses, covariance and systematic floors can affect both parameter fits and evidences.",
+      "objection": "The likelihood assumes independent Gaussian residuals with diagonal variances and does not justify neglecting correlations or instrumental/systematic errors.",
+      "paper_location": "Equation (8), lines 686-691; data description line 837",
+      "severity": "moderate",
+      "would_change_verdict_if_true": false
+    },
+    {
+      "confidence": 0.74,
+      "evidence": "Equation (7) defines B_i,j = ln(E_i/E_j), while the table caption says fermionic models are compared to the null model but the row is labeled B_0a,j and the text interprets positive B_0a,1a as evidence for the null. The intended direction can be inferred, but the presentation is easy to misread.",
+      "objection": "Bayes-factor notation and sign are somewhat ambiguous in Table 3/caption relative to the text.",
+      "paper_location": "Equation (7), lines 646-647; Table 3 lines 701-713; Section 3.2 lines 855-856",
+      "severity": "minor",
+      "would_change_verdict_if_true": false
+    }
+  ]
+}
