@@ -68,6 +68,9 @@ def paper_summary(entry: dict[str, object], papers_dir: Path) -> dict[str, objec
         "sabine_bullshit_meter_score_note",
         "sabine_bullshit_meter_candidate_scores_10",
         "sabine_related_video_bullshit_meter_score_10",
+        "sabine_bullshit_ratings",
+        "youtube_url",
+        "transcript_video_title",
     ):
         if key in entry:
             summary[key] = entry[key]
