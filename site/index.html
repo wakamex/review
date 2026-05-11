@@ -96,11 +96,11 @@
 // Override either way with ?data=cdn or ?data=local.
 const DATA_BASE = (() => {
     const force = new URLSearchParams(location.search).get('data');
-    if (force === 'cdn')   return 'https://cdn.jsdelivr.net/gh/wakamex/review@main/';
+    if (force === 'cdn')   return 'https://cdn.jsdelivr.net/gh/wakamex/review@__DATA_SHA__/';
     if (force === 'local') return '../';
     const host = location.hostname;
     const isLocal = host === 'localhost' || host === '127.0.0.1' || host === '';
-    return isLocal ? '../' : 'https://cdn.jsdelivr.net/gh/wakamex/review@main/';
+    return isLocal ? '../' : 'https://cdn.jsdelivr.net/gh/wakamex/review@__DATA_SHA__/';
 })();
 
 async function loadData(repoPath) {
