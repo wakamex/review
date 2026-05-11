@@ -46,7 +46,7 @@ def paper_summary(entry: dict[str, object], papers_dir: Path) -> dict[str, objec
         else {}
     )
     calls = run_summary.get("calls") if isinstance(run_summary.get("calls"), list) else []
-    return {
+    summary = {
         "arxiv_id": arxiv_id,
         "title": entry.get("title"),
         "abs_url": entry.get("abs_url"),
@@ -61,6 +61,17 @@ def paper_summary(entry: dict[str, object], papers_dir: Path) -> dict[str, objec
             for status in sorted({str(call.get("status")) for call in calls if isinstance(call, dict)})
         },
     }
+    for key in (
+        "sabine_bullshit_meter_score_10",
+        "sabine_bullshit_meter_score_status",
+        "sabine_bullshit_meter_score_scope",
+        "sabine_bullshit_meter_score_note",
+        "sabine_bullshit_meter_candidate_scores_10",
+        "sabine_related_video_bullshit_meter_score_10",
+    ):
+        if key in entry:
+            summary[key] = entry[key]
+    return summary
 
 
 def render_markdown(rows: list[dict[str, object]]) -> str:
