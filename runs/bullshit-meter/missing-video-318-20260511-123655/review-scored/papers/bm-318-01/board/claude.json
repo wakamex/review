@@ -1,0 +1,93 @@
+{
+  "audit_trail": {
+    "cycles_used": 2,
+    "notes": "All three reviewers converged on the same two core diagnoses across both cycles: (1) Lemma 1 fatally drops the Bohm quantum potential by treating the classical density as having no spatial variation, and (2) the Bell/EPR treatment evades rather than refutes Bell's theorem by computing continuous spinor correlations rather than binary-outcome correlations. Disagreements were in degree of harshness (Gemini 1/10 vs. Claude 3/10 vs. Codex 2/10) and in secondary objection severities. Cycle 2 updated Claude's verdict from weak_evidence to major_flaw after inter-reviewer cross-examination; all final-cycle reviewers agree on major_flaw. The HTML source extraction has several blank formula environments around the critical Lemma 1 proof, which is flagged as a required human spot-check before any editorial decision. The paper's connection to Sabine Hossenfelder's video 'Quantum Physics Is An Unnecessary Complication Physicists Say' is noted in the bundle metadata.",
+    "reviewers_used": [
+      "claude",
+      "codex",
+      "gemini"
+    ]
+  },
+  "general_reader_takeaway": "This paper from MIT claims that quantum wave functions can be derived exactly from classical particle paths alone \u2014 no Feynman \"sum over all histories\" needed \u2014 by combining multi-valued classical action solutions with classical fluid density. The review board found the individual examples correct but the central proof fatally flawed: it silently assumes a condition that does not hold in general, and the paper's treatment of the Bell inequality experiment substitutes continuous spinor math for the discrete binary measurements that Bell's theorem actually governs. All worked examples succeed for reasons already known to physics, not because the general framework is valid.",
+  "human_spotchecks": [
+    "PDF/LaTeX inspection of Lemma 1: The HTML extraction of equation (14) and its proof is incomplete, with several formula environments blank. A human should inspect the original PDF to determine whether the proof explicitly addresses spatial gradient terms of \u221a\u03c1_k, or whether 'its total differential has no variation with respect to x' is the complete argument as submitted. This determines whether the fatal gap is a presentation artifact or a genuine mathematical error.",
+    "Bell binary-outcome statistics: A Bell-inequality expert should explicitly construct the probability model for binary \u00b11 outcomes given the paper's initial spinor \u03b8 and filter directions, compute the two-detector correlator, and verify whether Bell's inequality is satisfied or violated. This determines whether the paper's continuous-spinor model produces correct binary experimental statistics in any interpretation.",
+    "Quaternion Dirac derivation (Section 4.2): A specialist in relativistic quantum mechanics should verify step-by-step whether the anti-commutation relations (78)/(79) ensure that all cross-terms in the quaternion generalization of the quantum potential vanish \u2014 i.e., whether Q = 0 holds in the quaternion sector by a non-trivial cancellation or is again assumed without proof.",
+    "Lagrangian vs. Eulerian density consistency: A specialist in Hamiltonian PDEs and quantum hydrodynamics should determine whether there exists a coherent mathematical reading of the proof in which \u03c1_k is simultaneously (a) a Lagrangian path density with no spatial variation (as required by the Lemma 1 proof) and (b) an Eulerian spatial field that can be substituted as an amplitude in the Schr\u00f6dinger PDE (as required by every worked example and the normalization condition)."
+  ],
+  "paper_id": "bm-318-01",
+  "public_summary": "Lohmiller and Slotine (MIT) argue that every quantum wave function can be constructed as a sum \u03a8 = \u03a3_k \u221a\u03c1_k exp(iS_k/\u210f), where S_k are branches of the classical action satisfying the Hamilton-Jacobi PDE and \u03c1_k is the classical fluid density transported along each branch. The paper claims this is exact \u2014 not a WKB or semiclassical approximation \u2014 for all quantum systems, including relativistic cases and the EPR experiment. The review board found the presentation unified and the individual examples correct, but three independent reviewers across two adversarial cycles unanimously identified the same fatal gap: the core proof (Lemma 1) discards the Bohm quantum potential by treating the density as having no spatial variation, which holds only in special cases. The examples are precisely those special cases (free spherical waves, quadratic potentials, Coulomb via a known coordinate transformation), so they do not validate the broader claim. The paper's attempt to derive a local hidden-variable explanation for Bell inequality violations conflates continuous spinor math with the discrete binary measurement outcomes that Bell's theorem governs. Born's rule is explicitly left as a postulate, limiting the claimed derivation of quantum fundamentals. The multi-valued action framing is a fresh synthesis worth attention, but the paper's central exactness claim is not established for general potentials.",
+  "reviewer_disagreements": [
+    "Overall severity: Gemini assigned scores of 1/10 in both cycles, characterizing the Lemma 1 error as an elementary calculus mistake and the Bell treatment as a 'common crackpot trope,' warranting the lowest possible score. Claude assigned 4/10 in cycle 1 (revised to 3/10 in cycle 2), arguing the authors are serious researchers at MIT who produce correct examples and whose error is overclaiming generality rather than making a naive mistake. Codex assigned 2/10 in both cycles, agreeing on the fatal flaw but acknowledging genuine ambition. All three agreed on the same core diagnoses; the disagreement is about how harshly to characterize the work.",
+    "Novelty assessment: Gemini dismissed novelty almost entirely, viewing the multi-valued action synthesis as indistinct from Madelung (1927) and Bohm (1952). Claude and Codex acknowledged that the systematic treatment of branch points and multipaths across multiple wave equations within a single framework constitutes a real presentational novelty, even though the key exactness claim \u2014 the source of the paper's strongest novelty \u2014 is precisely what is unestablished.",
+    "Tunneling example (Example 4): Claude and Gemini rated this moderate severity, noting the result is correct and the incompleteness lies in not invoking analytic continuation explicitly. Codex rated it closer to major severity, arguing that without a general variational principle or matching derivation for complex paths, the example cannot be claimed as a derivation within the framework."
+  ],
+  "strongest_objections": [
+    {
+      "objection": "The proof of Lemma 1 \u2014 the paper's central result \u2014 requires the spatial gradient of the classical density \u03c1_k to vanish (\u2207\u221a\u03c1_k = 0), which eliminates the Bohm quantum potential Q = \u2212(\u210f\u00b2/2m)(\u2207\u00b2\u221a\u03c1_k / \u221a\u03c1_k). The paper justifies this by saying \u03c1_k 'is only defined along each individual path' and therefore has no variation with respect to position, but this conflicts with every worked example where \u03c1_k is explicitly a spatial field (e.g., \u03c1_k \u221d 1/r\u00b2 in Example 1). The classical Hamilton-Jacobi equation is recovered from the Schr\u00f6dinger equation only when Q = 0, which is not generally true. This gap was independently identified by all three reviewers in both review cycles.",
+      "paper_location": "Section 3, Lemma 1 proof (equation 14 and surrounding text)",
+      "severity": "fatal",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The EPR/Bell treatment (Example 7) computes correlations of continuous spinor projections before binary quantization, not correlations of the binary \u00b11 measurement outcomes that Bell's theorem governs. Replacing Bell's binary detector function (equation 91) with a continuous spinor detector pair (equation 93) models a different, physically non-realizable experiment; it avoids Bell's theorem rather than refuting it. The paper's claim that Bell's inequality is 'classically only applicable at a relative angle on the Bloch sphere' misreads Bell's proof, which assumes binary outcomes as an experimental fact, not as a modeling choice.",
+      "paper_location": "Section 4.4, Example 7, equations (88)\u2013(93)",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The paper's generality claim is not supported by the worked examples, all of which reduce to previously known exact methods. The double-slit succeeds because \u2207\u00b2(1/r) = 0 in three dimensions (quantum potential vanishes for spherical waves). The harmonic oscillator follows Feynman [23], who showed quadratic actions are exact; no new content is added. The hydrogen atom uses the Duru\u2013Kleinert coordinate transformation [18, 42] to map Coulomb to harmonic oscillator, an established exact technique. No example with a general anharmonic or nonlinear potential is provided, and the Concluding Remarks explicitly acknowledge that deriving complex actions for general nonlinear potentials is ongoing research.",
+      "paper_location": "Examples 1, 5, 6; Abstract; Section 5 Concluding Remarks",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "The claim that multi-valued action branches can only arise at unbounded forces or unbounded derivatives \u2014 used to characterize branch points in Theorem 1 \u2014 overstates what the Picard\u2013Lindel\u00f6f and contraction arguments establish. Smooth, bounded Hamiltonian flows can produce caustics (envelopes of classical trajectories) where multiple characteristics converge and the Hamilton-Jacobi solution becomes degenerate. Standard semiclassical methods require Maslov phase corrections at each caustic crossing; the paper mentions Maslov indices only in the context of prior work and does not show how the exact construction handles caustics.",
+      "paper_location": "Section 2, paragraph before Theorem 1; Section 3",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex"
+      ]
+    },
+    {
+      "objection": "The Maxwell equation derivation identifies the real vector potential A with a wave function and a 'square root density vector' \u221a\u03c1 without justification beyond dimensional plausibility. The claim that the inhomogeneous Maxwell equation (84) implies photon creation and annihilation without second quantization conflates classical field wave-equation solutions with quantum field theory: classical Maxwell fields and single-particle Dirac spinors lack photon number operators, Fock-space structure, or QED scattering amplitudes.",
+      "paper_location": "Section 4.3, equations (82)\u2013(84); Example 8",
+      "severity": "major",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    },
+    {
+      "objection": "Example 4 (quantum tunneling) introduces complex classical action and imaginary momenta for the classically forbidden region, asserting that superposition of two conjugate imaginary path solutions yields a real position solution with zero velocity. Complex-action (instanton) methods are a known technique but require explicit analytic continuation of the Hamiltonian and boundary-matching conditions for reflection and transmission amplitudes; neither is provided. The resulting wave function (equation 30) matches the known result, but the derivation's logical steps are incomplete.",
+      "paper_location": "Example 4, equations (27)\u2013(30)",
+      "severity": "moderate",
+      "supporting_reviewers": [
+        "claude",
+        "codex",
+        "gemini"
+      ]
+    }
+  ],
+  "strongest_supported_claims": [
+    "The worked examples \u2014 double-slit experiment, harmonic oscillator, particle in a box, and hydrogen atom \u2014 each produce the correct quantum wave function, consistent with results derivable by prior established methods (Feynman path integrals for quadratic actions, Duru\u2013Kleinert mapping for the Coulomb problem).",
+    "For the specific examples covered, the multi-valued classical action approach is computationally simpler than direct Feynman path integration over zig-zag paths.",
+    "The paper explicitly acknowledges that Born's rule is not derived and remains a postulate, limiting its claim to deriving only a subset of quantum postulates.",
+    "The unified framing connecting multi-valued classical action to quantum wave equations across Schr\u00f6dinger, Klein-Gordon, Dirac, Pauli, and Maxwell equations in a single formalism is a novel synthetic presentation, even if the exactness claim is unestablished."
+  ],
+  "technical_takeaway": "The central proof (Lemma 1) requires the Eulerian spatial gradient of the classical density \u03c1_k to vanish \u2014 which eliminates the Bohm quantum potential Q = \u2212(\u210f\u00b2/2m)(\u2207\u00b2\u221a\u03c1_k / \u221a\u03c1_k) and recovers the classical Hamilton-Jacobi equation from the Schr\u00f6dinger equation \u2014 but this condition is neither stated as a hypothesis nor generally true. All three reviewers independently identified this as a fatal gap across both review cycles. The paper conflates Lagrangian path density (a scalar along a trajectory, no x-dependence by construction) with Eulerian density field (a function of x and t), and every worked example succeeds because Q = 0 coincidentally holds in that case: spherical-wave 1/r\u00b2 density in 3D (\u2207\u00b2(1/r) = 0), quadratic Hamiltonians (Feynman-exact by prior work), and Coulomb via the Duru\u2013Kleinert mapping to the harmonic oscillator. No example with a general anharmonic potential is provided. The EPR/Bell section computes correlations of continuous spinor projections before binary quantization \u2014 which avoids Bell's theorem rather than refuting it. All relativistic extensions inherit the unestablished base lemma."
+}

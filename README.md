@@ -16,6 +16,7 @@ Live site: **<https://mihaicosma.com/review/>** — catalog, scatter, drill-down
 | `gr-qc` | arXiv April 2026, gr-qc category, papers ≤10 pages | 66 | `runs/2026-04/gr-qc/` |
 | `bs-meter · sabine` | Papers rated on Sabine Hossenfelder's bullshit-meter video series | 45 | `runs/bullshit-meter/sabine-20260509-164342/` |
 | `bs-meter · latest-video` | Latest Sabine bullshit-meter video (separate run) | 1 | `runs/bullshit-meter/latest-video-20260510-225418/review-scored/` |
+| `bs-meter · missing-video-318` | Backfill of a Sabine video missed by the main batch (arXiv 2405.06328) | 1 | `runs/bullshit-meter/missing-video-318-20260511-123655/review-scored/` |
 
 The site renders the two bs-meter runs as one category, with Sabine's 0–10
 bullshit score (higher = more bullshit) shown alongside the board's 0–10
