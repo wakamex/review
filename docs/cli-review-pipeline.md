@@ -372,6 +372,28 @@ python3 scripts/summarize_review_results.py \
   preserve the original arXiv listing order.
 - Board synthesis receives the paper bundle and all review-cycle artifacts.
 
+Fill missing reviewer artifacts with exponential retry:
+
+```bash
+nohup python3 -u scripts/retry_review_gaps.py \
+  --run-dir runs/bullshit-meter/sabine-20260509-164342 \
+  --run-dir runs/2026-04/gr-qc \
+  --providers claude,codex,gemini \
+  --cycles 2 \
+  --attempts 6 \
+  --initial-delay 300 \
+  --max-delay 3600 \
+  --timeout 1500 \
+  --execute \
+  > runs/retry-gaps-$(date +%Y%m%d-%H%M%S).out 2>&1 &
+```
+
+The retry wrapper scans each run's `manifest.jsonl`, reruns only papers with
+missing reviewer JSONs, and rescans after each attempt because provider-level
+JSON failures are recorded as artifacts rather than fatal process exits. It
+does not overwrite existing reviewer JSON. When a paper's gaps are filled, it
+refreshes that paper's board synthesis with `--overwrite-board`.
+
 Artifacts for the first test paper live under:
 
 ```text
