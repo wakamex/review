@@ -444,15 +444,16 @@ def collect_review_artifacts(paper_dir: Path, cycles: int, providers: list[str])
         for provider in providers:
             path = provider_review_path(paper_dir, cycle, provider)
             error_path = path.with_suffix(".error.json")
+            missing = not path.exists()
             artifacts.append(
                 {
                     "cycle": cycle,
                     "reviewer": provider,
                     "path": str(path),
-                    "review": read_json(path) if path.exists() else None,
-                    "missing": not path.exists(),
-                    "error_path": str(error_path) if error_path.exists() else None,
-                    "error": read_json(error_path) if error_path.exists() else None,
+                    "review": read_json(path) if not missing else None,
+                    "missing": missing,
+                    "error_path": str(error_path) if missing and error_path.exists() else None,
+                    "error": read_json(error_path) if missing and error_path.exists() else None,
                 }
             )
     return artifacts
