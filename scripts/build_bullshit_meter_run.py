@@ -257,6 +257,7 @@ def extract_html_title(path: Path) -> str | None:
     raw = path.read_text(encoding="utf-8", errors="replace")
     patterns = [
         r"(?is)<meta[^>]+property=[\"']og:title[\"'][^>]+content=[\"']([^\"']+)",
+        r"(?is)<span[^>]+class=[\"'][^\"']*ltx_font_bold[^\"']*[\"'][^>]*style=[\"'][^\"']*font-size:144%[^\"']*[\"'][^>]*>(.*?)</span>",
         r"(?is)<h1[^>]*>(.*?)</h1>",
         r"(?is)<title[^>]*>(.*?)</title>",
     ]
