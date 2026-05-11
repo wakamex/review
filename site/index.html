@@ -306,11 +306,27 @@ function renderScatter() {
     }
 }
 
+function escAttr(s) {
+    return String(s ?? '').replace(/[&<>"']/g, c => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[c]));
+}
+
+function youtubeLine(p) {
+    if (!p.youtube_url) return '';
+    const title = p.transcript_video_title || 'Sabine bullshit-meter video';
+    return `<a class="yt-link" href="${escAttr(p.youtube_url)}" target="_blank" rel="noopener"
+              title="${escAttr(title)}" onclick="event.stopPropagation()">
+                <span class="yt-glyph" aria-hidden="true"></span>
+                <span class="yt-title">${escAttr(title)}</span>
+            </a>`;
+}
+
 const COLUMNS_BASE = [
     { key: 'selected_score', label: 'Score', num: true,
       render: p => `<span class="${scoreClass(p.selected_score)}">${fmtScore(p.selected_score)}</span>` },
     { key: 'title', label: 'Title', num: false,
-      render: p => `${p.title} <span class="muted" style="font-size:.75rem">${p.arxiv_id}</span>` },
+      render: p => `<div>${p.title} <span class="muted" style="font-size:.75rem">${p.arxiv_id}</span></div>${youtubeLine(p)}` },
     { key: 'general_reader_takeaway', label: 'General-reader takeaway', num: false,
       render: p => p.general_reader_takeaway || '—', cls: 'takeaway' },
 ];

@@ -64,6 +64,8 @@
             </div>
         </div>
 
+        <div id="p-sabine-card-host"></div>
+
         <h2>General-reader takeaway</h2>
         <p id="p-general"></p>
 
@@ -253,6 +255,9 @@ function renderPaper(board, summary, teaser, reviewers) {
     const cycleNums = Object.keys(reviewers).sort();
     document.getElementById('p-cycles').textContent = `${cycleNums.length} × ${(summary.providers || AGENTS).length}`;
 
+    // Sabine transcript card (bs-meter only)
+    renderSabineCard(teaser);
+
     // Takeaways
     document.getElementById('p-general').innerHTML = paragraphs(board.general_reader_takeaway);
     document.getElementById('p-technical').innerHTML = paragraphs(board.technical_takeaway);
@@ -297,6 +302,49 @@ function renderPaper(board, summary, teaser, reviewers) {
         `<code>${esc(ROOT)}/papers/${esc(ID)}/board/claude.json</code> · ` +
         `<code>review_run_summary.json</code> · ` +
         `<code>review_cycles/cycle_0{1,2}/reviews/{claude,codex,gemini}.json</code>`;
+}
+
+// Pull the first [HH:MM:SS.ms] (or [MM:SS]) timestamp out of a transcript excerpt
+// and return total seconds, or null if none found.
+function firstTimestampSeconds(text) {
+    if (!text) return null;
+    const m = text.match(/\[(\d+):(\d{1,2})(?::(\d{1,2}))?(?:\.\d+)?\]/);
+    if (!m) return null;
+    const a = +m[1], b = +m[2], c = m[3] == null ? null : +m[3];
+    return c == null ? a * 60 + b : a * 3600 + b * 60 + c;
+}
+function fmtMMSS(sec) {
+    if (sec == null) return '';
+    const m = Math.floor(sec / 60), s = sec % 60;
+    return `${m}:${String(s).padStart(2, '0')}`;
+}
+
+function renderSabineCard(teaser) {
+    const host = document.getElementById('p-sabine-card-host');
+    host.innerHTML = '';
+    if (!teaser || !teaser.youtube_url) return;
+
+    const yt = teaser.youtube_url;
+    const vid = teaser.transcript_video_title || 'Sabine bullshit-meter video';
+    const ratings = Array.isArray(teaser.sabine_bullshit_ratings) ? teaser.sabine_bullshit_ratings : [];
+
+    const excerpts = ratings.map((r, i) => {
+        const t = firstTimestampSeconds(r.excerpt);
+        const href = t != null ? `${yt}&t=${t}s` : yt;
+        const stamp = t != null
+            ? `<a href="${esc(href)}" target="_blank" rel="noopener">Watch from ${esc(fmtMMSS(t))} →</a>`
+            : `<a href="${esc(yt)}" target="_blank" rel="noopener">Watch on YouTube →</a>`;
+        const scoreText = r.score_10 != null ? `<span class="${bsClass(r.score_10)}" style="font-weight:700">${fmt(r.score_10)}/10</span> ` : '';
+        return `<div style="margin-top:${i ? 12 : 6}px">
+            <p style="font-style:italic; color: var(--text-supporting); line-height: 1.55">…${esc(r.excerpt).trim()}…</p>
+            <p style="font-size: 0.85rem; color: var(--muted)">${scoreText}${stamp}</p>
+        </div>`;
+    }).join('');
+
+    const heading = `<h2 style="margin-top: 24px">Sabine's transcript</h2>`;
+    const sub = `<p style="margin: 0 0 4px"><a href="${esc(yt)}" target="_blank" rel="noopener">▶ ${esc(vid)}</a></p>`;
+    host.innerHTML = heading + sub +
+        (excerpts || `<p class="muted" style="font-size: 0.85rem">No transcript excerpt recorded for this paper.</p>`);
 }
 
 function agentTag(name) {
