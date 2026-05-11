@@ -306,12 +306,17 @@ function renderPaper(board, summary, teaser, reviewers) {
 
 // Pull the first [HH:MM:SS.ms] (or [MM:SS]) timestamp out of a transcript excerpt
 // and return total seconds, or null if none found.
+const TIMESTAMP_RE = /\[\d+:\d{1,2}(?::\d{1,2})?(?:\.\d+)?\]/g;
 function firstTimestampSeconds(text) {
     if (!text) return null;
     const m = text.match(/\[(\d+):(\d{1,2})(?::(\d{1,2}))?(?:\.\d+)?\]/);
     if (!m) return null;
     const a = +m[1], b = +m[2], c = m[3] == null ? null : +m[3];
     return c == null ? a * 60 + b : a * 3600 + b * 60 + c;
+}
+function stripTimestamps(text) {
+    if (!text) return '';
+    return text.replace(TIMESTAMP_RE, '').replace(/[ \t]{2,}/g, ' ').trim();
 }
 function fmtMMSS(sec) {
     if (sec == null) return '';
@@ -335,13 +340,14 @@ function renderSabineCard(teaser) {
             ? `<a href="${esc(href)}" target="_blank" rel="noopener">Watch from ${esc(fmtMMSS(t))} →</a>`
             : `<a href="${esc(yt)}" target="_blank" rel="noopener">Watch on YouTube →</a>`;
         const scoreText = r.score_10 != null ? `<span class="${bsClass(r.score_10)}" style="font-weight:700">${fmt(r.score_10)}/10</span> ` : '';
+        const cleaned = stripTimestamps(r.excerpt);
         return `<div style="margin-top:${i ? 12 : 6}px">
-            <p style="font-style:italic; color: var(--text-supporting); line-height: 1.55">…${esc(r.excerpt).trim()}…</p>
+            <p style="font-style:italic; color: var(--text-supporting); line-height: 1.55">…${esc(cleaned)}…</p>
             <p style="font-size: 0.85rem; color: var(--muted)">${scoreText}${stamp}</p>
         </div>`;
     }).join('');
 
-    const heading = `<h2 style="margin-top: 24px">Sabine's transcript</h2>`;
+    const heading = `<h2 style="margin-top: 24px">Sabine's take</h2>`;
     const sub = `<p style="margin: 0 0 4px"><a href="${esc(yt)}" target="_blank" rel="noopener">▶ ${esc(vid)}</a></p>`;
     host.innerHTML = heading + sub +
         (excerpts || `<p class="muted" style="font-size: 0.85rem">No transcript excerpt recorded for this paper.</p>`);
