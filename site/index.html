@@ -283,9 +283,21 @@ function renderScatter() {
         stroke: '#ff9800', 'stroke-width': '1', 'stroke-dasharray': '4 4', opacity: '0.6'
     });
 
+    // HTML tooltip overlay — fixed-positioned at body level so it can float
+    // anywhere on the page and never gets clipped by the SVG viewBox or the
+    // scatter card. One element is reused across renders.
+    let tip = document.getElementById('scatter-tip-host');
+    if (!tip) {
+        tip = document.createElement('div');
+        tip.id = 'scatter-tip-host';
+        tip.className = 'scatter-tip';
+        document.body.appendChild(tip);
+    }
+    tip.style.display = 'none';
+    tip.className = 'scatter-tip';
+
     // Dots
     const dotGroup = make('g', {});
-    const tooltip = make('text', { class: 'scatter-tooltip', x: M.l + plotW, y: M.t + 14, 'text-anchor': 'end' });
     for (const p of STATE.papers) {
         if (p.selected_score == null || p.sabine_bullshit_meter_score_10 == null) continue;
         const dis = Math.abs(p.selected_score + p.sabine_bullshit_meter_score_10 - 10);
@@ -299,9 +311,41 @@ function renderScatter() {
             opacity: '0.75',
         }, dotGroup);
         c.addEventListener('mouseenter', () => {
-            tooltip.textContent = `${p.title} — board ${fmtScore1(p.selected_score)} · BS ${fmtScore1(p.sabine_bullshit_meter_score_10)} · gap ${fmtScore1(dis)}`;
+            tip.innerHTML =
+                `<div class="t-title">${escAttr(p.title)}</div>` +
+                `<div class="t-meta">board ${fmtScore1(p.selected_score)} · BS ${fmtScore1(p.sabine_bullshit_meter_score_10)} · gap ${fmtScore1(dis)}</div>`;
+            // Reveal so we can measure dimensions.
+            tip.className = 'scatter-tip';
+            tip.style.display = 'block';
+            tip.style.left = '0px';
+            tip.style.top  = '0px';
+
+            const dotRect = c.getBoundingClientRect();
+            const tipRect = tip.getBoundingClientRect();
+            const svgRect = svg.getBoundingClientRect();
+            const cx = dotRect.left + dotRect.width / 2;
+            const cy = dotRect.top  + dotRect.height / 2;
+            const margin = 12;
+
+            // Anchor the tip into the chart, not out of it: a dot in the upper
+            // half of the chart shows the tip below; a dot in the lower half
+            // shows it above. This avoids both the chart heading at the top
+            // and the legend/table at the bottom.
+            const flip = cy < svgRect.top + svgRect.height / 2;
+            // Horizontal: prefer centred, but anchor to one edge of the tip
+            // when the dot is close enough to the viewport edge that the
+            // centred version would clip.
+            const halfW = tipRect.width / 2;
+            const viewportW = window.innerWidth;
+            let mods = '';
+            if (cx - halfW < 8)               mods += ' edge-left';
+            else if (cx + halfW > viewportW - 8) mods += ' edge-right';
+            if (flip) mods += ' flip';
+            tip.className = 'scatter-tip' + mods;
+            tip.style.left = `${cx}px`;
+            tip.style.top  = `${cy + (flip ? margin : -margin)}px`;
         });
-        c.addEventListener('mouseleave', () => { tooltip.textContent = ''; });
+        c.addEventListener('mouseleave', () => { tip.style.display = 'none'; });
         c.addEventListener('click', () => openPaper(p));
     }
 }

@@ -218,6 +218,40 @@ tr.clickable { cursor: pointer; }
     padding: 12px 16px 8px;
     margin: 8px 0 16px;
     background: var(--bg-soft);
+    position: relative;
+}
+
+/* Floating tooltip for scatter dots. Position: fixed so it can extend past
+   the scatter card or even the viewport edges without being clipped. */
+.scatter-tip {
+    position: fixed;
+    display: none;
+    pointer-events: none;
+    background: rgba(4, 5, 6, 0.96);
+    border: 1px solid var(--border-strong);
+    border-radius: 4px;
+    padding: 6px 10px;
+    z-index: 100;
+    max-width: 320px;
+    line-height: 1.4;
+    /* Default: anchor bottom-centre (tip floats above the dot). */
+    transform: translate(-50%, -100%);
+}
+.scatter-tip.flip       { transform: translate(-50%, 0); }
+.scatter-tip.edge-left  { transform: translate(0,     -100%); }
+.scatter-tip.edge-right { transform: translate(-100%, -100%); }
+.scatter-tip.flip.edge-left  { transform: translate(0,     0); }
+.scatter-tip.flip.edge-right { transform: translate(-100%, 0); }
+.scatter-tip .t-title {
+    color: var(--text-bright);
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+.scatter-tip .t-meta {
+    color: var(--text-supporting);
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+    margin-top: 2px;
 }
 .scatter-wrap svg { display: block; width: 100%; max-width: 720px; height: auto; }
 .scatter-legend {
@@ -242,11 +276,6 @@ tr.clickable { cursor: pointer; }
     transition: r 0.1s ease, opacity 0.1s ease;
 }
 .scatter-dot:hover { r: 7; opacity: 1 !important; }
-.scatter-tooltip {
-    pointer-events: none;
-    fill: var(--text-bright);
-    font-size: 11px;
-}
 .scatter-axis text { fill: var(--muted); font-size: 10px; }
 .scatter-axis line, .scatter-axis path { stroke: var(--border); }
 .scatter-grid line { stroke: #1a1916; }
