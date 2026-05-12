@@ -62,7 +62,7 @@
             <li><b>Two cycles.</b> Cycle 1 is independent. In cycle 2 each reviewer is shown the other two&rsquo;s cycle-1 reports and writes a follow-up &mdash; keeping real objections, retracting weak ones, marking which of the others&rsquo; points they accept or reject, and re-scoring.</li>
             <li><b>Final score.</b> Each reviewer hands in one <code>overall_score_10</code> per cycle. The displayed score is the mechanical mean of the three reviewers&rsquo; cycle-2 overall scores &mdash; no human weighting. The five dimension scores (technical soundness, novelty, significance, clarity, reviewer confidence) are reported per reviewer for information only and are not aggregated into the displayed score.</li>
             <li><b>Board synthesis.</b> A separate <span class="agent-tag claude"><svg class="icon"><use href="#ic-claude"/></svg>claude</span> run reads all six reviewer JSONs and produces the public summary, strongest supported claims, strongest objections (with which reviewers backed each), reviewer disagreements, and suggested human spot-checks shown on each paper&rsquo;s detail page.</li>
-            <li><b>bs-meter view.</b> Sabine&rsquo;s 0&ndash;10 score runs <i>opposite</i> the board&rsquo;s: high BS-meter ↔ low quality. The agreement metric is <code>|board + sabine_BS &minus; 10|</code> (small = agree, large = disagree). A few rows are papers Sabine discussed but didn&rsquo;t score numerically &mdash; the BS column shows <span class="muted" style="font-size:.7rem; text-transform: uppercase; letter-spacing: 0.05em">companion</span> (sibling paper from the same video, score is on the primary), <span class="muted" style="font-size:.7rem; text-transform: uppercase; letter-spacing: 0.05em">qualitative</span> (no number given), or <span class="muted" style="font-size:.7rem; text-transform: uppercase; letter-spacing: 0.05em">ambiguous</span> (couldn&rsquo;t be cleanly attributed).</li>
+            <li><b>bs-meter view.</b> Sabine&rsquo;s 0&ndash;10 score runs <i>opposite</i> the board&rsquo;s: high BS-meter ↔ low quality. The agreement metric is <code>|board + sabine_BS &minus; 10|</code> (small = agree, large = disagree). A few rows are papers Sabine discussed but didn&rsquo;t pin down to one number &mdash; the BS column shows <i>companion</i> (sibling paper from the same video, score is on the primary), <i>qualitative</i> (she only gave a verbal verdict), or the candidate scores joined with <i>or</i> (e.g., <i>0 or 10</i>) when she explicitly offered more than one. Hover any of these for the per-paper note.</li>
         </ul>
     </details>
 
@@ -385,28 +385,34 @@ const COLUMNS_BASE = [
       render: p => p.general_reader_takeaway || '—', cls: 'takeaway' },
 ];
 
-const SABINE_NO_SCORE = {
-    'not_scored_separately': {
-        label: 'companion',
-        title: 'Sibling paper from the same Sabine video — the BS score is on the primary paper for that video.',
-    },
-    'qualitative_no_numeric': {
-        label: 'qualitative',
-        title: 'Sabine discussed this paper but did not assign a 0–10 bullshit score.',
-    },
-    'ambiguous': {
-        label: 'ambiguous',
-        title: 'The transcript mentions a number but it could not be cleanly attributed to this paper.',
-    },
-};
-
 function sabineCell(p) {
     if (p.sabine_bullshit_meter_score_10 != null) {
         return `<span class="${bsClass(p.sabine_bullshit_meter_score_10)}">${fmtScore(p.sabine_bullshit_meter_score_10)}</span>`;
     }
-    const meta = SABINE_NO_SCORE[p.sabine_bullshit_meter_score_status]
-              || { label: '—', title: 'No Sabine BS score available.' };
-    return `<span class="bs-status" title="${escAttr(meta.title)}">${meta.label}</span>`;
+    const status = p.sabine_bullshit_meter_score_status;
+    const note = p.sabine_bullshit_meter_score_note;
+    const candidates = p.sabine_bullshit_meter_candidate_scores_10 || [];
+    let label, title;
+    if (status === 'not_scored_separately') {
+        label = 'companion';
+        title = 'Sibling paper from the same Sabine video — the BS score is on the primary paper for that video.';
+    } else if (status === 'qualitative_no_numeric') {
+        label = 'qualitative';
+        title = note || 'Sabine discussed this paper but did not assign a 0–10 bullshit score.';
+    } else if (status === 'ambiguous') {
+        // Surface the candidate scores Sabine actually mentioned (e.g., "0 or 10")
+        // — the transcript said both and she did not pick one. Drop trailing
+        // .0 since Sabine speaks in whole numbers.
+        const fmtCand = n => n == null ? '?' : (Number.isInteger(n) ? String(n) : Number(n).toFixed(1));
+        label = candidates.length >= 2
+              ? candidates.map(fmtCand).join(' or ')
+              : 'ambiguous';
+        title = note || 'Sabine offered more than one candidate score and did not pick.';
+    } else {
+        label = '—';
+        title = 'No Sabine BS score available.';
+    }
+    return `<span class="bs-status" title="${escAttr(title)}">${label}</span>`;
 }
 
 const COLUMNS_BS_EXTRA = [
