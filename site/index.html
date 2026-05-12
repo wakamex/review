@@ -385,18 +385,28 @@ const COLUMNS_BASE = [
       render: p => p.general_reader_takeaway || '—', cls: 'takeaway' },
 ];
 
-const SABINE_NO_SCORE_LABEL = {
-    'not_scored_separately': 'companion',
-    'qualitative_no_numeric': 'qualitative',
-    'ambiguous': 'ambiguous',
+const SABINE_NO_SCORE = {
+    'not_scored_separately': {
+        label: 'companion',
+        title: 'Sibling paper from the same Sabine video — the BS score is on the primary paper for that video.',
+    },
+    'qualitative_no_numeric': {
+        label: 'qualitative',
+        title: 'Sabine discussed this paper but did not assign a 0–10 bullshit score.',
+    },
+    'ambiguous': {
+        label: 'ambiguous',
+        title: 'The transcript mentions a number but it could not be cleanly attributed to this paper.',
+    },
 };
 
 function sabineCell(p) {
     if (p.sabine_bullshit_meter_score_10 != null) {
         return `<span class="${bsClass(p.sabine_bullshit_meter_score_10)}">${fmtScore(p.sabine_bullshit_meter_score_10)}</span>`;
     }
-    const label = SABINE_NO_SCORE_LABEL[p.sabine_bullshit_meter_score_status] || '—';
-    return `<span class="bs-status">${label}</span>`;
+    const meta = SABINE_NO_SCORE[p.sabine_bullshit_meter_score_status]
+              || { label: '—', title: 'No Sabine BS score available.' };
+    return `<span class="bs-status" title="${escAttr(meta.title)}">${meta.label}</span>`;
 }
 
 const COLUMNS_BS_EXTRA = [
