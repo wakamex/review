@@ -50,6 +50,21 @@
     <div class="pillrow-label">Dataset</div>
     <div class="pillrow" id="tabs" role="tablist"></div>
 
+    <details class="protocol-card">
+        <summary>How this works</summary>
+        <ul>
+            <li><b>Inputs.</b> Each paper is rendered into a single markdown bundle. Reviewers see only the bundle &mdash; no metadata, no Sabine score, no sibling papers from the same video.</li>
+            <li><b>Three independent reviewers.</b>
+                <span class="agent-tag claude"><svg class="icon"><use href="#ic-claude"/></svg>claude</span>
+                <span class="agent-tag codex"><svg class="icon"><use href="#ic-codex"/></svg>codex</span>
+                <span class="agent-tag gemini"><svg class="icon"><use href="#ic-gemini"/></svg>gemini</span>
+                each emit a structured JSON: claims with support level, technical objections with severity + confidence, missing assumptions, novelty assessment, points needing human spot-check, and a recommended verdict from a six-value enum.</li>
+            <li><b>Two cycles.</b> Cycle 1 is independent. In cycle 2 each reviewer is shown the other two&rsquo;s cycle-1 reports and writes a follow-up &mdash; keeping real objections, retracting weak ones, marking which of the others&rsquo; points they accept or reject, and re-scoring.</li>
+            <li><b>Five dimensions, 0&ndash;10.</b> Technical soundness, novelty, significance, clarity, reviewer confidence. The final selected score is the mechanical average of cycle-2 dimension scores across the three reviewers &mdash; no human weighting.</li>
+            <li><b>Board synthesis.</b> A separate <span class="agent-tag claude"><svg class="icon"><use href="#ic-claude"/></svg>claude</span> run reads all six reviewer JSONs and produces the public summary, strongest supported claims, strongest objections (with which reviewers backed each), reviewer disagreements, and suggested human spot-checks shown on each paper&rsquo;s detail page.</li>
+        </ul>
+    </details>
+
     <div class="summary" id="summary">
         <div class="item"><div class="label">Papers</div><div class="value" id="m-count">—</div></div>
         <div class="item"><div class="label">Median board score</div><div class="value" id="m-median">—</div><div class="meta" id="m-range">—</div></div>
