@@ -330,13 +330,13 @@ tr.clickable { cursor: pointer; }
 .scatter-grid line { stroke: #1a1916; }
 
 /* YouTube link in catalog row. display: flex so the link sizes to the cell,
-   not to its content; .yt-title gets min-width: 0 and flex: 1 1 auto so it
-   can shrink below its intrinsic width and truncate with an ellipsis. */
+   not to its content. The title wraps onto multiple lines if needed; the
+   glyph stays top-aligned with the first line of text via align-items. */
 a.yt-link {
     color: var(--text-supporting);
     border-bottom: none;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 4px;
     margin-top: 3px;
     font-size: 0.78rem;
@@ -366,9 +366,7 @@ a.yt-link .yt-glyph::after {
 a.yt-link .yt-title {
     flex: 1 1 auto;
     min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    overflow-wrap: anywhere;
 }
 
 /* Agent icons */
