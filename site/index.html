@@ -60,8 +60,9 @@
                 <span class="agent-tag gemini"><svg class="icon"><use href="#ic-gemini"/></svg>gemini</span>
                 each emit a structured JSON: claims with support level, technical objections with severity + confidence, missing assumptions, novelty assessment, points needing human spot-check, and a recommended verdict from a six-value enum.</li>
             <li><b>Two cycles.</b> Cycle 1 is independent. In cycle 2 each reviewer is shown the other two&rsquo;s cycle-1 reports and writes a follow-up &mdash; keeping real objections, retracting weak ones, marking which of the others&rsquo; points they accept or reject, and re-scoring.</li>
-            <li><b>Five dimensions, 0&ndash;10.</b> Technical soundness, novelty, significance, clarity, reviewer confidence. The final selected score is the mechanical average of cycle-2 dimension scores across the three reviewers &mdash; no human weighting.</li>
+            <li><b>Final score.</b> Each reviewer hands in one <code>overall_score_10</code> per cycle. The displayed score is the mechanical mean of the three reviewers&rsquo; cycle-2 overall scores &mdash; no human weighting. The five dimension scores (technical soundness, novelty, significance, clarity, reviewer confidence) are reported per reviewer for information only and are not aggregated into the displayed score.</li>
             <li><b>Board synthesis.</b> A separate <span class="agent-tag claude"><svg class="icon"><use href="#ic-claude"/></svg>claude</span> run reads all six reviewer JSONs and produces the public summary, strongest supported claims, strongest objections (with which reviewers backed each), reviewer disagreements, and suggested human spot-checks shown on each paper&rsquo;s detail page.</li>
+            <li><b>bs-meter view.</b> Sabine&rsquo;s 0&ndash;10 score runs <i>opposite</i> the board&rsquo;s: high BS-meter ↔ low quality. The agreement metric is <code>|board + sabine_BS &minus; 10|</code> (small = agree, large = disagree). A few rows are papers Sabine discussed but didn&rsquo;t score numerically &mdash; the BS column shows <span class="muted" style="font-size:.7rem; text-transform: uppercase; letter-spacing: 0.05em">companion</span> (sibling paper from the same video, score is on the primary), <span class="muted" style="font-size:.7rem; text-transform: uppercase; letter-spacing: 0.05em">qualitative</span> (no number given), or <span class="muted" style="font-size:.7rem; text-transform: uppercase; letter-spacing: 0.05em">ambiguous</span> (couldn&rsquo;t be cleanly attributed).</li>
         </ul>
     </details>
 
@@ -96,13 +97,6 @@
     </p>
     <div id="catalog" class="loading">Loading…</div>
 
-    <div class="footer">
-        <p>Each paper gets two review cycles × three reviewers (claude, codex, gemini) plus a board synthesis.
-        Scores are mechanical averages of reviewer dimension scores (technical soundness, novelty, significance, clarity, reviewer confidence).</p>
-        <p>Sabine's bullshit meter is rated 0–10 where <b>higher means more bullshit</b>, so it runs opposite to the board's 0–10 quality score.
-           The "agreement" metric here is <code>|board + sabine_BS − 10|</code>; small = the two agree, large = they disagree.</p>
-        <p>Source code, pipeline, raw reviews: <a href="https://github.com/wakamex/review" target="_blank" rel="noopener">github.com/wakamex/review</a>.</p>
-    </div>
 
 <script>
 // In dev (localhost) load JSON from the sibling repo via `../`; in production
@@ -391,9 +385,23 @@ const COLUMNS_BASE = [
       render: p => p.general_reader_takeaway || '—', cls: 'takeaway' },
 ];
 
+const SABINE_NO_SCORE_LABEL = {
+    'not_scored_separately': 'companion',
+    'qualitative_no_numeric': 'qualitative',
+    'ambiguous': 'ambiguous',
+};
+
+function sabineCell(p) {
+    if (p.sabine_bullshit_meter_score_10 != null) {
+        return `<span class="${bsClass(p.sabine_bullshit_meter_score_10)}">${fmtScore(p.sabine_bullshit_meter_score_10)}</span>`;
+    }
+    const label = SABINE_NO_SCORE_LABEL[p.sabine_bullshit_meter_score_status] || '—';
+    return `<span class="bs-status">${label}</span>`;
+}
+
 const COLUMNS_BS_EXTRA = [
     { key: 'sabine_bullshit_meter_score_10', label: 'Sabine BS', num: true,
-      render: p => `<span class="${bsClass(p.sabine_bullshit_meter_score_10)}">${fmtScore(p.sabine_bullshit_meter_score_10)}</span>` },
+      render: sabineCell },
     { key: 'disagreement', label: 'Gap', num: true,
       get: p => (p.selected_score != null && p.sabine_bullshit_meter_score_10 != null)
                 ? Math.abs(p.selected_score + p.sabine_bullshit_meter_score_10 - 10) : null,
